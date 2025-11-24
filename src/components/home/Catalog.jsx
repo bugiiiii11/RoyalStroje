@@ -97,13 +97,13 @@ export default function Catalog() {
             </div>
 
             {/* Subcategory Filters */}
-            <div className="mb-8 overflow-x-auto">
-              <div className="flex gap-3 pb-2">
+            <div className="mb-8">
+              <div className="flex flex-wrap gap-3">
                 {currentCategory?.subcategories.map((subcategory) => (
                   <button
                     key={subcategory.id}
                     onClick={() => handleSubcategoryChange(subcategory.id)}
-                    className={`px-5 py-3 rounded-lg font-bold text-base whitespace-nowrap transition-all ${
+                    className={`px-4 py-2.5 rounded-lg font-bold text-sm transition-all ${
                       activeSubcategory === subcategory.id
                         ? 'bg-orange-primary text-white shadow-lg'
                         : 'bg-zinc-900 border border-white/10 text-white/70 hover:bg-zinc-800 hover:text-white hover:border-white/20'
