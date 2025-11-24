@@ -70,7 +70,7 @@ export default function Hero() {
               {/* Image Container with Frame */}
               <div className="relative rounded-2xl overflow-hidden border-4 border-orange-primary/20 bg-zinc-900 shadow-2xl">
                 {/* Images */}
-                <div className="relative aspect-[16/9] overflow-hidden">
+                <div className="relative aspect-[16/7.2] overflow-hidden">
                   {slides.map((slide, index) => (
                     <div
                       key={slide.id}
