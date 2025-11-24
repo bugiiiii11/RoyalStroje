@@ -38,7 +38,13 @@ export default function Catalog() {
   };
 
   return (
-    <section id="katalog" className="py-12 md:py-16">
+    <section id="katalog" className="relative py-12 md:py-16">
+      {/* Decorative top border with glow */}
+      <div className="absolute top-0 left-0 right-0 flex justify-center">
+        <div className="w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-orange-primary/50 to-transparent"></div>
+      </div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-16 bg-orange-primary/10 blur-3xl pointer-events-none"></div>
+
       <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-12">

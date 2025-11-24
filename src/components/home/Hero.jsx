@@ -4,13 +4,12 @@ import { useEffect, useState } from 'react';
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Temporary: using same image 5 times, will be replaced with different images
   const slides = [
-    { id: 1, image: '/hero-pozicovna.webp', alt: 'Royal Stroje - Novinky 1' },
-    { id: 2, image: '/hero-pozicovna.webp', alt: 'Royal Stroje - Novinky 2' },
-    { id: 3, image: '/hero-pozicovna.webp', alt: 'Royal Stroje - Novinky 3' },
-    { id: 4, image: '/hero-pozicovna.webp', alt: 'Royal Stroje - Novinky 4' },
-    { id: 5, image: '/hero-pozicovna.webp', alt: 'Royal Stroje - Novinky 5' },
+    { id: 1, image: '/hero-pozicovna.webp', alt: 'Royal Stroje - Požičovňa náradia' },
+    { id: 2, image: '/hero-main1.webp', alt: 'Royal Stroje - Stavebná technika' },
+    { id: 3, image: '/hero-main2.webp', alt: 'Royal Stroje - Profesionálne náradie' },
+    { id: 4, image: '/hero-main3.webp', alt: 'Royal Stroje - Mechanizácia' },
+    { id: 5, image: '/hero-main4.webp', alt: 'Royal Stroje - Ťažká technika' },
   ];
 
   // Auto-rotate slides every 4 seconds
@@ -23,8 +22,11 @@ export default function Hero() {
   }, [slides.length]);
 
   return (
-    <section className="relative py-12 md:py-20">
-      <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+    <section className="relative py-12 md:py-20 bg-black">
+      {/* Transition gradient at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-zinc-950/50 to-zinc-900 pointer-events-none"></div>
+
+      <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
 
           {/* Left Side - Text Content (1/3) */}
