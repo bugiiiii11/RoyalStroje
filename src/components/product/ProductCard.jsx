@@ -34,18 +34,26 @@ export default function ProductCard({ product }) {
               {product.badge}
             </div>
           )}
+
+          {/* Price Badge - Bottom Right */}
+          <div className="absolute bottom-3 right-3 bg-zinc-900/95 border border-orange-primary/40 backdrop-blur-md rounded-lg px-3 py-2 shadow-lg shadow-black/50" style={{ zIndex: 2 }}>
+            <div className="flex flex-col items-start">
+              <span className="text-orange-primary text-2xl font-black leading-none">{(product.pricePerDay * 1.2).toFixed(2)}€</span>
+              <span className="text-white/50 text-[10px] font-medium mt-0.5">s DPH /deň</span>
+            </div>
+          </div>
         </div>
 
         {/* Content */}
         <div className="p-4">
           {/* Product Name */}
-          <h3 className="text-lg font-bold text-white mb-1 leading-tight line-clamp-1">
-            {product.name}
+          <h3 className="text-lg font-bold text-orange-primary mb-1 leading-tight line-clamp-1">
+            {product.description}
           </h3>
 
           {/* Description */}
           <p className="text-white text-sm mb-4 leading-relaxed line-clamp-1">
-            {product.description}
+            {product.name}
           </p>
 
           {/* Actions */}
@@ -99,111 +107,77 @@ export default function ProductCard({ product }) {
           onClick={() => setShowSpecs(false)}
         >
           <div
-            className="bg-zinc-900 border border-white/10 rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto"
+            className="bg-zinc-900 border-2 border-orange-primary/60 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-[0_0_40px_rgba(255,102,0,0.3)]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
-            <div className="sticky top-0 bg-zinc-900 border-b border-white/10 p-6 flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-black text-white mb-1">{product.name}</h2>
-                <p className="text-white/60 text-sm">{product.subcategory}</p>
-              </div>
-              <button
-                onClick={() => setShowSpecs(false)}
-                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white transition-all"
-              >
-                <X size={20} />
-              </button>
-            </div>
+            {/* Close Button */}
+            <button
+              onClick={() => setShowSpecs(false)}
+              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white transition-all"
+            >
+              <X size={16} />
+            </button>
 
             {/* Content */}
             <div className="p-6">
               {/* Image */}
-              <div className="mb-6 rounded-xl overflow-hidden border border-white/10">
+              <div className="mb-6 rounded-xl overflow-hidden border border-white/10 bg-zinc-800">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-56 object-contain"
                 />
               </div>
 
-              {/* Description */}
-              <div className="mb-6">
-                <h3 className="text-white font-bold text-lg mb-2">Popis</h3>
-                <p className="text-white/70 leading-relaxed">{product.description}</p>
+              {/* Product Info */}
+              <div className="mb-6 text-center">
+                <h2 className="text-2xl font-black text-orange-primary mb-2">{product.description}</h2>
+                <p className="text-white text-lg font-bold">{product.name}</p>
               </div>
 
-              {/* Specs */}
-              <div className="mb-6">
-                <h3 className="text-white font-bold text-lg mb-3">Technické parametre</h3>
-                <div className="bg-zinc-800 border border-white/10 rounded-xl p-4 space-y-3">
-                  {product.specs ? (
-                    Object.entries(product.specs).map(([key, value]) => (
-                      <div key={key} className="flex justify-between py-2 border-b border-white/5 last:border-0">
-                        <span className="text-white/60 font-medium">{key}</span>
-                        <span className="text-white font-bold">{value}</span>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-white/60 text-sm">
-                      Pre viac informácií o technických parametroch nás kontaktujte na{' '}
-                      <a href="tel:+421948555551" className="text-orange-primary font-bold hover:underline">
-                        0948 555 551
-                      </a>
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              {/* Features */}
+              {/* Parameters Table */}
               {product.features && product.features.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-white font-bold text-lg mb-3">Vlastnosti</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {product.features.map((feature, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1.5 bg-orange-primary/10 border border-orange-primary/30 text-orange-primary rounded-lg font-semibold text-sm"
-                      >
-                        {feature}
-                      </span>
-                    ))}
+                  <h3 className="text-white font-bold text-sm uppercase tracking-wide mb-3 text-center">Parametre</h3>
+                  <div className="bg-zinc-800 border border-white/10 rounded-xl overflow-hidden">
+                    {product.features.map((feature, idx) => {
+                      // Split feature by common separators or just display as is
+                      const parts = feature.split(/[-:]/);
+                      const label = parts.length > 1 ? parts[0].trim() : `Parameter ${idx + 1}`;
+                      const value = parts.length > 1 ? parts.slice(1).join('-').trim() : feature;
+
+                      return (
+                        <div key={idx} className="flex justify-between py-3 px-4 border-b border-white/5 last:border-0">
+                          <span className="text-white/60 font-medium text-sm">{label}</span>
+                          <span className="text-white font-bold text-sm">{value}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
 
-              {/* Price */}
-              <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-4 mb-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-white/70 text-sm mb-1">Cena prenájmu</p>
-                    <p className="text-orange-primary text-3xl font-black">{product.price}</p>
-                    <p className="text-white/60 text-xs font-semibold mt-1">bez DPH</p>
-                  </div>
-                  <a
-                    href="tel:+421948555551"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-lg shadow-orange-primary/40"
-                  >
-                    <Phone size={16} />
-                    <span>Rezervovať</span>
-                  </a>
+              {/* Prices */}
+              <div className="mb-6 space-y-3">
+                <div className="flex justify-between items-center bg-zinc-800 border border-white/10 rounded-lg p-4">
+                  <span className="text-white/70 font-medium">Cena bez DPH</span>
+                  <span className="text-white text-xl font-black">{product.pricePerDay}€ /deň</span>
+                </div>
+                <div className="flex justify-between items-center bg-orange-primary/10 border border-orange-primary/30 rounded-lg p-4">
+                  <span className="text-orange-primary/80 font-medium">Cena s DPH</span>
+                  <span className="text-orange-primary text-xl font-black">{(product.pricePerDay * 1.2).toFixed(2)}€ /deň</span>
                 </div>
               </div>
 
-              {/* Stock Status */}
-              <div className="text-center">
-                {product.inStock ? (
-                  <span className="inline-flex items-center gap-2 text-green-400 font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-green-400"></span>
-                    Dostupné na sklade
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-2 text-red-400 font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-red-400"></span>
-                    Momentálne nedostupné
-                  </span>
-                )}
-              </div>
+              {/* Reserve Button */}
+              <a
+                href="tel:+421948555551"
+                className="relative w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-lg rounded-full hover:scale-105 transition-all shadow-lg shadow-orange-primary/40 overflow-hidden group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <Phone size={20} className="relative z-10" />
+                <span className="relative z-10">Rezervovať</span>
+              </a>
             </div>
           </div>
         </div>

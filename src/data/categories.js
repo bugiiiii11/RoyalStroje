@@ -16,7 +16,6 @@ export const categories = [
       { id: 'zvaracia-meracia', name: 'Zváracia a meracia technika', slug: 'zvaracia-meracia' },
       { id: 'vibratory-miesadla', name: 'Vibrátory, vibračné lišty a miešadlá', slug: 'vibratory-miesadla' },
       { id: 'lesenie', name: 'Lešenie', slug: 'lesenie' },
-      { id: 'zahradna-technika', name: 'Záhradná technika', slug: 'zahradna-technika' },
       { id: 'nadrze', name: 'Nádrže na vodu a naftu', slug: 'nadrze' },
     ]
   },
@@ -87,6 +86,21 @@ export const categories = [
       { id: 'all', name: 'Všetko', slug: 'all' },
       { id: 'auta-dodavky', name: 'Autá a dodávky', slug: 'auta-dodavky' },
       { id: 'privesne-voziky', name: 'Prívesné vozíky', slug: 'privesne-voziky' },
+    ]
+  },
+  {
+    id: 'zahradna-technika',
+    name: 'Záhradná technika',
+    slug: 'zahradna-technika',
+    description: 'Kosačky, krovinorezy, fukovače, vertikutátory a ďalšia záhradná technika',
+    subcategories: [
+      { id: 'all', name: 'Všetko', slug: 'all' },
+      { id: 'kosacky', name: 'Kosačky na trávu', slug: 'kosacky' },
+      { id: 'krovinorezy', name: 'Krovinorezy a motorové píly', slug: 'krovinorezy' },
+      { id: 'fukovace', name: 'Fukovače a vysávače lístia', slug: 'fukovace' },
+      { id: 'vertikutatory', name: 'Vertikutátory a prevzdušňovače', slug: 'vertikutatory' },
+      { id: 'drvice', name: 'Drviče konárov a vetiev', slug: 'drvice' },
+      { id: 'kultivacie', name: 'Kultivácie a rotavátory', slug: 'kultivacie' },
     ]
   },
 ];
