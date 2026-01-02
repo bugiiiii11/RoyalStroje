@@ -103,42 +103,44 @@ export default function ProductCard({ product }) {
       {/* Specs Modal */}
       {showSpecs && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm"
           onClick={() => setShowSpecs(false)}
         >
           <div
-            className="bg-zinc-900 border-2 border-orange-primary/60 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-[0_0_40px_rgba(255,102,0,0.3)]"
+            className="bg-zinc-900 border-2 border-orange-primary/60 rounded-2xl w-full sm:max-w-md max-h-[95vh] sm:max-h-[90vh] shadow-[0_0_40px_rgba(255,102,0,0.3)] relative flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
-            <button
-              onClick={() => setShowSpecs(false)}
-              className="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white transition-all"
-            >
-              <X size={16} />
-            </button>
+            {/* Close Button - Fixed Header */}
+            <div className="flex-shrink-0 flex justify-end p-3 sm:p-4 pb-2">
+              <button
+                onClick={() => setShowSpecs(false)}
+                className="w-10 h-10 sm:w-8 sm:h-8 rounded-full bg-zinc-800 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white transition-all"
+              >
+                <X size={18} className="sm:w-4 sm:h-4" />
+              </button>
+            </div>
 
-            {/* Content */}
-            <div className="p-6">
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-4 sm:pb-6">
               {/* Image */}
-              <div className="mb-6 rounded-xl overflow-hidden border border-white/10 bg-zinc-800">
+              <div className="mb-4 sm:mb-6 rounded-xl overflow-hidden border border-white/10 bg-zinc-800">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-56 object-contain"
+                  className="w-full h-40 sm:h-56 object-contain"
                 />
               </div>
 
               {/* Product Info */}
-              <div className="mb-6 text-center">
-                <h2 className="text-2xl font-black text-orange-primary mb-2">{product.description}</h2>
-                <p className="text-white text-lg font-bold">{product.name}</p>
+              <div className="mb-4 sm:mb-6 text-center">
+                <h2 className="text-xl sm:text-2xl font-black text-orange-primary mb-2">{product.description}</h2>
+                <p className="text-white text-base sm:text-lg font-bold">{product.name}</p>
               </div>
 
               {/* Parameters Table */}
               {product.features && product.features.length > 0 && (
-                <div className="mb-6">
-                  <h3 className="text-white font-bold text-sm uppercase tracking-wide mb-3 text-center">Parametre</h3>
+                <div className="mb-4 sm:mb-6">
+                  <h3 className="text-white font-bold text-xs sm:text-sm uppercase tracking-wide mb-3 text-center">Parametre</h3>
                   <div className="bg-zinc-800 border border-white/10 rounded-xl overflow-hidden">
                     {product.features.map((feature, idx) => {
                       // Split feature by common separators or just display as is
@@ -147,9 +149,9 @@ export default function ProductCard({ product }) {
                       const value = parts.length > 1 ? parts.slice(1).join('-').trim() : feature;
 
                       return (
-                        <div key={idx} className="flex justify-between py-3 px-4 border-b border-white/5 last:border-0">
-                          <span className="text-white/60 font-medium text-sm">{label}</span>
-                          <span className="text-white font-bold text-sm">{value}</span>
+                        <div key={idx} className="flex justify-between py-2.5 sm:py-3 px-3 sm:px-4 border-b border-white/5 last:border-0 gap-2">
+                          <span className="text-white/60 font-medium text-xs sm:text-sm">{label}</span>
+                          <span className="text-white font-bold text-xs sm:text-sm text-right">{value}</span>
                         </div>
                       );
                     })}
@@ -158,24 +160,24 @@ export default function ProductCard({ product }) {
               )}
 
               {/* Prices */}
-              <div className="mb-6 space-y-3">
-                <div className="flex justify-between items-center bg-zinc-800 border border-white/10 rounded-lg p-4">
-                  <span className="text-white/70 font-medium">Cena bez DPH</span>
-                  <span className="text-white text-xl font-black">{product.pricePerDay}€ /deň</span>
+              <div className="mb-4 sm:mb-6 space-y-2 sm:space-y-3">
+                <div className="flex justify-between items-center bg-zinc-800 border border-white/10 rounded-lg p-3 sm:p-4">
+                  <span className="text-white/70 font-medium text-sm sm:text-base">Cena bez DPH</span>
+                  <span className="text-white text-lg sm:text-xl font-black">{product.pricePerDay}€ /deň</span>
                 </div>
-                <div className="flex justify-between items-center bg-orange-primary/10 border border-orange-primary/30 rounded-lg p-4">
-                  <span className="text-orange-primary/80 font-medium">Cena s DPH</span>
-                  <span className="text-orange-primary text-xl font-black">{(product.pricePerDay * 1.2).toFixed(2)}€ /deň</span>
+                <div className="flex justify-between items-center bg-orange-primary/10 border border-orange-primary/30 rounded-lg p-3 sm:p-4">
+                  <span className="text-orange-primary/80 font-medium text-sm sm:text-base">Cena s DPH</span>
+                  <span className="text-orange-primary text-lg sm:text-xl font-black">{(product.pricePerDay * 1.2).toFixed(2)}€ /deň</span>
                 </div>
               </div>
 
               {/* Reserve Button */}
               <a
                 href="tel:+421948555551"
-                className="relative w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-lg rounded-full hover:scale-105 transition-all shadow-lg shadow-orange-primary/40 overflow-hidden group"
+                className="relative w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-base sm:text-lg rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg shadow-orange-primary/40 overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                <Phone size={20} className="relative z-10" />
+                <Phone size={18} className="relative z-10 sm:w-5 sm:h-5" />
                 <span className="relative z-10">Rezervovať</span>
               </a>
             </div>
