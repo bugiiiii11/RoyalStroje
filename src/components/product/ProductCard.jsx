@@ -1,98 +1,91 @@
-import { Phone, ChevronRight, X } from 'lucide-react';
+import { ShoppingCart, ChevronRight, ChevronLeft, X, Phone, Check } from 'lucide-react';
 import { useState } from 'react';
+import { useCart } from '../../context/CartContext';
 
 export default function ProductCard({ product }) {
   const [showSpecs, setShowSpecs] = useState(false);
+  const { addToCart, isInCart } = useCart();
+  const inCart = isInCart(product.id);
 
   return (
     <>
-      <div className="group bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden hover:border-orange-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-primary/20">
-        {/* Image Container */}
-        <div className="relative h-64 bg-zinc-800 overflow-hidden">
+      <div className="group bg-zinc-900 border border-white/10 rounded-xl overflow-hidden hover:border-orange-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-primary/20">
+        {/* Image Container - Square aspect ratio */}
+        <div className="relative aspect-square bg-zinc-800 overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover select-none group-hover:brightness-110 transition-all duration-300"
+            className="w-full h-full object-cover select-none transition-all duration-300"
             loading="lazy"
             draggable="false"
           />
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none select-none group-hover:from-black/70 transition-all duration-300" style={{ zIndex: 1 }}></div>
-
-          {/* Price Badge */}
-          <div className="absolute top-4 right-4 flex flex-col items-end" style={{ zIndex: 2 }}>
-            <div className="px-3 py-1.5 bg-orange-primary text-black font-black text-sm rounded-lg shadow-lg">
-              {product.price}
-            </div>
-            <span className="text-[10px] text-white/60 font-semibold mt-1 bg-black/50 px-2 py-0.5 rounded">
-              bez DPH
-            </span>
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none select-none" style={{ zIndex: 1 }}></div>
 
           {/* Status Badges */}
           {product.isNew && (
-            <div className="absolute top-4 left-4 px-2 py-1 bg-orange-primary/20 border border-orange-primary/40 backdrop-blur-sm text-orange-primary text-xs font-bold rounded-md uppercase" style={{ zIndex: 2 }}>
+            <div className="absolute top-3 left-3 px-2 py-0.5 bg-orange-primary/20 border border-orange-primary/40 backdrop-blur-sm text-orange-primary text-[10px] font-bold rounded uppercase" style={{ zIndex: 2 }}>
               Novinka
             </div>
           )}
 
           {product.badge && (
-            <div className="absolute bottom-4 left-4 px-2 py-1 bg-zinc-900/90 border border-white/20 backdrop-blur-sm text-white text-xs font-bold rounded-md uppercase" style={{ zIndex: 2 }}>
+            <div className="absolute bottom-3 left-3 px-2 py-0.5 bg-zinc-900/90 border border-white/20 backdrop-blur-sm text-white text-[10px] font-bold rounded uppercase" style={{ zIndex: 2 }}>
               {product.badge}
             </div>
           )}
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-4">
           {/* Product Name */}
-          <h3 className="text-xl font-black text-white mb-3 leading-tight">
+          <h3 className="text-lg font-bold text-white mb-1 leading-tight line-clamp-1">
             {product.name}
           </h3>
 
           {/* Description */}
-          <p className="text-white/60 text-sm mb-4 leading-relaxed line-clamp-2">
+          <p className="text-white text-sm mb-4 leading-relaxed line-clamp-1">
             {product.description}
           </p>
 
-          {/* Features */}
-          {product.features && product.features.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-6">
-              {product.features.slice(0, 3).map((feature, idx) => (
-                <span
-                  key={idx}
-                  className="text-xs px-3 py-1.5 bg-orange-primary/10 border border-orange-primary/30 text-orange-primary rounded-lg font-semibold"
-                >
-                  {feature}
-                </span>
-              ))}
-            </div>
-          )}
-
           {/* Actions */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
             {/* Primary CTA */}
-            <a
-              href="tel:+421948555551"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm rounded-full hover:scale-105 transition-all shadow-lg shadow-orange-primary/30 w-auto mx-auto"
+            <button
+              onClick={() => addToCart(product)}
+              disabled={inCart}
+              className={`relative inline-flex items-center justify-center gap-1.5 px-3 py-2.5 font-bold text-sm rounded-full transition-all overflow-hidden group/cart ${
+                inCart
+                  ? 'bg-green-500/20 border border-green-500/50 text-green-400 cursor-default'
+                  : 'bg-black border border-orange-primary text-orange-primary hover:scale-105'
+              }`}
             >
-              <Phone size={16} />
-              <span>Rezervovať</span>
-            </a>
+              {/* Shine effect */}
+              {!inCart && (
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-primary/30 to-transparent -translate-x-full group-hover/cart:translate-x-full transition-transform duration-700"></div>
+              )}
+              {inCart ? (
+                <Check size={16} className="relative z-10" />
+              ) : (
+                <ShoppingCart size={16} className="relative z-10" />
+              )}
+              <span className="relative z-10">{inCart ? 'V košíku' : 'Do košíka'}</span>
+            </button>
 
             {/* Secondary Link */}
             <button
               onClick={() => setShowSpecs(true)}
-              className="group/btn text-orange-primary font-bold text-sm flex items-center justify-center gap-2 hover:gap-3 transition-all"
+              className="group/btn text-orange-primary font-bold text-sm flex items-center justify-center gap-1 hover:gap-2 transition-all"
             >
+              <ChevronLeft size={16} className="group-hover/btn:-translate-x-0.5 transition-transform" />
               <span>Technické parametre</span>
-              <ChevronRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+              <ChevronRight size={16} className="group-hover/btn:translate-x-0.5 transition-transform" />
             </button>
           </div>
 
           {/* Stock Status */}
           {!product.inStock && (
-            <div className="mt-3 text-center text-red-400 text-xs font-semibold">
+            <div className="mt-2 text-center text-red-400 text-[10px] font-semibold">
               Momentálne nedostupné
             </div>
           )}

@@ -1,8 +1,10 @@
 import { Phone, ArrowDown } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [parallaxOffset, setParallaxOffset] = useState(0);
+  const heroRef = useRef(null);
 
   const slides = [
     { id: 1, image: '/hero-pozicovna.webp', alt: 'Royal Stroje - Požičovňa náradia' },
@@ -21,10 +23,51 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [slides.length]);
 
+  // Parallax effect on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const scrolled = window.scrollY;
+        const heroTop = heroRef.current.offsetTop;
+        const heroHeight = heroRef.current.offsetHeight;
+
+        if (scrolled < heroTop + heroHeight) {
+          setParallaxOffset(scrolled * 0.3);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section className="relative py-12 md:py-20 bg-black">
-      {/* Transition gradient at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-zinc-950/50 to-zinc-900 pointer-events-none"></div>
+    <section ref={heroRef} className="relative py-12 md:py-20 bg-black overflow-hidden">
+      {/* Modern geometric bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 overflow-hidden">
+        {/* Angled cut with steps */}
+        <svg className="absolute bottom-0 w-full h-20" viewBox="0 0 1440 80" preserveAspectRatio="none">
+          {/* Main shape */}
+          <path
+            d="M0,80 L0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30 L1440,80 Z"
+            fill="#09090b"
+          />
+          {/* Orange accent line */}
+          <path
+            d="M0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30"
+            fill="none"
+            stroke="rgba(255,102,0,0.6)"
+            strokeWidth="2"
+          />
+          {/* Glow line */}
+          <path
+            d="M250,0 L600,0"
+            fill="none"
+            stroke="rgba(255,102,0,0.8)"
+            strokeWidth="3"
+          />
+        </svg>
+      </div>
 
       <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
@@ -71,7 +114,7 @@ export default function Hero() {
             <div className="relative">
               {/* Image Container with Frame */}
               <div className="relative rounded-2xl overflow-hidden border-4 border-orange-primary/20 bg-zinc-900 shadow-2xl">
-                {/* Images */}
+                {/* Images with Parallax */}
                 <div className="relative aspect-[16/7.2] overflow-hidden">
                   {slides.map((slide, index) => (
                     <div
@@ -83,7 +126,8 @@ export default function Hero() {
                       <img
                         src={slide.image}
                         alt={slide.alt}
-                        className="w-full h-full object-cover"
+                        className="w-full h-[120%] object-cover transition-transform duration-100"
+                        style={{ transform: `translateY(-${parallaxOffset * 0.15}px) scale(1.05)` }}
                       />
                     </div>
                   ))}

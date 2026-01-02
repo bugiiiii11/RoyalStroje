@@ -3,7 +3,32 @@ import { Facebook, Instagram, MessageCircle, Send, Phone, Mail, MapPin, Clock } 
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-white/10 py-16">
+    <footer className="relative bg-black pt-24 pb-16">
+      {/* Modern geometric top border - mirrored from Hero */}
+      <div className="absolute top-0 left-0 right-0 h-20 overflow-hidden">
+        {/* Angled cut with steps - flipped vertically */}
+        <svg className="absolute top-0 w-full h-20" viewBox="0 0 1440 80" preserveAspectRatio="none">
+          {/* Main shape */}
+          <path
+            d="M0,0 L0,50 L200,50 L250,80 L600,80 L650,50 L900,50 L950,65 L1200,65 L1250,50 L1440,50 L1440,0 Z"
+            fill="#09090b"
+          />
+          {/* Orange accent line */}
+          <path
+            d="M0,50 L200,50 L250,80 L600,80 L650,50 L900,50 L950,65 L1200,65 L1250,50 L1440,50"
+            fill="none"
+            stroke="rgba(255,102,0,0.6)"
+            strokeWidth="2"
+          />
+          {/* Glow line */}
+          <path
+            d="M250,80 L600,80"
+            fill="none"
+            stroke="rgba(255,102,0,0.8)"
+            strokeWidth="3"
+          />
+        </svg>
+      </div>
       <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
