@@ -47,7 +47,7 @@ export default function ProductCard({ product }) {
         {/* Content */}
         <div className="p-4">
           {/* Product Name */}
-          <h3 className="text-lg font-bold text-orange-primary mb-1 leading-tight line-clamp-1">
+          <h3 className="text-lg font-bold text-white mb-1 leading-tight line-clamp-1">
             {product.description}
           </h3>
 

@@ -42,7 +42,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative py-12 md:py-20 bg-black overflow-hidden">
+    <section ref={heroRef} className="relative pt-24 md:pt-32 lg:pt-40 pb-12 md:pb-20 bg-black overflow-hidden">
       {/* Modern geometric bottom border */}
       <div className="absolute bottom-0 left-0 right-0 h-20 overflow-hidden">
         {/* Angled cut with steps */}

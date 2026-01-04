@@ -32,9 +32,9 @@ export default function Sluzby() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[33vh] min-h-[300px] flex items-center overflow-hidden bg-black">
+      <section className="relative py-24 md:py-32 lg:py-40 flex items-center overflow-hidden">
         {/* Background Image */}
-        <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0">
           <img
             src="/hero-pozicovna.webp"
             alt="Royal Stroje - Služby"
@@ -48,10 +48,12 @@ export default function Sluzby() {
         {/* Modern geometric bottom border */}
         <div className="absolute bottom-0 left-0 right-0 h-20 overflow-hidden z-30">
           <svg className="absolute bottom-0 w-full h-20" viewBox="0 0 1440 80" preserveAspectRatio="none">
+            {/* Fill area below decorative line with background color */}
             <path
               d="M0,80 L0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30 L1440,80 Z"
               fill="#09090b"
             />
+            {/* Orange decorative lines */}
             <path
               d="M0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30"
               fill="none"
@@ -81,8 +83,122 @@ export default function Sluzby() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-16">
-        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+        {/* Radial gradient overlay - wider spread */}
+        <div
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
+          }}
+        />
+
+        {/* Grid pattern overlay - much more visible */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.25] z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+
+        {/* Diagonal subtle lines for technical feel */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
+          }}
+        />
+
+        {/* Orange accent glow - top right (animated) - FAST visible test */}
+        <div
+          className="absolute pointer-events-none z-0"
+          style={{
+            top: '10%',
+            right: '10%',
+            width: '600px',
+            height: '600px',
+            background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
+            filter: 'blur(100px)',
+            opacity: 0.15,
+            animation: 'floatGlow1 8s ease-in-out infinite'
+          }}
+        />
+
+        {/* Orange accent glow - bottom left (animated) - FAST visible test */}
+        <div
+          className="absolute pointer-events-none z-0"
+          style={{
+            bottom: '10%',
+            left: '10%',
+            width: '550px',
+            height: '550px',
+            background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
+            filter: 'blur(90px)',
+            opacity: 0.12,
+            animation: 'floatGlow2 10s ease-in-out infinite'
+          }}
+        />
+
+        {/* Center pulsing glow - FAST visible test */}
+        <div
+          className="absolute top-1/2 left-1/2 pointer-events-none z-0"
+          style={{
+            width: '800px',
+            height: '800px',
+            marginLeft: '-400px',
+            marginTop: '-400px',
+            background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+            filter: 'blur(120px)',
+            animation: 'pulseGlow 6s ease-in-out infinite'
+          }}
+        />
+
+        {/* Animation keyframes - defined AFTER elements with explicit animations */}
+        <style>{`
+          @keyframes floatGlow1 {
+            0%, 100% {
+              transform: translate(0, 0) scale(1);
+            }
+            25% {
+              transform: translate(-120px, 100px) scale(1.2);
+            }
+            50% {
+              transform: translate(80px, -120px) scale(0.85);
+            }
+            75% {
+              transform: translate(100px, 60px) scale(1.1);
+            }
+          }
+
+          @keyframes floatGlow2 {
+            0%, 100% {
+              transform: translate(0, 0) scale(1);
+            }
+            33% {
+              transform: translate(140px, -100px) scale(1.25);
+            }
+            66% {
+              transform: translate(-100px, 120px) scale(0.8);
+            }
+          }
+
+          @keyframes pulseGlow {
+            0%, 100% {
+              transform: scale(1);
+              opacity: 0.08;
+            }
+            50% {
+              transform: scale(1.4);
+              opacity: 0.18;
+            }
+          }
+        `}</style>
+
+        <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+          {/* Services section */}
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
               Čo pre vás <span className="text-orange-primary">môžeme urobiť</span>
@@ -92,7 +208,7 @@ export default function Sluzby() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {services.map((service) => {
               const IconComponent = service.icon;
               return (
@@ -130,12 +246,85 @@ export default function Sluzby() {
               );
             })}
           </div>
+
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-black">
-        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center">
+      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+        {/* Radial gradient overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
+          }}
+        />
+
+        {/* Grid pattern overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.25] z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+
+        {/* Diagonal subtle lines */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
+          }}
+        />
+
+        {/* Orange accent glow - top right */}
+        <div
+          className="absolute pointer-events-none z-0"
+          style={{
+            top: '10%',
+            right: '10%',
+            width: '600px',
+            height: '600px',
+            background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
+            filter: 'blur(100px)',
+            opacity: 0.15,
+            animation: 'floatGlow1 8s ease-in-out infinite'
+          }}
+        />
+
+        {/* Orange accent glow - bottom left */}
+        <div
+          className="absolute pointer-events-none z-0"
+          style={{
+            bottom: '10%',
+            left: '10%',
+            width: '550px',
+            height: '550px',
+            background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
+            filter: 'blur(90px)',
+            opacity: 0.12,
+            animation: 'floatGlow2 10s ease-in-out infinite'
+          }}
+        />
+
+        {/* Center pulsing glow */}
+        <div
+          className="absolute top-1/2 left-1/2 pointer-events-none z-0"
+          style={{
+            width: '800px',
+            height: '800px',
+            marginLeft: '-400px',
+            marginTop: '-400px',
+            background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+            filter: 'blur(120px)',
+            animation: 'pulseGlow 6s ease-in-out infinite'
+          }}
+        />
+
+        <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center">
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
             Potrebujete poradiť?
           </h2>

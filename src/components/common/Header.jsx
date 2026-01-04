@@ -47,21 +47,17 @@ export default function Header() {
           {/* Logo - larger when not scrolled */}
           <Link
             to="/"
-            className="flex items-center gap-3 md:gap-4 hover:scale-105 transition-all duration-500 group"
+            className="flex items-center hover:scale-105 transition-all duration-500 group"
           >
             <div className="relative">
               <img
-                src="/znak.png"
-                alt="Royal Stroje Logo"
+                src="/logoroyal.png"
+                alt="Royal Stroje"
                 className={`w-auto relative z-10 transition-all duration-500 ${scrolled ? 'h-10 md:h-12' : 'h-14 md:h-16'}`}
               />
               {/* Logo glow effect */}
               <div className="absolute inset-0 bg-orange-primary/40 blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
-            <span className={`font-black tracking-tight transition-all duration-500 ${scrolled ? 'text-3xl md:text-4xl' : 'text-4xl md:text-5xl'}`}>
-              <span className="text-white">ROYAL</span>
-              <span className="text-orange-primary"> STROJE</span>
-            </span>
           </Link>
 
           {/* Desktop Navigation */}
