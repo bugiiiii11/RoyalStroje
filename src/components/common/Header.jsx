@@ -55,8 +55,6 @@ export default function Header() {
                 alt="Royal Stroje"
                 className={`w-auto relative z-10 transition-all duration-500 ${scrolled ? 'h-10 md:h-12' : 'h-14 md:h-16'}`}
               />
-              {/* Logo glow effect */}
-              <div className="absolute inset-0 bg-orange-primary/40 blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
           </Link>
 
