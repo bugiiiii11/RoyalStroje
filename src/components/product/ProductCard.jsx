@@ -143,15 +143,16 @@ export default function ProductCard({ product }) {
                   <h3 className="text-white font-bold text-xs sm:text-sm uppercase tracking-wide mb-3 text-center">Parametre</h3>
                   <div className="bg-zinc-800 border border-white/10 rounded-xl overflow-hidden">
                     {product.features.map((feature, idx) => {
-                      // Split feature by common separators or just display as is
+                      // Split feature by common separators
                       const parts = feature.split(/[-:]/);
-                      const label = parts.length > 1 ? parts[0].trim() : `Parameter ${idx + 1}`;
-                      const value = parts.length > 1 ? parts.slice(1).join('-').trim() : feature;
+                      const hasValue = parts.length > 1;
+                      const label = hasValue ? parts[0].trim() : feature.trim();
+                      const value = hasValue ? parts.slice(1).join('-').trim() : '';
 
                       return (
                         <div key={idx} className="flex justify-between py-2.5 sm:py-3 px-3 sm:px-4 border-b border-white/5 last:border-0 gap-2">
                           <span className="text-white/60 font-medium text-xs sm:text-sm">{label}</span>
-                          <span className="text-white font-bold text-xs sm:text-sm text-right">{value}</span>
+                          {value && <span className="text-white font-bold text-xs sm:text-sm text-right">{value}</span>}
                         </div>
                       );
                     })}

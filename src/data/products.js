@@ -51,7 +51,8 @@ export const products = [
     description: 'Búracie kladivo 5.6 kg - SDS-Max',
     features: [
       'Sila jednotlivého príklepu - 8.1 J',
-      'Antivibračná technológia - AVT'
+      'Antivibračná technológia - AVT',
+      'Príkon - 1.100 W'
     ],
     inStock: true,
     isNew: false,
@@ -67,7 +68,9 @@ export const products = [
     pricePerDay: 20,
     description: 'Búracie kladivo 9.7 kg - SDS-Max',
     features: [
-      'Sila jednotlivého príklepu - 19.1 J'
+      'Sila jednotlivého príklepu - 19.1 J',
+      'Plynulý rozbeh pre precíznu prácu',
+      'Príkon - 1.510 W'
     ],
     inStock: true,
     isNew: false,
@@ -83,7 +86,7 @@ export const products = [
     pricePerDay: 9,
     description: 'Príklepová vŕtačka 2 kg - akučkovadlo',
     features: [
-      'Max. vŁtací výkon - oceľ/betón/drevo - 13/16/30 mm',
+      'Max. vŕtací výkon - oceľ/betón/drevo - 13/16/30 mm',
       'Upínací rozsah skľučovadla - 1.5 – 13 mm',
       'Príkon - 710 W'
     ],
@@ -102,7 +105,8 @@ export const products = [
     description: 'Vŕtacie kladivo 6.2 kg - SDS-Max',
     features: [
       'Sila jednotlivého príklepu - 8.3 J',
-      'Max. vŕtací výkon (vrták, korúnka) - 40/105 mm'
+      'Max. vŕtací výkon (vrták, korúnka) - 40/105 mm',
+      'Príkon - 1.100 W'
     ],
     inStock: true,
     isNew: false,
@@ -119,7 +123,8 @@ export const products = [
     description: 'Vŕtacie kladivo 10.9 kg - SDS-Max',
     features: [
       'Sila jednotlivého príklepu - 20 J',
-      'Max. vŕtací výkon (vrták, korúnka) - 52/160 mm'
+      'Max. vŕtací výkon (vrták, korúnka) - 52/160 mm',
+      'Príkon - 1.510 W'
     ],
     inStock: true,
     isNew: false,
@@ -135,7 +140,9 @@ export const products = [
     pricePerDay: 23,
     description: 'Búracie kladivo 15.3 kg',
     features: [
-      'Sila jednotlivého príklepu - 25.5 J'
+      'Sila jednotlivého príklepu - 25.5 J',
+      'Plynulý rozbeh pri rizikel manipuládi',
+      'Príkon - 1.510 W'
     ],
     inStock: true,
     isNew: false,
@@ -152,7 +159,8 @@ export const products = [
     description: 'Búracie kladivo 29.4 kg',
     features: [
       'Sila jednotlivého príklepu - 71.4 J',
-      'Rozbitanie cestných povrchov, základov alebo búracie práce - 1.8 kg'
+      'Rozbitanie cestných povrchov, základov alebo búracie práce',
+      'Príkon - 2.000 W'
     ],
     inStock: true,
     isNew: false,
@@ -171,7 +179,8 @@ export const products = [
     description: 'Uhlová brúska 125mm',
     features: [
       'Priemer kotúča - 125 mm',
-      'Hmotnosť - 1.8 kg'
+      'Hmotnosť - 1.8 kg',
+      'Príkon - 720 W'
     ],
     inStock: true,
     isNew: false,
@@ -206,7 +215,8 @@ export const products = [
     description: 'Uhlová brúska AKU 125mm',
     features: [
       'Priemer kotúča - 125 mm',
-      'Batéria - 18V 2x5 0Ah'
+      'Hmotnosť - 1.8 kg',
+      'Batéria - 18V 2x5.0Ah'
     ],
     inStock: true,
     isNew: false,
@@ -223,7 +233,8 @@ export const products = [
     description: 'Uhlová brúska na betón 125mm',
     features: [
       'Priemer kotúča - 125 mm',
-      'Regulácia otáčok/odskúšavanie prachu - áno / áno'
+      'Regulácia otáčok/odsávanie prachu - áno / áno',
+      'Príkon - 1500 W'
     ],
     inStock: true,
     isNew: false,
@@ -239,8 +250,9 @@ export const products = [
     pricePerDay: 7,
     description: 'Vibračná brúska 1.6 kg',
     features: [
-      'Príkon - 190 W',
-      'Excentricita - 2 mm'
+      'Rozmer brúsneho papiera - 93 x 228 mm',
+      'Excentricita - 2 mm',
+      'Príkon - 190 W'
     ],
     inStock: true,
     isNew: false,
@@ -256,7 +268,8 @@ export const products = [
     pricePerDay: 7,
     description: 'Pásová brúska 2.7 kg',
     features: [
-      'Rozmer brúsneho pásu - 76x457 mm'
+      'Rozmer brúsneho pásu - 76x457 mm',
+      'Príkon - 950 W'
     ],
     inStock: true,
     isNew: false,
@@ -273,7 +286,8 @@ export const products = [
     description: 'Excentrická brúska 1.4 kg',
     features: [
       'Priemer základnej dosky - 123 mm',
-      'Excentricita - 2.8 mm'
+      'Excentricita - 2.8 mm',
+      'Príkon - 300 W'
     ],
     inStock: true,
     isNew: false,
@@ -310,7 +324,8 @@ export const products = [
     description: 'Kotúčová pila 235mm',
     features: [
       'Max. hĺbka rezu pri 90°/45° - 85/58 mm',
-      'Hmotnosť - 5.7 kg'
+      'Hmotnosť - 7.2 kg',
+      'Príkon - 2000 W'
     ],
     inStock: true,
     isNew: false,
@@ -326,7 +341,9 @@ export const products = [
     pricePerDay: 12,
     description: 'Chvostová pila 3.3 kg',
     features: [
-      'Max. dĺžka rezu - 255/130 mm'
+      'Dĺžka pílového listu - 450 mm',
+      'Max. priemer drevo/rúrka  0° - 255/130 mm',
+      'Príkon - 1200 W'
     ],
     inStock: true,
     isNew: false,
@@ -342,7 +359,9 @@ export const products = [
     pricePerDay: 10,
     description: 'Priamočiara pila 260mm',
     features: [
-      'Max. hĺbka rezu dreva/kov - 135/10 mm'
+      'Max. hĺbka rezu dreva/kov - 135/10 mm',
+      'Hmotnosť - 2.6 kg',
+      'Príkon - 720 W'
     ],
     inStock: true,
     isNew: false,
@@ -358,7 +377,9 @@ export const products = [
     pricePerDay: 24,
     description: 'Pokovosá pila 260mm',
     features: [
-      'Max. hĺbka rezu pri 90° - 305/215 mm'
+      'Max. hĺbka rezu pri 90° - 305/215 mm',
+      'Hmotnosť - 19.9 kg',
+      'Príkon - 1.430 W'
     ],
     inStock: true,
     isNew: false,
@@ -372,9 +393,9 @@ export const products = [
     image: '/rezačka na dlažbu 1050mm.webp',
     price: '22.14€/deň',
     pricePerDay: 18,
-    description: 'Rézačka na dlažbu 1050mm',
+    description: 'Rezačka na dlažbu 1050mm',
     features: [
-      'max. dĺžka rezu - 1050mm'
+      'Max. dĺžka rezu - 1050mm'
     ],
     inStock: true,
     isNew: false,
@@ -388,10 +409,11 @@ export const products = [
     image: '/Styropor4.webp',
     price: '13.53€/deň',
     pricePerDay: 11,
-    description: 'Rézačka polyštyrénm 1200mm',
+    description: 'Rezačka polyštyrénm 1200mm',
     features: [
-      'max. dĺžka rezu - 1200mm',
-      'Hmotnosť - 9.8 kg'
+      'Max. dĺžka rezu - 1200mm',
+      'Hmotnosť - 9.8 kg',
+      'Príkon - 160 W'
     ],
     inStock: true,
     isNew: false,
@@ -407,7 +429,9 @@ export const products = [
     pricePerDay: 29,
     description: 'Dražkovacia pila 150mm',
     features: [
-      'Šírka / hĺbka - f = 35 mm / 7 – 45 mm'
+      'Šírka / hĺbka - 7 – 35 mm / 7 - 45 mm',
+      'Hmotnosť - 5.7 kg',
+      'Príkon - 1800 W'
     ],
     inStock: true,
     isNew: false,
@@ -426,7 +450,8 @@ export const products = [
     description: 'Stavebný vysávač 42L',
     features: [
       'Objem nádoby - 42 L',
-      'Hmotnosť - 30 L'
+      'Kefa pre Vami pre vedu',
+      'Príkon - 1200 W'
     ],
     inStock: true,
     isNew: false,
@@ -443,7 +468,8 @@ export const products = [
     description: 'Stavebný vysávač 25L',
     features: [
       'Objem nádoby - 25 L',
-      'Hmotnosť - 8 kg'
+      'Hmotnosť - 8 kg',
+      'Príkon - 1000 W'
     ],
     inStock: true,
     isNew: false,
@@ -459,8 +485,9 @@ export const products = [
     pricePerDay: 22,
     description: 'Tepovač',
     features: [
-      'Objem nádoby - 10 L',
-      'Pracovný výkon - 150W'
+      'Max. plošný výkon (m³/h) - 20 - 25',
+      'Hmotnosť - 10.7 kg',
+      'Nádrž na čistú / špinavú vodu (l) - 10 - 9'
     ],
     inStock: true,
     isNew: false,
@@ -476,8 +503,9 @@ export const products = [
     pricePerDay: 24,
     description: 'Vysokotlákový čistič',
     features: [
-      'Maximálna vyhlačná výška - 12 m',
-      'Hmotnosť - 9.5 kg'
+      'Pracovný výkon - 150W',
+      'Hmotnosť - 26.5 kg',
+      'Príkon - 2500 W'
     ],
     inStock: true,
     isNew: false,
@@ -495,8 +523,9 @@ export const products = [
     pricePerDay: 24,
     description: 'Čerpadlo na dodatkovú vodu 224 l/min',
     features: [
-      'Max. plošný výkon (m³/h) - 20 - 25',
-      'Hmotnosť - 10.7 kg'
+      'Maximálna výtlačná výška - 12 m',
+      'Hmotnosť - 9.5 kg',
+      'vyhlačná/priemer - 416/253/220 mm'
     ],
     inStock: true,
     isNew: false,
@@ -512,8 +541,9 @@ export const products = [
     pricePerDay: 24,
     description: 'Kálové ponorné čerpadlo 317 l/min',
     features: [
-      'Max. vyhlačná výška - 13 m',
-      'Hmotnosť - 13 kg'
+      'Max. výtlačná výška - 13 m',
+      'Hmotnosť - 13 kg',
+      'vyhlačná/šírka/priemer - 416/277/241 mm'
     ],
     inStock: true,
     isNew: false,
@@ -529,7 +559,7 @@ export const products = [
     pricePerDay: 27,
     description: 'Ponorné čerpadlo 470 l/min',
     features: [
-      'Max. vyhlačná výška - 15 m',
+      'Max. výtlačná výška - 15 m',
       'Hmotnosť - 13 kg'
     ],
     inStock: true,
