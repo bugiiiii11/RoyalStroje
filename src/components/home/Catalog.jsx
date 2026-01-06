@@ -10,7 +10,7 @@ export default function Catalog() {
   const [activeSubcategory, setActiveSubcategory] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDays, setSelectedDays] = useState([]);
-  const productsPerPage = 6;
+  const productsPerPage = 8;
   const { cartItems, removeFromCart, getTotal } = useCart();
 
   // Generate calendar days starting from today, aligned to week grid
@@ -402,7 +402,7 @@ export default function Catalog() {
                     {/* Total */}
                     <div className="border-t border-white/10 pt-3 mb-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-white/70 text-sm">Celkom:</span>
+                        <span className="text-white/70 text-sm">Cena s DPH:</span>
                         <div className="text-right">
                           <span className="text-orange-primary text-lg font-black">
                             {totalPrice}€
