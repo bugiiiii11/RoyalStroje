@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(node update-csv-images.js:*)",
+      "Bash(node csv-to-products.js:*)",
+      "Bash(npm install:*)",
+      "Bash(node csv-to-products-v2.js:*)",
+      "Bash(node fix-csv.js:*)"
     ]
   }
 }
