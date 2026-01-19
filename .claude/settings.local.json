@@ -6,7 +6,8 @@
       "Bash(node csv-to-products.js:*)",
       "Bash(npm install:*)",
       "Bash(node csv-to-products-v2.js:*)",
-      "Bash(node fix-csv.js:*)"
+      "Bash(node fix-csv.js:*)",
+      "Bash(node scripts/processProducts.js:*)"
     ]
   }
 }
