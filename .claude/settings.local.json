@@ -7,7 +7,8 @@
       "Bash(npm install:*)",
       "Bash(node csv-to-products-v2.js:*)",
       "Bash(node fix-csv.js:*)",
-      "Bash(node scripts/processProducts.js:*)"
+      "Bash(node scripts/processProducts.js:*)",
+      "Bash(git restore:*)"
     ]
   }
 }

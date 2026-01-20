@@ -43,6 +43,118 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} className="relative pt-24 md:pt-32 lg:pt-40 pb-12 md:pb-20 bg-black overflow-hidden">
+      {/* Animation keyframes for floating icons */}
+      <style>{`
+        @keyframes float1 {
+          0%, 100% { transform: translate(0, 0) rotate(-3deg); }
+          25% { transform: translate(12px, -18px) rotate(2deg); }
+          50% { transform: translate(-8px, -30px) rotate(-5deg); }
+          75% { transform: translate(18px, -12px) rotate(0deg); }
+        }
+        @keyframes float2 {
+          0%, 100% { transform: translate(0, 0) rotate(2deg); }
+          33% { transform: translate(-15px, 20px) rotate(-3deg); }
+          66% { transform: translate(12px, 8px) rotate(4deg); }
+        }
+        @keyframes float3 {
+          0%, 100% { transform: translate(0, 0) rotate(0deg); }
+          50% { transform: translate(-10px, -15px) rotate(-2deg); }
+        }
+      `}</style>
+
+      {/* Floating Construction Equipment Icons - Left Side */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Excavator - top left */}
+        <div
+          className="absolute top-[15%] left-[3%] w-40 h-40 opacity-[0.35]"
+          style={{ animation: 'float1 14s ease-in-out infinite' }}
+        >
+          <svg viewBox="0 0 120 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            {/* Tracks */}
+            <rect x="10" y="75" width="55" height="15" rx="7" stroke="#ff6600" strokeWidth="2.5" fill="none"/>
+            <circle cx="18" cy="82" r="4" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            <circle cx="57" cy="82" r="4" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            <circle cx="37" cy="82" r="3" stroke="#ff6600" strokeWidth="1.5" fill="none"/>
+            {/* Body/Cab */}
+            <rect x="20" y="55" width="40" height="20" rx="3" stroke="#ff6600" strokeWidth="2.5" fill="none"/>
+            {/* Cab window */}
+            <rect x="25" y="58" width="15" height="12" rx="2" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            {/* Boom base */}
+            <circle cx="55" cy="58" r="5" stroke="#ff6600" strokeWidth="2.5" fill="none"/>
+            {/* Boom arm */}
+            <path d="M58 55 L85 30" stroke="#ff6600" strokeWidth="3.5" strokeLinecap="round"/>
+            {/* Stick/Dipper */}
+            <path d="M85 30 L105 50" stroke="#ff6600" strokeWidth="3" strokeLinecap="round"/>
+            {/* Bucket */}
+            <path d="M105 50 L115 55 L110 65 L100 60 L105 50" stroke="#ff6600" strokeWidth="2.5" strokeLinejoin="round" fill="none"/>
+            {/* Bucket teeth */}
+            <path d="M102 62 L100 68 M106 63 L105 69 M110 63 L110 69" stroke="#ff6600" strokeWidth="2" strokeLinecap="round"/>
+            {/* Hydraulic cylinders */}
+            <line x1="50" y1="52" x2="70" y2="35" stroke="#ff6600" strokeWidth="2"/>
+            <line x1="88" y1="33" x2="98" y2="48" stroke="#ff6600" strokeWidth="2"/>
+          </svg>
+        </div>
+
+        {/* Crane - middle left */}
+        <div
+          className="absolute top-[40%] left-[6%] w-36 h-36 opacity-[0.35]"
+          style={{ animation: 'float2 16s ease-in-out infinite' }}
+        >
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            {/* Crane base/tracks */}
+            <rect x="15" y="80" width="40" height="12" rx="5" stroke="#ff6600" strokeWidth="2.5" fill="none"/>
+            <circle cx="23" cy="86" r="3" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            <circle cx="47" cy="86" r="3" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            {/* Crane body */}
+            <rect x="25" y="65" width="20" height="15" rx="2" stroke="#ff6600" strokeWidth="2.5" fill="none"/>
+            {/* Cabin */}
+            <rect x="28" y="68" width="10" height="8" rx="1" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            {/* Main boom/tower */}
+            <path d="M35 65 L35 25" stroke="#ff6600" strokeWidth="3.5" strokeLinecap="round"/>
+            {/* Jib arm */}
+            <path d="M35 28 L80 28" stroke="#ff6600" strokeWidth="3" strokeLinecap="round"/>
+            {/* Counter jib */}
+            <path d="M35 28 L15 28" stroke="#ff6600" strokeWidth="2.5" strokeLinecap="round"/>
+            {/* Counterweight */}
+            <rect x="10" y="25" width="8" height="6" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            {/* Hook cable */}
+            <path d="M70 28 L70 50" stroke="#ff6600" strokeWidth="2"/>
+            {/* Hook */}
+            <path d="M66 50 L74 50 L74 55 C74 58, 70 60, 66 55 L66 50" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            {/* Support cables */}
+            <path d="M35 25 L15 28" stroke="#ff6600" strokeWidth="1.5" opacity="0.8"/>
+            <path d="M35 25 L80 28" stroke="#ff6600" strokeWidth="1.5" opacity="0.8"/>
+          </svg>
+        </div>
+
+        {/* Dump Truck - bottom left */}
+        <div
+          className="absolute top-[65%] left-[2%] w-44 h-44 opacity-[0.35]"
+          style={{ animation: 'float3 12s ease-in-out infinite', animationDelay: '2s' }}
+        >
+          <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            {/* Wheels */}
+            <circle cx="25" cy="62" r="12" stroke="#ff6600" strokeWidth="2.5" fill="none"/>
+            <circle cx="25" cy="62" r="6" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            <circle cx="90" cy="62" r="12" stroke="#ff6600" strokeWidth="2.5" fill="none"/>
+            <circle cx="90" cy="62" r="6" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            {/* Cabin */}
+            <rect x="8" y="32" width="28" height="25" rx="3" stroke="#ff6600" strokeWidth="2.5" fill="none"/>
+            <rect x="12" y="36" width="16" height="12" rx="2" stroke="#ff6600" strokeWidth="2" fill="none"/>
+            {/* Chassis */}
+            <path d="M36 50 L108 50 L108 57 L36 57 Z" stroke="#ff6600" strokeWidth="2.5" fill="none"/>
+            {/* Dump bed */}
+            <path d="M40 15 L40 47 L110 47 L110 28 L92 15 L40 15" stroke="#ff6600" strokeWidth="2.5" strokeLinejoin="round" fill="none"/>
+            {/* Dump bed ribs */}
+            <line x1="55" y1="15" x2="55" y2="47" stroke="#ff6600" strokeWidth="2"/>
+            <line x1="70" y1="15" x2="70" y2="47" stroke="#ff6600" strokeWidth="2"/>
+            <line x1="85" y1="18" x2="85" y2="47" stroke="#ff6600" strokeWidth="2"/>
+            {/* Hydraulic cylinder */}
+            <path d="M45 47 L60 28" stroke="#ff6600" strokeWidth="2"/>
+          </svg>
+        </div>
+      </div>
+
       {/* Modern geometric bottom border */}
       <div className="absolute bottom-0 left-0 right-0 h-20 overflow-hidden">
         {/* Angled cut with steps */}

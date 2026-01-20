@@ -235,12 +235,8 @@ export default function Catalog() {
       `}</style>
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-        {/* Main Container with Frame */}
-        <div className="relative bg-zinc-950/80 backdrop-blur-sm border-2 border-orange-primary/60 rounded-3xl p-6 md:p-10 lg:p-12 shadow-[0_0_40px_rgba(255,102,0,0.15)]">
-          {/* Subtle glow effect */}
-          <div className="absolute -inset-px bg-gradient-to-b from-orange-primary/10 via-transparent to-orange-primary/5 rounded-3xl pointer-events-none"></div>
-        {/* Section Header */}
-        <div className="text-center mb-12">
+        {/* Section Header - outside the container, on grid background */}
+        <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
             Vyberte si z našej{' '}
             <span className="text-orange-primary">širokej ponuky</span>
@@ -249,6 +245,11 @@ export default function Catalog() {
             Profesionálna technika pre každý typ projektu - od malého náradia po ťažkú mechanizáciu
           </p>
         </div>
+
+        {/* Main Container with Frame */}
+        <div className="relative bg-zinc-950/80 backdrop-blur-sm border-2 border-orange-primary/60 rounded-3xl p-6 md:p-10 lg:p-12 shadow-[0_0_40px_rgba(255,102,0,0.15)]">
+          {/* Subtle glow effect */}
+          <div className="absolute -inset-px bg-gradient-to-b from-orange-primary/10 via-transparent to-orange-primary/5 rounded-3xl pointer-events-none"></div>
 
         {/* Main Catalog Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
