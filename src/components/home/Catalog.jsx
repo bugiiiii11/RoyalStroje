@@ -1,9 +1,24 @@
 import { useState, useEffect } from 'react';
-import { ShoppingCart, X, Send, Calendar } from 'lucide-react';
+import {
+  ShoppingCart, X, Send, Calendar,
+  Hammer, Cog, HardHat, ArrowUpFromLine,
+  Container, Car, TreePine
+} from 'lucide-react';
 import { categories } from '../../data/categories';
 import { getProductsBySubcategory } from '../../data/products';
 import ProductCard from '../product/ProductCard';
 import { useCart } from '../../context/CartContext';
+
+// Ikony pre jednotlivé kategórie
+const categoryIcons = {
+  'male-naradie': Hammer,
+  'stredna-mechanizacia': Cog,
+  'tazka-technika': HardHat,
+  'pracovne-plosiny': ArrowUpFromLine,
+  'vybavenie-staveniska': Container,
+  'auta-privesy': Car,
+  'zahradna-technika': TreePine,
+};
 
 export default function Catalog() {
   const [activeCategory, setActiveCategory] = useState('male-naradie');
@@ -129,23 +144,15 @@ export default function Catalog() {
         }}
       />
 
-      {/* Grid pattern overlay - much more visible */}
+      {/* Grid pattern overlay - subtle */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.25] z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.15] z-0"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)
+            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
           `,
           backgroundSize: '50px 50px'
-        }}
-      />
-
-      {/* Diagonal subtle lines for technical feel */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
-        style={{
-          backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
         }}
       />
 
@@ -155,11 +162,11 @@ export default function Catalog() {
         style={{
           top: '10%',
           right: '10%',
-          width: '600px',
-          height: '600px',
-          background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
-          filter: 'blur(100px)',
-          opacity: 0.15,
+          width: '500px',
+          height: '500px',
+          background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 40%, transparent 70%)',
+          filter: 'blur(80px)',
+          opacity: 0.2,
           animation: 'floatGlow1 8s ease-in-out infinite'
         }}
       />
@@ -170,26 +177,12 @@ export default function Catalog() {
         style={{
           bottom: '10%',
           left: '10%',
-          width: '550px',
-          height: '550px',
-          background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
-          filter: 'blur(90px)',
-          opacity: 0.12,
+          width: '450px',
+          height: '450px',
+          background: 'radial-gradient(circle, rgba(255,102,0,0.35) 0%, rgba(255,102,0,0.1) 40%, transparent 70%)',
+          filter: 'blur(70px)',
+          opacity: 0.15,
           animation: 'floatGlow2 10s ease-in-out infinite'
-        }}
-      />
-
-      {/* Center pulsing glow */}
-      <div
-        className="absolute top-1/2 left-1/2 pointer-events-none z-0"
-        style={{
-          width: '800px',
-          height: '800px',
-          marginLeft: '-400px',
-          marginTop: '-400px',
-          background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-          filter: 'blur(120px)',
-          animation: 'pulseGlow 6s ease-in-out infinite'
         }}
       />
 
@@ -197,39 +190,23 @@ export default function Catalog() {
       <style>{`
         @keyframes floatGlow1 {
           0%, 100% {
-            transform: translate(0, 0) scale(1);
-          }
-          25% {
-            transform: translate(-120px, 100px) scale(1.2);
+            transform: translateY(0) scale(1);
+            opacity: 0.2;
           }
           50% {
-            transform: translate(80px, -120px) scale(0.85);
-          }
-          75% {
-            transform: translate(100px, 60px) scale(1.1);
+            transform: translateY(-30px) scale(1.15);
+            opacity: 0.25;
           }
         }
 
         @keyframes floatGlow2 {
           0%, 100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(140px, -100px) scale(1.25);
-          }
-          66% {
-            transform: translate(-100px, 120px) scale(0.8);
-          }
-        }
-
-        @keyframes pulseGlow {
-          0%, 100% {
-            transform: scale(1);
-            opacity: 0.08;
+            transform: translateY(0) scale(1);
+            opacity: 0.15;
           }
           50% {
-            transform: scale(1.4);
-            opacity: 0.18;
+            transform: translateY(30px) scale(1.2);
+            opacity: 0.2;
           }
         }
       `}</style>
@@ -242,7 +219,7 @@ export default function Catalog() {
             <span className="text-orange-primary">širokej ponuky</span>
           </h2>
           <p className="text-white/70 text-base md:text-lg max-w-3xl mx-auto">
-            Profesionálna technika pre každý typ projektu - od malého náradia po ťažkú mechanizáciu
+            Profesionálna technika pre každý typ práce - od malého náradia po ťažkú techniku.
           </p>
         </div>
 
@@ -260,26 +237,57 @@ export default function Catalog() {
                 Kategórie
               </h3>
               <div className="space-y-3">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => handleCategoryChange(category.id)}
-                    className={`w-full text-left px-5 py-4 rounded-xl font-bold text-lg transition-all ${
-                      activeCategory === category.id
-                        ? 'bg-orange-primary text-white shadow-lg shadow-orange-primary/30'
-                        : 'bg-zinc-800/50 text-white/80 hover:bg-zinc-800 hover:text-white'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span>{category.name}</span>
-                      {category.badge && activeCategory !== category.id && (
-                        <span className="text-xs px-2 py-1 bg-orange-primary/20 text-orange-primary rounded font-semibold">
-                          {category.badge}
-                        </span>
-                      )}
-                    </div>
-                  </button>
-                ))}
+                {categories.map((category) => {
+                  const IconComponent = categoryIcons[category.id];
+                  const isActive = activeCategory === category.id;
+
+                  return (
+                    <button
+                      key={category.id}
+                      onClick={() => handleCategoryChange(category.id)}
+                      className={`group w-full text-left px-4 py-3.5 rounded-xl font-bold transition-all duration-300 ${
+                        isActive
+                          ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg shadow-orange-primary/40'
+                          : 'bg-zinc-800/50 text-white/80 hover:bg-zinc-800 hover:text-white border border-transparent hover:border-orange-primary/30'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3 relative">
+                        {/* Icon Container */}
+                        <div className={`relative flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                          isActive
+                            ? 'bg-white/20'
+                            : 'bg-zinc-700/50 group-hover:bg-orange-primary/20'
+                        }`}>
+                          {IconComponent && (
+                            <IconComponent
+                              size={20}
+                              className={`transition-all duration-300 ${
+                                isActive
+                                  ? 'text-white'
+                                  : 'text-orange-primary group-hover:scale-110'
+                              }`}
+                            />
+                          )}
+                          {/* Badge as small dot indicator on icon */}
+                          {category.badge && !isActive && (
+                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-orange-primary rounded-full border-2 border-zinc-900"></span>
+                          )}
+                        </div>
+
+                        {/* Text */}
+                        <div className="flex-1">
+                          <span className="block text-base">{category.name}</span>
+                          {/* Badge text under category name */}
+                          {category.badge && !isActive && (
+                            <span className="text-[9px] text-orange-primary font-bold uppercase tracking-wider">
+                              {category.badge}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 

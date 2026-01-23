@@ -250,8 +250,8 @@ export default function Kontakt() {
                   </div>
                   <div>
                     <h3 className="text-white font-bold text-xl mb-2">Adresa</h3>
-                    <p className="text-white/80 text-lg font-semibold mb-1">Réčka cesta 182</p>
-                    <p className="text-white/80 text-lg font-semibold">903 01 Senec</p>
+                    <p className="text-white/80 text-lg font-semibold mb-1">Recká cesta 182</p>
+                    <p className="text-white/80 text-lg font-semibold">925 26 Senec-Boldog</p>
                   </div>
                 </div>
 

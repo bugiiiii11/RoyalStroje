@@ -2,7 +2,7 @@ import { Phone } from 'lucide-react';
 
 export default function CTASection() {
   return (
-    <section className="relative py-16 bg-zinc-950 overflow-hidden">
+    <section className="relative py-16 bg-zinc-950 overflow-visible">
       {/* Radial gradient overlay */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
@@ -75,12 +75,36 @@ export default function CTASection() {
         }}
       />
 
+      {/* Animation keyframes for floating object */}
+      <style>{`
+        @keyframes floatObject3 {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          25% { transform: translateY(-15px) rotate(0.5deg); }
+          50% { transform: translateY(-25px) rotate(-0.5deg); }
+          75% { transform: translateY(-10px) rotate(0.3deg); }
+        }
+      `}</style>
+
+      {/* 3D Object - Left Side - Extends into footer */}
+      <div className="absolute inset-0 pointer-events-none overflow-visible z-[1]">
+        <div
+          className="absolute top-[10%] left-[1%] w-[24rem] md:w-[24rem] lg:w-[30rem] opacity-100"
+          style={{ animation: 'floatObject3 16s ease-in-out infinite' }}
+        >
+          <img
+            src="/pictures/graphics/objects5.png"
+            alt=""
+            className="w-full h-auto"
+          />
+        </div>
+      </div>
+
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center">
         <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
           Potrebujete poradiť s výberom?
         </h2>
         <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-          Neviete, aké náradie potrebujete na váš projekt? Zavolajte nám a náš tím vám ochotne poradí s výberom tej správnej techniky pre vašu prácu.
+          Neviete, aké náradie potrebujete pre vašu prácu? Zavolajte nám a náš tím vám ochotne poradí s výberom tej správnej techniky.
         </p>
         <a
           href="tel:+421948555551"

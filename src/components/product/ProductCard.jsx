@@ -77,7 +77,7 @@ export default function ProductCard({ product }) {
               ) : (
                 <ShoppingCart size={16} className="relative z-10" />
               )}
-              <span className="relative z-10">{inCart ? 'V košíku' : 'Do košíka'}</span>
+              <span className="relative z-10">{inCart ? 'V košíku' : 'Rezervovať'}</span>
             </button>
 
             {/* Secondary Link */}

@@ -3,7 +3,7 @@ import { Facebook, Instagram, MessageCircle, Send, Phone, Mail, MapPin, Clock } 
 
 export default function Footer() {
   return (
-    <footer className="relative bg-black pt-24 pb-16">
+    <footer className="relative bg-black pt-24 pb-16 overflow-visible">
       {/* Modern geometric top border - mirrored from Hero */}
       <div className="absolute top-0 left-0 right-0 h-20 overflow-hidden">
         {/* Angled cut with steps - flipped vertically */}
@@ -29,7 +29,7 @@ export default function Footer() {
           />
         </svg>
       </div>
-      <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+      <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Column 1: About */}
@@ -39,8 +39,9 @@ export default function Footer() {
               <span className="text-orange-primary"> STROJE</span>
             </div>
             <p className="text-white/70 text-sm leading-relaxed">
-              Profesionálna požičovňa náradia a stavebnej techniky v Senci.
-              Spolahlivosť a kvalita od roku 2015.
+              Profesionálna požičovňa v Senci.
+              Ponúkame prenájom a predaj špičkovej stavebnej techniky a náradia pre vaše najnáročnejšie práce.
+              Budujte s dôverou.
             </p>
           </div>
 
@@ -98,7 +99,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2 text-white/70">
                 <MapPin size={16} className="mt-0.5 flex-shrink-0" />
-                <span>Réčka cesta 182, 903 01 Senec</span>
+                <span>Recká cesta 182, 925 26 Senec-Boldog</span>
               </li>
               <li className="flex items-start gap-2 text-white/70">
                 <Clock size={16} className="mt-0.5 flex-shrink-0" />
@@ -145,9 +146,6 @@ export default function Footer() {
                 <Send size={18} />
               </a>
             </div>
-            <span className="inline-block px-4 py-2 bg-orange-primary/20 border border-orange-primary/40 rounded-full text-orange-primary text-xs font-bold uppercase tracking-wide">
-              Nová požičovňa v Senci
-            </span>
           </div>
         </div>
 
