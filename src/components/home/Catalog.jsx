@@ -446,19 +446,59 @@ export default function Catalog() {
             {/* Subcategory Filters */}
             <div className="mb-8">
               <div className="flex flex-wrap gap-3">
-                {currentCategory?.subcategories.map((subcategory) => (
-                  <button
-                    key={subcategory.id}
-                    onClick={() => handleSubcategoryChange(subcategory.id)}
-                    className={`px-5 py-3 rounded-xl font-bold text-base transition-all ${
-                      activeSubcategory === subcategory.id
-                        ? 'bg-orange-primary text-white shadow-lg shadow-orange-primary/30'
-                        : 'bg-zinc-900 border border-white/10 text-white/70 hover:bg-zinc-800 hover:text-white hover:border-white/20'
-                    }`}
-                  >
-                    {subcategory.name}
-                  </button>
-                ))}
+                {currentCategory?.subcategories.map((subcategory) => {
+                  const isActive = activeSubcategory === subcategory.id;
+                  return (
+                    <button
+                      key={subcategory.id}
+                      onClick={() => handleSubcategoryChange(subcategory.id)}
+                      className={`group relative px-6 py-3.5 rounded-2xl font-bold text-base transition-all duration-300 ${
+                        isActive
+                          ? 'text-white scale-[1.02]'
+                          : 'text-white/80 hover:text-white hover:scale-[1.02]'
+                      }`}
+                      style={{
+                        background: isActive
+                          ? 'linear-gradient(135deg, #ff6600 0%, #ff8533 50%, #ff6600 100%)'
+                          : 'linear-gradient(145deg, #2a2a2e 0%, #1a1a1d 100%)',
+                        boxShadow: isActive
+                          ? '0 8px 25px -5px rgba(255, 102, 0, 0.5), 0 4px 10px -5px rgba(255, 102, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.15)'
+                          : '0 4px 15px -3px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -2px 0 rgba(0, 0, 0, 0.2)',
+                        border: isActive
+                          ? '1px solid rgba(255, 255, 255, 0.2)'
+                          : '1px solid rgba(255, 255, 255, 0.1)',
+                        transform: isActive ? 'translateY(-2px)' : 'translateY(0)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.boxShadow = '0 6px 20px -3px rgba(255, 102, 0, 0.3), 0 3px 8px -2px rgba(255, 102, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -2px 0 rgba(0, 0, 0, 0.2)';
+                          e.currentTarget.style.border = '1px solid rgba(255, 102, 0, 0.4)';
+                          e.currentTarget.style.transform = 'translateY(-2px)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.boxShadow = '0 4px 15px -3px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -2px 0 rgba(0, 0, 0, 0.2)';
+                          e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                          e.currentTarget.style.transform = 'translateY(0)';
+                        }
+                      }}
+                    >
+                      {/* Shine effect overlay */}
+                      <span
+                        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, transparent 100%)',
+                        }}
+                      />
+                      {/* Active indicator dot */}
+                      {isActive && (
+                        <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full shadow-lg shadow-white/50" />
+                      )}
+                      <span className="relative z-10">{subcategory.name}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 

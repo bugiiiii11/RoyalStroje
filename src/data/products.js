@@ -323,7 +323,7 @@ export const products = [
     isPopular: false,
   },
   {
-    id: '',
+    id: 'bruska-na-steny-a-stropy',
     name: ' ',
     category: 'male-naradie',
     subcategory: 'uhlove-vibracne-a-pasove-brusky',
@@ -1021,7 +1021,7 @@ export const products = [
 
   // lesenie (3 produktov)
   {
-    id: 'custers',
+    id: 'custers-0-7m',
     name: 'Custers',
     category: 'male-naradie',
     subcategory: 'lesenie',
@@ -1039,7 +1039,7 @@ export const products = [
     isPopular: false,
   },
   {
-    id: 'custers',
+    id: 'custers-1-3m',
     name: 'Custers',
     category: 'male-naradie',
     subcategory: 'lesenie',
@@ -1057,7 +1057,7 @@ export const products = [
     isPopular: false,
   },
   {
-    id: '',
+    id: 'lesenarske-kozy',
     name: ' ',
     category: 'male-naradie',
     subcategory: 'lesenie',
@@ -1074,7 +1074,7 @@ export const products = [
 
   // nadrze na vodu a naftu (1 produktov)
   {
-    id: '',
+    id: 'nadrz-ibc-1000l',
     name: ' ',
     category: 'male-naradie',
     subcategory: 'nadrze-na-vodu-a-naftu',
@@ -1479,7 +1479,7 @@ export const products = [
     isPopular: false,
   },
   {
-    id: '',
+    id: 'hospodarsky-cirkular',
     name: ' ',
     category: 'stredna-mechanizacia',
     subcategory: 'stolove-a-portalove-pily',
@@ -1516,7 +1516,7 @@ export const products = [
     isPopular: false,
   },
   {
-    id: '',
+    id: 'kos-na-beton-badia',
     name: ' ',
     category: 'stredna-mechanizacia',
     subcategory: 'miesacky-hladicky-betonu-a-badie',
@@ -1552,7 +1552,7 @@ export const products = [
 
   // manipulacna technika (1 produktov)
   {
-    id: '',
+    id: 'paletovaci-vozik',
     name: ' ',
     category: 'stredna-mechanizacia',
     subcategory: 'manipulacna-technika',

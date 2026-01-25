@@ -47,7 +47,7 @@ export default function ProductCard({ product }) {
         {/* Content */}
         <div className="p-4">
           {/* Product Name */}
-          <h3 className="text-lg font-bold text-white mb-1 leading-tight line-clamp-1">
+          <h3 className="text-base font-bold text-white mb-1 leading-tight">
             {product.description}
           </h3>
 
@@ -122,12 +122,12 @@ export default function ProductCard({ product }) {
 
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto px-4 sm:px-6 pb-4 sm:pb-6">
-              {/* Image */}
+              {/* Image - Square aspect ratio like product card */}
               <div className="mb-4 sm:mb-6 rounded-xl overflow-hidden border border-white/10 bg-zinc-800">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-40 sm:h-56 object-contain"
+                  className="w-full aspect-square object-contain"
                 />
               </div>
 

@@ -2,97 +2,95 @@ import { Phone } from 'lucide-react';
 
 export default function CTASection() {
   return (
-    <section className="relative py-16 bg-zinc-950 overflow-visible">
-      {/* Radial gradient overlay */}
+    <section className="relative py-16 overflow-visible">
+      {/* Dark gradient background with depth */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
+          background: 'linear-gradient(180deg, #0c0c0f 0%, #131318 30%, #18181d 50%, #131318 70%, #0c0c0f 100%)'
         }}
       />
 
-      {/* Grid pattern overlay */}
+      {/* Subtle vignette effect */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.25] z-0"
+        className="absolute inset-0 pointer-events-none z-0"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px'
+          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)'
         }}
       />
 
-      {/* Diagonal subtle lines */}
+      {/* Soft ambient light from top */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
+        className="absolute inset-0 pointer-events-none z-0 opacity-30"
         style={{
-          backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
+          background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,102,0,0.15) 0%, transparent 60%)'
         }}
       />
 
-      {/* Orange accent glow - top right */}
+      {/* Subtle noise texture overlay */}
       <div
-        className="absolute pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none z-0 opacity-[0.03]"
         style={{
-          top: '10%',
-          right: '10%',
-          width: '600px',
-          height: '600px',
-          background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
-          filter: 'blur(100px)',
-          opacity: 0.15,
-          animation: 'floatGlow1 8s ease-in-out infinite'
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* Orange accent glow - bottom left */}
-      <div
-        className="absolute pointer-events-none z-0"
-        style={{
-          bottom: '10%',
-          left: '10%',
-          width: '550px',
-          height: '550px',
-          background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
-          filter: 'blur(90px)',
-          opacity: 0.12,
-          animation: 'floatGlow2 10s ease-in-out infinite'
-        }}
-      />
-
-      {/* Center pulsing glow */}
+      {/* Orange accent glow - center */}
       <div
         className="absolute top-1/2 left-1/2 pointer-events-none z-0"
         style={{
-          width: '800px',
-          height: '800px',
-          marginLeft: '-400px',
-          marginTop: '-400px',
-          background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-          filter: 'blur(120px)',
-          animation: 'pulseGlow 6s ease-in-out infinite'
+          width: '900px',
+          height: '500px',
+          marginLeft: '-450px',
+          marginTop: '-250px',
+          background: 'radial-gradient(ellipse, rgba(255,102,0,0.2) 0%, rgba(255,102,0,0.05) 40%, transparent 70%)',
+          filter: 'blur(80px)',
+          animation: 'pulseGlow 8s ease-in-out infinite'
         }}
       />
 
-      {/* Animation keyframes for floating object */}
+      {/* Animation keyframes for floating objects */}
       <style>{`
-        @keyframes floatObject3 {
+        @keyframes floatObjectLeft {
           0%, 100% { transform: translateY(0) rotate(0deg); }
           25% { transform: translateY(-15px) rotate(0.5deg); }
           50% { transform: translateY(-25px) rotate(-0.5deg); }
           75% { transform: translateY(-10px) rotate(0.3deg); }
         }
+        @keyframes floatObjectRight {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          25% { transform: translateY(-12px) rotate(-0.3deg); }
+          50% { transform: translateY(-20px) rotate(0.4deg); }
+          75% { transform: translateY(-8px) rotate(-0.2deg); }
+        }
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+        }
       `}</style>
 
-      {/* 3D Object - Left Side - Extends into footer */}
+      {/* 3D Object - Left Side - Extends into footer (20% smaller) */}
       <div className="absolute inset-0 pointer-events-none overflow-visible z-[1]">
         <div
-          className="absolute top-[10%] left-[1%] w-[24rem] md:w-[24rem] lg:w-[30rem] opacity-100"
-          style={{ animation: 'floatObject3 16s ease-in-out infinite' }}
+          className="absolute top-[10%] left-[1%] w-[19rem] md:w-[19rem] lg:w-[24rem] opacity-100"
+          style={{ animation: 'floatObjectLeft 16s ease-in-out infinite' }}
         >
           <img
             src="/pictures/graphics/objects5.png"
+            alt=""
+            className="w-full h-auto"
+          />
+        </div>
+      </div>
+
+      {/* 3D Object - Right Side - Extends into footer */}
+      <div className="absolute inset-0 pointer-events-none overflow-visible z-[1]">
+        <div
+          className="absolute top-[10%] right-[1%] w-[19rem] md:w-[19rem] lg:w-[24rem] opacity-100"
+          style={{ animation: 'floatObjectRight 18s ease-in-out infinite' }}
+        >
+          <img
+            src="/pictures/graphics/objects1.png"
             alt=""
             className="w-full h-auto"
           />
