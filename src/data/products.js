@@ -9,7 +9,7 @@ export const products = [
     name: 'Makita HR2470',
     category: 'male-naradie',
     subcategory: 'vrtacie-buracie-kladiva-a-vrtacky',
-    image: '/pictures/Malé náradie/Búracie , vŕtacie kladivá a vŕtačky/Makita HR2470.png',
+    image: '/pictures/Malé náradie/Búracie , vŕtacie kladivá a vŕtačky/Makita HR2470.webp',
     price: '10.80€/deň',
     pricePerDay: 9,
     description: 'Vŕtacie kladivo 2,9 kg - SDS-Plus',

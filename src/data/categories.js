@@ -11,12 +11,12 @@ export const categories = [
       { id: 'vrtacie-buracie-kladiva-a-vrtacky', name: 'Vŕtacie búracie kladivá a vŕtačky', slug: 'vrtacie-buracie-kladiva-a-vrtacky' },
       { id: 'uhlove-vibracne-a-pasove-brusky', name: 'Uhlové, vibračné a pásové brúsky', slug: 'uhlove-vibracne-a-pasove-brusky' },
       { id: 'rucne-pily-a-rezacky', name: 'Ručné píly a rezačky', slug: 'rucne-pily-a-rezacky' },
+      { id: 'nadrze-na-vodu-a-naftu', name: 'Nádrže na vodu a naftu', slug: 'nadrze-na-vodu-a-naftu' },
       { id: 'vysavace-tepovace-a-tlakove-cistice', name: 'Vysávače, tepovače a tlakové čističe', slug: 'vysavace-tepovace-a-tlakove-cistice' },
       { id: 'cerpadla-ohrievace-a-odvlhcovace', name: 'Čerpadlá, ohrievače a odvlhčovače', slug: 'cerpadla-ohrievace-a-odvlhcovace' },
       { id: 'zvaracia-a-meracia-technika', name: 'Zváracia a meracia technika', slug: 'zvaracia-a-meracia-technika' },
       { id: 'vibratory-vibracne-listy-a-miesadla', name: 'Vibrátory, vibračné lišty a miešadlá', slug: 'vibratory-vibracne-listy-a-miesadla' },
       { id: 'lesenie', name: 'Lešenie', slug: 'lesenie' },
-      { id: 'nadrze-na-vodu-a-naftu', name: 'Nádrže na vodu a naftu', slug: 'nadrze-na-vodu-a-naftu' },
     ]
   },
   {
