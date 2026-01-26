@@ -144,18 +144,6 @@ export default function Catalog() {
         }}
       />
 
-      {/* Grid pattern overlay - subtle */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.15] z-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px'
-        }}
-      />
-
       {/* Orange accent glow - top right (animated) */}
       <div
         className="absolute pointer-events-none z-0"

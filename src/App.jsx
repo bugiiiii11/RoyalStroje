@@ -6,7 +6,7 @@ import AnimatedBackground from './components/common/AnimatedBackground';
 import { CartProvider } from './context/CartContext';
 import Home from './pages/Home';
 import Sluzby from './pages/Sluzby';
-import ZemnePrace from './pages/ZemnePrace';
+import PredajTechniky from './pages/PredajTechniky';
 import ServisNaradia from './pages/ServisNaradia';
 import DovozTechniky from './pages/DovozTechniky';
 import Kontakt from './pages/Kontakt';
@@ -25,7 +25,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/sluzby" element={<Sluzby />} />
-              <Route path="/sluzby/zemne-prace" element={<ZemnePrace />} />
+              <Route path="/sluzby/predaj-techniky" element={<PredajTechniky />} />
               <Route path="/sluzby/servis-naradia" element={<ServisNaradia />} />
               <Route path="/sluzby/dovoz-techniky" element={<DovozTechniky />} />
               <Route path="/kontakt" element={<Kontakt />} />

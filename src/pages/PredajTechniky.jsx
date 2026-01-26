@@ -1,48 +1,57 @@
-import { Phone, Mail, Truck, RefreshCw, Zap, TruckIcon, Package, Shield, MapPin, Lightbulb } from 'lucide-react';
+import { Phone, Mail, ShoppingCart, Package, Tag, Zap, Shield, Wrench, HardHat } from 'lucide-react';
 
-export default function DovozTechniky() {
-  const services = [
+export default function PredajTechniky() {
+  const categories = [
     {
-      id: 'dovoz-na-stavbu',
-      icon: Truck,
-      title: 'Dovoz na stavbu',
-      description: 'Rýchly a spoľahlivý dovoz náradia a techniky priamo na vašu stavbu.',
-      features: ['Dovoz do 24 hodín', 'Celé Slovensko', 'Presný termín', 'Asistenčná služba'],
+      id: 'naradie',
+      icon: Wrench,
+      title: 'Stavebné náradie',
+      description: 'Profesionálne náradie od overených značiek pre každý typ práce.',
+      items: ['Vŕtačky a kladivá', 'Píly a brúsky', 'Uťahovače a vŕtačky', 'Náradia batérie'],
     },
     {
-      id: 'odvoz-po-skonceni',
-      icon: RefreshCw,
-      title: 'Odvoz po skončení',
-      description: 'Odvoz techniky zo stavby po skončení prenájmu. Flexibilné termíny.',
-      features: ['Flexibilný čas', 'Víkendy a sviatky', 'Predĺženie prenájmu', 'Bezplatný odvoz'],
-    },
-    {
-      id: 'express-doprava',
-      icon: Zap,
-      title: 'Express doprava',
-      description: 'Expresné doručenie v prípade havárie alebo poruchy stroja na stavbe.',
-      features: ['Non-stop dostupnosť', 'Náhradný stroj', 'Do 4 hodín', 'Prioritná podpora'],
-    },
-    {
-      id: 'preprava-tazka-mechanizacia',
-      icon: TruckIcon,
-      title: 'Preprava ťažkej mechanizácie',
-      description: 'Preprava bagrov, rýpadiel a inej ťažkej techniky na stavbu.',
-      features: ['Vlastné podvalníky', 'Skúsení vodiči', 'Povolenia a dokumenty', 'Naloženie/vyloženie'],
-    },
-    {
-      id: 'skladovanie',
+      id: 'mechanizacia',
       icon: Package,
-      title: 'Skladovanie techniky',
-      description: 'Krátkodobé alebo dlhodobé skladovanie vašej techniky.',
-      features: ['Strážený areál', 'Prístrešky', 'Nabíjanie batérií', 'Dohľad technikov'],
+      title: 'Stavebná mechanizácia',
+      description: 'Vybrané kusy stavebnej mechanizácie priamo na sklade.',
+      items: ['Miešačky a čerpadlá', 'Kompresory', 'Generátory', 'Stavebné výťahy'],
     },
     {
-      id: 'poistenie-prepravy',
+      id: 'prislusenstvo',
+      icon: ShoppingCart,
+      title: 'Príslušenstvo a spotrebný materiál',
+      description: 'Široký výber kvalitného príslušenstva za výhodné ceny.',
+      items: ['Diamantové kotúče', 'Vŕtacie a rezné kotúče', 'Brusy a leštidlá', 'Príslušenstvo na stroje'],
+    },
+    {
+      id: 'bozp',
+      icon: HardHat,
+      title: 'Ochranné pomôcky BOZP',
+      description: 'Bezpečnosť na prvom mieste - kompletný sortiment ochranných pomôcok.',
+      items: ['Reflexné vesty', 'Ochranné gurtne', 'Ochranné rukavice', 'Ochranné okuliare'],
+    },
+  ];
+
+  const advantages = [
+    {
+      icon: Tag,
+      title: 'Férové ceny',
+      description: 'Konkurenčné ponuky a akcie.',
+    },
+    {
+      icon: Package,
+      title: 'Tovar skladom',
+      description: 'Rovno k odberu bez čakania.',
+    },
+    {
+      icon: Zap,
+      title: 'Expresné dodanie',
+      description: 'Čo nemáme, rýchlo dovezieme.',
+    },
+    {
       icon: Shield,
-      title: 'Poistenie prepravy',
-      description: 'Plné poistenie techniky počas prepravy na stavbu a späť.',
-      features: ['Havarijné poistenie', 'Odcudzenie', 'Škody pri preprave', 'Bez rizika'],
+      title: 'Overené značky',
+      description: 'Len kvalitní výrobcovia.',
     },
   ];
 
@@ -54,7 +63,7 @@ export default function DovozTechniky() {
         <div className="absolute inset-0">
           <img
             src="/hero-pozicovna.webp"
-            alt="Royal Stroje - Dovoz techniky"
+            alt="Royal Stroje - Predaj techniky"
             className="w-full h-full object-cover"
           />
         </div>
@@ -90,18 +99,18 @@ export default function DovozTechniky() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Dovoz techniky
+              Predaj náradia, mechanizácie a príslušenstva
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Rýchly a spoľahlivý dovoz náradia a techniky priamo na vašu stavbu.
+              Všetko pre stavbu a dielňu priamo na prevádzke v Senci.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Main Content Section */}
       <section className="relative py-16 bg-zinc-950 overflow-hidden">
-        {/* Radial gradient overlay - wider spread */}
+        {/* Radial gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
           style={{
@@ -109,7 +118,7 @@ export default function DovozTechniky() {
           }}
         />
 
-        {/* Diagonal subtle lines for technical feel */}
+        {/* Diagonal subtle lines */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
           style={{
@@ -117,7 +126,7 @@ export default function DovozTechniky() {
           }}
         />
 
-        {/* Orange accent glow - top right (animated) */}
+        {/* Orange accent glow - top right */}
         <div
           className="absolute pointer-events-none z-0"
           style={{
@@ -132,7 +141,7 @@ export default function DovozTechniky() {
           }}
         />
 
-        {/* Orange accent glow - bottom left (animated) */}
+        {/* Orange accent glow - bottom left */}
         <div
           className="absolute pointer-events-none z-0"
           style={{
@@ -203,46 +212,78 @@ export default function DovozTechniky() {
         `}</style>
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-              Komplexné <span className="text-orange-primary">dopravné služby</span>
+          {/* Intro Section */}
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-6">
+              Overené značky, <span className="text-orange-primary">férové ceny</span>
             </h2>
-            <p className="text-white/70 max-w-2xl mx-auto">
-              Dovoz a odvoz techniky kedykoľvek potrebujete
-            </p>
+            <div className="max-w-4xl mx-auto space-y-4 text-white/80 text-lg leading-relaxed">
+              <p>
+                Na sklade držíme Na sklade držíme náradie, remeselnícke potreby a vybrané kusy stavebnej mechanizácie. K tomu širokú škálu vysokej kvality príslušenstva – diamantové vrátka, kotúče rôznych priemerov a ďalší materiál za  <span className="text-orange-primary font-bold">výhodné ceny</span>.
+              </p>
+              <p>
+                Myslíme aj na bezpečnosť: <span className="text-white font-bold">reflexné vesty, gurtne, ochranné rukavice</span> a <span className="text-white font-bold">okuliare</span>.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => {
-              const IconComponent = service.icon;
-              return (
-                <div
-                  key={service.id}
-                  className="bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group"
-                >
-                  <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
-                    <IconComponent className="text-orange-primary" size={28} />
+          {/* Quick Service Banner */}
+          <div className="mb-16 p-8 bg-gradient-to-r from-orange-primary/10 to-orange-primary/5 border-l-4 border-orange-primary rounded-2xl">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-orange-primary/20 border border-orange-primary/40 flex items-center justify-center flex-shrink-0">
+                <Zap className="text-orange-primary" size={24} />
+              </div>
+              <div>
+                <h3 className="text-2xl font-black text-white mb-2">
+                  Rýchlo, pohodlne, spoľahlivo
+                </h3>
+                <p className="text-white/80 text-lg leading-relaxed">
+                  Nakúpiť u nás bez zbytočného čakania. Čo práve nemáme, <span className="text-white font-bold">ihneď objednáme</span> a po dohode <span className="text-orange-primary font-bold">expresne doručíme na Vašu stavbu</span>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Categories Grid */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+                Čo u nás <span className="text-orange-primary">nájdete</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {categories.map((category) => {
+                const IconComponent = category.icon;
+                return (
+                  <div
+                    key={category.id}
+                    className="bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
+                      <IconComponent className="text-orange-primary" size={28} />
+                    </div>
+                    <h3 className="text-xl font-black text-white mb-3">{category.title}</h3>
+                    <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                      {category.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {category.items.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-white/60">
+                          <span className="text-orange-primary mt-0.5">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="text-xl font-black text-white mb-3">{service.title}</h3>
-                  <p className="text-white/70 text-sm mb-4 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-white/60">
-                        <span className="text-orange-primary mt-0.5">•</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Pricing Info Section */}
+      {/* Advantages Section */}
       <section className="relative py-16 bg-zinc-950 overflow-hidden">
         {/* Radial gradient overlay */}
         <div
@@ -307,50 +348,23 @@ export default function DovozTechniky() {
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-              Transparentné <span className="text-orange-primary">cenníky</span>
+              Prečo nakupovať <span className="text-orange-primary">u nás</span>
             </h2>
-            <p className="text-white/70 max-w-2xl mx-auto mb-8">
-              Cena dopravy závisí od vzdialenosti a typu techniky
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 mx-auto">
-                <MapPin className="text-orange-primary" size={28} />
-              </div>
-              <h3 className="text-white font-bold text-lg mb-2">Do 20 km</h3>
-              <p className="text-orange-primary text-2xl font-black mb-2">ZDARMA</p>
-              <p className="text-white/60 text-sm">Pri prenájme nad 3 dni</p>
-            </div>
-            <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 mx-auto">
-                <Truck className="text-orange-primary" size={28} />
-              </div>
-              <h3 className="text-white font-bold text-lg mb-2">20-50 km</h3>
-              <p className="text-orange-primary text-2xl font-black mb-2">0,50 €/km</p>
-              <p className="text-white/60 text-sm">Malé náradie a stroje</p>
-            </div>
-            <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 mx-auto">
-                <TruckIcon className="text-orange-primary" size={28} />
-              </div>
-              <h3 className="text-white font-bold text-lg mb-2">Nad 50 km</h3>
-              <p className="text-orange-primary text-2xl font-black mb-2">Dohodou</p>
-              <p className="text-white/60 text-sm">Individuálna cena</p>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-start gap-3 bg-orange-primary/10 border border-orange-primary/30 rounded-xl px-6 py-4 max-w-3xl">
-              <div className="w-8 h-8 rounded-lg bg-orange-primary/20 border border-orange-primary/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Lightbulb className="text-orange-primary" size={18} />
-              </div>
-              <p className="text-white/90 text-sm text-left">
-                <strong className="text-white">Tip:</strong> Pri dlhšom prenájme (nad 7 dní) alebo opakovanej spolupráci
-                ponúkame <strong className="text-orange-primary">dopravu ZDARMA</strong> aj na väčšie vzdialenosti!
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {advantages.map((advantage, idx) => {
+              const IconComponent = advantage.icon;
+              return (
+                <div key={idx} className="text-center">
+                  <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
+                    <IconComponent className="text-orange-primary" size={32} />
+                  </div>
+                  <h3 className="text-white font-bold mb-2">{advantage.title}</h3>
+                  <p className="text-white/60 text-sm">{advantage.description}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -359,20 +373,23 @@ export default function DovozTechniky() {
       <section className="py-16 bg-black">
         <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center">
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-            Potrebujete dopravu techniky?
+            Zastavte sa u nás
           </h2>
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-            Zavolajte nám a dohodneme presný termín dovozu priamo na vašu stavbu.
+          <p className="text-white/70 text-lg mb-4 max-w-2xl mx-auto">
+            Naša predajňa v Senci je otvorená Po - Pi od 7:00 do 16:00.
+          </p>
+          <p className="text-white/60 mb-8">
+            Rácka cesta 182, 903 01 Senec
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <span className="flex items-center gap-2 text-white/70">
-              <span className="text-orange-primary">✓</span> Dovoz do 24 hodín
+              <span className="text-orange-primary">✓</span> Odborné poradenstvo
             </span>
             <span className="flex items-center gap-2 text-white/70">
-              <span className="text-orange-primary">✓</span> Non-stop linka
+              <span className="text-orange-primary">✓</span> Tovar na predvádzku
             </span>
             <span className="flex items-center gap-2 text-white/70">
-              <span className="text-orange-primary">✓</span> Celé Slovensko
+              <span className="text-orange-primary">✓</span> Bezplatné parkovanie
             </span>
           </div>
           <div className="flex flex-wrap justify-center gap-4">

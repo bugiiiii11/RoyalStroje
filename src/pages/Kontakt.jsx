@@ -64,18 +64,6 @@ export default function Kontakt() {
           }}
         />
 
-        {/* Grid pattern overlay - much more visible */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.25] z-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        />
-
         {/* Diagonal subtle lines for technical feel */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
@@ -378,18 +366,6 @@ export default function Kontakt() {
           className="absolute inset-0 pointer-events-none z-0"
           style={{
             background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
-          }}
-        />
-
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.25] z-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
           }}
         />
 

@@ -8,7 +8,12 @@
       "Bash(node csv-to-products-v2.js:*)",
       "Bash(node fix-csv.js:*)",
       "Bash(node scripts/processProducts.js:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }

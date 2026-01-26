@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
-import { Wrench, Truck, Settings } from 'lucide-react';
+import { ShoppingCart, Truck, Settings } from 'lucide-react';
 
 export default function Sluzby() {
   const services = [
     {
-      id: 'zemne-prace',
-      path: '/sluzby/zemne-prace',
-      icon: Wrench,
-      title: 'Zemné a búracie práce',
-      description: 'Výkopy základov, prípojky inžinierskych sietí, búracie práce s hydraulickým kladivom, terénne úpravy a odvoz odpadu.',
-      features: ['Výkopy a základy', 'Inžinierske siete', 'Búracie práce', 'Terénne úpravy'],
+      id: 'predaj-techniky',
+      path: '/sluzby/predaj-techniky',
+      icon: ShoppingCart,
+      title: 'Predaj techniky',
+      description: 'Kvalitné náradie, mechanizácia a príslušenstvo značkových výrobcov priamo na sklade v Senci.',
+      features: ['Overené značky', 'Férové ceny', 'Tovar skladom', 'Expresné dodanie'],
+      backgroundImage: '/pictures/graphics/predaj.png',
     },
     {
       id: 'servis-naradia',
@@ -18,14 +19,16 @@ export default function Sluzby() {
       title: 'Servis náradia',
       description: 'Profesionálny servis a údržba stavebného náradia a techniky. Opravy, kontroly a náhradné diely.',
       features: ['Opravy strojov', 'Preventívna údržba', 'Náhradné diely', 'Expresný servis'],
+      backgroundImage: '/pictures/graphics/servis.png',
     },
     {
       id: 'dovoz-techniky',
       path: '/sluzby/dovoz-techniky',
       icon: Truck,
       title: 'Dovoz techniky',
-      description: 'Rýchla a spoľahlivá doprava náradia a techniky priamo na vašu stavbu. Dovoz do 24 hodín.',
+      description: 'Rýchly a spoľahlivý dovoz náradia a techniky priamo na vašu stavbu. Dovoz do 24 hodín.',
       features: ['Dovoz na stavbu', 'Odvoz po skončení', 'Non-stop dostupnosť', 'Celé Slovensko'],
+      backgroundImage: '/pictures/graphics/dovoz.png',
     },
   ];
 
@@ -89,18 +92,6 @@ export default function Sluzby() {
           className="absolute inset-0 pointer-events-none z-0"
           style={{
             background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
-          }}
-        />
-
-        {/* Grid pattern overlay - much more visible */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.25] z-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
           }}
         />
 
@@ -215,32 +206,45 @@ export default function Sluzby() {
                 <Link
                   key={service.id}
                   to={service.path}
-                  className="bg-zinc-900 border border-white/10 rounded-2xl p-8 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group"
+                  className="relative bg-zinc-900 border border-white/10 rounded-2xl p-8 hover:border-orange-primary/50 transition-all group overflow-hidden"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-6 group-hover:bg-orange-primary/20 transition">
-                    <IconComponent className="text-orange-primary" size={32} />
+                  {/* Background Image */}
+                  <div className="absolute inset-0 z-0">
+                    <img
+                      src={service.backgroundImage}
+                      alt={service.title}
+                      className="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500 brightness-110 contrast-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 to-zinc-900/50"></div>
                   </div>
 
-                  <h3 className="text-2xl font-black text-white mb-3 group-hover:text-orange-primary transition">
-                    {service.title}
-                  </h3>
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-6 group-hover:bg-orange-primary/20 transition">
+                      <IconComponent className="text-orange-primary" size={32} />
+                    </div>
 
-                  <p className="text-white/70 leading-relaxed mb-6">
-                    {service.description}
-                  </p>
+                    <h3 className="text-2xl font-black text-white mb-3 group-hover:text-orange-primary transition">
+                      {service.title}
+                    </h3>
 
-                  <ul className="space-y-2 mb-6">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-white/60">
-                        <span className="text-orange-primary mt-0.5">✓</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    <p className="text-white/70 leading-relaxed mb-6">
+                      {service.description}
+                    </p>
 
-                  <div className="inline-flex items-center gap-2 text-orange-primary font-bold group-hover:gap-3 transition-all">
-                    <span>Viac informácií</span>
-                    <span>→</span>
+                    <ul className="space-y-2 mb-6">
+                      {service.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-white/60">
+                          <span className="text-orange-primary mt-0.5">✓</span>
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="inline-flex items-center gap-2 text-orange-primary font-bold group-hover:gap-3 transition-all">
+                      <span>Viac informácií</span>
+                      <span>→</span>
+                    </div>
                   </div>
                 </Link>
               );
@@ -257,18 +261,6 @@ export default function Sluzby() {
           className="absolute inset-0 pointer-events-none z-0"
           style={{
             background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
-          }}
-        />
-
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.25] z-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
           }}
         />
 

@@ -123,4 +123,4 @@ src/
 
 ## 📄 Licencia
 
-© 2024 Royal Stroje. Všetky práva vyhradené.
+© 2026 Royal Stroje. Všetky práva vyhradené.
