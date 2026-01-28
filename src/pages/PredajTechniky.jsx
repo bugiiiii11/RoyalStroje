@@ -41,12 +41,12 @@ export default function PredajTechniky() {
     {
       icon: Package,
       title: 'Tovar skladom',
-      description: 'Rovno k odberu bez čakania.',
+      description: 'Okamžitý odber bez čakania.',
     },
     {
       icon: Zap,
       title: 'Expresné dodanie',
-      description: 'Čo nemáme, rýchlo dovezieme.',
+      description: 'Rýchle zabezpečenie tovaru na objednávku.',
     },
     {
       icon: Shield,
@@ -373,13 +373,13 @@ export default function PredajTechniky() {
       <section className="py-16 bg-black">
         <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center">
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-            Zastavte sa u nás
+            Zastavte sa v našej <span className="text-orange-primary">predajni</span>
           </h2>
           <p className="text-white/70 text-lg mb-4 max-w-2xl mx-auto">
             Naša predajňa v Senci je otvorená Po - Pi od 7:00 do 16:00.
           </p>
           <p className="text-white/60 mb-8">
-            Rácka cesta 182, 903 01 Senec
+            Recká cesta 182, 925 26 Senec
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <span className="flex items-center gap-2 text-white/70">

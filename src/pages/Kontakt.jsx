@@ -45,7 +45,7 @@ export default function Kontakt() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Kontaktujte nás
+              <span className="text-orange-primary">Kontaktujte</span> nás
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
               Sme tu pre vás. Zavolajte, napíšte email alebo nás navštívte v našej novootvorenej prevádzke v Senci.
