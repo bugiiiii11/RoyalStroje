@@ -99,10 +99,10 @@ export default function PredajTechniky() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Predaj náradia, mechanizácie a príslušenstva
+              <span className="text-orange-primary">Predaj</span> náradia, stavebných strojov a príslušenstva
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Všetko pre stavbu a dielňu priamo na prevádzke v Senci.
+              Všetko pre stavbu a dielňu priamo na prevádzke <span className="text-orange-primary">v Senci</span>.
             </p>
           </div>
         </div>
@@ -219,10 +219,10 @@ export default function PredajTechniky() {
             </h2>
             <div className="max-w-4xl mx-auto space-y-4 text-white/80 text-lg leading-relaxed">
               <p>
-                Na sklade držíme Na sklade držíme náradie, remeselnícke potreby a vybrané kusy stavebnej mechanizácie. K tomu širokú škálu vysokej kvality príslušenstva – diamantové vrátka, kotúče rôznych priemerov a ďalší materiál za  <span className="text-orange-primary font-bold">výhodné ceny</span>.
+                Na sklade je náradie, remeselnícke potreby a vybrané kusy stavebnej mechanizácie. K dispozícii je aj široký výber príslušenstva – diamantové vrtáky, rezné a diamantové kotúče rôznych priemerov a ďalší spotrebný materiál <span className="text-orange-primary font-bold">výhodné ceny</span>.
               </p>
               <p>
-                Myslíme aj na bezpečnosť: <span className="text-white font-bold">reflexné vesty, gurtne, ochranné rukavice</span> a <span className="text-white font-bold">okuliare</span>.
+                Súčasťou ponuky je aj bezpečnostné vybavenie: reflexné vesty, gurtne, ochranné rukavice a ochranné okuliare.
               </p>
             </div>
           </div>
@@ -238,7 +238,7 @@ export default function PredajTechniky() {
                   Rýchlo, pohodlne, spoľahlivo
                 </h3>
                 <p className="text-white/80 text-lg leading-relaxed">
-                  Nakúpiť u nás bez zbytočného čakania. Čo práve nemáme, <span className="text-white font-bold">ihneď objednáme</span> a po dohode <span className="text-orange-primary font-bold">expresne doručíme na Vašu stavbu</span>.
+                  Nákup prebieha bez zbytočného čakania. Tovar, ktorý nie je aktuálne skladom, je možné okamžite objednať a po dohode zabezpečiť <span className="text-orange-primary font-bold">expresné doručenie</span>.
                 </p>
               </div>
             </div>
@@ -248,7 +248,7 @@ export default function PredajTechniky() {
           <div className="mb-16">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-                Čo u nás <span className="text-orange-primary">nájdete</span>
+                Z našej <span className="text-orange-primary">predajne</span>
               </h2>
             </div>
 

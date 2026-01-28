@@ -7,7 +7,7 @@ export default function Sluzby() {
       id: 'predaj-techniky',
       path: '/sluzby/predaj-techniky',
       icon: ShoppingCart,
-      title: 'Predaj techniky',
+      title: 'Predaj náradia',
       description: 'Kvalitné náradie, mechanizácia a príslušenstvo značkových výrobcov priamo na sklade v Senci.',
       features: ['Overené značky', 'Férové ceny', 'Tovar skladom', 'Expresné dodanie'],
       backgroundImage: '/pictures/graphics/predaj.png',
