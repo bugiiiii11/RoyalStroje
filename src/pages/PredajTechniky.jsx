@@ -7,7 +7,7 @@ export default function PredajTechniky() {
       icon: Wrench,
       title: 'Stavebné náradie',
       description: 'Profesionálne náradie od overených značiek pre každý typ práce.',
-      items: ['Vŕtačky a kladivá', 'Píly a brúsky', 'Uťahovače a vŕtačky', 'Náradia batérie'],
+      items: ['Ručné náradie', 'Elektrické náradie', 'Búracie a vŕtacie stroje', 'Aku náradie - skrutkovače, vŕtačky, brúsky'],
     },
     {
       id: 'mechanizacia',
@@ -248,8 +248,11 @@ export default function PredajTechniky() {
           <div className="mb-16">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-                Z našej <span className="text-orange-primary">predajne</span>
+                <span className="text-orange-primary">Predaj</span> náradia a techniky
               </h2>
+              <p>
+                Kvalitné náradie a stroje, ktoré máme overené aj v našej požičovni.
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
