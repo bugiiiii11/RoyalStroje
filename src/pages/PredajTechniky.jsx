@@ -1,6 +1,17 @@
+import { useState, useEffect } from 'react';
 import { Phone, Mail, ShoppingCart, Package, Tag, Zap, Shield, Wrench, HardHat } from 'lucide-react';
 
 export default function PredajTechniky() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const categories = [
     {
       id: 'naradie',
@@ -102,314 +113,331 @@ export default function PredajTechniky() {
               <span className="text-orange-primary">Predaj</span> náradia, stavebných strojov a príslušenstva
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Všetko pre stavbu a dielňu priamo na prevádzke <span className="text-orange-primary">v Senci</span>.
+              Všetko pre stavbu a dielňu priamo na prevádzke v Senci.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Main Content Section */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
-        {/* Radial gradient overlay */}
+      {/* Main Content Section - Unified with parallax effects */}
+      <section className="relative py-16 bg-gradient-to-b from-zinc-950 via-zinc-950 to-black overflow-hidden">
+        {/* Subtle vignette for depth */}
         <div
-          className="absolute inset-0 pointer-events-none z-0"
+          className="absolute inset-0 pointer-events-none z-[2]"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
+            background: 'radial-gradient(ellipse 85% 75% at 50% 40%, transparent 0%, transparent 60%, rgba(0,0,0,0.08) 100%)'
           }}
         />
 
         {/* Diagonal subtle lines */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
+          className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
           style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
+            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 80px)'
           }}
         />
 
-        {/* Orange accent glow - top right */}
+        {/* Main soft spotlight - moves slower than scroll, stays centered */}
+        <div
+          className="absolute pointer-events-none z-0 transition-all duration-500 ease-out"
+          style={{
+            top: `${150 + scrollY * 0.35}px`,
+            left: '50%',
+            width: '1600px',
+            height: '1100px',
+            marginLeft: '-800px',
+            background: 'radial-gradient(ellipse 50% 40% at 50% 45%, rgba(255,110,0,0.18) 0%, rgba(255,100,0,0.09) 35%, rgba(255,90,0,0.03) 70%, transparent 100%)',
+            filter: 'blur(120px)',
+            opacity: 0.75
+          }}
+        />
+
+        {/* Subtle inner glow for depth */}
+        <div
+          className="absolute pointer-events-none z-[1] transition-all duration-500 ease-out"
+          style={{
+            top: `${250 + scrollY * 0.35}px`,
+            left: '50%',
+            width: '900px',
+            height: '700px',
+            marginLeft: '-450px',
+            background: 'radial-gradient(ellipse 55% 45% at 50% 50%, rgba(255,115,5,0.22) 0%, rgba(255,105,0,0.10) 30%, rgba(255,95,0,0.03) 65%, transparent 100%)',
+            filter: 'blur(90px)',
+            opacity: 0.65
+          }}
+        />
+
+        {/* Ambient background glow - very subtle */}
         <div
           className="absolute pointer-events-none z-0"
           style={{
-            top: '10%',
-            right: '10%',
-            width: '600px',
-            height: '600px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
-            filter: 'blur(100px)',
-            opacity: 0.15,
-            animation: 'floatGlow1 8s ease-in-out infinite'
+            top: '15%',
+            right: '12%',
+            width: '550px',
+            height: '550px',
+            background: 'radial-gradient(circle, rgba(255,100,0,0.09) 0%, rgba(255,90,0,0.03) 50%, transparent 80%)',
+            filter: 'blur(110px)',
+            opacity: 0.5,
+            animation: 'ambientFloat1 20s ease-in-out infinite'
           }}
         />
 
-        {/* Orange accent glow - bottom left */}
+        {/* Ambient background glow 2 */}
         <div
           className="absolute pointer-events-none z-0"
           style={{
             bottom: '10%',
             left: '10%',
-            width: '550px',
-            height: '550px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            opacity: 0.12,
-            animation: 'floatGlow2 10s ease-in-out infinite'
-          }}
-        />
-
-        {/* Center pulsing glow */}
-        <div
-          className="absolute top-1/2 left-1/2 pointer-events-none z-0"
-          style={{
-            width: '800px',
-            height: '800px',
-            marginLeft: '-400px',
-            marginTop: '-400px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-            filter: 'blur(120px)',
-            animation: 'pulseGlow 6s ease-in-out infinite'
+            width: '500px',
+            height: '500px',
+            background: 'radial-gradient(circle, rgba(255,105,0,0.08) 0%, rgba(255,95,0,0.03) 50%, transparent 80%)',
+            filter: 'blur(105px)',
+            opacity: 0.45,
+            animation: 'ambientFloat2 22s ease-in-out infinite'
           }}
         />
 
         {/* Animation keyframes */}
         <style>{`
-          @keyframes floatGlow1 {
+          @keyframes ambientFloat1 {
             0%, 100% {
               transform: translate(0, 0) scale(1);
-            }
-            25% {
-              transform: translate(-120px, 100px) scale(1.2);
+              opacity: 0.4;
             }
             50% {
-              transform: translate(80px, -120px) scale(0.85);
-            }
-            75% {
-              transform: translate(100px, 60px) scale(1.1);
+              transform: translate(-25px, 20px) scale(1.08);
+              opacity: 0.5;
             }
           }
 
-          @keyframes floatGlow2 {
+          @keyframes ambientFloat2 {
             0%, 100% {
               transform: translate(0, 0) scale(1);
-            }
-            33% {
-              transform: translate(140px, -100px) scale(1.25);
-            }
-            66% {
-              transform: translate(-100px, 120px) scale(0.8);
-            }
-          }
-
-          @keyframes pulseGlow {
-            0%, 100% {
-              transform: scale(1);
-              opacity: 0.08;
+              opacity: 0.35;
             }
             50% {
-              transform: scale(1.4);
-              opacity: 0.18;
+              transform: translate(30px, -25px) scale(1.1);
+              opacity: 0.45;
             }
           }
         `}</style>
 
-        <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-          {/* Intro Section */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-6">
-              Overené značky, <span className="text-orange-primary">férové ceny</span>
-            </h2>
-            <div className="max-w-4xl mx-auto space-y-4 text-white/80 text-lg leading-relaxed">
-              <p>
-                Na sklade je náradie, remeselnícke potreby a vybrané kusy stavebnej mechanizácie. K dispozícii je aj široký výber príslušenstva – diamantové vrtáky, rezné a diamantové kotúče rôznych priemerov a ďalší spotrebný materiál <span className="text-orange-primary font-bold">výhodné ceny</span>.
-              </p>
-              <p>
-                Súčasťou ponuky je aj bezpečnostné vybavenie: reflexné vesty, gurtne, ochranné rukavice a ochranné okuliare.
-              </p>
-            </div>
-          </div>
-
-          {/* Quick Service Banner */}
-          <div className="mb-16 p-8 bg-gradient-to-r from-orange-primary/10 to-orange-primary/5 border-l-4 border-orange-primary rounded-2xl">
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-orange-primary/20 border border-orange-primary/40 flex items-center justify-center flex-shrink-0">
-                <Zap className="text-orange-primary" size={24} />
-              </div>
-              <div>
-                <h3 className="text-2xl font-black text-white mb-2">
-                  Rýchlo, pohodlne, spoľahlivo
-                </h3>
-                <p className="text-white/80 text-lg leading-relaxed">
-                  Nákup prebieha bez zbytočného čakania. Tovar, ktorý nie je aktuálne skladom, je možné okamžite objednať a po dohode zabezpečiť <span className="text-orange-primary font-bold">expresné doručenie</span>.
-                </p>
-              </div>
-            </div>
-          </div>
-
+        <div className="relative z-[10] max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Categories Grid */}
           <div className="mb-16">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
                 <span className="text-orange-primary">Kamenný predaj</span> náradia a techniky
               </h2>
-              <p>
+              <p className="text-white/80 text-lg md:text-xl lg:text-2xl font-medium">
                 Kvalitné náradie a stroje, ktoré máme overené aj v našej požičovni.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {categories.map((category) => {
                 const IconComponent = category.icon;
                 return (
                   <div
                     key={category.id}
-                    className="bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group"
+                    className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
                   >
-                    <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
-                      <IconComponent className="text-orange-primary" size={28} />
+                    {/* Gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+                    <div className="relative">
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:border-orange-primary/50 transition-all">
+                          <IconComponent className="text-orange-primary" size={36} />
+                        </div>
+                        <div className="flex-1 pt-1">
+                          <h3 className="text-2xl md:text-3xl font-black text-white mb-2 group-hover:text-orange-primary/90 transition-colors">
+                            {category.title}
+                          </h3>
+                          <p className="text-white/85 text-lg md:text-xl leading-relaxed">
+                            {category.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
+                        {category.items.map((item, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-start gap-2 bg-zinc-950/50 rounded-lg px-3 py-2.5 border border-white/5 group-hover:border-orange-primary/20 transition-colors"
+                          >
+                            <span className="text-orange-primary text-base mt-0.5 flex-shrink-0">▸</span>
+                            <span className="text-white/80 text-base md:text-lg leading-snug">{item}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <h3 className="text-xl font-black text-white mb-3">{category.title}</h3>
-                    <p className="text-white/70 text-sm mb-4 leading-relaxed">
-                      {category.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {category.items.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-white/60">
-                          <span className="text-orange-primary mt-0.5">•</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
                 );
               })}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Advantages Section */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
-        {/* Radial gradient overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
-          }}
-        />
-
-        {/* Diagonal subtle lines */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
-          }}
-        />
-
-        {/* Orange accent glow - top right */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            top: '10%',
-            right: '10%',
-            width: '600px',
-            height: '600px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
-            filter: 'blur(100px)',
-            opacity: 0.15,
-            animation: 'floatGlow1 8s ease-in-out infinite'
-          }}
-        />
-
-        {/* Orange accent glow - bottom left */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            bottom: '10%',
-            left: '10%',
-            width: '550px',
-            height: '550px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            opacity: 0.12,
-            animation: 'floatGlow2 10s ease-in-out infinite'
-          }}
-        />
-
-        {/* Center pulsing glow */}
-        <div
-          className="absolute top-1/2 left-1/2 pointer-events-none z-0"
-          style={{
-            width: '800px',
-            height: '800px',
-            marginLeft: '-400px',
-            marginTop: '-400px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-            filter: 'blur(120px)',
-            animation: 'pulseGlow 6s ease-in-out infinite'
-          }}
-        />
-
-        <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+          {/* Intro Section */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-              Prečo nakupovať <span className="text-orange-primary">u nás</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
+              Overené značky, <span className="text-orange-primary">férové ceny</span>
             </h2>
+            <div className="max-w-5xl mx-auto">
+              <p className="text-white/90 text-lg md:text-xl mb-8 leading-relaxed">
+                Na sklade je náradie, remeselnícke potreby a vybrané kusy stavebnej mechanizácie. K dispozícii je aj široký výber príslušenstva – diamantové vrtáky, rezné a diamantové kotúče rôznych priemerov a ďalší spotrebný materiál za <span className="text-orange-primary font-bold">výhodné ceny</span>.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* BOZP Banner */}
+          <div className="mb-12 p-6 md:p-8 bg-zinc-900/30 backdrop-blur-sm border border-white/10 rounded-2xl relative overflow-hidden hover:border-orange-primary/30 hover:bg-zinc-900/40 transition-all duration-300 max-w-4xl mx-auto">
+            <div
+              className="absolute -top-10 -right-10 w-40 h-40 bg-orange-primary/6 rounded-full blur-3xl"
+            ></div>
+            <div className="relative flex items-start gap-4 md:gap-5">
+              <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/20 flex items-center justify-center flex-shrink-0">
+                <Shield className="text-orange-primary" size={22} />
+              </div>
+              <div>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-2.5">
+                  Bezpečnosť na prvom mieste
+                </h3>
+                <p className="text-white/75 text-sm md:text-base leading-relaxed">
+                  Súčasťou ponuky je aj bezpečnostné vybavenie: <span className="text-orange-primary font-semibold">reflexné vesty, gurtne, ochranné rukavice a ochranné okuliare</span>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Advantages Cards - Integrated */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             {advantages.map((advantage, idx) => {
               const IconComponent = advantage.icon;
               return (
-                <div key={idx} className="text-center">
-                  <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
-                    <IconComponent className="text-orange-primary" size={32} />
+                <div
+                  key={idx}
+                  className="bg-zinc-900/50 backdrop-blur-sm border border-orange-primary/20 rounded-xl p-5 hover:border-orange-primary/50 hover:bg-zinc-900/70 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-primary/10 transition-all group"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                    <IconComponent className="text-orange-primary" size={24} />
                   </div>
-                  <h3 className="text-white font-bold mb-2">{advantage.title}</h3>
-                  <p className="text-white/60 text-sm">{advantage.description}</p>
+                  <h3 className="text-white font-bold text-base mb-1.5">{advantage.title}</h3>
+                  <p className="text-white/60 text-sm leading-snug">{advantage.description}</p>
                 </div>
               );
             })}
           </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-black">
-        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-            Zastavte sa v našej <span className="text-orange-primary">predajni</span>
-          </h2>
-          <p className="text-white/70 text-lg mb-4 max-w-2xl mx-auto">
-            Naša predajňa v Senci je otvorená Po - Pi od 7:00 do 16:00.
-          </p>
-          <p className="text-white/60 mb-8">
-            Recká cesta 182, 925 26 Senec
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <span className="flex items-center gap-2 text-white/70">
-              <span className="text-orange-primary">✓</span> Odborné poradenstvo
-            </span>
-            <span className="flex items-center gap-2 text-white/70">
-              <span className="text-orange-primary">✓</span> Tovar na predvádzku
-            </span>
-            <span className="flex items-center gap-2 text-white/70">
-              <span className="text-orange-primary">✓</span> Bezplatné parkovanie
-            </span>
+          {/* Quick Service Banner */}
+          <div className="mb-12 p-6 md:p-8 bg-zinc-900/30 backdrop-blur-sm border border-white/10 rounded-2xl relative overflow-hidden hover:border-orange-primary/30 hover:bg-zinc-900/40 transition-all duration-300">
+            <div
+              className="absolute -top-10 -right-10 w-40 h-40 bg-orange-primary/6 rounded-full blur-3xl"
+            ></div>
+            <div className="relative flex items-start gap-4 md:gap-5">
+              <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/20 flex items-center justify-center flex-shrink-0">
+                <Zap className="text-orange-primary" size={22} />
+              </div>
+              <div>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-2.5">
+                  Rýchlo, pohodlne, spoľahlivo
+                </h3>
+                <p className="text-white/75 text-sm md:text-base leading-relaxed">
+                  Nákup prebieha bez zbytočného čakania. Tovar, ktorý nie je aktuálne skladom, je možné okamžite objednať a po dohode zabezpečiť <span className="text-orange-primary font-semibold">expresné doručenie</span>.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="tel:+421948555551"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
-            >
-              <Phone size={20} />
-              <span>Zavolať teraz</span>
-            </a>
-            <a
-              href="mailto:info@royalstroje.sk"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-800 border-2 border-zinc-700 text-white font-bold rounded-full hover:bg-zinc-700 transition-all"
-            >
-              <Mail size={20} />
-              <span>Napísať email</span>
-            </a>
+
+          {/* CTA Content */}
+          <div className="mt-20">
+            <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+              Zastavte sa v našej <span className="text-orange-primary">predajni</span>
+            </h2>
+          </div>
+
+          {/* Info Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-6xl mx-auto">
+            {/* Opening Hours */}
+            <div className="bg-zinc-900/50 backdrop-blur border border-orange-primary/20 rounded-2xl p-6 text-center hover:border-orange-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-primary/10 transition-all">
+              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
+                <svg className="w-7 h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2">Otváracie hodiny</h3>
+              <p className="text-orange-primary font-semibold text-xl mb-1">Po - Pi</p>
+              <p className="text-white/70 text-base">7:00 - 16:00</p>
+            </div>
+
+            {/* Address */}
+            <div className="bg-zinc-900/50 backdrop-blur border border-orange-primary/20 rounded-2xl p-6 text-center hover:border-orange-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-primary/10 transition-all">
+              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
+                <svg className="w-7 h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2">Adresa predajne</h3>
+              <p className="text-white/90 text-base leading-relaxed">
+                Recká cesta 182<br />
+                <span className="text-orange-primary">925 26 Senec</span>
+              </p>
+            </div>
+
+            {/* Contact */}
+            <div className="bg-zinc-900/50 backdrop-blur border border-orange-primary/20 rounded-2xl p-6 text-center hover:border-orange-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-primary/10 transition-all">
+              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
+                <Phone className="text-orange-primary" size={28} />
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2">Kontakt</h3>
+              <p className="text-white/90 text-base mb-1">
+                <a href="tel:+421948555551" className="hover:text-orange-primary transition-colors">
+                  +421 948 555 551
+                </a>
+              </p>
+              <p className="text-white/70 text-sm">
+                <a href="mailto:info@royalstroje.sk" className="hover:text-orange-primary transition-colors">
+                  info@royalstroje.sk
+                </a>
+              </p>
+            </div>
+          </div>
+
+            {/* Benefits Pills */}
+            <div className="flex flex-wrap justify-center gap-3 mb-10">
+              <div className="flex items-center gap-2 bg-orange-primary/10 border border-orange-primary/30 rounded-full px-5 py-2.5">
+                <span className="text-orange-primary text-lg">✓</span>
+                <span className="text-white/90 font-medium text-sm">Odborné poradenstvo</span>
+              </div>
+              <div className="flex items-center gap-2 bg-orange-primary/10 border border-orange-primary/30 rounded-full px-5 py-2.5">
+                <span className="text-orange-primary text-lg">✓</span>
+                <span className="text-white/90 font-medium text-sm">Tovar na predvádzku</span>
+              </div>
+              <div className="flex items-center gap-2 bg-orange-primary/10 border border-orange-primary/30 rounded-full px-5 py-2.5">
+                <span className="text-orange-primary text-lg">✓</span>
+                <span className="text-white/90 font-medium text-sm">Bezplatné parkovanie</span>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="tel:+421948555551"
+                className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-lg rounded-full hover:scale-105 transition-all shadow-2xl shadow-orange-primary/40 hover:shadow-orange-primary/60"
+              >
+                <Phone size={22} />
+                <span>Zavolať teraz</span>
+              </a>
+              <a
+                href="mailto:info@royalstroje.sk"
+                className="inline-flex items-center gap-3 px-10 py-5 bg-zinc-900 border-2 border-zinc-700 text-white font-bold text-lg rounded-full hover:bg-zinc-800 hover:border-orange-primary/50 transition-all"
+              >
+                <Mail size={22} />
+                <span>Napísať email</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>

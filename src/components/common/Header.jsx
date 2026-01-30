@@ -77,7 +77,7 @@ export default function Header() {
             <nav className="flex items-center gap-1">
               <Link
                 to="/"
-                className={`relative px-4 py-2 font-semibold text-sm uppercase tracking-wider transition-all duration-300 ${
+                className={`relative px-3 py-2 font-medium text-sl uppercase tracking-wide transition-all duration-300 ${
                   isActive('/')
                     ? 'text-orange-primary'
                     : 'text-white/70 hover:text-white'
@@ -90,7 +90,7 @@ export default function Header() {
               </Link>
               <Link
                 to="/sluzby"
-                className={`relative px-4 py-2 font-semibold text-sm uppercase tracking-wider transition-all duration-300 ${
+                className={`relative px-3 py-2 font-medium text-sl uppercase tracking-wide transition-all duration-300 ${
                   isActive('/sluzby') || location.pathname.startsWith('/sluzby/')
                     ? 'text-orange-primary'
                     : 'text-white/70 hover:text-white'
@@ -103,7 +103,7 @@ export default function Header() {
               </Link>
               <Link
                 to="/kontakt"
-                className={`relative px-4 py-2 font-semibold text-sm uppercase tracking-wider transition-all duration-300 ${
+                className={`relative px-3 py-2 font-medium text-sl uppercase tracking-wide transition-all duration-300 ${
                   isActive('/kontakt')
                     ? 'text-orange-primary'
                     : 'text-white/70 hover:text-white'
@@ -129,7 +129,7 @@ export default function Header() {
                 className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
                 aria-label="WhatsApp"
               >
-                <WhatsAppIcon size={28} />
+                <WhatsAppIcon size={32} />
               </a>
               <a
                 href="https://t.me/petokrivo"
@@ -138,7 +138,7 @@ export default function Header() {
                 className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
                 aria-label="Telegram"
               >
-                <TelegramIcon size={28} />
+                <TelegramIcon size={32} />
               </a>
 
               {/* Phone CTA - icon with hover to show number */}
@@ -149,7 +149,7 @@ export default function Header() {
                 onMouseLeave={() => setPhoneHovered(false)}
                 aria-label="Telefón: 0948 555 551"
               >
-                <Phone size={28} className="flex-shrink-0" />
+                <Phone size={32} className="flex-shrink-0" />
                 <span className={`font-bold text-sm whitespace-nowrap overflow-hidden transition-all duration-300 ${
                   phoneHovered ? 'max-w-32 opacity-100' : 'max-w-0 opacity-0'
                 }`}>

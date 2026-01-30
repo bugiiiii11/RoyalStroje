@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {
-  ShoppingCart, X, Send, Calendar,
+  ShoppingCart, X, Send, Calendar, Phone,
   Hammer, Cog, HardHat, ArrowUpFromLine,
   Container, Car, TreePine
 } from 'lucide-react';
@@ -560,6 +560,23 @@ export default function Catalog() {
             )}
           </div>
         </div>
+        </div>
+
+        {/* CTA Section - Integrated */}
+        <div className="mt-16 text-center max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+            Potrebujete poradiť s výberom?
+          </h2>
+          <p className="text-white/70 text-lg mb-8 leading-relaxed">
+            Neviete, aké náradie potrebujete pre vašu prácu? Zavolajte nám a náš tím vám ochotne poradí s výberom tej správnej techniky.
+          </p>
+          <a
+            href="tel:+421948555551"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+          >
+            <Phone size={20} />
+            <span>Zavolať teraz: 0948 555 551</span>
+          </a>
         </div>
       </div>
     </section>
