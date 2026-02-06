@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, Menu, X } from 'lucide-react';
+import { Phone, Menu, X, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 // WhatsApp icon with brand color
@@ -22,6 +22,8 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [phoneHovered, setPhoneHovered] = useState(false);
   const [phoneClicked, setPhoneClicked] = useState(false);
+  const [promoVisible, setPromoVisible] = useState(false);
+  const [promoClosed, setPromoClosed] = useState(false);
 
   const isActive = (path) => location.pathname === path;
 
@@ -30,6 +32,17 @@ export default function Header() {
     setMobileMenuOpen(false);
     setPhoneClicked(false);
   };
+
+  // Show promo banner after delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!promoClosed) {
+        setPromoVisible(true);
+      }
+    }, 2000); // Show after 2 seconds
+
+    return () => clearTimeout(timer);
+  }, [promoClosed]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,18 +53,75 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleClosePromo = () => {
+    setPromoVisible(false);
+    setPromoClosed(true);
+  };
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-zinc-950/95 backdrop-blur-md'
-          : 'bg-transparent'
-      }`}
-    >
-      {/* Bottom border */}
-      <div className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-300 ${
-        scrolled ? 'bg-white/10 opacity-100' : 'opacity-0'
-      }`}></div>
+    <>
+      {/* Promo Banner - Slide in from right */}
+      <div
+        className={`fixed top-24 right-0 z-[60] transition-all duration-500 ease-out ${
+          promoVisible ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="relative bg-gradient-to-br from-orange-primary to-orange-hover rounded-l-2xl shadow-2xl shadow-orange-primary/30 overflow-hidden max-w-sm">
+          {/* Close button */}
+          <button
+            onClick={handleClosePromo}
+            className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 rounded-full transition-all z-10"
+            aria-label="Zavrieť"
+          >
+            <X size={16} />
+          </button>
+
+          {/* Content */}
+          <div className="p-6 pr-8">
+            <div className="flex items-start gap-3 mb-3">
+              <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                <Sparkles className="text-white" size={20} />
+              </div>
+              <div>
+                <h3 className="text-white font-black text-lg leading-tight mb-1">
+                  Novo otvorená požičovňa!
+                </h3>
+                <p className="text-white/90 text-sm leading-relaxed">
+                  Navštívte našu prevádzku v Senci
+                </p>
+              </div>
+            </div>
+            <div className="bg-white/20 rounded-xl px-4 py-3 mb-3">
+              <p className="text-white text-sm font-semibold">
+                📍 Recká cesta 182, Senec
+              </p>
+            </div>
+            <Link
+              to="/kontakt"
+              onClick={() => setPromoVisible(false)}
+              className="block w-full text-center bg-white text-orange-primary font-bold py-2.5 px-4 rounded-lg hover:bg-white/90 transition-all"
+            >
+              Zobraziť na mape
+            </Link>
+          </div>
+
+          {/* Decorative elements */}
+          <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+          <div className="absolute -top-10 -left-10 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+        </div>
+      </div>
+
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-zinc-950/95 backdrop-blur-md'
+            : 'bg-transparent'
+        }`}
+      >
+        {/* Bottom border */}
+        <div className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-300 ${
+          scrolled ? 'bg-white/10 opacity-100' : 'opacity-0'
+        }`}></div>
 
       <div className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 transition-all duration-300 ${
         scrolled ? 'py-3' : 'py-5'
@@ -132,7 +202,7 @@ export default function Header() {
                 <WhatsAppIcon size={32} />
               </a>
               <a
-                href="https://t.me/petokrivo"
+                href="https://t.me/Royalstroje"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
@@ -220,7 +290,7 @@ export default function Header() {
                 <WhatsAppIcon size={32} />
               </a>
               <a
-                href="https://t.me/petokrivo"
+                href="https://t.me/Royalstroje"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center"
@@ -249,5 +319,6 @@ export default function Header() {
         )}
       </div>
     </header>
+    </>
   );
 }

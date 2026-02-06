@@ -47,7 +47,7 @@ const LinkedInIcon = ({ size = 24 }) => (
 
 export default function Footer() {
   return (
-    <footer className="relative bg-black pt-24 pb-16 overflow-visible">
+    <footer className="relative bg-black pt-32 pb-8 overflow-visible">
       {/* Modern geometric top border - mirrored from Hero */}
       <div className="absolute top-0 left-0 right-0 h-20 overflow-hidden">
         {/* Angled cut with steps - flipped vertically */}
@@ -75,24 +75,61 @@ export default function Footer() {
       </div>
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
           {/* Column 1: About */}
           <div>
             <div className="text-2xl font-black mb-4">
               <span className="text-white">ROYAL</span>
               <span className="text-orange-primary"> STROJE</span>
             </div>
-            <p className="text-white/70 text-sm leading-relaxed">
+            <p className="text-white/70 text-sm leading-relaxed mb-6 max-w-xs">
               Profesionálna požičovňa v Senci.
               Ponúkame prenájom a predaj špičkovej stavebnej techniky a náradia pre vaše najnáročnejšie práce.
               Budujte s dôverou.
             </p>
+            <div className="flex gap-4">
+              <a
+                href="#"
+                aria-label="Facebook"
+                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
+              >
+                <FacebookIcon size={24} />
+              </a>
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
+              >
+                <InstagramIcon size={24} />
+              </a>
+              <a
+                href="#"
+                aria-label="LinkedIn"
+                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
+              >
+                <LinkedInIcon size={24} />
+              </a>
+              <a
+                href="https://wa.me/421948555551"
+                aria-label="WhatsApp"
+                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
+              >
+                <WhatsAppIcon size={24} />
+              </a>
+              <a
+                href="https://t.me/Royalstroje"
+                aria-label="Telegram"
+                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
+              >
+                <TelegramIcon size={24} />
+              </a>
+            </div>
           </div>
 
-          {/* Column 2: Quick Links */}
+          {/* Column 2: Služby */}
           <div>
             <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
-              Rýchle linky
+              Služby
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
@@ -101,13 +138,37 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/sluzby" className="text-white/70 hover:text-orange-primary transition">
-                  Služby
+                <Link to="/sluzby/predaj-techniky" className="text-white/70 hover:text-orange-primary transition">
+                  Predaj náradia
                 </Link>
               </li>
               <li>
-                <Link to="/kontakt" className="text-white/70 hover:text-orange-primary transition">
-                  Kontakt
+                <Link to="/sluzby/nahradne-diely" className="text-white/70 hover:text-orange-primary transition">
+                  Náhradné diely
+                </Link>
+              </li>
+              <li>
+                <Link to="/sluzby/cenova-ponuka" className="text-white/70 hover:text-orange-primary transition">
+                  Cenová ponuka
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Stránky */}
+          <div>
+            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
+              Stránky
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <Link to="/blog" className="text-white/70 hover:text-orange-primary transition">
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link to="/partneri" className="text-white/70 hover:text-orange-primary transition">
+                  Partneri
                 </Link>
               </li>
               <li>
@@ -123,7 +184,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact */}
+          {/* Column 4: Kontakt */}
           <div>
             <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
               Kontakt
@@ -143,7 +204,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2 text-white/70">
                 <MapPin size={16} className="mt-0.5 flex-shrink-0" />
-                <span>Recká cesta 182, 925 26 Senec-Boldog</span>
+                <span>Recká cesta 182<br />925 26 Senec-Boldog</span>
               </li>
               <li className="flex items-start gap-2 text-white/70">
                 <Clock size={16} className="mt-0.5 flex-shrink-0" />
@@ -153,50 +214,6 @@ export default function Footer() {
                 </div>
               </li>
             </ul>
-          </div>
-
-          {/* Column 4: Social Media */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
-              Sledujte nás
-            </h4>
-            <div className="flex gap-4 mb-6">
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
-              >
-                <FacebookIcon size={28} />
-              </a>
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
-              >
-                <InstagramIcon size={28} />
-              </a>
-              <a
-                href="#"
-                aria-label="LinkedIn"
-                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
-              >
-                <LinkedInIcon size={28} />
-              </a>
-              <a
-                href="https://wa.me/421948555551"
-                aria-label="WhatsApp"
-                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
-              >
-                <WhatsAppIcon size={28} />
-              </a>
-              <a
-                href="https://t.me/petokrivo"
-                aria-label="Telegram"
-                className="flex items-center justify-center hover:scale-110 transition-transform duration-300"
-              >
-                <TelegramIcon size={28} />
-              </a>
-            </div>
           </div>
         </div>
 

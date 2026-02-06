@@ -7,9 +7,12 @@ import { CartProvider } from './context/CartContext';
 import Home from './pages/Home';
 import Sluzby from './pages/Sluzby';
 import PredajTechniky from './pages/PredajTechniky';
-import ServisNaradia from './pages/ServisNaradia';
-import DovozTechniky from './pages/DovozTechniky';
+import NahradneDiely from './pages/NahradneDiely';
+import CenovaPonuka from './pages/CenovaPonuka';
+import Blog from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
 import Kontakt from './pages/Kontakt';
+import Partneri from './pages/Partneri';
 
 function App() {
   return (
@@ -26,9 +29,12 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/sluzby" element={<Sluzby />} />
               <Route path="/sluzby/predaj-techniky" element={<PredajTechniky />} />
-              <Route path="/sluzby/servis-naradia" element={<ServisNaradia />} />
-              <Route path="/sluzby/dovoz-techniky" element={<DovozTechniky />} />
+              <Route path="/sluzby/nahradne-diely" element={<NahradneDiely />} />
+              <Route path="/sluzby/cenova-ponuka" element={<CenovaPonuka />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/kontakt" element={<Kontakt />} />
+              <Route path="/partneri" element={<Partneri />} />
             </Routes>
           </main>
           <Footer />

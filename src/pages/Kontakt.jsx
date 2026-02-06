@@ -205,7 +205,7 @@ export default function Kontakt() {
 
             {/* Telegram */}
             <a
-              href="https://t.me/petokrivo"
+              href="https://t.me/Royalstroje"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
@@ -216,7 +216,7 @@ export default function Kontakt() {
                   <Send className="text-orange-primary" size={24} />
                 </div>
                 <h3 className="text-white font-bold text-base mb-1.5">Telegram</h3>
-                <p className="text-orange-primary font-bold text-lg mb-1">@petokrivo</p>
+                <p className="text-orange-primary font-bold text-lg mb-1">@Royalstroje</p>
                 <p className="text-white/60 text-sm">Alternatívny kontakt</p>
               </div>
             </a>
@@ -357,30 +357,66 @@ export default function Kontakt() {
               </div>
             </div>
 
-            {/* Map */}
-            <div className="mb-10 max-w-md mx-auto">
-              <div className="rounded-2xl overflow-hidden border border-white/10 aspect-square">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.6!2d17.3994!3d48.2187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8f0c0c0c0c0d%3A0x0!2zUsOpxI1rYSBjZXN0YSAxODIsIDkwMyAwMSBTZW5lYw!5e0!3m2!1ssk!2ssk!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Royal Stroje - Mapa"
-                ></iframe>
+            {/* Company Info & Map Grid */}
+            <div className="mb-10 grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto items-start">
+              {/* Company Information - Left Side */}
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 hover:shadow-xl hover:shadow-orange-primary/10 transition-all relative overflow-hidden group h-fit">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative">
+                  <h3 className="text-2xl md:text-3xl font-black text-white mb-5">Firemné údaje</h3>
+                  <div className="space-y-3.5">
+                    <div>
+                      <h4 className="text-orange-primary font-bold text-xl mb-1">Royal stroje, s.r.o.</h4>
+                    </div>
+                    <div className="space-y-2 text-white/80 text-base md:text-lg">
+                      <p><span className="text-white/60">Sídlo:</span> <span className="text-white font-medium">182, Boldog 92526</span></p>
+                      <p><span className="text-white/60">IČO:</span> <span className="text-white font-medium">57 405 425</span></p>
+                      <p><span className="text-white/60">DIČ:</span> <span className="text-white font-medium">2122722063</span></p>
+                      <p><span className="text-white/60">Zastúpený:</span> <span className="text-white font-medium">Peter Krivosudký</span></p>
+                    </div>
+                    <div className="pt-3 border-t border-white/10 space-y-2">
+                      <p className="flex items-center gap-2">
+                        <Phone className="text-orange-primary" size={18} />
+                        <a href="tel:+421948555551" className="text-white hover:text-orange-primary transition-colors font-medium">
+                          +421 948 555 551
+                        </a>
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <Mail className="text-orange-primary" size={18} />
+                        <a href="mailto:info@royalstroje.sk" className="text-white hover:text-orange-primary transition-colors font-medium">
+                          info@royalstroje.sk
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="text-center mt-4">
-                <a
-                  href="https://maps.google.com/?q=Réčka+cesta+182,+Senec"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-orange-primary font-bold hover:gap-3 transition-all"
-                >
-                  <span>Otvoriť v Google Maps</span>
-                  <span>→</span>
-                </a>
+
+              {/* Map - Right Side */}
+              <div>
+                <div className="rounded-2xl overflow-hidden border border-white/10 h-[400px]">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.6!2d17.3994!3d48.2187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8f0c0c0c0c0d%3A0x0!2zUsOpxI1rYSBjZXN0YSAxODIsIDkwMyAwMSBTZW5lYw!5e0!3m2!1ssk!2ssk!4v1234567890"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Royal Stroje - Mapa"
+                  ></iframe>
+                </div>
+                <div className="text-center mt-4">
+                  <a
+                    href="https://maps.google.com/?q=Réčka+cesta+182,+Senec"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-orange-primary font-bold hover:gap-3 transition-all"
+                  >
+                    <span>Otvoriť v Google Maps</span>
+                    <span>→</span>
+                  </a>
+                </div>
               </div>
             </div>
 

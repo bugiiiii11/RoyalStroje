@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Truck, Settings } from 'lucide-react';
+import { ShoppingCart, FileText, Package } from 'lucide-react';
 
 export default function Sluzby() {
   const services = [
@@ -13,21 +13,21 @@ export default function Sluzby() {
       backgroundImage: '/pictures/graphics/predaj.png',
     },
     {
-      id: 'servis-naradia',
-      path: '/sluzby/servis-naradia',
-      icon: Settings,
-      title: 'Servis náradia',
-      description: 'Profesionálny servis a údržba stavebného náradia a techniky. Opravy, kontroly a náhradné diely.',
-      features: ['Opravy strojov', 'Preventívna údržba', 'Náhradné diely', 'Expresný servis'],
+      id: 'nahradne-diely',
+      path: '/sluzby/nahradne-diely',
+      icon: Package,
+      title: 'Predaj náhradných dielov',
+      description: 'Široký sortiment originálnych náhradných dielov pre stavebné náradie. Skladom diely pre všetky typy strojov a zariadení.',
+      features: ['Originálne diely', 'Skladová dostupnosť', 'Odborné poradenstvo', 'Expresná objednávka'],
       backgroundImage: '/pictures/graphics/servis.png',
     },
     {
-      id: 'dovoz-techniky',
-      path: '/sluzby/dovoz-techniky',
-      icon: Truck,
-      title: 'Dovoz techniky',
-      description: 'Rýchly a spoľahlivý dovoz náradia a techniky priamo na vašu stavbu. Dovoz do 24 hodín.',
-      features: ['Dovoz na stavbu', 'Odvoz po skončení', 'Non-stop dostupnosť', 'Celé Slovensko'],
+      id: 'cenova-ponuka',
+      path: '/sluzby/cenova-ponuka',
+      icon: FileText,
+      title: 'Cenová ponuka',
+      description: 'Pripravíme pre vás presnú cenovú ponuku na mieru. Rýchlo, transparentne a bez skrytých poplatkov.',
+      features: ['Ponuka do 24 hodín', 'Presná kalkulácia', 'Individuálny prístup', 'Bezplatné poradenstvo'],
       backgroundImage: '/pictures/graphics/dovoz.png',
     },
   ];
