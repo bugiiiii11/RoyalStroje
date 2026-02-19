@@ -78,30 +78,25 @@ export default function Header() {
 
           {/* Content */}
           <div className="p-6 pr-8">
-            <div className="flex items-start gap-3 mb-3">
+            <div className="flex items-start gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
                 <Sparkles className="text-white" size={20} />
               </div>
               <div>
-                <h3 className="text-white font-black text-lg leading-tight mb-1">
-                  Novo otvorená požičovňa!
+                <h3 className="text-white font-black text-lg leading-tight mb-2">
+                  Čoskoro otvárame!
                 </h3>
                 <p className="text-white/90 text-sm leading-relaxed">
-                  Navštívte našu prevádzku v Senci
+                  Web je momentálne v testovacej prevádzke. Oficiálne spustenie čoskoro.
                 </p>
               </div>
-            </div>
-            <div className="bg-white/20 rounded-xl px-4 py-3 mb-3">
-              <p className="text-white text-sm font-semibold">
-                📍 Recká cesta 182, Senec
-              </p>
             </div>
             <Link
               to="/kontakt"
               onClick={() => setPromoVisible(false)}
               className="block w-full text-center bg-white text-orange-primary font-bold py-2.5 px-4 rounded-lg hover:bg-white/90 transition-all"
             >
-              Zobraziť na mape
+              Kontaktujte nás
             </Link>
           </div>
 

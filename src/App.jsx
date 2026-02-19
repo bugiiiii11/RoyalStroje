@@ -3,6 +3,7 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import MobileNav from './components/common/MobileNav';
 import AnimatedBackground from './components/common/AnimatedBackground';
+import ScrollToTop from './components/common/ScrollToTop';
 import { CartProvider } from './context/CartContext';
 import Home from './pages/Home';
 import Sluzby from './pages/Sluzby';
@@ -13,11 +14,14 @@ import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Kontakt from './pages/Kontakt';
 import Partneri from './pages/Partneri';
+import GDPR from './pages/GDPR';
+import ObchodnePodmienky from './pages/ObchodnePodmienky';
 
 function App() {
   return (
     <CartProvider>
       <Router>
+        <ScrollToTop />
         <div className="min-h-screen bg-zinc-950 text-white relative overflow-x-hidden">
         {/* Animated Background */}
         <AnimatedBackground />
@@ -35,6 +39,8 @@ function App() {
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/kontakt" element={<Kontakt />} />
               <Route path="/partneri" element={<Partneri />} />
+              <Route path="/gdpr" element={<GDPR />} />
+              <Route path="/obchodne-podmienky" element={<ObchodnePodmienky />} />
             </Routes>
           </main>
           <Footer />

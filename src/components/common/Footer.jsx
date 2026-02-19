@@ -172,14 +172,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-white/70 hover:text-orange-primary transition">
+                <Link to="/obchodne-podmienky" className="text-white/70 hover:text-orange-primary transition">
                   Obchodné podmienky
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-white/70 hover:text-orange-primary transition">
+                <Link to="/gdpr" className="text-white/70 hover:text-orange-primary transition">
                   GDPR
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
