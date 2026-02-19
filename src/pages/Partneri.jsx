@@ -180,7 +180,7 @@ export default function Partneri() {
                 Čo znamená <span className="text-orange-primary">partnerstvo</span>
               </h2>
               <p className="text-white/80 max-w-3xl mx-auto text-lg leading-relaxed">
-                Partnerstvo s Royal Stroje nie je o zľavách či výhodách. Je to <strong className="text-orange-primary">ocenenie a pocta</strong> pre našich najlepších klientov, ktorí s nami budujú dlhodobú, kvalitnú spoluprácu.
+                Partnerstvo s Royal Stroje nie je o zľavách či výhodách. Je to <strong className="text-orange-primary">ocenenie a pocta</strong> pre našich najlepších partnerov, ktorí s nami budujú dlhodobú, kvalitnú spoluprácu.
               </p>
             </div>
 
@@ -200,9 +200,9 @@ export default function Partneri() {
               </div>
 
               <div className="bg-zinc-950/50 rounded-xl p-6 border border-white/5">
-                <h3 className="text-white font-bold text-lg mb-3">Riešime každú požiadavku</h3>
+                <h3 className="text-white font-bold text-lg mb-3">Komplexné pokrytie stavebníctva</h3>
                 <p className="text-white/70 leading-relaxed">
-                  Vďaka našim širokým partnerstám dokážeme vyriešiť <strong className="text-white">akúkoľvek požiadavku v stavebnom priemysle</strong> — rýchlo, profesionálne a s kvalitnou technikou. Od prenájmu strojov cez zemné práce až po dodávku materiálu.
+                  Naša sieť partnerov pokrýva <strong className="text-white">široké spektrum stavebných služieb</strong> — od prenájmu strojov, cez zemné práce, až po dodávky materiálu. Pre našich klientov to znamená jedno spoľahlivé kontaktné miesto a rýchle riešenia.
                 </p>
               </div>
             </div>
