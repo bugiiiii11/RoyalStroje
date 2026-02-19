@@ -180,7 +180,7 @@ export default function Partneri() {
                 Čo znamená <span className="text-orange-primary">partnerstvo</span>
               </h2>
               <p className="text-white/80 max-w-3xl mx-auto text-lg leading-relaxed">
-                Partnerstvo s Royal Stroje nie je o zľavách či výhodách. Je to <strong className="text-orange-primary">ocenenie a pocta</strong> pre našich najlepších partnerov, ktorí s nami budujú dlhodobú, kvalitnú spoluprácu.
+                Naši partneri sú <strong className="text-orange-primary">základom našej úspešnej práce</strong>. Si vážime každého z nich a spoločne vytvárame sieť dôveryhodných profesionálov v stavebnom priemysle, ktorí sa môžu navzájom odporúčať a spolupracovať.
               </p>
             </div>
 
