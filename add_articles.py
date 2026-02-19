@@ -1,0 +1,13 @@
+# Script to notify user
+print("✓ Blog.jsx už obsahuje metadata pre všetkých 6 nových článkov (7-12)")
+print("✓ Článok 7 (Cenník) má už kompletný JSX obsah v blogArticles.jsx")
+print("")
+print("Zostáva pridať plný JSX obsah pre články 8-12:")
+print("  - Článok 8: Vibračné dosky")
+print("  - Článok 9: Jesenné úpravy")
+print("  - Článok 10: Case study")
+print("  - Článok 11: Zimné projekty")
+print("  - Článok 12: Ročný prehľad")
+print("")
+print("Tieto články vyžadujú manuálnu konverziu z markdown do JSX.")
+print("Odporúčam dokončiť ich postupne aby sa predišlo timeout problémom.")
