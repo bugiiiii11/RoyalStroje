@@ -175,7 +175,7 @@ export default function Catalog() {
             <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
           </h2>
           <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto mb-6">
-            Objavte našu širokú ponuku profesionálneho vybavenia - od malého náradia po ťažkú techniku. Nájdite všetko potrebné pre váš projekt na jednom mieste.
+            Objavte našu širokú ponuku profesionálneho vybavenia - od malého náradia po ťažkú techniku - všetko na jednom mieste.
           </p>
 
           {/* Customer Type Selector & Search - Centered Row */}

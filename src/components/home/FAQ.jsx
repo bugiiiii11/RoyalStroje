@@ -13,7 +13,7 @@ export default function FAQ() {
           <ol className="space-y-2 ml-4">
             <li><strong className="text-orange-primary">1. Vyberte produkty:</strong> Prejdite si naše kategórie, vyberte si požadované náradie alebo techniku a pridajte položky do košíka.</li>
             <li><strong className="text-orange-primary">2. Zvoľte dni prenájmu:</strong> V kalendári označte dni, počas ktorých budete techniku potrebovať. Cena sa automaticky prepočíta.</li>
-            <li><strong className="text-orange-primary">3. Pošlite objednávku:</strong> Kliknite na "Poslať objednávku" - nezáväzná objednávka sa automaticky odošle na náš WhatsApp. Potvrdíme dostupnosť a dohodneme si prevzatie.</li>
+            <li><strong className="text-orange-primary">3. Pošlite objednávku:</strong> Kliknite na "Poslať objednávku" - nezáväzná objednávka sa automaticky odošle na náš email. Potvrdíme dostupnosť telefonicky a dohodneme si prevzatie.</li>
           </ol>
           <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 mt-4">
             <p className="text-sm"><strong className="text-orange-primary">Alternatívne</strong> nás môžete priamo <strong>zavolať na <a href="tel:+421948555551" className="text-orange-primary hover:underline">0948 555 551</a></strong> a rezerváciu vyriešime telefonicky.</p>
@@ -45,11 +45,11 @@ export default function FAQ() {
       answer: (
         <div className="space-y-3">
           <p>Stroje <strong className="text-white">odovzdávame s plnou nádržou</strong> pohonných hmôt (PHM) a takisto ich <strong className="text-white">očakávame späť s plnou nádržou</strong>.</p>
-          <p className="text-white/80">V prípade vrátenia s prázdnou alebo čiastočne naplnenou nádržou bude účtovaný doplatok vo výške:</p>
+          <p className="text-white/80">V prípade vrátenia s prázdnou alebo čiastočne naplnenou nádržou bude účtovaný doplatok za dotankovanie vo výške:</p>
           <div className="bg-zinc-800/50 rounded-lg p-3 mt-2">
-            <p className="text-orange-primary font-bold">Cena PHM + manipulačný poplatok 10 €</p>
+            <p className="text-orange-primary font-bold">2€/liter bez DPH</p>
           </div>
-          <p className="text-sm text-white/70 mt-3"><strong>Tip:</strong> Natankujte stroj pred vrátením – ušetríte manipulačný poplatok.</p>
+          <p className="text-sm text-white/70 mt-3"><strong>Tip:</strong> Natankujte stroj pred vrátením.</p>
         </div>
       )
     },
