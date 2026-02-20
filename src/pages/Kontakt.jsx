@@ -61,7 +61,15 @@ export default function Kontakt() {
       </section>
 
       {/* Main Content - Single Section */}
-      <section className="relative py-16 bg-gradient-to-b from-zinc-950 via-zinc-950 to-black overflow-hidden">
+      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+        {/* Radial gradient overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none z-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.5) 0%, rgba(9, 9, 11, 1) 75%)'
+          }}
+        />
+
         <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
 
           {/* Section Heading */}

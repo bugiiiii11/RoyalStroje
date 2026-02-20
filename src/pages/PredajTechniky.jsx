@@ -1,17 +1,6 @@
-import { useState, useEffect } from 'react';
 import { Phone, Mail, ShoppingCart, Package, Tag, Zap, Shield, Wrench, HardHat } from 'lucide-react';
 
 export default function PredajTechniky() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
   const categories = [
     {
       id: 'naradie',
@@ -119,110 +108,17 @@ export default function PredajTechniky() {
         </div>
       </section>
 
-      {/* Main Content Section - Unified with parallax effects */}
-      <section className="relative py-16 bg-gradient-to-b from-zinc-950 via-zinc-950 to-black overflow-hidden">
-        {/* Subtle vignette for depth */}
+      {/* Main Content Section */}
+      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+        {/* Radial gradient overlay */}
         <div
-          className="absolute inset-0 pointer-events-none z-[2]"
+          className="absolute inset-0 pointer-events-none z-0"
           style={{
-            background: 'radial-gradient(ellipse 85% 75% at 50% 40%, transparent 0%, transparent 60%, rgba(0,0,0,0.08) 100%)'
+            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.5) 0%, rgba(9, 9, 11, 1) 75%)'
           }}
         />
 
-        {/* Diagonal subtle lines */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.04] z-0"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 80px)'
-          }}
-        />
-
-        {/* Main soft spotlight - moves slower than scroll, stays centered */}
-        <div
-          className="absolute pointer-events-none z-0 transition-all duration-500 ease-out"
-          style={{
-            top: `${150 + scrollY * 0.35}px`,
-            left: '50%',
-            width: '1600px',
-            height: '1100px',
-            marginLeft: '-800px',
-            background: 'radial-gradient(ellipse 50% 40% at 50% 45%, rgba(255,110,0,0.18) 0%, rgba(255,100,0,0.09) 35%, rgba(255,90,0,0.03) 70%, transparent 100%)',
-            filter: 'blur(120px)',
-            opacity: 0.75
-          }}
-        />
-
-        {/* Subtle inner glow for depth */}
-        <div
-          className="absolute pointer-events-none z-[1] transition-all duration-500 ease-out"
-          style={{
-            top: `${250 + scrollY * 0.35}px`,
-            left: '50%',
-            width: '900px',
-            height: '700px',
-            marginLeft: '-450px',
-            background: 'radial-gradient(ellipse 55% 45% at 50% 50%, rgba(255,115,5,0.22) 0%, rgba(255,105,0,0.10) 30%, rgba(255,95,0,0.03) 65%, transparent 100%)',
-            filter: 'blur(90px)',
-            opacity: 0.65
-          }}
-        />
-
-        {/* Ambient background glow - very subtle */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            top: '15%',
-            right: '12%',
-            width: '550px',
-            height: '550px',
-            background: 'radial-gradient(circle, rgba(255,100,0,0.09) 0%, rgba(255,90,0,0.03) 50%, transparent 80%)',
-            filter: 'blur(110px)',
-            opacity: 0.5,
-            animation: 'ambientFloat1 20s ease-in-out infinite'
-          }}
-        />
-
-        {/* Ambient background glow 2 */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            bottom: '10%',
-            left: '10%',
-            width: '500px',
-            height: '500px',
-            background: 'radial-gradient(circle, rgba(255,105,0,0.08) 0%, rgba(255,95,0,0.03) 50%, transparent 80%)',
-            filter: 'blur(105px)',
-            opacity: 0.45,
-            animation: 'ambientFloat2 22s ease-in-out infinite'
-          }}
-        />
-
-        {/* Animation keyframes */}
-        <style>{`
-          @keyframes ambientFloat1 {
-            0%, 100% {
-              transform: translate(0, 0) scale(1);
-              opacity: 0.4;
-            }
-            50% {
-              transform: translate(-25px, 20px) scale(1.08);
-              opacity: 0.5;
-            }
-          }
-
-          @keyframes ambientFloat2 {
-            0%, 100% {
-              transform: translate(0, 0) scale(1);
-              opacity: 0.35;
-            }
-            50% {
-              transform: translate(30px, -25px) scale(1.1);
-              opacity: 0.45;
-            }
-          }
-        `}</style>
-
-        <div className="relative z-[10] max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Categories Grid */}
           <div className="mb-16">
             <div className="text-center mb-10">

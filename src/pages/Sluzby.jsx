@@ -87,106 +87,13 @@ export default function Sluzby() {
 
       {/* Services Grid */}
       <section className="relative py-16 bg-zinc-950 overflow-hidden">
-        {/* Radial gradient overlay - wider spread */}
+        {/* Radial gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
+            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.5) 0%, rgba(9, 9, 11, 1) 75%)'
           }}
         />
-
-        {/* Diagonal subtle lines for technical feel */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
-          }}
-        />
-
-        {/* Orange accent glow - top right (animated) - FAST visible test */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            top: '10%',
-            right: '10%',
-            width: '600px',
-            height: '600px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
-            filter: 'blur(100px)',
-            opacity: 0.15,
-            animation: 'floatGlow1 8s ease-in-out infinite'
-          }}
-        />
-
-        {/* Orange accent glow - bottom left (animated) - FAST visible test */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            bottom: '10%',
-            left: '10%',
-            width: '550px',
-            height: '550px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            opacity: 0.12,
-            animation: 'floatGlow2 10s ease-in-out infinite'
-          }}
-        />
-
-        {/* Center pulsing glow - FAST visible test */}
-        <div
-          className="absolute top-1/2 left-1/2 pointer-events-none z-0"
-          style={{
-            width: '800px',
-            height: '800px',
-            marginLeft: '-400px',
-            marginTop: '-400px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-            filter: 'blur(120px)',
-            animation: 'pulseGlow 6s ease-in-out infinite'
-          }}
-        />
-
-        {/* Animation keyframes - defined AFTER elements with explicit animations */}
-        <style>{`
-          @keyframes floatGlow1 {
-            0%, 100% {
-              transform: translate(0, 0) scale(1);
-            }
-            25% {
-              transform: translate(-120px, 100px) scale(1.2);
-            }
-            50% {
-              transform: translate(80px, -120px) scale(0.85);
-            }
-            75% {
-              transform: translate(100px, 60px) scale(1.1);
-            }
-          }
-
-          @keyframes floatGlow2 {
-            0%, 100% {
-              transform: translate(0, 0) scale(1);
-            }
-            33% {
-              transform: translate(140px, -100px) scale(1.25);
-            }
-            66% {
-              transform: translate(-100px, 120px) scale(0.8);
-            }
-          }
-
-          @keyframes pulseGlow {
-            0%, 100% {
-              transform: scale(1);
-              opacity: 0.08;
-            }
-            50% {
-              transform: scale(1.4);
-              opacity: 0.18;
-            }
-          }
-        `}</style>
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Services section */}
