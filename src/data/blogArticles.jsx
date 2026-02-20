@@ -4918,43 +4918,6 @@ export const blogArticles = {
           </div>
         </div>
 
-        {/* Competition Analysis */}
-        <div>
-          <h2 className="text-2xl font-black text-white mb-4">🏢 Analýza Konkurencie (Top 3)</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b-2 border-orange-primary">
-                  <th className="p-3 text-white font-bold">Požičovňa</th>
-                  <th className="p-3 text-white font-bold text-right">Obrat 2025</th>
-                  <th className="p-3 text-white font-bold">Silné stránky</th>
-                  <th className="p-3 text-white font-bold">Slabé stránky</th>
-                </tr>
-              </thead>
-              <tbody className="text-white/80">
-                <tr className="border-b border-white/10">
-                  <td className="p-3 font-bold text-white">BestRent</td>
-                  <td className="p-3 text-right">8,5M €</td>
-                  <td className="p-3 text-sm">Veľký park strojov, 12 pobočiek</td>
-                  <td className="p-3 text-sm">Vysoké ceny (+15%), slabá podpora</td>
-                </tr>
-                <tr className="border-b border-white/10 bg-orange-500/5">
-                  <td className="p-3 font-bold text-orange-primary">Royal Stroje</td>
-                  <td className="p-3 text-right text-orange-primary">1,2M €</td>
-                  <td className="p-3 text-sm">Najlepší pomer cena/výkon, 24/7 podpora</td>
-                  <td className="p-3 text-sm">Zatiaľ 1 pobočka (Senec)</td>
-                </tr>
-                <tr className="border-b border-white/10">
-                  <td className="p-3 font-bold text-white">OTS Slovakia</td>
-                  <td className="p-3 text-right">6,2M €</td>
-                  <td className="p-3 text-sm">Dlhá tradícia (od 1998), korporátni klienti</td>
-                  <td className="p-3 text-sm">Zastaralé stroje, pomalá digitalizácia</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
         {/* 2026 Predictions */}
         <div>
           <h2 className="text-2xl font-black text-white mb-4">🔮 Predpovede Na 2026</h2>
@@ -4982,65 +4945,11 @@ export const blogArticles = {
           </div>
         </div>
 
-        {/* Royal Stroje 2025 Numbers */}
-        <div className="bg-gradient-to-br from-orange-500/10 to-orange-600/10 border border-orange-primary/30 rounded-2xl p-8">
-          <h2 className="text-2xl font-black text-white mb-6">🏆 Royal Stroje: Náš Rok 2025</h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-6">
-            <div className="text-center">
-              <div className="text-4xl font-black text-orange-primary mb-2">1,200</div>
-              <p className="text-white/70">Spokojných zákazníkov</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-black text-orange-primary mb-2">1,2M €</div>
-              <p className="text-white/70">Obrat (+80% YoY)</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-black text-orange-primary mb-2">4.9/5</div>
-              <p className="text-white/70">Priemerné hodnotenie</p>
-            </div>
-          </div>
-
-          <div className="bg-zinc-900 border border-white/10 rounded-xl p-6 mb-6">
-            <h3 className="text-white font-bold mb-4">Naše Najväčšie Úspechy:</h3>
-            <ul className="space-y-2 text-white/80">
-              <li className="flex items-start">
-                <span className="text-orange-primary mr-2">✓</span>
-                <span>Rozšírenie vozového parku o 15 nových strojov</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-orange-primary mr-2">✓</span>
-                <span>Zavedenie 24/7 technickej podpory</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-orange-primary mr-2">✓</span>
-                <span>Najnižšie ceny v regióne Bratislava/Senec</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-orange-primary mr-2">✓</span>
-                <span>Žiadne reklamácie (100% spokojnosť)</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-orange-primary mr-2">✓</span>
-                <span>Nový web s online kalkulačkou a rezerváciou</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="text-center">
-            <p className="text-white/90 text-lg mb-4">
-              <strong>Ďakujeme všetkým našim zákazníkom za dôveru!</strong>
-            </p>
-            <p className="text-white/70">
-              V roku 2026 plánujeme ďalšie rozšírenie a nové služby. Budeme vás informovať!
-            </p>
-          </div>
-        </div>
-
         {/* CTA */}
         <div className="bg-gradient-to-br from-orange-600 to-orange-700 rounded-2xl p-8 text-center">
-          <h2 className="text-3xl font-black text-white mb-4">Chcete Byť Súčasťou Úspechu?</h2>
+          <h2 className="text-3xl font-black text-white mb-4">Plánujete Stavebný Projekt v 2026?</h2>
           <p className="text-white/90 mb-6 text-lg">
-            Rezervujte si stroj na rok 2026 už teraz a získajte zľavu 10%
+            Kontaktujte nás pre konzultáciu a najlepšie ceny na trhu
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href="tel:+421948555551" className="bg-white text-orange-primary px-8 py-3 rounded-full font-bold hover:bg-white/90 transition-colors">
@@ -5051,7 +4960,7 @@ export const blogArticles = {
             </a>
           </div>
           <p className="text-white/70 mt-6 text-sm">
-            🎉 Prvá rezervácia 2026 = Extra deň ZADARMO
+            Poradenstvo ZADARMO | Doprava do 30 km ZADARMO | 24/7 podpora
           </p>
         </div>
       </div>

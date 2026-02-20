@@ -137,6 +137,9 @@ export default function Blog() {
     },
   ];
 
+  // Filter out hidden articles (3, 7, 9)
+  const visiblePosts = blogPosts.filter(post => ![3, 7, 9].includes(post.id));
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -276,7 +279,7 @@ export default function Blog() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
+            {visiblePosts.map((post) => (
               <Link
                 key={post.id}
                 to={`/blog/${post.slug}`}
