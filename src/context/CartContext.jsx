@@ -26,7 +26,11 @@ export function CartProvider({ children }) {
 
   const getTotal = () => {
     return cartItems.reduce((sum, item) => {
-      // Extract number from price string like "25€/deň" or "od 150€"
+      // Use pricePerDay if available, otherwise extract from price string
+      if (item.pricePerDay && !isNaN(item.pricePerDay)) {
+        return sum + item.pricePerDay;
+      }
+      // Fallback: Extract number from price string like "25€/deň" or "od 150€"
       const priceMatch = item.price?.match(/(\d+)/);
       const price = priceMatch ? parseInt(priceMatch[1], 10) : 0;
       return sum + price;

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   ShoppingCart, X, Send, Calendar, Phone,
   Hammer, Cog, HardHat, ArrowUpFromLine,
-  Container, Car, TreePine
+  Container, Car, TreePine, Building2, User
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { getProductsBySubcategory } from '../../data/products';
@@ -25,6 +25,7 @@ export default function Catalog() {
   const [activeSubcategory, setActiveSubcategory] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDays, setSelectedDays] = useState([]);
+  const [customerType, setCustomerType] = useState('po'); // 'po' or 'fo'
   const productsPerPage = 8;
   const { cartItems, removeFromCart, getTotal } = useCart();
 
@@ -91,17 +92,23 @@ export default function Catalog() {
   const dayHeaders = ['Po', 'Ut', 'St', 'Št', 'Pi', 'So', 'Ne'];
 
   const rentalDays = selectedDays.length || 1;
-  const totalPrice = getTotal() * rentalDays;
+  const baseTotal = getTotal();
+  const totalPrice = customerType === 'po' ? baseTotal : baseTotal * 1.2;
 
   const handleSendOrder = () => {
     if (cartItems.length === 0) return;
-    const productList = cartItems
-      .map((item) => `- ${item.name} (${item.price})`)
-      .join('\n');
+    const productList = cartItems.map((item) => {
+      const itemPrice = item.pricePerDay && !isNaN(item.pricePerDay)
+        ? (customerType === 'po' ? item.pricePerDay : item.pricePerDay * 1.2).toFixed(2)
+        : 'Cena dohodou';
+      const priceLabel = customerType === 'po' ? 'bez DPH' : 's DPH';
+      return `- ${item.name} (${itemPrice}€ ${priceLabel}/deň)`;
+    }).join('\n');
     const daysText = selectedDays.length > 0
       ? `\n\nVybrané dni (${selectedDays.length}): ${selectedDays.sort().join(', ')}`
       : '';
-    const message = `Dobrý deň, mám záujem o prenájom:\n\n${productList}${daysText}\n\nCelková suma: ${totalPrice}€ (${rentalDays} ${rentalDays === 1 ? 'deň' : rentalDays < 5 ? 'dni' : 'dní'})`;
+    const priceType = customerType === 'po' ? 'bez DPH' : 's DPH';
+    const message = `Dobrý deň, mám záujem o prenájom:\n\n${productList}${daysText}\n\nCelková suma: ${(totalPrice * rentalDays).toFixed(2)}€ ${priceType} (${rentalDays} ${rentalDays === 1 ? 'deň' : rentalDays < 5 ? 'dni' : 'dní'})`;
     const whatsappUrl = `https://wa.me/421948555551?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -118,20 +125,17 @@ export default function Catalog() {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-  // Reset to page 1 when category or subcategory changes
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [activeCategory, activeSubcategory]);
-
   // Handle category change
   const handleCategoryChange = (categoryId) => {
     setActiveCategory(categoryId);
     setActiveSubcategory('all');
+    setCurrentPage(1);
   };
 
   // Handle subcategory change
   const handleSubcategoryChange = (subcategoryId) => {
     setActiveSubcategory(subcategoryId);
+    setCurrentPage(1);
   };
 
   return (
@@ -209,6 +213,34 @@ export default function Catalog() {
           <p className="text-white/70 text-base md:text-lg max-w-3xl mx-auto">
             Profesionálna technika pre každý typ práce - od malého náradia po ťažkú techniku.
           </p>
+        </div>
+
+        {/* Customer Type Selector */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex bg-zinc-900 border border-white/10 rounded-2xl p-2 gap-2">
+            <button
+              onClick={() => setCustomerType('po')}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
+                customerType === 'po'
+                  ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
+                  : 'text-white/60 hover:text-white/80'
+              }`}
+            >
+              <Building2 size={20} />
+              <span>Právnické osoby</span>
+            </button>
+            <button
+              onClick={() => setCustomerType('fo')}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
+                customerType === 'fo'
+                  ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
+                  : 'text-white/60 hover:text-white/80'
+              }`}
+            >
+              <User size={20} />
+              <span>Fyzické osoby</span>
+            </button>
+          </div>
         </div>
 
         {/* Main Container with Frame */}
@@ -302,27 +334,32 @@ export default function Catalog() {
                   <>
                     {/* Items List */}
                     <div className="space-y-2 max-h-48 overflow-y-auto mb-4">
-                      {cartItems.map((item) => (
-                        <div
-                          key={item.id}
-                          className="flex items-center justify-between gap-2 bg-zinc-800/50 rounded-lg px-3 py-2"
-                        >
-                          <div className="flex-1 min-w-0">
-                            <p className="text-white text-xs font-semibold truncate">
-                              {item.name}
-                            </p>
-                            <p className="text-orange-primary text-xs font-bold">
-                              {item.price}
-                            </p>
-                          </div>
-                          <button
-                            onClick={() => removeFromCart(item.id)}
-                            className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:bg-red-500/20 hover:border-red-500/50 hover:text-red-400 transition-all flex-shrink-0"
+                      {cartItems.map((item) => {
+                        const itemPrice = item.pricePerDay && !isNaN(item.pricePerDay)
+                          ? (customerType === 'po' ? item.pricePerDay : item.pricePerDay * 1.2).toFixed(2)
+                          : null;
+                        return (
+                          <div
+                            key={item.id}
+                            className="flex items-center justify-between gap-2 bg-zinc-800/50 rounded-lg px-3 py-2"
                           >
-                            <X size={12} />
-                          </button>
-                        </div>
-                      ))}
+                            <div className="flex-1 min-w-0">
+                              <p className="text-white text-xs font-semibold truncate">
+                                {item.name}
+                              </p>
+                              <p className="text-orange-primary text-xs font-bold">
+                                {itemPrice ? `${itemPrice}€/deň` : 'Cena dohodou'}
+                              </p>
+                            </div>
+                            <button
+                              onClick={() => removeFromCart(item.id)}
+                              className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:bg-red-500/20 hover:border-red-500/50 hover:text-red-400 transition-all flex-shrink-0"
+                            >
+                              <X size={12} />
+                            </button>
+                          </div>
+                        );
+                      })}
                     </div>
 
                     {/* Mini Calendar */}
@@ -399,14 +436,16 @@ export default function Catalog() {
                     {/* Total */}
                     <div className="border-t border-white/10 pt-3 mb-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-white/70 text-sm">Cena s DPH:</span>
+                        <span className="text-white/70 text-sm">
+                          {customerType === 'po' ? 'Cena bez DPH:' : 'Cena s DPH:'}
+                        </span>
                         <div className="text-right">
                           <span className="text-orange-primary text-lg font-black">
-                            {totalPrice}€
+                            {(totalPrice * rentalDays).toFixed(2)}€
                           </span>
                           {rentalDays > 1 && (
                             <p className="text-white/50 text-xs">
-                              ({getTotal()}€ × {rentalDays} {rentalDays < 5 ? 'dni' : 'dní'})
+                              ({totalPrice.toFixed(2)}€ × {rentalDays} {rentalDays < 5 ? 'dni' : 'dní'})
                             </p>
                           )}
                         </div>
@@ -495,7 +534,7 @@ export default function Catalog() {
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-8">
                   {currentProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard key={product.id} product={product} customerType={customerType} />
                   ))}
                 </div>
 

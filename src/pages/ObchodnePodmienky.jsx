@@ -1,7 +1,12 @@
+import { useState } from 'react';
+import { FileText, Building2, User } from 'lucide-react';
+
 export default function ObchodnePodmienky() {
+  const [activeTab, setActiveTab] = useState('po'); // 'po' or 'fo'
+
   return (
     <div className="min-h-screen">
-      {/* Hero with Background */}
+      {/* Hero Section */}
       <section className="relative py-24 md:py-32 lg:py-40 flex items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
@@ -40,9 +45,14 @@ export default function ObchodnePodmienky() {
         {/* Content */}
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              <span className="text-orange-primary">Obchodné</span> podmienky
-            </h1>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center">
+                <FileText size={28} className="text-white" />
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
+                <span className="text-orange-primary">Obchodné</span> podmienky
+              </h1>
+            </div>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
               Všeobecné podmienky prenájmu mechanizácie a príslušenstva
             </p>
@@ -54,34 +64,65 @@ export default function ObchodnePodmienky() {
       <section className="relative py-16 bg-gradient-to-b from-zinc-950 via-zinc-950 to-black">
         <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
 
-          {/* Header Info */}
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl p-6 md:p-8 mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm md:text-base">
-              <div>
-                <p className="text-white/60 mb-1">Verzia</p>
-                <p className="text-white font-semibold">VPPM2026.02</p>
-              </div>
-              <div>
-                <p className="text-white/60 mb-1">Platné od</p>
-                <p className="text-white font-semibold">01. 02. 2026</p>
-              </div>
-              <div>
-                <p className="text-white/60 mb-1">Vydavateľ</p>
-                <p className="text-white/80">ROYAL STROJE s.r.o., Recká cesta 182, 925 26 Boldog – Senec</p>
-              </div>
-              <div>
-                <p className="text-white/60 mb-1">Web</p>
-                <p className="text-white/80">www.royalstroje.sk</p>
-              </div>
-              <div className="md:col-span-2">
-                <p className="text-white/60 mb-1">Určené pre</p>
-                <p className="text-white/80">Právnické osoby a fyzické osoby – podnikatelia (SZČO)</p>
-              </div>
+          {/* Tab Selector */}
+          <div className="flex justify-center mb-12">
+            <div className="inline-flex bg-zinc-900 border border-white/10 rounded-2xl p-2 gap-2">
+              <button
+                onClick={() => setActiveTab('po')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
+                  activeTab === 'po'
+                    ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
+                    : 'text-white/60 hover:text-white/80'
+                }`}
+              >
+                <Building2 size={20} />
+                <span>Právnické osoby</span>
+              </button>
+              <button
+                onClick={() => setActiveTab('fo')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
+                  activeTab === 'fo'
+                    ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
+                    : 'text-white/60 hover:text-white/80'
+                }`}
+              >
+                <User size={20} />
+                <span>Fyzické osoby</span>
+              </button>
             </div>
           </div>
 
-          {/* Content Sections */}
-          <div className="space-y-8">
+          {/* Content for Právnické osoby (PO) */}
+          {activeTab === 'po' && (
+            <>
+              {/* Header Info */}
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl p-6 md:p-8 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm md:text-base">
+                  <div>
+                    <p className="text-white/60 mb-1">Verzia</p>
+                    <p className="text-white font-semibold">VPPM2026.02</p>
+                  </div>
+                  <div>
+                    <p className="text-white/60 mb-1">Platné od</p>
+                    <p className="text-white font-semibold">01. 02. 2026</p>
+                  </div>
+                  <div>
+                    <p className="text-white/60 mb-1">Vydavateľ</p>
+                    <p className="text-white/80">ROYAL STROJE s.r.o., Recká cesta 182, 925 26 Boldog – Senec</p>
+                  </div>
+                  <div>
+                    <p className="text-white/60 mb-1">Web</p>
+                    <p className="text-white/80">www.royalstroje.sk</p>
+                  </div>
+                  <div className="md:col-span-2">
+                    <p className="text-white/60 mb-1">Určené pre</p>
+                    <p className="text-white/80">Právnické osoby a fyzické osoby – podnikatelia (SZČO)</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Sections */}
+              <div className="space-y-8">
 
             {/* Section I */}
             <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
@@ -333,17 +374,266 @@ export default function ObchodnePodmienky() {
               </div>
             </div>
 
-          </div>
+              </div>
 
-          {/* Footer */}
-          <div className="text-center mt-12 pt-8 border-t border-white/10">
-            <p className="text-white/50 text-sm">
-              ROYAL STROJE s.r.o. | Verzia VPPM2026.02 | Platné od 01.02.2026 | www.royalstroje.sk
-            </p>
-            <p className="text-white/40 text-xs mt-2">
-              Recká cesta 182, 925 26 Boldog – Senec | IČO: 57 405 425 | info@royalstroje.sk
-            </p>
-          </div>
+              {/* Footer */}
+              <div className="text-center mt-12 pt-8 border-t border-white/10">
+                <p className="text-white/50 text-sm">
+                  ROYAL STROJE s.r.o. | Verzia VPPM2026.02 | Platné od 01.02.2026 | www.royalstroje.sk
+                </p>
+                <p className="text-white/40 text-xs mt-2">
+                  Recká cesta 182, 925 26 Boldog – Senec | IČO: 57 405 425 | info@royalstroje.sk
+                </p>
+              </div>
+            </>
+          )}
+
+          {/* Content for Fyzické osoby (FO) */}
+          {activeTab === 'fo' && (
+            <>
+              {/* Header Info */}
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl p-6 md:p-8 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm md:text-base">
+                  <div>
+                    <p className="text-white/60 mb-1">Verzia</p>
+                    <p className="text-white font-semibold">VPPM-FO 2026.01</p>
+                  </div>
+                  <div>
+                    <p className="text-white/60 mb-1">Platné od</p>
+                    <p className="text-white font-semibold">01. 02. 2026</p>
+                  </div>
+                  <div>
+                    <p className="text-white/60 mb-1">Vydavateľ</p>
+                    <p className="text-white/80">ROYAL STROJE s.r.o., Recká cesta 182, 925 26 Boldog – Senec</p>
+                  </div>
+                  <div>
+                    <p className="text-white/60 mb-1">Web</p>
+                    <p className="text-white/80">www.royalstroje.sk</p>
+                  </div>
+                  <div className="md:col-span-2">
+                    <p className="text-white/60 mb-1">Určené pre</p>
+                    <p className="text-white/80">Fyzické osoby – nepodnikatelia (spotrebitelia)</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content Sections */}
+              <div className="space-y-8">
+
+                {/* Section I */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">I.</span> Úvodné ustanovenia
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Tieto Všeobecné podmienky prenájmu mechanizácie a príslušenstva pre fyzické osoby (ďalej len VPPM-FO) tvoria neoddeliteľnú súčasť Zmluvy o prenájme uzatvorenej medzi ROYAL STROJE s.r.o. (Prenajímateľ) a Nájomcom – fyzickou osobou nepodnikateľom (Spotrebiteľom).</p>
+                    <p><strong className="text-white">2.</strong> VPPM-FO sa spravujú zákonom č. 40/1964 Zb. Občiansky zákonník (OZ), zákonom č. 250/2007 Z. z. o ochrane spotrebiteľa a zákonom č. 102/2014 Z. z. o ochrane spotrebiteľa pri predaji na diaľku. Ustanovenia v neprospech Spotrebiteľa, ktoré sú v rozpore s kogentným právom, sú neplatné.</p>
+                    <p><strong className="text-white">3.</strong> V prípade rozporu má prednosť Zmluva pred VPPM-FO. Tieto podmienky sú dostupné v sídle Prenajímateľa a na www.royalstroje.sk; Spotrebiteľ ich obdrží v papierovej forme pri podpise Zmluvy.</p>
+                    <p><strong className="text-white">4.</strong> Predmetom prenájmu môže byť výlučne malé náradie a stredná mechanizácia (ďalej len PP) podľa aktuálneho katalógu Prenajímateľa. Prenajímateľ si vyhradzuje právo prenájom PP Spotrebiteľovi odmietnuť bez udania dôvodu.</p>
+                  </div>
+                </div>
+
+                {/* Section II */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">II.</span> Predmet prenájmu a odovzdanie
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> PP je špecifikovaný v Zmluve vrátane výrobného čísla, príslušenstva a dennej sadzby. PP je odovzdávaný v stave spôsobilom na dohodnuté užívanie, zodpovedajúcom jeho veku a opotrebeniu, spolu s návodom na obsluhu v slovenskom jazyku.</p>
+                    <p><strong className="text-white">2.</strong> Spotrebiteľ je povinný PP pred prevzatím skontrolovať. Zjavné vady musí uviesť v odovzdávacom protokole; na neskoršie reklamácie zjavných vád sa neprihliada. Podpisom protokolu Spotrebiteľ potvrdzuje prevzatie PP v opísanom stave.</p>
+                    <p><strong className="text-white">3.</strong> Prenajímateľ je povinný odovzdať PP s úplnou dokumentáciou. Ak PP nemá návod v slovenčine, Prenajímateľ je povinný ústne poučiť Spotrebiteľa o bezpečnom používaní a toto zaznamenať do protokolu.</p>
+                  </div>
+                </div>
+
+                {/* Section III */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">III.</span> Záloha (depozit) a platobné podmienky
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Prenajímateľ požaduje pred odovzdaním PP zaplatenie zálohy (depozitu) vo výške uvedenej v Zmluve. Záloha slúži ako zabezpečenie nájomného, náhrady škody a prípadných ďalších oprávnených pohľadávok Prenajímateľa.</p>
+                    <p><strong className="text-white">2.</strong> Záloha nie je nájomným a neúročí sa. Po riadnom vrátení PP a vysporiadaní všetkých pohľadávok bude záloha vrátená Spotrebiteľovi najneskôr do <strong className="text-white">14 dní</strong>, a to rovnakou formou, akou bola zaplatená (hotovosť/prevod).</p>
+                    <p><strong className="text-white">3.</strong> Nájomné je splatné pri vrátení PP, ak nie je v Zmluve dohodnuté inak. Denná sadzba sa počíta za každý začatý kalendárny deň prenájmu. Splatnosť faktúry/dokladu: 7 dní od vystavenia. Platbu je možné vykonať hotovosťou, platobnou kartou, bezhotovostným prevodom alebo iným spôsobom dohodnutým v Zmluve.</p>
+                    <p><strong className="text-white">4.</strong> Pri omeškaní s úhradou nájomného je Prenajímateľ oprávnený účtovať zákonný úrok z omeškania podľa § 517 ods. 2 OZ (nariadenie vlády SR č. 87/1995 Z. z.). Zmluvné pokuty voči Spotrebiteľovi môžu byť dojednané len v primeranej výške neodporujúcej dobrým mravom (§ 39 OZ).</p>
+                    <p><strong className="text-white">5.</strong> Prenajímateľ nie je oprávnený jednostranne meniť výšku nájomného počas trvania Zmluvy.</p>
+                  </div>
+                </div>
+
+                {/* Section IV */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">IV.</span> Doba prenájmu
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Prenájom začína dňom a časom odovzdania PP podľa Zmluvy a trvá do riadneho fyzického vrátenia PP a jeho protokolárneho prevzatia Prenajímateľom. Odstavenie PP pred prevádzkou bez protokolárneho prevzatia sa za vrátenie nepovažuje.</p>
+                    <p><strong className="text-white">2.</strong> Spotrebiteľ môže PP vrátiť aj pred uplynutím dohodnutej doby; nájomné sa v takom prípade počíta len za skutočnú dobu prenájmu.</p>
+                    <p><strong className="text-white">3.</strong> Ak Spotrebiteľ nevráti PP v dohodnutom termíne ani do 48 hodín po jeho uplynutí a na výzvu nereaguje, Prenajímateľ je oprávnený uplatniť všetky právne prostriedky ochrany svojich práv vrátane podania trestného oznámenia. Prenajímateľ má za čas omeškania nárok na nájomné podľa Zmluvy.</p>
+                  </div>
+                </div>
+
+                {/* Section V */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">V.</span> Miesto užívania
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> PP sa môže používať výlučne na mieste uvedenom v Zmluve, výlučne na súkromné účely Spotrebiteľa. Komerčné využitie PP je zakázané.</p>
+                    <p><strong className="text-white">2.</strong> Premiestnenie PP na iné miesto vyžaduje predchádzajúci písomný (vrátane e-mailový) súhlas Prenajímateľa.</p>
+                    <p><strong className="text-white">3.</strong> Subprenájom alebo poskytnutie PP tretej osobe na užívanie je zakázané.</p>
+                  </div>
+                </div>
+
+                {/* Section VI */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">VI.</span> Zodpovednosť spotrebiteľa
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Spotrebiteľ zodpovedá za PP od jeho prevzatia do riadneho vrátenia. Zodpovedá za škody nad rámec bežného opotrebenia vrátane škôd spôsobených osobami žijúcimi s ním v spoločnej domácnosti.</p>
+                    <p><strong className="text-white">2.</strong> Pri škode na PP: Prenajímateľ má právo na náhradu skutočnej škody (nie novej ceny PP), preukázanú dokladom o oprave alebo znaleckým posudkom. V prípade sporu o výšku škody rozhoduje nezávislý znalec zapísaný v zozname znalcov Ministerstva spravodlivosti SR; náklady posudku znáša strana, ktorej tvrdenie sa nepreukáže.</p>
+                    <p><strong className="text-white">3.</strong> Spotrebiteľ nie je zodpovedný za škodu vzniknutú bežným opotrebením alebo skrytou vadou PP existujúcou pred odovzdaním.</p>
+                    <p><strong className="text-white">4.</strong> Spotrebiteľ je povinný bezodkladne (do 4 hodín) telefonicky a následne písomne (e-mailom) nahlásiť každú poruchu, poškodenie, haváriu, odcudzenie alebo stratu PP.</p>
+                  </div>
+                </div>
+
+                {/* Section VII */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">VII.</span> Povinnosti spotrebiteľa pri užívaní PP
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> PP môže obsluhovať len Spotrebiteľ osobne alebo osoba, ktorú výslovne uviedol v Zmluve a ktorá je na obsluhu spôsobilá. Spotrebiteľ je povinný dodržiavať návod na obsluhu a bezpečnostné pokyny.</p>
+                    <p><strong className="text-white">2.</strong> Spotrebiteľ nesmie vykonávať žiadne zásahy, úpravy ani opravy PP bez písomného súhlasu Prenajímateľa. Pri poruche je povinný PP odstaviť a kontaktovať Prenajímateľa.</p>
+                    <p><strong className="text-white">3.</strong> Spotrebiteľ je povinný zabezpečiť PP proti odcudzeniu a poškodeniu: v uzamknutom priestore alebo s mechanickým zabezpečením (reťaz/zámok). Prenajímateľ nenesie zodpovednosť za škodu spôsobenú tretími osobami počas doby prenájmu.</p>
+                    <p><strong className="text-white">4.</strong> Spotrebiteľ je povinný vrátiť PP vyčistený, so všetkým príslušenstvom a dokumentáciou, v stave zodpovedajúcom primeranému opotrebeniu.</p>
+                  </div>
+                </div>
+
+                {/* Section VIII */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">VIII.</span> Povinnosti prenajímateľa
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Prenajímateľ je povinný odovzdať PP v stave spôsobilom na dohodnuté užívanie a zabezpečiť pokojné užívanie PP po celú dobu prenájmu.</p>
+                    <p><strong className="text-white">2.</strong> Prenajímateľ je povinný odstrániť vady a poruchy PP vzniknuté bežným opotrebením alebo skrytou vadou do <strong className="text-white">48 hodín</strong> od nahlásenia. Ak tak neurobí, Spotrebiteľ má právo na primeranú zľavu z nájomného za dobu, počas ktorej PP nemohol riadne užívať.</p>
+                    <p><strong className="text-white">3.</strong> Prenajímateľ zodpovedá za škodu spôsobenú Spotrebiteľovi vadou PP existujúcou v čase odovzdania, s výnimkou vád uvedených v protokole.</p>
+                  </div>
+                </div>
+
+                {/* Section IX */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">IX.</span> Reklamačné podmienky
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Spotrebiteľ má právo reklamovať vady PP bez zbytočného odkladu po ich zistení. Reklamáciu možno uplatniť:</p>
+                    <ul className="ml-6 list-disc list-inside space-y-1">
+                      <li>osobne v sídle Prenajímateľa (Recká cesta 182, Boldog)</li>
+                      <li>e-mailom na info@royalstroje.sk</li>
+                      <li>telefonicky na +421 948 555 551</li>
+                    </ul>
+                    <p><strong className="text-white">2.</strong> Prenajímateľ je povinný reklamáciu prijať a vydať o jej uplatnení písomné potvrdenie. Reklamácia bude vybavená do <strong className="text-white">30 dní</strong>; v odôvodnených prípadoch do 60 dní. O výsledku bude Spotrebiteľ písomne informovaný.</p>
+                    <p><strong className="text-white">3.</strong> Spotrebiteľ má pri oprávnenej reklamácii právo na: bezplatnú opravu alebo výmenu PP, primeranú zľavu z nájomného, alebo odstúpenie od Zmluvy s vrátením nájomného.</p>
+                    <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-4 mt-4">
+                      <p className="text-orange-primary font-semibold">! Uplatnenie reklamácie nemá vplyv na plynutie doby prenájmu ani na povinnosť vrátiť PP.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section X */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">X.</span> Ukončenie zmluvy a odstúpenie
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Spotrebiteľ môže od Zmluvy uzatvorenej na diaľku (e-mail, telefón, web) odstúpiť bez udania dôvodu do <strong className="text-white">14 dní</strong> od uzavretia Zmluvy (zákon č. 102/2014 Z. z.). Ak Spotrebiteľ výslovne požiadal o odovzdanie PP pred uplynutím 14-dňovej lehoty, má právo na odstúpenie od Zmluvy, avšak je povinný uhradiť pomernú časť nájomného za dobu od prevzatia PP do dňa oznámenia odstúpenia.</p>
+                    <p><strong className="text-white">2.</strong> Prenajímateľ môže Zmluvu ukončiť s okamžitou účinnosťou ak: Spotrebiteľ je v omeškaní s úhradou viac ako 14 dní; PP je použité v rozpore so Zmluvou; hrozí poškodenie alebo strata PP. V takom prípade musí Prenajímateľ Spotrebiteľa písomne upozorniť a poskytnúť mu primeranú lehotu na nápravu (min. 5 dní), okrem prípadu bezprostredného ohrozenia PP.</p>
+                    <p><strong className="text-white">3.</strong> Pri predčasnom ukončení Zmluvy z dôvodu na strane Prenajímateľa (nie zavinením Spotrebiteľa) má Spotrebiteľ nárok na vrátenie pomernej časti zaplateného nájomného a zálohy v plnej výške.</p>
+                  </div>
+                </div>
+
+                {/* Section XI */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">XI.</span> Vyššia moc
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Žiadna zo strán nie je v omeškaní, ak nesplnenie záväzku bolo spôsobené okolnosťami vylučujúcimi zodpovednosť (§ 374 v spojení s § 757 OZ): živelná pohroma, pandémia, vojnový stav, úradné nariadenie.</p>
+                    <p><strong className="text-white">2.</strong> Strana dovolávajúca sa vyššej moci je povinná to bezodkladne písomne oznámiť. Ak prekážka trvá viac ako 30 dní, každá strana môže Zmluvu ukončiť výpoveďou s okamžitou účinnosťou; záloha sa vráti v plnej výške.</p>
+                  </div>
+                </div>
+
+                {/* Section XII */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">XII.</span> Ochrana osobných údajov
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Prenajímateľ spracúva osobné údaje Spotrebiteľa (meno, adresa, kontaktné údaje, údaje zo Zmluvy) na účely plnenia Zmluvy (čl. 6 ods. 1 písm. b) GDPR), plnenia zákonných povinností (čl. 6 ods. 1 písm. c) GDPR) a ochrany oprávnených záujmov (čl. 6 ods. 1 písm. f) GDPR).</p>
+                    <p><strong className="text-white">2.</strong> Podrobné informácie o spracúvaní osobných údajov, právach Spotrebiteľa ako dotknutej osoby (prístup, oprava, výmaz, námietka) a kontakt na dozorný orgán (ÚOOÚ SR) sú uvedené v dokumente Informácie o spracúvaní osobných údajov dostupnom na www.royalstroje.sk.</p>
+                  </div>
+                </div>
+
+                {/* Section XIII */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">XIII.</span> Alternatívne riešenie sporov
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Spotrebiteľ má právo obrátiť sa na Prenajímateľa so žiadosťou o nápravu (info@royalstroje.sk), ak nie je spokojný s vybavením reklamácie. Ak Prenajímateľ odpovie zamietavo alebo do 30 dní neodpovie, Spotrebiteľ môže podať návrh na alternatívne riešenie sporu (ARS) k:</p>
+                    <ul className="ml-6 list-disc list-inside space-y-1">
+                      <li><strong className="text-white">Slovenská obchodná inšpekcia (SOI)</strong>, Bajkalská 21/A, 827 99 Bratislava – <a href="https://www.soi.sk" target="_blank" rel="noopener noreferrer" className="text-orange-primary hover:underline">www.soi.sk</a></li>
+                      <li>alebo inému subjektu ARS zapísanému v zozname Ministerstva hospodárstva SR – <a href="https://www.mhsr.sk" target="_blank" rel="noopener noreferrer" className="text-orange-primary hover:underline">www.mhsr.sk</a></li>
+                    </ul>
+                    <p><strong className="text-white">2.</strong> Spotrebiteľ môže využiť aj európsku platformu riešenia sporov online (ODR): <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" className="text-orange-primary hover:underline">https://ec.europa.eu/consumers/odr</a></p>
+                    <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-4 mt-4">
+                      <p className="text-orange-primary font-semibold">! Tieto práva nie sú dotknuté možnosťou Spotrebiteľa obrátiť sa na súd.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Section XIV */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-orange-primary/30 transition-all">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
+                    <span className="text-orange-primary">XIV.</span> Záverečné ustanovenia
+                  </h2>
+
+                  <div className="space-y-3 text-white/80 leading-relaxed">
+                    <p><strong className="text-white">1.</strong> Prenajímateľ nie je oprávnený jednostranne meniť VPPM-FO v neprospech Spotrebiteľa počas trvania Zmluvy. Zmeny VPPM-FO sú účinné len pre budúce zmluvy uzavreté po ich zverejnení.</p>
+                    <p><strong className="text-white">2.</strong> Ak sa niektoré ustanovenie stane neplatným alebo nevykonateľným, ostatné zostávajú v platnosti. Neplatné ustanovenie sa nahradí platnou úpravou najbližšou jeho účelu.</p>
+                    <p><strong className="text-white">3.</strong> Spotrebiteľ podpisom Zmluvy potvrdzuje, že sa s VPPM-FO oboznámil, obdržal ich v papierovej forme a porozumel im.</p>
+                    <p><strong className="text-white">4.</strong> Miestna príslušnosť súdu sa riadi všeobecne záväznými právnymi predpismi; tým nie je dotknuté právo Spotrebiteľa podať žalobu na súde podľa miesta svojho bydliska (§ 39 ods. 3 zák. č. 160/2015 Z. z. CMP).</p>
+                    <p><strong className="text-white">5.</strong> Tieto VPPM-FO sa spravujú právom Slovenskej republiky. Zákon č. 40/1964 Zb. Občiansky zákonník, zákon č. 250/2007 Z. z. a zákon č. 102/2014 Z. z. majú prednosť pred týmito podmienkami.</p>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Footer */}
+              <div className="text-center mt-12 pt-8 border-t border-white/10">
+                <p className="text-white/50 text-sm">
+                  ROYAL STROJE s.r.o. | Verzia VPPM-FO 2026.01 | Platné od 01.02.2026 | www.royalstroje.sk
+                </p>
+                <p className="text-white/40 text-xs mt-2">
+                  Recká cesta 182, 925 26 Boldog – Senec | IČO: 57 405 425 | info@royalstroje.sk
+                </p>
+              </div>
+            </>
+          )}
 
         </div>
       </section>

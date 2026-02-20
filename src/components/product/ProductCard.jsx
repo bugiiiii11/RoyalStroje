@@ -2,10 +2,19 @@ import { ShoppingCart, ChevronRight, ChevronLeft, X, Phone, Check } from 'lucide
 import { useState } from 'react';
 import { useCart } from '../../context/CartContext';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, customerType = 'po' }) {
   const [showSpecs, setShowSpecs] = useState(false);
   const { addToCart, isInCart } = useCart();
   const inCart = isInCart(product.id);
+
+  // Calculate price based on customer type
+  const displayPrice = customerType === 'po'
+    ? product.pricePerDay
+    : (product.pricePerDay * 1.2);
+
+  // Check if price is valid
+  const hasValidPrice = product.pricePerDay && !isNaN(product.pricePerDay);
+  const priceLabel = customerType === 'po' ? 'bez DPH /deň' : 's DPH /deň';
 
   return (
     <>
@@ -37,9 +46,15 @@ export default function ProductCard({ product }) {
 
           {/* Price Badge - Bottom Right */}
           <div className="absolute bottom-3 right-3 bg-zinc-900/95 border border-orange-primary/40 backdrop-blur-md rounded-lg px-3 py-2 shadow-lg shadow-black/50" style={{ zIndex: 2 }}>
-            <div className="flex flex-col items-start">
-              <span className="text-orange-primary text-2xl font-black leading-none">{(product.pricePerDay * 1.2).toFixed(2)}€</span>
-              <span className="text-white/50 text-[10px] font-medium mt-0.5">s DPH /deň</span>
+            <div className="flex flex-col items-end">
+              {hasValidPrice ? (
+                <>
+                  <span className="text-orange-primary text-2xl font-black leading-none">{displayPrice.toFixed(2)}€</span>
+                  <span className="text-white/50 text-[10px] font-medium mt-0.5">{priceLabel}</span>
+                </>
+              ) : (
+                <span className="text-orange-primary text-sm font-black leading-tight text-right whitespace-nowrap">Cena dohodou</span>
+              )}
             </div>
           </div>
         </div>
@@ -161,16 +176,24 @@ export default function ProductCard({ product }) {
               )}
 
               {/* Prices */}
-              <div className="mb-4 sm:mb-6 space-y-2 sm:space-y-3">
-                <div className="flex justify-between items-center bg-zinc-800 border border-white/10 rounded-lg p-3 sm:p-4">
-                  <span className="text-white/70 font-medium text-sm sm:text-base">Cena bez DPH</span>
-                  <span className="text-white text-lg sm:text-xl font-black">{product.pricePerDay}€ /deň</span>
+              {hasValidPrice ? (
+                <div className="mb-4 sm:mb-6 space-y-2 sm:space-y-3">
+                  <div className="flex justify-between items-center bg-zinc-800 border border-white/10 rounded-lg p-3 sm:p-4">
+                    <span className="text-white/70 font-medium text-sm sm:text-base">Cena bez DPH</span>
+                    <span className="text-white text-lg sm:text-xl font-black">{product.pricePerDay.toFixed(2)}€ /deň</span>
+                  </div>
+                  <div className="flex justify-between items-center bg-orange-primary/10 border border-orange-primary/30 rounded-lg p-3 sm:p-4">
+                    <span className="text-orange-primary/80 font-medium text-sm sm:text-base">Cena s DPH</span>
+                    <span className="text-orange-primary text-lg sm:text-xl font-black">{(product.pricePerDay * 1.2).toFixed(2)}€ /deň</span>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center bg-orange-primary/10 border border-orange-primary/30 rounded-lg p-3 sm:p-4">
-                  <span className="text-orange-primary/80 font-medium text-sm sm:text-base">Cena s DPH</span>
-                  <span className="text-orange-primary text-lg sm:text-xl font-black">{(product.pricePerDay * 1.2).toFixed(2)}€ /deň</span>
+              ) : (
+                <div className="mb-4 sm:mb-6">
+                  <div className="flex justify-center items-center bg-orange-primary/10 border border-orange-primary/30 rounded-lg p-4 sm:p-6">
+                    <span className="text-orange-primary text-xl sm:text-2xl font-black">Cena dohodou</span>
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Reserve Button */}
               <a
