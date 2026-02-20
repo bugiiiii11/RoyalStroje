@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import {
-  ShoppingCart, X, Send, Calendar, Phone,
+  ShoppingCart, X, Send, Calendar,
   Hammer, Cog, HardHat, ArrowUpFromLine,
   Container, Car, TreePine, Building2, User, Search
 } from 'lucide-react';
 import { categories } from '../../data/categories';
-import { getProductsBySubcategory } from '../../data/products';
+import { getProductsBySubcategory, products } from '../../data/products';
 import ProductCard from '../product/ProductCard';
 import { useCart } from '../../context/CartContext';
+import FAQ from './FAQ';
 
 // Ikony pre jednotlivé kategórie
 const categoryIcons = {
@@ -114,19 +115,27 @@ export default function Catalog() {
     window.open(whatsappUrl, '_blank');
   };
 
+  // Helper function to remove diacritics (accents)
+  const removeDiacritics = (str) => {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  };
+
   // Get current category data
   const currentCategory = categories.find(cat => cat.id === activeCategory);
 
   // Get filtered products
-  let allProducts = getProductsBySubcategory(activeCategory, activeSubcategory);
-
-  // Apply search filter
+  let allProducts;
   if (searchQuery.trim()) {
-    const query = searchQuery.toLowerCase();
-    allProducts = allProducts.filter(product =>
-      product.name.toLowerCase().includes(query) ||
-      product.description.toLowerCase().includes(query)
-    );
+    // Search across all products when search query is active
+    const query = removeDiacritics(searchQuery.toLowerCase());
+    allProducts = products.filter(product => {
+      const name = removeDiacritics(product.name.toLowerCase());
+      const description = removeDiacritics(product.description.toLowerCase());
+      return name.includes(query) || description.includes(query);
+    });
+  } else {
+    // Normal category/subcategory filtering when no search
+    allProducts = getProductsBySubcategory(activeCategory, activeSubcategory);
   }
 
   // Calculate pagination
@@ -150,84 +159,27 @@ export default function Catalog() {
 
   return (
     <section id="katalog" className="relative py-12 md:py-16 bg-zinc-950 overflow-hidden">
-      {/* Radial gradient overlay - wider spread */}
+      {/* Radial gradient overlay */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
+          background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.5) 0%, rgba(9, 9, 11, 1) 75%)'
         }}
       />
-
-      {/* Orange accent glow - top right (animated) */}
-      <div
-        className="absolute pointer-events-none z-0"
-        style={{
-          top: '10%',
-          right: '10%',
-          width: '500px',
-          height: '500px',
-          background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 40%, transparent 70%)',
-          filter: 'blur(80px)',
-          opacity: 0.2,
-          animation: 'floatGlow1 8s ease-in-out infinite'
-        }}
-      />
-
-      {/* Orange accent glow - bottom left (animated) */}
-      <div
-        className="absolute pointer-events-none z-0"
-        style={{
-          bottom: '10%',
-          left: '10%',
-          width: '450px',
-          height: '450px',
-          background: 'radial-gradient(circle, rgba(255,102,0,0.35) 0%, rgba(255,102,0,0.1) 40%, transparent 70%)',
-          filter: 'blur(70px)',
-          opacity: 0.15,
-          animation: 'floatGlow2 10s ease-in-out infinite'
-        }}
-      />
-
-      {/* Animation keyframes */}
-      <style>{`
-        @keyframes floatGlow1 {
-          0%, 100% {
-            transform: translateY(0) scale(1);
-            opacity: 0.2;
-          }
-          50% {
-            transform: translateY(-30px) scale(1.15);
-            opacity: 0.25;
-          }
-        }
-
-        @keyframes floatGlow2 {
-          0%, 100% {
-            transform: translateY(0) scale(1);
-            opacity: 0.15;
-          }
-          50% {
-            transform: translateY(30px) scale(1.2);
-            opacity: 0.2;
-          }
-        }
-      `}</style>
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-        {/* Compact Header */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mb-8">
-          {/* Title */}
-          <div className="text-center lg:text-left">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-2">
-              <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
-            </h2>
-            <p className="text-white/70 text-sm md:text-base">
-              Od malého náradia po ťažkú techniku - všetko na jednom mieste
-            </p>
-          </div>
+        {/* Centered Header */}
+        <div className="text-center mb-8">
+          {/* Title and Subtitle */}
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+            <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
+          </h2>
+          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto mb-6">
+            Objavte našu širokú ponuku profesionálneho vybavenia - od malého náradia po ťažkú techniku. Nájdite všetko potrebné pre váš projekt na jednom mieste.
+          </p>
 
-          {/* Customer Type Selector & Search */}
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+          {/* Customer Type Selector & Search - Centered Row */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {/* Customer Type Selector */}
             <div className="inline-flex bg-zinc-900 border border-white/10 rounded-2xl p-1.5 gap-1.5">
               <button
@@ -355,7 +307,7 @@ export default function Catalog() {
               {/* Header */}
               <div className="bg-zinc-800 border-b border-white/10 px-4 py-3 flex items-center gap-2">
                 <ShoppingCart size={18} className="text-orange-primary" />
-                <h3 className="text-white font-bold text-sm">Košík</h3>
+                <h3 className="text-white font-bold text-sm">Nezáväzná objednávka</h3>
                 {cartItems.length > 0 && (
                   <span className="ml-auto bg-orange-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
                     {cartItems.length}
@@ -557,10 +509,6 @@ export default function Catalog() {
                           background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, transparent 100%)',
                         }}
                       />
-                      {/* Active indicator dot */}
-                      {isActive && (
-                        <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full shadow-lg shadow-white/50" />
-                      )}
                       <span className="relative z-10">{subcategory.name}</span>
                     </button>
                   );
@@ -653,87 +601,9 @@ export default function Catalog() {
         </div>
         </div>
 
-        {/* Customer Journey Section */}
-        <div className="mt-16 mb-16">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-              Ako funguje <span className="text-orange-primary">prenájom</span>?
-            </h2>
-            <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
-              Prenajať si profesionálnu techniku je jednoduché. Stačí dodržať tri kroky a môžete začať pracovať.
-            </p>
-          </div>
+        {/* FAQ Section - Integrated */}
+        <FAQ />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Step 1 */}
-            <div className="relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all group">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-2xl bg-orange-primary/20 border-2 border-orange-primary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="text-orange-primary font-black text-2xl">1</span>
-                </div>
-                <h3 className="text-white font-black text-lg mb-3">Vyberte produkty</h3>
-                <p className="text-white/70 text-sm leading-relaxed">
-                  Prejdite si naše kategórie, vyberte si požadované náradie alebo techniku a pridajte položky do košíka
-                </p>
-              </div>
-              {/* Arrow connector - hidden on mobile */}
-              <div className="hidden md:block absolute top-1/2 -right-6 -translate-y-1/2 text-orange-primary/40">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </div>
-
-            {/* Step 2 */}
-            <div className="relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all group">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-2xl bg-orange-primary/20 border-2 border-orange-primary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="text-orange-primary font-black text-2xl">2</span>
-                </div>
-                <h3 className="text-white font-black text-lg mb-3">Zvoľte dni prenájmu</h3>
-                <p className="text-white/70 text-sm leading-relaxed">
-                  V kalendári označte dni, počas ktorých budete techniku potrebovať. Cena sa automaticky prepočíta
-                </p>
-              </div>
-              {/* Arrow connector - hidden on mobile */}
-              <div className="hidden md:block absolute top-1/2 -right-6 -translate-y-1/2 text-orange-primary/40">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all group">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-2xl bg-orange-primary/20 border-2 border-orange-primary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <span className="text-orange-primary font-black text-2xl">3</span>
-                </div>
-                <h3 className="text-white font-black text-lg mb-3">Pošlite objednávku</h3>
-                <p className="text-white/70 text-sm leading-relaxed">
-                  Kliknite na tlačidlo a objednávka sa automaticky odošle cez WhatsApp. Potvrdíme dostupnosť a dohodneme si prevzatie
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Section - Integrated */}
-        <div className="mt-16 text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-            Potrebujete poradiť s výberom?
-          </h2>
-          <p className="text-white/70 text-lg mb-8 leading-relaxed">
-            Neviete, aké náradie potrebujete pre vašu prácu? Zavolajte nám a náš tím vám ochotne poradí s výberom tej správnej techniky.
-          </p>
-          <a
-            href="tel:+421948555551"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
-          >
-            <Phone size={20} />
-            <span>Zavolať teraz: 0948 555 551</span>
-          </a>
-        </div>
       </div>
     </section>
   );

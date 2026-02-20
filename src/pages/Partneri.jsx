@@ -5,9 +5,9 @@ export default function Partneri() {
   const partners = [
     {
       id: 1,
-      name: 'Partner Firma 1',
-      logo: '/placeholder-logo.png',
-      website: 'https://example.com',
+      name: 'M & M WOOD',
+      logo: '/logoMMwood.png',
+      website: 'https://www.mmwood.sk/',
     },
     {
       id: 2,
@@ -160,9 +160,13 @@ export default function Partneri() {
                 rel="noopener noreferrer"
                 className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[180px]"
               >
-                {/* Logo Placeholder */}
-                <div className="w-20 h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-orange-primary/30 transition-all">
-                  <div className="text-white/40 text-xs font-bold">LOGO</div>
+                {/* Logo */}
+                <div className="w-20 h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-orange-primary/30 transition-all overflow-hidden">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="w-full h-full object-contain p-2"
+                  />
                 </div>
 
                 {/* Company Name */}
