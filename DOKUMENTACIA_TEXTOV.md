@@ -255,7 +255,7 @@
 | Typ elementu | Tag | Text |
 |--------------|-----|------|
 | **Nadpis (H3)** | `<h3>` | `O nás` |
-| **Odsek 1** | `<p>` | `ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2015. Špecializujeme sa na prenájom kvalitného náradia pre stavebné firmy, remeselníkov aj súkromné osoby.` |
+| **Odsek 1** | `<p>` | `ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2026. Špecializujeme sa na prenájom kvalitného náradia pre stavebné firmy, remeselníkov aj súkromné osoby.` |
 | **Odsek 2** | `<p>` | `Naša firma ponúka nielen požičovňu náradia, ale aj komplexné služby v oblasti zemných a búracích prác. Disponujeme vlastnou strojovou technikou a skúseným tímom strojníkov.` |
 | **Podnadpis (H4)** | `<h4>` | `Hodnoty, ktorými sa riadime:` |
 

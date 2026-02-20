@@ -54,7 +54,7 @@ export default function Kontakt() {
               Sme tu pre vás. Zavolajte, napíšte email alebo nás navštívte v našej prevádzke v Senci.
             </p>
             <p className="text-base md:text-lg text-white/80 leading-relaxed">
-              ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2015.
+              ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2026.
             </p>
           </div>
         </div>
@@ -197,7 +197,7 @@ export default function Kontakt() {
                   <p><strong className="text-white">Sídlo:</strong> 182, Boldog 92526</p>
                   <p><strong className="text-white">IČO:</strong> 57 405 425</p>
                   <p><strong className="text-white">DIČ:</strong> 2122722063</p>
-                  <p><strong className="text-white">Zastúpený:</strong> Peter Krivosudký</p>
+                  <p><strong className="text-white">Zastúpený:</strong> Peter Krivosudský</p>
                 </div>
               </div>
 
@@ -205,7 +205,7 @@ export default function Kontakt() {
               <div className="bg-zinc-950/50 rounded-xl p-6 border border-white/5">
                 <h3 className="text-white font-bold text-lg mb-3">O nás</h3>
                 <p className="text-white/70 leading-relaxed">
-                  ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2015. Ponúkame prenájom kvalitného náradia aj komplexné služby v oblasti zemných a búracích prác.
+                  ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2026. Ponúkame prenájom kvalitného náradia aj komplexné služby v oblasti zemných a búracích prác.
                 </p>
               </div>
             </div>
