@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   ShoppingCart, X, Send, Calendar, Phone,
   Hammer, Cog, HardHat, ArrowUpFromLine,
-  Container, Car, TreePine, Building2, User
+  Container, Car, TreePine, Building2, User, Search
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { getProductsBySubcategory } from '../../data/products';
@@ -26,6 +26,7 @@ export default function Catalog() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDays, setSelectedDays] = useState([]);
   const [customerType, setCustomerType] = useState('po'); // 'po' or 'fo'
+  const [searchQuery, setSearchQuery] = useState('');
   const productsPerPage = 8;
   const { cartItems, removeFromCart, getTotal } = useCart();
 
@@ -117,7 +118,16 @@ export default function Catalog() {
   const currentCategory = categories.find(cat => cat.id === activeCategory);
 
   // Get filtered products
-  const allProducts = getProductsBySubcategory(activeCategory, activeSubcategory);
+  let allProducts = getProductsBySubcategory(activeCategory, activeSubcategory);
+
+  // Apply search filter
+  if (searchQuery.trim()) {
+    const query = searchQuery.toLowerCase();
+    allProducts = allProducts.filter(product =>
+      product.name.toLowerCase().includes(query) ||
+      product.description.toLowerCase().includes(query)
+    );
+  }
 
   // Calculate pagination
   const totalPages = Math.ceil(allProducts.length / productsPerPage);
@@ -204,49 +214,78 @@ export default function Catalog() {
       `}</style>
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-        {/* Section Header - outside the container, on grid background */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
-            Vyberte si z našej{' '}
-            <span className="text-orange-primary">širokej ponuky</span>
-          </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-3xl mx-auto">
-            Profesionálna technika pre každý typ práce - od malého náradia po ťažkú techniku.
-          </p>
-        </div>
+        {/* Compact Header */}
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mb-8">
+          {/* Title */}
+          <div className="text-center lg:text-left">
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-2">
+              <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
+            </h2>
+            <p className="text-white/70 text-sm md:text-base">
+              Od malého náradia po ťažkú techniku - všetko na jednom mieste
+            </p>
+          </div>
 
-        {/* Customer Type Selector */}
-        <div className="flex justify-center mb-8">
-          <div className="inline-flex bg-zinc-900 border border-white/10 rounded-2xl p-2 gap-2">
-            <button
-              onClick={() => setCustomerType('po')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
-                customerType === 'po'
-                  ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
-                  : 'text-white/60 hover:text-white/80'
-              }`}
-            >
-              <Building2 size={20} />
-              <span>Právnické osoby</span>
-            </button>
-            <button
-              onClick={() => setCustomerType('fo')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${
-                customerType === 'fo'
-                  ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
-                  : 'text-white/60 hover:text-white/80'
-              }`}
-            >
-              <User size={20} />
-              <span>Fyzické osoby</span>
-            </button>
+          {/* Customer Type Selector & Search */}
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            {/* Customer Type Selector */}
+            <div className="inline-flex bg-zinc-900 border border-white/10 rounded-2xl p-1.5 gap-1.5">
+              <button
+                onClick={() => setCustomerType('po')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all ${
+                  customerType === 'po'
+                    ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
+                    : 'text-white/60 hover:text-white/80'
+                }`}
+              >
+                <Building2 size={16} />
+                <span className="hidden sm:inline">Právnické osoby</span>
+                <span className="sm:hidden">PO</span>
+              </button>
+              <button
+                onClick={() => setCustomerType('fo')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all ${
+                  customerType === 'fo'
+                    ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
+                    : 'text-white/60 hover:text-white/80'
+                }`}
+              >
+                <User size={16} />
+                <span className="hidden sm:inline">Fyzické osoby</span>
+                <span className="sm:hidden">FO</span>
+              </button>
+            </div>
+
+            {/* Search Bar */}
+            <div className="relative w-full sm:w-80">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" size={16} />
+              <input
+                type="text"
+                placeholder="Hľadať produkty..."
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="w-full bg-zinc-900 border border-white/10 rounded-xl pl-10 pr-10 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => {
+                    setSearchQuery('');
+                    setCurrentPage(1);
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                >
+                  <X size={14} />
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Main Container with Frame */}
-        <div className="relative bg-zinc-950/80 backdrop-blur-sm border-2 border-orange-primary/60 rounded-3xl p-6 md:p-10 lg:p-12 shadow-[0_0_40px_rgba(255,102,0,0.15)]">
-          {/* Subtle glow effect */}
-          <div className="absolute -inset-px bg-gradient-to-b from-orange-primary/10 via-transparent to-orange-primary/5 rounded-3xl pointer-events-none"></div>
+        {/* Main Content - No frame */}
+        <div className="relative">
 
         {/* Main Catalog Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
@@ -590,15 +629,93 @@ export default function Catalog() {
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">🔍</div>
                 <h3 className="text-xl font-bold text-white mb-2">
-                  Žiadne produkty
+                  {searchQuery ? 'Nenašli sa žiadne výsledky' : 'Žiadne produkty'}
                 </h3>
                 <p className="text-white/70">
-                  V tejto kategórii momentálne nie sú dostupné žiadne produkty.
+                  {searchQuery
+                    ? `Skúste hľadať iný výraz alebo upravte filter kategórií`
+                    : 'V tejto kategórii momentálne nie sú dostupné žiadne produkty.'}
                 </p>
+                {searchQuery && (
+                  <button
+                    onClick={() => {
+                      setSearchQuery('');
+                      setCurrentPage(1);
+                    }}
+                    className="mt-4 px-6 py-2 bg-orange-primary/20 border border-orange-primary/40 text-orange-primary rounded-full font-bold hover:bg-orange-primary/30 transition-all"
+                  >
+                    Vymazať vyhľadávanie
+                  </button>
+                )}
               </div>
             )}
           </div>
         </div>
+        </div>
+
+        {/* Customer Journey Section */}
+        <div className="mt-16 mb-16">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+              Ako funguje <span className="text-orange-primary">prenájom</span>?
+            </h2>
+            <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+              Prenajať si profesionálnu techniku je jednoduché. Stačí dodržať tri kroky a môžete začať pracovať.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Step 1 */}
+            <div className="relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all group">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-2xl bg-orange-primary/20 border-2 border-orange-primary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <span className="text-orange-primary font-black text-2xl">1</span>
+                </div>
+                <h3 className="text-white font-black text-lg mb-3">Vyberte produkty</h3>
+                <p className="text-white/70 text-sm leading-relaxed">
+                  Prejdite si naše kategórie, vyberte si požadované náradie alebo techniku a pridajte položky do košíka
+                </p>
+              </div>
+              {/* Arrow connector - hidden on mobile */}
+              <div className="hidden md:block absolute top-1/2 -right-6 -translate-y-1/2 text-orange-primary/40">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all group">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-2xl bg-orange-primary/20 border-2 border-orange-primary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <span className="text-orange-primary font-black text-2xl">2</span>
+                </div>
+                <h3 className="text-white font-black text-lg mb-3">Zvoľte dni prenájmu</h3>
+                <p className="text-white/70 text-sm leading-relaxed">
+                  V kalendári označte dni, počas ktorých budete techniku potrebovať. Cena sa automaticky prepočíta
+                </p>
+              </div>
+              {/* Arrow connector - hidden on mobile */}
+              <div className="hidden md:block absolute top-1/2 -right-6 -translate-y-1/2 text-orange-primary/40">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all group">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-2xl bg-orange-primary/20 border-2 border-orange-primary/40 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <span className="text-orange-primary font-black text-2xl">3</span>
+                </div>
+                <h3 className="text-white font-black text-lg mb-3">Pošlite objednávku</h3>
+                <p className="text-white/70 text-sm leading-relaxed">
+                  Kliknite na tlačidlo a objednávka sa automaticky odošle cez WhatsApp. Potvrdíme dostupnosť a dohodneme si prevzatie
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* CTA Section - Integrated */}
