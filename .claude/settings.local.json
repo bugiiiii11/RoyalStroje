@@ -16,7 +16,11 @@
       "Bash(git push:*)",
       "Bash(npm run build:*)",
       "Bash({)",
-      "Bash(head -n -1 tail -n +2831 blogArticles.jsx })"
+      "Bash(head -n -1 tail -n +2831 blogArticles.jsx })",
+      "Bash(node analyze-categories.js:*)",
+      "Bash(node analyze-categories-v2.js:*)",
+      "Bash(node fix-png-structure.js:*)",
+      "Bash(node generate-products-final.js:*)"
     ]
   }
 }

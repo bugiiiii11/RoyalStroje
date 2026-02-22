@@ -1,6 +1,6 @@
 // Produkty pre Royal Stroje požičovňu
 // Automaticky vygenerované z CSV súboru
-// Vygenerované: 22. 2. 2026 11:00:39
+// Vygenerované: 22. 2. 2026 10:49:40
 
 export const products = [
   // ========== MALÉ NÁRADIE ==========
@@ -293,7 +293,7 @@ export const products = [
     isPopular: false,
   },
   {
-    id: 'custers-2',
+    id: 'custers',
     name: 'Custers',
     category: 'male-naradie',
     subcategory: 'lesenie',

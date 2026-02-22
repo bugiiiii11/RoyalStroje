@@ -1,5 +1,4 @@
 // Kategórie pre Royal Stroje požičovňu
-// Aktualizované: 22.2.2026
 
 export const categories = [
   {
@@ -9,15 +8,15 @@ export const categories = [
     description: 'Ručné náradie, vŕtačky, brúsky, píly, vysávače, čerpadlá, meracia technika',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
-      { id: 'vrtacie-buracie-kladiva-a-vrtacky', name: 'vŕtacie, búracie kladivá a vŕtačky', slug: 'vrtacie-buracie-kladiva-a-vrtacky' },
-      { id: 'uhlove-vibracne-a-pasove-brusky', name: 'uhlové, vibračné a pásové brúsky', slug: 'uhlove-vibracne-a-pasove-brusky' },
-      { id: 'rucne-pily-a-rezacky', name: 'ručné píly a rezačky', slug: 'rucne-pily-a-rezacky' },
+      { id: 'vrtacie-buracie-kladiva-a-vrtacky', name: 'Vŕtacie búracie kladivá a vŕtačky', slug: 'vrtacie-buracie-kladiva-a-vrtacky' },
+      { id: 'uhlove-vibracne-a-pasove-brusky', name: 'Uhlové, vibračné a pásové brúsky', slug: 'uhlove-vibracne-a-pasove-brusky' },
+      { id: 'rucne-pily-a-rezacky', name: 'Ručné píly a rezačky', slug: 'rucne-pily-a-rezacky' },
+      { id: 'nadrze-na-vodu-a-naftu', name: 'Nádrže na vodu a naftu', slug: 'nadrze-na-vodu-a-naftu' },
       { id: 'vysavace-tepovace-a-tlakove-cistice', name: 'Vysávače, tepovače a tlakové čističe', slug: 'vysavace-tepovace-a-tlakove-cistice' },
       { id: 'cerpadla-ohrievace-a-odvlhcovace', name: 'Čerpadlá, ohrievače a odvlhčovače', slug: 'cerpadla-ohrievace-a-odvlhcovace' },
       { id: 'zvaracia-a-meracia-technika', name: 'Zváracia a meracia technika', slug: 'zvaracia-a-meracia-technika' },
       { id: 'vibratory-vibracne-listy-a-miesadla', name: 'Vibrátory, vibračné lišty a miešadlá', slug: 'vibratory-vibracne-listy-a-miesadla' },
       { id: 'lesenie', name: 'Lešenie', slug: 'lesenie' },
-      { id: 'nadrze-na-vodu-a-naftu', name: 'Nádrže na vodu a naftu', slug: 'nadrze-na-vodu-a-naftu' },
     ]
   },
   {
@@ -46,11 +45,11 @@ export const categories = [
       { id: 'all', name: 'Všetko', slug: 'all' },
       { id: 'pasove-mini-rypadla', name: 'Pásové mini-rýpadlá', slug: 'pasove-mini-rypadla' },
       { id: 'pasove-tazke-rypadla', name: 'Pásové ťažké rýpadlá', slug: 'pasove-tazke-rypadla' },
-      { id: 'kolesove-rypadla-a-nakladace', name: 'Kolesové rýpadlá a nakladače', slug: 'kolesove-rypadla-a-nakladace' },
-      { id: 'smykom-riadene-nakladace', name: 'Šmykom riadené nakladače', slug: 'smykom-riadene-nakladace' },
+      { id: 'kolesove-rypadla', name: 'Kolesové rýpadlá a nakladače', slug: 'kolesove-rypadla' },
+      { id: 'smykom-riadene', name: 'Šmykom riadené nakladače', slug: 'smykom-riadene' },
       { id: 'dumpre', name: 'Dumpre', slug: 'dumpre' },
       { id: 'valce', name: 'Valce', slug: 'valce' },
-      { id: 'manipulatory-a-vysokozdvizne-voziky', name: 'Manipulátory a vysokozdvižné vozíky', slug: 'manipulatory-a-vysokozdvizne-voziky' },
+      { id: 'manipulatory', name: 'Manipulátory a vysokozdvižné vozíky', slug: 'manipulatory' },
     ]
   },
   {
@@ -60,8 +59,8 @@ export const categories = [
     description: 'Interiérové a exteriérové plošiny pre prácu vo výške',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
-      { id: 'interierove', name: 'Interiérové', slug: 'interierove' },
-      { id: 'exterierove', name: 'Exteriérové', slug: 'exterierove' },
+      { id: 'interierove', name: 'Interiérové plošiny', slug: 'interierove' },
+      { id: 'exterierove', name: 'Exteriérové plošiny', slug: 'exterierove' },
     ]
   },
   {
@@ -71,11 +70,11 @@ export const categories = [
     description: 'Kontajnery, vrátnice, oplotenie, zábrany, mobilné toalety',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
-      { id: 'kancelarske-kontajnery-a-vratnice', name: 'Kancelárske kontajnery a vrátnice', slug: 'kancelarske-kontajnery-a-vratnice' },
+      { id: 'kancelarske-kontajnery', name: 'Kancelárske kontajnery a vrátnice', slug: 'kancelarske-kontajnery' },
       { id: 'skladove-kontajnery', name: 'Skladové kontajnery', slug: 'skladove-kontajnery' },
       { id: 'sanitarne-kontajnery', name: 'Sanitárne kontajnery', slug: 'sanitarne-kontajnery' },
-      { id: 'mobilne-oplotenia-a-zabrany', name: 'Mobilné oplotenia a zábrany', slug: 'mobilne-oplotenia-a-zabrany' },
-      { id: 'mobilne-toalety', name: 'Mobilné toalety', slug: 'mobilne-toalety' },
+      { id: 'oplotenie', name: 'Mobilné oplotenie a zábrany', slug: 'oplotenie' },
+      { id: 'toalety', name: 'Mobilné toalety', slug: 'toalety' },
     ]
   },
   {
@@ -85,7 +84,7 @@ export const categories = [
     description: 'Autá, dodávky a prívesné vozíky na prepravu techniky',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
-      { id: 'auta-a-dodavky', name: 'Autá a dodávky', slug: 'auta-a-dodavky' },
+      { id: 'auta-dodavky', name: 'Autá a dodávky', slug: 'auta-dodavky' },
       { id: 'privesne-voziky', name: 'Prívesné vozíky', slug: 'privesne-voziky' },
     ]
   },
@@ -93,11 +92,15 @@ export const categories = [
     id: 'zahradna-technika',
     name: 'Záhradná technika',
     slug: 'zahradna-technika',
-    description: 'Kosačky, krovinorezy a motorové píly',
+    description: 'Kosačky, krovinorezy, fukovače, vertikutátory a ďalšia záhradná technika',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
-      { id: 'kosacky-na-travu', name: 'Kosačky na trávu', slug: 'kosacky-na-travu' },
-      { id: 'krovinorezy-a-motorove-pily', name: 'Krovinorezy a motorové píly', slug: 'krovinorezy-a-motorove-pily' },
+      { id: 'kosacky', name: 'Kosačky na trávu', slug: 'kosacky' },
+      { id: 'krovinorezy', name: 'Krovinorezy a motorové píly', slug: 'krovinorezy' },
+      { id: 'fukovace', name: 'Fukovače a vysávače lístia', slug: 'fukovace' },
+      { id: 'vertikutatory', name: 'Vertikutátory a prevzdušňovače', slug: 'vertikutatory' },
+      { id: 'drvice', name: 'Drviče konárov a vetiev', slug: 'drvice' },
+      { id: 'kultivacie', name: 'Kultivácie a rotavátory', slug: 'kultivacie' },
     ]
   },
 ];
