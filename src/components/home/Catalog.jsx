@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   ShoppingCart, X, Send, Calendar,
   Hammer, Cog, HardHat, ArrowUpFromLine,
-  Container, Car, TreePine, Building2, User, Search
+  Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { getProductsBySubcategory, products } from '../../data/products';
@@ -28,7 +28,11 @@ export default function Catalog() {
   const [selectedDays, setSelectedDays] = useState([]);
   const [customerType, setCustomerType] = useState('po'); // 'po' or 'fo'
   const [searchQuery, setSearchQuery] = useState('');
-  const productsPerPage = 8;
+
+  // Mobile: 6 products, Desktop: 12 products
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const productsPerPage = isMobile ? 6 : 12;
+
   const { cartItems, removeFromCart, getTotal } = useCart();
 
   // Generate calendar days starting from today, aligned to week grid
@@ -158,7 +162,7 @@ export default function Catalog() {
   };
 
   return (
-    <section id="katalog" className="relative py-12 md:py-16 bg-zinc-950 overflow-hidden">
+    <section id="katalog" className="relative pt-6 pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
       {/* Radial gradient overlay */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
@@ -169,40 +173,40 @@ export default function Catalog() {
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Centered Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6 md:mb-8">
           {/* Title and Subtitle */}
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+          <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
             <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
-          </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto mb-6">
+          </h1>
+          <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-4 md:mb-6">
             Objavte našu širokú ponuku profesionálneho vybavenia - od malého náradia po ťažkú techniku - všetko na jednom mieste.
           </p>
 
           {/* Customer Type Selector & Search - Centered Row */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4">
             {/* Customer Type Selector */}
-            <div className="inline-flex bg-zinc-900 border border-white/10 rounded-2xl p-1.5 gap-1.5">
+            <div className="inline-flex bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-1 md:p-1.5 gap-1 md:gap-1.5">
               <button
                 onClick={() => setCustomerType('po')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all ${
+                className={`flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl font-bold text-xs md:text-sm transition-all ${
                   customerType === 'po'
                     ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
                     : 'text-white/60 hover:text-white/80'
                 }`}
               >
-                <Building2 size={16} />
+                <Building2 size={14} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline">Právnické osoby</span>
                 <span className="sm:hidden">PO</span>
               </button>
               <button
                 onClick={() => setCustomerType('fo')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all ${
+                className={`flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl font-bold text-xs md:text-sm transition-all ${
                   customerType === 'fo'
                     ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
                     : 'text-white/60 hover:text-white/80'
                 }`}
               >
-                <User size={16} />
+                <User size={14} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline">Fyzické osoby</span>
                 <span className="sm:hidden">FO</span>
               </button>
@@ -210,7 +214,7 @@ export default function Catalog() {
 
             {/* Search Bar */}
             <div className="relative w-full sm:w-80">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" size={16} />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" size={14} />
               <input
                 type="text"
                 placeholder="Hľadať produkty..."
@@ -219,7 +223,7 @@ export default function Catalog() {
                   setSearchQuery(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full bg-zinc-900 border border-white/10 rounded-xl pl-10 pr-10 py-2.5 text-sm text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+                className="w-full bg-zinc-900 border border-white/10 rounded-lg md:rounded-xl pl-9 md:pl-10 pr-9 md:pr-10 py-2 md:py-2.5 text-xs md:text-sm text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
               />
               {searchQuery && (
                 <button
@@ -229,7 +233,7 @@ export default function Catalog() {
                   }}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
                 >
-                  <X size={14} />
+                  <X size={12} className="md:w-3.5 md:h-3.5" />
                 </button>
               )}
             </div>
@@ -243,11 +247,11 @@ export default function Catalog() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Sidebar - Categories */}
           <aside className="lg:w-80 flex-shrink-0">
-            <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 sticky top-24">
-              <h3 className="text-white font-black text-lg uppercase tracking-wide mb-6 px-2">
+            <div className="bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 sticky top-24">
+              <h3 className="text-white font-black text-sm md:text-lg uppercase tracking-wide mb-3 md:mb-6 px-1 md:px-2">
                 Kategórie
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-1.5 md:space-y-3">
                 {categories.map((category) => {
                   const IconComponent = categoryIcons[category.id];
                   const isActive = activeCategory === category.id;
@@ -256,23 +260,23 @@ export default function Catalog() {
                     <button
                       key={category.id}
                       onClick={() => handleCategoryChange(category.id)}
-                      className={`group w-full text-left px-4 py-3.5 rounded-xl font-bold transition-all duration-300 ${
+                      className={`group w-full text-left px-2 py-2 md:px-4 md:py-3.5 rounded-lg md:rounded-xl font-bold transition-all duration-300 ${
                         isActive
                           ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg shadow-orange-primary/40'
                           : 'bg-zinc-800/50 text-white/80 hover:bg-zinc-800 hover:text-white border border-transparent hover:border-orange-primary/30'
                       }`}
                     >
-                      <div className="flex items-center gap-3 relative">
+                      <div className="flex items-center gap-2 md:gap-3 relative">
                         {/* Icon Container */}
-                        <div className={`relative flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                        <div className={`relative flex-shrink-0 w-7 h-7 md:w-10 md:h-10 rounded-md md:rounded-lg flex items-center justify-center transition-all duration-300 ${
                           isActive
                             ? 'bg-white/20'
                             : 'bg-zinc-700/50 group-hover:bg-orange-primary/20'
                         }`}>
                           {IconComponent && (
                             <IconComponent
-                              size={20}
-                              className={`transition-all duration-300 ${
+                              size={16}
+                              className={`md:w-5 md:h-5 transition-all duration-300 ${
                                 isActive
                                   ? 'text-white'
                                   : 'text-orange-primary group-hover:scale-110'
@@ -281,16 +285,16 @@ export default function Catalog() {
                           )}
                           {/* Badge as small dot indicator on icon */}
                           {category.badge && !isActive && (
-                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-orange-primary rounded-full border-2 border-zinc-900"></span>
+                            <span className="absolute -top-0.5 -right-0.5 md:-top-1 md:-right-1 w-2 h-2 md:w-3 md:h-3 bg-orange-primary rounded-full border border-zinc-900 md:border-2"></span>
                           )}
                         </div>
 
                         {/* Text */}
                         <div className="flex-1">
-                          <span className="block text-base">{category.name}</span>
+                          <span className="block text-xs md:text-base leading-tight">{category.name}</span>
                           {/* Badge text under category name */}
                           {category.badge && !isActive && (
-                            <span className="text-[9px] text-orange-primary font-bold uppercase tracking-wider">
+                            <span className="text-[8px] md:text-[9px] text-orange-primary font-bold uppercase tracking-wider">
                               {category.badge}
                             </span>
                           )}
@@ -462,15 +466,15 @@ export default function Catalog() {
           {/* Main Content Area */}
           <div className="flex-1">
             {/* Subcategory Filters */}
-            <div className="mb-8">
-              <div className="flex flex-wrap gap-3">
+            <div className="mb-4 md:mb-8">
+              <div className="flex flex-wrap gap-1.5 md:gap-3">
                 {currentCategory?.subcategories.map((subcategory) => {
                   const isActive = activeSubcategory === subcategory.id;
                   return (
                     <button
                       key={subcategory.id}
                       onClick={() => handleSubcategoryChange(subcategory.id)}
-                      className={`group relative px-6 py-3.5 rounded-2xl font-bold text-base transition-all duration-300 ${
+                      className={`group relative px-3 py-2 md:px-6 md:py-3.5 rounded-lg md:rounded-2xl font-bold text-xs md:text-base transition-all duration-300 ${
                         isActive
                           ? 'text-white scale-[1.02]'
                           : 'text-white/80 hover:text-white hover:scale-[1.02]'
@@ -519,7 +523,7 @@ export default function Catalog() {
             {/* Products Grid */}
             {currentProducts.length > 0 ? (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-8">
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-5 mb-8">
                   {currentProducts.map((product) => (
                     <ProductCard key={product.id} product={product} customerType={customerType} />
                   ))}
@@ -527,48 +531,63 @@ export default function Catalog() {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                  <div className="flex justify-center items-center gap-2">
+                  <div className="flex justify-center items-center gap-1 md:gap-2">
                     {/* Previous Button */}
                     <button
                       onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                       disabled={currentPage === 1}
-                      className={`px-4 py-2 rounded-lg font-semibold text-sm transition ${
+                      className={`p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 ${
                         currentPage === 1
                           ? 'bg-zinc-900 text-white/30 cursor-not-allowed'
-                          : 'bg-zinc-900 border border-white/10 text-white hover:bg-zinc-800'
+                          : 'bg-zinc-900 border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10'
                       }`}
                     >
-                      Predošlá
+                      <ChevronLeft size={18} />
+                      <span className="hidden md:inline text-sm">Predošlá</span>
                     </button>
 
-                    {/* Page Numbers */}
-                    <div className="flex gap-2">
-                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                        <button
-                          key={page}
-                          onClick={() => setCurrentPage(page)}
-                          className={`w-10 h-10 rounded-lg font-bold text-sm transition ${
-                            currentPage === page
-                              ? 'bg-orange-primary text-white'
-                              : 'bg-zinc-900 border border-white/10 text-white/70 hover:bg-zinc-800 hover:text-white'
-                          }`}
-                        >
-                          {page}
-                        </button>
-                      ))}
+                    {/* Page Numbers - Show max 5 pages on mobile */}
+                    <div className="flex gap-1 md:gap-2">
+                      {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+                        let page;
+                        if (totalPages <= 5) {
+                          page = i + 1;
+                        } else if (currentPage <= 3) {
+                          page = i + 1;
+                        } else if (currentPage >= totalPages - 2) {
+                          page = totalPages - 4 + i;
+                        } else {
+                          page = currentPage - 2 + i;
+                        }
+
+                        return (
+                          <button
+                            key={page}
+                            onClick={() => setCurrentPage(page)}
+                            className={`w-8 h-8 md:w-10 md:h-10 rounded-lg font-bold text-xs md:text-sm transition ${
+                              currentPage === page
+                                ? 'bg-orange-primary text-white shadow-lg shadow-orange-primary/40'
+                                : 'bg-zinc-900 border border-white/10 text-white/70 hover:bg-zinc-800 hover:text-white hover:border-orange-primary/30'
+                            }`}
+                          >
+                            {page}
+                          </button>
+                        );
+                      })}
                     </div>
 
                     {/* Next Button */}
                     <button
                       onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                       disabled={currentPage === totalPages}
-                      className={`px-4 py-2 rounded-lg font-semibold text-sm transition ${
+                      className={`p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 ${
                         currentPage === totalPages
                           ? 'bg-zinc-900 text-white/30 cursor-not-allowed'
-                          : 'bg-zinc-900 border border-white/10 text-white hover:bg-zinc-800'
+                          : 'bg-zinc-900 border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10'
                       }`}
                     >
-                      Ďalšia
+                      <span className="hidden md:inline text-sm">Ďalšia</span>
+                      <ChevronRight size={18} />
                     </button>
                   </div>
                 )}

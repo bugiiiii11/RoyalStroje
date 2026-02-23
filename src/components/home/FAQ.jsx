@@ -148,22 +148,22 @@ export default function FAQ() {
   };
 
   return (
-    <div id="faq" className="relative pt-32 pb-16 overflow-hidden">
+    <div id="faq" className="relative pt-12 md:pt-32 pb-8 md:pb-16 overflow-hidden">
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4">
+        <div className="text-center mb-6 md:mb-12">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4">
             Máte <span className="text-orange-primary">otázky</span>?
           </h2>
-          <p className="text-white/70 text-base md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
             Tu nájdete odpovede na najčastejšie otázky o prenájme stavebnej mechanizácie
           </p>
         </div>
 
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Left Side - Support Image/Info */}
-          <div className="lg:col-span-2">
+          {/* Left Side - Support Image/Info - Hidden on mobile */}
+          <div className="hidden lg:block lg:col-span-2">
             <div className="sticky top-24">
               {/* Image Container */}
               <div className="relative rounded-2xl overflow-hidden border-2 border-orange-primary/30 mb-6">
@@ -235,28 +235,28 @@ export default function FAQ() {
 
           {/* Right Side - FAQ Accordion */}
           <div className="lg:col-span-3">
-            <div className="space-y-4">
+            <div className="space-y-2 md:space-y-4">
               {faqs.map((faq, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-orange-primary/30 transition-all"
+                  className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/30 transition-all"
                 >
                   {/* Question Button */}
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full flex items-center justify-between gap-4 p-6 text-left group"
+                    className="w-full flex items-center justify-between gap-2 md:gap-4 p-3 md:p-6 text-left group"
                   >
-                    <h3 className="text-white font-bold text-base md:text-lg flex-1 group-hover:text-orange-primary transition-colors">
+                    <h3 className="text-white font-bold text-xs md:text-lg flex-1 group-hover:text-orange-primary transition-colors leading-tight">
                       {faq.question}
                     </h3>
                     <div
-                      className={`flex-shrink-0 w-8 h-8 rounded-lg bg-orange-primary/20 flex items-center justify-center transition-all ${
+                      className={`flex-shrink-0 w-6 h-6 md:w-8 md:h-8 rounded-md md:rounded-lg bg-orange-primary/20 flex items-center justify-center transition-all ${
                         openIndex === index ? 'rotate-180 bg-orange-primary' : ''
                       }`}
                     >
                       <ChevronDown
-                        size={20}
-                        className={`transition-colors ${
+                        size={16}
+                        className={`md:w-5 md:h-5 transition-colors ${
                           openIndex === index ? 'text-white' : 'text-orange-primary'
                         }`}
                       />
@@ -269,7 +269,7 @@ export default function FAQ() {
                       openIndex === index ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <div className="px-6 pb-6 text-white/80 text-sm md:text-base leading-relaxed border-t border-white/10 pt-6">
+                    <div className="px-3 pb-3 md:px-6 md:pb-6 text-white/80 text-[11px] md:text-base leading-relaxed border-t border-white/10 pt-3 md:pt-6">
                       {faq.answer}
                     </div>
                   </div>

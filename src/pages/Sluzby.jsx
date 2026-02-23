@@ -34,8 +34,8 @@ export default function Sluzby() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-24 md:py-32 lg:py-40 flex items-center overflow-hidden">
+      {/* Hero Section - Desktop only */}
+      <section className="hidden md:flex relative py-12 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -86,7 +86,7 @@ export default function Sluzby() {
       </section>
 
       {/* Services Grid */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+      <section className="relative pt-6 pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
         {/* Radial gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
@@ -97,23 +97,23 @@ export default function Sluzby() {
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Services section */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+          <div className="text-center mb-6 md:mb-12">
+            <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
               Čo pre vás <span className="text-orange-primary">môžeme urobiť</span>
-            </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+            </h1>
+            <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto hidden md:block">
               Profesionálne služby pre stavebné firmy, remeselníkov aj súkromné osoby
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 mb-6 md:mb-16">
             {services.map((service) => {
               const IconComponent = service.icon;
               return (
                 <Link
                   key={service.id}
                   to={service.path}
-                  className="relative bg-zinc-900 border border-white/10 rounded-2xl p-8 hover:border-orange-primary/50 transition-all group overflow-hidden"
+                  className="relative bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 hover:border-orange-primary/50 transition-all group overflow-hidden"
                 >
                   {/* Background Image */}
                   <div className="absolute inset-0 z-0">
@@ -127,21 +127,21 @@ export default function Sluzby() {
 
                   {/* Content */}
                   <div className="relative z-10">
-                    <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-6 group-hover:bg-orange-primary/20 transition">
-                      <IconComponent className="text-orange-primary" size={40} />
+                    <div className="w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 md:mb-6 group-hover:bg-orange-primary/20 transition">
+                      <IconComponent className="text-orange-primary" size={24} />
                     </div>
 
-                    <h3 className="text-3xl font-black text-white mb-3 group-hover:text-orange-primary transition">
+                    <h3 className="text-lg md:text-3xl font-black text-white mb-2 md:mb-3 group-hover:text-orange-primary transition">
                       {service.title}
                     </h3>
 
-                    <p className="text-white/70 text-base md:text-lg leading-relaxed mb-6">
+                    <p className="text-white/70 text-xs md:text-lg leading-relaxed mb-3 md:mb-6 line-clamp-2 md:line-clamp-none">
                       {service.description}
                     </p>
 
-                    <ul className="space-y-2 mb-6">
+                    <ul className="space-y-1 md:space-y-2 mb-3 md:mb-6">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-base text-white/60">
+                        <li key={idx} className="flex items-start gap-2 text-xs md:text-base text-white/60">
                           <span className="text-orange-primary mt-0.5">✓</span>
                           <span>{feature}</span>
                         </li>

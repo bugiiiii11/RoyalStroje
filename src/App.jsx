@@ -13,6 +13,7 @@ import CenovaPonuka from './pages/CenovaPonuka';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Kontakt from './pages/Kontakt';
+import Kosik from './pages/Kosik';
 import Partneri from './pages/Partneri';
 import GDPR from './pages/GDPR';
 import ObchodnePodmienky from './pages/ObchodnePodmienky';
@@ -38,6 +39,7 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/kontakt" element={<Kontakt />} />
+              <Route path="/kosik" element={<Kosik />} />
               <Route path="/partneri" element={<Partneri />} />
               <Route path="/gdpr" element={<GDPR />} />
               <Route path="/obchodne-podmienky" element={<ObchodnePodmienky />} />

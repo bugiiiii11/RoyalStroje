@@ -81,10 +81,10 @@ export default function Hero() {
 
       {/* Content Container */}
       <div className="relative z-10 min-h-screen flex items-center">
-        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 w-full py-24">
+        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 w-full pt-28 pb-24 md:py-24">
           <div className="max-w-2xl">
             {/* Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-6">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-4 md:mb-6">
               Požičovňa náradia a{' '}
               <span className="bg-gradient-to-r from-orange-primary to-orange-hover bg-clip-text text-transparent">
                 stavebnej techniky
@@ -92,7 +92,7 @@ export default function Hero() {
             </h1>
 
             {/* Description */}
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-8">
+            <p className="text-base md:text-xl text-white/90 leading-relaxed mb-6 md:mb-8">
               Profesionálne náradie, stroje a mechanizácia pre stavby všetkých veľkostí.{' '}
               <strong className="text-orange-primary font-bold">
                 Rýchla doprava na stavbu.
@@ -100,20 +100,20 @@ export default function Hero() {
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <a
                 href="tel:+421948555551"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-base rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
               >
-                <Phone size={20} />
+                <Phone size={18} className="md:w-5 md:h-5" />
                 <span>Zavolať teraz</span>
               </a>
               <a
                 href="#katalog"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/20 hover:border-white/50 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold text-sm md:text-base rounded-full hover:bg-white/20 hover:border-white/50 transition-all"
               >
                 <span>Zobraziť katalóg</span>
-                <ArrowDown size={20} />
+                <ArrowDown size={18} className="md:w-5 md:h-5" />
               </a>
             </div>
           </div>

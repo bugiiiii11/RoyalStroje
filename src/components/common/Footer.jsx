@@ -47,7 +47,7 @@ const LinkedInIcon = ({ size = 24 }) => (
 
 export default function Footer() {
   return (
-    <footer className="relative bg-black pt-32 pb-8 overflow-visible">
+    <footer className="hidden md:block relative bg-black pt-32 pb-8 overflow-visible">
       {/* Modern geometric top border - mirrored from Hero */}
       <div className="absolute top-0 left-0 right-0 h-20 overflow-hidden">
         {/* Angled cut with steps - flipped vertically */}

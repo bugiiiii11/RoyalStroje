@@ -3,8 +3,8 @@ import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
 export default function Kontakt() {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-24 md:py-32 lg:py-40 flex items-center overflow-hidden">
+      {/* Hero Section - Desktop only */}
+      <section className="hidden md:flex relative py-12 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -56,7 +56,7 @@ export default function Kontakt() {
       </section>
 
       {/* Main Content - Single Section */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+      <section className="relative pt-6 pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
         {/* Radial gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
@@ -68,28 +68,28 @@ export default function Kontakt() {
         <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
 
           {/* Section Heading */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+          <div className="text-center mb-6 md:mb-12">
+            <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
               Vyberte si <span className="text-orange-primary">spôsob kontaktu</span>
-            </h2>
-            <p className="text-white/70 max-w-2xl mx-auto text-lg">
+            </h1>
+            <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-lg hidden md:block">
               Sme dostupní telefonicky, cez email aj prostredníctvom moderných komunikačných aplikácií.
             </p>
           </div>
 
           {/* Contact Methods Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mb-6 md:mb-16">
             {/* Phone */}
             <a
               href="tel:+421948555551"
-              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
+              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-orange-primary/30 transition-all">
-                <Phone className="text-orange-primary" size={24} />
+              <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-2 md:mb-4 group-hover:border-orange-primary/30 transition-all">
+                <Phone className="text-orange-primary" size={16} />
               </div>
-              <h3 className="text-white font-bold text-base mb-1.5">Telefón</h3>
-              <p className="text-orange-primary font-bold text-lg mb-1">+421 948 555 551</p>
-              <p className="text-white/60 text-sm">Non-stop dostupnosť</p>
+              <h3 className="text-white font-bold text-xs md:text-base mb-0.5 md:mb-1.5">Telefón</h3>
+              <p className="text-orange-primary font-bold text-sm md:text-lg mb-0.5 md:mb-1">+421 948 555 551</p>
+              <p className="text-white/60 text-[10px] md:text-sm hidden md:block">Non-stop dostupnosť</p>
             </a>
 
             {/* WhatsApp */}
@@ -97,14 +97,14 @@ export default function Kontakt() {
               href="https://wa.me/421948555551"
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
+              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-orange-primary/30 transition-all">
-                <MessageCircle className="text-orange-primary" size={24} />
+              <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-2 md:mb-4 group-hover:border-orange-primary/30 transition-all">
+                <MessageCircle className="text-orange-primary" size={16} />
               </div>
-              <h3 className="text-white font-bold text-base mb-1.5">WhatsApp</h3>
-              <p className="text-orange-primary font-bold text-lg mb-1">0948 555 551</p>
-              <p className="text-white/60 text-sm">Rýchla komunikácia</p>
+              <h3 className="text-white font-bold text-xs md:text-base mb-0.5 md:mb-1.5">WhatsApp</h3>
+              <p className="text-orange-primary font-bold text-sm md:text-lg mb-0.5 md:mb-1">0948 555 551</p>
+              <p className="text-white/60 text-[10px] md:text-sm hidden md:block">Rýchla komunikácia</p>
             </a>
 
             {/* Telegram */}
@@ -112,90 +112,90 @@ export default function Kontakt() {
               href="https://t.me/Royalstroje"
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
+              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-orange-primary/30 transition-all">
-                <Send className="text-orange-primary" size={24} />
+              <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-2 md:mb-4 group-hover:border-orange-primary/30 transition-all">
+                <Send className="text-orange-primary" size={16} />
               </div>
-              <h3 className="text-white font-bold text-base mb-1.5">Telegram</h3>
-              <p className="text-orange-primary font-bold text-lg mb-1">@Royalstroje</p>
-              <p className="text-white/60 text-sm">Alternatívny kontakt</p>
+              <h3 className="text-white font-bold text-xs md:text-base mb-0.5 md:mb-1.5">Telegram</h3>
+              <p className="text-orange-primary font-bold text-sm md:text-lg mb-0.5 md:mb-1">@Royalstroje</p>
+              <p className="text-white/60 text-[10px] md:text-sm hidden md:block">Alternatívny kontakt</p>
             </a>
 
             {/* Email */}
             <a
               href="mailto:info@royalstroje.sk"
-              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
+              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-orange-primary/30 transition-all">
-                <Mail className="text-orange-primary" size={24} />
+              <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-2 md:mb-4 group-hover:border-orange-primary/30 transition-all">
+                <Mail className="text-orange-primary" size={16} />
               </div>
-              <h3 className="text-white font-bold text-base mb-1.5">Email</h3>
-              <p className="text-orange-primary font-bold text-lg mb-1 break-all">info@royalstroje.sk</p>
-              <p className="text-white/60 text-sm">Odpoveď do 24 hodín</p>
+              <h3 className="text-white font-bold text-xs md:text-base mb-0.5 md:mb-1.5">Email</h3>
+              <p className="text-orange-primary font-bold text-sm md:text-lg mb-0.5 md:mb-1 break-all">info@royalstroje.sk</p>
+              <p className="text-white/60 text-[10px] md:text-sm hidden md:block">Odpoveď do 24 hodín</p>
             </a>
           </div>
 
           {/* Visit Us Section */}
-          <div className="space-y-8">
+          <div className="space-y-4 md:space-y-8">
             {/* Section Header */}
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+            <div className="text-center mb-3 md:mb-12">
+              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
                 Navštívte nás v <span className="text-orange-primary">Senci</span>
               </h2>
-              <p className="text-white/70 max-w-2xl mx-auto text-lg">
+              <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-lg hidden md:block">
                 Tešíme sa na vašu návštevu v našej požičovni stavebnej techniky a náradia.
               </p>
             </div>
 
-            {/* Large Info Cards - 3 Column Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {/* Large Info Cards - Vertical on mobile, 3 columns on desktop */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-4 md:mb-8">
               {/* Opening Hours Card */}
-              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
+              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-xl md:rounded-3xl p-4 md:p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
                 <div className="relative z-10 text-center">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
-                    <Clock className="text-white" size={36} />
+                  <div className="hidden md:flex w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
+                    <Clock className="text-white" size={24} />
                   </div>
-                  <h3 className="text-white font-black text-xl mb-4">Otváracie hodiny</h3>
-                  <p className="text-orange-primary font-bold text-2xl mb-2">Po - Pi</p>
-                  <p className="text-white/80 text-lg">7:00 - 16:00</p>
+                  <h3 className="text-white font-black text-sm md:text-xl mb-2 md:mb-4">Otváracie hodiny</h3>
+                  <p className="text-orange-primary font-bold text-base md:text-2xl mb-1 md:mb-2">Po - Pi</p>
+                  <p className="text-white/80 text-sm md:text-lg">7:00 - 16:00</p>
                 </div>
               </div>
 
               {/* Address Card */}
-              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
+              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-xl md:rounded-3xl p-4 md:p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
                 <div className="relative z-10 text-center">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
-                    <MapPin className="text-white" size={36} />
+                  <div className="hidden md:flex w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
+                    <MapPin className="text-white" size={24} />
                   </div>
-                  <h3 className="text-white font-black text-xl mb-4">Adresa predajne</h3>
-                  <p className="text-white/90 text-lg leading-relaxed mb-1">Recká cesta 182</p>
-                  <p className="text-orange-primary font-bold text-xl">925 26 Senec</p>
+                  <h3 className="text-white font-black text-sm md:text-xl mb-2 md:mb-4">Adresa predajne</h3>
+                  <p className="text-white/90 text-sm md:text-lg leading-relaxed mb-1 md:mb-1">Recká cesta 182</p>
+                  <p className="text-orange-primary font-bold text-base md:text-xl">925 26 Senec</p>
                 </div>
               </div>
 
               {/* Contact Card */}
-              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
+              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-xl md:rounded-3xl p-4 md:p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
                 <div className="relative z-10 text-center">
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
-                    <Phone className="text-white" size={36} />
+                  <div className="hidden md:flex w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
+                    <Phone className="text-white" size={24} />
                   </div>
-                  <h3 className="text-white font-black text-xl mb-4">Kontakt</h3>
-                  <a href="tel:+421948555551" className="block text-orange-primary font-bold text-lg mb-2 hover:text-orange-hover transition-colors">
+                  <h3 className="text-white font-black text-sm md:text-xl mb-2 md:mb-4">Kontakt</h3>
+                  <a href="tel:+421948555551" className="block text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2 hover:text-orange-hover transition-colors">
                     +421 948 555 551
                   </a>
-                  <a href="mailto:info@royalstroje.sk" className="block text-white/80 text-base hover:text-orange-primary transition-colors">
+                  <a href="mailto:info@royalstroje.sk" className="block text-white/80 text-xs md:text-base hover:text-orange-primary transition-colors">
                     info@royalstroje.sk
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Map and Company Info - 2 Column Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Map and Company Info - 2 Column Grid - Hidden on mobile */}
+            <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Map */}
               <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-6 overflow-hidden">
                 <h3 className="text-white font-black text-xl mb-4 px-2">Nájdete nás tu</h3>
@@ -248,14 +248,29 @@ export default function Kontakt() {
             </div>
 
             {/* CTA Button */}
-            <div className="text-center pt-8">
+            <div className="text-center pt-4 md:pt-8">
               <a
                 href="tel:+421948555551"
-                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-lg rounded-full hover:scale-105 transition-all shadow-2xl shadow-orange-primary/50"
+                className="inline-flex items-center justify-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-lg rounded-full hover:scale-105 transition-all shadow-2xl shadow-orange-primary/50"
               >
-                <Phone size={24} />
+                <Phone size={18} className="md:w-6 md:h-6" />
                 <span>Zavolať: 0948 555 551</span>
               </a>
+            </div>
+
+            {/* Company Details - Mobile only */}
+            <div className="md:hidden mt-6">
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-4">
+                <h3 className="text-white font-black text-sm mb-3">Firemné údaje</h3>
+                <div className="space-y-1.5 text-white/70 text-xs leading-relaxed">
+                  <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
+                  <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
+                  <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
+                  <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
+                  <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>
+                  <p><strong className="text-white font-bold">Zastúpený:</strong> Peter Krivosudský</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

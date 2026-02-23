@@ -4,7 +4,10 @@ import Catalog from '../components/home/Catalog';
 export default function Home() {
   return (
     <>
-      <Hero />
+      {/* Hero - Desktop only */}
+      <div className="hidden md:block">
+        <Hero />
+      </div>
       <Catalog />
     </>
   );

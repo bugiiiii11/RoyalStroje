@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, Menu, X, Sparkles } from 'lucide-react';
+import { Phone, X, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 // WhatsApp icon with brand color
@@ -19,19 +19,11 @@ const TelegramIcon = ({ size = 16 }) => (
 export default function Header() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [phoneHovered, setPhoneHovered] = useState(false);
-  const [phoneClicked, setPhoneClicked] = useState(false);
   const [promoVisible, setPromoVisible] = useState(false);
   const [promoClosed, setPromoClosed] = useState(false);
 
   const isActive = (path) => location.pathname === path;
-
-  // Close mobile menu when clicking a link
-  const handleNavClick = () => {
-    setMobileMenuOpen(false);
-    setPhoneClicked(false);
-  };
 
   // Show promo banner after delay
   useEffect(() => {
@@ -60,9 +52,9 @@ export default function Header() {
 
   return (
     <>
-      {/* Promo Banner - Slide in from right */}
+      {/* Promo Banner - Slide in from right - Desktop only */}
       <div
-        className={`fixed top-24 right-0 z-[60] transition-all duration-500 ease-out ${
+        className={`hidden md:block fixed top-24 right-0 z-[60] transition-all duration-500 ease-out ${
           promoVisible ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -107,7 +99,7 @@ export default function Header() {
       </div>
 
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`hidden md:block fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
             ? 'bg-zinc-950/95 backdrop-blur-md'
             : 'bg-transparent'
@@ -223,95 +215,7 @@ export default function Header() {
               </a>
             </div>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden w-10 h-10 flex items-center justify-center text-white"
-            aria-label="Menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-white/10 pt-4">
-            <nav className="flex flex-col gap-2">
-              <Link
-                to="/"
-                onClick={handleNavClick}
-                className={`px-4 py-3 rounded-lg font-semibold transition-all ${
-                  isActive('/')
-                    ? 'bg-orange-primary/10 text-orange-primary'
-                    : 'text-white/70 hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                Požičovňa
-              </Link>
-              <Link
-                to="/sluzby"
-                onClick={handleNavClick}
-                className={`px-4 py-3 rounded-lg font-semibold transition-all ${
-                  isActive('/sluzby') || location.pathname.startsWith('/sluzby/')
-                    ? 'bg-orange-primary/10 text-orange-primary'
-                    : 'text-white/70 hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                Služby
-              </Link>
-              <Link
-                to="/kontakt"
-                onClick={handleNavClick}
-                className={`px-4 py-3 rounded-lg font-semibold transition-all ${
-                  isActive('/kontakt')
-                    ? 'bg-orange-primary/10 text-orange-primary'
-                    : 'text-white/70 hover:bg-white/5 hover:text-white'
-                }`}
-              >
-                Kontakt
-              </Link>
-            </nav>
-
-            {/* Mobile Contact */}
-            <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-white/10">
-              <a
-                href="https://wa.me/421948555551"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center"
-                aria-label="WhatsApp"
-              >
-                <WhatsAppIcon size={32} />
-              </a>
-              <a
-                href="https://t.me/Royalstroje"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center"
-                aria-label="Telegram"
-              >
-                <TelegramIcon size={32} />
-              </a>
-              <a
-                href="tel:+421948555551"
-                onClick={(e) => {
-                  if (!phoneClicked) {
-                    e.preventDefault();
-                    setPhoneClicked(true);
-                  }
-                }}
-                className="flex items-center gap-2 text-orange-primary"
-                aria-label="Telefón: 0948 555 551"
-              >
-                <Phone size={32} />
-                {phoneClicked && (
-                  <span className="font-bold text-sm">0948 555 551</span>
-                )}
-              </a>
-            </div>
-          </div>
-        )}
       </div>
     </header>
     </>

@@ -18,9 +18,9 @@ export default function ProductCard({ product, customerType = 'po' }) {
 
   return (
     <>
-      <div className="group bg-zinc-900 border border-white/10 rounded-xl overflow-hidden hover:border-orange-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-primary/20">
-        {/* Image Container - Square aspect ratio */}
-        <div className="relative aspect-square bg-zinc-800 overflow-hidden">
+      <div className="group bg-zinc-900 border border-white/10 rounded-lg md:rounded-xl overflow-hidden hover:border-orange-primary/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-primary/20">
+        {/* Image Container - Compact on mobile, square on desktop */}
+        <div className="relative aspect-[4/3] md:aspect-square bg-zinc-800 overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
@@ -45,39 +45,39 @@ export default function ProductCard({ product, customerType = 'po' }) {
           )}
 
           {/* Price Badge - Bottom Right */}
-          <div className="absolute bottom-3 right-3 bg-zinc-900/95 border border-orange-primary/40 backdrop-blur-md rounded-lg px-3 py-2 shadow-lg shadow-black/50" style={{ zIndex: 2 }}>
+          <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 bg-zinc-900/95 border border-orange-primary/40 backdrop-blur-md rounded-lg px-2 py-1.5 md:px-3 md:py-2 shadow-lg shadow-black/50" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-end">
               {hasValidPrice ? (
                 <>
-                  <span className="text-orange-primary text-2xl font-black leading-none">{displayPrice.toFixed(2)}€</span>
-                  <span className="text-white/50 text-[10px] font-medium mt-0.5">{priceLabel}</span>
+                  <span className="text-orange-primary text-lg md:text-2xl font-black leading-none">{displayPrice.toFixed(2)}€</span>
+                  <span className="text-white/50 text-[9px] md:text-[10px] font-medium mt-0.5">{priceLabel}</span>
                 </>
               ) : (
-                <span className="text-orange-primary text-sm font-black leading-tight text-right whitespace-nowrap">Cena dohodou</span>
+                <span className="text-orange-primary text-xs md:text-sm font-black leading-tight text-right whitespace-nowrap">Cena dohodou</span>
               )}
             </div>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-4">
+        <div className="p-2 md:p-4">
           {/* Product Name */}
-          <h3 className="text-base font-bold text-white mb-1 leading-tight">
+          <h3 className="text-sm md:text-base font-bold text-white mb-0.5 md:mb-1 leading-tight line-clamp-1">
             {product.description}
           </h3>
 
           {/* Description */}
-          <p className="text-white text-sm mb-4 leading-relaxed line-clamp-1">
+          <p className="text-white text-xs md:text-sm mb-2 md:mb-4 leading-relaxed line-clamp-1">
             {product.name}
           </p>
 
           {/* Actions */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1.5 md:gap-2">
             {/* Primary CTA */}
             <button
               onClick={() => addToCart(product)}
               disabled={inCart}
-              className={`relative inline-flex items-center justify-center gap-1.5 px-3 py-2.5 font-bold text-sm rounded-full transition-all overflow-hidden group/cart ${
+              className={`relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-1.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-full transition-all overflow-hidden group/cart ${
                 inCart
                   ? 'bg-green-500/20 border border-green-500/50 text-green-400 cursor-default'
                   : 'bg-black border border-orange-primary text-orange-primary hover:scale-105'
@@ -88,9 +88,9 @@ export default function ProductCard({ product, customerType = 'po' }) {
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-primary/30 to-transparent -translate-x-full group-hover/cart:translate-x-full transition-transform duration-700"></div>
               )}
               {inCart ? (
-                <Check size={16} className="relative z-10" />
+                <Check size={14} className="relative z-10 md:w-4 md:h-4" />
               ) : (
-                <ShoppingCart size={16} className="relative z-10" />
+                <ShoppingCart size={14} className="relative z-10 md:w-4 md:h-4" />
               )}
               <span className="relative z-10">{inCart ? 'V košíku' : 'Rezervovať'}</span>
             </button>
@@ -98,11 +98,11 @@ export default function ProductCard({ product, customerType = 'po' }) {
             {/* Secondary Link */}
             <button
               onClick={() => setShowSpecs(true)}
-              className="group/btn text-orange-primary font-bold text-sm flex items-center justify-center gap-1 hover:gap-2 transition-all"
+              className="group/btn text-orange-primary font-bold text-[10px] md:text-sm flex items-center justify-center gap-0.5 md:gap-1 hover:gap-2 transition-all py-1"
             >
-              <ChevronLeft size={16} className="group-hover/btn:-translate-x-0.5 transition-transform" />
+              <ChevronLeft size={12} className="group-hover/btn:-translate-x-0.5 transition-transform md:w-4 md:h-4" />
               <span>Technické parametre</span>
-              <ChevronRight size={16} className="group-hover/btn:translate-x-0.5 transition-transform" />
+              <ChevronRight size={12} className="group-hover/btn:translate-x-0.5 transition-transform md:w-4 md:h-4" />
             </button>
           </div>
 
