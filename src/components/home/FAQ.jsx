@@ -121,6 +121,7 @@ export default function FAQ() {
                 <li>Fakturácia s lehotou splatnosti 14 dní</li>
                 <li>Bankovým prevodom</li>
                 <li>Možnosť pravidelných mesačných faktúr pre stálych klientov</li>
+                <li>Platba kartou na prevádzke aj v teréne</li>
               </ul>
             </div>
 
@@ -129,7 +130,7 @@ export default function FAQ() {
               <ul className="space-y-1 ml-4 list-disc">
                 <li>Hotovosť pri prevzatí/vrátení</li>
                 <li>Bankovým prevodom vopred</li>
-                <li>Platba kartou (v prevádzke)</li>
+                <li>Platba kartou na prevádzke aj v teréne</li>
               </ul>
             </div>
           </div>

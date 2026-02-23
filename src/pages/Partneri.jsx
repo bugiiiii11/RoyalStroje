@@ -6,20 +6,20 @@ export default function Partneri() {
     {
       id: 1,
       name: 'M & M WOOD',
-      logo: '/logoMMwood.png',
+      logo: '/pictures/graphics/partneri/logo_mmwood.png',
       website: 'https://www.mmwood.sk/',
     },
     {
       id: 2,
-      name: 'Partner Firma 2',
-      logo: '/placeholder-logo.png',
-      website: 'https://example.com',
+      name: 'ZSOLIKA',
+      logo: '/pictures/graphics/partneri/logo_zsolika.png',
+      website: 'https://www.zsolika.sk/',
     },
     {
       id: 3,
-      name: 'Partner Firma 3',
-      logo: '/placeholder-logo.png',
-      website: 'https://example.com',
+      name: 'MOBILBOX',
+      logo: '/pictures/graphics/partneri/logo_mobilbox.png',
+      website: 'https://mobilbox.sk/',
     },
     {
       id: 4,
@@ -166,21 +166,32 @@ export default function Partneri() {
                 href={partner.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[180px]"
+                className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[220px] overflow-hidden"
               >
-                {/* Logo */}
-                <div className="w-20 h-20 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:border-orange-primary/30 transition-all overflow-hidden">
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="w-full h-full object-contain p-2"
-                  />
-                </div>
+                {/* Hover gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
 
-                {/* Company Name */}
-                <h3 className="text-white font-bold text-base group-hover:text-orange-primary transition-colors">
-                  {partner.name}
-                </h3>
+                {/* Content */}
+                <div className="relative z-10 flex flex-col items-center">
+                  {/* Logo */}
+                  <div className="w-32 h-32 rounded-2xl bg-white flex items-center justify-center mb-5 group-hover:shadow-lg group-hover:shadow-orange-primary/30 transition-all duration-300 overflow-hidden">
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      className="w-full h-full object-contain p-3"
+                    />
+                  </div>
+
+                  {/* Company Name */}
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
+                    {partner.name}
+                  </h3>
+
+                  {/* Visit indicator */}
+                  <span className="text-white/40 text-xs group-hover:text-orange-primary/70 transition-colors">
+                    Navštíviť web →
+                  </span>
+                </div>
               </a>
             ))}
           </div>

@@ -20,7 +20,9 @@
       "Bash(node analyze-categories.js:*)",
       "Bash(node analyze-categories-v2.js:*)",
       "Bash(node fix-png-structure.js:*)",
-      "Bash(node generate-products-final.js:*)"
+      "Bash(node generate-products-final.js:*)",
+      "Bash(node analyze-katalog-mvp.js:*)",
+      "Bash(node:*)"
     ]
   }
 }

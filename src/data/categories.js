@@ -1,5 +1,5 @@
 // Kategórie pre Royal Stroje požičovňu
-// Aktualizované: 22.2.2026
+// Aktualizované z katalogMVP.csv: 23.2.2026
 
 export const categories = [
   {
@@ -9,15 +9,17 @@ export const categories = [
     description: 'Ručné náradie, vŕtačky, brúsky, píly, vysávače, čerpadlá, meracia technika',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
-      { id: 'vrtacie-buracie-kladiva-a-vrtacky', name: 'vŕtacie, búracie kladivá a vŕtačky', slug: 'vrtacie-buracie-kladiva-a-vrtacky' },
-      { id: 'uhlove-vibracne-a-pasove-brusky', name: 'uhlové, vibračné a pásové brúsky', slug: 'uhlove-vibracne-a-pasove-brusky' },
-      { id: 'rucne-pily-a-rezacky', name: 'ručné píly a rezačky', slug: 'rucne-pily-a-rezacky' },
-      { id: 'vysavace-tepovace-a-tlakove-cistice', name: 'Vysávače, tepovače a tlakové čističe', slug: 'vysavace-tepovace-a-tlakove-cistice' },
-      { id: 'cerpadla-ohrievace-a-odvlhcovace', name: 'Čerpadlá, ohrievače a odvlhčovače', slug: 'cerpadla-ohrievace-a-odvlhcovace' },
+      { id: 'vrtacie-kladiva-a-vrtacky', name: 'Vŕtacie kladivá a vŕtačky', slug: 'vrtacie-kladiva-a-vrtacky' },
+      { id: 'buracie-kladiva', name: 'Búracie kladivá', slug: 'buracie-kladiva' },
+      { id: 'brusky', name: 'Brúsky', slug: 'brusky' },
+      { id: 'pily-a-rezacky', name: 'Píly a rezačky', slug: 'pily-a-rezacky' },
+      { id: 'vysavace-a-cistice', name: 'Vysávače a čističe', slug: 'vysavace-a-cistice' },
+      { id: 'cerpadla', name: 'Čerpadlá', slug: 'cerpadla' },
+      { id: 'ohrievace-a-odvlhcovace', name: 'Ohrievače a odvlhčovače', slug: 'ohrievace-a-odvlhcovace' },
       { id: 'zvaracia-a-meracia-technika', name: 'Zváracia a meracia technika', slug: 'zvaracia-a-meracia-technika' },
-      { id: 'vibratory-vibracne-listy-a-miesadla', name: 'Vibrátory, vibračné lišty a miešadlá', slug: 'vibratory-vibracne-listy-a-miesadla' },
+      { id: 'vibratory-listy-a-miesadla', name: 'Vibrátory, lišty a miešadlá', slug: 'vibratory-listy-a-miesadla' },
       { id: 'lesenie', name: 'Lešenie', slug: 'lesenie' },
-      { id: 'nadrze-na-vodu-a-naftu', name: 'Nádrže na vodu a naftu', slug: 'nadrze-na-vodu-a-naftu' },
+      { id: 'nadrze', name: 'Nádrže', slug: 'nadrze' },
     ]
   },
   {
@@ -31,7 +33,7 @@ export const categories = [
       { id: 'elektrocentraly', name: 'Elektrocentrály', slug: 'elektrocentraly' },
       { id: 'kompresory', name: 'Kompresory', slug: 'kompresory' },
       { id: 'cestne-rezacky-frezy-a-brusky', name: 'Cestné rezačky, frézy a brúsky', slug: 'cestne-rezacky-frezy-a-brusky' },
-      { id: 'stolove-a-portalove-pily', name: 'Stolové a portálové píly', slug: 'stolove-a-portalove-pily' },
+      { id: 'stolove-pily', name: 'Stolové píly', slug: 'stolove-pily' },
       { id: 'miesacky-hladicky-betonu-a-badie', name: 'Miešačky, hladičky betónu a bádie', slug: 'miesacky-hladicky-betonu-a-badie' },
       { id: 'manipulacna-technika', name: 'Manipulačná technika', slug: 'manipulacna-technika' },
     ]
@@ -50,7 +52,8 @@ export const categories = [
       { id: 'smykom-riadene-nakladace', name: 'Šmykom riadené nakladače', slug: 'smykom-riadene-nakladace' },
       { id: 'dumpre', name: 'Dumpre', slug: 'dumpre' },
       { id: 'valce', name: 'Valce', slug: 'valce' },
-      { id: 'manipulatory-a-vysokozdvizne-voziky', name: 'Manipulátory a vysokozdvižné vozíky', slug: 'manipulatory-a-vysokozdvizne-voziky' },
+      { id: 'manipulatory', name: 'Manipulátory', slug: 'manipulatory' },
+      { id: 'vysokozdvizne-voziky', name: 'Vysokozdvižné vozíky', slug: 'vysokozdvizne-voziky' },
     ]
   },
   {

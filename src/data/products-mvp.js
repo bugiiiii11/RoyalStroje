@@ -2492,23 +2492,3 @@ export const products = [
     isPopular: false,
   },
 ];
-
-// Helper funkcie
-export const getProductsByCategory = (categoryId) => {
-  return products.filter(p => p.category === categoryId);
-};
-
-export const getProductsBySubcategory = (categoryId, subcategoryId) => {
-  if (subcategoryId === 'all') {
-    return getProductsByCategory(categoryId);
-  }
-  return products.filter(p => p.category === categoryId && p.subcategory === subcategoryId);
-};
-
-export const getPopularProducts = () => {
-  return products.filter(p => p.isPopular).slice(0, 6);
-};
-
-export const getNewProducts = () => {
-  return products.filter(p => p.isNew).slice(0, 4);
-};
