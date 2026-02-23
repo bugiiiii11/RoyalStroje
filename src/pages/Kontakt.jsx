@@ -42,14 +42,9 @@ export default function Kontakt() {
         {/* Content */}
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center">
-                <Phone size={28} className="text-white" />
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
-                <span className="text-orange-primary">Kontaktujte</span> nás
-              </h1>
-            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+              <span className="text-orange-primary">Kontaktujte</span> nás
+            </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-4">
               Sme tu pre vás. Zavolajte, napíšte email alebo nás navštívte v našej prevádzke v Senci.
             </p>
@@ -142,115 +137,123 @@ export default function Kontakt() {
           </div>
 
           {/* Visit Us Section */}
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl p-8 md:p-12">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-4">
+          <div className="space-y-8">
+            {/* Section Header */}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
                 Navštívte nás v <span className="text-orange-primary">Senci</span>
               </h2>
-              <p className="text-white/80 max-w-3xl mx-auto text-lg leading-relaxed">
+              <p className="text-white/70 max-w-2xl mx-auto text-lg">
                 Tešíme sa na vašu návštevu v našej požičovni stavebnej techniky a náradia.
               </p>
             </div>
 
-            {/* Info Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
-              {/* Opening Hours */}
-              <div className="bg-zinc-950/50 rounded-xl p-6 border border-white/5 text-center">
-                <div className="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 mx-auto">
-                  <Clock className="text-orange-primary" size={28} />
+            {/* Large Info Cards - 3 Column Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {/* Opening Hours Card */}
+              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
+                <div className="relative z-10 text-center">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
+                    <Clock className="text-white" size={36} />
+                  </div>
+                  <h3 className="text-white font-black text-xl mb-4">Otváracie hodiny</h3>
+                  <p className="text-orange-primary font-bold text-2xl mb-2">Po - Pi</p>
+                  <p className="text-white/80 text-lg">7:00 - 16:00</p>
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Otváracie hodiny</h3>
-                <p className="text-orange-primary font-semibold text-xl mb-1">Po - Pi</p>
-                <p className="text-white/70 text-base">7:00 - 16:00</p>
               </div>
 
-              {/* Address */}
-              <div className="bg-zinc-950/50 rounded-xl p-6 border border-white/5 text-center">
-                <div className="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 mx-auto">
-                  <MapPin className="text-orange-primary" size={28} />
+              {/* Address Card */}
+              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
+                <div className="relative z-10 text-center">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
+                    <MapPin className="text-white" size={36} />
+                  </div>
+                  <h3 className="text-white font-black text-xl mb-4">Adresa predajne</h3>
+                  <p className="text-white/90 text-lg leading-relaxed mb-1">Recká cesta 182</p>
+                  <p className="text-orange-primary font-bold text-xl">925 26 Senec</p>
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Adresa predajne</h3>
-                <p className="text-white/90 text-base leading-relaxed">
-                  Recká cesta 182<br />
-                  <span className="text-orange-primary">925 26 Senec</span>
-                </p>
               </div>
 
-              {/* Contact */}
-              <div className="bg-zinc-950/50 rounded-xl p-6 border border-white/5 text-center">
-                <div className="w-14 h-14 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 mx-auto">
-                  <Phone className="text-orange-primary" size={28} />
-                </div>
-                <h3 className="text-white font-bold text-lg mb-2">Kontakt</h3>
-                <p className="text-white/90 text-base mb-1">
-                  <a href="tel:+421948555551" className="hover:text-orange-primary transition-colors">
+              {/* Contact Card */}
+              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
+                <div className="relative z-10 text-center">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
+                    <Phone className="text-white" size={36} />
+                  </div>
+                  <h3 className="text-white font-black text-xl mb-4">Kontakt</h3>
+                  <a href="tel:+421948555551" className="block text-orange-primary font-bold text-lg mb-2 hover:text-orange-hover transition-colors">
                     +421 948 555 551
                   </a>
-                </p>
-                <p className="text-white/70 text-sm">
-                  <a href="mailto:info@royalstroje.sk" className="hover:text-orange-primary transition-colors">
+                  <a href="mailto:info@royalstroje.sk" className="block text-white/80 text-base hover:text-orange-primary transition-colors">
                     info@royalstroje.sk
                   </a>
-                </p>
-              </div>
-            </div>
-
-            {/* Company Info & Map Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-              {/* Company Information */}
-              <div className="bg-zinc-950/50 rounded-xl p-6 border border-white/5">
-                <h3 className="text-white font-bold text-lg mb-3">Firemné údaje</h3>
-                <div className="space-y-2 text-white/70 leading-relaxed">
-                  <p><strong className="text-white">Názov:</strong> Royal stroje, s.r.o.</p>
-                  <p><strong className="text-white">Sídlo:</strong> 182, Boldog 92526</p>
-                  <p><strong className="text-white">IČO:</strong> 57 405 425</p>
-                  <p><strong className="text-white">DIČ:</strong> 2122722063</p>
-                  <p><strong className="text-white">Zastúpený:</strong> Peter Krivosudský</p>
                 </div>
               </div>
-
-              {/* About Section */}
-              <div className="bg-zinc-950/50 rounded-xl p-6 border border-white/5">
-                <h3 className="text-white font-bold text-lg mb-3">O nás</h3>
-                <p className="text-white/70 leading-relaxed">
-                  ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2026. Ponúkame prenájom kvalitného náradia aj komplexné služby v oblasti zemných a búracích prác.
-                </p>
-              </div>
             </div>
 
-            {/* Map */}
-            <div className="mb-8">
-              <div className="rounded-2xl overflow-hidden border border-white/10 h-[400px]">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.6!2d17.3994!3d48.2187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8f0c0c0c0c0d%3A0x0!2zUsOpxI1rYSBjZXN0YSAxODIsIDkwMyAwMSBTZW5lYw!5e0!3m2!1ssk!2ssk!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Royal Stroje - Mapa"
-                ></iframe>
-              </div>
-              <div className="text-center mt-4">
+            {/* Map and Company Info - 2 Column Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Map */}
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-6 overflow-hidden">
+                <h3 className="text-white font-black text-xl mb-4 px-2">Nájdete nás tu</h3>
+                <div className="rounded-2xl overflow-hidden border-2 border-white/10 h-[350px] mb-4">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.6!2d17.3994!3d48.2187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8f0c0c0c0c0d%3A0x0!2zUsOpxI1rYSBjZXN0YSAxODIsIDkwMyAwMSBTZW5lYw!5e0!3m2!1ssk!2ssk!4v1234567890"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Royal Stroje - Mapa"
+                  ></iframe>
+                </div>
                 <a
                   href="https://maps.google.com/?q=Réčka+cesta+182,+Senec"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-orange-primary font-bold hover:gap-3 transition-all"
+                  className="flex items-center justify-center gap-2 text-orange-primary font-bold hover:gap-3 transition-all"
                 >
                   <span>Otvoriť v Google Maps</span>
                   <span>→</span>
                 </a>
               </div>
+
+              {/* Company Info & About */}
+              <div className="space-y-6">
+                {/* Company Information */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8">
+                  <h3 className="text-white font-black text-xl mb-4">Firemné údaje</h3>
+                  <div className="space-y-2.5 text-white/70 leading-relaxed">
+                    <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
+                    <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
+                    <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
+                    <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
+                    <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>
+                    <p><strong className="text-white font-bold">Zastúpený:</strong> Peter Krivosudský</p>
+                  </div>
+                </div>
+
+                {/* About Section */}
+                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8">
+                  <h3 className="text-white font-black text-xl mb-4">O nás</h3>
+                  <p className="text-white/70 leading-relaxed">
+                    ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2026. Ponúkame prenájom kvalitného náradia aj komplexné služby v oblasti stavebníctva.
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* CTA Button */}
-            <div className="text-center">
+            <div className="text-center pt-8">
               <a
                 href="tel:+421948555551"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-lg rounded-full hover:scale-105 transition-all shadow-2xl shadow-orange-primary/50"
               >
+                <Phone size={24} />
                 <span>Zavolať: 0948 555 551</span>
               </a>
             </div>
