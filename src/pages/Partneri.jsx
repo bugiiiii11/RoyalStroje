@@ -23,15 +23,15 @@ export default function Partneri() {
     },
     {
       id: 4,
-      name: 'Partner Firma 4',
-      logo: '/placeholder-logo.png',
-      website: 'https://example.com',
+      name: 'ESKOPA',
+      logo: '/pictures/graphics/partneri/logo_eskopa.png',
+      website: null,
     },
     {
       id: 5,
-      name: 'Partner Firma 5',
-      logo: '/placeholder-logo.png',
-      website: 'https://example.com',
+      name: 'MOBA',
+      logo: '/pictures/graphics/partneri/logo_moba.png',
+      website: 'https://moba.sk/',
     },
     {
       id: 6,
@@ -160,40 +160,59 @@ export default function Partneri() {
 
           {/* Partners Grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {partners.map((partner) => (
-              <a
-                key={partner.id}
-                href={partner.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[220px] overflow-hidden"
-              >
-                {/* Hover gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
+            {partners.map((partner) => {
+              const cardContent = (
+                <>
+                  {/* Hover gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
 
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center">
-                  {/* Logo */}
-                  <div className="w-32 h-32 rounded-2xl bg-white flex items-center justify-center mb-5 group-hover:shadow-lg group-hover:shadow-orange-primary/30 transition-all duration-300 overflow-hidden">
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className="w-full h-full object-contain p-3"
-                    />
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col items-center">
+                    {/* Logo */}
+                    <div className="w-32 h-32 rounded-2xl bg-white flex items-center justify-center mb-5 group-hover:shadow-lg group-hover:shadow-orange-primary/30 transition-all duration-300 overflow-hidden">
+                      <img
+                        src={partner.logo}
+                        alt={partner.name}
+                        className="w-full h-full object-contain p-3"
+                      />
+                    </div>
+
+                    {/* Company Name */}
+                    <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
+                      {partner.name}
+                    </h3>
+
+                    {/* Visit indicator - only show if website exists */}
+                    {partner.website && (
+                      <span className="text-white/40 text-xs group-hover:text-orange-primary/70 transition-colors">
+                        Navštíviť web →
+                      </span>
+                    )}
                   </div>
+                </>
+              );
 
-                  {/* Company Name */}
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
-                    {partner.name}
-                  </h3>
+              const cardClasses = "group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[220px] overflow-hidden";
 
-                  {/* Visit indicator */}
-                  <span className="text-white/40 text-xs group-hover:text-orange-primary/70 transition-colors">
-                    Navštíviť web →
-                  </span>
+              return partner.website ? (
+                <a
+                  key={partner.id}
+                  href={partner.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cardClasses}
+                >
+                  {cardContent}
+                </a>
+              ) : (
+                <div
+                  key={partner.id}
+                  className={cardClasses}
+                >
+                  {cardContent}
                 </div>
-              </a>
-            ))}
+              );
+            })}
           </div>
 
           {/* Partnership Info Section */}
