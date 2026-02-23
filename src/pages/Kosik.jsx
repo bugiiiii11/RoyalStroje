@@ -97,7 +97,7 @@ export default function Kosik() {
         {/* Header */}
         <div className="mb-6 text-center">
           <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
-            <span className="text-orange-primary">Nezáväzná</span> objednávka
+            <span className="text-orange-primary">Nezáväzná</span><br className="md:hidden" /> objednávka
           </h1>
           <p className="text-white/70 text-sm md:text-lg">
             Skontrolujte si vybrané produkty a odošlite objednávku

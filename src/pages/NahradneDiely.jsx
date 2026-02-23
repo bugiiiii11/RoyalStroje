@@ -81,8 +81,8 @@ export default function NahradneDiely() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-24 md:py-32 lg:py-40 flex items-center overflow-hidden">
+      {/* Hero Section - Desktop only */}
+      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -133,7 +133,7 @@ export default function NahradneDiely() {
       </section>
 
       {/* Main Content Section */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+      <section className="relative pt-6 pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
         {/* Radial gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
@@ -144,11 +144,11 @@ export default function NahradneDiely() {
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Services Grid */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-                Komplexný servis <span className="text-orange-primary">náhradných dielov</span>
-              </h2>
+          <div className="mb-12 md:mb-16">
+            <div className="text-center mb-6 md:mb-12">
+              <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
+                <span className="text-orange-primary">Predaj</span><br className="md:hidden" /> náhradných dielov
+              </h1>
               <p className="text-white/70 max-w-2xl mx-auto">
                 Od identifikácie po dodanie - postaráme sa o všetko
               </p>

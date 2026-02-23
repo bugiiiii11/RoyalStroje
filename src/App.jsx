@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import MobileNav from './components/common/MobileNav';
+import HamburgerMenu from './components/common/HamburgerMenu';
 import AnimatedBackground from './components/common/AnimatedBackground';
 import ScrollToTop from './components/common/ScrollToTop';
 import { CartProvider } from './context/CartContext';
@@ -29,6 +30,7 @@ function App() {
 
         <div className="relative z-10">
           <Header />
+          <HamburgerMenu />
           <main className="pb-20 md:pb-0">
             <Routes>
               <Route path="/" element={<Home />} />

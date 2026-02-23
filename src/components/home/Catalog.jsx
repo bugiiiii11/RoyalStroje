@@ -176,7 +176,7 @@ export default function Catalog() {
         <div className="text-center mb-6 md:mb-8">
           {/* Title and Subtitle */}
           <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
-            <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
+            <span className="text-orange-primary">Požičovňa</span><br className="md:hidden" /> profesionálnej techniky
           </h1>
           <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-4 md:mb-6">
             Objavte našu širokú ponuku profesionálneho vybavenia - od malého náradia po ťažkú techniku - všetko na jednom mieste.

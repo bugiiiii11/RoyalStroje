@@ -99,7 +99,7 @@ export default function Sluzby() {
           {/* Services section */}
           <div className="text-center mb-6 md:mb-12">
             <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
-              Čo pre vás <span className="text-orange-primary">môžeme urobiť</span>
+              Čo pre vás<br className="md:hidden" /> <span className="text-orange-primary">môžeme urobiť</span>
             </h1>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto hidden md:block">
               Profesionálne služby pre stavebné firmy, remeselníkov aj súkromné osoby

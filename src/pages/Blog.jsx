@@ -142,57 +142,8 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-24 md:py-32 lg:py-40 flex items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/hero-pozicovna.webp"
-            alt="Royal Stroje - Blog"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Modern geometric bottom border */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 overflow-hidden z-30">
-          <svg className="absolute bottom-0 w-full h-20" viewBox="0 0 1440 80" preserveAspectRatio="none">
-            <path
-              d="M0,80 L0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30 L1440,80 Z"
-              fill="#09090b"
-            />
-            <path
-              d="M0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30"
-              fill="none"
-              stroke="rgba(255,102,0,0.6)"
-              strokeWidth="2"
-            />
-            <path
-              d="M250,0 L600,0"
-              fill="none"
-              stroke="rgba(255,102,0,0.8)"
-              strokeWidth="3"
-            />
-          </svg>
-        </div>
-
-        {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Blog
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Tipy, novinky a užitočné informácie zo sveta stavebnej techniky a náradia.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Main Content Section */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+      <section className="relative pt-6 pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
         {/* Radial gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
@@ -201,27 +152,29 @@ export default function Blog() {
           }}
         />
 
-        <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-          {/* Blog Posts Grid */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-                Najnovšie <span className="text-orange-primary">články</span>
-              </h2>
-              <p className="text-white/70 max-w-2xl mx-auto">
-                Sledujte náš blog a buďte v obraze o novinkách, tipoch a trendoch v oblasti stavebnej techniky.
-              </p>
-            </div>
+        <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Section Heading */}
+          <div className="text-center mb-6 md:mb-12">
+            <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
+              Náš<br className="md:hidden" /> <span className="text-orange-primary">blog</span>
+            </h1>
+            <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+              Tipy, novinky a užitočné informácie zo sveta stavebnej techniky a náradia.
+            </p>
+          </div>
+
+          {/* Blog Posts Grid */}
+          <div className="mb-8 md:mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
               {visiblePosts.map((post) => (
                 <Link
                   key={post.id}
                   to={`/blog/${post.slug}`}
-                  className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl overflow-hidden hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 relative"
+                  className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 relative"
                 >
                   {/* Image */}
-                  <div className="relative h-48 overflow-hidden rounded-t-2xl">
+                  <div className="relative h-32 md:h-48 overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title}
@@ -230,46 +183,46 @@ export default function Blog() {
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/50 to-transparent"></div>
 
                     {/* Category Badge */}
-                    <div className="absolute top-4 left-4">
-                      <span className="inline-block bg-orange-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <div className="absolute top-2 left-2 md:top-4 md:left-4">
+                      <span className="inline-block bg-orange-primary/90 text-white text-[10px] md:text-xs font-bold px-2 py-1 md:px-3 rounded-full">
                         {post.category}
                       </span>
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-6">
+                  <div className="p-3 md:p-6">
                     {/* Meta Info */}
-                    <div className="flex items-center gap-4 mb-3 text-xs text-white/60">
+                    <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-3 text-[10px] md:text-xs text-white/60">
                       <span className="flex items-center gap-1">
-                        <Calendar size={14} />
+                        <Calendar size={12} className="md:w-3.5 md:h-3.5" />
                         {post.date}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Clock size={14} />
+                        <Clock size={12} className="md:w-3.5 md:h-3.5" />
                         {post.readTime}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-black text-white mb-3 group-hover:text-orange-primary transition-colors">
+                    <h3 className="text-sm md:text-xl font-black text-white mb-2 md:mb-3 group-hover:text-orange-primary transition-colors line-clamp-2">
                       {post.title}
                     </h3>
 
                     {/* Excerpt */}
-                    <p className="text-white/70 text-sm leading-relaxed mb-4">
+                    <p className="text-white/70 text-xs md:text-sm leading-relaxed mb-2 md:mb-4 line-clamp-2 md:line-clamp-3">
                       {post.excerpt}
                     </p>
 
                     {/* Read More */}
-                    <div className="flex items-center gap-2 text-orange-primary font-bold text-sm group-hover:gap-3 transition-all">
+                    <div className="flex items-center gap-2 text-orange-primary font-bold text-xs md:text-sm group-hover:gap-3 transition-all">
                       <span>Čítať viac</span>
-                      <ArrowRight size={16} />
+                      <ArrowRight size={14} className="md:w-4 md:h-4" />
                     </div>
                   </div>
 
                   {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 pointer-events-none"></div>
                 </Link>
               ))}
             </div>
@@ -277,22 +230,22 @@ export default function Blog() {
 
           {/* CTA Section */}
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+            <h2 className="text-lg md:text-3xl font-black text-white mb-2 md:mb-4">
               Zaujala vás naša ponuka?
             </h2>
-            <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-white/70 text-xs md:text-lg mb-4 md:mb-8 max-w-2xl mx-auto">
               Kontaktujte nás a radi vám pomôžeme s výberom správnej techniky pre váš projekt.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
               <Link
                 to="/kontakt"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+                className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-base rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
               >
                 <span>Kontaktujte nás</span>
               </Link>
               <Link
                 to="/sluzby"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-800 border-2 border-zinc-700 text-white font-bold rounded-full hover:bg-zinc-700 transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-zinc-800 border border-zinc-700 md:border-2 text-white font-bold text-sm md:text-base rounded-full hover:bg-zinc-700 transition-all"
               >
                 <span>Naše služby</span>
               </Link>
