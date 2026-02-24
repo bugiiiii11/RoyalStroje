@@ -99,10 +99,10 @@ export default function PredajTechniky() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Kúpte náradie, ktoré používame my. <span className="text-orange-primary">Overené na stavbách.</span>
+              Milwaukee, Makita, Hilti. <span className="text-orange-primary">Značkové náradie skladom v Senci.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Predaj stavebného náradia a techniky v Senci. Od Makita po Hilti.
+              Diamantové kotúče, vrtáky, príslušenstvo a BOZP pomôcky. Férové ceny, odborné poradenstvo a okamžitý odber na prevádzke v Senci.
             </p>
           </div>
         </div>

@@ -76,10 +76,10 @@ export default function NahradneDiely() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Náhradné diely skladom. <span className="text-orange-primary">Originál, rýchlo.</span>
+              Okamžitý odber alebo dodanie do 48 hodín. <span className="text-orange-primary">Iba originálne diely.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Originálne diely pre stavebné stroje a náradie. Express dodanie do 48 hodín.
+              Široký sortiment náhradných dielov pre stavebné stroje a náradie. Sklad v Senci.
             </p>
           </div>
         </div>

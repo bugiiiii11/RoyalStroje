@@ -95,10 +95,10 @@ export default function RoyalFleet() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Dlhodobý prenájom pre firmy. <span className="text-orange-primary">Fixné náklady, žiadne prekvapenia.</span>
+              Vlastná flotila bez kúpy. <span className="text-orange-primary">Fixná mesačná platba od 109 €.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Royal Fleet - program dlhodobého prenájmu techniky s fixnou mesačnou platbou pre firmy po celom Slovensku.
+              Stroje denne k dispozícii, žiadne viazanie kapitálu. Royal Fleet pre firmy po celom Slovensku.
             </p>
           </div>
         </div>

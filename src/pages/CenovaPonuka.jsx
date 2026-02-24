@@ -24,11 +24,11 @@ export default function CenovaPonuka() {
       features: ['Konzultácia zdarma', 'Návrh riešenia', 'Možnosť úprav', 'Odborné poradenstvo'],
     },
     {
-      id: 'ziadna-zavaznost',
+      id: 'bezplatna-konzultacia',
       icon: CheckCircle,
-      title: 'Zadarmo a nezáväzne',
-      description: 'Vytvorenie cenovej ponuky je úplne zadarmo a nezáväzné.',
-      features: ['Zadarmo', 'Bez registrácie', 'Žiadne záväzky', 'Ochrana údajov GDPR'],
+      title: 'Bezplatná konzultácia',
+      description: 'Príprava cenovej ponuky a odborná konzultácia sú úplne zdarma.',
+      features: ['Konzultácia zdarma', 'Príprava ponuky zdarma', 'Žiadne záväzky', 'Ochrana údajov GDPR'],
     },
   ];
 
@@ -76,10 +76,10 @@ export default function CenovaPonuka() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Cenová ponuka do 24 hodín. <span className="text-orange-primary">Presne, férovo.</span>
+              Bezplatná konzultácia. <span className="text-orange-primary">Pripravíme do 24 hodín.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Rýchla kalkulácia na mieru. Bez skrytých poplatkov.
+              Detailná kalkulácia na mieru. Transparentný rozpis bez skrytých poplatkov.
             </p>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default function CenovaPonuka() {
                 Cenová ponuka do 24 hodín. <span className="text-orange-primary">Presne, férovo.</span>
               </h1>
               <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
-                Presná kalkulácia na mieru. Zadarmo a nezáväzne.
+                Presná kalkulácia na mieru. Transparentný rozpis bez skrytých poplatkov.
               </p>
             </div>
 
