@@ -11,6 +11,7 @@ import Sluzby from './pages/Sluzby';
 import PredajTechniky from './pages/PredajTechniky';
 import NahradneDiely from './pages/NahradneDiely';
 import CenovaPonuka from './pages/CenovaPonuka';
+import RoyalFleet from './pages/RoyalFleet';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Kontakt from './pages/Kontakt';
@@ -38,6 +39,7 @@ function App() {
               <Route path="/sluzby/predaj-techniky" element={<PredajTechniky />} />
               <Route path="/sluzby/nahradne-diely" element={<NahradneDiely />} />
               <Route path="/sluzby/cenova-ponuka" element={<CenovaPonuka />} />
+              <Route path="/sluzby/royal-fleet" element={<RoyalFleet />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogDetail />} />
               <Route path="/kontakt" element={<Kontakt />} />

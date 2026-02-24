@@ -137,8 +137,8 @@ export default function Blog() {
     },
   ];
 
-  // Filter out hidden articles (3, 7, 9)
-  const visiblePosts = blogPosts.filter(post => ![3, 7, 9].includes(post.id));
+  // Filter out hidden articles - show only 6 articles (1, 2, 4, 5, 6, 8)
+  const visiblePosts = blogPosts.filter(post => ![3, 7, 9, 10, 11, 12].includes(post.id));
 
   return (
     <div className="min-h-screen">

@@ -207,8 +207,8 @@ export default function Header() {
                 aria-label="Telefón: 0948 555 551"
               >
                 <Phone size={32} className="flex-shrink-0" />
-                <span className={`font-bold text-sm whitespace-nowrap overflow-hidden transition-all duration-300 ${
-                  phoneHovered ? 'max-w-32 opacity-100' : 'max-w-0 opacity-0'
+                <span className={`font-black text-xl whitespace-nowrap overflow-hidden transition-all duration-300 ${
+                  phoneHovered ? 'max-w-40 opacity-100' : 'max-w-0 opacity-0'
                 }`}>
                   0948 555 551
                 </span>

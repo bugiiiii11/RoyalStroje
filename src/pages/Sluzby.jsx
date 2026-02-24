@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, FileText, Package, Wrench } from 'lucide-react';
+import { ShoppingCart, FileText, Package, Wrench, Truck } from 'lucide-react';
 
 export default function Sluzby() {
   const services = [
@@ -10,7 +10,7 @@ export default function Sluzby() {
       title: 'Prenájom techniky',
       description: 'Malé náradie, stredná a ťažká mechanizácia. Prenájom od 1 dňa s dovozom na stavbu.',
       features: ['Dovoz do 4 hodín', 'Nonstop podpora', 'Senec - Bratislava - okolie', 'Od 1 dňa prenájmu'],
-      backgroundImage: '/pictures/graphics/predaj.png',
+      backgroundImage: '/pictures/graphics/hero4.png',
     },
     {
       id: 'predaj-techniky',
@@ -19,7 +19,7 @@ export default function Sluzby() {
       title: 'Predaj náradia',
       description: 'Kvalitné náradie, mechanizácia a príslušenstvo značkových výrobcov priamo na sklade v Senci.',
       features: ['Overené značky', 'Férové ceny', 'Tovar skladom', 'Expresné dodanie'],
-      backgroundImage: '/pictures/graphics/predaj.png',
+      backgroundImage: '/pictures/graphics/servis.png',
     },
     {
       id: 'nahradne-diely',
@@ -28,7 +28,7 @@ export default function Sluzby() {
       title: 'Predaj náhradných dielov',
       description: 'Široký sortiment originálnych náhradných dielov pre stavebné náradie. Skladom diely pre všetky typy strojov a zariadení.',
       features: ['Originálne diely', 'Skladová dostupnosť', 'Odborné poradenstvo', 'Expresná objednávka'],
-      backgroundImage: '/pictures/graphics/servis.png',
+      backgroundImage: '/pictures/graphics/predaj.png',
     },
     {
       id: 'cenova-ponuka',
@@ -37,7 +37,16 @@ export default function Sluzby() {
       title: 'Cenová ponuka',
       description: 'Pripravíme pre vás presnú cenovú ponuku na mieru. Rýchlo, transparentne a bez skrytých poplatkov.',
       features: ['Ponuka do 24 hodín', 'Presná kalkulácia', 'Individuálny prístup', 'Bezplatné poradenstvo'],
-      backgroundImage: '/pictures/graphics/dovoz.png',
+      backgroundImage: '/pictures/graphics/objects1.png',
+    },
+    {
+      id: 'royal-fleet',
+      path: '/sluzby/royal-fleet',
+      icon: Truck,
+      title: 'Royal Fleet',
+      description: 'Dlhodobý prenájom techniky pre firmy po celom Slovensku. Fixné mesačné náklady, servis zahrnutý.',
+      features: ['Dlhodobý prenájom', 'Fixné mesačné platby', 'Servis zahrnutý', 'Pre firmy - celé Slovensko'],
+      backgroundImage: '/pictures/graphics/objects4.png',
     },
   ];
 
@@ -124,7 +133,7 @@ export default function Sluzby() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 md:gap-6 mb-6 md:mb-16">
             {services.map((service) => {
               const IconComponent = service.icon;
               return (
