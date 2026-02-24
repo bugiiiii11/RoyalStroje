@@ -1,4 +1,4 @@
-import { Phone, Mail, Package, Wrench, Clock, Shield, CheckCircle, Lightbulb } from 'lucide-react';
+import { Phone, Mail, Package, Wrench, Clock, Shield } from 'lucide-react';
 
 export default function NahradneDiely() {
   const services = [
@@ -14,68 +14,21 @@ export default function NahradneDiely() {
       icon: Package,
       title: 'Skladová dostupnosť',
       description: 'Najžiadanejšie náhradné diely priamo na sklade v Senci.',
-      features: ['Okamžitý odber', 'Veľký sklad', 'Rezervácia online', 'Express objednávka'],
+      features: ['Okamžitý odber', 'Veľký sklad', 'Rezervácia telefonicky', 'Express objednávka'],
     },
     {
       id: 'odberne-poradenstvo',
       icon: Wrench,
       title: 'Odborné poradenstvo',
       description: 'Pomôžeme vám nájsť správny náhradný diel pre váš stroj.',
-      features: ['Skúsení technici', 'Identifikácia dielu', 'Montážne rady', 'Bezplatné poradenstvo'],
+      features: ['Identifikácia dielu', 'Montážne rady', 'Bezplatné poradenstvo', '12 rokov skúseností'],
     },
     {
       id: 'rychle-dodanie',
       icon: Clock,
       title: 'Rýchle dodanie',
       description: 'Ak nemáme diel skladom, objednáme a dodáme do 48 hodín.',
-      features: ['Express objednávka', 'Sledovanie zásielky', 'SMS notifikácie', 'Dovoz na stavbu'],
-    },
-    {
-      id: 'servisne-balicky',
-      icon: CheckCircle,
-      title: 'Servisné balíčky',
-      description: 'Kompletné servisné sady pre pravidelné údržby vašej techniky.',
-      features: ['Filtre a oleje', 'Opotrebované diely', 'Zvýhodnené ceny', 'Servisné manuály'],
-    },
-    {
-      id: 'garancia-zaruka',
-      icon: Shield,
-      title: 'Garancia a záruka',
-      description: 'Všetky diely s plnou zárukou výrobcu a možnosťou vrátenia.',
-      features: ['Záruka 24 mesiacov', 'Výmena vadného dielu', '14 dní na vrátenie', 'Certifikát pravosti'],
-    },
-  ];
-
-  const partners = [
-    {
-      name: 'Makita',
-      logo: '/pictures/brands/makita.png',
-      description: 'Profesionálne elektrické náradie',
-    },
-    {
-      name: 'Bosch',
-      logo: '/pictures/brands/bosch.png',
-      description: 'Prémiové náradie a príslušenstvo',
-    },
-    {
-      name: 'Hilti',
-      logo: '/pictures/brands/hilti.png',
-      description: 'Stavebná technika a náradie',
-    },
-    {
-      name: 'Stihl',
-      logo: '/pictures/brands/stihl.png',
-      description: 'Motorové píly a záhradná technika',
-    },
-    {
-      name: 'DeWalt',
-      logo: '/pictures/brands/dewalt.png',
-      description: 'Profesionálne akumulátorové náradie',
-    },
-    {
-      name: 'Milwaukee',
-      logo: '/pictures/brands/milwaukee.png',
-      description: 'Ťažké profesionálne náradie',
+      features: ['Dodanie do 48h', 'Dovoz na stavbu', 'Senec - Bratislava', 'SMS notifikácie'],
     },
   ];
 
@@ -123,10 +76,10 @@ export default function NahradneDiely() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Predaj náhradných dielov
+              Náhradné diely skladom. <span className="text-orange-primary">Originál, rýchlo.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Široký sortiment originálnych náhradných dielov pre stavebné náradie a techniku. Skladom diely pre všetky typy strojov.
+              Originálne diely pre stavebné stroje a náradie. Express dodanie do 48 hodín.
             </p>
           </div>
         </div>
@@ -156,14 +109,14 @@ export default function NahradneDiely() {
           <div className="mb-12 md:mb-16">
             <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
               <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
-                <span className="text-orange-primary">Predaj</span> náhradných dielov
+                Náhradné diely skladom. <span className="text-orange-primary">Originál, rýchlo.</span>
               </h1>
               <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
-                Od identifikácie po dodanie - postaráme sa o všetko
+                Originálne diely pre stavebné náradie. Express dodanie.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {services.map((service) => {
                 const IconComponent = service.icon;
                 return (
@@ -192,56 +145,14 @@ export default function NahradneDiely() {
             </div>
           </div>
 
-          {/* Partners Section */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-                Naši <span className="text-orange-primary">partneri</span>
-              </h2>
-              <p className="text-white/70 max-w-2xl mx-auto mb-8">
-                Spolupracujeme s prémiovými značkami stavebného náradia a techniky
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
-              {partners.map((partner, index) => (
-                <div
-                  key={index}
-                  className="bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group text-center flex flex-col items-center justify-center"
-                >
-                  <div className="w-full h-20 flex items-center justify-center mb-3">
-                    <div className="text-white/80 font-black text-2xl group-hover:text-orange-primary transition-colors">
-                      {partner.name}
-                    </div>
-                  </div>
-                  <p className="text-white/50 text-xs leading-tight">
-                    {partner.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-12 text-center">
-              <div className="inline-flex items-start gap-3 bg-orange-primary/10 border border-orange-primary/30 rounded-xl px-6 py-4 max-w-3xl">
-                <div className="w-8 h-8 rounded-lg bg-orange-primary/20 border border-orange-primary/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Lightbulb className="text-orange-primary" size={18} />
-                </div>
-                <p className="text-white/90 text-sm text-left">
-                  <strong className="text-white">Nenašli ste značku?</strong> Objednávame diely aj pre ďalšie značky na vyžiadanie.
-                  Kontaktujte nás a overíme dostupnosť.
-                </p>
-              </div>
-            </div>
-          </div>
-
           {/* FAQ Section */}
           <div className="mb-16">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-                Ako to <span className="text-orange-primary">funguje?</span>
+                Ako objednať <span className="text-orange-primary">náhradný diel?</span>
               </h2>
               <p className="text-white/70 max-w-2xl mx-auto mb-8">
-                Jednoduchý proces objednávky náhradných dielov
+                Od identifikácie po dodanie - 4 jednoduché kroky
               </p>
             </div>
 
@@ -288,10 +199,10 @@ export default function NahradneDiely() {
           {/* CTA Section */}
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-              Potrebujete náhradný diel?
+              Hľadáte náhradný diel?
             </h2>
             <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-              Kontaktujte nás a pomôžeme vám nájsť správny diel pre váš stroj.
+              Zavolejte nám a pomôžeme vám nájsť správny diel.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <span className="flex items-center gap-2 text-white/70">

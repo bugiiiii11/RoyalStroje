@@ -1,4 +1,4 @@
-import { Phone, Mail, FileText, CheckCircle, Clock, Calculator, UserCheck, Lightbulb } from 'lucide-react';
+import { Phone, Mail, CheckCircle, Clock, Calculator, UserCheck } from 'lucide-react';
 
 export default function CenovaPonuka() {
   const services = [
@@ -6,43 +6,29 @@ export default function CenovaPonuka() {
       id: 'presna-kalkulacia',
       icon: Calculator,
       title: 'Presná kalkulácia',
-      description: 'Detailný rozpis všetkých položiek s férovou cenou bez skrytých poplatkov.',
-      features: ['Transparentný cenník', 'Žiadne skryté poplatky', 'Detailný rozpis položiek', 'Cenová flexibilita'],
+      description: 'Detailný rozpis všetkých položiek. Férové ceny bez skrytých poplatkov.',
+      features: ['Transparentný cenník', 'Žiadne skryté poplatky', 'Detailný rozpis', 'Cenová flexibilita'],
     },
     {
       id: 'rychle-spracovanie',
       icon: Clock,
-      title: 'Rýchle spracovanie',
-      description: 'Cenovú ponuku pripravíme a odošleme do 24 hodín od vašej požiadavky.',
-      features: ['Ponuka do 24h', 'Express možnosť', 'Online odoslanie', 'SMS notifikácia'],
+      title: 'Ponuka do 24 hodín',
+      description: 'Pripravíme a odošleme cenovú ponuku do 24 hodín od požiadavky.',
+      features: ['Ponuka do 24h', 'Email + SMS', 'Možnosť konzultácie', '12 rokov skúseností'],
     },
     {
       id: 'individualny-pristup',
       icon: UserCheck,
       title: 'Individuálny prístup',
-      description: 'Každá cenová ponuka je prispôsobená presne vašim potrebám a požiadavkám.',
+      description: 'Každá cenová ponuka je na mieru podľa vašich potrieb.',
       features: ['Konzultácia zdarma', 'Návrh riešenia', 'Možnosť úprav', 'Odborné poradenstvo'],
     },
     {
       id: 'ziadna-zavaznost',
       icon: CheckCircle,
-      title: 'Bez záväzkov',
-      description: 'Vytvorenie cenovej ponuky je pre vás úplne zadarmo a nezáväzné.',
-      features: ['Zadarmo', 'Bez registrácie', 'Žiadne záväzky', 'Ochrana údajov'],
-    },
-    {
-      id: 'komplexne-sluzby',
-      icon: FileText,
-      title: 'Komplexné služby',
-      description: 'Ponúkame cenové kalkulácie pre prenájom, predaj aj servisné služby.',
-      features: ['Prenájom techniky', 'Predaj náradia', 'Náhradné diely', 'Zemné práce'],
-    },
-    {
-      id: 'poradenstvo',
-      icon: Lightbulb,
-      title: 'Odborné poradenstvo',
-      description: 'Pomôžeme vám vybrať správne riešenie a optimalizovať náklady.',
-      features: ['Výber techniky', 'Optimalizácia nákladov', 'Technické parametre', 'Alternatívne riešenia'],
+      title: 'Zadarmo a nezáväzne',
+      description: 'Vytvorenie cenovej ponuky je úplne zadarmo a nezáväzné.',
+      features: ['Zadarmo', 'Bez registrácie', 'Žiadne záväzky', 'Ochrana údajov GDPR'],
     },
   ];
 
@@ -90,10 +76,10 @@ export default function CenovaPonuka() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Cenová ponuka
+              Cenová ponuka do 24 hodín. <span className="text-orange-primary">Presne, férovo.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Pre každého obchodníka je tvorba cenových ponúk jednou z najdôležitejších obchodných aktivít. Je posledným krokom pred objednávkou a preto jej každý z obchodníkov pripisuje veľký význam.
+              Rýchla kalkulácia na mieru. Bez skrytých poplatkov.
             </p>
           </div>
         </div>
@@ -123,14 +109,14 @@ export default function CenovaPonuka() {
           <div className="mb-12 md:mb-16">
             <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
               <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
-                <span className="text-orange-primary">Cenová ponuka</span> na mieru
+                Cenová ponuka do 24 hodín. <span className="text-orange-primary">Presne, férovo.</span>
               </h1>
               <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
-                Hlavnou výhodou týchto cenových ponúk je možnosť vypracovať presnú cenovú kalkuláciu podľa vopred zistených potrieb klienta a naviač pridať ďalšie možnosti, ktoré si klient môže vyberať sám.
+                Presná kalkulácia na mieru. Zadarmo a nezáväzne.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {services.map((service) => {
                 const IconComponent = service.icon;
                 return (
@@ -163,10 +149,10 @@ export default function CenovaPonuka() {
           <div className="mb-16">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-                Prečo si <span className="text-orange-primary">vyžiadať ponuku?</span>
+                Ako to <span className="text-orange-primary">funguje?</span>
               </h2>
               <p className="text-white/70 max-w-3xl mx-auto mb-8">
-                Vďaka našim dlhoročným skúsenostiam Vám vieme v tomto smere poskytnúť veľmi presnú cenovú ponuku, ktorú vieme prispôsobiť Vašim potrebám. Taktiež Vám dokážeme naceniť a zabezpečiť tovar potrebný k realizácii, čím Vás odbremeníme od nepríjemností, ktoré sú spojené často spojené.
+                3 jednoduché kroky k presnej cenovej ponuke
               </p>
             </div>
 
@@ -199,27 +185,15 @@ export default function CenovaPonuka() {
                 </p>
               </div>
             </div>
-
-            <div className="mt-12 text-center">
-              <div className="inline-flex items-start gap-3 bg-orange-primary/10 border border-orange-primary/30 rounded-xl px-6 py-4 max-w-3xl">
-                <div className="w-8 h-8 rounded-lg bg-orange-primary/20 border border-orange-primary/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Lightbulb className="text-orange-primary" size={18} />
-                </div>
-                <p className="text-white/90 text-sm text-left">
-                  <strong className="text-white">Tip:</strong> Čím presnejšie popíšete vaše požiadavky, tým rýchlejšie
-                  a presnejšie vieme pripraviť cenovú ponuku na mieru.
-                </p>
-              </div>
-            </div>
           </div>
 
           {/* CTA Section */}
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-              Potrebujete cenovú ponuku?
+              Potrebujete kalkuláciu?
             </h2>
             <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-              Kontaktujte nás a my vám pripravíme detailnú cenovú kalkuláciu presne podľa vašich potrieb.
+              Zavolejte nám a pripravíme vám cenovú ponuku do 24 hodín.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <span className="flex items-center gap-2 text-white/70">

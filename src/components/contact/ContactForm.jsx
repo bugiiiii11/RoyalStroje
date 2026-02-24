@@ -25,8 +25,23 @@ export default function ContactForm() {
     setIsSubmitting(true);
 
     // Using formspree.io or similar service - replace with your endpoint
-    // For now, using mailto as fallback
-    const mailtoLink = `mailto:info@royalstroje.sk?subject=Dopyt z webu - ${formData.projectType}&body=Meno: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0ATelefón: ${formData.phone}%0D%0ATyp projektu: ${formData.projectType}%0D%0A%0D%0ASprávová:%0D%0A${formData.message}`;
+    // For now, using mailto as fallback with improved formatting
+    const mailtoLink = `mailto:info@royalstroje.sk?subject=Dopyt z webu - ${formData.projectType}&body=` +
+      `NOVÝ DOPYT Z WEBU%0D%0A` +
+      `========================================%0D%0A%0D%0A` +
+      `KONTAKTNÉ ÚDAJE:%0D%0A` +
+      `--------------------%0D%0A` +
+      `Meno: ${formData.name}%0D%0A` +
+      `Email: ${formData.email}%0D%0A` +
+      `Telefón: ${formData.phone}%0D%0A%0D%0A` +
+      `PROJEKT:%0D%0A` +
+      `--------------------%0D%0A` +
+      `Typ projektu: ${formData.projectType}%0D%0A%0D%0A` +
+      `SPRÁVA:%0D%0A` +
+      `--------------------%0D%0A` +
+      `${formData.message}%0D%0A%0D%0A` +
+      `========================================%0D%0A` +
+      `Odoslané z kontaktného formulára Royal Stroje`;
 
     window.location.href = mailtoLink;
 

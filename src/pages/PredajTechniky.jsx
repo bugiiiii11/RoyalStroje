@@ -99,10 +99,10 @@ export default function PredajTechniky() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              <span className="text-orange-primary">Predaj</span> náradia, stavebných strojov a príslušenstva
+              Kúpte náradie, ktoré používame my. <span className="text-orange-primary">Overené na stavbách.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Všetko pre stavbu a dielňu priamo na prevádzke v Senci.
+              Predaj stavebného náradia a techniky v Senci. Od Makita po Hilti.
             </p>
           </div>
         </div>
@@ -132,10 +132,10 @@ export default function PredajTechniky() {
           <div className="mb-12 md:mb-16">
             <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
               <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 leading-tight">
-                <span className="text-orange-primary">Kamenný predaj</span> náradia a techniky
+                Kúpte náradie, ktoré používame my. <span className="text-orange-primary">Overené na stavbách.</span>
               </h1>
               <p className="text-white/70 text-sm md:text-lg">
-                Kvalitné náradie a stroje, ktoré máme overené aj v našej požičovni.
+                Predaj náradia a techniky v Senci. To čo používame, to aj predávame.
               </p>
             </div>
 
@@ -188,30 +188,10 @@ export default function PredajTechniky() {
             <h2 className="text-xl md:text-4xl lg:text-5xl font-black text-white mb-3 md:mb-6 leading-tight">
               Overené značky, <span className="text-orange-primary">férové ceny</span>
             </h2>
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <p className="text-white/90 text-sm md:text-lg lg:text-xl mb-4 md:mb-8 leading-relaxed">
-                Na sklade je náradie, remeselnícke potreby a vybrané kusy stavebnej mechanizácie. K dispozícii je aj široký výber príslušenstva – diamantové vrtáky, rezné a diamantové kotúče rôznych priemerov a ďalší spotrebný materiál za <span className="text-orange-primary font-bold">výhodné ceny</span>.
+                Náradie a mechanizácia na sklade v Senci. Diamantové kotúče, vrtáky, príslušenstvo a BOZP pomôcky za <span className="text-orange-primary font-bold">výhodné ceny</span>.
               </p>
-            </div>
-          </div>
-
-          {/* BOZP Banner */}
-          <div className="mb-6 md:mb-12 p-4 md:p-8 bg-zinc-900/30 backdrop-blur-sm border border-white/10 rounded-xl md:rounded-2xl relative overflow-hidden hover:border-orange-primary/30 hover:bg-zinc-900/40 transition-all duration-300 max-w-4xl mx-auto">
-            <div
-              className="absolute -top-10 -right-10 w-40 h-40 bg-orange-primary/6 rounded-full blur-3xl"
-            ></div>
-            <div className="relative flex items-start gap-3 md:gap-5">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/20 flex items-center justify-center flex-shrink-0">
-                <Shield className="text-orange-primary w-[18px] h-[18px] md:w-[22px] md:h-[22px]" />
-              </div>
-              <div>
-                <h3 className="text-base md:text-2xl font-bold text-white mb-1.5 md:mb-2.5">
-                  Bezpečnosť na prvom mieste
-                </h3>
-                <p className="text-white/75 text-xs md:text-base leading-relaxed">
-                  Súčasťou ponuky je aj bezpečnostné vybavenie: <span className="text-orange-primary font-semibold">reflexné vesty, gurtne, ochranné rukavice a ochranné okuliare</span>.
-                </p>
-              </div>
             </div>
           </div>
 
@@ -234,31 +214,11 @@ export default function PredajTechniky() {
             })}
           </div>
 
-          {/* Quick Service Banner */}
-          <div className="mb-6 md:mb-12 p-4 md:p-8 bg-zinc-900/30 backdrop-blur-sm border border-white/10 rounded-xl md:rounded-2xl relative overflow-hidden hover:border-orange-primary/30 hover:bg-zinc-900/40 transition-all duration-300">
-            <div
-              className="absolute -top-10 -right-10 w-40 h-40 bg-orange-primary/6 rounded-full blur-3xl"
-            ></div>
-            <div className="relative flex items-start gap-3 md:gap-5">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/20 flex items-center justify-center flex-shrink-0">
-                <Zap className="text-orange-primary w-[18px] h-[18px] md:w-[22px] md:h-[22px]" />
-              </div>
-              <div>
-                <h3 className="text-base md:text-2xl font-bold text-white mb-1.5 md:mb-2.5">
-                  Rýchlo, pohodlne, spoľahlivo
-                </h3>
-                <p className="text-white/75 text-xs md:text-base leading-relaxed">
-                  Nákup prebieha bez zbytočného čakania. Tovar, ktorý nie je aktuálne skladom, je možné okamžite objednať a po dohode zabezpečiť <span className="text-orange-primary font-semibold">expresné doručenie</span>.
-                </p>
-              </div>
-            </div>
-          </div>
-
           {/* CTA Content */}
           <div className="mt-10 md:mt-20">
             <div className="text-center mb-6 md:mb-12">
             <h2 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-6">
-              Zastavte sa v našej <span className="text-orange-primary">predajni</span>
+              Zastavte sa <span className="text-orange-primary">na predvádzke</span>
             </h2>
           </div>
 
