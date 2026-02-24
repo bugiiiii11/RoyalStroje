@@ -162,51 +162,73 @@ export default function Catalog() {
   };
 
   return (
-    <section id="katalog" className="relative pt-6 pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
+    <section id="katalog" className="relative bg-zinc-950 overflow-hidden min-h-screen">
+      {/* Mobile Hero - Compact */}
+      <div className="md:hidden relative h-[22vh] max-h-[200px] bg-black overflow-hidden">
+        {/* Logo - Top Left */}
+        <div className="absolute top-3 left-3 z-30">
+          <img
+            src="/logoroyal.png"
+            alt="Royal Stroje"
+            className="h-8 w-auto"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-20 h-full flex flex-col justify-center px-4 pt-10 text-center">
+          <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 leading-tight">
+            <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
+          </h1>
+          <p className="text-white/70 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
+            Objavte našu širokú ponuku profesionálneho vybavenia - od malého náradia po ťažkú techniku - všetko na jednom mieste.
+          </p>
+        </div>
+      </div>
+
       {/* Radial gradient overlay */}
       <div
-        className="absolute inset-0 pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none z-0 top-[30vh] md:top-0"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.5) 0%, rgba(9, 9, 11, 1) 75%)'
         }}
       />
 
-      <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-        {/* Centered Header */}
-        <div className="text-center mb-6 md:mb-8">
-          {/* Title and Subtitle */}
-          <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
-            <span className="text-orange-primary">Požičovňa</span><br className="md:hidden" /> profesionálnej techniky
+      <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pt-2 pb-16 md:py-16">
+        {/* Desktop Header */}
+        <div className="hidden md:block text-center mb-8">
+          <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
           </h1>
-          <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-4 md:mb-6">
+          <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-6">
             Objavte našu širokú ponuku profesionálneho vybavenia - od malého náradia po ťažkú techniku - všetko na jednom mieste.
           </p>
+        </div>
 
-          {/* Customer Type Selector & Search - Centered Row */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4">
+        {/* Customer Type Selector & Search - Centered Row */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4 mb-4 md:mb-8">
             {/* Customer Type Selector */}
-            <div className="inline-flex bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-1 md:p-1.5 gap-1 md:gap-1.5">
+            <div className="inline-flex bg-zinc-900 border border-white/10 rounded-lg md:rounded-2xl p-0.5 md:p-1.5 gap-0.5 md:gap-1.5">
               <button
                 onClick={() => setCustomerType('po')}
-                className={`flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl font-bold text-xs md:text-sm transition-all ${
+                className={`flex items-center gap-1 md:gap-2 px-2.5 py-1.5 md:px-4 md:py-2 rounded-md md:rounded-xl font-bold text-[10px] md:text-sm transition-all ${
                   customerType === 'po'
                     ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
                     : 'text-white/60 hover:text-white/80'
                 }`}
               >
-                <Building2 size={14} className="md:w-4 md:h-4" />
+                <Building2 size={12} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline">Právnické osoby</span>
                 <span className="sm:hidden">PO</span>
               </button>
               <button
                 onClick={() => setCustomerType('fo')}
-                className={`flex items-center gap-1.5 md:gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl font-bold text-xs md:text-sm transition-all ${
+                className={`flex items-center gap-1 md:gap-2 px-2.5 py-1.5 md:px-4 md:py-2 rounded-md md:rounded-xl font-bold text-[10px] md:text-sm transition-all ${
                   customerType === 'fo'
                     ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
                     : 'text-white/60 hover:text-white/80'
                 }`}
               >
-                <User size={14} className="md:w-4 md:h-4" />
+                <User size={12} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline">Fyzické osoby</span>
                 <span className="sm:hidden">FO</span>
               </button>
@@ -214,7 +236,7 @@ export default function Catalog() {
 
             {/* Search Bar */}
             <div className="relative w-full sm:w-80">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" size={14} />
+              <Search className="absolute left-2.5 md:left-3 top-1/2 -translate-y-1/2 text-white/40" size={12} />
               <input
                 type="text"
                 placeholder="Hľadať produkty..."
@@ -223,7 +245,7 @@ export default function Catalog() {
                   setSearchQuery(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full bg-zinc-900 border border-white/10 rounded-lg md:rounded-xl pl-9 md:pl-10 pr-9 md:pr-10 py-2 md:py-2.5 text-xs md:text-sm text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+                className="w-full bg-zinc-900 border border-white/10 rounded-lg md:rounded-xl pl-8 md:pl-10 pr-8 md:pr-10 py-1.5 md:py-2.5 text-[11px] md:text-sm text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
               />
               {searchQuery && (
                 <button
@@ -231,14 +253,13 @@ export default function Catalog() {
                     setSearchQuery('');
                     setCurrentPage(1);
                   }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                  className="absolute right-2.5 md:right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
                 >
-                  <X size={12} className="md:w-3.5 md:h-3.5" />
+                  <X size={10} className="md:w-3.5 md:h-3.5" />
                 </button>
               )}
             </div>
           </div>
-        </div>
 
         {/* Main Content - No frame */}
         <div className="relative">

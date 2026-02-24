@@ -21,8 +21,8 @@ export default function BlogDetail() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-24 md:py-32 lg:py-40 flex items-center overflow-hidden">
+      {/* Hero Section - Desktop only */}
+      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -98,6 +98,15 @@ export default function BlogDetail() {
 
       {/* Article Content */}
       <section className="relative py-16 bg-zinc-950 overflow-hidden">
+        {/* Mobile Logo - Top Left */}
+        <div className="md:hidden absolute top-3 left-3 z-30">
+          <img
+            src="/logoroyal.png"
+            alt="Royal Stroje"
+            className="h-8 w-auto"
+          />
+        </div>
+
         {/* Background effects */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
@@ -107,6 +116,42 @@ export default function BlogDetail() {
         />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 lg:px-12">
+          {/* Mobile Header */}
+          <div className="md:hidden text-center mb-6 pt-16">
+            {/* Back Button */}
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 text-white/70 hover:text-orange-primary transition-colors mb-4"
+            >
+              <ArrowLeft size={16} />
+              <span className="text-sm">Späť na blog</span>
+            </Link>
+
+            {/* Category Badge */}
+            <div className="mb-3">
+              <span className="inline-block bg-orange-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full">
+                {article.category}
+              </span>
+            </div>
+
+            <h1 className="text-xl font-black text-white mb-2 leading-tight">
+              {article.title}
+            </h1>
+
+            {/* Meta Info */}
+            <div className="flex flex-wrap items-center justify-center gap-3 text-white/70 text-xs">
+              <span className="flex items-center gap-1">
+                <Calendar size={14} />
+                {article.date}
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock size={14} />
+                {article.readTime}
+              </span>
+              <span>{article.author}</span>
+            </div>
+          </div>
+
           {/* Article Body */}
           <article className="prose prose-invert prose-lg max-w-none">
             {article.content}

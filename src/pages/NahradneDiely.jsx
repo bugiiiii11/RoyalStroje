@@ -133,7 +133,7 @@ export default function NahradneDiely() {
       </section>
 
       {/* Main Content Section */}
-      <section className="relative pt-6 pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
+      <section className="relative pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
         {/* Radial gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
@@ -142,14 +142,23 @@ export default function NahradneDiely() {
           }}
         />
 
+        {/* Mobile Logo - Top Left */}
+        <div className="md:hidden absolute top-3 left-3 z-30">
+          <img
+            src="/logoroyal.png"
+            alt="Royal Stroje"
+            className="h-8 w-auto"
+          />
+        </div>
+
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Services Grid */}
           <div className="mb-12 md:mb-16">
-            <div className="text-center mb-6 md:mb-12">
-              <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
-                <span className="text-orange-primary">Predaj</span><br className="md:hidden" /> náhradných dielov
+            <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+              <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+                <span className="text-orange-primary">Predaj</span> náhradných dielov
               </h1>
-              <p className="text-white/70 max-w-2xl mx-auto">
+              <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
                 Od identifikácie po dodanie - postaráme sa o všetko
               </p>
             </div>

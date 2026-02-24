@@ -143,7 +143,7 @@ export default function Blog() {
   return (
     <div className="min-h-screen">
       {/* Main Content Section */}
-      <section className="relative pt-6 pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
+      <section className="relative pb-16 md:py-16 bg-zinc-950 overflow-hidden min-h-screen">
         {/* Radial gradient overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
@@ -152,12 +152,21 @@ export default function Blog() {
           }}
         />
 
+        {/* Mobile Logo - Top Left */}
+        <div className="md:hidden absolute top-3 left-3 z-30">
+          <img
+            src="/logoroyal.png"
+            alt="Royal Stroje"
+            className="h-8 w-auto"
+          />
+        </div>
+
         <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
 
           {/* Section Heading */}
-          <div className="text-center mb-6 md:mb-12">
-            <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
-              Náš<br className="md:hidden" /> <span className="text-orange-primary">blog</span>
+          <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+              Náš <span className="text-orange-primary">blog</span>
             </h1>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
               Tipy, novinky a užitočné informácie zo sveta stavebnej techniky a náradia.

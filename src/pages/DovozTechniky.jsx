@@ -48,8 +48,8 @@ export default function DovozTechniky() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-24 md:py-32 lg:py-40 flex items-center overflow-hidden">
+      {/* Hero Section - Desktop only */}
+      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
@@ -101,6 +101,15 @@ export default function DovozTechniky() {
 
       {/* Services Grid */}
       <section className="relative py-16 bg-zinc-950 overflow-hidden">
+        {/* Mobile Logo - Top Left */}
+        <div className="md:hidden absolute top-3 left-3 z-30">
+          <img
+            src="/logoroyal.png"
+            alt="Royal Stroje"
+            className="h-8 w-auto"
+          />
+        </div>
+
         {/* Radial gradient overlay - wider spread */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
@@ -203,11 +212,11 @@ export default function DovozTechniky() {
         `}</style>
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+          <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
               Komplexné <span className="text-orange-primary">dopravné služby</span>
-            </h2>
-            <p className="text-white/70 max-w-2xl mx-auto">
+            </h1>
+            <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
               Dovoz a odvoz techniky kedykoľvek potrebujete
             </p>
           </div>

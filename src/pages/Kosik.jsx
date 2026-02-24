@@ -92,12 +92,21 @@ export default function Kosik() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 pt-6 pb-24">
+    <div className="min-h-screen bg-zinc-950 pb-24 relative">
+      {/* Mobile Logo - Top Left */}
+      <div className="md:hidden absolute top-3 left-3 z-30">
+        <img
+          src="/logoroyal.png"
+          alt="Royal Stroje"
+          className="h-8 w-auto"
+        />
+      </div>
+
       <div className="container mx-auto px-4 max-w-2xl">
         {/* Header */}
-        <div className="mb-6 text-center">
-          <h1 className="text-2xl md:text-4xl font-black text-white mb-2 md:mb-4">
-            <span className="text-orange-primary">Nezáväzná</span><br className="md:hidden" /> objednávka
+        <div className="mb-6 text-center pt-16 md:pt-0">
+          <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="text-orange-primary">Nezáväzná</span> objednávka
           </h1>
           <p className="text-white/70 text-sm md:text-lg">
             Skontrolujte si vybrané produkty a odošlite objednávku
