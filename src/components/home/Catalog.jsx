@@ -177,10 +177,10 @@ export default function Catalog() {
         {/* Content */}
         <div className="relative z-20 h-full flex flex-col justify-center px-4 pt-10 text-center">
           <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 leading-tight">
-            <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
+            <span className="text-orange-primary">Katalóg</span> strojov na prenájom
           </h1>
           <p className="text-white/70 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
-            Objavte našu širokú ponuku profesionálneho vybavenia - od malého náradia po ťažkú techniku - všetko na jednom mieste.
+            Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Dovoz na stavbu do 4 hodín.
           </p>
         </div>
       </div>
@@ -196,11 +196,11 @@ export default function Catalog() {
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pt-2 pb-16 md:py-16">
         {/* Desktop Header */}
         <div className="hidden md:block text-center mb-8">
-          <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
-            <span className="text-orange-primary">Požičovňa</span> profesionálnej techniky
-          </h1>
+          <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="text-orange-primary">Katalóg</span> strojov na prenájom
+          </h2>
           <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-6">
-            Objavte našu širokú ponuku profesionálneho vybavenia - od malého náradia po ťažkú techniku - všetko na jednom mieste.
+            Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Dovoz na stavbu do 4 hodín.
           </p>
         </div>
 

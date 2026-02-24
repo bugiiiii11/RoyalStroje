@@ -29,7 +29,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <img
           src="/hero1.png"
-          alt="Royal Stroje - Prenájom stavebnej techniky"
+          alt="Požičovňa stavebnej techniky Royal Stroje Senec - profesionálne náradie a stroje na prenájom"
           className="w-full h-full object-cover transition-transform duration-100"
           style={{
             transform: `translateY(-${parallaxOffset * 0.15}px) scale(1.05)`,
@@ -85,17 +85,17 @@ export default function Hero() {
           <div className="max-w-2xl">
             {/* Headline */}
             <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-4 md:mb-6">
-              Požičovňa náradia a{' '}
+              Prenajmite si stavebné stroje.{' '}
               <span className="bg-gradient-to-r from-orange-primary to-orange-hover bg-clip-text text-transparent">
-                stavebnej techniky
+                Dnes objednáte, zajtra pracujete.
               </span>
             </h1>
 
             {/* Description */}
             <p className="text-base md:text-xl text-white/90 leading-relaxed mb-6 md:mb-8">
-              Profesionálne náradie, stroje a mechanizácia pre stavby všetkých veľkostí.{' '}
+              Požičovňa náradia a techniky v Senci s dovozom na stavbu.{' '}
               <strong className="text-orange-primary font-bold">
-                Rýchla doprava na stavbu.
+                12 rokov skúseností • Nonstop linka • Obsluhujeme Bratislavu a okolie
               </strong>
             </p>
 

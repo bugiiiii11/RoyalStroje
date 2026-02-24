@@ -1,8 +1,17 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, FileText, Package } from 'lucide-react';
+import { ShoppingCart, FileText, Package, Wrench } from 'lucide-react';
 
 export default function Sluzby() {
   const services = [
+    {
+      id: 'prenajom',
+      path: '/#katalog',
+      icon: Wrench,
+      title: 'Prenájom techniky',
+      description: 'Malé náradie, stredná a ťažká mechanizácia. Prenájom od 1 dňa s dovozom na stavbu.',
+      features: ['Dovoz do 4 hodín', 'Nonstop podpora', 'Senec - Bratislava - okolie', 'Od 1 dňa prenájmu'],
+      backgroundImage: '/pictures/graphics/predaj.png',
+    },
     {
       id: 'predaj-techniky',
       path: '/sluzby/predaj-techniky',
@@ -76,10 +85,10 @@ export default function Sluzby() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Naše služby
+              Všetko pre vašu stavbu. <span className="text-orange-primary">Pod jednou strechou.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-              Komplexné služby pre vašu stavbu – od požičovne náradia cez zemné práce až po servis a dopravu.
+              Prenájom stavebnej techniky, predaj náradia, náhradné diely a odborné poradenstvo v Senci.
             </p>
           </div>
         </div>

@@ -60,13 +60,13 @@ export default function Partneri() {
           {/* Section Heading */}
           <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
             <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
-              Naši <span className="text-orange-primary">partneri</span>
+              Sieť overených profesionálov. <span className="text-orange-primary">Jeden kontakt, všetky služby.</span>
             </h1>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-2 md:mb-4">
-              Spolupracujeme s overenými profesionálmi zo Senca, Bratislavy a okolia.
+              Partneri Royal Stroje v Senci, Bratislave a okolí - stavbári, ktorým dôverujeme.
             </p>
             <p className="text-white/60 text-xs md:text-base max-w-2xl mx-auto hidden md:block">
-              Všetci naši partneri sú verifikované legitimné firmy, s ktorými udržiavame dlhodobú spoluprácu. Spoločne budujeme dôveryhodné partnerstvá založené na kvalite a profesionalite.
+              Partnerstvo vzniká prirodzene po dlhodobej kvalitnej spolupráci. Len naši najspoľahlivejší partneri sú uvedení na tomto zozname.
             </p>
           </div>
 

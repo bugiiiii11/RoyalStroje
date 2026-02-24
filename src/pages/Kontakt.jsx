@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
+import ContactForm from '../components/contact/ContactForm';
 
 export default function Kontakt() {
   return (
@@ -43,13 +44,13 @@ export default function Kontakt() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
-              <span className="text-orange-primary">Kontaktujte</span> nás
+              Zavolajte teraz. <span className="text-orange-primary">Stroje budú na stavbe zajtra.</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-4">
-              Sme tu pre vás. Zavolajte, napíšte email alebo nás navštívte v našej prevádzke v Senci.
+              Nonstop telefonická dostupnosť • Senec, Recká cesta 182 • Odpoveď do 15 minút
             </p>
             <p className="text-base md:text-lg text-white/80 leading-relaxed">
-              ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2026.
+              Obsluhujeme Senec, Bratislavu, Galantu, Trnavu, Pezinok, Modru, Sereď, Šamorín a okolie.
             </p>
           </div>
         </div>
@@ -143,6 +144,11 @@ export default function Kontakt() {
               <p className="text-orange-primary font-bold text-sm md:text-lg mb-0.5 md:mb-1 break-all">info@royalstroje.sk</p>
               <p className="text-white/60 text-[10px] md:text-sm hidden md:block">Odpoveď do 24 hodín</p>
             </a>
+          </div>
+
+          {/* Contact Form Section */}
+          <div className="mb-8 md:mb-16">
+            <ContactForm />
           </div>
 
           {/* Visit Us Section */}
@@ -250,7 +256,7 @@ export default function Kontakt() {
                 <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8">
                   <h3 className="text-white font-black text-xl mb-4">O nás</h3>
                   <p className="text-white/70 leading-relaxed">
-                    ROYAL STROJE je profesionálna požičovňa stavebného náradia a techniky pôsobiaca v Senci od roku 2026. Ponúkame prenájom kvalitného náradia aj komplexné služby v oblasti stavebníctva.
+                    ROYAL STROJE je požičovňa stavebného náradia a techniky v Senci s 12-ročnými skúsenosťami v odvetví. Ponúkame prenájom profesionálneho náradia, strednej a ťažkej mechanizácie s dovozom na stavbu.
                   </p>
                 </div>
               </div>

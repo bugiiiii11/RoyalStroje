@@ -166,10 +166,10 @@ export default function Blog() {
           {/* Section Heading */}
           <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
             <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
-              Náš <span className="text-orange-primary">blog</span>
+              Stavajte efektívnejšie. <span className="text-orange-primary">Tipy od profesionálov.</span>
             </h1>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
-              Tipy, novinky a užitočné informácie zo sveta stavebnej techniky a náradia.
+              Praktické rady, návody a novinky zo sveta stavebnej mechanizácie pre región Senec - Bratislava.
             </p>
           </div>
 
