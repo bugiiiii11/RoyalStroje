@@ -1,5 +1,4 @@
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
-import ContactForm from '../components/contact/ContactForm';
 
 export default function Kontakt() {
   return (
@@ -146,11 +145,6 @@ export default function Kontakt() {
             </a>
           </div>
 
-          {/* Contact Form Section */}
-          <div className="mb-8 md:mb-16">
-            <ContactForm />
-          </div>
-
           {/* Visit Us Section */}
           <div className="space-y-4 md:space-y-8">
             {/* Section Header */}
@@ -262,8 +256,8 @@ export default function Kontakt() {
               </div>
             </div>
 
-            {/* Social Media Section */}
-            <div className="text-center mb-6 md:mb-8">
+            {/* Social Media Section - Hidden until accounts are set up */}
+            {/* <div className="text-center mb-6 md:mb-8">
               <h3 className="text-white font-black text-lg md:text-2xl mb-3 md:mb-6">
                 Sledujte <span className="text-orange-primary">nás</span>
               </h3>
@@ -312,7 +306,7 @@ export default function Kontakt() {
                   </svg>
                 </a>
               </div>
-            </div>
+            </div> */}
 
             {/* CTA Button */}
             <div className="text-center pt-4 md:pt-8">

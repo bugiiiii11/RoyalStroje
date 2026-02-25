@@ -1,4 +1,5 @@
-import { Phone, Mail, CheckCircle, Clock, Calculator, UserCheck } from 'lucide-react';
+import { CheckCircle, Clock, Calculator, UserCheck } from 'lucide-react';
+import ContactForm from '../components/contact/ContactForm';
 
 export default function CenovaPonuka() {
   const services = [
@@ -28,7 +29,7 @@ export default function CenovaPonuka() {
       icon: CheckCircle,
       title: 'Bezplatná konzultácia',
       description: 'Príprava cenovej ponuky a odborná konzultácia sú úplne zdarma.',
-      features: ['Konzultácia zdarma', 'Príprava ponuky zdarma', 'Žiadne záväzky', 'Ochrana údajov GDPR'],
+      features: ['Konzultácia zdarma', 'Príprava ponuky zdarma', 'Bez registrácie', 'Ochrana údajov GDPR'],
     },
   ];
 
@@ -145,6 +146,36 @@ export default function CenovaPonuka() {
             </div>
           </div>
 
+          {/* Why Request a Quote Section */}
+          <div className="mb-16">
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/30 rounded-3xl p-8 md:p-12">
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-4">
+                    Prečo si vyžiadať <span className="text-orange-primary">ponuku?</span>
+                  </h2>
+                  <p className="text-white/80 leading-relaxed text-base md:text-lg">
+                    Vďaka našim <strong className="text-orange-primary">12-ročným skúsenostiam</strong> v odvetví vieme poskytnúť presnú cenovú ponuku prispôsobenú vašim potrebám. Dokážeme vám naceniť a zabezpečiť všetok potrebný tovar k realizácii projektu, čím vás odbremeníme od zbytočných komplikácií a šetríme váš čas.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                  <div className="bg-zinc-950/50 rounded-xl p-4 border border-white/5 text-center">
+                    <div className="text-orange-primary font-black text-3xl mb-2">12+</div>
+                    <p className="text-white/70 text-sm">rokov skúseností</p>
+                  </div>
+                  <div className="bg-zinc-950/50 rounded-xl p-4 border border-white/5 text-center">
+                    <div className="text-orange-primary font-black text-3xl mb-2">24h</div>
+                    <p className="text-white/70 text-sm">príprava ponuky</p>
+                  </div>
+                  <div className="bg-zinc-950/50 rounded-xl p-4 border border-white/5 text-center">
+                    <div className="text-orange-primary font-black text-3xl mb-2">100%</div>
+                    <p className="text-white/70 text-sm">na mieru</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Benefits Section */}
           <div className="mb-16">
             <div className="text-center mb-12">
@@ -187,41 +218,9 @@ export default function CenovaPonuka() {
             </div>
           </div>
 
-          {/* CTA Section */}
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-              Potrebujete kalkuláciu?
-            </h2>
-            <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-              Zavolejte nám a pripravíme vám cenovú ponuku do 24 hodín.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <span className="flex items-center gap-2 text-white/70">
-                <span className="text-orange-primary">✓</span> Ponuka do 24 hodín
-              </span>
-              <span className="flex items-center gap-2 text-white/70">
-                <span className="text-orange-primary">✓</span> Zadarmo a nezáväzne
-              </span>
-              <span className="flex items-center gap-2 text-white/70">
-                <span className="text-orange-primary">✓</span> Odborné poradenstvo
-              </span>
-            </div>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="tel:+421948555551"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
-              >
-                <Phone size={20} />
-                <span>Zavolať teraz</span>
-              </a>
-              <a
-                href="mailto:info@royalstroje.sk"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-800 border-2 border-zinc-700 text-white font-bold rounded-full hover:bg-zinc-700 transition-all"
-              >
-                <Mail size={20} />
-                <span>Napísať email</span>
-              </a>
-            </div>
+          {/* Contact Form Section */}
+          <div className="mb-16">
+            <ContactForm />
           </div>
         </div>
       </section>

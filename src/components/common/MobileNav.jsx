@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Wrench, Phone, ShoppingCart } from 'lucide-react';
+import { Home, Wrench, Phone } from 'lucide-react';
 
 export default function MobileNav() {
   const location = useLocation();
@@ -8,7 +8,8 @@ export default function MobileNav() {
     { path: '/', icon: Home, label: 'Požičovňa' },
     { path: '/sluzby', icon: Wrench, label: 'Služby' },
     { path: '/kontakt', icon: Phone, label: 'Kontakt' },
-    { path: '/kosik', icon: ShoppingCart, label: 'Objednávka' },
+    // Košík/Objednávka je dočasne skrytá
+    // { path: '/kosik', icon: ShoppingCart, label: 'Objednávka' },
   ];
 
   return (

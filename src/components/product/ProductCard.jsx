@@ -1,11 +1,9 @@
-import { ShoppingCart, ChevronRight, ChevronLeft, X, Phone, Check } from 'lucide-react';
+import { ChevronRight, ChevronLeft, X, Phone } from 'lucide-react';
 import { useState } from 'react';
-import { useCart } from '../../context/CartContext';
 
 export default function ProductCard({ product, customerType = 'po' }) {
   const [showSpecs, setShowSpecs] = useState(false);
-  const { addToCart, isInCart } = useCart();
-  const inCart = isInCart(product.id);
+  const [showPhone, setShowPhone] = useState(false);
 
   // Calculate price based on customer type
   const displayPrice = customerType === 'po'
@@ -73,27 +71,24 @@ export default function ProductCard({ product, customerType = 'po' }) {
 
           {/* Actions */}
           <div className="flex flex-col gap-1.5 md:gap-2">
-            {/* Primary CTA */}
-            <button
-              onClick={() => addToCart(product)}
-              disabled={inCart}
-              className={`relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-1.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-full transition-all overflow-hidden group/cart ${
-                inCart
-                  ? 'bg-green-500/20 border border-green-500/50 text-green-400 cursor-default'
-                  : 'bg-black border border-orange-primary text-orange-primary hover:scale-105'
-              }`}
+            {/* Primary CTA - Desktop: Show phone on click, Mobile: Direct tel link */}
+            <a
+              href="tel:+421948555551"
+              onClick={(e) => {
+                // On desktop, prevent default and show phone number instead
+                if (window.innerWidth >= 768) {
+                  e.preventDefault();
+                  setShowPhone(true);
+                }
+                // On mobile, allow default behavior (tel: link)
+              }}
+              className="relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-1.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-full transition-all overflow-hidden group/cart bg-black border border-orange-primary text-orange-primary hover:scale-105"
             >
               {/* Shine effect */}
-              {!inCart && (
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-primary/30 to-transparent -translate-x-full group-hover/cart:translate-x-full transition-transform duration-700"></div>
-              )}
-              {inCart ? (
-                <Check size={14} className="relative z-10 md:w-4 md:h-4" />
-              ) : (
-                <ShoppingCart size={14} className="relative z-10 md:w-4 md:h-4" />
-              )}
-              <span className="relative z-10">{inCart ? 'V košíku' : 'Rezervovať'}</span>
-            </button>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-primary/30 to-transparent -translate-x-full group-hover/cart:translate-x-full transition-transform duration-700"></div>
+              <Phone size={14} className="relative z-10 md:w-4 md:h-4" />
+              <span className="relative z-10">{showPhone ? '0948 555 551' : 'Zavolať'}</span>
+            </a>
 
             {/* Secondary Link */}
             <button
@@ -195,14 +190,14 @@ export default function ProductCard({ product, customerType = 'po' }) {
                 </div>
               )}
 
-              {/* Reserve Button */}
+              {/* Call Button */}
               <a
                 href="tel:+421948555551"
                 className="relative w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-base sm:text-lg rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg shadow-orange-primary/40 overflow-hidden group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 <Phone size={18} className="relative z-10 sm:w-5 sm:h-5" />
-                <span className="relative z-10">Rezervovať</span>
+                <span className="relative z-10">Zavolať</span>
               </a>
             </div>
           </div>

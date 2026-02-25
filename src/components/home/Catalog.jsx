@@ -29,6 +29,9 @@ export default function Catalog() {
   const [customerType, setCustomerType] = useState('po'); // 'po' or 'fo'
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Feature flag to show/hide cart functionality
+  const showCart = false;
+
   // Mobile: 6 products, Desktop: 12 products
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const productsPerPage = isMobile ? 6 : 12;
@@ -328,6 +331,7 @@ export default function Catalog() {
             </div>
 
             {/* Cart - Under Categories */}
+            {showCart && (
             <div className="hidden lg:block bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden mt-6">
               {/* Header */}
               <div className="bg-zinc-800 border-b border-white/10 px-4 py-3 flex items-center gap-2">
@@ -482,6 +486,7 @@ export default function Catalog() {
                 )}
               </div>
             </div>
+            )}
           </aside>
 
           {/* Main Content Area */}

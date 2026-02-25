@@ -6,17 +6,33 @@ export default function FAQ() {
 
   const faqs = [
     {
-      question: 'Ako funguje prenájom náradia a strojov?',
+      question: 'Ako funguje prenájom?',
       answer: (
         <div className="space-y-3">
-          <p>Prenajať si profesionálnu techniku je jednoduché. Stačí dodržať tri kroky a môžete začať pracovať:</p>
-          <ol className="space-y-2 ml-4">
-            <li><strong className="text-orange-primary">1. Vyberte produkty:</strong> Prejdite si naše kategórie, vyberte si požadované náradie alebo techniku a pridajte položky do košíka.</li>
-            <li><strong className="text-orange-primary">2. Zvoľte dni prenájmu:</strong> V kalendári označte dni, počas ktorých budete techniku potrebovať. Cena sa automaticky prepočíta.</li>
-            <li><strong className="text-orange-primary">3. Pošlite objednávku:</strong> Kliknite na "Poslať objednávku" - nezáväzná objednávka sa automaticky odošle na náš email. Potvrdíme dostupnosť telefonicky a dohodneme si prevzatie.</li>
-          </ol>
-          <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 mt-4">
-            <p className="text-sm"><strong className="text-orange-primary">Alternatívne</strong> nás môžete priamo <strong>zavolať na <a href="tel:+421948555551" className="text-orange-primary hover:underline">0948 555 551</a></strong> a rezerváciu vyriešime telefonicky.</p>
+          <p>Prenájom u nás funguje jednoducho a rýchlo – na základe priamej dohody a potvrdenia dostupnosti.</p>
+
+          <div className="space-y-4 mt-4">
+            <div>
+              <p className="font-bold text-white mb-2">1. Kontaktujte nás</p>
+              <ul className="space-y-1 ml-4 list-disc text-white/80">
+                <li>Najrýchlejšie telefonicky na <a href="tel:+421948555551" className="text-orange-primary hover:underline font-semibold">0948 555 551</a></li>
+                <li>Kontaktovať nás môžete aj e-mailom na <a href="mailto:info@royalstroje.sk" className="text-orange-primary hover:underline font-semibold">info@royalstroje.sk</a></li>
+                <li>alebo cez WhatsApp / Telegram</li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="font-bold text-white mb-2">2. Dohodneme techniku, termín a spôsob prevzatia alebo dopravy</p>
+              <p className="ml-4 text-white/80">Spoločne si potvrdíme dostupnosť a pripravíme všetko potrebné k prenájmu.</p>
+            </div>
+
+            <div>
+              <p className="font-bold text-white mb-2">3. Registrácia a vratná kaucia (pri nových zákazníkoch)</p>
+              <ul className="space-y-1 ml-4 list-disc text-white/80">
+                <li>Noví zákazníci sa registrujú osobne alebo e-mailom na základe registračného formulára.</li>
+                <li>Pri prvom prenájme sa vyžaduje vratná kaucia podľa typu techniky.</li>
+              </ul>
+            </div>
           </div>
         </div>
       )
