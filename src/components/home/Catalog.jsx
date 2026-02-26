@@ -9,6 +9,7 @@ import { getProductsBySubcategory, products } from '../../data/products';
 import ProductCard from '../product/ProductCard';
 import { useCart } from '../../context/CartContext';
 import FAQ from './FAQ';
+import QuoteForm from '../catalog/QuoteForm';
 
 // Ikony pre jednotlivé kategórie
 const categoryIcons = {
@@ -330,7 +331,12 @@ export default function Catalog() {
               </div>
             </div>
 
-            {/* Cart - Under Categories */}
+            {/* Quote Form - Under Categories */}
+            <div className="hidden lg:block mt-6">
+              <QuoteForm />
+            </div>
+
+            {/* Cart - Under Categories (Hidden) */}
             {showCart && (
             <div className="hidden lg:block bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden mt-6">
               {/* Header */}

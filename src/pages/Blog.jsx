@@ -135,9 +135,20 @@ export default function Blog() {
       image: '/pictures/graphics/hero4.png',
       category: 'Novinky',
     },
+    {
+      id: 13,
+      slug: 'dewalt-dcg405p2-akumulatorova-bruska-profesionalny-nastroj',
+      title: 'DeWalt DCG405P2: Akumulátorová Brúska Pre Profesionálov i Kutiloch',
+      excerpt: 'Kompletný prehľad akumulátorovej brúsky DeWalt DCG405P2 - technické parametre, bezpečnostné funkcie, praktické využitie a naše skúsenosti s týmto nástrojom. Prečo je táto brúska jednou z najlepších volieb na trhu?',
+      date: '20. Február 2026',
+      author: 'Royal Stroje',
+      readTime: '12 min',
+      image: '/pictures/graphics/objects2.png',
+      category: 'Návody',
+    },
   ];
 
-  // Filter out hidden articles - show only 6 articles (1, 2, 4, 5, 6, 8)
+  // Filter out hidden articles - show only 7 articles (1, 2, 4, 5, 6, 8, 13)
   const visiblePosts = blogPosts.filter(post => ![3, 7, 9, 10, 11, 12].includes(post.id));
 
   return (

@@ -1,5 +1,6 @@
-import { ChevronRight, ChevronLeft, X, Phone } from 'lucide-react';
+import { ChevronRight, ChevronLeft, X, Phone, BookOpen } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product, customerType = 'po' }) {
   const [showSpecs, setShowSpecs] = useState(false);
@@ -89,6 +90,17 @@ export default function ProductCard({ product, customerType = 'po' }) {
               <Phone size={14} className="relative z-10 md:w-4 md:h-4" />
               <span className="relative z-10">{showPhone ? '0948 555 551' : 'Zavolať'}</span>
             </a>
+
+            {/* Blog Article Link - Only show if product has blog article */}
+            {product.blogArticleSlug && (
+              <Link
+                to={`/blog/${product.blogArticleSlug}`}
+                className="group/blog text-blue-400 font-bold text-[10px] md:text-xs flex items-center justify-center gap-1 hover:text-blue-300 transition-all py-1"
+              >
+                <BookOpen size={12} className="md:w-3.5 md:h-3.5" />
+                <span>Prečítať článok o produkte</span>
+              </Link>
+            )}
 
             {/* Secondary Link */}
             <button

@@ -108,6 +108,7 @@ export const products = [
     inStock: true,
     isNew: false,
     isPopular: false,
+    blogArticleSlug: 'dewalt-dcg405p2-akumulatorova-bruska-profesionalny-nastroj',
   },
   {
     id: 'dewalt-dwe4257kt',

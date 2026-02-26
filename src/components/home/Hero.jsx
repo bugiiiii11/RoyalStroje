@@ -1,41 +1,14 @@
 import { Phone, ArrowDown } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
 
 export default function Hero() {
-  const [parallaxOffset, setParallaxOffset] = useState(0);
-  const heroRef = useRef(null);
-
-  // Parallax effect on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (heroRef.current) {
-        const scrolled = window.scrollY;
-        const heroTop = heroRef.current.offsetTop;
-        const heroHeight = heroRef.current.offsetHeight;
-
-        if (scrolled < heroTop + heroHeight) {
-          setParallaxOffset(scrolled * 0.3);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <section ref={heroRef} className="relative min-h-screen bg-black overflow-hidden">
+    <section className="relative min-h-screen bg-black overflow-hidden">
       {/* Fullscreen Background Image */}
       <div className="absolute inset-0">
         <img
           src="/hero1.png"
           alt="Požičovňa stavebnej techniky Royal Stroje Senec - profesionálne náradie a stroje na prenájom"
-          className="w-full h-full object-cover transition-transform duration-100"
-          style={{
-            transform: `translateY(-${parallaxOffset * 0.15}px) scale(1.05)`,
-            minHeight: '100%',
-            minWidth: '100%'
-          }}
+          className="w-full h-full object-cover"
         />
       </div>
 
