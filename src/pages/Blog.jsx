@@ -22,7 +22,7 @@ export default function Blog() {
       date: '10. Marec 2025',
       author: 'Royal Stroje',
       readTime: '10 min',
-      image: '/pictures/graphics/objects1.png',
+      image: '/pictures/graphics/mini-rypadlo-1000-transparent.png',
       category: 'Návody',
     },
     {
@@ -143,13 +143,24 @@ export default function Blog() {
       date: '20. Február 2026',
       author: 'Royal Stroje',
       readTime: '12 min',
-      image: '/pictures/graphics/objects2.png',
+      image: '/pictures/graphics/DeWalt-DCG405P2-transparent.png',
+      category: 'Návody',
+    },
+    {
+      id: 14,
+      slug: 'makita-tw001gm201-razovy-utahovak-extremny-vykon',
+      title: 'Makita TW001GM201: Rázový Uťahovák s Extrémnym Výkonom 2050 Nm',
+      excerpt: 'Kompletný prehľad rázového uťahováka Makita TW001GM201 - 40V XGT systém, 2050 Nm krútiaci moment, profesionálne použitie v autoservisoch a ťažkom priemysle. Prečo je tento nástroj skutočný beast?',
+      date: '26. Február 2026',
+      author: 'Royal Stroje',
+      readTime: '13 min',
+      image: '/pictures/graphics/Makita-TW001GM201-transparent.png',
       category: 'Návody',
     },
   ];
 
-  // Filter out hidden articles - show only 7 articles (1, 2, 4, 5, 6, 8, 13)
-  const visiblePosts = blogPosts.filter(post => ![3, 7, 9, 10, 11, 12].includes(post.id));
+  // Filter out hidden articles - show only 7 articles (1, 2, 4, 6, 8, 13, 14)
+  const visiblePosts = blogPosts.filter(post => ![3, 5, 7, 9, 10, 11, 12].includes(post.id));
 
   return (
     <div className="min-h-screen">
@@ -245,11 +256,11 @@ export default function Blog() {
                   className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 relative"
                 >
                   {/* Image */}
-                  <div className="relative h-32 md:h-48 overflow-hidden">
+                  <div className="relative h-32 md:h-48 overflow-hidden bg-black">
                     <img
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-full object-cover transition-all duration-500 group-hover:brightness-110"
+                      className="w-full h-full object-contain transition-all duration-500 group-hover:brightness-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/50 to-transparent"></div>
 

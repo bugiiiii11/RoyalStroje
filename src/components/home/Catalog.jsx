@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   ShoppingCart, X, Send, Calendar,
   Hammer, Cog, HardHat, ArrowUpFromLine,
@@ -23,15 +24,34 @@ const categoryIcons = {
 };
 
 export default function Catalog() {
+  const location = useLocation();
+
+  // Get initial search query from URL
+  const getInitialSearch = () => {
+    const params = new URLSearchParams(location.search);
+    return params.get('search') || '';
+  };
+
   const [activeCategory, setActiveCategory] = useState('male-naradie');
   const [activeSubcategory, setActiveSubcategory] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDays, setSelectedDays] = useState([]);
   const [customerType, setCustomerType] = useState('po'); // 'po' or 'fo'
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(getInitialSearch());
 
   // Feature flag to show/hide cart functionality
   const showCart = false;
+
+  // Update search query when URL changes (for navigation from other pages)
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const searchParam = params.get('search');
+    if (searchParam && searchParam !== searchQuery) {
+      setSearchQuery(searchParam);
+      setCurrentPage(1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]);
 
   // Mobile: 6 products, Desktop: 12 products
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;

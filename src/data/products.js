@@ -2011,6 +2011,7 @@ export const products = [
     inStock: true,
     isNew: false,
     isPopular: false,
+    blogArticleSlug: 'ako-vybrat-spravne-minirypadlo',
   },
   {
     id: 'mini-rypadlo-18-t',
