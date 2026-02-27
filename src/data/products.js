@@ -2030,6 +2030,7 @@ export const products = [
     inStock: true,
     isNew: false,
     isPopular: false,
+    blogArticleSlug: 'ako-vybrat-spravne-minirypadlo',
   },
   {
     id: 'mini-rypadlo-26-t',
@@ -2048,6 +2049,7 @@ export const products = [
     inStock: true,
     isNew: false,
     isPopular: false,
+    blogArticleSlug: 'ako-vybrat-spravne-minirypadlo',
   },
   {
     id: 'mini-rypadlo-35-t',
@@ -2066,6 +2068,7 @@ export const products = [
     inStock: true,
     isNew: false,
     isPopular: false,
+    blogArticleSlug: 'ako-vybrat-spravne-minirypadlo',
   },
 
   // tazka-technika/pasove-tazke-rypadla (2 produktov)

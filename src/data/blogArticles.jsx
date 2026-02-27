@@ -236,126 +236,280 @@ export const blogArticles = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">1. Veľkostné Kategórie Minirýpadiel</h2>
-        <p className="text-white/80 leading-relaxed">
-          Minirýpadlá sa rozdeľujú podľa <strong className="text-orange-primary">prevádzkovej hmotnosti</strong>.
-          Každá kategória má svoje využitie.
+        <h2 className="text-2xl md:text-3xl font-black text-white">Naše Minirýpadlá: Nájdite Perfektnú Veľkosť Pre Váš Projekt</h2>
+        <p className="text-white/80 leading-relaxed mb-4">
+          V Royal Stroje máme <strong className="text-orange-primary">4 veľkosti minirýpadiel</strong>, ktoré pokryjú 95% všetkých
+          stavebných a záhradných projektov. Pozrime sa na ne detailne s reálnymi príkladmi použitia.
         </p>
 
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6">
+          <p className="text-blue-400 font-bold mb-2">💡 Ako Si Vybrať?</p>
+          <p className="text-white/80 text-sm">
+            Zvoľte si podľa <strong className="text-white">hĺbky výkopu</strong> a <strong className="text-white">objemu prác</strong>.
+            Ak si nie ste istí, zavolajte nám - pomôžeme vám vybrať správnu veľkosť a ušetríte peniaze.
+          </p>
+        </div>
+
         <div className="space-y-6">
+          {/* Mini-rýpadlo 1t */}
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
-            <h3 className="text-xl font-bold text-orange-primary mb-4">Mikro Minirýpadlá (0,8 - 1,5 tony)</h3>
+            <div className="flex items-start justify-between mb-4">
+              <h3 className="text-xl font-bold text-orange-primary">Mini-Rýpadlo 1t</h3>
+              <div className="text-right">
+                <div className="bg-orange-primary/20 border border-orange-primary/50 rounded-lg px-3 py-1">
+                  <p className="text-orange-primary text-lg font-black">75 €/deň</p>
+                  <p className="text-white/60 text-xs">bez DPH</p>
+                </div>
+              </div>
+            </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-4">
               <div>
-                <p className="text-white/70 font-bold mb-2">Typické parametre:</p>
+                <p className="text-white/70 font-bold mb-2">Základné parametre:</p>
                 <ul className="space-y-1 text-white/80 text-sm">
-                  <li>• Šírka: 70-100 cm</li>
-                  <li>• Hĺbka výkopu: 1,5-2,5 m</li>
-                  <li>• Výkon motora: 10-15 HP</li>
-                  <li>• Transportná hmotnosť: 800-1500 kg</li>
+                  <li>• <strong>Hĺbkový dosah:</strong> 1,5 m</li>
+                  <li>• <strong>Hmotnosť:</strong> 1 tona</li>
+                  <li>• <strong>Šírka:</strong> 70-90 cm (prejde dverami!)</li>
+                  <li>• <strong>Palivo:</strong> Nafta</li>
                 </ul>
               </div>
               <div>
-                <p className="text-white/70 font-bold mb-2">Ideálne pre:</p>
+                <p className="text-white/70 font-bold mb-2">Najlepšie pre:</p>
                 <ul className="space-y-1 text-white/80 text-sm">
-                  <li>• Záhradné terénne úpravy</li>
-                  <li>• Káblové výkopy</li>
-                  <li>• Výmena kanalizácie</li>
-                  <li>• Projekty v úzkych dvoroch</li>
+                  <li>• <strong>Záhradné terénne úpravy</strong></li>
+                  <li>• <strong>Výkop prípojok</strong> (voda, elektrika)</li>
+                  <li>• <strong>Káblové ryhy</strong> pre osvetlenie</li>
+                  <li>• <strong>Práce v úzkych dvoroch</strong></li>
                 </ul>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
-                <p className="text-green-500 font-bold text-sm mb-2">Výhody:</p>
-                <ul className="space-y-1 text-white/70 text-sm">
-                  <li>✓ Prejde štandardnými dverami (90 cm)</li>
-                  <li>✓ Môžete ho odviezť na príves za osobným autom</li>
-                  <li>✓ Minimálne poškodenie trávnika</li>
-                </ul>
-              </div>
-              <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
-                <p className="text-red-500 font-bold text-sm mb-2">Nevýhody:</p>
-                <ul className="space-y-1 text-white/70 text-sm">
-                  <li>✗ Slabší výkon pri tvrdej pôde</li>
-                  <li>✗ Menšia lopátka (20-30 cm)</li>
-                  <li>✗ Nie je vhodný pre skalnaté terény</li>
-                </ul>
+            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mb-4">
+              <p className="text-green-500 font-bold mb-3">✓ Reálne Príklady Použitia:</p>
+              <div className="grid md:grid-cols-2 gap-4 text-white/80 text-sm">
+                <div>
+                  <p className="font-bold text-white mb-1">1. Výkop pre záhradné jazierko</p>
+                  <p className="text-white/60">Rozmer 3×4 m, hĺbka 80 cm → 1-2 hodiny práce</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">2. Výkop prípojky vody do domu</p>
+                  <p className="text-white/60">Dĺžka 15 m, hĺbka 1,2 m → 2-3 hodiny</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">3. Terénne úpravy záhrady</p>
+                  <p className="text-white/60">Zrovnanie svahu, odvoz 10 m³ zeminy → pol dňa</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">4. Výkop septiku 3 m³</p>
+                  <p className="text-white/60">Hĺbka 1,2 m → 3-4 hodiny</p>
+                </div>
               </div>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-white/10">
-              <p className="text-orange-primary font-bold">Cena prenájmu: 50-70 € / deň</p>
+            <div className="flex items-center gap-2 text-white/70 text-sm">
+              <span className="text-green-500">✓</span>
+              <span><strong className="text-white">Tip:</strong> Prejde cez štandardné dvere (90 cm) → ideálne pre práce vo dvoroch bez priameho prístupu</span>
             </div>
           </div>
 
+          {/* Mini-rýpadlo 1.8t */}
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl p-6">
             <div className="flex items-start justify-between mb-4">
-              <h3 className="text-xl font-bold text-orange-primary">Malé Minirýpadlá (1,5 - 3 tony)</h3>
-              <span className="bg-orange-primary text-white text-xs font-bold px-3 py-1 rounded-full">NAJPOPULÁRNEJŠIE</span>
+              <div>
+                <h3 className="text-xl font-bold text-orange-primary">Mini-Rýpadlo 1.8t</h3>
+                <span className="inline-block bg-orange-primary text-white text-xs font-bold px-3 py-1 rounded-full mt-2">NAJPOPULÁRNEJŠIE</span>
+              </div>
+              <div className="text-right">
+                <div className="bg-orange-primary/20 border border-orange-primary/50 rounded-lg px-3 py-1">
+                  <p className="text-orange-primary text-lg font-black">90 €/deň</p>
+                  <p className="text-white/60 text-xs">bez DPH</p>
+                </div>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-4">
               <div>
-                <p className="text-white/70 font-bold mb-2">Typické parametre:</p>
+                <p className="text-white/70 font-bold mb-2">Základné parametre:</p>
                 <ul className="space-y-1 text-white/80 text-sm">
-                  <li>• Šírka: 100-150 cm</li>
-                  <li>• Hĺbka výkopu: 2,5-3,5 m</li>
-                  <li>• Výkon motora: 15-25 HP</li>
-                  <li>• Transportná hmotnosť: 1500-3000 kg</li>
+                  <li>• <strong>Hĺbkový dosah:</strong> 2,5-2,8 m</li>
+                  <li>• <strong>Hmotnosť:</strong> 1,8 tony</li>
+                  <li>• <strong>Šírka:</strong> 100-120 cm</li>
+                  <li>• <strong>Palivo:</strong> Nafta</li>
                 </ul>
               </div>
               <div>
-                <p className="text-white/70 font-bold mb-2">Ideálne pre:</p>
+                <p className="text-white/70 font-bold mb-2">Najlepšie pre:</p>
                 <ul className="space-y-1 text-white/80 text-sm">
-                  <li>• Základy rodinných domov</li>
-                  <li>• Menšie demolácie</li>
-                  <li>• Terénne úpravy</li>
-                  <li>• Výkopy studní</li>
+                  <li>• <strong>Základy rodinných domov</strong></li>
+                  <li>• <strong>Garáže a prístavby</strong></li>
+                  <li>• <strong>Výkop studní</strong> (do 2,5 m)</li>
+                  <li>• <strong>Menšie demolácie</strong></li>
                 </ul>
               </div>
             </div>
 
-            <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-lg p-4">
-              <p className="text-white/90 text-sm">
-                <strong className="text-orange-primary">Zlatý štandard:</strong> Minirýpadlo 1,8 tony je najpopulárnejšia
-                voľba na Slovensku. 80% našich zákazníkov si prenajíma práve túto veľkosť – ideálny pomer výkon/veľkosť/cena.
+            <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-lg p-4 mb-4">
+              <p className="text-white/90 text-sm mb-3">
+                <strong className="text-orange-primary">Prečo je najpopulárnejší?</strong> Ideálny pomer výkon/cena/veľkosť.
+                70% našich zákazníkov si prenajíma práve túto veľkosť.
               </p>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-white/10">
-              <p className="text-orange-primary font-bold">Cena prenájmu: 60-80 € / deň</p>
+            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mb-4">
+              <p className="text-green-500 font-bold mb-3">✓ Reálne Príklady Použitia:</p>
+              <div className="grid md:grid-cols-2 gap-4 text-white/80 text-sm">
+                <div>
+                  <p className="font-bold text-white mb-1">1. Základy garáže 6×6 m</p>
+                  <p className="text-white/60">Hĺbka 80 cm, pás 60 cm → 1 deň</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">2. Výkop rodinného domu 10×12 m</p>
+                  <p className="text-white/60">Pásové základy, hĺbka 1,2 m → 2-3 dni</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">3. Výkop septiku 6 m³</p>
+                  <p className="text-white/60">Hĺbka 2 m → 4-5 hodín</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">4. Výmena kanalizácie pod domom</p>
+                  <p className="text-white/60">Dĺžka 20 m, hĺbka 2 m → 1 deň</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 text-white/70 text-sm">
+              <span className="text-orange-primary">⭐</span>
+              <span><strong className="text-white">Odporúčanie:</strong> Ak si nie ste istí veľkosťou, zvoľte 1.8t - zvládne 90% domácich projektov</span>
             </div>
           </div>
 
+          {/* Mini-rýpadlo 2.6t */}
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
-            <h3 className="text-xl font-bold text-orange-primary mb-4">Stredné Minirýpadlá (3 - 6 ton)</h3>
+            <div className="flex items-start justify-between mb-4">
+              <h3 className="text-xl font-bold text-orange-primary">Mini-Rýpadlo 2.6t</h3>
+              <div className="text-right">
+                <div className="bg-orange-primary/20 border border-orange-primary/50 rounded-lg px-3 py-1">
+                  <p className="text-orange-primary text-lg font-black">90 €/deň</p>
+                  <p className="text-white/60 text-xs">bez DPH</p>
+                </div>
+              </div>
+            </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-4">
               <div>
-                <p className="text-white/70 font-bold mb-2">Typické parametre:</p>
+                <p className="text-white/70 font-bold mb-2">Základné parametre:</p>
                 <ul className="space-y-1 text-white/80 text-sm">
-                  <li>• Šírka: 150-200 cm</li>
-                  <li>• Hĺbka výkopu: 3,5-4,5 m</li>
-                  <li>• Výkon motora: 25-50 HP</li>
-                  <li>• Transportná hmotnosť: 3000-6000 kg</li>
+                  <li>• <strong>Hĺbkový dosah:</strong> 3-3,2 m</li>
+                  <li>• <strong>Hmotnosť:</strong> 2,6 tony</li>
+                  <li>• <strong>Šírka:</strong> 130-150 cm</li>
+                  <li>• <strong>Palivo:</strong> Nafta</li>
                 </ul>
               </div>
               <div>
-                <p className="text-white/70 font-bold mb-2">Ideálne pre:</p>
+                <p className="text-white/70 font-bold mb-2">Najlepšie pre:</p>
                 <ul className="space-y-1 text-white/80 text-sm">
-                  <li>• Veľké výkopy (bazény, pivnice)</li>
-                  <li>• Demolácie budov</li>
-                  <li>• Ťažký terén a skaly</li>
-                  <li>• Stavebné projekty</li>
+                  <li>• <strong>Väčšie rodinné domy</strong></li>
+                  <li>• <strong>Príprava staveniska</strong></li>
+                  <li>• <strong>Demolácie menších objektov</strong></li>
+                  <li>• <strong>Výkopy bazénov</strong></li>
                 </ul>
               </div>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-white/10">
-              <p className="text-orange-primary font-bold">Cena prenájmu: 80-120 € / deň</p>
+            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mb-4">
+              <p className="text-green-500 font-bold mb-3">✓ Reálne Príklady Použitia:</p>
+              <div className="grid md:grid-cols-2 gap-4 text-white/80 text-sm">
+                <div>
+                  <p className="font-bold text-white mb-1">1. Výkop bazénu 8×4 m</p>
+                  <p className="text-white/60">Hĺbka 1,5 m, odvoz 50 m³ zeminy → 1-2 dni</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">2. Základy väčšieho RD 12×15 m</p>
+                  <p className="text-white/60">Pásové + žumpa, hĺbka 1,5 m → 3 dni</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">3. Demolácia garáže + odvoz</p>
+                  <p className="text-white/60">Bouranie + nakládka 30 m³ → 1 deň</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">4. Príprava staveniska</p>
+                  <p className="text-white/60">Odstránenie stromov, zrovnanie 500 m² → 2 dni</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 text-white/70 text-sm">
+              <span className="text-blue-500">ℹ️</span>
+              <span><strong className="text-white">Bonus:</strong> Vďaka vyššej hmotnosti lepšia stabilita pri práci na svahu a pri demoláciách</span>
+            </div>
+          </div>
+
+          {/* Mini-rýpadlo 3.5t */}
+          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h3 className="text-xl font-bold text-orange-primary">Mini-Rýpadlo 3.5t</h3>
+                <span className="inline-block bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full mt-2">MAXIMÁLNY VÝKON</span>
+              </div>
+              <div className="text-right">
+                <div className="bg-orange-primary/20 border border-orange-primary/50 rounded-lg px-3 py-1">
+                  <p className="text-orange-primary text-lg font-black">110 €/deň</p>
+                  <p className="text-white/60 text-xs">bez DPH</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-4">
+              <div>
+                <p className="text-white/70 font-bold mb-2">Základné parametre:</p>
+                <ul className="space-y-1 text-white/80 text-sm">
+                  <li>• <strong>Hĺbkový dosah:</strong> 3,5-3,8 m</li>
+                  <li>• <strong>Hmotnosť:</strong> 3,5 tony</li>
+                  <li>• <strong>Šírka:</strong> 150-170 cm</li>
+                  <li>• <strong>Palivo:</strong> Nafta</li>
+                </ul>
+              </div>
+              <div>
+                <p className="text-white/70 font-bold mb-2">Najlepšie pre:</p>
+                <ul className="space-y-1 text-white/80 text-sm">
+                  <li>• <strong>Hlboké výkopy (pivnice)</strong></li>
+                  <li>• <strong>Veľké demolácie</strong></li>
+                  <li>• <strong>Ťažký terén a skaly</strong></li>
+                  <li>• <strong>Komerčné projekty</strong></li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mb-4">
+              <p className="text-green-500 font-bold mb-3">✓ Reálne Príklady Použitia:</p>
+              <div className="grid md:grid-cols-2 gap-4 text-white/80 text-sm">
+                <div>
+                  <p className="font-bold text-white mb-1">1. Výkop pivnice pod domom</p>
+                  <p className="text-white/60">Rozmer 8×10 m, hĺbka 3 m → 4-5 dní</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">2. Veľký bazén 10×5 m</p>
+                  <p className="text-white/60">Hĺbka 2,5 m, odvoz 120 m³ → 2-3 dni</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">3. Demolácia staršieho domu</p>
+                  <p className="text-white/60">Bouranie + nakládka, betónové základy → 3-4 dni</p>
+                </div>
+                <div>
+                  <p className="font-bold text-white mb-1">4. Výkop v skalnatom teréne</p>
+                  <p className="text-white/60">Základy + drvenie skaly → podľa potreby</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+              <p className="text-blue-400 font-bold mb-2">💪 Kedy Zvoliť 3.5t?</p>
+              <ul className="space-y-1 text-white/80 text-sm">
+                <li>✓ Potrebujete kopať hlbšie ako 3 metre</li>
+                <li>✓ Pracujete so skalatým alebo veľmi tvrdým terénom</li>
+                <li>✓ Potrebujete demolovať betónové konštrukcie</li>
+                <li>✓ Chcete maximálny výkon a stabilitu</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -443,46 +597,115 @@ export const blogArticles = {
         </div>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-orange-primary mb-4">Cennníkový Prehľad (Royal Stroje 2025)</h3>
+          <h3 className="text-xl font-bold text-orange-primary mb-4">Cenníkový Prehľad Royal Stroje 2026</h3>
 
           <div className="space-y-3">
-            <div className="flex justify-between items-center py-2 border-b border-white/10">
-              <span className="text-white/80">Mikro minirýpadlá (0,8-1,5t)</span>
-              <span className="text-orange-primary font-bold">60 € / deň</span>
+            <div className="flex justify-between items-center py-3 border-b border-white/10">
+              <div>
+                <p className="text-white font-bold">Mini-rýpadlo 1t</p>
+                <p className="text-white/60 text-xs">Hĺbka 1,5 m · Záhradné práce</p>
+              </div>
+              <span className="text-orange-primary font-bold text-lg">75 € / deň</span>
             </div>
-            <div className="flex justify-between items-center py-2 border-b border-white/10">
-              <span className="text-white/80">Malé minirýpadlá (1,5-3t)</span>
-              <span className="text-orange-primary font-bold">70 € / deň</span>
+            <div className="flex justify-between items-center py-3 border-b border-white/10">
+              <div>
+                <p className="text-white font-bold">Mini-rýpadlo 1.8t</p>
+                <p className="text-white/60 text-xs">Hĺbka 2,8 m · Najpopulárnejšie</p>
+              </div>
+              <span className="text-orange-primary font-bold text-lg">90 € / deň</span>
             </div>
-            <div className="flex justify-between items-center py-2 border-b border-white/10">
-              <span className="text-white/80">Stredné minirýpadlá (3-6t)</span>
-              <span className="text-orange-primary font-bold">100 € / deň</span>
+            <div className="flex justify-between items-center py-3 border-b border-white/10">
+              <div>
+                <p className="text-white font-bold">Mini-rýpadlo 2.6t</p>
+                <p className="text-white/60 text-xs">Hĺbka 3,2 m · Väčšie projekty</p>
+              </div>
+              <span className="text-orange-primary font-bold text-lg">90 € / deň</span>
+            </div>
+            <div className="flex justify-between items-center py-3">
+              <div>
+                <p className="text-white font-bold">Mini-rýpadlo 3.5t</p>
+                <p className="text-white/60 text-xs">Hĺbka 3,8 m · Maximálny výkon</p>
+              </div>
+              <span className="text-orange-primary font-bold text-lg">110 € / deň</span>
             </div>
           </div>
 
-          <div className="mt-4 pt-4 border-t border-white/10">
-            <p className="text-white/70 text-sm mb-2"><strong>V cene:</strong></p>
-            <ul className="space-y-1 text-white/60 text-sm">
-              <li>✓ Komplexný servis a údržba</li>
-              <li>✓ Základné poistenie</li>
-              <li>✓ Technická podpora 24/7</li>
-              <li>✓ 2-3 štandardné lopátky</li>
-              <li>✓ Doprava zadarmo do 30 km</li>
-            </ul>
+          <div className="mt-6 pt-4 border-t border-white/10">
+            <p className="text-white/70 text-sm mb-3"><strong>V cene vždy:</strong></p>
+            <div className="grid md:grid-cols-2 gap-3">
+              <ul className="space-y-1 text-white/60 text-sm">
+                <li>✓ Komplexný servis a údržba</li>
+                <li>✓ Základné poistenie</li>
+                <li>✓ Technická podpora 24/7</li>
+              </ul>
+              <ul className="space-y-1 text-white/60 text-sm">
+                <li>✓ 2-3 štandardné lopátky</li>
+                <li>✓ Doprava ZADARMO do 30 km</li>
+                <li>✓ Plná nádrž paliva</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-4 bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+            <p className="text-green-500 font-bold text-sm">💰 Zľavy pri dlhšom prenájme:</p>
+            <p className="text-white/80 text-xs mt-1">
+              5+ dní: -10% · 10+ dní: -15% · Mesačný prenájom: individuálna cena
+            </p>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
-          <h3 className="text-xl font-bold text-white mb-3">Naše Odporúčanie</h3>
-          <p className="text-white/90 leading-relaxed mb-4">
-            Pre <strong>90% projektov rodinných domov</strong> odporúčame:
-          </p>
-          <div className="bg-zinc-900/50 rounded-xl p-4">
-            <p className="text-2xl font-bold text-orange-primary mb-2">👉 Minirýpadlo 1,8 tony s pásmi</p>
-            <p className="text-white/70 text-sm">
-              Ideálny pomer výkon/cena/veľkosť. Prejde väčšinou brán, dosah a hĺbka stačia pre základy,
-              nie je preplacanie za zbytočný výkon.
+        <div className="bg-gradient-to-br from-orange-primary/10 to-orange-hover/10 border-2 border-orange-primary/50 rounded-2xl p-6 md:p-8">
+          <h3 className="text-2xl font-black text-white mb-4 text-center">Ktoré Mini-Rýpadlo Si Vybrať?</h3>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="bg-zinc-900/50 rounded-xl p-5">
+              <h4 className="text-orange-primary font-bold mb-3">🏡 Pre Domáce Projekty</h4>
+              <div className="space-y-3 text-sm">
+                <div>
+                  <p className="text-white font-bold mb-1">→ Výber 1t mini-rýpadla</p>
+                  <p className="text-white/70 text-xs">Záhrada, prípojky, malé terénne úpravy</p>
+                </div>
+                <div>
+                  <p className="text-white font-bold mb-1">→ Výber 1.8t mini-rýpadla</p>
+                  <p className="text-white/70 text-xs">Garáž, prístavba, základy menších objektov</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-zinc-900/50 rounded-xl p-5">
+              <h4 className="text-orange-primary font-bold mb-3">🏗️ Pre Stavebné Projekty</h4>
+              <div className="space-y-3 text-sm">
+                <div>
+                  <p className="text-white font-bold mb-1">→ Výber 2.6t mini-rýpadla</p>
+                  <p className="text-white/70 text-xs">Rodinný dom, bazén, väčšie demolácie</p>
+                </div>
+                <div>
+                  <p className="text-white font-bold mb-1">→ Výber 3.5t mini-rýpadla</p>
+                  <p className="text-white/70 text-xs">Pivnica, tvrdý terén, komerčné projekty</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-orange-primary/20 border border-orange-primary/40 rounded-xl p-4 text-center">
+            <p className="text-white font-bold mb-2">💡 Nie ste si istí?</p>
+            <p className="text-white/80 text-sm mb-4">
+              Zavolajte nám a opíšte svoj projekt - poradíme vám správnu veľkosť a ušetríte peniaze!
             </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="tel:+421948555551"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all"
+              >
+                <span>Zavolať: 0948 555 551</span>
+              </a>
+              <a
+                href="/?search=mini-rýpadlo#katalog"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-800 border-2 border-orange-primary/50 text-white font-bold rounded-full hover:bg-zinc-700 transition-all"
+              >
+                <span>Pozrieť v katalógu</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -1384,57 +1607,111 @@ export const blogArticles = {
 
         <div className="bg-gradient-to-br from-orange-primary/10 to-orange-hover/10 border-2 border-orange-primary/50 rounded-2xl p-6 md:p-8">
           <h3 className="text-2xl font-black text-white mb-4 text-center">
-            Odporúčame: Mini-rýpadlo 1t v Royal Stroje
+            Pripravené Na Váš Projekt: Naše Mini-Rýpadlá
           </h3>
           <p className="text-white/80 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
-            Pre väčšinu domácich projektov a rekonštrukcií je <strong className="text-white">mini-rýpadlo 1t</strong> ideálna voľba.
-            Kompaktné, výkonné a cenovo dostupné. Máme ho pripravené a overené našimi zákazníkmi.
+            Všetky naše minirýpadlá sú pripravené, pravidelne servisované a overené stovkami zákazníkov.
+            Vyberte si podľa typu vášho projektu:
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-6">
-            <div className="bg-zinc-900/50 rounded-xl p-4">
-              <h4 className="text-orange-primary font-bold mb-3">✓ Základné Parametre</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
-                <li>• <strong>Hmotnosť:</strong> 1 tona</li>
-                <li>• <strong>Hĺbkový dosah:</strong> 1,5 m</li>
-                <li>• <strong>Palivo:</strong> Nafta</li>
-                <li>• <strong>Ideálne pre:</strong> Výkopy základov, terénne úpravy, káblové ryhy</li>
-              </ul>
-            </div>
-
-            <div className="bg-zinc-900/50 rounded-xl p-4">
-              <h4 className="text-orange-primary font-bold mb-3">💰 Prenájom v Royal Stroje</h4>
-              <div className="space-y-3 text-sm">
-                <div className="bg-orange-primary/20 rounded-lg p-3">
-                  <p className="text-orange-primary font-bold mb-1">Od 75 €/deň bez DPH</p>
-                  <p className="text-white/60 text-xs">92,25 €/deň s DPH</p>
-                </div>
-                <div className="space-y-2 text-white/80">
-                  <p>✓ Doprava ZADARMO do 30 km</p>
-                  <p>✓ Technická podpora 24/7</p>
-                  <p>✓ Palivová nádrž plná pri prevzatí</p>
-                </div>
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            {/* Mini-rýpadlo 1t */}
+            <a
+              href="/?search=mini-rýpadlo#katalog"
+              className="group bg-zinc-900/50 hover:bg-zinc-900 border border-white/10 hover:border-orange-primary/50 rounded-xl p-4 transition-all hover:-translate-y-1"
+            >
+              <div className="flex justify-between items-start mb-3">
+                <h4 className="text-orange-primary font-bold">Mini-Rýpadlo 1t</h4>
+                <span className="text-orange-primary text-lg font-black">75 €/deň</span>
               </div>
+              <p className="text-white/70 text-sm mb-2">Hĺbka 1,5 m · Šírka 70-90 cm</p>
+              <p className="text-white/60 text-xs">→ Záhradné úpravy, káblové ryhy, prípojky</p>
+              <div className="mt-3 text-orange-primary text-sm font-bold group-hover:gap-2 flex items-center gap-1 transition-all">
+                <span>Pozrieť detail</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
+
+            {/* Mini-rýpadlo 1.8t */}
+            <a
+              href="/?search=mini-rýpadlo#katalog"
+              className="group bg-orange-primary/10 hover:bg-orange-primary/20 border-2 border-orange-primary/50 hover:border-orange-primary rounded-xl p-4 transition-all hover:-translate-y-1 relative"
+            >
+              <div className="absolute top-2 right-2">
+                <span className="bg-orange-primary text-white text-xs font-bold px-2 py-0.5 rounded">TOP</span>
+              </div>
+              <div className="flex justify-between items-start mb-3">
+                <h4 className="text-orange-primary font-bold">Mini-Rýpadlo 1.8t</h4>
+                <span className="text-orange-primary text-lg font-black">90 €/deň</span>
+              </div>
+              <p className="text-white/70 text-sm mb-2">Hĺbka 2,8 m · Šírka 100-120 cm</p>
+              <p className="text-white/60 text-xs">→ Garáže, základy domov, väčšie výkopy</p>
+              <div className="mt-3 text-orange-primary text-sm font-bold group-hover:gap-2 flex items-center gap-1 transition-all">
+                <span>Pozrieť detail</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
+
+            {/* Mini-rýpadlo 2.6t */}
+            <a
+              href="/?search=mini-rýpadlo#katalog"
+              className="group bg-zinc-900/50 hover:bg-zinc-900 border border-white/10 hover:border-orange-primary/50 rounded-xl p-4 transition-all hover:-translate-y-1"
+            >
+              <div className="flex justify-between items-start mb-3">
+                <h4 className="text-orange-primary font-bold">Mini-Rýpadlo 2.6t</h4>
+                <span className="text-orange-primary text-lg font-black">90 €/deň</span>
+              </div>
+              <p className="text-white/70 text-sm mb-2">Hĺbka 3,2 m · Šírka 130-150 cm</p>
+              <p className="text-white/60 text-xs">→ Bazény, väčšie domy, demolácie</p>
+              <div className="mt-3 text-orange-primary text-sm font-bold group-hover:gap-2 flex items-center gap-1 transition-all">
+                <span>Pozrieť detail</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
+
+            {/* Mini-rýpadlo 3.5t */}
+            <a
+              href="/?search=mini-rýpadlo#katalog"
+              className="group bg-zinc-900/50 hover:bg-zinc-900 border border-white/10 hover:border-orange-primary/50 rounded-xl p-4 transition-all hover:-translate-y-1"
+            >
+              <div className="flex justify-between items-start mb-3">
+                <h4 className="text-orange-primary font-bold">Mini-Rýpadlo 3.5t</h4>
+                <span className="text-orange-primary text-lg font-black">110 €/deň</span>
+              </div>
+              <p className="text-white/70 text-sm mb-2">Hĺbka 3,8 m · Šírka 150-170 cm</p>
+              <p className="text-white/60 text-xs">→ Pivnice, tvrdý terén, max. výkon</p>
+              <div className="mt-3 text-orange-primary text-sm font-bold group-hover:gap-2 flex items-center gap-1 transition-all">
+                <span>Pozrieť detail</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
+          </div>
+
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6">
+            <p className="text-blue-400 font-bold mb-2">🎯 Všetko v cene prenájmu:</p>
+            <div className="grid md:grid-cols-3 gap-3 text-white/80 text-sm">
+              <div>✓ Doprava ZADARMO do 30 km</div>
+              <div>✓ Technická podpora 24/7</div>
+              <div>✓ 2-3 lopátky v cene</div>
+              <div>✓ Plná nádrž paliva</div>
+              <div>✓ Základné poistenie</div>
+              <div>✓ Zľavy pri dlhšom prenájme</div>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-6">
+          <div className="flex flex-wrap justify-center gap-4">
             <a
               href="tel:+421948555551"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
             >
-              <span>Zavolať: 0948 555 551</span>
+              <span>Poradiť: 0948 555 551</span>
             </a>
             <a
-              href="/?search=Mini-rýpadlo+1t#katalog"
+              href="/#katalog"
               className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-800 border-2 border-orange-primary/50 text-white font-bold rounded-full hover:bg-zinc-700 transition-all"
             >
-              <span>Pozrieť v katalógu</span>
+              <span>Zobraziť všetky v katalógu</span>
             </a>
-          </div>
-
-          <div className="text-center text-sm text-white/70">
-            <p>💡 <strong className="text-white">Tip:</strong> Pri prenájme na viac ako 5 dní získate automatickú zľavu!</p>
           </div>
         </div>
 
