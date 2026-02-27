@@ -10,6 +10,7 @@ export default function QuoteForm() {
     name: '',
     email: '',
     phone: '',
+    projectType: '',
     message: '',
     honeypot: ''
   });
@@ -65,7 +66,7 @@ export default function QuoteForm() {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
-        project_type: 'Cenová ponuka z katalógu',
+        project_type: formData.projectType,
         message: formData.message || 'Žiadam o cenovú ponuku',
         recaptcha_token: recaptchaToken,
         to_email: 'info@royalstroje.sk'
@@ -84,6 +85,7 @@ export default function QuoteForm() {
           name: '',
           email: '',
           phone: '',
+          projectType: '',
           message: '',
           honeypot: ''
         });
@@ -174,6 +176,25 @@ export default function QuoteForm() {
             className="w-full bg-zinc-800 border border-white/10 rounded-lg px-3 py-2 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
             placeholder="Telefón *"
           />
+        </div>
+
+        {/* Project Type */}
+        <div>
+          <select
+            name="projectType"
+            value={formData.projectType}
+            onChange={handleChange}
+            required
+            className="w-full bg-zinc-800 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-orange-primary/50 transition-all"
+          >
+            <option value="">Vyberte typ projektu *</option>
+            <option value="Stavba domu">Stavba domu</option>
+            <option value="Rekonštrukcia">Rekonštrukcia</option>
+            <option value="Terénne úpravy">Terénne úpravy</option>
+            <option value="Zemné práce">Zemné práce</option>
+            <option value="Záhradné úpravy">Záhradné úpravy</option>
+            <option value="Iné">Iné</option>
+          </select>
         </div>
 
         {/* Message */}

@@ -352,7 +352,7 @@ export default function Catalog() {
             </div>
 
             {/* Quote Form - Under Categories */}
-            <div className="hidden lg:block mt-6">
+            <div className="mt-6">
               <QuoteForm />
             </div>
 
