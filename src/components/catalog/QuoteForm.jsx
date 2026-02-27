@@ -120,10 +120,18 @@ export default function QuoteForm() {
 
   return (
     <div className="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden">
-      {/* Header */}
-      <div className="bg-zinc-800 border-b border-white/10 px-4 py-3 flex items-center gap-2">
-        <FileText size={18} className="text-orange-primary" />
-        <h3 className="text-white font-bold text-sm">Cenová ponuka</h3>
+      {/* Header with Title and Description */}
+      <div className="bg-zinc-800 border-b border-white/10 px-4 py-4 md:py-5">
+        <div className="flex items-center gap-2 mb-2">
+          <FileText size={18} className="text-orange-primary" />
+          <h3 className="text-white font-bold text-base md:text-lg">
+            Potrebujete <span className="text-orange-primary">cenovú ponuku</span>?
+          </h3>
+        </div>
+        {/* Description - Desktop only */}
+        <p className="hidden md:block text-white/70 text-xs md:text-sm pl-7">
+          Vyplňte formulár a ozveme sa vám do 24 hodín s nezáväznou ponukou.
+        </p>
       </div>
 
       {/* Form */}

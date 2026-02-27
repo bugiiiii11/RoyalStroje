@@ -351,8 +351,8 @@ export default function Catalog() {
               </div>
             </div>
 
-            {/* Quote Form - Under Categories */}
-            <div className="mt-6">
+            {/* Quote Form - Under Categories (Desktop only) */}
+            <div className="hidden lg:block mt-6">
               <QuoteForm />
             </div>
 
@@ -670,6 +670,11 @@ export default function Catalog() {
             )}
           </div>
         </div>
+        </div>
+
+        {/* Quote Form - Mobile only (before FAQ) */}
+        <div className="lg:hidden mt-12 mb-8">
+          <QuoteForm />
         </div>
 
         {/* FAQ Section - Integrated */}
