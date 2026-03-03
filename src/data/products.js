@@ -1,6 +1,6 @@
 // Auto-generované z katalogMVP.csv
-// Počet produktov: 137
-// Posledná aktualizácia: 23. 2. 2026 17:56:05
+// Počet produktov: 139
+// Posledná aktualizácia: 3. 3. 2026 (ručne pridané 2 produkty)
 
 export const products = [
 
@@ -429,7 +429,7 @@ export const products = [
     isPopular: false,
   },
 
-  // male-naradie/lesenie (3 produktov)
+  // male-naradie/lesenie (4 produktov)
   {
     id: 'custers',
     name: 'Custers',
@@ -479,6 +479,24 @@ export const products = [
     ],
     inStock: true,
     isNew: false,
+    isPopular: false,
+  },
+  {
+    id: 'toughbuilt-tb-c700',
+    name: 'TOUGHBUILT TB-C700',
+    category: 'male-naradie',
+    subcategory: 'lesenie',
+    image: '/pictures/Katalog-PNG/Malé náradie/Lešenie/toughbuilt-tb-c700.png',
+    price: '14.76€/deň',
+    pricePerDay: 12,
+    description: 'Pracovné kozy',
+    features: [
+      'Výška v najvyššej pozícii - 81.5 cm',
+      'Hmotnosť - 10.45 kg',
+      'Konštrukcia tela - 100% oceľ',
+    ],
+    inStock: true,
+    isNew: true,
     isPopular: false,
   },
 
@@ -968,7 +986,7 @@ export const products = [
     isPopular: false,
   },
 
-  // male-naradie/vysavace-a-cistice (5 produktov)
+  // male-naradie/vysavace-a-cistice (6 produktov)
   {
     id: 'bosch-advancedvac-20',
     name: 'Bosch AdvancedVac 20',
@@ -1024,24 +1042,6 @@ export const products = [
     isPopular: false,
   },
   {
-    id: 'makita-hw151',
-    name: 'Makita HW151',
-    category: 'male-naradie',
-    subcategory: 'vysavace-a-cistice',
-    image: '/pictures/Katalog-PNG/Malé náradie/Vysávače a čističe/Makita-HW151.png',
-    price: '22.14€/deň',
-    pricePerDay: 18,
-    description: 'Vysokotlakový čistič',
-    features: [
-      'Pracovný tlak - 150W',
-      'Hmotnosť - 26,9 kg',
-      'Príkon - 2500 W',
-    ],
-    inStock: true,
-    isNew: false,
-    isPopular: false,
-  },
-  {
     id: 'karcher-puzzi-101',
     name: 'Kärcher Puzzi 10/1',
     category: 'male-naradie',
@@ -1057,6 +1057,24 @@ export const products = [
     ],
     inStock: true,
     isNew: false,
+    isPopular: false,
+  },
+  {
+    id: 'ryobi-170-bar',
+    name: 'RYOBI 170 BAR',
+    category: 'male-naradie',
+    subcategory: 'vysavace-a-cistice',
+    image: '/pictures/Katalog-PNG/Malé náradie/Vysávače a čističe/vysokotlakovy-cistic-ryobi-170-bar.png',
+    price: '20.91€/deň',
+    pricePerDay: 17,
+    description: 'Vysokotlakový čistič',
+    features: [
+      'Prevádzkový tlak - 170 Bar',
+      'Typ motora - Uhlíkový',
+      'Maximálny prietok - 470 l/h',
+    ],
+    inStock: true,
+    isNew: true,
     isPopular: false,
   },
 
