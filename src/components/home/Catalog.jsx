@@ -12,6 +12,7 @@ import { useCart } from '../../context/CartContext';
 import FAQ from './FAQ';
 import QuoteForm from '../catalog/QuoteForm';
 import WhyRoyalStroje from './WhyRoyalStroje';
+import ContentSection from '../common/ContentSection';
 
 // Ikony pre jednotlivé kategórie
 const categoryIcons = {
@@ -187,12 +188,7 @@ export default function Catalog() {
   };
 
   return (
-    <section id="katalog" className="relative overflow-hidden min-h-screen pt-0" style={{
-      background: `
-        radial-gradient(ellipse 100% 100% at 50% 50%, #71717a 0%, #27272a 45%, #09090b 55%),
-        linear-gradient(to bottom, #09090b 0%, #27272a 10%, #27272a 90%, #09090b 100%)
-      `
-    }}>
+    <ContentSection id="katalog" className="pt-0">
       {/* WhyRoyalStroje section integrated */}
       <WhyRoyalStroje />
       {/* Mobile Hero - Compact */}
@@ -219,9 +215,10 @@ export default function Catalog() {
 
       {/* Radial gradient overlay */}
       <div
-        className="absolute inset-0 pointer-events-none z-0 top-[30vh] md:top-0"
+        className="absolute inset-0 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(100, 100, 110, 0.2) 0%, transparent 75%)'
+          background: 'radial-gradient(ellipse at 50% 50%, rgba(100, 100, 110, 0.2) 0%, transparent 75%)',
+          top: '15%'
         }}
       />
 
@@ -689,6 +686,6 @@ export default function Catalog() {
         <FAQ />
 
       </div>
-    </section>
+    </ContentSection>
   );
 }

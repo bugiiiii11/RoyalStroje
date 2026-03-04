@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
+import ContentSection from '../components/common/ContentSection';
 
 export default function Kontakt() {
   return (
@@ -56,20 +57,7 @@ export default function Kontakt() {
       </section>
 
       {/* Main Content - Single Section */}
-      <section className="relative pb-16 md:py-16 overflow-hidden min-h-screen" style={{
-        background: `
-          radial-gradient(ellipse 100% 100% at 50% 50%, #71717a 0%, #27272a 45%, #09090b 55%),
-          linear-gradient(to bottom, #09090b 0%, #27272a 10%, #27272a 90%, #09090b 100%)
-        `
-      }}>
-        {/* Radial gradient overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(100, 100, 110, 0.2) 0%, transparent 75%)'
-          }}
-        />
-
+      <ContentSection>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -389,7 +377,7 @@ export default function Kontakt() {
             </div>
           </div>
         </div>
-      </section>
+      </ContentSection>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { Phone } from 'lucide-react';
+import ContentSection from '../components/common/ContentSection';
 
 export default function Partneri() {
   const partners = [
@@ -88,20 +89,7 @@ export default function Partneri() {
       </section>
 
       {/* Main Content Section */}
-      <section className="relative pb-16 md:py-16 overflow-hidden min-h-screen" style={{
-        background: `
-          radial-gradient(ellipse 100% 100% at 50% 50%, #71717a 0%, #27272a 45%, #09090b 55%),
-          linear-gradient(to bottom, #09090b 0%, #27272a 10%, #27272a 90%, #09090b 100%)
-        `
-      }}>
-        {/* Radial gradient overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(100, 100, 110, 0.2) 0%, transparent 75%)'
-          }}
-        />
-
+      <ContentSection>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -184,40 +172,39 @@ export default function Partneri() {
           </div>
 
           {/* Partnership Info Section */}
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl md:rounded-2xl p-4 md:p-12">
-            <div className="text-center mb-4 md:mb-8">
-              <h2 className="text-lg md:text-3xl font-black text-white mb-2 md:mb-4">
-                Čo znamená <span className="text-orange-primary">partnerstvo</span>
-              </h2>
-              <p className="text-white/80 max-w-3xl mx-auto text-xs md:text-lg leading-relaxed">
-                Naši partneri sú <strong className="text-orange-primary">základom našej úspešnej práce</strong>. Si vážime každého z nich a spoločne vytvárame sieť dôveryhodných profesionálov v stavebnom priemysle, ktorí sa môžu navzájom odporúčať a spolupracovať.
+          <div className="text-center mb-6 md:mb-12">
+            <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+              Čo znamená <span className="text-orange-primary">partnerstvo</span>
+            </h2>
+            <p className="text-white/80 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed">
+              Naši partneri sú <strong className="text-orange-primary">základom našej úspešnej práce</strong>. Si vážime každého z nich a spoločne vytvárame sieť dôveryhodných profesionálov v stavebnom priemysle, ktorí sa môžu navzájom odporúčať a spolupracovať.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-6 md:space-y-8 mb-8 md:mb-12">
+            <div>
+              <h3 className="text-white font-bold text-lg md:text-2xl mb-2 md:mb-4">Ako vzniká partnerstvo?</h3>
+              <p className="text-white/70 text-sm md:text-lg leading-relaxed">
+                Nevyhľadávame nových partnerov. Partnerstvo vzniká prirodzene po dlhodobej kvalitnej spolupráci ako poďakovanie za dôveru a profesionalitu. Len naši najbližší a najspoľahlivejší klienti sa môžu stať oficiálnymi partnermi.
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto space-y-3 md:space-y-6 mb-4 md:mb-8">
-              <div className="bg-zinc-950/50 rounded-lg md:rounded-xl p-3 md:p-6 border border-white/5">
-                <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-3">Ako vzniká partnerstvo?</h3>
-                <p className="text-white/70 text-xs md:text-base leading-relaxed">
-                  Nevyhľadávame nových partnerov. Partnerstvo vzniká prirodzene po dlhodobej kvalitnej spolupráci ako <strong className="text-white">poďakovanie za dôveru a profesionalitu</strong>. Len naši najbližší a najspoľahlivejší klienti sa môžu stať oficiálnymi partnermi.
-                </p>
-              </div>
-
-              <div className="bg-zinc-950/50 rounded-lg md:rounded-xl p-3 md:p-6 border border-white/5">
-                <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-3">Vzájomné odporúčanie</h3>
-                <p className="text-white/70 text-xs md:text-base leading-relaxed">
-                  Partnerstvo znamená vzájomnú dôveru. Radi odporúčame služby našich partnerov aj našim klientom a spoločne vytvárame sieť spoľahlivých profesionálov v stavebnom priemysle.
-                </p>
-              </div>
-
-              <div className="bg-zinc-950/50 rounded-lg md:rounded-xl p-3 md:p-6 border border-white/5">
-                <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-3">Komplexné pokrytie stavebníctva</h3>
-                <p className="text-white/70 text-xs md:text-base leading-relaxed">
-                  Naša sieť partnerov pokrýva <strong className="text-white">široké spektrum stavebných služieb</strong> — od prenájmu strojov, cez zemné práce, až po dodávky materiálu. Pre našich klientov to znamená jedno spoľahlivé kontaktné miesto a rýchle riešenia.
-                </p>
-              </div>
+            <div>
+              <h3 className="text-white font-bold text-lg md:text-2xl mb-2 md:mb-4">Vzájomné odporúčanie</h3>
+              <p className="text-white/70 text-sm md:text-lg leading-relaxed">
+                Partnerstvo znamená vzájomnú dôveru. Radi odporúčame služby našich partnerov aj našim klientom a spoločne vytvárame sieť spoľahlivých profesionálov v stavebnom priemysle.
+              </p>
             </div>
 
-            <div className="text-center">
+            <div>
+              <h3 className="text-white font-bold text-lg md:text-2xl mb-2 md:mb-4">Komplexné pokrytie stavebníctva</h3>
+              <p className="text-white/70 text-sm md:text-lg leading-relaxed">
+                Naša sieť partnerov pokrýva široké spektrum stavebných služieb — od prenájmu strojov, cez zemné práce, až po dodávky materiálu. Pre našich klientov to znamená jedno spoľahlivé kontaktné miesto a rýchle riešenia.
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center">
               <p className="text-white/60 text-xs md:text-sm mb-3 md:mb-4">
                 Máte záujem o spoluprácu? Kontaktujte nás a začnime budovať dôveru.
               </p>
@@ -228,11 +215,10 @@ export default function Partneri() {
                 <Phone size={16} className="md:w-5 md:h-5" />
                 <span>Zavolať: 0948 555 551</span>
               </a>
-            </div>
           </div>
 
         </div>
-      </section>
+      </ContentSection>
     </div>
   );
 }
