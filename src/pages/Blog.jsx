@@ -3,17 +3,6 @@ import { Link } from 'react-router-dom';
 import ContentSection from '../components/common/ContentSection';
 
 export default function Blog() {
-  // Category color mapping
-  const getCategoryColor = (category) => {
-    const colors = {
-      'Návody': 'bg-orange-primary/90 text-white',
-      'Tipy a rady': 'bg-blue-500/90 text-white',
-      'Novinky': 'bg-green-500/90 text-white',
-      'Prípadové štúdie': 'bg-purple-500/90 text-white',
-    };
-    return colors[category] || 'bg-orange-primary/90 text-white';
-  };
-
   const blogPosts = [
     {
       id: 1,
@@ -21,6 +10,7 @@ export default function Blog() {
       title: 'Prenájom vs. Kúpa Stavebnej Mechanizácie: Komplexný Sprievodca',
       excerpt: 'Rozhodujete sa, či investovať do vlastnej stavebnej mechanizácie alebo si ju radšej prenajať? Porovnali sme náklady, výhody a nevýhody oboch možností. Kalkulačka úspor + praktické tipy.',
       date: '15. Február 2026',
+      dateSort: '2026-02-15',
       author: 'Royal Stroje',
       readTime: '9 min',
       image: '/pictures/graphics/objects2.png',
@@ -32,6 +22,7 @@ export default function Blog() {
       title: 'Ako Vybrať Správne Minirýpadlo: Praktický Návod pre Začiatočníkov',
       excerpt: 'Minirýpadlo je jeden z najuniverzálnejších stavebných strojov. Ale s desiatskami modelov a veľkostí na trhu, ako si vybrať to pravé? Komplexný sprievodca veľkosťami, typmi a výberom správneho stroja.',
       date: '1. Marec 2026',
+      dateSort: '2026-03-01',
       author: 'Royal Stroje',
       readTime: '10 min',
       image: '/pictures/graphics/mini-rypadlo-blog.png',
@@ -43,6 +34,7 @@ export default function Blog() {
       title: 'Prenájom Stavebnej Mechanizácie v Senci a okolí: Lokálny Sprievodca 2026',
       excerpt: 'Senec a jeho okolie zažíva stavebný boom. Dozviete sa všetko o dostupnosti, cenách a špecifikách prenájmu stavebnej mechanizácie v regióne Senec, Bratislava, Dunajská Streda a okolie.',
       date: '5. Marec 2026',
+      dateSort: '2026-03-05',
       author: 'Royal Stroje',
       readTime: '9 min',
       image: '/pictures/graphics/objects3.png',
@@ -54,6 +46,7 @@ export default function Blog() {
       title: 'Jarné Stavebné Projekty: Top 5 Mechanizácií, Ktoré Potrebujete',
       excerpt: 'Plánujete stavebný projekt na jar 2026? Zistite, ktorých 5 strojov sú absolútne nevyhnutné pre terénne úpravy, základy a záhradné projekty. Jarné balíčky so zľavou.',
       date: '2. Marec 2026',
+      dateSort: '2026-03-02',
       author: 'Royal Stroje',
       readTime: '11 min',
       image: '/pictures/graphics/objects2.png',
@@ -65,6 +58,7 @@ export default function Blog() {
       title: 'Mobilné Sanitárne Kontajnery: Komplexný Sprievodca pre Stavby a Eventy',
       excerpt: 'Potrebujete mobilné WC na stavbu alebo event? Komplexný sprievodca typmi, cenami a hygienickými štandardmi. Royal Stroje Senec - prenájom od 35 €/deň.',
       date: '15. Február 2026',
+      dateSort: '2026-02-15',
       author: 'Royal Stroje',
       readTime: '12 min',
       image: '/pictures/graphics/objects4.png',
@@ -76,6 +70,7 @@ export default function Blog() {
       title: '10 Bezpečnostných Pravidiel pri Práci so Stavebnými Strojmi',
       excerpt: 'Bezpečnosť na stavbe je prvoradá! 10 kľúčových pravidiel pre prácu s minirýpadlom, nakladačom a ďalšou mechanizáciou. Bezplatný checklist na stiahnutie.',
       date: '10. Január 2026',
+      dateSort: '2026-01-10',
       author: 'Royal Stroje',
       readTime: '13 min',
       image: '/pictures/graphics/cigy-blog.png',
@@ -87,6 +82,7 @@ export default function Blog() {
       title: 'Cenník Prenájmu Stavebnej Mechanizácie 2026: Komplexný Prehľad',
       excerpt: 'Aktuálne ceny prenájmu stavebnej mechanizácie na Slovensku 2026. Porovnanie požičovní, zľavy, kalkulačka nákladov. Royal Stroje - transparentné ceny bez skrytých poplatkov.',
       date: '1. August 2026',
+      dateSort: '2026-08-01',
       author: 'Royal Stroje',
       readTime: '18 min',
       image: '/pictures/graphics/objects1.png',
@@ -98,6 +94,7 @@ export default function Blog() {
       title: 'Vibračné Dosky a Hutnenie: Všetko Čo Potrebujete Vedieť',
       excerpt: 'Komplexný sprievodca vibračnými doskami a hutnením. Typy, použitie, technické parametre, najčastejšie chyby. Royal Stroje - prenájom od 25 €/deň.',
       date: '4. Marec 2026',
+      dateSort: '2026-03-04',
       author: 'Royal Stroje',
       readTime: '17 min',
       image: '/pictures/graphics/objects2.png',
@@ -109,6 +106,7 @@ export default function Blog() {
       title: 'Jesenné Terénne Úpravy: Príprava Pozemku na Zimu',
       excerpt: 'Komplexný sprievodca jesennými terénymi úpravami. Čo urobiť pred zimou, aby ste na jar mali pripravený pozemok. Drenáž, odvodnenie, hutnenie.',
       date: '10. Október 2026',
+      dateSort: '2026-10-10',
       author: 'Royal Stroje',
       readTime: '12 min',
       image: '/pictures/graphics/dovoz.png',
@@ -120,6 +118,7 @@ export default function Blog() {
       title: 'Case Study: Ako Sme Pomohli Dokončiť Projekt o 30% Rýchlejšie',
       excerpt: 'Reálna prípadová štúdia stavby rodinného domu v Senci. Ako Royal Stroje pomohli ušetriť čas a peniaze. Before/After, náklady a lessons learned.',
       date: '5. Február 2026',
+      dateSort: '2026-02-05',
       author: 'Royal Stroje',
       readTime: '13 min',
       image: '/pictures/graphics/predaj.png',
@@ -131,6 +130,7 @@ export default function Blog() {
       title: 'Stavebné Projekty v Zime: Výzvy a Riešenia',
       excerpt: 'Dá sa stavať v zime? Áno! Komplexný sprievodca zimnými stavebnými prácami. Čo robiť, čo nerobiť, aká mechanizácia. Zimné zľavy až -30%!',
       date: '1. Január 2026',
+      dateSort: '2026-01-01',
       author: 'Royal Stroje',
       readTime: '13 min',
       image: '/pictures/graphics/servis.png',
@@ -142,6 +142,7 @@ export default function Blog() {
       title: 'Ročný Prehľad 2026: Trendy v Prenájme Stavebnej Mechanizácie',
       excerpt: 'Komplexný prehľad roku 2026 v prenájme stavebnej mechanizácie na Slovensku. Trendy, štatistiky, predpovede na 2026. Čo sa zmenilo a čo nás čaká?',
       date: '15. Január 2026',
+      dateSort: '2026-01-15',
       author: 'Royal Stroje',
       readTime: '14 min',
       image: '/pictures/graphics/hero4.png',
@@ -153,6 +154,7 @@ export default function Blog() {
       title: 'Akumulátorová Brúska DeWalt Pre Profesionálov i Kutiloch',
       excerpt: 'Kompletný prehľad akumulátorovej brúsky DeWalt DCG405P2 - technické parametre, bezpečnostné funkcie, praktické využitie a naše skúsenosti s týmto nástrojom. Prečo je táto brúska jednou z najlepších volieb na trhu?',
       date: '20. Február 2026',
+      dateSort: '2026-02-20',
       author: 'Royal Stroje',
       readTime: '12 min',
       image: '/pictures/graphics/dewalt-blog.png',
@@ -164,6 +166,7 @@ export default function Blog() {
       title: 'Rázový Uťahovák Makita s Extrémnym Výkonom 2050 Nm',
       excerpt: 'Kompletný prehľad rázového uťahováka Makita TW001GM201 - 40V XGT systém, 2050 Nm krútiaci moment, profesionálne použitie v autoservisoch a ťažkom priemysle. Prečo je tento nástroj skutočný beast?',
       date: '26. Február 2026',
+      dateSort: '2026-02-26',
       author: 'Royal Stroje',
       readTime: '13 min',
       image: '/pictures/graphics/makita-blog.png',
@@ -175,6 +178,7 @@ export default function Blog() {
       title: 'Pracovné Kozy TOUGHBUILT, Ktoré Vydržia Všetko',
       excerpt: 'Kompletný prehľad pracovných kôz TOUGHBUILT TB-C700 - 100% oceľová konštrukcia, nosnosť až 1,180 kg v páre, výškovo nastaviteľné nohy a revolučný samonivelačný systém. Prečo sú tieto kozy najlepšou voľbou pre profesionálov?',
       date: '5. Marec 2026',
+      dateSort: '2026-03-05',
       author: 'Royal Stroje',
       readTime: '12 min',
       image: '/pictures/graphics/toughbuilt-tb-c700-transparent.png',
@@ -183,7 +187,10 @@ export default function Blog() {
   ];
 
   // Filter out hidden articles - show only 8 articles (1, 2, 4, 6, 8, 13, 14, 15)
-  const visiblePosts = blogPosts.filter(post => ![3, 5, 7, 9, 10, 11, 12].includes(post.id));
+  // Sort by date from newest to oldest
+  const visiblePosts = blogPosts
+    .filter(post => ![3, 5, 7, 9, 10, 11, 12].includes(post.id))
+    .sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort));
 
   return (
     <div className="min-h-screen">
@@ -278,13 +285,6 @@ export default function Blog() {
                       className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/30 via-transparent to-transparent group-hover:from-zinc-900/20 transition-all duration-500"></div>
-
-                    {/* Category Badge - Color coded */}
-                    <div className="absolute top-2 left-2 md:top-4 md:left-4 z-10">
-                      <span className={`inline-block ${getCategoryColor(post.category)} text-[10px] md:text-xs font-bold px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-lg backdrop-blur-sm border border-white/20 transition-all group-hover:scale-110`}>
-                        {post.category}
-                      </span>
-                    </div>
                   </div>
 
                   {/* Content */}
