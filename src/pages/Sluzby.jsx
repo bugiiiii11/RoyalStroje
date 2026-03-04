@@ -17,10 +17,10 @@ export default function Sluzby() {
       id: 'predaj-techniky',
       path: '/sluzby/predaj-techniky',
       icon: ShoppingCart,
-      title: 'Predaj náradia',
+      title: 'Makita - Autorizovaný predajca',
       description: 'Kvalitné náradie, mechanizácia a príslušenstvo značkových výrobcov priamo na sklade v Senci.',
       features: ['Overené značky', 'Férové ceny', 'Tovar skladom', 'Expresné dodanie'],
-      backgroundImage: '/pictures/graphics/servis.png',
+      backgroundImage: '/pictures/graphics/predaj.png',
     },
     {
       id: 'nahradne-diely',
@@ -29,7 +29,7 @@ export default function Sluzby() {
       title: 'Predaj náhradných dielov',
       description: 'Široký sortiment originálnych náhradných dielov pre stavebné náradie. Skladom diely pre všetky typy strojov a zariadení.',
       features: ['Originálne diely', 'Skladová dostupnosť', 'Odborné poradenstvo', 'Expresná objednávka'],
-      backgroundImage: '/pictures/graphics/predaj.png',
+      backgroundImage: '/pictures/graphics/servis.png',
     },
     {
       id: 'cenova-ponuka',

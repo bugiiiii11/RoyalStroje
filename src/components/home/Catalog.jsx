@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import {
   ShoppingCart, X, Send, Calendar,
   Hammer, Cog, HardHat, ArrowUpFromLine,
-  Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight
+  Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, BookOpen, ArrowRight
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { getProductsBySubcategory, products } from '../../data/products';
@@ -55,9 +55,9 @@ export default function Catalog() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
-  // Mobile: 6 products, Desktop: 12 products
+  // Mobile: 6 products, Desktop: 8 products
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const productsPerPage = isMobile ? 6 : 12;
+  const productsPerPage = isMobile ? 6 : 8;
 
   const { cartItems, removeFromCart, getTotal } = useCart();
 
@@ -684,6 +684,65 @@ export default function Catalog() {
 
         {/* FAQ Section - Integrated */}
         <FAQ />
+
+        {/* Blog CTA Section */}
+        <div className="relative mt-16 md:mt-24 pt-12 md:pt-16 border-t border-white/10">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4">
+              Chcete vedieť <span className="text-orange-primary">víc</span>?
+            </h2>
+            <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+              Navštívte náš blog plný užitočných rád, tipov a noviniek zo sveta stavebnej mechanizácie
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-8 md:mb-12">
+            {/* Tip 1 */}
+            <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-primary/20 transition-all">
+                  <BookOpen className="text-orange-primary" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
+                    Návody a tipy
+                  </h3>
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    Praktické rady ako vybrať správnu techniku, ako správne používať stroje a ako ušetriť na prenájme
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Tip 2 */}
+            <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-primary/20 transition-all">
+                  <Calendar className="text-orange-primary" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
+                    Novinky a aktuality
+                  </h3>
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    Informácie o nových strojoch v našej ponuke, zmenách v cenníku a špeciálnych akciách
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Link
+              to="/blog"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-base rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+            >
+              <BookOpen size={20} />
+              <span>Prečítať blog</span>
+              <ArrowRight size={20} />
+            </Link>
+          </div>
+        </div>
 
       </div>
     </ContentSection>

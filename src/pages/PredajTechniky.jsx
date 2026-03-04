@@ -100,7 +100,7 @@ export default function PredajTechniky() {
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
-              Milwaukee, Makita, Hilti. <span className="text-orange-primary">Značkové náradie skladom v Senci.</span>
+              Makita -     <span className="text-orange-primary">Autorizovaný predajca</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed">
               Diamantové kotúče, vrtáky, príslušenstvo a BOZP pomôcky. Férové ceny, odborné poradenstvo a okamžitý odber na prevádzke v Senci.
@@ -132,16 +132,20 @@ export default function PredajTechniky() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {categories.map((category) => {
                 const IconComponent = category.icon;
                 return (
                   <div
                     key={category.id}
-                    className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 group relative overflow-hidden"
+                    className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
                   >
-                    {/* Gradient overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    {/* Animated border glow on hover */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                      background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                      backgroundSize: '200% 200%',
+                      animation: 'gradient-shift 3s ease infinite'
+                    }}></div>
 
                     <div className="relative">
                       <div className="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
@@ -170,6 +174,9 @@ export default function PredajTechniky() {
                         ))}
                       </div>
                     </div>
+
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
                   </div>
                 );
               })}
@@ -189,19 +196,31 @@ export default function PredajTechniky() {
           </div>
 
           {/* Advantages Cards - Integrated */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
             {advantages.map((advantage, idx) => {
               const IconComponent = advantage.icon;
               return (
                 <div
                   key={idx}
-                  className="bg-zinc-900/50 backdrop-blur-sm border border-orange-primary/20 rounded-xl p-3 md:p-5 hover:border-orange-primary/50 hover:bg-zinc-900/70 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-primary/10 transition-all group"
+                  className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-4 md:p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
                 >
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-2 md:mb-3 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
-                    <IconComponent className="text-orange-primary" size={20} />
+                  {/* Animated border glow on hover */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                    background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                    backgroundSize: '200% 200%',
+                    animation: 'gradient-shift 3s ease infinite'
+                  }}></div>
+
+                  <div className="relative text-center">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                      <IconComponent className="text-orange-primary" size={24} />
+                    </div>
+                    <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors">{advantage.title}</h3>
+                    <p className="text-white/60 text-xs md:text-sm leading-relaxed">{advantage.description}</p>
                   </div>
-                  <h3 className="text-white font-bold text-sm md:text-base mb-1 md:mb-1.5">{advantage.title}</h3>
-                  <p className="text-white/60 text-xs md:text-sm leading-snug">{advantage.description}</p>
+
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
                 </div>
               );
             })}
@@ -216,50 +235,76 @@ export default function PredajTechniky() {
           </div>
 
           {/* Info Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-12 max-w-6xl mx-auto">
             {/* Opening Hours */}
-            <div className="bg-zinc-900/50 backdrop-blur border border-orange-primary/20 rounded-xl md:rounded-2xl p-4 md:p-6 text-center hover:border-orange-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-primary/10 transition-all">
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 md:mb-4 mx-auto">
-                <svg className="w-6 h-6 md:w-7 md:h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+              {/* Animated border glow on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease infinite'
+              }}></div>
+
+              <div className="relative text-center">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                  <svg className="w-7 h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Otváracie hodiny</h3>
+                <p className="text-orange-primary font-bold text-base mb-1">Po - Pi</p>
+                <p className="text-white/60 text-sm leading-relaxed">7:00 - 16:00</p>
               </div>
-              <h3 className="text-white font-bold text-base md:text-lg mb-1.5 md:mb-2">Otváracie hodiny</h3>
-              <p className="text-orange-primary font-semibold text-lg md:text-xl mb-1">Po - Pi</p>
-              <p className="text-white/70 text-sm md:text-base">7:00 - 16:00</p>
+
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </div>
 
             {/* Address */}
-            <div className="bg-zinc-900/50 backdrop-blur border border-orange-primary/20 rounded-xl md:rounded-2xl p-4 md:p-6 text-center hover:border-orange-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-primary/10 transition-all">
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 md:mb-4 mx-auto">
-                <svg className="w-6 h-6 md:w-7 md:h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+            <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+              {/* Animated border glow on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease infinite'
+              }}></div>
+
+              <div className="relative text-center">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                  <svg className="w-7 h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Adresa predajne</h3>
+                <p className="text-white/80 text-base mb-1">Recká cesta 182</p>
+                <p className="text-orange-primary font-bold text-base">925 26 Senec</p>
               </div>
-              <h3 className="text-white font-bold text-base md:text-lg mb-1.5 md:mb-2">Adresa predajne</h3>
-              <p className="text-white/90 text-sm md:text-base leading-relaxed">
-                Recká cesta 182<br />
-                <span className="text-orange-primary">925 26 Senec</span>
-              </p>
+
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </div>
 
             {/* Contact */}
-            <div className="bg-zinc-900/50 backdrop-blur border border-orange-primary/20 rounded-xl md:rounded-2xl p-4 md:p-6 text-center hover:border-orange-primary/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-primary/10 transition-all">
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 md:mb-4 mx-auto">
-                <Phone className="text-orange-primary w-6 h-6 md:w-7 md:h-7" />
+            <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+              {/* Animated border glow on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease infinite'
+              }}></div>
+
+              <div className="relative text-center">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                  <Phone className="text-orange-primary" size={28} />
+                </div>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Kontakt</h3>
+                <p className="text-orange-primary font-bold text-base mb-1">+421 948 555 551</p>
+                <p className="text-white/60 text-sm leading-relaxed">info@royalstroje.sk</p>
               </div>
-              <h3 className="text-white font-bold text-base md:text-lg mb-1.5 md:mb-2">Kontakt</h3>
-              <p className="text-white/90 text-sm md:text-base mb-1">
-                <a href="tel:+421948555551" className="hover:text-orange-primary transition-colors">
-                  +421 948 555 551
-                </a>
-              </p>
-              <p className="text-white/70 text-xs md:text-sm">
-                <a href="mailto:info@royalstroje.sk" className="hover:text-orange-primary transition-colors">
-                  info@royalstroje.sk
-                </a>
-              </p>
+
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </div>
           </div>
 
