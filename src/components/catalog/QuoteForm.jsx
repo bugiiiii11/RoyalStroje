@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Send, CheckCircle, FileText } from 'lucide-react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import emailjs from '@emailjs/browser';
+import CustomSelect from '../ui/CustomSelect';
 
 export default function QuoteForm() {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -127,9 +128,9 @@ export default function QuoteForm() {
   }
 
   return (
-    <div className="bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden">
+    <div className="bg-zinc-900 border border-white/10 rounded-2xl overflow-visible">
       {/* Header with Title and Description */}
-      <div className="bg-zinc-800 border-b border-white/10 px-4 py-4 md:py-5">
+      <div className="bg-zinc-900 border-b border-white/10 px-4 py-4 md:py-5 rounded-t-2xl">
         <div className="flex items-center gap-2 mb-2">
           <FileText size={18} className="text-orange-primary" />
           <h3 className="text-white font-bold text-base md:text-lg">
@@ -143,7 +144,7 @@ export default function QuoteForm() {
       </div>
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="p-4 space-y-3">
+      <form onSubmit={handleSubmit} className="p-4 space-y-3 overflow-visible">
         {/* Honeypot */}
         <input
           type="text"
@@ -196,21 +197,21 @@ export default function QuoteForm() {
 
         {/* Project Type */}
         <div>
-          <select
+          <CustomSelect
             name="projectType"
             value={formData.projectType}
             onChange={handleChange}
             required
-            className="w-full bg-zinc-800 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-orange-primary/50 transition-all"
-          >
-            <option value="">Vyberte typ projektu *</option>
-            <option value="Stavba domu">Stavba domu</option>
-            <option value="Rekonštrukcia">Rekonštrukcia</option>
-            <option value="Terénne úpravy">Terénne úpravy</option>
-            <option value="Zemné práce">Zemné práce</option>
-            <option value="Záhradné úpravy">Záhradné úpravy</option>
-            <option value="Iné">Iné</option>
-          </select>
+            placeholder="Vyberte typ projektu *"
+            options={[
+              { value: 'Stavba domu', label: 'Stavba domu' },
+              { value: 'Rekonštrukcia', label: 'Rekonštrukcia' },
+              { value: 'Terénne úpravy', label: 'Terénne úpravy' },
+              { value: 'Zemné práce', label: 'Zemné práce' },
+              { value: 'Záhradné úpravy', label: 'Záhradné úpravy' },
+              { value: 'Iné', label: 'Iné' },
+            ]}
+          />
         </div>
 
         {/* Message */}

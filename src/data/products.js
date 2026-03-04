@@ -495,6 +495,7 @@ export const products = [
       'Hmotnosť - 10.45 kg',
       'Konštrukcia tela - 100% oceľ',
     ],
+    blogArticleSlug: 'toughbuilt-tb-c700-pracovne-kozy-profesionalny-nastroj',
     inStock: true,
     isNew: true,
     isPopular: false,

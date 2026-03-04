@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Send, CheckCircle, Phone, MessageCircle } from 'lucide-react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import emailjs from '@emailjs/browser';
+import CustomSelect from '../ui/CustomSelect';
 
 export default function ContactForm() {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -219,7 +220,7 @@ export default function ContactForm() {
 
   // Form state
   return (
-    <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-2xl md:rounded-3xl p-6 md:p-12">
+    <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-2xl md:rounded-3xl p-6 md:p-12 overflow-visible">
       <div className="mb-6 md:mb-8 text-center">
         <h3 className="text-white font-black text-2xl md:text-3xl mb-3 md:mb-4">
           Potrebujete <span className="text-orange-primary">cenovú ponuku</span>?
@@ -229,7 +230,7 @@ export default function ContactForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 overflow-visible">
         {/* Honeypot field - hidden from users, visible to bots */}
         <input
           type="text"
@@ -298,22 +299,21 @@ export default function ContactForm() {
           <label htmlFor="projectType" className="block text-white font-bold text-sm md:text-base mb-2">
             Typ projektu <span className="text-orange-primary">*</span>
           </label>
-          <select
-            id="projectType"
+          <CustomSelect
             name="projectType"
             value={formData.projectType}
             onChange={handleChange}
             required
-            className="w-full bg-zinc-800 border border-white/10 rounded-xl px-4 py-3 md:py-4 text-white focus:outline-none focus:border-orange-primary/50 transition-all"
-          >
-            <option value="">Vyberte typ projektu</option>
-            <option value="Stavba domu">Stavba domu</option>
-            <option value="Rekonštrukcia">Rekonštrukcia</option>
-            <option value="Terénne úpravy">Terénne úpravy</option>
-            <option value="Zemné práce">Zemné práce</option>
-            <option value="Záhradné úpravy">Záhradné úpravy</option>
-            <option value="Iné">Iné</option>
-          </select>
+            placeholder="Vyberte typ projektu"
+            options={[
+              { value: 'Stavba domu', label: 'Stavba domu' },
+              { value: 'Rekonštrukcia', label: 'Rekonštrukcia' },
+              { value: 'Terénne úpravy', label: 'Terénne úpravy' },
+              { value: 'Zemné práce', label: 'Zemné práce' },
+              { value: 'Záhradné úpravy', label: 'Záhradné úpravy' },
+              { value: 'Iné', label: 'Iné' },
+            ]}
+          />
         </div>
 
         {/* Message */}

@@ -1,15 +1,15 @@
 
-  'cennik-prenajmu-stavebnej-mechanizacie-2025': {
-    title: 'Cenník Prenájmu Stavebnej Mechanizácie 2025: Komplexný Prehľad',
-    date: '1. August 2025',
+  'cennik-prenajmu-stavebnej-mechanizacie-2026': {
+    title: 'Cenník Prenájmu Stavebnej Mechanizácie 2026: Komplexný Prehľad',
+    date: '1. August 2026',
     author: 'Royal Stroje',
     readTime: '18 min',
     category: 'Tipy a rady',
-    excerpt: 'Aktuálne ceny prenájmu stavebnej mechanizácie na Slovensku 2025.',
+    excerpt: 'Aktuálne ceny prenájmu stavebnej mechanizácie na Slovensku 2026.',
     content: (
       <div className="space-y-8">
         <p className="text-xl text-white/90 leading-relaxed">
-          Plánujete stavbu alebo rekonštrukciu a potrebujete prenajať mechanizáciu? Ceny na Slovensku sa líšia podľa požičovne, regiónu a dĺžky prenájmu. V tomto komplexnom cenníkovom sprievodcovi nájdete aktuálne ceny za rok 2025, porovnanie požičovní a kalkulačku nákladov.
+          Plánujete stavbu alebo rekonštrukciu a potrebujete prenajať mechanizáciu? Ceny na Slovensku sa líšia podľa požičovne, regiónu a dĺžky prenájmu. V tomto komplexnom cenníkovom sprievodcovi nájdete aktuálne ceny za rok 2026, porovnanie požičovní a kalkulačku nákladov.
         </p>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
@@ -28,7 +28,7 @@
           </ul>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Komplexný Cenník 2025</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-white">Komplexný Cenník 2026</h2>
 
         <h3 className="text-xl md:text-2xl font-bold text-orange-primary">Minirýpadlá</h3>
 
@@ -128,7 +128,7 @@
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Balíčky a Zľavy 2025</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-white">Balíčky a Zľavy 2026</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/50 rounded-2xl p-6">

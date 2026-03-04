@@ -11,6 +11,7 @@ import ProductCard from '../product/ProductCard';
 import { useCart } from '../../context/CartContext';
 import FAQ from './FAQ';
 import QuoteForm from '../catalog/QuoteForm';
+import WhyRoyalStroje from './WhyRoyalStroje';
 
 // Ikony pre jednotlivé kategórie
 const categoryIcons = {
@@ -186,7 +187,11 @@ export default function Catalog() {
   };
 
   return (
-    <section id="katalog" className="relative bg-zinc-950 overflow-hidden min-h-screen">
+    <section id="katalog" className="relative overflow-hidden min-h-screen pt-0" style={{
+      background: 'linear-gradient(to bottom, #09090b 0%, #27272a 15%, #27272a 85%, #09090b 100%)'
+    }}>
+      {/* WhyRoyalStroje section integrated */}
+      <WhyRoyalStroje />
       {/* Mobile Hero - Compact */}
       <div className="md:hidden relative h-[22vh] max-h-[200px] bg-black overflow-hidden">
         {/* Logo - Top Left */}
@@ -204,7 +209,7 @@ export default function Catalog() {
             <span className="text-orange-primary">Katalóg</span> strojov na prenájom
           </h1>
           <p className="text-white/70 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
-            Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Dovoz na stavbu do 4 hodín.
+            Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
           </p>
         </div>
       </div>
@@ -213,7 +218,7 @@ export default function Catalog() {
       <div
         className="absolute inset-0 pointer-events-none z-0 top-[30vh] md:top-0"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.5) 0%, rgba(9, 9, 11, 1) 75%)'
+          background: 'radial-gradient(ellipse at center, rgba(100, 100, 110, 0.2) 0%, transparent 75%)'
         }}
       />
 
@@ -224,7 +229,7 @@ export default function Catalog() {
             <span className="text-orange-primary">Katalóg</span> strojov na prenájom
           </h2>
           <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-6">
-            Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Dovoz na stavbu do 4 hodín.
+            Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
           </p>
         </div>
 

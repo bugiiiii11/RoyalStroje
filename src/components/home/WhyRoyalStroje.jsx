@@ -2,12 +2,12 @@ import { Truck, Phone, MapPin, Clock } from 'lucide-react';
 
 export default function WhyRoyalStroje() {
   return (
-    <section className="hidden md:block relative bg-zinc-950 py-16 lg:py-20 overflow-hidden">
+    <div className="hidden md:block relative py-16 lg:py-20">
       {/* Radial gradient overlay */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.3) 0%, rgba(9, 9, 11, 1) 70%)'
+          background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.3) 0%, transparent 70%)'
         }}
       />
 
@@ -26,85 +26,102 @@ export default function WhyRoyalStroje() {
         {/* Benefits Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* Benefit 1 - Rýchly dovoz */}
-          <div className="group relative bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 hover:scale-105">
-            <div className="absolute -top-3 -right-3 w-16 h-16 bg-gradient-to-br from-orange-primary to-orange-hover rounded-full opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
+          <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+            {/* Animated border glow on hover */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+              background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+              backgroundSize: '200% 200%',
+              animation: 'gradient-shift 3s ease infinite'
+            }}></div>
 
             <div className="relative">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Truck className="text-white" size={28} />
+              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                <Truck className="text-orange-primary" size={28} />
               </div>
 
-              <h3 className="text-white font-bold text-lg mb-2">Dovoz do 4 hodín</h3>
+              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Dovoz do 4 hodín</h3>
               <p className="text-white/60 text-sm leading-relaxed">
                 Malé náradie a stredná mechanizácia na stavbe v ten istý deň. Ťažká technika do 24 hodín.
               </p>
             </div>
+
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
           </div>
 
           {/* Benefit 2 - Nonstop dostupnosť */}
-          <div className="group relative bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 hover:scale-105">
-            <div className="absolute -top-3 -right-3 w-16 h-16 bg-gradient-to-br from-orange-primary to-orange-hover rounded-full opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
+          <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+            {/* Animated border glow on hover */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+              background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+              backgroundSize: '200% 200%',
+              animation: 'gradient-shift 3s ease infinite'
+            }}></div>
 
             <div className="relative">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Phone className="text-white" size={28} />
+              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                <Phone className="text-orange-primary" size={28} />
               </div>
 
-              <h3 className="text-white font-bold text-lg mb-2">Nonstop podpora</h3>
+              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Nonstop podpora</h3>
               <p className="text-white/60 text-sm leading-relaxed">
                 Telefonicky dostupní 24/7. Problém na stavbe? Voláme vám späť do 15 minút.
               </p>
             </div>
+
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
           </div>
 
           {/* Benefit 3 - Lokálna dostupnosť */}
-          <div className="group relative bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 hover:scale-105">
-            <div className="absolute -top-3 -right-3 w-16 h-16 bg-gradient-to-br from-orange-primary to-orange-hover rounded-full opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
+          <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+            {/* Animated border glow on hover */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+              background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+              backgroundSize: '200% 200%',
+              animation: 'gradient-shift 3s ease infinite'
+            }}></div>
 
             <div className="relative">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <MapPin className="text-white" size={28} />
+              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                <MapPin className="text-orange-primary" size={28} />
               </div>
 
-              <h3 className="text-white font-bold text-lg mb-2">Región Senec – Bratislava</h3>
+              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Región Senec – Bratislava</h3>
               <p className="text-white/60 text-sm leading-relaxed">
                 Obsluhujeme Senec, Bratislavu, Galantu, Trnavu, Pezinok, Modru, Sereď, Šamorín a okolie.
               </p>
             </div>
+
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
           </div>
 
           {/* Benefit 4 - Skúsenosti */}
-          <div className="group relative bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 hover:scale-105">
-            <div className="absolute -top-3 -right-3 w-16 h-16 bg-gradient-to-br from-orange-primary to-orange-hover rounded-full opacity-20 blur-2xl group-hover:opacity-40 transition-opacity"></div>
+          <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+            {/* Animated border glow on hover */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+              background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+              backgroundSize: '200% 200%',
+              animation: 'gradient-shift 3s ease infinite'
+            }}></div>
 
             <div className="relative">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <Clock className="text-white" size={28} />
+              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                <Clock className="text-orange-primary" size={28} />
               </div>
 
-              <h3 className="text-white font-bold text-lg mb-2">12 rokov skúseností</h3>
+              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">12 rokov skúseností</h3>
               <p className="text-white/60 text-sm leading-relaxed">
                 Dlhoročné know-how v prenájme techniky. Profesionálne poradenstvo pri výbere strojov.
               </p>
             </div>
+
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
           </div>
         </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-12 lg:mt-16 text-center">
-          <p className="text-white/70 text-lg mb-6">
-            Stavebná technika a náradie{' '}
-            <span className="text-orange-primary font-bold">priamo v Senci</span> na Reckej ceste 182
-          </p>
-          <a
-            href="tel:+421948555551"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
-          >
-            <Phone size={20} />
-            <span>Zavolať: 0948 555 551</span>
-          </a>
-        </div>
       </div>
-    </section>
+    </div>
   );
 }

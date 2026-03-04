@@ -1,7 +1,7 @@
 export const blogArticles = {
   'prenajom-vs-kupa-stavebnej-mechanizacie': {
-    title: 'Prenájom vs. Kúpa Stavebnej Mechanizácie: Komplexný Sprievodca 2025',
-    date: '15. Marec 2025',
+    title: 'Prenájom vs. Kúpa Stavebnej Mechanizácie: Komplexný Sprievodca 2026',
+    date: '5. Marec 2026',
     author: 'Royal Stroje',
     readTime: '9 min',
     category: 'Tipy a rady',
@@ -208,7 +208,7 @@ export const blogArticles = {
 
   'ako-vybrat-spravne-minirypadlo': {
     title: 'Ako Vybrať Správne Minirýpadlo: Praktický Návod pre Začiatočníkov',
-    date: '10. Marec 2025',
+    date: '5. Marec 2026',
     author: 'Royal Stroje',
     readTime: '10 min',
     category: 'Návody',
@@ -443,7 +443,7 @@ export const blogArticles = {
         </div>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-orange-primary mb-4">Cennníkový Prehľad (Royal Stroje 2025)</h3>
+          <h3 className="text-xl font-bold text-orange-primary mb-4">Cennníkový Prehľad (Royal Stroje 2026)</h3>
 
           <div className="space-y-3">
             <div className="flex justify-between items-center py-2 border-b border-white/10">
@@ -502,8 +502,8 @@ export const blogArticles = {
   },
 
   'prenajom-stavebnej-mechanizacie-senec-bratislava': {
-    title: 'Prenájom Stavebnej Mechanizácie v Senci a okolí: Lokálny Sprievodca 2025',
-    date: '5. Apríl 2025',
+    title: 'Prenájom Stavebnej Mechanizácie v Senci a okolí: Lokálny Sprievodca 2026',
+    date: '5. Marec 2026',
     author: 'Royal Stroje',
     readTime: '9 min',
     category: 'Tipy a rady',
@@ -712,7 +712,7 @@ export const blogArticles = {
           <p className="text-white/70">pripravených na prenájom</p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Cenníkový Prehľad (Región Senec 2025)</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-white">Cenníkový Prehľad (Región Senec 2026)</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6 overflow-x-auto">
           <h3 className="text-lg font-bold text-orange-primary mb-4">Porovnanie s Konkurenciou</h3>
@@ -975,11 +975,11 @@ export const blogArticles = {
 
   'jarne-stavebne-projekty-mechanizacia': {
     title: 'Jarné Stavebné Projekty: Top 5 Mechanizácií, Ktoré Potrebujete',
-    date: '20. Máj 2025',
+    date: '5. Marec 2026',
     author: 'Royal Stroje',
     readTime: '11 min',
     category: 'Tipy a rady',
-    excerpt: 'Plánujete stavebný projekt na jar 2025? Zistite, ktorých 5 strojov sú absolútne nevyhnutné pre terénne úpravy, základy a záhradné projekty.',
+    excerpt: 'Plánujete stavebný projekt na jar 2026? Zistite, ktorých 5 strojov sú absolútne nevyhnutné pre terénne úpravy, základy a záhradné projekty.',
     content: (
       <div className="space-y-8">
         <p className="text-xl text-white/90 leading-relaxed">
@@ -1003,7 +1003,7 @@ export const blogArticles = {
               </ul>
             </div>
             <div>
-              <p className="font-bold text-orange-primary mb-2">Jarné zľavy 2025:</p>
+              <p className="font-bold text-orange-primary mb-2">Jarné zľavy 2026:</p>
               <ul className="space-y-1 text-sm">
                 <li>• Prenájom na 7+ dní: -15%</li>
                 <li>• Balíček "Jarný štart": -20%</li>
@@ -1254,7 +1254,7 @@ export const blogArticles = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Jarný Balíček "Štart do Stavby" 2025</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-white">Jarný Balíček "Štart do Stavby" 2026</h2>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
           <div className="text-center mb-6">
@@ -1318,7 +1318,7 @@ export const blogArticles = {
 
           <div className="mt-6 text-center">
             <p className="text-white/80 text-sm mb-4">
-              ⏰ <strong>Jarná akcia platí do 30.6.2025</strong> alebo do vypredania kapacít
+              ⏰ <strong>Jarná akcia platí do 30.5.2026</strong> alebo do vypredania kapacít
             </p>
             <a
               href="tel:+421948555551"
@@ -1395,7 +1395,7 @@ export const blogArticles = {
               <li>✓ <strong>Odborné poradenstvo</strong> zadarmo</li>
               <li>✓ <strong>Technická podpora</strong> 24/7</li>
               <li>✓ <strong>Viac ako 50 strojov</strong> na sklade</li>
-              <li>✓ <strong>Jarné akcie</strong> až do 30.6.2025</li>
+              <li>✓ <strong>Jarné akcie</strong> až do 30.5.2026</li>
             </ul>
           </div>
         </div>
@@ -1421,7 +1421,7 @@ export const blogArticles = {
 
   'mobilne-sanitarne-kontajnery-sprievodca': {
     title: 'Mobilné Sanitárne Kontajnery: Komplexný Sprievodca pre Stavby a Eventy',
-    date: '15. Jún 2025',
+    date: '3. Marec 2026',
     author: 'Royal Stroje',
     readTime: '12 min',
     category: 'Návody',
@@ -1801,7 +1801,7 @@ export const blogArticles = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Cenníkový Prehľad 2025</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-white">Cenníkový Prehľad 2026</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6 overflow-x-auto">
           <table className="w-full text-sm">
@@ -1905,7 +1905,7 @@ export const blogArticles = {
 
   'bezpecnostne-pravidla-stavebne-stroje': {
     title: '10 Bezpečnostných Pravidiel pri Práci so Stavebnými Strojmi',
-    date: '10. Júl 2025',
+    date: '10. Február 2026',
     author: 'Royal Stroje',
     readTime: '13 min',
     category: 'Návody',

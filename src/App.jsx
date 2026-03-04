@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import MobileNav from './components/common/MobileNav';
@@ -19,11 +20,13 @@ import Kosik from './pages/Kosik';
 import Partneri from './pages/Partneri';
 import GDPR from './pages/GDPR';
 import ObchodnePodmienky from './pages/ObchodnePodmienky';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
-    <CartProvider>
-      <Router>
+    <HelmetProvider>
+      <CartProvider>
+        <Router>
         <ScrollToTop />
         <div className="min-h-screen bg-zinc-950 text-white relative overflow-x-hidden">
         {/* Animated Background */}
@@ -47,6 +50,8 @@ function App() {
               <Route path="/partneri" element={<Partneri />} />
               <Route path="/gdpr" element={<GDPR />} />
               <Route path="/obchodne-podmienky" element={<ObchodnePodmienky />} />
+              {/* Product Detail Pages - Dynamic Route */}
+              <Route path="/:productId" element={<ProductDetail />} />
             </Routes>
           </main>
           <Footer />
@@ -55,6 +60,7 @@ function App() {
       </div>
       </Router>
     </CartProvider>
+    </HelmetProvider>
   );
 }
 
