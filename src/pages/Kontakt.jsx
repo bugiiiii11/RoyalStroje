@@ -57,7 +57,10 @@ export default function Kontakt() {
 
       {/* Main Content - Single Section */}
       <section className="relative pb-16 md:py-16 overflow-hidden min-h-screen" style={{
-        background: 'linear-gradient(to bottom, #09090b 0%, #27272a 15%, #27272a 85%, #09090b 100%)'
+        background: `
+          radial-gradient(ellipse 100% 100% at 50% 50%, #71717a 0%, #27272a 45%, #09090b 55%),
+          linear-gradient(to bottom, #09090b 0%, #27272a 10%, #27272a 90%, #09090b 100%)
+        `
       }}>
         {/* Radial gradient overlay */}
         <div
@@ -88,19 +91,31 @@ export default function Kontakt() {
             </p>
           </div>
 
-          {/* Contact Methods Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mb-6 md:mb-16">
+          {/* Contact Methods - 4 Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8 md:mb-12">
             {/* Phone */}
             <a
               href="tel:+421948555551"
-              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
+              className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
             >
-              <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-2 md:mb-4 group-hover:border-orange-primary/30 transition-all">
-                <Phone className="text-orange-primary" size={16} />
+              {/* Animated border glow on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease infinite'
+              }}></div>
+
+              <div className="relative text-center">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                  <Phone className="text-orange-primary" size={28} />
+                </div>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Telefón</h3>
+                <p className="text-orange-primary font-bold text-base mb-1">+421 948 555 551</p>
+                <p className="text-white/60 text-sm leading-relaxed">Non-stop dostupnosť</p>
               </div>
-              <h3 className="text-white font-bold text-xs md:text-base mb-0.5 md:mb-1.5">Telefón</h3>
-              <p className="text-orange-primary font-bold text-sm md:text-lg mb-0.5 md:mb-1">+421 948 555 551</p>
-              <p className="text-white/60 text-[10px] md:text-sm hidden md:block">Non-stop dostupnosť</p>
+
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </a>
 
             {/* WhatsApp */}
@@ -108,14 +123,26 @@ export default function Kontakt() {
               href="https://wa.me/421948555551"
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
+              className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
             >
-              <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-2 md:mb-4 group-hover:border-orange-primary/30 transition-all">
-                <MessageCircle className="text-orange-primary" size={16} />
+              {/* Animated border glow on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease infinite'
+              }}></div>
+
+              <div className="relative text-center">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                  <MessageCircle className="text-orange-primary" size={28} />
+                </div>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">WhatsApp</h3>
+                <p className="text-orange-primary font-bold text-base mb-1">0948 555 551</p>
+                <p className="text-white/60 text-sm leading-relaxed">Rýchla komunikácia</p>
               </div>
-              <h3 className="text-white font-bold text-xs md:text-base mb-0.5 md:mb-1.5">WhatsApp</h3>
-              <p className="text-orange-primary font-bold text-sm md:text-lg mb-0.5 md:mb-1">0948 555 551</p>
-              <p className="text-white/60 text-[10px] md:text-sm hidden md:block">Rýchla komunikácia</p>
+
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </a>
 
             {/* Telegram */}
@@ -123,27 +150,51 @@ export default function Kontakt() {
               href="https://t.me/Royalstroje"
               target="_blank"
               rel="noopener noreferrer"
-              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
+              className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
             >
-              <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-2 md:mb-4 group-hover:border-orange-primary/30 transition-all">
-                <Send className="text-orange-primary" size={16} />
+              {/* Animated border glow on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease infinite'
+              }}></div>
+
+              <div className="relative text-center">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                  <Send className="text-orange-primary" size={28} />
+                </div>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Telegram</h3>
+                <p className="text-orange-primary font-bold text-base mb-1">@Royalstroje</p>
+                <p className="text-white/60 text-sm leading-relaxed">Alternatívny kontakt</p>
               </div>
-              <h3 className="text-white font-bold text-xs md:text-base mb-0.5 md:mb-1.5">Telegram</h3>
-              <p className="text-orange-primary font-bold text-sm md:text-lg mb-0.5 md:mb-1">@Royalstroje</p>
-              <p className="text-white/60 text-[10px] md:text-sm hidden md:block">Alternatívny kontakt</p>
+
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </a>
 
             {/* Email */}
             <a
               href="mailto:info@royalstroje.sk"
-              className="group bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 hover:border-orange-primary/50 hover:shadow-2xl hover:shadow-orange-primary/10 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center text-center"
+              className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
             >
-              <div className="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-2 md:mb-4 group-hover:border-orange-primary/30 transition-all">
-                <Mail className="text-orange-primary" size={16} />
+              {/* Animated border glow on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease infinite'
+              }}></div>
+
+              <div className="relative text-center">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                  <Mail className="text-orange-primary" size={28} />
+                </div>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Email</h3>
+                <p className="text-orange-primary font-bold text-base mb-1 break-all">info@royalstroje.sk</p>
+                <p className="text-white/60 text-sm leading-relaxed">Odpoveď do 24 hodín</p>
               </div>
-              <h3 className="text-white font-bold text-xs md:text-base mb-0.5 md:mb-1.5">Email</h3>
-              <p className="text-orange-primary font-bold text-sm md:text-lg mb-0.5 md:mb-1 break-all">info@royalstroje.sk</p>
-              <p className="text-white/60 text-[10px] md:text-sm hidden md:block">Odpoveď do 24 hodín</p>
+
+              {/* Hover overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </a>
           </div>
 
@@ -159,49 +210,50 @@ export default function Kontakt() {
               </p>
             </div>
 
-            {/* Large Info Cards - Vertical on mobile, 3 columns on desktop */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-4 md:mb-8">
-              {/* Opening Hours Card */}
-              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-xl md:rounded-3xl p-4 md:p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
-                <div className="relative z-10 text-center">
-                  <div className="hidden md:flex w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
-                    <Clock className="text-white" size={24} />
+            {/* Opening Hours & Address - 2 Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8 md:mb-12">
+              {/* Opening Hours */}
+              <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                {/* Animated border glow on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                  backgroundSize: '200% 200%',
+                  animation: 'gradient-shift 3s ease infinite'
+                }}></div>
+
+                <div className="relative text-center">
+                  <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                    <Clock className="text-orange-primary" size={28} />
                   </div>
-                  <h3 className="text-white font-black text-sm md:text-xl mb-2 md:mb-4">Otváracie hodiny</h3>
-                  <p className="text-orange-primary font-bold text-base md:text-2xl mb-1 md:mb-2">Po - Pi</p>
-                  <p className="text-white/80 text-sm md:text-lg">7:00 - 16:00</p>
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Otváracie hodiny</h3>
+                  <p className="text-orange-primary font-bold text-base mb-1">Po - Pi</p>
+                  <p className="text-white/60 text-sm leading-relaxed">7:00 - 16:00</p>
                 </div>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
               </div>
 
-              {/* Address Card */}
-              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-xl md:rounded-3xl p-4 md:p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
-                <div className="relative z-10 text-center">
-                  <div className="hidden md:flex w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
-                    <MapPin className="text-white" size={24} />
-                  </div>
-                  <h3 className="text-white font-black text-sm md:text-xl mb-2 md:mb-4">Adresa predajne</h3>
-                  <p className="text-white/90 text-sm md:text-lg leading-relaxed mb-1 md:mb-1">Recká cesta 182</p>
-                  <p className="text-orange-primary font-bold text-base md:text-xl">925 26 Senec</p>
-                </div>
-              </div>
+              {/* Address */}
+              <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                {/* Animated border glow on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                  backgroundSize: '200% 200%',
+                  animation: 'gradient-shift 3s ease infinite'
+                }}></div>
 
-              {/* Contact Card */}
-              <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-xl md:rounded-3xl p-4 md:p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-3xl"></div>
-                <div className="relative z-10 text-center">
-                  <div className="hidden md:flex w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-primary to-orange-hover items-center justify-center mb-6 mx-auto group-hover:shadow-lg group-hover:shadow-orange-primary/50 transition-all">
-                    <Phone className="text-white" size={24} />
+                <div className="relative text-center">
+                  <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                    <MapPin className="text-orange-primary" size={28} />
                   </div>
-                  <h3 className="text-white font-black text-sm md:text-xl mb-2 md:mb-4">Kontakt</h3>
-                  <a href="tel:+421948555551" className="block text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2 hover:text-orange-hover transition-colors">
-                    +421 948 555 551
-                  </a>
-                  <a href="mailto:info@royalstroje.sk" className="block text-white/80 text-xs md:text-base hover:text-orange-primary transition-colors">
-                    info@royalstroje.sk
-                  </a>
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Adresa predajne</h3>
+                  <p className="text-white/80 text-base mb-1">Recká cesta 182</p>
+                  <p className="text-orange-primary font-bold text-base">925 26 Senec</p>
                 </div>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
               </div>
             </div>
 

@@ -275,27 +275,68 @@ export default function ProductDetail() {
 
           {/* Info Cards */}
           <div className="mb-8 md:mb-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6 text-center hover:border-orange-primary/30 transition-all">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-3">
-                  <Clock className="text-orange-primary" size={24} />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {/* Card 1 - Okamžitá dostupnosť */}
+              <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                {/* Animated border glow on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                  backgroundSize: '200% 200%',
+                  animation: 'gradient-shift 3s ease infinite'
+                }}></div>
+
+                <div className="relative text-center">
+                  <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                    <Clock className="text-orange-primary" size={28} />
+                  </div>
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Rezervácia telefonicky alebo mailom</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">Pracujete do 24 hodín</p>
                 </div>
-                <h3 className="text-white font-bold text-sm md:text-base mb-2">Okamžitá dostupnosť</h3>
-                <p className="text-white/60 text-xs md:text-sm">Rezervácia telefonicky</p>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
               </div>
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6 text-center hover:border-orange-primary/30 transition-all">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-3">
-                  <Truck className="text-orange-primary" size={24} />
+
+              {/* Card 2 - Dovoz možný */}
+              <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                {/* Animated border glow on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                  backgroundSize: '200% 200%',
+                  animation: 'gradient-shift 3s ease infinite'
+                }}></div>
+
+                <div className="relative text-center">
+                  <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                    <Truck className="text-orange-primary" size={28} />
+                  </div>
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Dovoz na stavbu</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">Cena podľa dohody</p>
                 </div>
-                <h3 className="text-white font-bold text-sm md:text-base mb-2">Dovoz možný</h3>
-                <p className="text-white/60 text-xs md:text-sm">Cena podľa dohody</p>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
               </div>
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6 text-center hover:border-orange-primary/30 transition-all">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-3">
-                  <Shield className="text-orange-primary" size={24} />
+
+              {/* Card 3 - Servis zahrnutý */}
+              <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                {/* Animated border glow on hover */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
+                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
+                  backgroundSize: '200% 200%',
+                  animation: 'gradient-shift 3s ease infinite'
+                }}></div>
+
+                <div className="relative text-center">
+                  <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                    <Shield className="text-orange-primary" size={28} />
+                  </div>
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Ponúkame kvalitnú techniku</h3>
+                  <p className="text-white/60 text-sm leading-relaxed">Pravidelná údržba</p>
                 </div>
-                <h3 className="text-white font-bold text-sm md:text-base mb-2">Servis zahrnutý</h3>
-                <p className="text-white/60 text-xs md:text-sm">Pravidelná údržba</p>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
               </div>
             </div>
           </div>

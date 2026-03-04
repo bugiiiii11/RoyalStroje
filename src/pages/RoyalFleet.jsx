@@ -106,7 +106,10 @@ export default function RoyalFleet() {
 
       {/* Main Content Section */}
       <section className="relative pb-16 md:py-16 overflow-hidden min-h-screen" style={{
-        background: 'linear-gradient(to bottom, #09090b 0%, #27272a 15%, #27272a 85%, #09090b 100%)'
+        background: `
+          radial-gradient(ellipse 100% 100% at 50% 50%, #71717a 0%, #27272a 45%, #09090b 55%),
+          linear-gradient(to bottom, #09090b 0%, #27272a 10%, #27272a 90%, #09090b 100%)
+        `
       }}>
         {/* Radial gradient overlay */}
         <div
