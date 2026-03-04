@@ -686,10 +686,10 @@ export default function Catalog() {
         <FAQ />
 
         {/* Blog CTA Section */}
-        <div className="relative mt-16 md:mt-24 pt-12 md:pt-16 border-t border-white/10">
+        <div className="relative mt-16 md:mt-24 pt-12 md:pt-16">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4">
-              Chcete vedieť <span className="text-orange-primary">víc</span>?
+              Chcete vedieť <span className="text-orange-primary">viac</span>?
             </h2>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
               Navštívte náš blog plný užitočných rád, tipov a noviniek zo sveta stavebnej mechanizácie
