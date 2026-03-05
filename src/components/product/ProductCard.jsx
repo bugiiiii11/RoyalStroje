@@ -74,7 +74,7 @@ export default function ProductCard({ product, customerType = 'po' }) {
             {/* Product Detail Link - Primary Action */}
             <Link
               to={`/${product.id}`}
-              className="relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-1.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-full transition-all overflow-hidden group/detail bg-gradient-to-r from-orange-primary to-orange-hover text-white hover:scale-105"
+              className="relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-1.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-full transition-all overflow-hidden group/detail bg-black text-orange-primary hover:scale-105"
             >
               <span className="relative z-10">Zobraziť detail</span>
               <ChevronRight size={14} className="relative z-10 md:w-4 md:h-4 group-hover/detail:translate-x-0.5 transition-transform" />
@@ -91,7 +91,7 @@ export default function ProductCard({ product, customerType = 'po' }) {
                 }
                 // On mobile, allow default behavior (tel: link)
               }}
-              className="relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-1.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-full transition-all overflow-hidden group/cart bg-black border border-orange-primary text-orange-primary hover:scale-105"
+              className="relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-1.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-full transition-all overflow-hidden group/cart bg-gradient-to-r from-orange-primary to-orange-hover text-white hover:scale-105"
             >
               <Phone size={14} className="relative z-10 md:w-4 md:h-4" />
               <span className="relative z-10">{showPhone ? '0948 555 551' : 'Zavolať'}</span>

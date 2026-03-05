@@ -13,7 +13,7 @@ export default function Blog() {
       dateSort: '2026-02-15',
       author: 'Royal Stroje',
       readTime: '9 min',
-      image: '/pictures/graphics/objects2.png',
+      image: '/pictures/graphics/predaj.png',
       category: 'Tipy a rady',
     },
     {
@@ -97,7 +97,7 @@ export default function Blog() {
       dateSort: '2026-03-04',
       author: 'Royal Stroje',
       readTime: '17 min',
-      image: '/pictures/graphics/objects2.png',
+      image: '/pictures/graphics/vibracnadoska.png',
       category: 'Návody',
     },
     {
@@ -181,7 +181,7 @@ export default function Blog() {
       dateSort: '2026-03-05',
       author: 'Royal Stroje',
       readTime: '12 min',
-      image: '/pictures/graphics/toughbuilt-tb-c700-transparent.png',
+      image: '/pictures/graphics/koza.png',
       category: 'Návody',
     },
   ];

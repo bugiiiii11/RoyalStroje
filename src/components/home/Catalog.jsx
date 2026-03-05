@@ -224,13 +224,38 @@ export default function Catalog() {
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pt-2 pb-16 md:py-16">
         {/* Desktop Header */}
-        <div className="hidden md:block text-center mb-8">
-          <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
-            <span className="text-orange-primary">Katalóg</span> strojov na prenájom
-          </h2>
-          <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-6">
-            Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
-          </p>
+        <div className="hidden md:block mb-8">
+          <div className="relative flex items-center justify-center gap-8">
+            {/* Left Product Image */}
+            <div className="hidden lg:block flex-shrink-0">
+              <img
+                src="/pictures/graphics/toughbuilt-tb-c700-transparent.png"
+                alt="Produkt"
+                className="w-64 h-auto opacity-75 select-none pointer-events-none"
+                draggable="false"
+              />
+            </div>
+
+            {/* Center Content */}
+            <div className="text-center flex-1">
+              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+                <span className="text-orange-primary">Katalóg</span> strojov na prenájom
+              </h2>
+              <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-6">
+                Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
+              </p>
+            </div>
+
+            {/* Right Product Image */}
+            <div className="hidden lg:block flex-shrink-0">
+              <img
+                src="/pictures/graphics/mini-rypadlo-1000-transparent.png"
+                alt="Produkt"
+                className="w-64 h-auto opacity-75 select-none pointer-events-none"
+                draggable="false"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Customer Type Selector & Search - Centered Row */}
