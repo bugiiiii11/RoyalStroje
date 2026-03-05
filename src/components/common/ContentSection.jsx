@@ -4,7 +4,7 @@ export default function ContentSection({ children, className = "", id, ...props 
       id={id}
       className={`relative pb-16 md:py-16 overflow-hidden min-h-screen ${className}`}
       style={{
-        background: 'linear-gradient(to bottom, #09090b 0%, #09090b 2%, #52525b 10%, #52525b 90%, #09090b 98%, #09090b 100%)'
+        background: '#181818'
       }}
       {...props}
     >

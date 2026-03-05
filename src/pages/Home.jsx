@@ -8,6 +8,8 @@ export default function Home() {
       <div className="hidden md:block">
         <Hero />
       </div>
+      {/* Separator line between hero and content - Desktop only */}
+      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
       <Catalog />
     </>
   );

@@ -30,27 +30,14 @@ export default function Hero() {
         }}
       />
 
-      {/* Modern geometric bottom border */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 overflow-hidden z-20">
-        <svg className="absolute bottom-0 w-full h-20" viewBox="0 0 1440 80" preserveAspectRatio="none">
-          <path
-            d="M0,80 L0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30 L1440,80 Z"
-            fill="#09090b"
-          />
-          <path
-            d="M0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30"
-            fill="none"
-            stroke="rgba(255,102,0,0.6)"
-            strokeWidth="2"
-          />
-          <path
-            d="M250,0 L600,0"
-            fill="none"
-            stroke="rgba(255,102,0,0.8)"
-            strokeWidth="3"
-          />
-        </svg>
-      </div>
+      {/* Gradient fade na spodok - prechod do content sekcie */}
+      <div
+        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: '160px',
+          background: 'linear-gradient(to bottom, transparent, #181818)'
+        }}
+      />
 
       {/* Content Container */}
       <div className="relative z-10 min-h-screen flex items-center">
@@ -58,18 +45,18 @@ export default function Hero() {
           <div className="max-w-2xl">
             {/* Headline */}
             <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-4 md:mb-6">
-              Prenajmite si stavebné stroje.{' '}
+              Požičovňa náradia a{' '}
               <span className="bg-gradient-to-r from-orange-primary to-orange-hover bg-clip-text text-transparent">
-                Dnes objednáte, zajtra pracujete.
+                stavebnej techniky v Senci.
               </span>
             </h1>
 
             {/* Description */}
-            <p className="text-base md:text-xl text-white/90 leading-relaxed mb-6 md:mb-8">
-              Požičovňa náradia a techniky v Senci s dovozom na stavbu.{' '}
-              <strong className="text-orange-primary font-bold">
-                12 rokov skúseností • Nonstop linka • Obsluhujeme Bratislavu a okolie
-              </strong>
+            <p className="text-base md:text-xl text-white/90 leading-relaxed mb-2">
+              Obsluhujeme Bratislavu a okolie s dovozom na stavbu.
+            </p>
+            <p className="text-base md:text-xl text-orange-primary font-bold leading-relaxed mb-6 md:mb-8">
+              Po-Pia 7-16 • Nonstop linka +421 948 555 551
             </p>
 
             {/* CTA Buttons */}

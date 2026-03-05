@@ -67,29 +67,14 @@ export default function Sluzby() {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
 
-        {/* Modern geometric bottom border */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 overflow-hidden z-30">
-          <svg className="absolute bottom-0 w-full h-20" viewBox="0 0 1440 80" preserveAspectRatio="none">
-            {/* Fill area below decorative line with background color */}
-            <path
-              d="M0,80 L0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30 L1440,80 Z"
-              fill="#09090b"
-            />
-            {/* Orange decorative lines */}
-            <path
-              d="M0,30 L200,30 L250,0 L600,0 L650,30 L900,30 L950,15 L1200,15 L1250,30 L1440,30"
-              fill="none"
-              stroke="rgba(255,102,0,0.6)"
-              strokeWidth="2"
-            />
-            <path
-              d="M250,0 L600,0"
-              fill="none"
-              stroke="rgba(255,102,0,0.8)"
-              strokeWidth="3"
-            />
-          </svg>
-        </div>
+        {/* Gradient fade na spodok - prechod do content sekcie */}
+        <div
+          className="absolute bottom-0 left-0 right-0 pointer-events-none"
+          style={{
+            height: '160px',
+            background: 'linear-gradient(to bottom, transparent, #181818)'
+          }}
+        />
 
         {/* Content */}
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
@@ -103,6 +88,9 @@ export default function Sluzby() {
           </div>
         </div>
       </section>
+
+      {/* Separator line between hero and content */}
+      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
 
       {/* Services Grid */}
       <ContentSection>
