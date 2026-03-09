@@ -1,7 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
-import { Calendar, Clock, ArrowLeft, Phone, Mail } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { blogArticles } from '../data/blogArticles';
+import ContentSection from '../components/common/ContentSection';
 
 export default function BlogDetail() {
   const { slug } = useParams();
@@ -83,21 +84,14 @@ export default function BlogDetail() {
         {/* Content */}
         <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className="max-w-4xl">
-            {/* Back Button */}
+            {/* Back Button - Prominent */}
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 text-white/70 hover:text-orange-primary transition-colors mb-6"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-800/80 border border-white/20 text-white font-semibold rounded-full hover:bg-orange-primary hover:border-orange-primary transition-all mb-8"
             >
-              <ArrowLeft size={20} />
+              <ArrowLeft size={18} />
               <span>Späť na blog</span>
             </Link>
-
-            {/* Category Badge */}
-            <div className="mb-4">
-              <span className="inline-block bg-orange-primary/90 text-white text-sm font-bold px-4 py-1.5 rounded-full">
-                {article.category}
-              </span>
-            </div>
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
               {article.title}
@@ -119,8 +113,11 @@ export default function BlogDetail() {
         </div>
       </section>
 
+      {/* Separator line between hero and content */}
+      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
+
       {/* Article Content */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+      <ContentSection>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -130,32 +127,17 @@ export default function BlogDetail() {
           />
         </div>
 
-        {/* Background effects */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
-          }}
-        />
-
         <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 lg:px-12">
           {/* Mobile Header */}
           <div className="md:hidden text-center mb-6 pt-16">
-            {/* Back Button */}
+            {/* Back Button - Prominent */}
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 text-white/70 hover:text-orange-primary transition-colors mb-4"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800/80 border border-white/20 text-white font-semibold rounded-full hover:bg-orange-primary hover:border-orange-primary transition-all mb-6 text-sm"
             >
               <ArrowLeft size={16} />
-              <span className="text-sm">Späť na blog</span>
+              <span>Späť na blog</span>
             </Link>
-
-            {/* Category Badge */}
-            <div className="mb-3">
-              <span className="inline-block bg-orange-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full">
-                {article.category}
-              </span>
-            </div>
 
             <h1 className="text-xl font-black text-white mb-2 leading-tight">
               {article.title}
@@ -202,35 +184,21 @@ export default function BlogDetail() {
               </a>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-black">
-        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-8 md:p-12 text-center">
+          {/* CTA Section - Integrated */}
+          <div className="mt-16 text-center max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
-              Potrebujete <span className="text-orange-primary">poradiť</span>?
+              Potrebujete poradiť?
             </h2>
-            <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-white/70 text-lg mb-8 leading-relaxed">
               Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="tel:+421948555551"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
-              >
-                <Phone size={20} />
-                <span>Zavolať: 0948 555 551</span>
-              </a>
-              <Link
-                to="/kontakt"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-800 border-2 border-zinc-700 text-white font-bold rounded-full hover:bg-zinc-700 transition-all"
-              >
-                <Mail size={20} />
-                <span>Kontaktný formulár</span>
-              </Link>
-            </div>
+            <a
+              href="tel:+421948555551"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+            >
+              <span>Zavolať teraz: 0948 555 551</span>
+            </a>
           </div>
 
           {/* Related Articles */}
@@ -249,7 +217,7 @@ export default function BlogDetail() {
             </div>
           </div>
         </div>
-      </section>
+      </ContentSection>
     </div>
   );
 }
