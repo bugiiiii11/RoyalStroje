@@ -117,15 +117,6 @@ export default function ProductCard({ product, customerType = 'po' }) {
           )}
         </div>
 
-        {/* Hover overlay - Enhanced Glow */}
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
-
-        {/* Animated border glow on hover */}
-        <div className="absolute inset-0 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-          background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-          backgroundSize: '200% 200%',
-          animation: 'gradient-shift 3s ease infinite'
-        }}></div>
       </div>
     </>
   );

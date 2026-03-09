@@ -70,7 +70,7 @@ export default function Hero() {
               </a>
               <a
                 href="#katalog"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold text-sm md:text-base rounded-full hover:bg-white/20 hover:border-white/50 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-zinc-800 border-2 border-orange-primary/30 text-white font-bold text-sm md:text-base rounded-full hover:bg-zinc-700 hover:border-orange-primary transition-all hover:scale-105 active:scale-95 shadow-lg"
               >
                 <span>Zobraziť katalóg</span>
                 <ArrowDown size={18} className="md:w-5 md:h-5" />

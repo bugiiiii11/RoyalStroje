@@ -151,9 +151,12 @@ export default function ProductDetail() {
         </div>
       </section>
 
+      {/* Separator line between hero and content */}
+      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
+
       {/* Main Content Section */}
       <section className="relative pb-16 md:py-16 overflow-hidden min-h-screen" style={{
-        background: 'linear-gradient(to bottom, #09090b 0%, #27272a 15%, #27272a 85%, #09090b 100%)'
+        background: 'linear-gradient(to bottom, #181818 0%, #27272a 15%, #27272a 85%, #181818 100%)'
       }}>
         {/* Radial gradient overlay */}
         <div

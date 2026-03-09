@@ -241,17 +241,11 @@ export default function QuoteForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="relative w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm rounded-full hover:scale-105 transition-all shadow-lg shadow-orange-primary/40 overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-          <Send size={16} className="relative z-10" />
-          <span className="relative z-10">{isSubmitting ? 'Odosiela sa...' : 'Odoslať'}</span>
+          <Send size={16} />
+          <span>{isSubmitting ? 'Odosiela sa...' : 'Odoslať'}</span>
         </button>
-
-        {/* Info */}
-        <p className="text-white/50 text-[10px] text-center leading-tight">
-          Odpoveď do 24h • Nezáväzne
-        </p>
       </form>
     </div>
   );
