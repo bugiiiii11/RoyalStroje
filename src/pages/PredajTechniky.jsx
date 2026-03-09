@@ -1,4 +1,5 @@
 import { Phone, Mail, ShoppingCart, Package, Tag, Zap, Shield, Wrench, HardHat } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 
 export default function PredajTechniky() {
@@ -58,6 +59,19 @@ export default function PredajTechniky() {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Predaj náradia Makita - Autorizovaný predajca | Royal Stroje Senec</title>
+        <meta
+          name="description"
+          content="Autorizovaný predajca Makita v Senci. Profesionálne náradie, diamantové kotúče, vrtáky a BOZP pomôcky skladom. Férové ceny, odborné poradenstvo. 20 rokov skúseností."
+        />
+        <link rel="canonical" href="https://royalstroje.sk/sluzby/predaj-techniky" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Predaj náradia Makita | Royal Stroje Senec" />
+        <meta property="og:description" content="Autorizovaný predajca Makita. Profesionálne náradie skladom. 20 rokov skúseností." />
+        <meta property="og:url" content="https://royalstroje.sk/sluzby/predaj-techniky" />
+      </Helmet>
+
       {/* Hero Section - Desktop only */}
       <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
@@ -102,7 +116,7 @@ export default function PredajTechniky() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />

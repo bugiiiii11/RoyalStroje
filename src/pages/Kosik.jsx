@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ShoppingCart, X, Send, Calendar, Building2, User } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { useCart } from '../context/CartContext';
 
 export default function Kosik() {
@@ -93,10 +94,15 @@ export default function Kosik() {
 
   return (
     <div className="min-h-screen bg-zinc-950 pb-24 relative">
+      <Helmet>
+        <title>Košík | Royal Stroje</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+
       {/* Mobile Logo - Top Left */}
       <div className="md:hidden absolute top-3 left-3 z-30">
         <img
-          src="/logoroyal.png"
+          src="/logoroyal.webp"
           alt="Royal Stroje"
           className="h-8 w-auto"
         />

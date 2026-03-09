@@ -1,0 +1,28 @@
+# Royal Stroje - robots.txt
+# https://royalstroje.sk
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://royalstroje.sk/sitemap.xml
+
+# Disallow cart and internal pages
+Disallow: /kosik
+
+# Block crawling of asset files
+Disallow: /*.json$
+Disallow: /assets/
+
+# AI Crawlers - Allow
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /

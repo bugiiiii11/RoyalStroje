@@ -1,4 +1,5 @@
 import { Phone, Mail, Package, Wrench, Clock, Shield } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 
 export default function NahradneDiely() {
@@ -22,7 +23,7 @@ export default function NahradneDiely() {
       icon: Wrench,
       title: 'Odborné poradenstvo',
       description: 'Pomôžeme vám nájsť správny náhradný diel pre váš stroj.',
-      features: ['Identifikácia dielu', 'Montážne rady', 'Bezplatné poradenstvo', '12 rokov skúseností'],
+      features: ['Identifikácia dielu', 'Montážne rady', 'Bezplatné poradenstvo', '20 rokov skúseností'],
     },
     {
       id: 'rychle-dodanie',
@@ -35,6 +36,19 @@ export default function NahradneDiely() {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Náhradné diely pre stavebné stroje | Royal Stroje Senec</title>
+        <meta
+          name="description"
+          content="Originálne náhradné diely pre stavebné náradie a stroje. Široký sortiment skladom v Senci. Odborné poradenstvo, express dodanie do 48h. 20 rokov skúseností."
+        />
+        <link rel="canonical" href="https://royalstroje.sk/sluzby/nahradne-diely" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Náhradné diely pre stavebné stroje | Royal Stroje" />
+        <meta property="og:description" content="Originálne náhradné diely skladom. Express dodanie do 48h. Odborné poradenstvo." />
+        <meta property="og:url" content="https://royalstroje.sk/sluzby/nahradne-diely" />
+      </Helmet>
+
       {/* Hero Section - Desktop only */}
       <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
@@ -79,7 +93,7 @@ export default function NahradneDiely() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />

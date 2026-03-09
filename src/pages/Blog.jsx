@@ -1,5 +1,6 @@
 import { Calendar, ArrowRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 
 export default function Blog() {
@@ -13,7 +14,7 @@ export default function Blog() {
       dateSort: '2026-02-15',
       author: 'Royal Stroje',
       readTime: '9 min',
-      image: '/pictures/graphics/predaj.png',
+      image: '/pictures/graphics/predaj.webp',
       category: 'Tipy a rady',
     },
     {
@@ -25,7 +26,7 @@ export default function Blog() {
       dateSort: '2026-03-01',
       author: 'Royal Stroje',
       readTime: '10 min',
-      image: '/pictures/graphics/mini-rypadlo-blog.png',
+      image: '/pictures/graphics/mini-rypadlo-blog.webp',
       category: 'Návody',
     },
     {
@@ -37,7 +38,7 @@ export default function Blog() {
       dateSort: '2026-03-05',
       author: 'Royal Stroje',
       readTime: '9 min',
-      image: '/pictures/graphics/objects3.png',
+      image: '/pictures/graphics/objects3.webp',
       category: 'Tipy a rady',
     },
     {
@@ -49,7 +50,7 @@ export default function Blog() {
       dateSort: '2026-03-02',
       author: 'Royal Stroje',
       readTime: '11 min',
-      image: '/pictures/graphics/objects2.png',
+      image: '/pictures/graphics/objects2.webp',
       category: 'Tipy a rady',
     },
     {
@@ -61,7 +62,7 @@ export default function Blog() {
       dateSort: '2026-02-15',
       author: 'Royal Stroje',
       readTime: '12 min',
-      image: '/pictures/graphics/objects4.png',
+      image: '/pictures/graphics/objects4.webp',
       category: 'Návody',
     },
     {
@@ -73,7 +74,7 @@ export default function Blog() {
       dateSort: '2026-01-10',
       author: 'Royal Stroje',
       readTime: '13 min',
-      image: '/pictures/graphics/cigy-blog.png',
+      image: '/pictures/graphics/cigy-blog.webp',
       category: 'Návody',
     },
     {
@@ -85,7 +86,7 @@ export default function Blog() {
       dateSort: '2026-08-01',
       author: 'Royal Stroje',
       readTime: '18 min',
-      image: '/pictures/graphics/objects1.png',
+      image: '/pictures/graphics/objects1.webp',
       category: 'Tipy a rady',
     },
     {
@@ -97,7 +98,7 @@ export default function Blog() {
       dateSort: '2026-03-04',
       author: 'Royal Stroje',
       readTime: '17 min',
-      image: '/pictures/graphics/vibracnadoska.png',
+      image: '/pictures/graphics/vibracnadoska.webp',
       category: 'Návody',
     },
     {
@@ -109,7 +110,7 @@ export default function Blog() {
       dateSort: '2026-10-10',
       author: 'Royal Stroje',
       readTime: '12 min',
-      image: '/pictures/graphics/dovoz.png',
+      image: '/pictures/graphics/dovoz.webp',
       category: 'Tipy a rady',
     },
     {
@@ -121,7 +122,7 @@ export default function Blog() {
       dateSort: '2026-02-05',
       author: 'Royal Stroje',
       readTime: '13 min',
-      image: '/pictures/graphics/predaj.png',
+      image: '/pictures/graphics/predaj.webp',
       category: 'Prípadové štúdie',
     },
     {
@@ -133,7 +134,7 @@ export default function Blog() {
       dateSort: '2026-01-01',
       author: 'Royal Stroje',
       readTime: '13 min',
-      image: '/pictures/graphics/servis.png',
+      image: '/pictures/graphics/servis.webp',
       category: 'Tipy a rady',
     },
     {
@@ -145,7 +146,7 @@ export default function Blog() {
       dateSort: '2026-01-15',
       author: 'Royal Stroje',
       readTime: '14 min',
-      image: '/pictures/graphics/hero4.png',
+      image: '/pictures/graphics/hero4.webp',
       category: 'Novinky',
     },
     {
@@ -157,7 +158,7 @@ export default function Blog() {
       dateSort: '2026-02-20',
       author: 'Royal Stroje',
       readTime: '12 min',
-      image: '/pictures/graphics/dewalt-blog.png',
+      image: '/pictures/graphics/dewalt-blog.webp',
       category: 'Návody',
     },
     {
@@ -169,7 +170,7 @@ export default function Blog() {
       dateSort: '2026-02-26',
       author: 'Royal Stroje',
       readTime: '13 min',
-      image: '/pictures/graphics/makita-blog.png',
+      image: '/pictures/graphics/makita-blog.webp',
       category: 'Návody',
     },
     {
@@ -181,7 +182,7 @@ export default function Blog() {
       dateSort: '2026-03-05',
       author: 'Royal Stroje',
       readTime: '12 min',
-      image: '/pictures/graphics/koza.png',
+      image: '/pictures/graphics/koza.webp',
       category: 'Návody',
     },
   ];
@@ -194,6 +195,18 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Blog - Tipy a návody pre stavebníctvo | Royal Stroje</title>
+        <meta
+          name="description"
+          content="Praktické rady pre prácu so stavebnou technikou. Návody, tipy a novinky z oblasti stavebných strojov a náradia."
+        />
+        <link rel="canonical" href="https://royalstroje.sk/blog" />
+        <meta property="og:title" content="Blog - Royal Stroje" />
+        <meta property="og:description" content="Tipy a návody pre prácu so stavebnou technikou." />
+        <meta property="og:url" content="https://royalstroje.sk/blog" />
+      </Helmet>
+
       {/* Hero Section - Desktop only */}
       <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
@@ -238,7 +251,7 @@ export default function Blog() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />
@@ -252,7 +265,7 @@ export default function Blog() {
               Najnovšie články <span className="text-orange-primary">a praktické návody</span>
             </h1>
             <p className="text-white/80 text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
-              Odborné know-how z 12 rokov praxe v stavebníctve. Konkrétne riešenia pre vaše projekty.
+              Odborné know-how z 20 rokov praxe v stavebníctve. Konkrétne riešenia pre vaše projekty.
             </p>
           </div>
 

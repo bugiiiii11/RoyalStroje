@@ -1,14 +1,21 @@
+import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 
 export default function GDPR() {
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Ochrana osobných údajov (GDPR) | Royal Stroje</title>
+        <meta name="robots" content="noindex, follow" />
+        <link rel="canonical" href="https://royalstroje.sk/gdpr" />
+      </Helmet>
+
       {/* Main Content */}
       <ContentSection>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />

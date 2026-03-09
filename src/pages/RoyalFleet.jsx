@@ -1,4 +1,5 @@
 import { Phone, Mail, Check, TrendingDown, Shield, Calendar } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 
 export default function RoyalFleet() {
@@ -54,6 +55,19 @@ export default function RoyalFleet() {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Royal Fleet - Dlhodobý prenájom pre firmy | Royal Stroje</title>
+        <meta
+          name="description"
+          content="Dlhodobý prenájom stavebnej techniky pre firmy. Fixné mesačné platby od 109€, servis zahrnutý. 3 modely spolupráce. Royal Fleet pre celé Slovensko."
+        />
+        <link rel="canonical" href="https://royalstroje.sk/sluzby/royal-fleet" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Royal Fleet - Dlhodobý prenájom | Royal Stroje" />
+        <meta property="og:description" content="Fixné mesačné platby od 109€. Servis zahrnutý. Dlhodobý prenájom pre firmy." />
+        <meta property="og:url" content="https://royalstroje.sk/sluzby/royal-fleet" />
+      </Helmet>
+
       {/* Hero Section - Desktop only */}
       <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
@@ -98,7 +112,7 @@ export default function RoyalFleet() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />

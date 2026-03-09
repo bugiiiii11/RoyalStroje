@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ShoppingCart, FileText, Package, Wrench, Truck } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 
 export default function Sluzby() {
@@ -11,7 +12,7 @@ export default function Sluzby() {
       title: 'Prenájom techniky',
       description: 'Malé náradie, stredná a ťažká mechanizácia. Prenájom od 1 dňa s dovozom na stavbu.',
       features: ['Dovoz do 4 hodín', 'Nonstop podpora', 'Senec - Bratislava - okolie', 'Od 1 dňa prenájmu'],
-      backgroundImage: '/pictures/graphics/hero4.png',
+      backgroundImage: '/pictures/graphics/hero4.webp',
     },
     {
       id: 'predaj-techniky',
@@ -20,7 +21,7 @@ export default function Sluzby() {
       title: 'Makita - Autorizovaný predajca',
       description: 'Kvalitné náradie, mechanizácia a príslušenstvo značkových výrobcov priamo na sklade v Senci.',
       features: ['Overené značky', 'Férové ceny', 'Tovar skladom', 'Expresné dodanie'],
-      backgroundImage: '/pictures/graphics/predaj.png',
+      backgroundImage: '/pictures/graphics/predaj.webp',
     },
     {
       id: 'nahradne-diely',
@@ -29,7 +30,7 @@ export default function Sluzby() {
       title: 'Predaj náhradných dielov',
       description: 'Široký sortiment originálnych náhradných dielov pre stavebné náradie. Skladom diely pre všetky typy strojov a zariadení.',
       features: ['Originálne diely', 'Skladová dostupnosť', 'Odborné poradenstvo', 'Expresná objednávka'],
-      backgroundImage: '/pictures/graphics/servis.png',
+      backgroundImage: '/pictures/graphics/servis.webp',
     },
     {
       id: 'cenova-ponuka',
@@ -38,7 +39,7 @@ export default function Sluzby() {
       title: 'Cenová ponuka',
       description: 'Pripravíme pre vás presnú cenovú ponuku na mieru. Rýchlo, transparentne a bez skrytých poplatkov.',
       features: ['Ponuka do 24 hodín', 'Presná kalkulácia', 'Individuálny prístup', 'Bezplatné poradenstvo'],
-      backgroundImage: '/pictures/graphics/objects1.png',
+      backgroundImage: '/pictures/graphics/objects1.webp',
     },
     {
       id: 'royal-fleet',
@@ -47,12 +48,24 @@ export default function Sluzby() {
       title: 'Royal Fleet',
       description: 'Dlhodobý prenájom techniky pre firmy po celom Slovensku. Fixné mesačné náklady, servis zahrnutý.',
       features: ['Dlhodobý prenájom', 'Fixné mesačné platby', 'Servis zahrnutý', 'Pre firmy - celé Slovensko'],
-      backgroundImage: '/pictures/graphics/objects4.png',
+      backgroundImage: '/pictures/graphics/objects4.webp',
     },
   ];
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Služby - Prenájom a predaj stavebnej techniky | Royal Stroje Senec</title>
+        <meta
+          name="description"
+          content="Kompletné služby pre stavebníctvo: prenájom techniky, predaj Makita náradia, náhradné diely, dovoz na stavbu. 20 rokov skúseností v Senci."
+        />
+        <link rel="canonical" href="https://royalstroje.sk/sluzby" />
+        <meta property="og:title" content="Služby - Royal Stroje Senec" />
+        <meta property="og:description" content="Prenájom techniky, predaj náradia, náhradné diely. 20 rokov skúseností." />
+        <meta property="og:url" content="https://royalstroje.sk/sluzby" />
+      </Helmet>
+
       {/* Hero Section - Desktop only */}
       <section className="hidden md:flex relative py-12 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
@@ -97,7 +110,7 @@ export default function Sluzby() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />

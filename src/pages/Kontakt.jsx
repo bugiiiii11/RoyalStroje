@@ -1,9 +1,48 @@
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 
 export default function Kontakt() {
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Kontakt - Royal Stroje | Požičovňa náradia Senec</title>
+        <meta
+          name="description"
+          content="Kontaktujte Royal Stroje - požičovňa náradia Senec. ☎ 0948 555 551 | info@royalstroje.sk | Recká cesta 182. Po-Pi 7:00-16:00. 20 rokov skúseností."
+        />
+        <link rel="canonical" href="https://royalstroje.sk/kontakt" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Kontakt - Royal Stroje Senec" />
+        <meta property="og:description" content="Zavolajte: 0948 555 551. Stroje na stavbe do 24 hodín." />
+        <meta property="og:url" content="https://royalstroje.sk/kontakt" />
+
+        {/* LocalBusiness Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Royal Stroje",
+            "telephone": "+421948555551",
+            "email": "info@royalstroje.sk",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Recká cesta 182",
+              "addressLocality": "Senec",
+              "postalCode": "925 26",
+              "addressCountry": "SK"
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "07:00",
+              "closes": "16:00"
+            }
+          })}
+        </script>
+      </Helmet>
       {/* Hero Section - Desktop only */}
       <section className="hidden md:flex relative py-12 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
@@ -51,7 +90,7 @@ export default function Kontakt() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />
@@ -282,7 +321,7 @@ export default function Kontakt() {
                 <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8">
                   <h3 className="text-white font-black text-xl mb-4">O nás</h3>
                   <p className="text-white/70 leading-relaxed">
-                    ROYAL STROJE je požičovňa stavebného náradia a techniky v Senci s 12-ročnými skúsenosťami v odvetví. Ponúkame prenájom profesionálneho náradia, strednej a ťažkej mechanizácie s dovozom na stavbu.
+                    ROYAL STROJE je požičovňa stavebného náradia a techniky v Senci s 20-ročnými skúsenosťami v odvetví. Ponúkame prenájom profesionálneho náradia, strednej a ťažkej mechanizácie s dovozom na stavbu.
                   </p>
                 </div>
               </div>

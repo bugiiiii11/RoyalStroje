@@ -1,4 +1,5 @@
 import { CheckCircle, Clock, Calculator, UserCheck } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import ContactForm from '../components/contact/ContactForm';
 import ContentSection from '../components/common/ContentSection';
 
@@ -16,7 +17,7 @@ export default function CenovaPonuka() {
       icon: Clock,
       title: 'Ponuka do 24 hodín',
       description: 'Pripravíme a odošleme cenovú ponuku do 24 hodín od požiadavky.',
-      features: ['Ponuka do 24h', 'Email + SMS', 'Možnosť konzultácie', '12 rokov skúseností'],
+      features: ['Ponuka do 24h', 'Email + SMS', 'Možnosť konzultácie', '20 rokov skúseností'],
     },
     {
       id: 'individualny-pristup',
@@ -36,6 +37,19 @@ export default function CenovaPonuka() {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Cenová ponuka - Prenájom stavebnej techniky | Royal Stroje</title>
+        <meta
+          name="description"
+          content="Získajte bezplatnú cenovú ponuku na prenájom stavebnej techniky do 24 hodín. Individuálny prístup, presná kalkulácia, transparentné ceny. Royal Stroje Senec."
+        />
+        <link rel="canonical" href="https://royalstroje.sk/sluzby/cenova-ponuka" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Cenová ponuka | Royal Stroje Senec" />
+        <meta property="og:description" content="Bezplatná cenová ponuka do 24 hodín. Transparentné ceny, individuálny prístup." />
+        <meta property="og:url" content="https://royalstroje.sk/sluzby/cenova-ponuka" />
+      </Helmet>
+
       {/* Hero Section - Desktop only */}
       <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
@@ -80,7 +94,7 @@ export default function CenovaPonuka() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />

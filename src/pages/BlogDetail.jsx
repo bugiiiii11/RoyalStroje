@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowLeft, Phone, Mail } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { blogArticles } from '../data/blogArticles';
 
 export default function BlogDetail() {
@@ -19,8 +20,43 @@ export default function BlogDetail() {
     );
   }
 
+  // Article Schema for SEO
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": article.title,
+    "datePublished": article.date,
+    "author": {
+      "@type": "Person",
+      "name": article.author
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Royal Stroje",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://royalstroje.sk/logoroyal.webp"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>{article.title} | Blog | Royal Stroje</title>
+        <meta name="description" content={article.excerpt} />
+        <link rel="canonical" href={`https://royalstroje.sk/blog/${slug}`} />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={article.excerpt} />
+        <meta property="og:url" content={`https://royalstroje.sk/blog/${slug}`} />
+
+        <script type="application/ld+json">
+          {JSON.stringify(articleSchema)}
+        </script>
+      </Helmet>
+
       {/* Hero Section - Desktop only */}
       <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
         {/* Background Image */}
@@ -88,7 +124,7 @@ export default function BlogDetail() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />
