@@ -184,7 +184,7 @@ export default function FAQ() {
               {/* Image Container */}
               <div className="relative rounded-2xl overflow-hidden border-2 border-orange-primary/30 mb-6">
                 <img
-                  src="/pictures/graphics/dovoz.png"
+                  src="/pictures/graphics/dovoz.webp"
                   alt="Sme tu pre vás"
                   className="w-full h-auto object-cover"
                 />

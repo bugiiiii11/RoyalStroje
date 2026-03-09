@@ -5699,7 +5699,7 @@ export const blogArticles = {
           </h2>
           <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
             Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt.
-            Máme 12 rokov skúseností v prenájme stavebnej mechanizácie.
+            Máme 20 rokov skúseností v prenájme stavebnej mechanizácie.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
@@ -6182,7 +6182,7 @@ export const blogArticles = {
             Potrebujete <span className="text-orange-primary">Makita TW001GM201 na projekt</span>?
           </h2>
           <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-            Zavolajte nám a radi vám poradíme s výberom správneho nástroja. Máme 12 rokov skúseností
+            Zavolajte nám a radi vám poradíme s výberom správneho nástroja. Máme 20 rokov skúseností
             v prenájme profesionálneho náradia.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -6631,7 +6631,7 @@ export const blogArticles = {
           </h2>
           <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
             Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt.
-            Máme 12 rokov skúseností v prenájme stavebnej mechanizácie.
+            Máme 20 rokov skúseností v prenájme stavebnej mechanizácie.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a

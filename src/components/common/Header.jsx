@@ -120,7 +120,7 @@ export default function Header() {
             className="flex items-center hover:opacity-80 transition-opacity duration-300"
           >
             <img
-              src="/logoroyal.png"
+              src="/logoroyal.webp"
               alt="Royal Stroje"
               className={`w-auto transition-all duration-300 ${
                 scrolled ? 'h-10 md:h-12' : 'h-12 md:h-14'

@@ -6,31 +6,31 @@ export default function Partneri() {
     {
       id: 1,
       name: 'M & M WOOD',
-      logo: '/pictures/graphics/partneri/logo_mmwood.png',
+      logo: '/pictures/graphics/partneri/logo_mmwood.webp',
       website: 'https://www.mmwood.sk/',
     },
     {
       id: 2,
       name: 'ZSOLIKA',
-      logo: '/pictures/graphics/partneri/logo_zsolika.png',
+      logo: '/pictures/graphics/partneri/logo_zsolika.webp',
       website: 'https://www.zsolika.sk/',
     },
     {
       id: 3,
       name: 'MOBILBOX',
-      logo: '/pictures/graphics/partneri/logo_mobilbox.png',
+      logo: '/pictures/graphics/partneri/logo_mobilbox.webp',
       website: 'https://mobilbox.sk/',
     },
     {
       id: 4,
       name: 'ESKOPA',
-      logo: '/pictures/graphics/partneri/logo_eskopa.png',
+      logo: '/pictures/graphics/partneri/logo_eskopa.webp',
       website: null,
     },
     {
       id: 5,
       name: 'MOBA',
-      logo: '/pictures/graphics/partneri/logo_moba.png',
+      logo: '/pictures/graphics/partneri/logo_moba.webp',
       website: 'https://moba.sk/',
     },
   ];
@@ -81,7 +81,7 @@ export default function Partneri() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />

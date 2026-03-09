@@ -1728,7 +1728,7 @@ export const products = [
     name: 'Dumper 1.5t',
     category: 'tazka-technika',
     subcategory: 'dumpre',
-    image: '/pictures/Ťažká technika/Ťažká technika/Dumpre/Dumper 1.5 t.png',
+    image: '/pictures/Ťažká technika/Ťažká technika/Dumpre/Dumper 1.5 t.webp',
     price: '102.00€/deň',
     pricePerDay: 85,
     description: 'Dumper 1.5t',

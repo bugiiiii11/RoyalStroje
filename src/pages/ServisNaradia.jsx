@@ -89,7 +89,7 @@ export default function ServisNaradia() {
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />

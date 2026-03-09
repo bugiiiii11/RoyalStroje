@@ -76,7 +76,7 @@ export default function CTASection() {
           style={{ animation: 'floatObjectLeft 16s ease-in-out infinite' }}
         >
           <img
-            src="/pictures/graphics/objects5.png"
+            src="/pictures/graphics/objects5.webp"
             alt=""
             className="w-full h-auto"
           />
@@ -90,7 +90,7 @@ export default function CTASection() {
           style={{ animation: 'floatObjectRight 18s ease-in-out infinite' }}
         >
           <img
-            src="/pictures/graphics/objects1.png"
+            src="/pictures/graphics/objects1.webp"
             alt=""
             className="w-full h-auto"
           />

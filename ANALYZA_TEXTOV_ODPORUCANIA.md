@@ -230,7 +230,7 @@ Vždy skladom a pripravených na prácu
 
 ### 📸 Potrebné obrázky pre Homepage
 
-1. **Hero background** (aktuálne: hero1.png)
+1. **Hero background** (aktuálne: hero1.webp)
    - Alt text: "Požičovňa stavebnej techniky Royal Stroje Senec - stavebné stroje na stavbe"
    - Odporúčanie: Ak možno, pridať do obrázku Royal Stroje logo na stroj (branding)
 

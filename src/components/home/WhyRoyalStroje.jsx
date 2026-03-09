@@ -19,7 +19,7 @@ export default function WhyRoyalStroje() {
             <span className="text-orange-primary">Senci a Bratislave</span>
           </h2>
           <p className="text-white/70 text-lg max-w-3xl mx-auto">
-            12 rokov skúseností v prenájme stavebnej techniky pre firmy aj súkromné osoby
+            20 rokov skúseností v prenájme stavebnej techniky pre firmy aj súkromné osoby
           </p>
         </div>
 
@@ -111,7 +111,7 @@ export default function WhyRoyalStroje() {
                 <Clock className="text-orange-primary" size={28} />
               </div>
 
-              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">12 rokov skúseností</h3>
+              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">20 rokov skúseností</h3>
               <p className="text-white/60 text-sm leading-relaxed">
                 Dlhoročné know-how v prenájme techniky. Profesionálne poradenstvo pri výbere strojov.
               </p>

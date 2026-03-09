@@ -26,7 +26,14 @@
       "Bash(find:*)",
       "Bash(npm run dev:*)",
       "Bash(timeout /t 5 /nobreak)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(git clone:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File:*)",
+      "Bash(pip install:*)",
+      "Bash(python -m playwright:*)",
+      "Bash(python scripts/convert.py:*)",
+      "Bash(python:*)",
+      "Bash(del \"public\\\\pictures\\\\graphics\\\\royal_stroje_krivosudsky.png\")"
     ]
   }
 }

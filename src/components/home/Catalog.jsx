@@ -196,7 +196,7 @@ export default function Catalog() {
         {/* Logo - Top Left */}
         <div className="absolute top-3 left-3 z-30">
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />
@@ -229,7 +229,7 @@ export default function Catalog() {
             {/* Left Product Image */}
             <div className="hidden lg:block flex-shrink-0">
               <img
-                src="/pictures/graphics/toughbuilt-tb-c700-transparent.png"
+                src="/pictures/graphics/toughbuilt-tb-c700-transparent.webp"
                 alt="Produkt"
                 className="w-64 h-auto opacity-75 select-none pointer-events-none"
                 draggable="false"
@@ -249,7 +249,7 @@ export default function Catalog() {
             {/* Right Product Image */}
             <div className="hidden lg:block flex-shrink-0">
               <img
-                src="/pictures/graphics/mini-rypadlo-1000-transparent.png"
+                src="/pictures/graphics/mini-rypadlo-1000-transparent.webp"
                 alt="Produkt"
                 className="w-64 h-auto opacity-75 select-none pointer-events-none"
                 draggable="false"

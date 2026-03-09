@@ -302,27 +302,40 @@ export default function Kontakt() {
                 </a>
               </div>
 
-              {/* Company Info & About */}
-              <div className="space-y-6">
-                {/* Company Information */}
-                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8">
-                  <h3 className="text-white font-black text-xl mb-4">Firemné údaje</h3>
-                  <div className="space-y-2.5 text-white/70 leading-relaxed">
-                    <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
-                    <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
-                    <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
-                    <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
-                    <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>
-                    <p><strong className="text-white font-bold">Zastúpený:</strong> Peter Krivosudský</p>
-                  </div>
+              {/* Company Info & About - Combined with background image */}
+              <div className="relative border-2 border-white/10 rounded-3xl overflow-hidden">
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img
+                    src="/pictures/graphics/royal_stroje_krivosudsky.webp"
+                    alt="Peter Krivosudský - Royal Stroje"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-black/60"></div>
                 </div>
 
-                {/* About Section */}
-                <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-8">
-                  <h3 className="text-white font-black text-xl mb-4">O nás</h3>
-                  <p className="text-white/70 leading-relaxed">
-                    ROYAL STROJE je požičovňa stavebného náradia a techniky v Senci s 20-ročnými skúsenosťami v odvetví. Ponúkame prenájom profesionálneho náradia, strednej a ťažkej mechanizácie s dovozom na stavbu.
-                  </p>
+                {/* Content */}
+                <div className="relative z-10 p-8">
+                  {/* Company Information */}
+                  <div className="mb-8">
+                    <h3 className="text-white font-black text-xl mb-4">Firemné údaje</h3>
+                    <div className="space-y-2.5 text-white/80 leading-relaxed">
+                      <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
+                      <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
+                      <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
+                      <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
+                      <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>
+                      <p><strong className="text-white font-bold">Zastúpený:</strong> Peter Krivosudský</p>
+                    </div>
+                  </div>
+
+                  {/* About Section */}
+                  <div>
+                    <h3 className="text-white font-black text-xl mb-4">O nás</h3>
+                    <p className="text-white/80 leading-relaxed">
+                      ROYAL STROJE je požičovňa stavebného náradia a techniky v Senci s 20-ročnými skúsenosťami v odvetví. Ponúkame prenájom profesionálneho náradia, strednej a ťažkej mechanizácie s dovozom na stavbu.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -392,15 +405,35 @@ export default function Kontakt() {
 
             {/* Company Details - Mobile only */}
             <div className="md:hidden mt-6">
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-4">
-                <h3 className="text-white font-black text-sm mb-3">Firemné údaje</h3>
-                <div className="space-y-1.5 text-white/70 text-xs leading-relaxed">
-                  <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
-                  <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
-                  <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
-                  <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
-                  <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>
-                  <p><strong className="text-white font-bold">Zastúpený:</strong> Peter Krivosudský</p>
+              <div className="relative border border-white/10 rounded-xl overflow-hidden">
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img
+                    src="/pictures/graphics/royal_stroje_krivosudsky.webp"
+                    alt="Peter Krivosudský - Royal Stroje"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/85 to-black/70"></div>
+                </div>
+
+                {/* Content */}
+                <div className="relative z-10 p-4">
+                  {/* Company Information */}
+                  <h3 className="text-white font-black text-sm mb-3">Firemné údaje</h3>
+                  <div className="space-y-1.5 text-white/80 text-xs leading-relaxed mb-4">
+                    <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
+                    <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
+                    <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
+                    <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
+                    <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>
+                    <p><strong className="text-white font-bold">Zastúpený:</strong> Peter Krivosudský</p>
+                  </div>
+
+                  {/* About Section */}
+                  <h3 className="text-white font-black text-sm mb-2">O nás</h3>
+                  <p className="text-white/80 text-xs leading-relaxed">
+                    ROYAL STROJE je požičovňa stavebného náradia a techniky v Senci s 20-ročnými skúsenosťami v odvetví. Ponúkame prenájom profesionálneho náradia, strednej a ťažkej mechanizácie s dovozom na stavbu.
+                  </p>
                 </div>
               </div>
             </div>

@@ -176,7 +176,7 @@ export default function ProductDetail() {
             <span className="text-xs">Späť</span>
           </Link>
           <img
-            src="/logoroyal.png"
+            src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
           />
@@ -352,7 +352,7 @@ export default function ProductDetail() {
               </div>
               <div className="flex items-center gap-2 bg-zinc-900/50 border border-orange-primary/30 rounded-full px-4 py-2 text-sm md:text-base">
                 <span className="text-orange-primary">✓</span>
-                <span className="text-white/90">12 rokov skúseností</span>
+                <span className="text-white/90">20 rokov skúseností</span>
               </div>
             </div>
 
