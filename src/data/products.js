@@ -2515,6 +2515,26 @@ export const products = [
     isNew: false,
     isPopular: false,
   },
+
+  // zahradna-technika/rotavatory (1 produktov)
+  {
+    id: 'riwall-pro-rpt-8556r',
+    name: 'RIWALL PRO RPT 8556 R',
+    category: 'zahradna-technika',
+    subcategory: 'rotavatory',
+    image: '/pictures/Katalog-PNG/Záhradná technika/Rotavátory/RIWALL-PRO-RPT-8556R-Kultivator.webp',
+    price: '30.75€/deň',
+    pricePerDay: 25,
+    description: 'Kultivátor s benzínovým motorom',
+    features: [
+      'Nastaviteľný záber - 55/85 cm',
+      'Výkon - 4.1 kW',
+      'Hĺbka - 35 cm',
+    ],
+    inStock: true,
+    isNew: true,
+    isPopular: false,
+  },
 ];
 
 // Helper funkcie

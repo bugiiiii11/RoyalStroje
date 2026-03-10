@@ -302,20 +302,10 @@ export default function Kontakt() {
                 </a>
               </div>
 
-              {/* Company Info & About - Combined with background image */}
-              <div className="relative border-2 border-white/10 rounded-3xl overflow-hidden">
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <img
-                    src="/pictures/graphics/royal_stroje_krivosudsky.webp"
-                    alt="Peter Krivosudský - Royal Stroje"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-black/60"></div>
-                </div>
-
+              {/* Company Info & About */}
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl overflow-hidden">
                 {/* Content */}
-                <div className="relative z-10 p-8">
+                <div className="p-8">
                   {/* Company Information */}
                   <div className="mb-8">
                     <h3 className="text-white font-black text-xl mb-4">Firemné údaje</h3>
@@ -405,19 +395,9 @@ export default function Kontakt() {
 
             {/* Company Details - Mobile only */}
             <div className="md:hidden mt-6">
-              <div className="relative border border-white/10 rounded-xl overflow-hidden">
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <img
-                    src="/pictures/graphics/royal_stroje_krivosudsky.webp"
-                    alt="Peter Krivosudský - Royal Stroje"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/85 to-black/70"></div>
-                </div>
-
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl overflow-hidden">
                 {/* Content */}
-                <div className="relative z-10 p-4">
+                <div className="p-4">
                   {/* Company Information */}
                   <h3 className="text-white font-black text-sm mb-3">Firemné údaje</h3>
                   <div className="space-y-1.5 text-white/80 text-xs leading-relaxed mb-4">

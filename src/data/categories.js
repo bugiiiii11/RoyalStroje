@@ -96,11 +96,12 @@ export const categories = [
     id: 'zahradna-technika',
     name: 'Záhradná technika',
     slug: 'zahradna-technika',
-    description: 'Kosačky, krovinorezy a motorové píly',
+    description: 'Kosačky, krovinorezy, motorové píly a rotavátory',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
       { id: 'kosacky-na-travu', name: 'Kosačky na trávu', slug: 'kosacky-na-travu' },
       { id: 'krovinorezy-a-motorove-pily', name: 'Krovinorezy a motorové píly', slug: 'krovinorezy-a-motorove-pily' },
+      { id: 'rotavatory', name: 'Rotavátory', slug: 'rotavatory' },
     ]
   },
 ];
