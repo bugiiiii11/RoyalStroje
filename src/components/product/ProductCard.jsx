@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 export default function ProductCard({ product, customerType = 'po' }) {
   const [showPhone, setShowPhone] = useState(false);
 
-  // Calculate price based on customer type
+  // Calculate price based on customer type (23% DPH)
   const displayPrice = customerType === 'po'
     ? product.pricePerDay
-    : (product.pricePerDay * 1.2);
+    : (product.pricePerDay * 1.23);
 
   // Check if price is valid
   const hasValidPrice = product.pricePerDay && !isNaN(product.pricePerDay);

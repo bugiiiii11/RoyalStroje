@@ -125,13 +125,13 @@ export default function Catalog() {
 
   const rentalDays = selectedDays.length || 1;
   const baseTotal = getTotal();
-  const totalPrice = customerType === 'po' ? baseTotal : baseTotal * 1.2;
+  const totalPrice = customerType === 'po' ? baseTotal : baseTotal * 1.23;
 
   const handleSendOrder = () => {
     if (cartItems.length === 0) return;
     const productList = cartItems.map((item) => {
       const itemPrice = item.pricePerDay && !isNaN(item.pricePerDay)
-        ? (customerType === 'po' ? item.pricePerDay : item.pricePerDay * 1.2).toFixed(2)
+        ? (customerType === 'po' ? item.pricePerDay : item.pricePerDay * 1.23).toFixed(2)
         : 'Cena dohodou';
       const priceLabel = customerType === 'po' ? 'bez DPH' : 's DPH';
       return `- ${item.name} (${itemPrice}€ ${priceLabel}/deň)`;
@@ -412,7 +412,7 @@ export default function Catalog() {
                     <div className="space-y-2 max-h-48 overflow-y-auto mb-4">
                       {cartItems.map((item) => {
                         const itemPrice = item.pricePerDay && !isNaN(item.pricePerDay)
-                          ? (customerType === 'po' ? item.pricePerDay : item.pricePerDay * 1.2).toFixed(2)
+                          ? (customerType === 'po' ? item.pricePerDay : item.pricePerDay * 1.23).toFixed(2)
                           : null;
                         return (
                           <div
