@@ -55,46 +55,54 @@ export default function Header() {
       {/* Promo Banner - Slide in from right - Desktop only */}
       <div
         className={`hidden md:block fixed top-24 right-0 z-[60] transition-all duration-500 ease-out ${
-          promoVisible ? 'translate-x-0' : 'translate-x-full'
+          promoVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}
       >
-        <div className="relative bg-gradient-to-br from-orange-primary to-orange-hover rounded-l-2xl shadow-2xl shadow-orange-primary/30 overflow-hidden max-w-sm">
+        <div className="relative bg-zinc-950/95 backdrop-blur-xl border border-white/10 rounded-l-2xl shadow-2xl overflow-hidden max-w-sm">
+          {/* Top accent line */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-primary to-transparent"></div>
+
+          {/* Left accent line */}
+          <div className="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-orange-primary via-orange-primary/50 to-transparent"></div>
+
           {/* Close button */}
           <button
             onClick={handleClosePromo}
-            className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 rounded-full transition-all z-10"
+            className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center text-white/40 hover:text-white hover:bg-white/10 rounded-lg border border-white/10 hover:border-white/20 transition-all z-10"
             aria-label="Zavrieť"
           >
-            <X size={16} />
+            <X size={14} />
           </button>
 
           {/* Content */}
-          <div className="p-6 pr-8">
-            <div className="flex items-start gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                <Sparkles className="text-white" size={20} />
-              </div>
-              <div>
-                <h3 className="text-white font-black text-lg leading-tight mb-2">
-                  Čoskoro otvárame!
-                </h3>
-                <p className="text-white/90 text-sm leading-relaxed">
-                  Web je momentálne v testovacej prevádzke. Oficiálne spustenie čoskoro.
-                </p>
-              </div>
+          <div className="p-6 pr-12">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-1.5 bg-orange-primary/10 border border-orange-primary/20 rounded-full px-3 py-1 mb-4">
+              <span className="w-1.5 h-1.5 bg-orange-primary rounded-full animate-pulse"></span>
+              <span className="text-orange-primary text-xs font-semibold uppercase tracking-wider">Testovacia prevádzka</span>
             </div>
+
+            <h3 className="text-white font-black text-xl leading-tight mb-2">
+              Čoskoro otvárame!
+            </h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-5">
+              Pripravujeme pre vás niečo výnimočné. Sledujte nás pre najnovšie informácie.
+            </p>
+
             <Link
               to="/kontakt"
               onClick={() => setPromoVisible(false)}
-              className="block w-full text-center bg-white text-orange-primary font-bold py-2.5 px-4 rounded-lg hover:bg-white/90 transition-all"
+              className="group inline-flex items-center gap-2 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold py-2.5 px-5 rounded-lg hover:shadow-lg hover:shadow-orange-primary/25 transition-all duration-300"
             >
               Kontaktujte nás
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </Link>
           </div>
 
-          {/* Decorative elements */}
-          <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-          <div className="absolute -top-10 -left-10 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+          {/* Subtle decorative glow */}
+          <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-orange-primary/5 rounded-full blur-3xl"></div>
         </div>
       </div>
 
