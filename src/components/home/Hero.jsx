@@ -112,7 +112,7 @@ export default function Hero() {
             <div className="mt-8 md:mt-10">
               <div className="group inline-flex items-stretch bg-zinc-950/90 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:border-orange-primary/30 transition-all duration-300">
                 {/* Product image container - square */}
-                <div className="relative w-28 h-28 md:w-32 md:h-32 bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 flex-shrink-0">
+                <div className="relative w-36 h-36 md:w-44 md:h-44 bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 flex-shrink-0">
                   {/* Discount badge */}
                   <div className="absolute top-2 left-2 z-10">
                     {akcioveProdukty.map((produkt, index) => (
