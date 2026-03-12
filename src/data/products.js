@@ -1159,9 +1159,8 @@ export const products = [
     pricePerDay: 15,
     description: 'Krížový laser',
     features: [
-      'Laser so zeleným lúčom',
-      '3 x 360° rovina (2 x vertikálna, 1 x horizontálna)',
-      'Presné merania (2,0 mm/10m)',
+      'Laser so zeleným lúčom - 3 x 360° rovina (2 x vertikálna, 1 x horizontálna)',
+      'Presné merania - 2,0 mm/10m',
       'Príslušenstvo - statív + lata',
     ],
     inStock: true,
