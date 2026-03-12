@@ -1166,6 +1166,7 @@ export const products = [
     inStock: true,
     isNew: true,
     isPopular: false,
+    blogArticleSlug: 'nivel-cl3g-krizovy-laser-zeleny-profesionalny-nastroj',
   },
   {
     id: 'nivel-n32x',
