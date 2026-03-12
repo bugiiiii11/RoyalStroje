@@ -185,6 +185,81 @@ export default function PredajTechniky() {
             </div>
           </div>
 
+          {/* Authorized Partners Section */}
+          <div className="mb-12 md:mb-16">
+            <div className="text-center mb-6 md:mb-10">
+              <h2 className="text-xl md:text-3xl font-black text-white mb-2">
+                Autorizovaný predajca <span className="text-orange-primary">overených značiek</span>
+              </h2>
+              <p className="text-white/60 text-sm md:text-base">
+                Spolupracujeme s najväčšími dodávateľmi profesionálneho náradia
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              {/* Vercajch Partner Card */}
+              <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl overflow-hidden hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 transition-all duration-500">
+                <div className="flex flex-col sm:flex-row">
+                  {/* Image */}
+                  <div className="sm:w-40 md:w-48 lg:w-56 flex-shrink-0">
+                    <div className="aspect-square sm:h-full">
+                      <img
+                        src="/pictures/graphics/naradie.webp"
+                        alt="Vercajch centrum - profesionálne náradie"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  {/* Content */}
+                  <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Shield className="text-orange-primary flex-shrink-0" size={20} />
+                      <span className="text-orange-primary text-xs font-bold uppercase tracking-wider">Autorizovaný predajca</span>
+                    </div>
+                    <h3 className="text-lg md:text-2xl font-black text-white mb-2 group-hover:text-orange-primary/90 transition-colors">
+                      Vercajch centrum
+                    </h3>
+                    <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                      Partner najväčšej siete predajcov profesionálneho náradia na Slovensku. Široký sortiment, výhodné ceny, plná záruka.
+                    </p>
+                  </div>
+                </div>
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-500 pointer-events-none"></div>
+              </div>
+
+              {/* Makita Partner Card */}
+              <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl overflow-hidden hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 transition-all duration-500">
+                <div className="flex flex-col sm:flex-row">
+                  {/* Placeholder Image */}
+                  <div className="sm:w-40 md:w-48 lg:w-56 flex-shrink-0">
+                    <div className="aspect-square sm:h-full bg-gradient-to-br from-zinc-700 to-zinc-800 flex items-center justify-center">
+                      <div className="text-center p-4">
+                        <Wrench className="text-orange-primary/50 mx-auto mb-2" size={40} />
+                        <span className="text-white/30 text-xs">Obrázok</span>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Content */}
+                  <div className="flex-1 p-5 md:p-6 flex flex-col justify-center">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Shield className="text-orange-primary flex-shrink-0" size={20} />
+                      <span className="text-orange-primary text-xs font-bold uppercase tracking-wider">Autorizovaný predajca</span>
+                    </div>
+                    <h3 className="text-lg md:text-2xl font-black text-white mb-2 group-hover:text-orange-primary/90 transition-colors">
+                      Makita
+                    </h3>
+                    <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                      Oficiálny predajca japonského náradia Makita. Elektrické a AKU náradie najvyššej kvality pre profesionálov aj domácich majstrov.
+                    </p>
+                  </div>
+                </div>
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-500 pointer-events-none"></div>
+              </div>
+            </div>
+          </div>
+
           {/* Intro Section */}
           <div className="text-center mb-6 md:mb-12">
             <h2 className="text-xl md:text-4xl lg:text-5xl font-black text-white mb-3 md:mb-6 leading-tight">
