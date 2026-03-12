@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, X, Sparkles } from 'lucide-react';
+import { Phone, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 // WhatsApp icon
@@ -22,7 +22,6 @@ export default function Header() {
   const [phoneHovered, setPhoneHovered] = useState(false);
   const [promoVisible, setPromoVisible] = useState(false);
   const [promoClosed, setPromoClosed] = useState(false);
-
   const isActive = (path) => location.pathname === path;
 
   // Show promo banner after delay
@@ -58,7 +57,7 @@ export default function Header() {
           promoVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}
       >
-        <div className="relative bg-zinc-950/95 backdrop-blur-xl border border-white/10 rounded-l-2xl shadow-2xl overflow-hidden max-w-sm">
+        <div className="relative bg-zinc-950/95 backdrop-blur-xl border border-white/10 rounded-l-2xl shadow-2xl overflow-hidden w-[320px]">
           {/* Top accent line */}
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-primary to-transparent"></div>
 
