@@ -37,7 +37,7 @@ export default function PredajTechniky() {
       id: 'nivel-cl3g',
       name: 'NIVEL CL3G',
       subtitle: 'Krížový laser so zeleným lúčom',
-      price: '349',
+      price: '406',
       image: '/pictures/graphics/laser-transparent.png',
       specs: [
         { label: 'Laser', value: '3× 360° rovina (zelený lúč)' },
@@ -368,6 +368,55 @@ export default function PredajTechniky() {
                     </span>
                     <span className="inline-flex items-center gap-1.5 bg-zinc-950/50 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-white/70">
                       <span className="text-green-500">✓</span> Odborné poradenstvo
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Nivel System */}
+          <div className="mb-12 md:mb-16">
+            <div className="relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-green-500/30 rounded-xl p-5 md:p-8 overflow-hidden">
+              {/* Background decoration */}
+              <div className="absolute top-0 right-0 w-48 h-48 bg-green-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+              <div className="relative flex flex-col md:flex-row gap-5 md:gap-8 items-center">
+                {/* Nivel Logo */}
+                <div className="w-28 h-28 md:w-36 md:h-36 flex-shrink-0 bg-white rounded-xl flex items-center justify-center p-4">
+                  <img
+                    src="/pictures/graphics/logo-nivel-home.png"
+                    alt="Nivel System - Meracie prístroje"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 text-center md:text-left">
+                  <div className="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/50 rounded-full px-3 py-1.5 mb-3">
+                    <Zap className="text-green-500" size={14} />
+                    <span className="text-green-500 font-bold text-xs uppercase tracking-wider">Predávame značku</span>
+                  </div>
+
+                  <h2 className="text-xl md:text-2xl font-black text-white mb-3">
+                    Nivel System <span className="text-green-500">- Presnosť na prvom mieste</span>
+                  </h2>
+
+                  <p className="text-white/80 text-sm md:text-base leading-relaxed mb-4">
+                    Ponúkame profesionálne meracie prístroje značky <strong className="text-white">Nivel System</strong> - krížové lasery,
+                    rotačné lasery a príslušenstvo pre stavebníkov a remeselníkov. Zelené lasery s výbornou viditeľnosťou
+                    a <strong className="text-green-500">presnosťou do 2mm na 10m</strong>.
+                  </p>
+
+                  <div className="flex flex-wrap justify-center md:justify-start gap-2">
+                    <span className="inline-flex items-center gap-1.5 bg-zinc-950/50 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-white/70">
+                      <span className="text-green-500">✓</span> Zelené lasery
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 bg-zinc-950/50 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-white/70">
+                      <span className="text-green-500">✓</span> Kompletné sety so statívom
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 bg-zinc-950/50 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-white/70">
+                      <span className="text-green-500">✓</span> Profesionálna presnosť
                     </span>
                   </div>
                 </div>
