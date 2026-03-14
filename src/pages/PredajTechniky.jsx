@@ -1,4 +1,4 @@
-import { Phone, Mail, ShoppingCart, Package, Tag, Zap, Shield, Wrench, HardHat, Truck, Clock, ExternalLink } from 'lucide-react';
+import { Phone, MessageCircle, ShoppingCart, Package, Tag, Zap, Shield, Wrench, HardHat, Truck, Clock, ExternalLink } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import ContentSection from '../components/common/ContentSection';
@@ -130,7 +130,7 @@ export default function PredajTechniky() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/hero-pozicovna.webp"
+            src="/hero5.webp"
             alt="Royal Stroje - Predaj techniky"
             className="w-full h-full object-cover"
           />
@@ -627,11 +627,13 @@ export default function PredajTechniky() {
                 <span>Zavolať teraz</span>
               </a>
               <a
-                href="mailto:info@royalstroje.sk"
+                href="https://wa.me/421948555551"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 bg-zinc-900 border border-zinc-700 md:border-2 text-white font-bold text-sm md:text-lg rounded-full hover:bg-zinc-800 hover:border-orange-primary/50 transition-all"
               >
-                <Mail className="w-[18px] h-[18px] md:w-[22px] md:h-[22px]" />
-                <span>Napísať email</span>
+                <MessageCircle className="w-[18px] h-[18px] md:w-[22px] md:h-[22px] text-green-400" />
+                <span>WhatsApp</span>
               </a>
             </div>
           </div>

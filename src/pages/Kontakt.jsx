@@ -48,7 +48,7 @@ export default function Kontakt() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/hero-pozicovna.webp"
+            src="/hero6.webp"
             alt="Royal Stroje - Kontakt"
             className="w-full h-full object-cover"
           />
