@@ -11,7 +11,7 @@ export default function PredajTechniky() {
       name: 'Makita TW001GM201',
       subtitle: 'Rázový uťahovák 40V XGT',
       price: '690',
-      image: '/pictures/graphics/utahovak-transparent.png',
+      image: '/pictures/graphics/utahovak-transparent.webp',
       specs: [
         { label: 'Povoľovací moment', value: '2000 Nm' },
         { label: 'Uťahovací moment', value: '1630 Nm' },
@@ -24,7 +24,7 @@ export default function PredajTechniky() {
       name: 'Diamantový kotúč 450mm',
       subtitle: 'Tornado Laser - profesionálny',
       price: '179',
-      image: '/pictures/graphics/diamantovy-kotuc-transparent.png',
+      image: '/pictures/graphics/diamantovy-kotuc-transparent.webp',
       specs: [
         { label: 'Typ', value: 'Laserovaný diamantový kotúč' },
         { label: 'Priemer / otvor', value: '450 mm / 25,4 mm' },
@@ -38,7 +38,7 @@ export default function PredajTechniky() {
       name: 'NIVEL CL3G',
       subtitle: 'Krížový laser so zeleným lúčom',
       price: '406',
-      image: '/pictures/graphics/laser-transparent.png',
+      image: '/pictures/graphics/laser-transparent.webp',
       specs: [
         { label: 'Laser', value: '3× 360° rovina (zelený lúč)' },
         { label: 'Presnosť', value: '2,0 mm / 10 m' },
@@ -337,7 +337,7 @@ export default function PredajTechniky() {
                 {/* Makita Logo */}
                 <div className="w-28 h-28 md:w-36 md:h-36 flex-shrink-0 bg-white rounded-xl flex items-center justify-center p-4">
                   <img
-                    src="/pictures/graphics/makita-logo.png"
+                    src="/pictures/graphics/makita-logo.webp"
                     alt="Makita - Autorizovaný predajca"
                     className="w-full h-full object-contain"
                   />
@@ -385,7 +385,7 @@ export default function PredajTechniky() {
                 {/* Nivel Logo */}
                 <div className="w-28 h-28 md:w-36 md:h-36 flex-shrink-0 bg-white rounded-xl flex items-center justify-center p-4">
                   <img
-                    src="/pictures/graphics/logo-nivel-home.png"
+                    src="/pictures/graphics/logo-nivel-home.webp"
                     alt="Nivel System - Meracie prístroje"
                     className="w-full h-full object-contain"
                   />

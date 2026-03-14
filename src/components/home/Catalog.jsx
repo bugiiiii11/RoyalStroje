@@ -199,14 +199,22 @@ export default function Catalog() {
             src="/logoroyal.webp"
             alt="Royal Stroje"
             className="h-8 w-auto"
+            width={2048}
+            height={419}
           />
         </div>
 
+        {/* Čoskoro otvárame badge - Top Right */}
+        <Link to="/kontakt" className="absolute top-3 right-3 z-30 inline-flex items-center gap-1.5 bg-orange-primary/20 border border-orange-primary/40 backdrop-blur-sm rounded-full px-3 py-1.5">
+          <span className="w-1.5 h-1.5 bg-orange-primary rounded-full animate-pulse"></span>
+          <span className="text-orange-primary text-[10px] font-bold uppercase tracking-wide">Čoskoro otvárame</span>
+        </Link>
+
         {/* Content */}
         <div className="relative z-20 h-full flex flex-col justify-center px-4 pt-10 text-center">
-          <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 leading-tight">
+          <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 leading-tight">
             <span className="text-orange-primary">Katalóg</span> strojov na prenájom
-          </h1>
+          </h2>
           <p className="text-white/70 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
             Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
           </p>
@@ -232,6 +240,8 @@ export default function Catalog() {
                 src="/pictures/graphics/toughbuilt-tb-c700-transparent.webp"
                 alt="Produkt"
                 className="w-64 h-auto opacity-75 select-none pointer-events-none"
+                width={800}
+                height={800}
                 draggable="false"
               />
             </div>
@@ -252,6 +262,8 @@ export default function Catalog() {
                 src="/pictures/graphics/mini-rypadlo-1000-transparent.webp"
                 alt="Produkt"
                 className="w-64 h-auto opacity-75 select-none pointer-events-none"
+                width={800}
+                height={800}
                 draggable="false"
               />
             </div>
@@ -264,25 +276,25 @@ export default function Catalog() {
             <div className="inline-flex bg-zinc-900 border border-white/10 rounded-lg md:rounded-2xl p-0.5 md:p-1.5 gap-0.5 md:gap-1.5">
               <button
                 onClick={() => setCustomerType('po')}
-                className={`flex items-center gap-1 md:gap-2 px-2.5 py-1.5 md:px-4 md:py-2 rounded-md md:rounded-xl font-bold text-[10px] md:text-sm transition-all ${
+                className={`flex items-center gap-1 md:gap-2 px-3 py-3 md:px-4 md:py-2 rounded-md md:rounded-xl font-bold text-xs md:text-sm transition-all min-h-[48px] ${
                   customerType === 'po'
                     ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
-                    : 'text-white/60 hover:text-white/80'
+                    : 'text-white/70 hover:text-white/80'
                 }`}
               >
-                <Building2 size={12} className="md:w-4 md:h-4" />
+                <Building2 size={14} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline">Právnické osoby</span>
                 <span className="sm:hidden">PO</span>
               </button>
               <button
                 onClick={() => setCustomerType('fo')}
-                className={`flex items-center gap-1 md:gap-2 px-2.5 py-1.5 md:px-4 md:py-2 rounded-md md:rounded-xl font-bold text-[10px] md:text-sm transition-all ${
+                className={`flex items-center gap-1 md:gap-2 px-3 py-3 md:px-4 md:py-2 rounded-md md:rounded-xl font-bold text-xs md:text-sm transition-all min-h-[48px] ${
                   customerType === 'fo'
                     ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
-                    : 'text-white/60 hover:text-white/80'
+                    : 'text-white/70 hover:text-white/80'
                 }`}
               >
-                <User size={12} className="md:w-4 md:h-4" />
+                <User size={14} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline">Fyzické osoby</span>
                 <span className="sm:hidden">FO</span>
               </button>
@@ -299,7 +311,7 @@ export default function Catalog() {
                   setSearchQuery(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full bg-zinc-900 border border-white/10 rounded-lg md:rounded-xl pl-8 md:pl-10 pr-8 md:pr-10 py-1.5 md:py-2.5 text-[11px] md:text-sm text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+                className="w-full bg-zinc-900 border border-white/10 rounded-lg md:rounded-xl pl-8 md:pl-10 pr-8 md:pr-10 py-3 md:py-2.5 text-sm md:text-sm text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all min-h-[48px]"
               />
               {searchQuery && (
                 <button
@@ -335,7 +347,7 @@ export default function Catalog() {
                     <button
                       key={category.id}
                       onClick={() => handleCategoryChange(category.id)}
-                      className={`group w-full text-left px-2 py-2 md:px-4 md:py-3.5 rounded-lg md:rounded-xl font-bold transition-all duration-300 ${
+                      className={`group w-full text-left px-2 py-3 md:px-4 md:py-3.5 rounded-lg md:rounded-xl font-bold transition-all duration-300 min-h-[48px] ${
                         isActive
                           ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg shadow-orange-primary/40'
                           : 'bg-zinc-800/50 text-white/80 hover:bg-zinc-800 hover:text-white border border-transparent hover:border-orange-primary/30'
@@ -451,7 +463,7 @@ export default function Catalog() {
                           return (
                             <div
                               key={day}
-                              className={`text-center text-xs font-bold ${isWeekendHeader ? 'text-white/30' : 'text-white/60'}`}
+                              className={`text-center text-xs font-bold ${isWeekendHeader ? 'text-white/30' : 'text-white/70'}`}
                             >
                               {day}
                             </div>
@@ -556,9 +568,9 @@ export default function Catalog() {
                     <button
                       key={subcategory.id}
                       onClick={() => handleSubcategoryChange(subcategory.id)}
-                      className={`group relative px-3 py-2 md:px-6 md:py-3.5 rounded-lg md:rounded-2xl font-bold text-xs md:text-base transition-all duration-300 ${
+                      className={`subcategory-btn group relative px-3 py-3 md:px-6 md:py-3.5 rounded-lg md:rounded-2xl font-bold text-xs md:text-base transition-all duration-300 min-h-[48px] ${
                         isActive
-                          ? 'text-white scale-[1.02]'
+                          ? 'subcategory-btn--active text-white scale-[1.02]'
                           : 'text-white/80 hover:text-white hover:scale-[1.02]'
                       }`}
                       style={{
@@ -572,20 +584,6 @@ export default function Catalog() {
                           ? '1px solid rgba(255, 255, 255, 0.2)'
                           : '1px solid rgba(255, 255, 255, 0.1)',
                         transform: isActive ? 'translateY(-2px)' : 'translateY(0)',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.boxShadow = '0 6px 20px -3px rgba(255, 102, 0, 0.3), 0 3px 8px -2px rgba(255, 102, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -2px 0 rgba(0, 0, 0, 0.2)';
-                          e.currentTarget.style.border = '1px solid rgba(255, 102, 0, 0.4)';
-                          e.currentTarget.style.transform = 'translateY(-2px)';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.boxShadow = '0 4px 15px -3px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -2px 0 rgba(0, 0, 0, 0.2)';
-                          e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.1)';
-                          e.currentTarget.style.transform = 'translateY(0)';
-                        }
                       }}
                     >
                       {/* Shine effect overlay */}
@@ -646,7 +644,7 @@ export default function Catalog() {
                           <button
                             key={page}
                             onClick={() => setCurrentPage(page)}
-                            className={`w-8 h-8 md:w-10 md:h-10 rounded-lg font-bold text-xs md:text-sm transition ${
+                            className={`w-10 h-10 md:w-10 md:h-10 rounded-lg font-bold text-xs md:text-sm transition ${
                               currentPage === page
                                 ? 'bg-orange-primary text-white shadow-lg shadow-orange-primary/40'
                                 : 'bg-zinc-900 border border-white/10 text-white/70 hover:bg-zinc-800 hover:text-white hover:border-orange-primary/30'

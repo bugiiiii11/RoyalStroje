@@ -40,7 +40,7 @@ export default function WhyRoyalStroje() {
               </div>
 
               <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Dovoz do 4 hodín</h3>
-              <p className="text-white/60 text-sm leading-relaxed">
+              <p className="text-white/70 text-sm leading-relaxed">
                 Malé náradie a stredná mechanizácia na stavbe v ten istý deň. Ťažká technika do 24 hodín.
               </p>
             </div>
@@ -64,7 +64,7 @@ export default function WhyRoyalStroje() {
               </div>
 
               <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Nonstop podpora</h3>
-              <p className="text-white/60 text-sm leading-relaxed">
+              <p className="text-white/70 text-sm leading-relaxed">
                 Telefonicky dostupní 24/7. Problém na stavbe? Voláme vám späť do 15 minút.
               </p>
             </div>
@@ -88,7 +88,7 @@ export default function WhyRoyalStroje() {
               </div>
 
               <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Región Senec – Bratislava</h3>
-              <p className="text-white/60 text-sm leading-relaxed">
+              <p className="text-white/70 text-sm leading-relaxed">
                 Obsluhujeme Senec, Bratislavu, Galantu, Trnavu, Pezinok, Modru, Sereď, Šamorín a okolie.
               </p>
             </div>
@@ -112,7 +112,7 @@ export default function WhyRoyalStroje() {
               </div>
 
               <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">20 rokov skúseností</h3>
-              <p className="text-white/60 text-sm leading-relaxed">
+              <p className="text-white/70 text-sm leading-relaxed">
                 Dlhoročné know-how v prenájme techniky. Profesionálne poradenstvo pri výbere strojov.
               </p>
             </div>

@@ -10,6 +10,9 @@ export default function Hero() {
           src="/hero1.webp"
           alt="Požičovňa stavebnej techniky Royal Stroje Senec - profesionálne náradie a stroje na prenájom"
           className="w-full h-full object-cover"
+          width={1920}
+          height={1080}
+          fetchPriority="high"
         />
       </div>
 

@@ -23,7 +23,7 @@ export default function MobileNav() {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all min-w-[70px] ${
+              className={`flex flex-col items-center gap-1 px-3 py-3 rounded-lg transition-all min-w-[70px] min-h-[48px] ${
                 isActive ? 'text-orange-primary' : 'text-white/70'
               }`}
             >

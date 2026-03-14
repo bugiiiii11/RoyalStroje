@@ -84,7 +84,7 @@ export default function Header() {
             <h3 className="text-white font-black text-xl leading-tight mb-2">
               Čoskoro otvárame!
             </h3>
-            <p className="text-white/60 text-sm leading-relaxed mb-5">
+            <p className="text-white/70 text-sm leading-relaxed mb-5">
               Pripravujeme pre vás niečo výnimočné. Sledujte nás pre najnovšie informácie.
             </p>
 

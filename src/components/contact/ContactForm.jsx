@@ -3,8 +3,9 @@ import { Send, CheckCircle, Phone, MessageCircle } from 'lucide-react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import emailjs from '@emailjs/browser';
 import CustomSelect from '../ui/CustomSelect';
+import RecaptchaWrapper from '../common/RecaptchaWrapper';
 
-export default function ContactForm() {
+function ContactFormInner() {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const [formData, setFormData] = useState({
@@ -369,5 +370,13 @@ export default function ContactForm() {
         </p>
       </form>
     </div>
+  );
+}
+
+export default function ContactForm() {
+  return (
+    <RecaptchaWrapper>
+      <ContactFormInner />
+    </RecaptchaWrapper>
   );
 }

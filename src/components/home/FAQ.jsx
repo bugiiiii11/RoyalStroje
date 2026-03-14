@@ -213,7 +213,7 @@ export default function FAQ() {
                     <Phone size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-white/60 text-xs">Zavolajte nám</p>
+                    <p className="text-white/70 text-xs">Zavolajte nám</p>
                     <p className="text-white font-bold">0948 555 551</p>
                   </div>
                 </a>
@@ -226,7 +226,7 @@ export default function FAQ() {
                     <Mail size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-white/60 text-xs">Napíšte nám</p>
+                    <p className="text-white/70 text-xs">Napíšte nám</p>
                     <p className="text-white font-bold">info@royalstroje.sk</p>
                   </div>
                 </a>
@@ -241,7 +241,7 @@ export default function FAQ() {
                     <MessageCircle size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-white/60 text-xs">WhatsApp</p>
+                    <p className="text-white/70 text-xs">WhatsApp</p>
                     <p className="text-white font-bold">Rýchla odpoveď</p>
                   </div>
                 </a>
