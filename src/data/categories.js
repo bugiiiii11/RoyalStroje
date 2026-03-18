@@ -22,6 +22,7 @@ export const categories = [
       { id: 'vibratory-listy-a-miesadla', name: 'Vibrátory, lišty a miešadlá', slug: 'vibratory-listy-a-miesadla' },
       { id: 'lesenie', name: 'Lešenie', slug: 'lesenie' },
       { id: 'nadrze', name: 'Nádrže', slug: 'nadrze' },
+      { id: 'prislusenstvo', name: 'Príslušenstvo', slug: 'prislusenstvo' },
     ]
   },
   {

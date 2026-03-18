@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { getProductsBySubcategory, products } from '../../data/products';
+import { accessories } from '../../data/accessories';
 import ProductCard from '../product/ProductCard';
 import { useCart } from '../../context/CartContext';
 import FAQ from './FAQ';
@@ -591,8 +592,44 @@ export default function Catalog() {
               </div>
             </div>
 
-            {/* Products Grid */}
-            {currentProducts.length > 0 ? (
+            {/* Products Grid or Accessories Table */}
+            {activeSubcategory === 'prislusenstvo' && activeCategory === 'male-naradie' ? (
+              <div className="mb-8">
+                <div className="bg-zinc-900/80 border border-white/10 rounded-2xl overflow-hidden">
+                  {accessories.map((group, groupIndex) => (
+                    <div key={group.group}>
+                      {/* Group header */}
+                      <div className="px-4 md:px-6 py-3 bg-gradient-to-r from-orange-primary/20 to-transparent border-b border-white/10">
+                        <h3 className="text-sm md:text-base font-bold text-orange-primary uppercase tracking-wider">{group.group}</h3>
+                      </div>
+                      {/* Items */}
+                      {group.items.map((item, itemIndex) => (
+                        <div
+                          key={`${group.group}-${itemIndex}`}
+                          className={`grid grid-cols-3 px-4 md:px-6 py-3 md:py-4 items-center ${
+                            itemIndex < group.items.length - 1 || groupIndex < accessories.length - 1
+                              ? 'border-b border-white/5'
+                              : ''
+                          } hover:bg-white/5 transition-colors`}
+                        >
+                          <span className="text-white font-medium text-sm md:text-base">{item.name}</span>
+                          <span className="text-white/60 text-sm md:text-base text-center">{item.parameter}</span>
+                          <span className="text-orange-primary font-bold text-sm md:text-base text-right">
+                            {customerType === 'fo'
+                              ? `${item.priceWithVat.toFixed(2)}€`
+                              : `${item.pricePerDay.toFixed(2)}€`
+                            }
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+                <p className="text-white/40 text-xs md:text-sm mt-3 text-center">
+                  {customerType === 'fo' ? 'Ceny sú s DPH' : 'Ceny sú bez DPH'}
+                </p>
+              </div>
+            ) : currentProducts.length > 0 ? (
               <>
                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-5 mb-8">
                   {currentProducts.map((product) => (
