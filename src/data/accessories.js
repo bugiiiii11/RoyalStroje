@@ -1,45 +1,20 @@
 // Príslušenstvo k malému náradiu
-// Ceny sú bez DPH (pricePerDay), s DPH sa vypočíta dynamicky
+// Ceny sú bez DPH (pricePerDay), s DPH (priceWithVat)
 
 export const accessories = [
-  {
-    group: 'Sekáče',
-    items: [
-      { name: 'Sekáč', parameter: 'špicatý', pricePerDay: 2, priceWithVat: 2.46 },
-      { name: 'Sekáč', parameter: 'plochý', pricePerDay: 2, priceWithVat: 2.46 },
-    ],
-  },
-  {
-    group: 'Vrtáky',
-    items: [
-      { name: 'Vrtáky', parameter: 'priemer x 0.1€', pricePerDay: 5, priceWithVat: 6.15 },
-    ],
-  },
-  {
-    group: 'Kotúče',
-    items: [
-      { name: 'Kotúč', parameter: 'priemer 150mm', pricePerDay: 5, priceWithVat: 6.15 },
-      { name: 'Kotúč', parameter: 'priemer 230mm', pricePerDay: 5, priceWithVat: 6.15 },
-      { name: 'Kotúč', parameter: 'priemer 350mm', pricePerDay: 25, priceWithVat: 30.75 },
-      { name: 'Kotúč', parameter: 'priemer 400mm', pricePerDay: 30, priceWithVat: 36.9 },
-      { name: 'Kotúč', parameter: 'priemer 450mm', pricePerDay: 35, priceWithVat: 43.05 },
-      { name: 'Kotúč brúsny', parameter: 'priemer 125mm', pricePerDay: 10, priceWithVat: 12.3 },
-    ],
-  },
-  {
-    group: 'Píly',
-    items: [
-      { name: 'Pílový list', parameter: 'chvostová píla', pricePerDay: 5, priceWithVat: 6.15 },
-    ],
-  },
-  {
-    group: 'Ostatné',
-    items: [
-      { name: 'Bubon 230V', parameter: '50m', pricePerDay: 3, priceWithVat: 3.69 },
-      { name: 'Tlmiaca guma', parameter: '—', pricePerDay: 3, priceWithVat: 3.69 },
-      { name: 'Hadica', parameter: 'k čerpadlu', pricePerDay: 3, priceWithVat: 3.69 },
-      { name: 'Hadica', parameter: 'ku kompresoru', pricePerDay: 3, priceWithVat: 3.69 },
-      { name: 'Elektróda', parameter: '—', pricePerDay: 0.2, priceWithVat: 0.246 },
-    ],
-  },
+  { name: 'Sekáč', parameter: 'špicatý', pricePerDay: 2, priceWithVat: 2.46 },
+  { name: 'Sekáč', parameter: 'plochý', pricePerDay: 2, priceWithVat: 2.46 },
+  { name: 'Vrtáky', parameter: 'priemer x 0.1€', pricePerDay: 5, priceWithVat: 6.15 },
+  { name: 'Kotúč', parameter: 'priemer 150mm', pricePerDay: 5, priceWithVat: 6.15 },
+  { name: 'Kotúč', parameter: 'priemer 230mm', pricePerDay: 5, priceWithVat: 6.15 },
+  { name: 'Kotúč', parameter: 'priemer 350mm', pricePerDay: 25, priceWithVat: 30.75 },
+  { name: 'Kotúč', parameter: 'priemer 400mm', pricePerDay: 30, priceWithVat: 36.9 },
+  { name: 'Kotúč', parameter: 'priemer 450mm', pricePerDay: 35, priceWithVat: 43.05 },
+  { name: 'Kotúč brúsny', parameter: 'priemer 125mm', pricePerDay: 10, priceWithVat: 12.3 },
+  { name: 'Pílový list', parameter: 'chvostová píla', pricePerDay: 5, priceWithVat: 6.15 },
+  { name: 'Bubon 230V', parameter: '50m', pricePerDay: 3, priceWithVat: 3.69 },
+  { name: 'Tlmiaca guma', parameter: '—', pricePerDay: 3, priceWithVat: 3.69 },
+  { name: 'Hadica', parameter: 'k čerpadlu', pricePerDay: 3, priceWithVat: 3.69 },
+  { name: 'Hadica', parameter: 'ku kompresoru', pricePerDay: 3, priceWithVat: 3.69 },
+  { name: 'Elektróda', parameter: '—', pricePerDay: 0.2, priceWithVat: 0.246 },
 ];
