@@ -9,9 +9,9 @@ export const categories = [
     description: 'Ručné náradie, vŕtačky, brúsky, píly, vysávače, čerpadlá, meracia technika',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
-      { id: 'utahovace-a-skrutkovace', name: 'Uťahovače a skrutkovače', slug: 'utahovace-a-skrutkovace' },
       { id: 'vrtacie-kladiva-a-vrtacky', name: 'Vŕtacie kladivá a vŕtačky', slug: 'vrtacie-kladiva-a-vrtacky' },
       { id: 'buracie-kladiva', name: 'Búracie kladivá', slug: 'buracie-kladiva' },
+      { id: 'utahovace-a-skrutkovace', name: 'Uťahovače a skrutkovače', slug: 'utahovace-a-skrutkovace' },
       { id: 'brusky', name: 'Brúsky', slug: 'brusky' },
       { id: 'pily-a-rezacky', name: 'Píly a rezačky', slug: 'pily-a-rezacky' },
       { id: 'vysavace-a-cistice', name: 'Vysávače a čističe', slug: 'vysavace-a-cistice' },
