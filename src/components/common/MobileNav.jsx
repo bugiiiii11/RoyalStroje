@@ -13,7 +13,7 @@ export default function MobileNav() {
   ];
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-950/98 backdrop-blur-md border-t border-white/20 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] safe-area-inset-bottom">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-zinc-950 border-t border-zinc-800 shadow-[0_-4px_20px_rgba(0,0,0,0.6)] safe-area-inset-bottom">
       <div className="flex justify-around items-center max-w-md mx-auto px-2 py-3">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -23,8 +23,8 @@ export default function MobileNav() {
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center gap-1 px-3 py-3 rounded-lg transition-all min-w-[70px] min-h-[48px] ${
-                isActive ? 'text-orange-primary' : 'text-white/70'
+              className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all min-w-[70px] min-h-[48px] ${
+                isActive ? 'bg-orange-primary/15 text-orange-primary' : 'text-zinc-400'
               }`}
             >
               <Icon size={22} strokeWidth={2.5} />

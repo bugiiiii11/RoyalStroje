@@ -255,7 +255,7 @@ export default function ProductDetail() {
             <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div className="lg:max-w-lg">
                 <h2 className="text-white font-black text-xl md:text-2xl lg:text-3xl mb-2">
-                  Máte záujem o <span className="text-orange-primary">tento produkt</span>?
+                  Máte záujem o <span className="text-orange-primary">tento produkt?</span>
                 </h2>
                 <p className="text-white/70 text-sm md:text-base">
                   Zavolajte nám alebo napíšte — zistite dostupnosť a dohodnite dovoz priamo na stavbu.
@@ -290,16 +290,6 @@ export default function ProductDetail() {
         </div>
       </section>
 
-      {/* ═══ MOBILE STICKY CTA ═══ */}
-      <div className="md:hidden fixed bottom-[68px] left-0 right-0 z-40 px-3 pb-2 pt-1 bg-gradient-to-t from-zinc-950 via-zinc-950/95 to-transparent">
-        <a
-          href="tel:+421948555551"
-          className="flex items-center justify-center gap-2 w-full py-3.5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm rounded-xl shadow-lg shadow-orange-primary/30"
-        >
-          <Phone size={18} />
-          <span>Zavolať: 0948 555 551</span>
-        </a>
-      </div>
     </div>
   );
 }

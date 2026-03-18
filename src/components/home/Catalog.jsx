@@ -191,34 +191,15 @@ export default function Catalog() {
     <ContentSection id="katalog" className="pt-0">
       {/* WhyRoyalStroje section integrated */}
       <WhyRoyalStroje />
-      {/* Mobile Hero - Compact */}
-      <div className="md:hidden relative h-[22vh] max-h-[200px] bg-black overflow-hidden">
-        {/* Logo - Top Left */}
-        <div className="absolute top-3 left-3 z-30">
-          <img
-            src="/logoroyal.webp"
-            alt="Royal Stroje"
-            className="h-8 w-auto"
-            width={2048}
-            height={419}
-          />
-        </div>
-
-        {/* Čoskoro otvárame badge - Top Right */}
-        <Link to="/kontakt" className="absolute top-3 right-3 z-30 inline-flex items-center gap-1.5 bg-orange-primary/20 border border-orange-primary/40 backdrop-blur-sm rounded-full px-3 py-1.5">
-          <span className="w-1.5 h-1.5 bg-orange-primary rounded-full animate-pulse"></span>
-          <span className="text-orange-primary text-[10px] font-bold uppercase tracking-wide">Čoskoro otvárame</span>
-        </Link>
-
-        {/* Content */}
-        <div className="relative z-20 h-full flex flex-col justify-center px-4 pt-10 text-center">
-          <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 leading-tight">
-            <span className="text-orange-primary">Katalóg</span> strojov na prenájom
-          </h2>
-          <p className="text-white/70 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto">
-            Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
-          </p>
-        </div>
+      {/* Mobile Logo - Top Left */}
+      <div className="md:hidden absolute top-3 left-3 z-30">
+        <img
+          src="/logoroyal.webp"
+          alt="Royal Stroje"
+          className="h-8 w-auto"
+          width={2048}
+          height={419}
+        />
       </div>
 
       {/* Radial gradient overlay */}
@@ -230,7 +211,17 @@ export default function Catalog() {
         }}
       />
 
-      <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pt-2 pb-16 md:py-16">
+      <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pb-16 md:py-16">
+        {/* Mobile Header */}
+        <div className="md:hidden text-center mb-6 pt-16 md:pt-0">
+          <h2 className="text-xl font-black text-white mb-2 leading-tight">
+            <span className="text-orange-primary">Katalóg</span> strojov na prenájom
+          </h2>
+          <p className="text-white/70 text-sm leading-relaxed max-w-2xl mx-auto">
+            Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
+          </p>
+        </div>
+
         {/* Desktop Header */}
         <div className="hidden md:block mb-8">
           <div className="relative flex items-center justify-center gap-8">
@@ -712,7 +703,7 @@ export default function Catalog() {
         <div className="relative mt-16 md:mt-24 pt-12 md:pt-16">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4">
-              Chcete vedieť <span className="text-orange-primary">viac</span>?
+              Chcete vedieť viac?
             </h2>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
               Navštívte náš blog plný užitočných rád, tipov a noviniek zo sveta stavebnej mechanizácie

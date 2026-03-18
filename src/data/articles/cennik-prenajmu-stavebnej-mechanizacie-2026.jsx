@@ -1,12 +1,11 @@
-
-  'cennik-prenajmu-stavebnej-mechanizacie-2026': {
-    title: 'Cenník Prenájmu Stavebnej Mechanizácie 2026: Komplexný Prehľad',
-    date: '1. August 2026',
-    author: 'Royal Stroje',
-    readTime: '18 min',
-    category: 'Tipy a rady',
-    excerpt: 'Aktuálne ceny prenájmu stavebnej mechanizácie na Slovensku 2026.',
-    content: (
+const article = {
+  title: 'Cenník Prenájmu Stavebnej Mechanizácie 2026: Komplexný Prehľad',
+  date: '1. August 2026',
+  author: 'Royal Stroje',
+  readTime: '18 min',
+  category: 'Tipy a rady',
+  excerpt: 'Aktuálne ceny prenájmu stavebnej mechanizácie na Slovensku 2026.',
+  content: (
       <div className="space-y-8">
         <p className="text-xl text-white/90 leading-relaxed">
           Plánujete stavbu alebo rekonštrukciu a potrebujete prenajať mechanizáciu? Ceny na Slovensku sa líšia podľa požičovne, regiónu a dĺžky prenájmu. V tomto komplexnom cenníkovom sprievodcovi nájdete aktuálne ceny za rok 2026, porovnanie požičovní a kalkulačku nákladov.
@@ -279,4 +278,5 @@
         </div>
       </div>
     ),
-  },
+};
+export default article;

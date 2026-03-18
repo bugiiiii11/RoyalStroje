@@ -330,6 +330,32 @@ export default function Kontakt() {
               </div>
             </div>
 
+            {/* Mobile Map */}
+            <div className="md:hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-4 overflow-hidden">
+              <h3 className="text-white font-black text-lg mb-3">Nájdete nás tu</h3>
+              <div className="rounded-2xl overflow-hidden border-2 border-white/10 h-[250px] mb-3">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.6!2d17.3994!3d48.2187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8f0c0c0c0c0d%3A0x0!2zUsOpxI1rYSBjZXN0YSAxODIsIDkwMyAwMSBTZW5lYw!5e0!3m2!1ssk!2ssk!4v1234567890"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Royal Stroje - Mapa"
+                ></iframe>
+              </div>
+              <a
+                href="https://maps.google.com/?q=Réčka+cesta+182,+Senec"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 text-orange-primary font-bold text-sm"
+              >
+                <span>Otvoriť v Google Maps</span>
+                <span>→</span>
+              </a>
+            </div>
+
             {/* Social Media Section - Hidden until accounts are set up */}
             {/* <div className="text-center mb-6 md:mb-8">
               <h3 className="text-white font-black text-lg md:text-2xl mb-3 md:mb-6">

@@ -5,7 +5,17 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores([
+    'dist',
+    'csv-to-products.js',
+    'csv-to-products-v2.js',
+    'fix-csv.js',
+    'update-csv-images.js',
+    'scripts/',
+    'src/data/blogArticles_final.jsx',
+    'src/data/blogArticles_temp.jsx',
+    'src/data/blog_article_7.jsx',
+  ]),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
@@ -24,6 +34,7 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'react-refresh/only-export-components': ['warn', { allowExportNames: ['useCart'] }],
     },
   },
 ])

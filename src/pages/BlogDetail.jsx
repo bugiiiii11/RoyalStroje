@@ -1,14 +1,28 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import { blogArticles } from '../data/blogArticles';
+import { blogMeta, loadArticle } from '../data/blogArticles';
 import ContentSection from '../components/common/ContentSection';
 
 export default function BlogDetail() {
   const { slug } = useParams();
-  const article = blogArticles[slug];
+  const meta = blogMeta[slug];
+  const [article, setArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!article) {
+  useEffect(() => {
+    let cancelled = false;
+    loadArticle(slug).then((data) => {
+      if (!cancelled) {
+        setArticle(data);
+        setLoading(false);
+      }
+    });
+    return () => { cancelled = true; };
+  }, [slug]);
+
+  if (!meta) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -25,11 +39,11 @@ export default function BlogDetail() {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": article.title,
-    "datePublished": article.date,
+    "headline": meta.title,
+    "datePublished": meta.date,
     "author": {
       "@type": "Person",
-      "name": article.author
+      "name": meta.author
     },
     "publisher": {
       "@type": "Organization",
@@ -44,13 +58,13 @@ export default function BlogDetail() {
   return (
     <div className="min-h-screen">
       <Helmet>
-        <title>{article.title} | Blog | Royal Stroje</title>
-        <meta name="description" content={article.excerpt} />
+        <title>{meta.title} | Blog | Royal Stroje</title>
+        <meta name="description" content={meta.excerpt} />
         <link rel="canonical" href={`https://royalstroje.sk/blog/${slug}`} />
 
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.excerpt} />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:description" content={meta.excerpt} />
         <meta property="og:url" content={`https://royalstroje.sk/blog/${slug}`} />
 
         <script type="application/ld+json">
@@ -64,7 +78,7 @@ export default function BlogDetail() {
         <div className="absolute inset-0">
           <img
             src="/hero-pozicovna.webp"
-            alt={article.title}
+            alt={meta.title}
             className="w-full h-full object-cover"
           />
         </div>
@@ -94,20 +108,20 @@ export default function BlogDetail() {
             </Link>
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
-              {article.title}
+              {meta.title}
             </h1>
 
             {/* Meta Info */}
             <div className="flex flex-wrap items-center gap-4 text-white/80">
               <span className="flex items-center gap-2">
                 <Calendar size={18} />
-                {article.date}
+                {meta.date}
               </span>
               <span className="flex items-center gap-2">
                 <Clock size={18} />
-                {article.readTime}
+                {meta.readTime}
               </span>
-              <span>Autor: {article.author}</span>
+              <span>Autor: {meta.author}</span>
             </div>
           </div>
         </div>
@@ -140,26 +154,34 @@ export default function BlogDetail() {
             </Link>
 
             <h1 className="text-xl font-black text-white mb-2 leading-tight">
-              {article.title}
+              {meta.title}
             </h1>
 
             {/* Meta Info */}
             <div className="flex flex-wrap items-center justify-center gap-3 text-white/70 text-xs">
               <span className="flex items-center gap-1">
                 <Calendar size={14} />
-                {article.date}
+                {meta.date}
               </span>
               <span className="flex items-center gap-1">
                 <Clock size={14} />
-                {article.readTime}
+                {meta.readTime}
               </span>
-              <span>{article.author}</span>
+              <span>{meta.author}</span>
             </div>
           </div>
 
           {/* Article Body */}
           <article className="prose prose-invert prose-lg max-w-none">
-            {article.content}
+            {loading ? (
+              <div className="flex items-center justify-center py-20">
+                <div className="w-10 h-10 border-4 border-orange-primary border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            ) : article ? (
+              article.content
+            ) : (
+              <p className="text-white/70 text-center py-20">Článok sa nepodarilo načítať.</p>
+            )}
           </article>
 
           {/* Share Section */}
