@@ -194,7 +194,7 @@ export default function Blog() {
       dateSort: '2026-03-12',
       author: 'Royal Stroje',
       readTime: '10 min',
-      image: '/pictures/Katalog-PNG/Malé náradie/Zváracia a meracia technika/Krizovy-laser-CLx3G.webp',
+      image: '/pictures/graphics/nivel-CL3G-blog.webp',
       category: 'Návody',
     },
     {
@@ -206,7 +206,7 @@ export default function Blog() {
       dateSort: '2026-03-12',
       author: 'Royal Stroje',
       readTime: '9 min',
-      image: '/pictures/Katalog-PNG/Malé náradie/Zváracia a meracia technika/Opticky-nivelacny-pristroj-N32x.webp',
+      image: '/pictures/graphics/nivel-N32-blog.webp',
       category: 'Návody',
     },
     {
@@ -218,7 +218,7 @@ export default function Blog() {
       dateSort: '2026-03-12',
       author: 'Royal Stroje',
       readTime: '10 min',
-      image: '/pictures/Katalog-PNG/Malé náradie/Zváracia a meracia technika/Nivel-NL520R.webp',
+      image: '/pictures/graphics/nivel-NL520R-blog.webp',
       category: 'Návody',
     },
   ];
