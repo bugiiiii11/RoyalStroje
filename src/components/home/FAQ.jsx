@@ -169,7 +169,7 @@ export default function FAQ() {
         {/* Header */}
         <div className="text-center mb-6 md:mb-12">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4">
-            Máte <span className="text-orange-primary">otázky</span>?
+            Máte <span className="text-orange-primary">otázky?</span>
           </h2>
           <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
             Tu nájdete odpovede na najčastejšie otázky o prenájme stavebnej mechanizácie

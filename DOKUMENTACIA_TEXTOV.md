@@ -188,7 +188,7 @@ Každý príspevok obsahuje:
 **Popis:** "Komplexné služby pre vašu stavbu – od požičovne náradia cez zemné práce až po servis a dopravu."
 
 ### Mobilná hlavička
-**Nadpis:** "Čo pre vás **môžeme urobiť**"
+**Nadpis:** "Čo pre vás **môžeme urobiť?**"
 
 **Popis:** "Profesionálne služby pre stavebné firmy, remeselníkov aj súkromné osoby"
 

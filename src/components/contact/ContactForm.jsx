@@ -224,7 +224,7 @@ function ContactFormInner() {
     <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-2xl md:rounded-3xl p-6 md:p-12 overflow-visible">
       <div className="mb-6 md:mb-8 text-center">
         <h3 className="text-white font-black text-2xl md:text-3xl mb-3 md:mb-4">
-          Potrebujete <span className="text-orange-primary">cenovú ponuku</span>?
+          Potrebujete <span className="text-orange-primary">cenovú ponuku?</span>
         </h3>
         <p className="text-white/70 text-sm md:text-base">
           Vyplňte formulár a ozveme sa vám do 24 hodín s nezáväznou ponukou.

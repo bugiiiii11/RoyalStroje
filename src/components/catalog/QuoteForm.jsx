@@ -135,7 +135,7 @@ function QuoteFormInner() {
         <div className="flex items-center gap-2 mb-2">
           <FileText size={18} className="text-orange-primary" />
           <h3 className="text-white font-bold text-base md:text-lg">
-            Potrebujete <span className="text-orange-primary">cenovú ponuku</span>?
+            Potrebujete <span className="text-orange-primary">cenovú ponuku?</span>
           </h3>
         </div>
         {/* Description - Desktop only */}

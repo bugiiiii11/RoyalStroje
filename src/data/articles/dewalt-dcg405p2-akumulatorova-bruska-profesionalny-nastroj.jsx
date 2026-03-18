@@ -300,7 +300,7 @@ const article = {
               </div>
               <div className="bg-zinc-900/50 rounded-lg p-3">
                 <p className="text-orange-primary font-bold mb-1">Prenájom na týždeň:</p>
-                <p className="text-white/70">~80-90 € (Royal Stroje: od 13 €/deň)</p>
+                <p className="text-white/70">65-80 € (Royal Stroje: od 13 €/deň)</p>
               </div>
               <div className="bg-zinc-900/50 rounded-lg p-3">
                 <p className="text-blue-500 font-bold mb-1">Úspora:</p>
