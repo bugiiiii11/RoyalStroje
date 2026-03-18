@@ -1,0 +1,10 @@
+{
+  "name": "@royal-stroje/shared",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.0"
+  }
+}
