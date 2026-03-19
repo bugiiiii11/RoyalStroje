@@ -29,3 +29,82 @@ export default function useEquipment(filters = {}) {
 
   return { ...query, totalPages: query.data ? Math.ceil((query.data.length || 0) / pageSize) : 0 };
 }
+
+// --- Mutation helpers (standalone, call refetch after) ---
+
+export async function deleteEquipment(id) {
+  const { error } = await supabase.from('equipment').delete().eq('id', id);
+  if (error) throw error;
+}
+
+export async function toggleEquipmentStock(id, currentInStock) {
+  const { error } = await supabase
+    .from('equipment')
+    .update({ in_stock: !currentInStock })
+    .eq('id', id);
+  if (error) throw error;
+}
+
+export async function updateEquipmentStatus(id, status) {
+  const { error } = await supabase
+    .from('equipment')
+    .update({ status })
+    .eq('id', id);
+  if (error) throw error;
+}
+
+// Export all equipment as CSV (for syncing with website)
+export async function exportEquipmentCsv() {
+  const { data, error } = await supabase
+    .from('equipment')
+    .select('*, equipment_categories(name, slug), equipment_subcategories(name, slug)')
+    .eq('status', 'active')
+    .order('name');
+
+  if (error) throw error;
+
+  const header =
+    'Nazov produktu,typ produktu,Nazov obrazka,popis 1,parameter 1,popis 2,parameter 2,popis 3,parameter 3,Kategoria,Podkategoria,Cena bez dph,Cena s dph,nazov obrazka';
+
+  const rows = (data || []).map((item) => {
+    const features = Array.isArray(item.features) ? item.features : [];
+    // Parse features into label-value pairs (format: "Label - Value" or "Label")
+    const parsed = features.slice(0, 3).map((f) => {
+      const sep = f.indexOf(' - ');
+      if (sep > -1) return [f.slice(0, sep).trim(), f.slice(sep + 3).trim()];
+      return [f, ''];
+    });
+    while (parsed.length < 3) parsed.push(['', '']);
+
+    const csvVal = (v) => {
+      const s = String(v ?? '');
+      return s.includes(',') || s.includes('"') ? `"${s.replace(/"/g, '""')}"` : s;
+    };
+
+    return [
+      csvVal(item.description || item.name),
+      csvVal(item.name),
+      csvVal(item.image_path ? item.image_path.split('/').pop() : ''),
+      csvVal(parsed[0][0]),
+      csvVal(parsed[0][1]),
+      csvVal(parsed[1][0]),
+      csvVal(parsed[1][1]),
+      csvVal(parsed[2][0]),
+      csvVal(parsed[2][1]),
+      csvVal(item.equipment_categories?.name || ''),
+      csvVal(item.equipment_subcategories?.name || ''),
+      csvVal(item.daily_rate_base),
+      csvVal(item.daily_rate_vat),
+      csvVal(item.image_path ? item.image_path.split('/').pop() : ''),
+    ].join(',');
+  });
+
+  const csv = [header, ...rows].join('\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `katalog-royal-stroje-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}

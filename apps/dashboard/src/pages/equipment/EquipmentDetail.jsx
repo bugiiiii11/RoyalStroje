@@ -1,9 +1,9 @@
 import Modal from '../../components/ui/Modal';
 import Badge from '../../components/ui/Badge';
 import { formatPrice, imageUrl } from '../../lib/constants';
-import { Package } from 'lucide-react';
+import { Package, Pencil, Trash2, PackageX, PackageCheck } from 'lucide-react';
 
-export default function EquipmentDetail({ item, open, onClose }) {
+export default function EquipmentDetail({ item, open, onClose, onEdit, onDelete, onToggleStock, confirmDeleteId }) {
   if (!item) return null;
 
   const features = Array.isArray(item.features) ? item.features : [];
@@ -27,7 +27,7 @@ export default function EquipmentDetail({ item, open, onClose }) {
             <p className="text-gray-600 mt-1">{item.description}</p>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-wrap">
             <Badge
               label={item.in_stock ? 'Na sklade' : 'Nedostupné'}
               bg={item.in_stock ? 'bg-green-100' : 'bg-red-100'}
@@ -39,6 +39,12 @@ export default function EquipmentDetail({ item, open, onClose }) {
               bg="bg-gray-100"
               text="text-gray-700"
             />
+            {item.status === 'maintenance' && (
+              <Badge label="Údržba" bg="bg-orange-100" text="text-orange-700" />
+            )}
+            {item.status === 'inactive' && (
+              <Badge label="Neaktívne" bg="bg-gray-100" text="text-gray-500" />
+            )}
           </div>
 
           <div className="border-t border-gray-100 pt-4">
@@ -73,6 +79,48 @@ export default function EquipmentDetail({ item, open, onClose }) {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Action buttons */}
+      <div className="flex gap-2 mt-6 pt-4 border-t border-gray-100">
+        <button
+          onClick={() => onEdit?.(item)}
+          className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-royal-600 bg-royal-50 hover:bg-royal-100 rounded-lg transition-colors"
+        >
+          <Pencil className="w-4 h-4" />
+          Upraviť
+        </button>
+        <button
+          onClick={() => onToggleStock?.(item)}
+          className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+            item.in_stock
+              ? 'text-orange-600 bg-orange-50 hover:bg-orange-100'
+              : 'text-green-600 bg-green-50 hover:bg-green-100'
+          }`}
+        >
+          {item.in_stock ? (
+            <>
+              <PackageX className="w-4 h-4" />
+              Nedostupné
+            </>
+          ) : (
+            <>
+              <PackageCheck className="w-4 h-4" />
+              Na sklade
+            </>
+          )}
+        </button>
+        <button
+          onClick={() => onDelete?.(item)}
+          className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-colors ml-auto ${
+            confirmDeleteId === item.id
+              ? 'text-white bg-red-500 hover:bg-red-600'
+              : 'text-red-600 bg-red-50 hover:bg-red-100'
+          }`}
+        >
+          <Trash2 className="w-4 h-4" />
+          {confirmDeleteId === item.id ? 'Potvrdiť' : 'Odstrániť'}
+        </button>
       </div>
     </Modal>
   );

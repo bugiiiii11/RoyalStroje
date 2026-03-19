@@ -1,5 +1,5 @@
 // Kategórie pre Royal Stroje požičovňu
-// Aktualizované z katalogMVP.csv: 23.2.2026
+// Aktualizované z katalogMVP.csv: 19.3.2026
 
 export const categories = [
   {
@@ -22,6 +22,7 @@ export const categories = [
       { id: 'vibratory-listy-a-miesadla', name: 'Vibrátory, lišty a miešadlá', slug: 'vibratory-listy-a-miesadla' },
       { id: 'lesenie', name: 'Lešenie', slug: 'lesenie' },
       { id: 'nadrze', name: 'Nádrže', slug: 'nadrze' },
+      { id: 'krovinorezy-a-motorove-pily', name: 'Krovinorezy a motorové píly', slug: 'krovinorezy-a-motorove-pily' },
       { id: 'prislusenstvo', name: 'Príslušenstvo', slug: 'prislusenstvo' },
     ]
   },
