@@ -1,12 +1,23 @@
 import { Phone, ArrowLeft, Clock, Shield, Truck, Check, ChevronRight, MessageCircle } from 'lucide-react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { products } from '../data/products';
+import useProducts from '../hooks/useProducts';
 
 export default function ProductDetail() {
   const { productId } = useParams();
+  const { products, loading } = useProducts();
+
   // Find product by ID
   const productData = products.find(p => p.id === productId);
+
+  // Show loading while fetching from Supabase
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   // Redirect to home if product not found
   if (!productData) {

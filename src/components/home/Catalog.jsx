@@ -6,8 +6,8 @@ import {
   Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, BookOpen, ArrowRight
 } from 'lucide-react';
 import { categories } from '../../data/categories';
-import { getProductsBySubcategory, products } from '../../data/products';
 import { accessories } from '../../data/accessories';
+import useProducts, { getProductsBySubcategory } from '../../hooks/useProducts';
 import ProductCard from '../product/ProductCard';
 import { useCart } from '../../context/CartContext';
 import FAQ from './FAQ';
@@ -28,6 +28,7 @@ const categoryIcons = {
 
 export default function Catalog() {
   const location = useLocation();
+  const { products } = useProducts();
 
   // Get initial search query from URL
   const getInitialSearch = () => {
@@ -166,7 +167,7 @@ export default function Catalog() {
     });
   } else {
     // Normal category/subcategory filtering when no search
-    allProducts = getProductsBySubcategory(activeCategory, activeSubcategory);
+    allProducts = getProductsBySubcategory(products, activeCategory, activeSubcategory);
   }
 
   // Calculate pagination
