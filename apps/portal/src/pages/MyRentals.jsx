@@ -38,7 +38,7 @@ export default function MyRentals() {
   }
 
   return (
-    <div>
+    <div className="animate-page-enter">
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Moje prenájmy</h1>
 
       {rentals.length === 0 ? (
@@ -52,7 +52,7 @@ export default function MyRentals() {
             const status = RESERVATION_STATUSES[r.status];
             const isExpanded = expanded === r.id;
             return (
-              <div key={r.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+              <div key={r.id} className="card-interactive bg-white rounded-xl border border-gray-100 overflow-hidden">
                 <div
                   onClick={() => toggleExpand(r.id)}
                   className="flex items-center justify-between px-6 py-4 cursor-pointer hover:bg-gray-50"

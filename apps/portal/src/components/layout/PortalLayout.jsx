@@ -21,10 +21,10 @@ export default function PortalLayout() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-royal-500 rounded-lg flex items-center justify-center">
+            <div className="w-9 h-9 bg-gradient-to-br from-royal-500 to-royal-400 rounded-lg shadow-glow flex items-center justify-center">
               <Crown className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -41,8 +41,8 @@ export default function PortalLayout() {
                 to={item.to}
                 end={item.to === '/'}
                 className={({ isActive }) =>
-                  `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    isActive ? 'bg-royal-50 text-royal-700' : 'text-gray-600 hover:bg-gray-100'
+                  `flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    isActive ? 'bg-royal-50 text-royal-700 font-medium' : 'text-gray-600 hover:bg-gray-50 hover:text-royal-600'
                   }`
                 }
               >
@@ -69,7 +69,7 @@ export default function PortalLayout() {
               to={item.to}
               end={item.to === '/'}
               className={({ isActive }) =>
-                `flex-1 flex flex-col items-center gap-1 py-2 text-xs font-medium ${
+                `flex-1 flex flex-col items-center gap-1 py-2 text-xs font-medium transition-colors ${
                   isActive ? 'text-royal-600 border-b-2 border-royal-500' : 'text-gray-500'
                 }`
               }

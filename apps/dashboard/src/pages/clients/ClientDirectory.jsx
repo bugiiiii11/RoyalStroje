@@ -12,6 +12,7 @@ const columns = [
     key: 'company_name',
     label: 'Firma',
     sortable: true,
+    width: '25%',
     render: (row) => (
       <div>
         <p className="font-medium text-gray-900">{row.company_name}</p>
@@ -22,21 +23,25 @@ const columns = [
   {
     key: 'contact_person',
     label: 'Kontakt',
+    width: '20%',
     render: (row) => row.contact_person || '—',
   },
   {
     key: 'phone',
     label: 'Telefón',
+    width: '16%',
     render: (row) => row.phone || '—',
   },
   {
     key: 'email',
     label: 'Email',
-    render: (row) => row.email || '—',
+    width: '25%',
+    render: (row) => <span className="truncate block">{row.email || '—'}</span>,
   },
   {
     key: 'client_type',
     label: 'Typ',
+    width: '14%',
     render: (row) => {
       const type = CLIENT_TYPES[row.client_type] || CLIENT_TYPES.standard;
       const colorMap = {
@@ -61,7 +66,7 @@ export default function ClientDirectory() {
         <h1 className="text-2xl font-bold text-gray-900">Klienti</h1>
         <button
           onClick={() => navigate('/deals/new')}
-          className="flex items-center gap-2 bg-royal-500 hover:bg-royal-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+          className="flex items-center gap-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press"
         >
           <UserPlus className="w-4 h-4" />
           Nový klient
@@ -72,7 +77,7 @@ export default function ClientDirectory() {
         <SearchInput value={search} onChange={setSearch} placeholder="Hľadať podľa firmy, kontaktu, IČO..." />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card">
         <DataTable
           columns={columns}
           data={clients}

@@ -55,7 +55,7 @@ export default function NewDealStepItems({ dateFrom, dateTo, items, onDatesChang
             type="date"
             value={dateFrom}
             onChange={(e) => handleDateChange('dateFrom', e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none"
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
           />
         </div>
         <div>
@@ -65,7 +65,7 @@ export default function NewDealStepItems({ dateFrom, dateTo, items, onDatesChang
             value={dateTo}
             min={dateFrom}
             onChange={(e) => handleDateChange('dateTo', e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none"
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
           />
         </div>
         {days > 0 && (
@@ -81,7 +81,7 @@ export default function NewDealStepItems({ dateFrom, dateTo, items, onDatesChang
       </div>
 
       {search && (
-        <div className="border border-gray-200 rounded-lg mb-6 max-h-[200px] overflow-y-auto">
+        <div className="border border-gray-100 rounded-xl shadow-card mb-6 max-h-[200px] overflow-y-auto">
           {loading && <p className="text-sm text-gray-400 p-3">Načítavam...</p>}
           {!loading && equipment?.length === 0 && (
             <p className="text-sm text-gray-400 p-3">Nič nenájdené</p>
@@ -112,8 +112,8 @@ export default function NewDealStepItems({ dateFrom, dateTo, items, onDatesChang
 
       {/* Selected Items */}
       {items.length > 0 && (
-        <div className="border border-gray-200 rounded-lg">
-          <div className="px-4 py-2 bg-gray-50 border-b border-gray-200">
+        <div className="border border-gray-100 rounded-xl shadow-card">
+          <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
             <p className="text-xs font-medium text-gray-500 uppercase">Vybrané zariadenia ({items.length})</p>
           </div>
           {items.map((item, idx) => (

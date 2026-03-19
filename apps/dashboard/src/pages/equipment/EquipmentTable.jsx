@@ -7,16 +7,18 @@ const columns = [
     key: 'name',
     label: 'Názov',
     sortable: true,
+    width: '30%',
     render: (row) => (
       <div>
         <p className="font-medium text-gray-900">{row.name}</p>
-        <p className="text-xs text-gray-400">{row.description}</p>
+        <p className="text-xs text-gray-400 truncate">{row.description}</p>
       </div>
     ),
   },
   {
     key: 'category',
     label: 'Kategória',
+    width: '22%',
     render: (row) => (
       <div>
         <p className="text-sm">{row.equipment_categories?.name || '—'}</p>
@@ -28,6 +30,7 @@ const columns = [
     key: 'daily_rate_base',
     label: 'Cena/deň',
     sortable: true,
+    width: '16%',
     render: (row) => (
       <div>
         <p className="font-medium">{row.pricing_type === 'negotiable' ? 'Na požiadanie' : formatPrice(row.daily_rate_base)}</p>
@@ -40,6 +43,7 @@ const columns = [
   {
     key: 'in_stock',
     label: 'Sklad',
+    width: '14%',
     render: (row) => (
       <Badge
         label={row.in_stock ? 'Na sklade' : 'Nedostupné'}
@@ -51,6 +55,7 @@ const columns = [
   {
     key: 'status',
     label: 'Stav',
+    width: '12%',
     render: (row) => {
       const map = {
         active: { label: 'Aktívne', bg: 'bg-green-100', text: 'text-green-700' },

@@ -45,7 +45,7 @@ export default function Catalog() {
         {cart.length > 0 && (
           <button
             onClick={() => navigate('/booking', { state: { cart } })}
-            className="flex items-center gap-2 bg-royal-500 hover:bg-royal-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+            className="flex items-center gap-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-glow btn-press transition-all"
           >
             <ShoppingCart className="w-4 h-4" />
             Rezervovať ({cart.length})
@@ -60,11 +60,11 @@ export default function Catalog() {
           <input
             type="text" value={search} onChange={(e) => setSearch(e.target.value)}
             placeholder="Hľadať zariadenie..."
-            className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none"
+            className="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none"
           />
         </div>
         <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none">
+          className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none transition-all">
           <option value="">Všetky kategórie</option>
           {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
@@ -85,10 +85,10 @@ export default function Catalog() {
             const added = inCart(item.id);
 
             return (
-              <div key={item.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-                <div className="h-36 bg-gray-100 flex items-center justify-center">
+              <div key={item.id} className="card-interactive group bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                <div className="h-36 bg-gray-100 flex items-center justify-center overflow-hidden">
                   {item.image_path ? (
-                    <img src={imageUrl(item.image_path)} alt={item.name} className="h-full w-full object-contain p-3" />
+                    <img src={imageUrl(item.image_path)} alt={item.name} className="h-full w-full object-contain p-3 group-hover:scale-105 transition-transform duration-300" />
                   ) : (
                     <Package className="w-10 h-10 text-gray-300" />
                   )}
@@ -102,7 +102,7 @@ export default function Catalog() {
                     <div className="mt-3 flex items-center gap-2">
                       <span className="text-sm font-bold text-royal-600">{formatPrice(rcPrice)}/deň</span>
                       <span className="text-xs text-gray-400 line-through">{formatPrice(item.daily_rate_base)}</span>
-                      <span className="text-xs bg-royal-100 text-royal-700 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+                      <span className="text-xs bg-royal-50 text-royal-700 border border-royal-200 px-2 py-0.5 rounded-full font-semibold flex items-center gap-0.5">
                         <Crown className="w-3 h-3" />-5%
                       </span>
                     </div>
@@ -114,8 +114,8 @@ export default function Catalog() {
                     <button
                       onClick={() => !added && addToCart(item)}
                       disabled={added}
-                      className={`mt-3 w-full py-2 rounded-lg text-sm font-medium transition-colors ${
-                        added ? 'bg-green-100 text-green-700 cursor-default' : 'bg-royal-500 hover:bg-royal-600 text-white'
+                      className={`mt-3 w-full py-2 rounded-lg text-sm font-medium transition-all ${
+                        added ? 'bg-green-100 text-green-700 cursor-default' : 'bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white shadow-glow btn-press'
                       }`}
                     >
                       {added ? 'Pridané' : 'Pridať do rezervácie'}

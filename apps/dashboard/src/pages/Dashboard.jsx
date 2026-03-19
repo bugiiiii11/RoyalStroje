@@ -13,7 +13,7 @@ function DealCard({ deal, onClick }) {
   return (
     <div
       onClick={() => onClick(deal)}
-      className="bg-white rounded-lg border border-gray-200 p-3 cursor-pointer hover:shadow-sm hover:border-gray-300 transition-all"
+      className="bg-white rounded-xl border border-gray-100 p-3.5 cursor-pointer card-interactive group"
     >
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs font-mono font-medium text-gray-500">{deal.reservation_number}</span>
@@ -41,7 +41,7 @@ function PipelineColumn({ status, deals, onDealClick }) {
       <div className="flex items-center gap-2 mb-3 px-1">
         <div className={`w-2 h-2 rounded-full ${colors.dot}`} />
         <h3 className="text-sm font-medium text-gray-700">{info.label}</h3>
-        <span className="text-xs text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-full">
+        <span className="text-xs text-gray-500 bg-gray-50 px-2 py-0.5 rounded-full font-medium">
           {deals.length}
         </span>
       </div>
@@ -117,7 +117,7 @@ export default function Dashboard() {
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
         <button
           onClick={() => navigate('/deals/new')}
-          className="flex items-center gap-2 bg-royal-500 hover:bg-royal-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+          className="flex items-center gap-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press"
         >
           <PlusCircle className="w-4 h-4" />
           Nový obchod
@@ -153,7 +153,7 @@ export default function Dashboard() {
       </div>
 
       {/* Pipeline Kanban */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-6 mb-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Pipeline obchodov</h2>
         {dealsLoading ? (
           <div className="flex justify-center py-8"><Spinner /></div>
@@ -172,7 +172,7 @@ export default function Dashboard() {
       </div>
 
       {/* Today's Schedule */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Dnešný rozvrh</h2>
         {dealsLoading ? (
           <div className="flex justify-center py-8"><Spinner /></div>

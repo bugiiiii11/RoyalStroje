@@ -14,13 +14,13 @@ export default function NewDealStepConfirm({ reservation }) {
       <div className="flex gap-3">
         <button
           onClick={() => navigate(`/deals/${reservation?.id}`)}
-          className="bg-royal-500 hover:bg-royal-600 text-white font-medium px-6 py-2.5 rounded-lg transition-colors"
+          className="bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white font-semibold px-6 py-2.5 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press"
         >
           Zobraziť detail
         </button>
         <button
           onClick={() => navigate('/deals/new', { replace: true })}
-          className="border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium px-6 py-2.5 rounded-lg transition-colors"
+          className="border border-gray-200 hover:bg-gray-50 text-gray-700 font-medium px-6 py-2.5 rounded-full transition-colors"
         >
           Nový obchod
         </button>

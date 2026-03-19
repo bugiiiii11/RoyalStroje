@@ -26,9 +26,9 @@ export default function Home() {
   }, [client]);
 
   return (
-    <div>
+    <div className="animate-page-enter">
       {/* Welcome */}
-      <div className="bg-gradient-to-r from-royal-500 to-royal-600 rounded-2xl p-6 md:p-8 text-white mb-6">
+      <div className="bg-gradient-to-r from-royal-500 to-royal-400 rounded-2xl p-6 md:p-8 text-white mb-6">
         <div className="flex items-center gap-3 mb-3">
           <Crown className="w-8 h-8" />
           <div>
@@ -56,7 +56,7 @@ export default function Home() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <button
           onClick={() => navigate('/catalog')}
-          className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl p-5 hover:border-royal-300 hover:shadow-sm transition-all text-left"
+          className="card-interactive group shine-effect flex items-center gap-3 bg-white border border-gray-100 rounded-xl p-5 hover:border-royal-300 hover:shadow-sm transition-all text-left"
         >
           <div className="w-10 h-10 bg-royal-100 rounded-lg flex items-center justify-center">
             <Package className="w-5 h-5 text-royal-600" />
@@ -69,7 +69,7 @@ export default function Home() {
         </button>
         <button
           onClick={() => navigate('/catalog')}
-          className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl p-5 hover:border-royal-300 hover:shadow-sm transition-all text-left"
+          className="card-interactive group flex items-center gap-3 bg-white border border-gray-100 rounded-xl p-5 hover:border-royal-300 hover:shadow-sm transition-all text-left"
         >
           <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
             <PlusCircle className="w-5 h-5 text-green-600" />
@@ -83,7 +83,7 @@ export default function Home() {
       </div>
 
       {/* Active Rentals */}
-      <div className="bg-white rounded-xl border border-gray-200">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card">
         <div className="px-6 py-4 border-b border-gray-100">
           <h2 className="text-lg font-semibold text-gray-900">Aktívne prenájmy</h2>
         </div>

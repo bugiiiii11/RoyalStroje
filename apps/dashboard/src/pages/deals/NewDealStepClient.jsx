@@ -27,7 +27,7 @@ export default function NewDealStepClient({ selected, onSelect }) {
         </div>
         <button
           onClick={() => setShowNew(!showNew)}
-          className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
         >
           <UserPlus className="w-4 h-4" />
           Nový klient
@@ -35,39 +35,39 @@ export default function NewDealStepClient({ selected, onSelect }) {
       </div>
 
       {showNew && (
-        <div className="bg-gray-50 rounded-lg p-4 mb-4 space-y-3">
+        <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4 space-y-3">
           <h3 className="text-sm font-medium text-gray-700">Nový klient</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <input
               placeholder="Názov firmy *"
               value={newClient.company_name}
               onChange={(e) => setNewClient(p => ({ ...p, company_name: e.target.value }))}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none"
+              className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
             />
             <input
               placeholder="Kontaktná osoba"
               value={newClient.contact_person}
               onChange={(e) => setNewClient(p => ({ ...p, contact_person: e.target.value }))}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none"
+              className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
             />
             <input
               placeholder="Email"
               type="email"
               value={newClient.email}
               onChange={(e) => setNewClient(p => ({ ...p, email: e.target.value }))}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none"
+              className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
             />
             <input
               placeholder="Telefón"
               value={newClient.phone}
               onChange={(e) => setNewClient(p => ({ ...p, phone: e.target.value }))}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none"
+              className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
             />
           </div>
           <button
             onClick={handleNewClient}
             disabled={!newClient.company_name.trim()}
-            className="bg-royal-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-royal-600 disabled:opacity-50 transition-colors"
+            className="bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-glow hover:shadow-glow-md disabled:opacity-50 transition-all btn-press"
           >
             Vybrať nového klienta
           </button>
@@ -87,7 +87,7 @@ export default function NewDealStepClient({ selected, onSelect }) {
               key={client.id}
               onClick={() => onSelect(client)}
               className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all ${
-                isSelected ? 'border-royal-500 bg-royal-50 ring-1 ring-royal-500' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                isSelected ? 'border-royal-500 bg-royal-50 ring-1 ring-royal-500' : 'border-gray-100 hover:border-gray-300 hover:bg-gray-50'
               }`}
             >
               <div>

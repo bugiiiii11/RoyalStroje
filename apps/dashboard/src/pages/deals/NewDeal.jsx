@@ -14,8 +14,8 @@ function StepIndicator({ current }) {
       {STEPS.map((label, i) => (
         <div key={label} className="flex items-center gap-2">
           <div className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${
-            i < current ? 'bg-green-500 text-white' :
-            i === current ? 'bg-royal-500 text-white' :
+            i < current ? 'bg-royal-500 text-white' :
+            i === current ? 'bg-gradient-to-r from-royal-500 to-royal-400 text-white shadow-glow' :
             'bg-gray-200 text-gray-500'
           }`}>
             {i < current ? '✓' : i + 1}
@@ -71,7 +71,7 @@ export default function NewDeal() {
         clientId = newClient.id;
       }
 
-      // Create reservation
+      // Create reservation with pre-calculated financials
       const { data: reservation, error: resErr } = await supabase
         .from('reservations')
         .insert({
@@ -83,6 +83,10 @@ export default function NewDeal() {
           delivery_address: finalData.deliveryAddress || null,
           delivery_fee: finalData.deliveryFee || 0,
           discount_percent: finalData.discountPercent || 0,
+          discount_amount: finalData.discountAmount || 0,
+          subtotal: finalData.subtotal || 0,
+          vat_amount: finalData.vatAmount || 0,
+          total: finalData.total || 0,
           deposit_required: finalData.client.client_type !== 'royal_card',
           notes: finalData.notes || null,
           internal_notes: finalData.internalNotes || null,
@@ -166,14 +170,14 @@ export default function NewDeal() {
           <button
             onClick={() => setStep(Math.max(0, step - 1))}
             disabled={step === 0}
-            className="px-6 py-2 border border-gray-300 rounded-lg text-sm font-medium hover:bg-gray-50 disabled:opacity-30 transition-colors"
+            className="px-6 py-2 border border-gray-200 rounded-full text-sm font-medium hover:bg-gray-50 disabled:opacity-30 transition-colors"
           >
             Späť
           </button>
           <button
             onClick={() => setStep(step + 1)}
             disabled={!canNext()}
-            className="px-6 py-2 bg-royal-500 text-white rounded-lg text-sm font-medium hover:bg-royal-600 disabled:opacity-50 transition-colors"
+            className="px-6 py-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white rounded-full text-sm font-semibold shadow-glow hover:shadow-glow-md disabled:opacity-50 transition-all btn-press"
           >
             Ďalej
           </button>

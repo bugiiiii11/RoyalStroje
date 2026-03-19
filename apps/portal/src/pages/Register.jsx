@@ -71,16 +71,16 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-royal-500 rounded-xl mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-royal-500 to-royal-400 rounded-xl shadow-glow mb-4">
             <Crown className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Registrácia Royal Card</h1>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        <div className="bg-white rounded-2xl shadow-card border border-gray-100 p-8">
           {error && (
             <div className="mb-4 flex items-center gap-2 bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />{error}
@@ -94,10 +94,10 @@ export default function Register() {
                 value={inviteCode}
                 onChange={(e) => setInviteCode(e.target.value)}
                 placeholder="RC-XXXXXXXX"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-center text-lg font-mono focus:ring-2 focus:ring-royal-500 outline-none mb-4"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-center text-lg font-mono focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none mb-4"
               />
               <button onClick={validateCode} disabled={loading || !inviteCode.trim()}
-                className="w-full bg-royal-500 hover:bg-royal-600 text-white font-medium py-2.5 rounded-lg disabled:opacity-50 transition-colors">
+                className="w-full bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white font-semibold py-2.5 rounded-full shadow-glow btn-press disabled:opacity-50 transition-all">
                 {loading ? 'Overujem...' : 'Overiť kód'}
               </button>
             </div>
@@ -107,17 +107,17 @@ export default function Register() {
             <form onSubmit={handleRegister} className="space-y-4">
               <p className="text-sm text-gray-500 mb-2">Doplňte údaje pre vytvorenie účtu</p>
               <input value={form.email} onChange={(e) => setForm(f => ({ ...f, email: e.target.value }))} type="email" required
-                placeholder="Email *" className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none" />
+                placeholder="Email *" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none" />
               <input value={form.password} onChange={(e) => setForm(f => ({ ...f, password: e.target.value }))} type="password" required minLength={6}
-                placeholder="Heslo (min. 6 znakov) *" className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none" />
+                placeholder="Heslo (min. 6 znakov) *" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none" />
               <input value={form.company_name} onChange={(e) => setForm(f => ({ ...f, company_name: e.target.value }))} required
-                placeholder="Názov firmy *" className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none" />
+                placeholder="Názov firmy *" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none" />
               <input value={form.contact_person} onChange={(e) => setForm(f => ({ ...f, contact_person: e.target.value }))}
-                placeholder="Kontaktná osoba" className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none" />
+                placeholder="Kontaktná osoba" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none" />
               <input value={form.phone} onChange={(e) => setForm(f => ({ ...f, phone: e.target.value }))}
-                placeholder="Telefón" className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none" />
+                placeholder="Telefón" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none" />
               <button type="submit" disabled={loading}
-                className="w-full bg-royal-500 hover:bg-royal-600 text-white font-medium py-2.5 rounded-lg disabled:opacity-50 transition-colors">
+                className="w-full bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white font-semibold py-2.5 rounded-full shadow-glow btn-press disabled:opacity-50 transition-all">
                 {loading ? 'Registrujem...' : 'Zaregistrovať sa'}
               </button>
             </form>
@@ -129,7 +129,7 @@ export default function Register() {
               <h2 className="text-xl font-bold text-gray-900 mb-2">Registrácia úspešná!</h2>
               <p className="text-gray-500 mb-6">Teraz sa môžete prihlásiť do portálu.</p>
               <button onClick={() => navigate('/login')}
-                className="bg-royal-500 hover:bg-royal-600 text-white font-medium px-6 py-2.5 rounded-lg transition-colors">
+                className="bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white font-semibold px-6 py-2.5 rounded-full shadow-glow btn-press transition-all">
                 Prihlásiť sa
               </button>
             </div>

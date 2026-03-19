@@ -23,7 +23,7 @@ export default function EquipmentFilters({ filters, onChange }) {
       <select
         value={filters.categoryId || ''}
         onChange={(e) => update('categoryId', e.target.value || null)}
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none"
+        className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
       >
         <option value="">Všetky kategórie</option>
         {(categories || []).map((c) => (
@@ -34,7 +34,7 @@ export default function EquipmentFilters({ filters, onChange }) {
       <select
         value={filters.status || ''}
         onChange={(e) => update('status', e.target.value || null)}
-        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none"
+        className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
       >
         <option value="">Všetky stavy</option>
         <option value="active">Aktívne</option>

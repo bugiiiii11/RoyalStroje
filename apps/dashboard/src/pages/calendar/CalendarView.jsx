@@ -105,13 +105,13 @@ export default function CalendarView() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Kalendár</h1>
         <div className="flex items-center gap-2">
-          <button onClick={prevMonth} className="p-2 hover:bg-gray-100 rounded-lg">
+          <button onClick={prevMonth} className="p-2 hover:bg-royal-50 hover:text-royal-600 rounded-lg transition-colors">
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <button onClick={goToday} className="px-3 py-1.5 text-sm font-medium hover:bg-gray-100 rounded-lg">
+          <button onClick={goToday} className="px-3 py-1.5 text-sm font-medium hover:bg-royal-50 hover:text-royal-600 rounded-lg transition-colors">
             Dnes
           </button>
-          <button onClick={nextMonth} className="p-2 hover:bg-gray-100 rounded-lg">
+          <button onClick={nextMonth} className="p-2 hover:bg-royal-50 hover:text-royal-600 rounded-lg transition-colors">
             <ChevronRight className="w-5 h-5" />
           </button>
           <span className="text-lg font-semibold text-gray-900 ml-2">
@@ -120,9 +120,9 @@ export default function CalendarView() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card overflow-hidden">
         {/* Day headers */}
-        <div className="grid grid-cols-7 border-b border-gray-200">
+        <div className="grid grid-cols-7 border-b border-gray-100">
           {DAY_NAMES.map((d) => (
             <div key={d} className="text-center py-2 text-xs font-medium text-gray-500 uppercase">
               {d}
@@ -143,7 +143,7 @@ export default function CalendarView() {
                 <div
                   key={idx}
                   className={`min-h-[80px] border-b border-r border-gray-100 p-1 ${
-                    !day.isCurrentMonth ? 'bg-gray-50' : ''
+                    isToday ? 'bg-royal-50' : !day.isCurrentMonth ? 'bg-gray-50' : ''
                   }`}
                 >
                   <span className={`text-xs font-medium inline-flex items-center justify-center w-6 h-6 rounded-full ${

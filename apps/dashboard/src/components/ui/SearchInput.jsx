@@ -24,7 +24,7 @@ export default function SearchInput({ value, onChange, placeholder = 'Hľadať..
         value={local}
         onChange={handleChange}
         placeholder={placeholder}
-        className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 focus:border-royal-500 outline-none"
+        className="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none transition-all"
       />
     </div>
   );

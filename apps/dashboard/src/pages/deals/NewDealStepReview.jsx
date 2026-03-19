@@ -40,7 +40,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
       <p className="text-sm text-gray-500 mb-6">Skontrolujte údaje a potvrďte vytvorenie</p>
 
       {/* Client */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-4">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">
         <p className="text-xs font-medium text-gray-500 uppercase mb-2">Klient</p>
         <p className="font-medium text-gray-900">{client?.company_name}</p>
         <p className="text-sm text-gray-500">{client?.contact_person} · {client?.phone || client?.email}</p>
@@ -50,7 +50,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
       </div>
 
       {/* Dates */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-4">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">
         <p className="text-xs font-medium text-gray-500 uppercase mb-2">Termín</p>
         <p className="text-sm text-gray-900">
           {formatDate(dateFrom)} – {formatDate(dateTo)} ({days} {days === 1 ? 'deň' : days < 5 ? 'dni' : 'dní'})
@@ -58,8 +58,8 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
       </div>
 
       {/* Items */}
-      <div className="border border-gray-200 rounded-lg mb-4">
-        <div className="px-4 py-2 bg-gray-50 border-b border-gray-200">
+      <div className="border border-gray-100 rounded-xl shadow-card mb-4">
+        <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
           <p className="text-xs font-medium text-gray-500 uppercase">Zariadenia ({items.length})</p>
         </div>
         {items.map((item) => (
@@ -74,7 +74,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
       </div>
 
       {/* Delivery */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-4">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">
         <label className="flex items-center gap-2 text-sm cursor-pointer">
           <input
             type="checkbox"
@@ -90,7 +90,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
               placeholder="Adresa dovozu"
               value={deliveryAddress}
               onChange={(e) => setDeliveryAddress(e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500"
+              className="px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow"
             />
             <div>
               <input
@@ -98,7 +98,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
                 placeholder="Poplatok za dovoz"
                 value={deliveryFee || ''}
                 onChange={(e) => setDeliveryFee(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500 w-full"
+                className="px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow w-full"
               />
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow"
           />
         </div>
         <div>
@@ -122,13 +122,13 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
             value={internalNotes}
             onChange={(e) => setInternalNotes(e.target.value)}
             rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow"
           />
         </div>
       </div>
 
       {/* Financials */}
-      <div className="border border-gray-200 rounded-lg p-4 mb-6">
+      <div className="border border-gray-100 rounded-xl shadow-card p-4 mb-6">
         <div className="space-y-2 text-sm">
           <div className="flex justify-between"><span className="text-gray-500">Medzisúčet</span><span>{formatPrice(subtotal)}</span></div>
           {discountPercent > 0 && (
@@ -138,7 +138,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
             <div className="flex justify-between"><span className="text-gray-500">Dovoz</span><span>{formatPrice(deliveryFeeNum)}</span></div>
           )}
           <div className="flex justify-between"><span className="text-gray-500">DPH (23%)</span><span>{formatPrice(vatAmount)}</span></div>
-          <div className="flex justify-between pt-2 border-t border-gray-200 text-lg font-bold">
+          <div className="flex justify-between pt-2 border-t border-gray-100 text-lg font-bold">
             <span>Celkom</span><span>{formatPrice(total)}</span>
           </div>
         </div>
@@ -147,7 +147,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
       <button
         onClick={handleSubmit}
         disabled={submitting}
-        className="w-full bg-royal-500 hover:bg-royal-600 text-white font-medium py-3 rounded-lg transition-colors disabled:opacity-50"
+        className="w-full bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white font-semibold py-3 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50"
       >
         {submitting ? 'Vytvára sa...' : 'Vytvoriť obchod'}
       </button>

@@ -63,9 +63,9 @@ export default function InvoiceDetail() {
     }
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (invoice) {
-      generateInvoicePdf(invoice, invoice.reservations, items, invoice.reservations?.clients);
+      await generateInvoicePdf(invoice, invoice.reservations, items, invoice.reservations?.clients);
     }
   };
 
@@ -95,16 +95,16 @@ export default function InvoiceDetail() {
         </div>
 
         <button onClick={handleDownload}
-          className="flex items-center gap-1.5 px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 transition-colors">
+          className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all">
           <FileDown className="w-4 h-4" />Stiahnuť PDF
         </button>
 
         {validNext.map((next) => (
           <button key={next} onClick={() => setConfirmStatus(next)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              next === 'cancelled' ? 'border border-red-300 text-red-600 hover:bg-red-50' :
-              next === 'paid' ? 'bg-green-600 text-white hover:bg-green-700' :
-              'bg-royal-500 text-white hover:bg-royal-600'
+            className={`px-4 py-2 text-sm font-medium transition-all ${
+              next === 'cancelled' ? 'border border-red-300 text-red-600 hover:bg-red-50 rounded-lg' :
+              next === 'paid' ? 'bg-green-600 text-white hover:bg-green-700 rounded-full' :
+              'bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white rounded-full shadow-glow hover:shadow-glow-md btn-press'
             }`}>
             → {STATUS_MAP[next]?.label}
           </button>
@@ -131,14 +131,14 @@ export default function InvoiceDetail() {
           <ContentCard title="Položky">
             {items && items.length > 0 ? (
               <table className="w-full text-sm">
-                <thead><tr className="border-b border-gray-200">
+                <thead><tr className="border-b border-gray-100">
                   <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Zariadenie</th>
                   <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Ks</th>
                   <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Sadzba</th>
                   <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Dní</th>
                   <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Spolu</th>
                 </tr></thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-gray-50">
                   {items.map(item => (
                     <tr key={item.id}>
                       <td className="px-4 py-3 font-medium">{item.equipment?.name || '—'}</td>
@@ -166,7 +166,7 @@ export default function InvoiceDetail() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between"><span className="text-gray-500">Medzisúčet</span><span>{formatPrice(invoice.subtotal)}</span></div>
               <div className="flex justify-between"><span className="text-gray-500">DPH ({invoice.vat_rate}%)</span><span>{formatPrice(invoice.vat_amount)}</span></div>
-              <div className="flex justify-between pt-2 border-t border-gray-200 text-lg font-bold"><span>Celkom</span><span>{formatPrice(invoice.total)}</span></div>
+              <div className="flex justify-between pt-2 border-t border-gray-100 text-lg font-bold"><span>Celkom</span><span>{formatPrice(invoice.total)}</span></div>
             </div>
           </ContentCard>
 
@@ -188,9 +188,9 @@ export default function InvoiceDetail() {
           Zmeniť stav na <strong>{STATUS_MAP[confirmStatus]?.label}</strong>?
         </p>
         <div className="flex justify-end gap-3">
-          <button onClick={() => setConfirmStatus(null)} className="px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">Zrušiť</button>
+          <button onClick={() => setConfirmStatus(null)} className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all">Zrušiť</button>
           <button onClick={() => handleStatusChange(confirmStatus)} disabled={transitioning}
-            className="px-4 py-2 bg-royal-500 text-white rounded-lg text-sm font-medium hover:bg-royal-600 disabled:opacity-50">
+            className="px-4 py-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white rounded-full text-sm font-medium shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50">
             {transitioning ? 'Mení sa...' : 'Potvrdiť'}
           </button>
         </div>

@@ -26,17 +26,17 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-royal-500 rounded-xl mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-royal-500 to-royal-400 rounded-xl shadow-glow mb-4">
             <Crown className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Royal Card</h1>
           <p className="text-gray-500 mt-1">Klientský portál</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-card border border-gray-100 p-8">
           {error && (
             <div className="mb-4 flex items-center gap-2 bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />{error}
@@ -47,17 +47,17 @@ export default function Login() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 focus:border-royal-500 outline-none" />
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Heslo</label>
               <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-royal-500 focus:border-royal-500 outline-none" />
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow outline-none" />
             </div>
           </div>
 
           <button type="submit" disabled={loading}
-            className="mt-6 w-full flex items-center justify-center gap-2 bg-royal-500 hover:bg-royal-600 text-white font-medium py-2.5 rounded-lg transition-colors disabled:opacity-50">
+            className="mt-6 w-full flex items-center justify-center gap-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white font-semibold py-2.5 rounded-full shadow-glow btn-press transition-all disabled:opacity-50">
             {loading ? <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" /> : <><LogIn className="w-4 h-4" />Prihlásiť sa</>}
           </button>
 

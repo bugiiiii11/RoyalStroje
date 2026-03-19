@@ -70,19 +70,19 @@ export default function ClientDetail() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-gray-200">
+                    <tr className="border-b border-gray-100">
                       <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Číslo</th>
                       <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Stav</th>
                       <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Termín</th>
                       <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Celkom</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-gray-50">
                     {deals.map((deal) => (
                       <tr
                         key={deal.id}
                         onClick={() => navigate(`/deals/${deal.id}`)}
-                        className="cursor-pointer hover:bg-gray-50"
+                        className="cursor-pointer table-row-hover"
                       >
                         <td className="px-4 py-3 font-mono text-sm font-medium">{deal.reservation_number}</td>
                         <td className="px-4 py-3"><StatusBadge status={deal.status} /></td>
@@ -181,7 +181,7 @@ export default function ClientDetail() {
                     }
                   }}
                   disabled={inviting}
-                  className="flex items-center gap-2 w-full justify-center bg-royal-500 hover:bg-royal-600 text-white text-sm font-medium py-2.5 rounded-lg transition-colors disabled:opacity-50"
+                  className="flex items-center gap-2 w-full justify-center bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold py-2.5 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50"
                 >
                   <Crown className="w-4 h-4" />
                   {inviting ? 'Vytvára sa...' : 'Pozvať do Royal Card'}

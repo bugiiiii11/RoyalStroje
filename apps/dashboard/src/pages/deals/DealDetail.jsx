@@ -104,8 +104,8 @@ export default function DealDetail() {
         <div className="flex gap-2">
           {reservation.status !== 'inquiry' && (
             <button
-              onClick={() => generateQuotePdf(reservation, items, client)}
-              className="flex items-center gap-1.5 px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 transition-colors"
+              onClick={async () => await generateQuotePdf(reservation, items, client)}
+              className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
               title="Stiahnuť cenovú ponuku"
             >
               <FileDown className="w-4 h-4" />
@@ -113,8 +113,8 @@ export default function DealDetail() {
             </button>
           )}
           <button
-            onClick={() => generateAgreementPdf(reservation, items, client)}
-            className="flex items-center gap-1.5 px-3 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 transition-colors"
+            onClick={async () => await generateAgreementPdf(reservation, items, client)}
+            className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
             title="Stiahnuť zmluvu"
           >
             <FileText className="w-4 h-4" />
@@ -142,10 +142,10 @@ export default function DealDetail() {
                 <button
                   key={nextStatus}
                   onClick={() => setConfirmStatus(nextStatus)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 text-sm font-medium transition-all ${
                     isCancelled
-                      ? 'border border-red-300 text-red-600 hover:bg-red-50'
-                      : 'bg-royal-500 text-white hover:bg-royal-600'
+                      ? 'border border-red-300 text-red-600 hover:bg-red-50 rounded-lg'
+                      : 'bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white rounded-full shadow-glow hover:shadow-glow-md btn-press'
                   }`}
                 >
                   → {info.label}
@@ -268,14 +268,14 @@ export default function DealDetail() {
         <div className="flex justify-end gap-3">
           <button
             onClick={() => setConfirmStatus(null)}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50"
+            className="px-4 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
           >
             Zrušiť
           </button>
           <button
             onClick={() => handleStatusChange(confirmStatus)}
             disabled={transitioning}
-            className="px-4 py-2 bg-royal-500 text-white rounded-lg text-sm font-medium hover:bg-royal-600 disabled:opacity-50"
+            className="px-4 py-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white rounded-full text-sm font-medium shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50"
           >
             {transitioning ? 'Mení sa...' : 'Potvrdiť'}
           </button>

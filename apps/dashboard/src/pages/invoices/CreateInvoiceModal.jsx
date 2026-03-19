@@ -71,8 +71,8 @@ export default function CreateInvoiceModal({ open, onClose, onCreated, reservati
             { value: 'credit_note', label: 'Dobropis' },
           ].map((t) => (
             <button key={t.value} onClick={() => setType(t.value)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                type === t.value ? 'bg-royal-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                type === t.value ? 'bg-royal-50 text-royal-600 border border-royal-200' : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-transparent'
               }`}>
               {t.label}
             </button>
@@ -95,7 +95,7 @@ export default function CreateInvoiceModal({ open, onClose, onCreated, reservati
           ) : (
             <div className="space-y-2">
               <SearchInput value={search} onChange={setSearch} placeholder="Hľadať obchod..." />
-              <div className="max-h-[200px] overflow-y-auto border border-gray-200 rounded-lg">
+              <div className="max-h-[200px] overflow-y-auto border border-gray-100 rounded-xl shadow-card">
                 {(reservations || [])
                   .filter(r => !search || r.reservation_number.includes(search) || r.clients?.company_name?.toLowerCase().includes(search.toLowerCase()))
                   .map(r => (
@@ -119,14 +119,14 @@ export default function CreateInvoiceModal({ open, onClose, onCreated, reservati
         <label className="block text-xs font-medium text-gray-500 mb-1">Splatnosť</label>
         <input type="date" value={customDueDate || dueDateStr}
           onChange={(e) => setCustomDueDate(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none" />
+          className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow" />
       </div>
 
       {/* Notes */}
       <div className="mb-4">
         <label className="block text-xs font-medium text-gray-500 mb-1">Poznámky</label>
         <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={2}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none" />
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow" />
       </div>
 
       {/* Summary */}
@@ -134,14 +134,14 @@ export default function CreateInvoiceModal({ open, onClose, onCreated, reservati
         <div className="bg-gray-50 rounded-lg p-4 mb-4 text-sm">
           <div className="flex justify-between"><span className="text-gray-500">Medzisúčet</span><span>{formatPrice(activeRes.subtotal)}</span></div>
           <div className="flex justify-between"><span className="text-gray-500">DPH (23%)</span><span>{formatPrice(activeRes.vat_amount)}</span></div>
-          <div className="flex justify-between pt-2 border-t border-gray-200 font-bold text-lg mt-2">
+          <div className="flex justify-between pt-2 border-t border-gray-100 font-bold text-lg mt-2">
             <span>Celkom</span><span>{formatPrice(activeRes.total)}</span>
           </div>
         </div>
       )}
 
       <button onClick={handleSubmit} disabled={submitting || !activeRes}
-        className="w-full bg-royal-500 hover:bg-royal-600 text-white font-medium py-2.5 rounded-lg transition-colors disabled:opacity-50">
+        className="w-full bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white font-semibold py-2.5 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50">
         {submitting ? 'Vytvára sa...' : 'Vystaviť faktúru'}
       </button>
     </Modal>

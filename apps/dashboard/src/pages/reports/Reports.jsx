@@ -35,7 +35,7 @@ function RankingTable({ data, columns }) {
   return (
     <table className="w-full text-sm">
       <thead>
-        <tr className="border-b border-gray-200">
+        <tr className="border-b border-gray-100">
           <th className="text-left px-3 py-2 text-xs font-medium text-gray-500 uppercase w-8">#</th>
           {columns.map(c => (
             <th key={c.key} className={`${c.align === 'right' ? 'text-right' : 'text-left'} px-3 py-2 text-xs font-medium text-gray-500 uppercase`}>
@@ -44,7 +44,7 @@ function RankingTable({ data, columns }) {
           ))}
         </tr>
       </thead>
-      <tbody className="divide-y divide-gray-100">
+      <tbody className="divide-y divide-gray-50">
         {data.map((row, i) => (
           <tr key={i}>
             <td className="px-3 py-2 text-gray-400">{i + 1}</td>

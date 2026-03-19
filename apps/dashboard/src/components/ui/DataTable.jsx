@@ -13,31 +13,36 @@ export default function DataTable({ columns, data, loading, sortBy, sortAsc, onS
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-sm">
+      <table className="w-full text-sm table-fixed">
+        <colgroup>
+          {columns.map((col) => (
+            <col key={col.key} style={col.width ? { width: col.width } : undefined} />
+          ))}
+        </colgroup>
         <thead>
-          <tr className="border-b border-gray-200">
+          <tr className="border-b border-gray-100">
             {columns.map((col) => (
               <th
                 key={col.key}
-                className={`text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ${col.sortable ? 'cursor-pointer hover:text-gray-700 select-none' : ''}`}
+                className={`text-left px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider ${col.sortable ? 'cursor-pointer hover:text-gray-600 select-none transition-colors' : ''}`}
                 onClick={() => col.sortable && onSort?.(col.key)}
               >
                 <div className="flex items-center gap-1">
                   {col.label}
                   {col.sortable && sortBy === col.key && (
-                    sortAsc ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />
+                    sortAsc ? <ChevronUp className="w-3 h-3 text-royal-500" /> : <ChevronDown className="w-3 h-3 text-royal-500" />
                   )}
                 </div>
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100">
+        <tbody className="divide-y divide-gray-50">
           {data.map((row, i) => (
             <tr
               key={row.id || i}
               onClick={() => onRowClick?.(row)}
-              className={onRowClick ? 'cursor-pointer hover:bg-gray-50 transition-colors' : ''}
+              className={onRowClick ? 'cursor-pointer table-row-hover' : ''}
             >
               {columns.map((col) => (
                 <td key={col.key} className="px-4 py-3 text-gray-700">

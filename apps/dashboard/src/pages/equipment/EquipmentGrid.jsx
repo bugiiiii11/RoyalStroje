@@ -19,7 +19,7 @@ export default function EquipmentGrid({ data, loading, onItemClick }) {
         <div
           key={item.id}
           onClick={() => onItemClick?.(item)}
-          className="bg-white rounded-xl border border-gray-200 overflow-hidden cursor-pointer hover:shadow-md hover:border-gray-300 transition-all"
+          className="bg-white rounded-xl border border-gray-100 overflow-hidden cursor-pointer card-interactive group"
         >
           <div className="h-40 bg-gray-100 flex items-center justify-center">
             {item.image_path ? (

@@ -23,7 +23,7 @@ export default function DealTimeline({ reservationId }) {
       {logs.map((log) => (
         <div key={log.id} className="flex items-start gap-3">
           <div className="mt-0.5">
-            <Clock className="w-4 h-4 text-gray-400" />
+            <Clock className="w-4 h-4 text-royal-500" />
           </div>
           <div>
             <p className="text-sm text-gray-700">

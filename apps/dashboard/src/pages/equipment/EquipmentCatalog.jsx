@@ -31,13 +31,13 @@ export default function EquipmentCatalog() {
         <div className="flex items-center gap-1 bg-gray-100 rounded-lg p-1">
           <button
             onClick={() => setViewMode('table')}
-            className={`p-1.5 rounded ${viewMode === 'table' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
+            className={`p-1.5 rounded ${viewMode === 'table' ? 'bg-royal-50 text-royal-600 shadow-sm' : 'hover:bg-gray-200'}`}
           >
             <List className="w-4 h-4" />
           </button>
           <button
             onClick={() => setViewMode('grid')}
-            className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}`}
+            className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-royal-50 text-royal-600 shadow-sm' : 'hover:bg-gray-200'}`}
           >
             <LayoutGrid className="w-4 h-4" />
           </button>
@@ -48,7 +48,7 @@ export default function EquipmentCatalog() {
         <EquipmentFilters filters={filters} onChange={setFilters} />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card">
         {viewMode === 'table' ? (
           <EquipmentTable
             data={data}

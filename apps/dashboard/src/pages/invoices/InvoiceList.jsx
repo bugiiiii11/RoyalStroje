@@ -25,11 +25,13 @@ const columns = [
   {
     key: 'invoice_number',
     label: 'Číslo',
+    width: '14%',
     render: (row) => <span className="font-mono font-medium">{row.invoice_number}</span>,
   },
   {
     key: 'type',
     label: 'Typ',
+    width: '10%',
     render: (row) => {
       const t = TYPE_MAP[row.type] || TYPE_MAP.invoice;
       return <Badge label={t.label} bg={t.bg} text={t.text} />;
@@ -38,6 +40,7 @@ const columns = [
   {
     key: 'reservation',
     label: 'Obchod / Klient',
+    width: '20%',
     render: (row) => (
       <div>
         <p className="text-sm font-medium">{row.reservations?.reservation_number || '—'}</p>
@@ -48,11 +51,13 @@ const columns = [
   {
     key: 'issue_date',
     label: 'Vystavená',
+    width: '12%',
     render: (row) => formatDate(row.issue_date),
   },
   {
     key: 'due_date',
     label: 'Splatnosť',
+    width: '12%',
     render: (row) => {
       const isOverdue = row.status !== 'paid' && row.status !== 'cancelled' && new Date(row.due_date) < new Date();
       return <span className={isOverdue ? 'text-red-600 font-medium' : ''}>{formatDate(row.due_date)}</span>;
@@ -61,11 +66,13 @@ const columns = [
   {
     key: 'total',
     label: 'Celkom',
+    width: '14%',
     render: (row) => <span className="font-semibold">{formatPrice(row.total)}</span>,
   },
   {
     key: 'status',
     label: 'Stav',
+    width: '10%',
     render: (row) => {
       const s = STATUS_MAP[row.status] || STATUS_MAP.draft;
       return <Badge label={s.label} bg={s.bg} text={s.text} />;
@@ -85,7 +92,7 @@ export default function InvoiceList() {
         <h1 className="text-2xl font-bold text-gray-900">Faktúry</h1>
         <button
           onClick={() => setShowCreate(true)}
-          className="flex items-center gap-2 bg-royal-500 hover:bg-royal-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+          className="flex items-center gap-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press"
         >
           <Plus className="w-4 h-4" />
           Nová faktúra
@@ -97,14 +104,14 @@ export default function InvoiceList() {
           <SearchInput value={filters.search} onChange={(v) => setFilters(f => ({ ...f, search: v }))} placeholder="Hľadať podľa čísla..." />
         </div>
         <select value={filters.type} onChange={(e) => setFilters(f => ({ ...f, type: e.target.value }))}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none">
+          className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow">
           <option value="">Všetky typy</option>
           <option value="proforma">Proforma</option>
           <option value="invoice">Faktúra</option>
           <option value="credit_note">Dobropis</option>
         </select>
         <select value={filters.status} onChange={(e) => setFilters(f => ({ ...f, status: e.target.value }))}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-royal-500 outline-none">
+          className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow">
           <option value="">Všetky stavy</option>
           <option value="draft">Návrh</option>
           <option value="sent">Odoslaná</option>
@@ -113,7 +120,7 @@ export default function InvoiceList() {
         </select>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200">
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card">
         <DataTable
           columns={columns}
           data={invoices}
