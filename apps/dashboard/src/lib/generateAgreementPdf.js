@@ -113,7 +113,7 @@ export default async function generateAgreementPdf(reservation, items, client) {
     styles: base(f), columnStyles: { 0: { cellWidth: H }, 1: { cellWidth: H } },
     margin: { left: M, right: M }, theme: 'grid',
   });
-  y = doc.lastAutoTable.finalY + 1.5;
+  y = doc.lastAutoTable.finalY + 4;
 
   // ═══ LEGAL ═══
   doc.setFontSize(7); doc.setFont(f, 'normal'); doc.setTextColor(...LBL_C);
@@ -129,8 +129,8 @@ export default async function generateAgreementPdf(reservation, items, client) {
   const lesseeTitle = isFO ? 'N\u00E1jomca \u2013 spotrebite\u013E:' : 'N\u00E1jomca:';
   const lesseeName = isFO ? (client?.company_name || '') : (client?.contact_person || client?.company_name || '');
   const repName = COMPANY.represented.replace(/, konate\u013E/i, '');
-  const line1 = '________________';
-  const line2 = '______________________';
+  const line1 = '';
+  const line2 = '';
   const s = { fontSize: 7, textColor: LBL_C };
 
   // Use structured rows instead of multiline text - much more compact
