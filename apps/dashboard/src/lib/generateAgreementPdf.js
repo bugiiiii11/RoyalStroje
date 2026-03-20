@@ -221,29 +221,31 @@ export default async function generateAgreementPdf(reservation, items, client) {
   const lesseeName = isFO ? (client?.company_name || '') : (client?.contact_person || client?.company_name || '');
   const THIRD = CW / 3;
 
+  const representedName = COMPANY.represented.replace(/, konate\u013E/i, '');
+
   const col1 =
     'Za prenaj\u00EDmate\u013Ea:\nMeno a priezvisko:\n' +
-    `${COMPANY.represented}\n\n` +
-    '____________________\n\n' +
-    'D\u00E1tum:\n____________________\n' +
-    'Miesto:\n____________________\n' +
-    'Podpis:\n____________________';
+    `${representedName}\n` +
+    '___________________\n' +
+    'D\u00E1tum:\n___________________\n' +
+    'Miesto:\n___________________\n' +
+    'Podpis:\n___________________';
 
   const col2 =
     `${lesseeTitle}\nMeno a priezvisko:\n` +
-    `${lesseeName}\n\n` +
-    '____________________\n\n' +
-    'D\u00E1tum:\n____________________\n' +
-    'Miesto:\n____________________\n' +
-    'Podpis:\n____________________';
+    `${lesseeName}\n` +
+    '___________________\n' +
+    'D\u00E1tum:\n___________________\n' +
+    'Miesto:\n___________________\n' +
+    'Podpis:\n___________________';
 
   const col3 =
-    'D\u00E1tum a \u010Das vr\u00E1tenia:\n________________________\n\n' +
-    'Stav PP pri vr\u00E1ten\u00ED:\n________________________\n\n' +
-    'Po\u0161kodenia / ch\u00FDbaj\u00FAce\npr\u00EDslu\u0161enstvo:\n________________________\n\n' +
+    'D\u00E1tum a \u010Das vr\u00E1tenia:\n_______________________\n' +
+    'Stav PP pri vr\u00E1ten\u00ED:\n_______________________\n' +
+    'Po\u0161kodenia / ch\u00FDbaj\u00FAce pr\u00EDslu\u0161enstvo:\n_______________________\n' +
     'Vy\u010Disten\u00FD: \u25A1 \u00C1no  \u25A1 Nie\nFotodokument\u00E1cia: \u25A1 \u00C1no  \u25A1 Nie\n' +
-    'Podpis prenaj\u00EDmate\u013Ea:\n________________________\n\n' +
-    'Podpis n\u00E1jomcu:\n________________________';
+    'Podpis prenaj\u00EDmate\u013Ea:\n_______________________\n' +
+    'Podpis n\u00E1jomcu:\n_______________________';
 
   autoTable(doc, {
     startY: y,
@@ -252,11 +254,11 @@ export default async function generateAgreementPdf(reservation, items, client) {
       { content: 'PROTOKOL O VR\u00C1TEN\u00CD PP', styles: orangeHeader(f) },
     ]],
     body: [[
-      { content: col1, styles: { fontSize: 7.5, textColor: LABEL_COLOR } },
-      { content: col2, styles: { fontSize: 7.5, textColor: LABEL_COLOR } },
-      { content: col3, styles: { fontSize: 7.5, textColor: LABEL_COLOR, fillColor: NOTES_BG } },
+      { content: col1, styles: { fontSize: 7, textColor: LABEL_COLOR } },
+      { content: col2, styles: { fontSize: 7, textColor: LABEL_COLOR } },
+      { content: col3, styles: { fontSize: 7, textColor: LABEL_COLOR, fillColor: NOTES_BG } },
     ]],
-    styles: { ...baseStyles(f), cellPadding: { top: 4, bottom: 4, left: 4, right: 3 } },
+    styles: { ...baseStyles(f), cellPadding: { top: 3, bottom: 3, left: 4, right: 3 }, lineHeight: 1.3 },
     columnStyles: {
       0: { cellWidth: HALF * 0.5 },
       1: { cellWidth: HALF * 0.5 },
