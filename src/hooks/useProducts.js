@@ -86,6 +86,9 @@ export function getProductsByCategory(products, categoryId) {
 }
 
 export function getProductsBySubcategory(products, categoryId, subcategoryId) {
-  if (subcategoryId === 'all') return getProductsByCategory(products, categoryId);
+  if (subcategoryId === 'all') {
+    // Hide accessories from "Všetko" view - they show only in their own subcategory tab
+    return products.filter(p => p.category === categoryId && p.subcategory !== 'prislusenstvo');
+  }
   return products.filter(p => p.category === categoryId && p.subcategory === subcategoryId);
 }
