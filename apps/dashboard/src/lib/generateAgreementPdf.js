@@ -107,8 +107,8 @@ export default async function generateAgreementPdf(reservation, items, client) {
   autoTable(doc, {
     startY: y,
     body: [[
-      { content: `Ostatn\u00E9 inform\u00E1cie o PP a pr\u00EDslu\u0161enstve:\n${reservation.notes || ''}`, styles: { ...L, fillColor: NOTES_BG, minCellHeight: 10 } },
-      { content: 'Prevzatie PP \u2013 v\u00FDhrady k stavu (ak \u017Eiadne, nechajte pr\u00E1zdne):', styles: { ...L, fillColor: NOTES_BG, minCellHeight: 10 } },
+      { content: `Ostatn\u00E9 inform\u00E1cie o PP a pr\u00EDslu\u0161enstve:\n${reservation.notes || ''}\n\n `, styles: { ...L, fillColor: NOTES_BG, minCellHeight: 22 } },
+      { content: 'Prevzatie PP \u2013 v\u00FDhrady k stavu (ak \u017Eiadne, nechajte pr\u00E1zdne):\n\n\n ', styles: { ...L, fillColor: NOTES_BG, minCellHeight: 22 } },
     ]],
     styles: base(f), columnStyles: { 0: { cellWidth: H }, 1: { cellWidth: H } },
     margin: { left: M, right: M }, theme: 'grid',
