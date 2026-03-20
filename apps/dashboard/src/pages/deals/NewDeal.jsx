@@ -56,15 +56,29 @@ export default function NewDeal() {
 
       // Create new client if needed
       if (finalData.client._isNew) {
+        const isFO = finalData.client.entity_type === 'fo';
+        const clientPayload = {
+          company_name: finalData.client.company_name,
+          email: finalData.client.email || null,
+          phone: finalData.client.phone || null,
+          entity_type: finalData.client.entity_type || 'po',
+          client_type: 'standard',
+          address: finalData.client.address || null,
+          city: finalData.client.city || null,
+          postal_code: finalData.client.postal_code || null,
+        };
+        if (isFO) {
+          clientPayload.birth_date = finalData.client.birth_date || null;
+          clientPayload.id_card_number = finalData.client.id_card_number || null;
+        } else {
+          clientPayload.contact_person = finalData.client.contact_person || null;
+          clientPayload.ico = finalData.client.ico || null;
+          clientPayload.dic = finalData.client.dic || null;
+          clientPayload.ic_dph = finalData.client.ic_dph || null;
+        }
         const { data: newClient, error: clientErr } = await supabase
           .from('clients')
-          .insert({
-            company_name: finalData.client.company_name,
-            contact_person: finalData.client.contact_person,
-            email: finalData.client.email,
-            phone: finalData.client.phone,
-            client_type: 'standard',
-          })
+          .insert(clientPayload)
           .select()
           .single();
         if (clientErr) throw clientErr;

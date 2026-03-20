@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Building2, Phone, Mail, MapPin, Crown, Send } from 'lucide-react';
+import { ArrowLeft, Building2, Phone, Mail, MapPin, Crown, Send, User, Calendar, CreditCard } from 'lucide-react';
 import useClient from '../../hooks/useClient';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
@@ -27,6 +27,7 @@ export default function ClientDetail() {
     return <p className="text-center text-gray-500 py-20">Klient nebol nájdený</p>;
   }
 
+  const isFO = client.entity_type === 'fo';
   const typeInfo = CLIENT_TYPES[client.client_type] || CLIENT_TYPES.standard;
   const typeColorMap = {
     standard: { bg: 'bg-gray-100', text: 'text-gray-700' },
@@ -49,6 +50,11 @@ export default function ClientDetail() {
         <div className="flex-1">
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-bold text-gray-900">{client.company_name}</h1>
+            <Badge
+              label={isFO ? 'FO' : 'PO'}
+              bg={isFO ? 'bg-blue-50' : 'bg-gray-100'}
+              text={isFO ? 'text-blue-600' : 'text-gray-600'}
+            />
             <Badge label={typeInfo.label} bg={typeColors.bg} text={typeColors.text} />
           </div>
           {client.contact_person && (
@@ -125,12 +131,31 @@ export default function ClientDetail() {
             </div>
           </ContentCard>
 
-          {/* Business Details */}
-          <ContentCard title="Firemné údaje">
+          {/* Business/Personal Details */}
+          <ContentCard title={isFO ? 'Osobné údaje' : 'Firemné údaje'}>
             <div className="space-y-2 text-sm">
-              {client.ico && <div className="flex justify-between"><span className="text-gray-500">IČO</span><span>{client.ico}</span></div>}
-              {client.dic && <div className="flex justify-between"><span className="text-gray-500">DIČ</span><span>{client.dic}</span></div>}
-              {client.ic_dph && <div className="flex justify-between"><span className="text-gray-500">IČ DPH</span><span>{client.ic_dph}</span></div>}
+              {isFO ? (
+                <>
+                  {client.birth_date && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500 flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />Dátum narodenia</span>
+                      <span>{new Date(client.birth_date).toLocaleDateString('sk-SK')}</span>
+                    </div>
+                  )}
+                  {client.id_card_number && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500 flex items-center gap-1.5"><CreditCard className="w-3.5 h-3.5" />Číslo OP</span>
+                      <span>{client.id_card_number}</span>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {client.ico && <div className="flex justify-between"><span className="text-gray-500">IČO</span><span>{client.ico}</span></div>}
+                  {client.dic && <div className="flex justify-between"><span className="text-gray-500">DIČ</span><span>{client.dic}</span></div>}
+                  {client.ic_dph && <div className="flex justify-between"><span className="text-gray-500">IČ DPH</span><span>{client.ic_dph}</span></div>}
+                </>
+              )}
               {typeInfo.discount > 0 && (
                 <div className="flex justify-between"><span className="text-gray-500">Zľava</span><span className="text-green-600">{typeInfo.discount}%</span></div>
               )}

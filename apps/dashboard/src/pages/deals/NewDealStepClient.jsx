@@ -1,20 +1,31 @@
 import { useState } from 'react';
-import { UserPlus, Check } from 'lucide-react';
+import { UserPlus, Check, Building2, User } from 'lucide-react';
 import SearchInput from '../../components/ui/SearchInput';
 import useClients from '../../hooks/useClients';
 import Badge from '../../components/ui/Badge';
 import { CLIENT_TYPES } from '../../lib/constants';
 
+const EMPTY_PO = { company_name: '', contact_person: '', email: '', phone: '', ico: '', dic: '', ic_dph: '', address: '', city: '', postal_code: '' };
+const EMPTY_FO = { company_name: '', email: '', phone: '', address: '', city: '', postal_code: '', birth_date: '', id_card_number: '' };
+
 export default function NewDealStepClient({ selected, onSelect }) {
   const [search, setSearch] = useState('');
   const [showNew, setShowNew] = useState(false);
-  const [newClient, setNewClient] = useState({ company_name: '', contact_person: '', email: '', phone: '' });
+  const [entityType, setEntityType] = useState('po');
+  const [newClient, setNewClient] = useState(EMPTY_PO);
   const { data: clients, loading } = useClients(search);
+
+  const switchEntityType = (type) => {
+    setEntityType(type);
+    setNewClient(type === 'po' ? EMPTY_PO : EMPTY_FO);
+  };
 
   const handleNewClient = () => {
     if (!newClient.company_name.trim()) return;
-    onSelect({ ...newClient, _isNew: true, client_type: 'standard', discount_percent: 0 });
+    onSelect({ ...newClient, _isNew: true, entity_type: entityType, client_type: 'standard', discount_percent: 0 });
   };
+
+  const inputClass = 'px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow';
 
   return (
     <div>
@@ -35,35 +46,89 @@ export default function NewDealStepClient({ selected, onSelect }) {
       </div>
 
       {showNew && (
-        <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4 space-y-3">
-          <h3 className="text-sm font-medium text-gray-700">Nový klient</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <input
-              placeholder="Názov firmy *"
-              value={newClient.company_name}
-              onChange={(e) => setNewClient(p => ({ ...p, company_name: e.target.value }))}
-              className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
-            />
-            <input
-              placeholder="Kontaktná osoba"
-              value={newClient.contact_person}
-              onChange={(e) => setNewClient(p => ({ ...p, contact_person: e.target.value }))}
-              className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
-            />
-            <input
-              placeholder="Email"
-              type="email"
-              value={newClient.email}
-              onChange={(e) => setNewClient(p => ({ ...p, email: e.target.value }))}
-              className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
-            />
-            <input
-              placeholder="Telefón"
-              value={newClient.phone}
-              onChange={(e) => setNewClient(p => ({ ...p, phone: e.target.value }))}
-              className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
-            />
+        <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4 space-y-4">
+          {/* FO/PO Toggle */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => switchEntityType('po')}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                entityType === 'po'
+                  ? 'bg-royal-500 text-white shadow-sm'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              <Building2 className="w-4 h-4" />
+              Firma (PO)
+            </button>
+            <button
+              onClick={() => switchEntityType('fo')}
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                entityType === 'fo'
+                  ? 'bg-royal-500 text-white shadow-sm'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+            >
+              <User className="w-4 h-4" />
+              Fyzická osoba (FO)
+            </button>
           </div>
+
+          {entityType === 'po' ? (
+            /* PO Form */
+            <div className="space-y-3">
+              <h3 className="text-sm font-medium text-gray-700">Nová firma</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input placeholder="Obchodné meno *" value={newClient.company_name}
+                  onChange={(e) => setNewClient(p => ({ ...p, company_name: e.target.value }))} className={inputClass} />
+                <input placeholder="Kontaktná osoba" value={newClient.contact_person}
+                  onChange={(e) => setNewClient(p => ({ ...p, contact_person: e.target.value }))} className={inputClass} />
+                <input placeholder="Email" type="email" value={newClient.email}
+                  onChange={(e) => setNewClient(p => ({ ...p, email: e.target.value }))} className={inputClass} />
+                <input placeholder="Telefón" value={newClient.phone}
+                  onChange={(e) => setNewClient(p => ({ ...p, phone: e.target.value }))} className={inputClass} />
+                <input placeholder="IČO" value={newClient.ico}
+                  onChange={(e) => setNewClient(p => ({ ...p, ico: e.target.value }))} className={inputClass} />
+                <input placeholder="DIČ" value={newClient.dic}
+                  onChange={(e) => setNewClient(p => ({ ...p, dic: e.target.value }))} className={inputClass} />
+                <input placeholder="IČ DPH" value={newClient.ic_dph}
+                  onChange={(e) => setNewClient(p => ({ ...p, ic_dph: e.target.value }))} className={inputClass} />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input placeholder="Ulica a číslo" value={newClient.address}
+                  onChange={(e) => setNewClient(p => ({ ...p, address: e.target.value }))} className={inputClass} />
+                <input placeholder="Mesto" value={newClient.city}
+                  onChange={(e) => setNewClient(p => ({ ...p, city: e.target.value }))} className={inputClass} />
+                <input placeholder="PSČ" value={newClient.postal_code}
+                  onChange={(e) => setNewClient(p => ({ ...p, postal_code: e.target.value }))} className={inputClass} />
+              </div>
+            </div>
+          ) : (
+            /* FO Form */
+            <div className="space-y-3">
+              <h3 className="text-sm font-medium text-gray-700">Nová fyzická osoba</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input placeholder="Meno a priezvisko *" value={newClient.company_name}
+                  onChange={(e) => setNewClient(p => ({ ...p, company_name: e.target.value }))} className={inputClass} />
+                <input placeholder="Telefón" value={newClient.phone}
+                  onChange={(e) => setNewClient(p => ({ ...p, phone: e.target.value }))} className={inputClass} />
+                <input placeholder="Email" type="email" value={newClient.email}
+                  onChange={(e) => setNewClient(p => ({ ...p, email: e.target.value }))} className={inputClass} />
+                <input placeholder="Dátum narodenia" type="date" value={newClient.birth_date}
+                  onChange={(e) => setNewClient(p => ({ ...p, birth_date: e.target.value }))} className={inputClass} />
+                <input placeholder="Číslo OP / pasu" value={newClient.id_card_number}
+                  onChange={(e) => setNewClient(p => ({ ...p, id_card_number: e.target.value }))} className={inputClass} />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input placeholder="Adresa trvalého bydliska" value={newClient.address}
+                  onChange={(e) => setNewClient(p => ({ ...p, address: e.target.value }))} className={inputClass} />
+                <input placeholder="Mesto" value={newClient.city}
+                  onChange={(e) => setNewClient(p => ({ ...p, city: e.target.value }))} className={inputClass} />
+                <input placeholder="PSČ" value={newClient.postal_code}
+                  onChange={(e) => setNewClient(p => ({ ...p, postal_code: e.target.value }))} className={inputClass} />
+              </div>
+            </div>
+          )}
+
           <button
             onClick={handleNewClient}
             disabled={!newClient.company_name.trim()}
@@ -82,6 +147,7 @@ export default function NewDealStepClient({ selected, onSelect }) {
         {(clients || []).map((client) => {
           const isSelected = selected?.id === client.id;
           const typeInfo = CLIENT_TYPES[client.client_type] || CLIENT_TYPES.standard;
+          const isFO = client.entity_type === 'fo';
           return (
             <div
               key={client.id}
@@ -90,13 +156,21 @@ export default function NewDealStepClient({ selected, onSelect }) {
                 isSelected ? 'border-royal-500 bg-royal-50 ring-1 ring-royal-500' : 'border-gray-100 hover:border-gray-300 hover:bg-gray-50'
               }`}
             >
-              <div>
-                <p className="font-medium text-gray-900">{client.company_name}</p>
-                <p className="text-xs text-gray-500">
-                  {client.contact_person || '—'} · {client.phone || client.email || '—'}
-                </p>
+              <div className="flex items-center gap-2">
+                {isFO ? <User className="w-4 h-4 text-gray-400" /> : <Building2 className="w-4 h-4 text-gray-400" />}
+                <div>
+                  <p className="font-medium text-gray-900">{client.company_name}</p>
+                  <p className="text-xs text-gray-500">
+                    {isFO ? (client.phone || client.email || '—') : `${client.contact_person || '—'} · ${client.phone || client.email || '—'}`}
+                  </p>
+                </div>
               </div>
               <div className="flex items-center gap-2">
+                <Badge
+                  label={isFO ? 'FO' : 'PO'}
+                  bg={isFO ? 'bg-blue-50' : 'bg-gray-100'}
+                  text={isFO ? 'text-blue-600' : 'text-gray-600'}
+                />
                 <Badge label={typeInfo.label} bg="bg-gray-100" text="text-gray-600" />
                 {isSelected && <Check className="w-5 h-5 text-royal-500" />}
               </div>
