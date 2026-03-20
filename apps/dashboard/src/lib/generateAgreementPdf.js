@@ -216,48 +216,52 @@ export default async function generateAgreementPdf(reservation, items, client) {
   doc.setTextColor(0, 0, 0);
 
   // ═══ SIGNATURES + RETURN PROTOCOL ═══
+  // 3-column layout: Za prenajímateľa | Nájomca | Protokol (matches original side-by-side)
   const lesseeTitle = isFO ? 'N\u00E1jomca \u2013 spotrebite\u013E:' : 'N\u00E1jomca:';
   const lesseeName = isFO ? (client?.company_name || '') : (client?.contact_person || client?.company_name || '');
+  const THIRD = CW / 3;
 
-  // Signature block - left cell has nested two-column layout
-  const sigLeft =
-    'Za prenaj\u00EDmate\u013Ea:\n' +
-    `Meno a priezvisko: ${COMPANY.represented}\n` +
-    '\n___________________________\n' +
-    'D\u00E1tum:\n___________________________\n' +
-    'Miesto:\n___________________________\n' +
-    'Podpis:\n___________________________';
+  const col1 =
+    'Za prenaj\u00EDmate\u013Ea:\nMeno a priezvisko:\n' +
+    `${COMPANY.represented}\n\n` +
+    '____________________\n\n' +
+    'D\u00E1tum:\n____________________\n' +
+    'Miesto:\n____________________\n' +
+    'Podpis:\n____________________';
 
-  const sigRight =
-    `${lesseeTitle}\n` +
-    `Meno a priezvisko: ${lesseeName}\n` +
-    '\n___________________________\n' +
-    'D\u00E1tum:\n___________________________\n' +
-    'Miesto:\n___________________________\n' +
-    'Podpis:\n___________________________';
+  const col2 =
+    `${lesseeTitle}\nMeno a priezvisko:\n` +
+    `${lesseeName}\n\n` +
+    '____________________\n\n' +
+    'D\u00E1tum:\n____________________\n' +
+    'Miesto:\n____________________\n' +
+    'Podpis:\n____________________';
 
-  const sigLeftFull = sigLeft + '\n\n' + sigRight;
-
-  const protocolRight =
-    'D\u00E1tum a \u010Das vr\u00E1tenia:\n___________________________________\n\n' +
-    'Stav PP pri vr\u00E1ten\u00ED:\n___________________________________\n\n' +
-    'Po\u0161kodenia / ch\u00FDbaj\u00FAce pr\u00EDslu\u0161enstvo:\n___________________________________\n\n' +
-    'Vy\u010Disten\u00FD:  \u25A1 \u00C1no   \u25A1 Nie    Fotodokument\u00E1cia:  \u25A1 \u00C1no   \u25A1 Nie\n' +
-    'Podpis prenaj\u00EDmate\u013Ea:\n___________________________________\n\n' +
-    'Podpis n\u00E1jomcu:\n___________________________________';
+  const col3 =
+    'D\u00E1tum a \u010Das vr\u00E1tenia:\n________________________\n\n' +
+    'Stav PP pri vr\u00E1ten\u00ED:\n________________________\n\n' +
+    'Po\u0161kodenia / ch\u00FDbaj\u00FAce\npr\u00EDslu\u0161enstvo:\n________________________\n\n' +
+    'Vy\u010Disten\u00FD: \u25A1 \u00C1no  \u25A1 Nie\nFotodokument\u00E1cia: \u25A1 \u00C1no  \u25A1 Nie\n' +
+    'Podpis prenaj\u00EDmate\u013Ea:\n________________________\n\n' +
+    'Podpis n\u00E1jomcu:\n________________________';
 
   autoTable(doc, {
     startY: y,
     head: [[
-      { content: 'PODPISY ZMLUVN\u00DDCH STR\u00C1N', styles: orangeHeader(f) },
+      { content: 'PODPISY ZMLUVN\u00DDCH STR\u00C1N', colSpan: 2, styles: orangeHeader(f) },
       { content: 'PROTOKOL O VR\u00C1TEN\u00CD PP', styles: orangeHeader(f) },
     ]],
     body: [[
-      { content: sigLeftFull, styles: { fontSize: 8, textColor: LABEL_COLOR } },
-      { content: protocolRight, styles: { fontSize: 8, textColor: LABEL_COLOR, fillColor: NOTES_BG } },
+      { content: col1, styles: { fontSize: 7.5, textColor: LABEL_COLOR } },
+      { content: col2, styles: { fontSize: 7.5, textColor: LABEL_COLOR } },
+      { content: col3, styles: { fontSize: 7.5, textColor: LABEL_COLOR, fillColor: NOTES_BG } },
     ]],
-    styles: { ...baseStyles(f), cellPadding: { top: 5, bottom: 5, left: 5, right: 5 } },
-    columnStyles: { 0: { cellWidth: HALF }, 1: { cellWidth: HALF } },
+    styles: { ...baseStyles(f), cellPadding: { top: 4, bottom: 4, left: 4, right: 3 } },
+    columnStyles: {
+      0: { cellWidth: HALF * 0.5 },
+      1: { cellWidth: HALF * 0.5 },
+      2: { cellWidth: HALF },
+    },
     margin: { left: M, right: M },
     theme: 'grid',
   });
