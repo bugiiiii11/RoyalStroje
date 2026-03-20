@@ -64,18 +64,18 @@ export default function ProductDetail() {
         <meta property="og:type" content="product" />
         <meta property="og:title" content={`${product.name} - ${brand} ${model} | Prenájom strojov Senec`} />
         <meta property="og:description" content={`Profesionálny prenájom ${product.name} v Senci. Od ${product.pricePerDay}€/deň. Možnosť dovozu. ☎ 0948 555 551`} />
-        <meta property="og:image" content={`https://royalstroje.sk${product.image}`} />
+        <meta property="og:image" content={product.image.startsWith('http') ? product.image : `https://royalstroje.sk${product.image}`} />
         <meta property="og:url" content={`https://royalstroje.sk/${productId}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${product.name} - ${brand} ${model}`} />
         <meta name="twitter:description" content={`Prenájom ${product.name} v Senci od ${product.pricePerDay}€/deň. Možnosť dovozu.`} />
-        <meta name="twitter:image" content={`https://royalstroje.sk${product.image}`} />
+        <meta name="twitter:image" content={product.image.startsWith('http') ? product.image : `https://royalstroje.sk${product.image}`} />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org/",
             "@type": "Product",
             "name": `${product.name} - ${brand} ${model}`,
-            "image": `https://royalstroje.sk${product.image}`,
+            "image": product.image.startsWith('http') ? product.image : `https://royalstroje.sk${product.image}`,
             "description": `${product.name} na prenájom v Senci a Bratislave`,
             "brand": { "@type": "Brand", "name": brand },
             "offers": {

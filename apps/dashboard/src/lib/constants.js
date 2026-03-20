@@ -67,7 +67,9 @@ export const SITE_URL = 'https://royalstroje.sk';
 
 export function imageUrl(path) {
   if (!path) return null;
+  // Supabase Storage URLs are already absolute
   if (path.startsWith('http')) return path;
+  // Legacy paths from /public/ folder
   return SITE_URL + path;
 }
 

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { X, Plus, Trash2, Image } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { X, Plus, Trash2, Image, Upload, Loader2 } from 'lucide-react';
 import Modal from '../../components/ui/Modal';
 import useSupabaseQuery from '../../hooks/useSupabaseQuery';
 import { supabase } from '../../lib/supabase';
@@ -33,12 +33,36 @@ function slugify(text) {
     .replace(/(^-|-$)/g, '');
 }
 
+// Upload image to Supabase Storage
+async function uploadImage(file, slug, categorySlug, subcategorySlug) {
+  const ext = file.name.split('.').pop().toLowerCase();
+  const fileName = `${slug}.${ext}`;
+  const folderPath = [categorySlug, subcategorySlug].filter(Boolean).join('/');
+  const storagePath = folderPath ? `${folderPath}/${fileName}` : fileName;
+
+  const { error } = await supabase.storage
+    .from('equipment-images')
+    .upload(storagePath, file, { upsert: true, contentType: file.type });
+
+  if (error) throw new Error(`Upload zlyhal: ${error.message}`);
+
+  const { data: urlData } = supabase.storage
+    .from('equipment-images')
+    .getPublicUrl(storagePath);
+
+  return urlData.publicUrl;
+}
+
 export default function EquipmentForm({ open, onClose, onSave, item }) {
   const isEdit = !!item;
   const [form, setForm] = useState(EMPTY_FORM);
   const [newFeature, setNewFeature] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const { data: categories } = useSupabaseQuery(
     () => supabase.from('equipment_categories').select('id, name, slug').order('sort_order'),
@@ -79,6 +103,8 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
     }
     setError(null);
     setNewFeature('');
+    setImageFile(null);
+    setImagePreview(null);
   }, [open, item]);
 
   const update = (key, value) => {
@@ -122,13 +148,30 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
     const baseRate = parseFloat(form.daily_rate_base) || 0;
     const vatRate = baseRate * (1 + VAT_RATE);
 
+    // Upload image if a new file was selected
+    let imagePath = form.image_path.trim() || null;
+    if (imageFile) {
+      setUploading(true);
+      try {
+        const catSlug = (categories || []).find(c => c.id === form.category_id)?.slug || 'uncategorized';
+        const subcatSlug = (allSubcategories || []).find(s => s.id === form.subcategory_id)?.slug || '';
+        imagePath = await uploadImage(imageFile, form.slug.trim(), catSlug, subcatSlug);
+      } catch (err) {
+        setError(err.message);
+        setSaving(false);
+        setUploading(false);
+        return;
+      }
+      setUploading(false);
+    }
+
     const payload = {
       name: form.name.trim(),
       slug: form.slug.trim(),
       description: form.description.trim(),
       category_id: form.category_id,
       subcategory_id: form.subcategory_id || null,
-      image_path: form.image_path.trim() || null,
+      image_path: imagePath,
       daily_rate_base: baseRate,
       daily_rate_vat: Math.round(vatRate * 100) / 100,
       pricing_type: form.pricing_type,
@@ -298,21 +341,65 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
           </div>
         </div>
 
-        {/* Image */}
+        {/* Image Upload */}
         <div>
           <label className={labelClass}>
             <span className="flex items-center gap-1.5">
               <Image className="w-4 h-4" />
-              Cesta k obrázku
+              Obrázok zariadenia
             </span>
           </label>
           <input
-            type="text"
-            value={form.image_path}
-            onChange={(e) => update('image_path', e.target.value)}
-            className={inputClass}
-            placeholder="/pictures/Katalog-PNG/Malé náradie/Vŕtacie kladivá/makita-hr2470.webp"
+            ref={fileInputRef}
+            type="file"
+            accept=".webp,.png,.jpg,.jpeg"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (!file) return;
+              setImageFile(file);
+              setImagePreview(URL.createObjectURL(file));
+            }}
           />
+          <div className="flex items-start gap-4">
+            {/* Preview */}
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              className="w-28 h-28 bg-gray-50 border-2 border-dashed border-gray-200 rounded-lg flex items-center justify-center cursor-pointer hover:border-royal-400 hover:bg-royal-50/30 transition-colors overflow-hidden flex-shrink-0"
+            >
+              {imagePreview || form.image_path ? (
+                <img
+                  src={imagePreview || (form.image_path.startsWith('http') ? form.image_path : `https://royalstroje.sk${form.image_path}`)}
+                  alt="Náhľad"
+                  className="w-full h-full object-contain p-1"
+                />
+              ) : (
+                <div className="text-center">
+                  <Upload className="w-6 h-6 text-gray-300 mx-auto mb-1" />
+                  <span className="text-[10px] text-gray-400">Nahrať</span>
+                </div>
+              )}
+            </div>
+            <div className="flex-1 space-y-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors inline-flex items-center gap-1.5"
+              >
+                <Upload className="w-3.5 h-3.5" />
+                {form.image_path || imageFile ? 'Zmeniť obrázok' : 'Vybrať obrázok'}
+              </button>
+              {imageFile && (
+                <p className="text-xs text-green-600">
+                  Vybraný: {imageFile.name} ({(imageFile.size / 1024).toFixed(0)} KB)
+                </p>
+              )}
+              {!imageFile && form.image_path && (
+                <p className="text-xs text-gray-400 break-all">{form.image_path}</p>
+              )}
+              <p className="text-[10px] text-gray-400">WebP, PNG alebo JPG, max 5 MB</p>
+            </div>
+          </div>
         </div>
 
         {/* Features (technické parametre) */}
@@ -436,10 +523,11 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
           </button>
           <button
             type="submit"
-            disabled={saving}
-            className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 rounded-lg shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50"
+            disabled={saving || uploading}
+            className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 rounded-lg shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50 flex items-center gap-2"
           >
-            {saving ? 'Ukladám...' : isEdit ? 'Uložiť zmeny' : 'Pridať zariadenie'}
+            {(saving || uploading) && <Loader2 className="w-4 h-4 animate-spin" />}
+            {uploading ? 'Nahrávam obrázok...' : saving ? 'Ukladám...' : isEdit ? 'Uložiť zmeny' : 'Pridať zariadenie'}
           </button>
         </div>
       </form>

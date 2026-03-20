@@ -13,12 +13,17 @@ function mapEquipmentToProduct(item) {
   if (isNeg || pricePerDay === 0) priceStr = 'NA požiadanie';
   else priceStr = (Math.round(pricePerDay * 1.23 * 100) / 100) + '€/deň';
 
+  // Handle both Supabase Storage URLs (new uploads) and legacy /pictures/ paths
+  const image = item.image_path
+    ? (item.image_path.startsWith('http') ? item.image_path : item.image_path)
+    : '';
+
   return {
     id: item.slug,
     name: item.name,
     category: catSlug,
     subcategory: subcatSlug,
-    image: item.image_path || '',
+    image,
     price: priceStr,
     pricePerDay: isNeg ? 0 : pricePerDay,
     description: item.description || item.name,
