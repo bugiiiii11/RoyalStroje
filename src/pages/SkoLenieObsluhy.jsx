@@ -91,11 +91,11 @@ export default function SkoLenieObsluhy() {
         <title>Školenie obsluhy strojov – Preukaz obsluhy | Royal Stroje Senec</title>
         <meta
           name="description"
-          content="Certifikované kurzy obsluhy stavebných strojov – rýpadlá, nakladače, VZV, manipulátory. Akreditované školenia v spolupráci s Alpha Safety. Platný preukaz obsluhy."
+          content="Certifikované kurzy obsluhy stavebných strojov – rýpadlá, nakladače, VZV, manipulátory. Akreditované školenia v spolupráci s Alpha Safety s.r.o. Platný preukaz obsluhy."
         />
         <link rel="canonical" href="https://royalstroje.sk/sluzby/skolenie-obsluhy" />
         <meta property="og:title" content="Školenie obsluhy strojov | Royal Stroje" />
-        <meta property="og:description" content="Certifikované kurzy obsluhy stavebných strojov. Platný preukaz obsluhy. V spolupráci s Alpha Safety." />
+        <meta property="og:description" content="Certifikované kurzy obsluhy stavebných strojov. Platný preukaz obsluhy. V spolupráci s Alpha Safety s.r.o." />
         <meta property="og:url" content="https://royalstroje.sk/sluzby/skolenie-obsluhy" />
       </Helmet>
 
@@ -117,7 +117,7 @@ export default function SkoLenieObsluhy() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-primary/20 border border-orange-primary/40 rounded-full text-orange-primary text-sm font-bold mb-6">
               <GraduationCap size={16} />
-              V spolupráci s Alpha Safety
+              V spolupráci s Alpha Safety s.r.o.
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Preukaz obsluhy strojov. <span className="text-orange-primary">Rýchlo a legálne.</span>
@@ -145,7 +145,7 @@ export default function SkoLenieObsluhy() {
               Školenie obsluhy <span className="text-orange-primary">stavebných strojov</span>
             </h1>
             <p className="text-white/70 text-sm md:text-lg max-w-3xl mx-auto mb-4">
-              Royal Stroje v spolupráci s akreditovaným partnerom <strong className="text-white">Alpha Safety</strong> zabezpečuje odborné kurzy obsluhy stavebných strojov. Získajte platný preukaz, ktorý je zákonnou podmienkou pre prácu s mechanizáciou na Slovensku.
+              Royal Stroje v spolupráci s akreditovaným partnerom <a href="https://alphasafety.sk/kurzy/stavebne-stroje" target="_blank" rel="noopener noreferrer" className="text-white font-bold hover:text-orange-primary transition-colors duration-200">Alpha Safety s.r.o.</a> zabezpečuje odborné kurzy obsluhy stavebných strojov. Získajte platný preukaz, ktorý je zákonnou podmienkou pre prácu s mechanizáciou na Slovensku.
             </p>
             <p className="text-white/50 text-xs md:text-sm max-w-2xl mx-auto">
               Zákon č. 124/2006 Z. z. o bezpečnosti a ochrane zdravia pri práci ukladá povinnosť mať preukaz obsluhy pre vybrané typy strojov.
@@ -160,9 +160,11 @@ export default function SkoLenieObsluhy() {
               </div>
               <div className="text-center md:text-left">
                 <p className="text-orange-primary font-bold text-sm mb-1 uppercase tracking-wider">Akreditovaný partner</p>
-                <h2 className="text-white font-black text-xl md:text-2xl mb-2">Alpha Safety</h2>
+                <h2 className="text-white font-black text-xl md:text-2xl mb-2">
+                  <a href="https://alphasafety.sk/kurzy/stavebne-stroje" target="_blank" rel="noopener noreferrer" className="hover:text-orange-primary transition-colors duration-200">Alpha Safety s.r.o.</a>
+                </h2>
                 <p className="text-white/70 text-sm md:text-base leading-relaxed">
-                  Naším certifikovaným partnerom pre školenia je spoločnosť Alpha Safety – akreditovaná inštitúcia s dlhoročnými skúsenosťami v oblasti bezpečnosti práce a odbornej prípravy obsluhy stavebných strojov.
+                  Naším certifikovaným partnerom pre školenia je spoločnosť <a href="https://alphasafety.sk/kurzy/stavebne-stroje" target="_blank" rel="noopener noreferrer" className="text-orange-primary hover:underline">Alpha Safety s.r.o.</a> – akreditovaná inštitúcia s dlhoročnými skúsenosťami v oblasti bezpečnosti práce a odbornej prípravy obsluhy stavebných strojov.
                 </p>
               </div>
             </div>
@@ -306,7 +308,7 @@ export default function SkoLenieObsluhy() {
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <span className="flex items-center gap-2 text-white/70 text-sm md:text-base">
-                <span className="text-orange-primary">✓</span> Akreditovaný partner Alpha Safety
+                <span className="text-orange-primary">✓</span> Akreditovaný partner Alpha Safety s.r.o.
               </span>
               <span className="flex items-center gap-2 text-white/70 text-sm md:text-base">
                 <span className="text-orange-primary">✓</span> Platný preukaz obsluhy
