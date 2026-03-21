@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, FileText, Package, Wrench, Truck } from 'lucide-react';
+import { ShoppingCart, FileText, Package, Wrench, Truck, GraduationCap } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 
@@ -49,6 +49,15 @@ export default function Sluzby() {
       description: 'Dlhodobý prenájom techniky pre firmy po celom Slovensku. Fixné mesačné náklady, servis zahrnutý.',
       features: ['Dlhodobý prenájom', 'Fixné mesačné platby', 'Servis zahrnutý', 'Pre firmy - celé Slovensko'],
       backgroundImage: '/pictures/graphics/objects4.webp',
+    },
+    {
+      id: 'skolenie-obsluhy',
+      path: '/sluzby/skolenie-obsluhy',
+      icon: GraduationCap,
+      title: 'Školenie obsluhy strojov',
+      description: 'Získajte platný preukaz obsluhy stavebných strojov. Certifikované kurzy zabezpečujeme v spolupráci s akreditovaným partnerom Alpha Safety.',
+      features: ['Certifikované kurzy', 'Akreditovaný partner Alpha Safety', 'Platný preukaz obsluhy', 'Rýchly termín'],
+      backgroundImage: '/pictures/graphics/objects3.webp',
     },
   ];
 
@@ -127,7 +136,7 @@ export default function Sluzby() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 md:gap-6 mb-6 md:mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-16">
             {services.map((service) => {
               const IconComponent = service.icon;
               return (

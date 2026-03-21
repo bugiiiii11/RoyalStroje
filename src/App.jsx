@@ -16,6 +16,7 @@ const PredajTechniky = lazy(() => import('./pages/PredajTechniky'));
 const NahradneDiely = lazy(() => import('./pages/NahradneDiely'));
 const CenovaPonuka = lazy(() => import('./pages/CenovaPonuka'));
 const RoyalFleet = lazy(() => import('./pages/RoyalFleet'));
+const SkoLenieObsluhy = lazy(() => import('./pages/SkoLenieObsluhy'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogDetail = lazy(() => import('./pages/BlogDetail'));
 const Kontakt = lazy(() => import('./pages/Kontakt'));
@@ -55,6 +56,7 @@ function App() {
                 <Route path="/sluzby/nahradne-diely" element={<NahradneDiely />} />
                 <Route path="/sluzby/cenova-ponuka" element={<CenovaPonuka />} />
                 <Route path="/sluzby/royal-fleet" element={<RoyalFleet />} />
+                <Route path="/sluzby/skolenie-obsluhy" element={<SkoLenieObsluhy />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/kontakt" element={<Kontakt />} />

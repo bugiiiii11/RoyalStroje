@@ -185,7 +185,7 @@ const article = {
                   <ul className="space-y-1 text-white/80 text-sm">
                     <li>☐ Pásy: Žiadne praskliny, žiadne uvoľnené články</li>
                     <li>☐ Hydraulické hadice: Žiadne priesaky oleja</li>
-                    <li>☐ Lopátka: Nie je poškodená, zuby sú kompletné</li>
+                    <li>☐ Výkopová lopata: Nie je poškodená, zuby sú kompletné</li>
                     <li>☐ Kabína: Čisté sklo, funkčné dvere</li>
                     <li>☐ Bezpečnostné pásy: Funkčné</li>
                   </ul>
@@ -265,7 +265,7 @@ const article = {
               <h4 className="text-orange-primary font-bold mb-3">2. Používajte Stabilizátory Správne</h4>
               <div className="bg-zinc-900/50 rounded-lg p-4">
                 <p className="text-white/80 text-sm mb-3">
-                  Minirýpadlá majú <strong className="text-orange-primary">hydraulickú radlicu</strong> (zadná lopatka),
+                  Minirýpadlá majú <strong className="text-orange-primary">hydraulickú radlicu,</strong>
                   ktorá slúži ako stabilizátor.
                 </p>
                 <div className="grid md:grid-cols-2 gap-4 text-sm">
@@ -282,7 +282,7 @@ const article = {
                     <ul className="space-y-1 text-white/80">
                       <li>• Kopať bez spustenej radlice</li>
                       <li>• Radlica vo vzduchu = nestabilita!</li>
-                      <li>• Jazdiť s naplnenou lopátkou bez radlice</li>
+                      <li>• Jazdiť s naplnenou výkopovou lopatku bez radlice</li>
                     </ul>
                   </div>
                 </div>
@@ -297,8 +297,8 @@ const article = {
                 </p>
                 <ul className="space-y-2 text-white/80 text-sm">
                   <li>✓ <strong>Pracujte blízko stroja:</strong> Ideálny dosah je 60-70% maximálneho dosahu</li>
-                  <li>✓ <strong>Plná lopátka = kratší dosah:</strong> Ťažšie bremeno vyžaduje prácu bližšie k stroju</li>
-                  <li>❌ <strong>NIKDY</strong> nevysúvajte rameno na maximum s ťažkou lopátkou – stroj sa môže prevrátiť!</li>
+                  <li>✓ <strong>Plná výkopoválopata = kratší dosah:</strong> Ťažšie bremeno vyžaduje prácu bližšie k stroju</li>
+                  <li>❌ <strong>NIKDY</strong> nevysúvajte rameno na maximum s ťažkou výkopovou lopatou – stroj sa môže prevrátiť!</li>
                 </ul>
               </div>
             </div>
@@ -457,7 +457,7 @@ const article = {
                   <li>✓ <strong>Upevnenie:</strong> Min. 4 upínacie pásy (2 vpredu, 2 vzadu)</li>
                   <li>✓ <strong>Rameno:</strong> Zložené a zaistené</li>
                   <li>✓ <strong>Radlica:</strong> Zdvihnutá</li>
-                  <li>✓ <strong>Lopátka:</strong> Prázdna a zložená</li>
+                  <li>✓ <strong>Výkopová lopata:</strong> Prázdna a zložená</li>
                   <li>✓ <strong>Rýchlosť:</strong> Max. 80 km/h (odporúčané 60 km/h)</li>
                   <li>⚠️ <strong>Značenie:</strong> Reflexné trojuholníky na príves (povinné!)</li>
                 </ul>
