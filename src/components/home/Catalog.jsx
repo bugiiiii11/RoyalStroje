@@ -191,8 +191,6 @@ export default function Catalog() {
 
   return (
     <ContentSection id="katalog" className="pt-0">
-      {/* WhyRoyalStroje section integrated */}
-      <WhyRoyalStroje />
       {/* Mobile Logo - Top Left */}
       <div className="md:hidden absolute top-3 left-3 z-30">
         <img
@@ -721,6 +719,9 @@ export default function Catalog() {
         <div className="lg:hidden mt-12 mb-8">
           <QuoteForm />
         </div>
+
+        {/* WhyRoyalStroje section - between catalog and FAQ */}
+        <WhyRoyalStroje />
 
         {/* FAQ Section - Integrated */}
         <FAQ />
