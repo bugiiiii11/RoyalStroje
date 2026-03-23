@@ -192,7 +192,7 @@ Od kladiva po minirýpadlo. Všetko na jednom mieste.
 Vidíte cenu v katalógu. Bez skrytých poplatkov.
 
 ☎️ **Non-stop podpora**
-Problém na stavbe? Voláme vám späť do 15 minút.
+Problém na stavbe? kontaktujte nás 24/7.
 ```
 
 ---
@@ -461,7 +461,7 @@ Subheadline: Recká cesta 182 • 0948 555 551 • info@royalstroje.sk • Non-s
 
 ```markdown
 📞 **Telefón: 0948 555 551**
-Najrýchlejší spôsob. Odpoveď do 15 minút.
+Najrýchlejší spôsob kontaktu. 
 [Zavolať teraz]
 
 💬 **WhatsApp: 0948 555 551**

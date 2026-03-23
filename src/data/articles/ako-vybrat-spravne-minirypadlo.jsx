@@ -432,7 +432,7 @@ const article = {
               </ul>
               <ul className="space-y-1 text-white/60 text-sm">
                 <li>✓ 2-3 štandardné lopátky</li>
-                <li>✓ Doprava ZADARMO do 30 km</li>
+                <li>✓ Kvalitné servisované stroje</li>
                 <li>✓ Plná nádrž paliva</li>
               </ul>
             </div>

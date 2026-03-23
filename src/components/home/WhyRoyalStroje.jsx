@@ -65,7 +65,7 @@ export default function WhyRoyalStroje() {
 
               <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Nonstop podpora</h3>
               <p className="text-white/70 text-sm leading-relaxed">
-                Telefonicky dostupní 24/7. Problém na stavbe? Voláme vám späť do 15 minút.
+                Problém na stavbe? Telefonicky dostupní 24/7.  
               </p>
             </div>
 
