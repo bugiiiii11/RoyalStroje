@@ -122,7 +122,7 @@ export const blogMeta = {
   },
   'nivel-cl3g-krizovy-laser-zeleny-profesionalny-nastroj': {
     title: 'NIVEL CL3G: Krížový Laser so Zeleným Lúčom Pre Profesionálnu Presnosť',
-    date: '12. Marec 2026',
+    date: '18. Marec 2026',
     author: 'Royal Stroje',
     readTime: '10 min',
     category: 'Návody',
@@ -130,7 +130,7 @@ export const blogMeta = {
   },
   'nivel-n32x-opticky-nivelacny-pristroj-profesionalny-nastroj': {
     title: 'NIVEL N32x: Optický Nivelačný Prístroj Pre Profesionálnu Presnosť',
-    date: '12. Marec 2026',
+    date: '15. Marec 2026',
     author: 'Royal Stroje',
     readTime: '9 min',
     category: 'Návody',

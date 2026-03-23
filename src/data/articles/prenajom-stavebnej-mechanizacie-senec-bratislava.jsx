@@ -31,8 +31,8 @@ const article = {
             <div className="space-y-2 text-white/80 text-sm">
               <p><strong>Príklad:</strong></p>
               <p>• Doprava z Bratislavy do Senca: 60-80 €</p>
-              <p className="text-green-500">• Doprava z Royal Stroje: <strong>0 € do 30 km okruh!</strong></p>
-              <p className="text-orange-primary font-bold mt-3">Úspora: 60-80 € na každý prenájom</p>
+              <p className="text-green-500">• Doprava z Royal Stroje: <strong>0 € v Senci, 40 € Bratislava!</strong></p>
+              <p className="text-orange-primary font-bold mt-3">Úspora: 20-40 € na každý prenájom</p>
             </div>
           </div>
 

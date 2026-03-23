@@ -417,7 +417,7 @@ const article = {
           <div className="mt-4 pt-4 border-t border-white/10 text-sm">
             <p className="text-white/70 mb-2"><strong>V cene:</strong></p>
             <ul className="space-y-1 text-white/60">
-              <li>✓ Doprava do 30 km zdarma</li>
+              <li>✓ Doprava v Senci zdarma</li>
               <li>✓ Inštalácia a demontáž</li>
               <li>✓ Servis 1× týždenne (pri mesačnom prenájme 2× týždenne)</li>
               <li>✓ Toaletný papier a mydlo</li>

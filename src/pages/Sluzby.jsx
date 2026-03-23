@@ -11,7 +11,7 @@ export default function Sluzby() {
       icon: Wrench,
       title: 'Prenájom techniky',
       description: 'Malé náradie, stredná a ťažká mechanizácia. Prenájom od 1 dňa s dovozom na stavbu.',
-      features: ['Dovoz do 4 hodín', 'Nonstop podpora', 'Senec - Bratislava - okolie', 'Od 1 dňa prenájmu'],
+      features: ['Expresný dovoz', 'Nonstop podpora', 'Senec - Bratislava - okolie', 'Od 1 dňa prenájmu'],
       backgroundImage: '/pictures/graphics/hero4.webp',
     },
     {

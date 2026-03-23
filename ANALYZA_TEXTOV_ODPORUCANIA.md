@@ -182,7 +182,7 @@ Subheadline: Obsluhujeme Senec, Bratislavu a celé okolie • Nad 500 strojov sk
 
 [4 karty v rade]
 
-🚚 **Dovoz do 4 hodín**
+🚚 **Expresný dovoz**
 Na stavbe dnes. Expresná služba pre celý región.
 
 📦 **Nad 500 strojov**
@@ -635,7 +635,7 @@ Od malého náradia po ťažké stroje. Prenájom od 1 dňa.
 → Pozrieť katalóg
 
 ### 2. 🚚 Doprava na stavbu
-Dovoz do 4 hodín. ZDARMA do 20 km.
+Expresný dovoz. ZDARMA v Senci.
 → Viac o doprave
 
 ### 3. 🛒 Predaj náradia

@@ -77,9 +77,9 @@ export default function FAQ() {
           <div className="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 rounded-lg p-4 mt-3 space-y-2">
             <p><strong className="text-orange-primary">Cenník dopravy:</strong></p>
             <ul className="space-y-1 ml-4">
-              <li>• <strong className="text-white">Do 30 km:</strong> ZADARMO 🎉</li>
-              <li>• <strong className="text-white">30-50 km:</strong> od 20 € (podľa typu techniky)</li>
-              <li>• <strong className="text-white">Nad 50 km:</strong> cena dohodou</li>
+              <li>• <strong className="text-white">Senec:</strong> ZADARMO 🎉</li>
+              <li>• <strong className="text-white">Bratislava:</strong> 40 €</li>
+              <li>• <strong className="text-white">Ostatné:</strong> 1,1 €/km</li>
             </ul>
           </div>
           <p className="text-sm text-white/70 mt-3">Cena dopravy závisí od typu a hmotnosti techniky. Pri objednávke vám oznámime presnú cenu.</p>

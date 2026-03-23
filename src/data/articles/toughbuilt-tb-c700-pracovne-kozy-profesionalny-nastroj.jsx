@@ -333,11 +333,11 @@ const article = {
               </div>
               <div className="bg-zinc-900/50 rounded-lg p-3">
                 <p className="text-orange-primary font-bold mb-1">Prenájom na týždeň (pár):</p>
-                <p className="text-white/70">~60-70 € (Royal Stroje: od 12 €/deň)</p>
+                <p className="text-white/70">~60-75 € (Royal Stroje: od 12 €/deň)</p>
               </div>
               <div className="bg-zinc-900/50 rounded-lg p-3">
                 <p className="text-blue-500 font-bold mb-1">Úspora:</p>
-                <p className="text-white/70">~60-80 € + žiadne starosti so skladovaním</p>
+                <p className="text-white/70">~50-70 € + žiadne starosti so skladovaním</p>
               </div>
             </div>
           </div>
@@ -374,7 +374,7 @@ const article = {
             </div>
             <div className="bg-zinc-900/50 rounded-lg p-4">
               <p className="text-green-500 font-bold mb-1">Doprava ZADARMO</p>
-              <p className="text-white/60">do 30 km od Senca</p>
+              <p className="text-white/60">v Senci</p>
             </div>
             <div className="bg-zinc-900/50 rounded-lg p-4">
               <p className="text-blue-500 font-bold mb-1">Technická podpora</p>

@@ -39,7 +39,7 @@ export default function WhyRoyalStroje() {
                 <Truck className="text-orange-primary" size={28} />
               </div>
 
-              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Dovoz do 4 hodín</h3>
+              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Expresný dovoz</h3>
               <p className="text-white/70 text-sm leading-relaxed">
                 Malé náradie a stredná mechanizácia na stavbe v ten istý deň. Ťažká technika do 24 hodín.
               </p>

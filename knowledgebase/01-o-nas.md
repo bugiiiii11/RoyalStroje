@@ -67,7 +67,7 @@ Dovoz techniky na stavbu zabezpečujeme **do 24 hodín**. Malé náradie a stred
 ## Naše výhody
 
 - **20 rokov skúseností** v prenájme stavebnej techniky
-- **Dovoz do 4 hodín** pre malé náradie a strednú mechanizáciu
+- **Expresný dovoz** pre malé náradie a strednú mechanizáciu
 - **Non-stop telefonická podpora** 24/7
 - **Profesionálne poradenstvo** pri výbere strojov
 - **Servisovaná technika** — každý stroj prechádza kontrolou pred zapožičaním
