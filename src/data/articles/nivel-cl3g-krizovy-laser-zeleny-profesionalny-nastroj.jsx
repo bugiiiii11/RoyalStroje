@@ -1,6 +1,6 @@
 const article = {
   title: 'NIVEL CL3G: Krížový Laser so Zeleným Lúčom Pre Profesionálnu Presnosť',
-  date: '12. Marec 2026',
+  date: '18. Marec 2026',
   author: 'Royal Stroje',
   readTime: '10 min',
   category: 'Návody',

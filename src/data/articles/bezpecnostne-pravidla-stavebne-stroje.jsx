@@ -1,6 +1,6 @@
 const article = {
   title: '10 Bezpečnostných Pravidiel pri Práci so Stavebnými Strojmi',
-  date: '10. Júl 2026',
+  date: '8. Marec 2026',
   author: 'Royal Stroje',
   readTime: '13 min',
   category: 'Návody',

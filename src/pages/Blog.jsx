@@ -70,8 +70,8 @@ export default function Blog() {
       slug: 'bezpecnostne-pravidla-stavebne-stroje',
       title: '10 Bezpečnostných Pravidiel pri Práci so Stavebnými Strojmi',
       excerpt: 'Bezpečnosť na stavbe je prvoradá! 10 kľúčových pravidiel pre prácu s minirýpadlom, nakladačom a ďalšou mechanizáciou. Bezplatný checklist na stiahnutie.',
-      date: '10. Január 2026',
-      dateSort: '2026-01-10',
+      date: '8. Marec 2026',
+      dateSort: '2026-03-08',
       author: 'Royal Stroje',
       readTime: '13 min',
       image: '/pictures/graphics/cigy-blog.webp',
@@ -190,8 +190,8 @@ export default function Blog() {
       slug: 'nivel-cl3g-krizovy-laser-zeleny-profesionalny-nastroj',
       title: 'NIVEL CL3G: Krížový Laser so Zeleným Lúčom',
       excerpt: 'Kompletný prehľad krížového lasera NIVEL CL3G so zeleným lúčom - 3 × 360° roviny, Bluetooth ovládanie, USB-C nabíjanie. Prečo je zelený laser 4× viditeľnejší ako červený?',
-      date: '12. Marec 2026',
-      dateSort: '2026-03-12',
+      date: '18. Marec 2026',
+      dateSort: '2026-03-18',
       author: 'Royal Stroje',
       readTime: '10 min',
       image: '/pictures/graphics/nivel-CL3G-blog.webp',
@@ -202,8 +202,8 @@ export default function Blog() {
       slug: 'nivel-n32x-opticky-nivelacny-pristroj-profesionalny-nastroj',
       title: 'NIVEL N32x: Optický Nivelačný Prístroj',
       excerpt: 'Kompletný prehľad optického nivelačného prístroja NIVEL N32x - 32× zväčšenie, presnosť 1,5 mm/km, magnetický kompenzátor a IPX6 odolnosť. Ideálny pre geodetov a stavbárov.',
-      date: '12. Marec 2026',
-      dateSort: '2026-03-12',
+      date: '15. Marec 2026',
+      dateSort: '2026-03-15',
       author: 'Royal Stroje',
       readTime: '9 min',
       image: '/pictures/graphics/nivel-N32-blog.webp',
@@ -223,10 +223,10 @@ export default function Blog() {
     },
   ];
 
-  // Filter out hidden articles - show only 8 articles (1, 2, 4, 6, 8, 13, 14, 15)
+  // Filter out hidden articles
   // Sort by date from newest to oldest
   const visiblePosts = blogPosts
-    .filter(post => ![3, 5, 7, 9, 10, 11, 12].includes(post.id))
+    .filter(post => ![3, 4, 5, 7, 9, 10, 11, 12].includes(post.id))
     .sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort));
 
   return (

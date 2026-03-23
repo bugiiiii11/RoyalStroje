@@ -1,6 +1,6 @@
 const article = {
   title: 'NIVEL N32x: Optický Nivelačný Prístroj Pre Profesionálnu Presnosť',
-  date: '12. Marec 2026',
+  date: '15. Marec 2026',
   author: 'Royal Stroje',
   readTime: '9 min',
   category: 'Návody',
@@ -356,7 +356,7 @@ const article = {
               </div>
               <div className="bg-zinc-900/50 rounded-lg p-3">
                 <p className="text-orange-primary font-bold mb-1">Prenájom na týždeň:</p>
-                <p className="text-white/70">~84 € (Royal Stroje: od 12 €/deň)</p>
+                <p className="text-white/70">~60 € (Royal Stroje: od 12 €/deň)</p>
               </div>
               <div className="bg-zinc-900/50 rounded-lg p-3">
                 <p className="text-green-500 font-bold mb-1">Úspora:</p>
