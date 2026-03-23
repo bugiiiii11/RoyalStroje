@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
 import {
   ShoppingCart, X, Send, Calendar,
   Hammer, Cog, HardHat, ArrowUpFromLine,
@@ -27,35 +27,45 @@ const categoryIcons = {
 };
 
 export default function Catalog() {
-  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { products } = useProducts();
 
-  // Get initial search query from URL
-  const getInitialSearch = () => {
-    const params = new URLSearchParams(location.search);
-    return params.get('search') || '';
-  };
+  // Read filter state from URL params (persists across navigation)
+  const activeCategory = searchParams.get('category') || 'male-naradie';
+  const activeSubcategory = searchParams.get('subcategory') || 'all';
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+  const searchQuery = searchParams.get('search') || '';
 
-  const [activeCategory, setActiveCategory] = useState('male-naradie');
-  const [activeSubcategory, setActiveSubcategory] = useState('all');
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedDays, setSelectedDays] = useState([]);
   const [customerType, setCustomerType] = useState('po'); // 'po' or 'fo'
-  const [searchQuery, setSearchQuery] = useState(getInitialSearch());
 
   // Feature flag to show/hide cart functionality
   const showCart = false;
 
-  // Update search query when URL changes (for navigation from other pages)
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const searchParam = params.get('search');
-    if (searchParam && searchParam !== searchQuery) {
-      setSearchQuery(searchParam);
-      setCurrentPage(1);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.search]);
+  // Helper to update URL params without losing existing ones
+  const updateParams = (updates) => {
+    setSearchParams(prev => {
+      const next = new URLSearchParams(prev);
+      Object.entries(updates).forEach(([key, value]) => {
+        if (value === null || value === undefined || value === '' || value === 'all' && key === 'subcategory' || value === 1 && key === 'page') {
+          next.delete(key);
+        } else {
+          next.set(key, value);
+        }
+      });
+      // Clean up default category to keep URL short
+      if (next.get('category') === 'male-naradie' && !next.get('search')) {
+        next.delete('category');
+      }
+      return next;
+    }, { replace: true });
+  };
+
+  // Setters that write to URL
+  const setActiveCategory = (id) => updateParams({ category: id, subcategory: null, page: null });
+  const setActiveSubcategory = (id) => updateParams({ subcategory: id, page: null });
+  const setCurrentPage = (p) => updateParams({ page: p });
+  const setSearchQuery = (q) => updateParams({ search: q || null, page: null });
 
   // Mobile: 6 products, Desktop: 8 products
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
@@ -176,18 +186,11 @@ export default function Catalog() {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-  // Handle category change
-  const handleCategoryChange = (categoryId) => {
-    setActiveCategory(categoryId);
-    setActiveSubcategory('all');
-    setCurrentPage(1);
-  };
+  // Handle category change (setActiveCategory already resets subcategory & page)
+  const handleCategoryChange = (categoryId) => setActiveCategory(categoryId);
 
-  // Handle subcategory change
-  const handleSubcategoryChange = (subcategoryId) => {
-    setActiveSubcategory(subcategoryId);
-    setCurrentPage(1);
-  };
+  // Handle subcategory change (setActiveSubcategory already resets page)
+  const handleSubcategoryChange = (subcategoryId) => setActiveSubcategory(subcategoryId);
 
   return (
     <ContentSection id="katalog" className="pt-0">
@@ -298,18 +301,12 @@ export default function Catalog() {
                 type="text"
                 placeholder="Hľadať produkty..."
                 value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setCurrentPage(1);
-                }}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-zinc-900 border border-white/10 rounded-lg md:rounded-xl pl-8 md:pl-10 pr-8 md:pr-10 py-3 md:py-2.5 text-sm md:text-sm text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all min-h-[48px]"
               />
               {searchQuery && (
                 <button
-                  onClick={() => {
-                    setSearchQuery('');
-                    setCurrentPage(1);
-                  }}
+                  onClick={() => setSearchQuery('')}
                   className="absolute right-2.5 md:right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
                 >
                   <X size={10} className="md:w-3.5 md:h-3.5" />
@@ -629,7 +626,7 @@ export default function Catalog() {
                   <div className="flex justify-center items-center gap-1 md:gap-2">
                     {/* Previous Button */}
                     <button
-                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))}
                       disabled={currentPage === 1}
                       className={`p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 ${
                         currentPage === 1
@@ -673,7 +670,7 @@ export default function Catalog() {
 
                     {/* Next Button */}
                     <button
-                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                      onClick={() => setCurrentPage(Math.min(currentPage + 1, totalPages))}
                       disabled={currentPage === totalPages}
                       className={`p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 ${
                         currentPage === totalPages
@@ -700,10 +697,7 @@ export default function Catalog() {
                 </p>
                 {searchQuery && (
                   <button
-                    onClick={() => {
-                      setSearchQuery('');
-                      setCurrentPage(1);
-                    }}
+                    onClick={() => setSearchQuery('')}
                     className="mt-4 px-6 py-2 bg-orange-primary/20 border border-orange-primary/40 text-orange-primary rounded-full font-bold hover:bg-orange-primary/30 transition-all"
                   >
                     Vymazať vyhľadávanie
