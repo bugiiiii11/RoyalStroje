@@ -1,10 +1,11 @@
 import { Phone, ArrowLeft, Clock, Shield, Truck, Check, ChevronRight, MessageCircle } from 'lucide-react';
-import { Link, useParams, Navigate } from 'react-router-dom';
+import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import useProducts from '../hooks/useProducts';
 
 export default function ProductDetail() {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const { products, loading } = useProducts();
 
   // Find product by ID
@@ -112,13 +113,13 @@ export default function ProductDetail() {
         <div className="relative z-10 h-full flex flex-col justify-end pb-10">
           <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 w-full">
             {/* Breadcrumb */}
-            <Link
-              to="/#pozicovna"
+            <button
+              onClick={() => navigate(-1)}
               className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-orange-primary/20 border border-white/15 hover:border-orange-primary/40 text-white/80 hover:text-white text-sm font-semibold rounded-full transition-all mb-5 backdrop-blur-sm"
             >
               <ArrowLeft size={15} />
               <span>Späť na katalóg</span>
-            </Link>
+            </button>
 
             <p className="text-orange-primary text-sm font-bold uppercase tracking-wider mb-1">{product.name}</p>
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight">
@@ -131,13 +132,13 @@ export default function ProductDetail() {
       {/* ═══ MOBILE HEADER ═══ */}
       <div className="md:hidden bg-zinc-950 pt-4 pb-2 px-4">
         <div className="flex items-center justify-between mb-3">
-          <Link
-            to="/#pozicovna"
+          <button
+            onClick={() => navigate(-1)}
             className="flex items-center gap-2 px-3 py-2 bg-zinc-900 border border-white/10 text-white font-bold rounded-full transition-all text-xs"
           >
             <ArrowLeft size={14} />
             <span>Katalóg</span>
-          </Link>
+          </button>
           <img src="/logoroyal.webp" alt="Royal Stroje" className="h-7 w-auto" width={2048} height={419} />
         </div>
         <h1 className="text-xl font-black text-white leading-tight">
