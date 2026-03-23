@@ -13,6 +13,7 @@ import DealFinancials from './DealFinancials';
 import DealTimeline from './DealTimeline';
 import generateQuotePdf from '../../lib/generateQuotePdf';
 import generateAgreementPdf from '../../lib/generateAgreementPdf';
+import generateAgreementPdfPO from '../../lib/generateAgreementPdfPO';
 import CreateInvoiceModal from '../invoices/CreateInvoiceModal';
 import { VALID_TRANSITIONS, RESERVATION_STATUSES, formatDate, formatPrice } from '../../lib/constants';
 
@@ -113,7 +114,10 @@ export default function DealDetail() {
             </button>
           )}
           <button
-            onClick={async () => await generateAgreementPdf(reservation, items, client)}
+            onClick={async () => {
+              const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
+              await gen(reservation, items, client);
+            }}
             className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
             title="Stiahnuť zmluvu"
           >
