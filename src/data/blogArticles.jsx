@@ -2,7 +2,7 @@
 export const blogMeta = {
   'prenajom-vs-kupa-stavebnej-mechanizacie': {
     title: 'Prenájom vs. Kúpa Stavebnej Mechanizácie: Komplexný Sprievodca 2026',
-    date: '2. Marec 2026',
+    date: '20. Marec 2026',
     author: 'Royal Stroje',
     readTime: '9 min',
     category: 'Tipy a rady',
