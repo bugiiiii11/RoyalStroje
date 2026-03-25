@@ -57,7 +57,7 @@ export default function Header() {
           promoVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
         }`}
       >
-        <div className="relative bg-zinc-950/98 backdrop-blur-xl border border-orange-primary/40 rounded-l-2xl shadow-2xl shadow-orange-primary/10 overflow-hidden w-[320px]" style={{boxShadow: '0 0 0 1px rgba(232,114,10,0.25), 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(232,114,10,0.08)'}}>
+        <div className="relative bg-zinc-950 border border-orange-primary/40 rounded-l-2xl overflow-hidden w-[320px]" style={{boxShadow: '0 0 0 1px rgba(232,114,10,0.25), 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(232,114,10,0.08)'}}>
           {/* Top accent line */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-orange-primary/60 via-orange-primary to-orange-primary/60"></div>
 
@@ -67,7 +67,7 @@ export default function Header() {
           {/* Close button */}
           <button
             onClick={handleClosePromo}
-            className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center text-white/40 hover:text-orange-primary hover:bg-orange-primary/10 rounded-lg border border-white/10 hover:border-orange-primary/30 transition-all z-10"
+            className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center text-orange-primary hover:text-white hover:bg-orange-primary rounded-lg border border-orange-primary/40 hover:border-orange-primary transition-all z-10"
             aria-label="Zavrieť"
           >
             <X size={14} />
