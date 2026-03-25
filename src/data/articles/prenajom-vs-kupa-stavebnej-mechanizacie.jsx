@@ -48,7 +48,7 @@ const article = {
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
             <h3 className="text-xl font-bold text-orange-primary mb-4">Prenájom — Celkové Náklady za 5 Rokov</h3>
             <ul className="space-y-2 text-white/80">
-              <li>• Denný prenájom (90 €/deň × 250 dní × 5 rokov): 112 500 €</li>
+              <li>• Denný prenájom (80 €/deň × 250 dní × 5 rokov): 100 000 €</li>
               <li>• Doprava (1500 € ročne): 7 500 €</li>
               <li>• Poistenie už v cene: 0 €</li>
               <li>• Servis už v cene: 0 €</li>
