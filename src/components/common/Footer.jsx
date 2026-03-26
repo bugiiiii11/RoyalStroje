@@ -52,7 +52,7 @@ const LinkedInIcon = ({ size = 24 }) => (
 
 export default function Footer() {
   return (
-    <footer className="relative bg-black pt-16 pb-8 overflow-visible">
+    <footer className="relative bg-black pt-16 pb-24 md:pb-8 overflow-visible">
       {/* Separator line above footer */}
       <hr className="absolute top-0 left-0 right-0 border-0 h-[2px] bg-[#FF6600] w-full m-0" />
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">

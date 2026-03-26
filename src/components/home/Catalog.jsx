@@ -200,17 +200,6 @@ export default function Catalog() {
 
   return (
     <ContentSection id="katalog" className="pt-0">
-      {/* Mobile Logo - Top Left */}
-      <div className="md:hidden absolute top-3 left-3 z-30">
-        <img
-          src="/logoroyal.webp"
-          alt="Royal Stroje"
-          className="h-8 w-auto"
-          width={2048}
-          height={419}
-        />
-      </div>
-
       {/* Radial gradient overlay */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
@@ -222,7 +211,7 @@ export default function Catalog() {
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pb-16 md:py-16">
         {/* Mobile Header */}
-        <div ref={headerRef} className={`md:hidden text-center mb-6 pt-16 md:pt-0 reveal ${headerInView ? 'in-view' : ''}`}>
+        <div ref={headerRef} className={`md:hidden text-center mb-6 pt-6 reveal ${headerInView ? 'in-view' : ''}`}>
           <h2 className="text-xl font-black text-white mb-2 leading-tight">
             <span className="text-orange-primary">Katalóg</span> strojov na prenájom
           </h2>
@@ -718,7 +707,7 @@ export default function Catalog() {
         </div>
 
         {/* Quote Form - Mobile only (before FAQ) */}
-        <div className="lg:hidden mt-12 mb-8">
+        <div className="lg:hidden mt-20 mb-8">
           <QuoteForm />
         </div>
 
