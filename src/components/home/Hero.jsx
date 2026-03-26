@@ -13,8 +13,6 @@ export default function Hero() {
           width={1920}
           height={1080}
           fetchPriority="high"
-          decoding="sync"
-          loading="eager"
         />
       </div>
 

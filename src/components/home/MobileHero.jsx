@@ -10,8 +10,6 @@ export default function MobileHero() {
           alt="Royal Stroje - požičovňa stavebnej techniky Senec"
           className="w-full h-full object-cover object-center"
           fetchPriority="high"
-          decoding="sync"
-          loading="eager"
         />
       </div>
 
