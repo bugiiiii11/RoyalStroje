@@ -8,9 +8,9 @@ import HamburgerMenu from './components/common/HamburgerMenu';
 import AnimatedBackground from './components/common/AnimatedBackground';
 import ScrollToTop from './components/common/ScrollToTop';
 import { CartProvider } from './context/CartContext';
+import Home from './pages/Home';
 
 // Lazy-loaded pages — each becomes a separate chunk
-const Home = lazy(() => import('./pages/Home'));
 const Sluzby = lazy(() => import('./pages/Sluzby'));
 const PredajTechniky = lazy(() => import('./pages/PredajTechniky'));
 const NahradneDiely = lazy(() => import('./pages/NahradneDiely'));
