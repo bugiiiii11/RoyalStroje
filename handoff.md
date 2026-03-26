@@ -59,8 +59,11 @@
 10. **PNG-to-WebP conversion** -- 13 PNG files converted to WebP. Total savings: 15.1 MB (87.7%). Hero image: 2.8 MB -> 167 KB. All code references updated automatically. Committed: 2af232b.
 
 ### Performance Fix
-11. **Home page no longer lazy-loaded** -- Removed `React.lazy()` from Home import in `App.jsx`. Home now loads in the main bundle, eliminating the Suspense spinner that showed header+footer before hero. Committed: a7888e0.
+11. **Removed lazy loading from all pages** -- Removed `React.lazy()` and `Suspense` from all page imports in `App.jsx`. All pages now load in the main bundle (207KB gzip), eliminating the spinner on every page refresh. Committed: e670d0a.
 12. **Hero image preload** -- `<link rel="preload">` in `index.html` for `hero-main.webp` so browser downloads it before React mounts. Committed: a59a376.
+
+### Footer
+13. **Copyright row centered on desktop** -- Changed from `justify-between` to `justify-center` with `|` separator between copyright and MDN Tech credit. Mobile layout unchanged. Committed: d335a83.
 
 ## What To Do Next
 | Priority | Task | Notes |
