@@ -1,4 +1,3 @@
-import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/common/Header';
@@ -9,30 +8,20 @@ import AnimatedBackground from './components/common/AnimatedBackground';
 import ScrollToTop from './components/common/ScrollToTop';
 import { CartProvider } from './context/CartContext';
 import Home from './pages/Home';
-
-// Lazy-loaded pages — each becomes a separate chunk
-const Sluzby = lazy(() => import('./pages/Sluzby'));
-const PredajTechniky = lazy(() => import('./pages/PredajTechniky'));
-const NahradneDiely = lazy(() => import('./pages/NahradneDiely'));
-const CenovaPonuka = lazy(() => import('./pages/CenovaPonuka'));
-const RoyalFleet = lazy(() => import('./pages/RoyalFleet'));
-const SkoLenieObsluhy = lazy(() => import('./pages/SkoLenieObsluhy'));
-const Blog = lazy(() => import('./pages/Blog'));
-const BlogDetail = lazy(() => import('./pages/BlogDetail'));
-const Kontakt = lazy(() => import('./pages/Kontakt'));
-const Kosik = lazy(() => import('./pages/Kosik'));
-const Partneri = lazy(() => import('./pages/Partneri'));
-const GDPR = lazy(() => import('./pages/GDPR'));
-const ObchodnePodmienky = lazy(() => import('./pages/ObchodnePodmienky'));
-const ProductDetail = lazy(() => import('./pages/ProductDetail'));
-
-function PageLoader() {
-  return (
-    <div className="min-h-[60vh] flex items-center justify-center">
-      <div className="w-10 h-10 border-4 border-orange-primary/30 border-t-orange-primary rounded-full animate-spin" />
-    </div>
-  );
-}
+import Sluzby from './pages/Sluzby';
+import PredajTechniky from './pages/PredajTechniky';
+import NahradneDiely from './pages/NahradneDiely';
+import CenovaPonuka from './pages/CenovaPonuka';
+import RoyalFleet from './pages/RoyalFleet';
+import SkoLenieObsluhy from './pages/SkoLenieObsluhy';
+import Blog from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
+import Kontakt from './pages/Kontakt';
+import Kosik from './pages/Kosik';
+import Partneri from './pages/Partneri';
+import GDPR from './pages/GDPR';
+import ObchodnePodmienky from './pages/ObchodnePodmienky';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -48,7 +37,6 @@ function App() {
           <Header />
           <HamburgerMenu />
           <main className="pb-20 md:pb-0">
-            <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/sluzby" element={<Sluzby />} />
@@ -67,7 +55,6 @@ function App() {
                 {/* Product Detail Pages - Dynamic Route */}
                 <Route path="/:productId" element={<ProductDetail />} />
               </Routes>
-            </Suspense>
           </main>
           <Footer />
           <MobileNav />
