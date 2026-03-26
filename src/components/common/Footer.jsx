@@ -212,7 +212,7 @@ export default function Footer() {
             className="flex items-center gap-2 text-white/40 hover:text-orange-primary transition-colors duration-200 text-sm group"
           >
             <span>Vytvorené</span>
-            <img src="/pictures/graphics/partneri/logo_mdntechorg.png" alt="M.D.N Tech" className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity duration-200" />
+            <img src="/pictures/graphics/partneri/logo_mdntechorg.webp" alt="M.D.N Tech" className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity duration-200" />
             <span className="font-medium">M.D.N Tech</span>
           </a>
         </div>

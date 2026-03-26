@@ -124,6 +124,7 @@ export default function Header() {
           {/* Logo */}
           <Link
             to="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center hover:opacity-80 transition-opacity duration-300"
           >
             <img
@@ -143,39 +144,39 @@ export default function Header() {
                 to="/"
                 className={`relative px-4 py-2.5 font-bold text-lg uppercase tracking-wide transition-all duration-300 ${
                   isActive('/')
-                    ? 'text-orange-primary'
-                    : 'text-white hover:text-orange-primary'
+                    ? 'text-white'
+                    : 'text-white/70 hover:text-orange-primary'
                 }`}
               >
                 Požičovňa
                 {isActive('/') && (
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-orange-primary rounded-t-full"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-white rounded-t-full"></span>
                 )}
               </Link>
               <Link
                 to="/sluzby"
                 className={`relative px-4 py-2.5 font-bold text-lg uppercase tracking-wide transition-all duration-300 ${
                   isActive('/sluzby') || location.pathname.startsWith('/sluzby/')
-                    ? 'text-orange-primary'
-                    : 'text-white hover:text-orange-primary'
+                    ? 'text-white'
+                    : 'text-white/70 hover:text-orange-primary'
                 }`}
               >
                 Služby
                 {(isActive('/sluzby') || location.pathname.startsWith('/sluzby/')) && (
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-orange-primary rounded-t-full"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-white rounded-t-full"></span>
                 )}
               </Link>
               <Link
                 to="/kontakt"
                 className={`relative px-4 py-2.5 font-bold text-lg uppercase tracking-wide transition-all duration-300 ${
                   isActive('/kontakt')
-                    ? 'text-orange-primary'
-                    : 'text-white hover:text-orange-primary'
+                    ? 'text-white'
+                    : 'text-white/70 hover:text-orange-primary'
                 }`}
               >
                 Kontakt
                 {isActive('/kontakt') && (
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-orange-primary rounded-t-full"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-white rounded-t-full"></span>
                 )}
               </Link>
             </nav>
@@ -190,7 +191,7 @@ export default function Header() {
                 href="https://wa.me/421948555551"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center text-orange-primary hover:text-orange-hover hover:scale-110 transition-all duration-300"
+                className="flex items-center justify-center text-white hover:text-orange-primary hover:scale-110 transition-all duration-300"
                 aria-label="WhatsApp"
               >
                 <WhatsAppIcon size={32} />
@@ -199,7 +200,7 @@ export default function Header() {
                 href="https://t.me/Royalstroje"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center text-orange-primary hover:text-orange-hover hover:scale-110 transition-all duration-300"
+                className="flex items-center justify-center text-white hover:text-orange-primary hover:scale-110 transition-all duration-300"
                 aria-label="Telegram"
               >
                 <TelegramIcon size={32} />
@@ -208,7 +209,7 @@ export default function Header() {
               {/* Phone CTA - icon with hover to show number */}
               <a
                 href="tel:+421948555551"
-                className="group relative flex items-center gap-2 text-orange-primary hover:text-orange-hover transition-all duration-300"
+                className="group relative flex items-center gap-2 text-white hover:text-orange-primary transition-all duration-300"
                 onMouseEnter={() => setPhoneHovered(true)}
                 onMouseLeave={() => setPhoneHovered(false)}
                 aria-label="Telefón: 0948 555 551"

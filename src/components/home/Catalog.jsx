@@ -42,8 +42,14 @@ export default function Catalog() {
 
   // Scroll reveal refs
   const [headerRef, headerInView] = useInView();
+  const [desktopHeaderRef, desktopHeaderInView] = useInView();
+  const [filtersRef, filtersInView] = useInView();
+  const [sidebarRef, sidebarInView] = useInView();
+  const [subcatRef, subcatInView] = useInView();
   const [gridRef, gridInView] = useInView();
+  const [quoteFormRef, quoteFormInView] = useInView();
   const [blogCtaRef, blogCtaInView] = useInView();
+  const [blogCardsRef, blogCardsInView] = useInView();
 
   // Feature flag to show/hide cart functionality
   const showCart = false;
@@ -221,7 +227,7 @@ export default function Catalog() {
         </div>
 
         {/* Desktop Header */}
-        <div className="hidden md:block mb-8">
+        <div ref={desktopHeaderRef} className={`hidden md:block mb-8 reveal ${desktopHeaderInView ? 'in-view' : ''}`}>
           <div className="relative flex items-center justify-center gap-8">
             {/* Left Product Image */}
             <div className="hidden lg:block flex-shrink-0">
@@ -260,7 +266,7 @@ export default function Catalog() {
         </div>
 
         {/* Customer Type Selector & Search - Centered Row */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4 mb-4 md:mb-8">
+        <div ref={filtersRef} className={`flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4 mb-4 md:mb-8 reveal-fade stagger-2 ${filtersInView ? 'in-view' : ''}`}>
             {/* Customer Type Selector */}
             <div className="inline-flex bg-zinc-900 border border-white/10 rounded-lg md:rounded-2xl p-0.5 md:p-1.5 gap-0.5 md:gap-1.5">
               <button
@@ -316,7 +322,7 @@ export default function Catalog() {
         {/* Main Catalog Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Sidebar - Categories */}
-          <aside className="lg:w-80 flex-shrink-0">
+          <aside ref={sidebarRef} className={`lg:w-80 flex-shrink-0 reveal-left stagger-1 ${sidebarInView ? 'in-view' : ''}`}>
             <div className="bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 sticky top-24">
               <h3 className="text-white font-black text-sm md:text-lg uppercase tracking-wide mb-3 md:mb-6 px-1 md:px-2">
                 Kategórie
@@ -543,7 +549,7 @@ export default function Catalog() {
           {/* Main Content Area */}
           <div className="flex-1">
             {/* Subcategory Filters */}
-            <div className="mb-4 md:mb-8">
+            <div ref={subcatRef} className={`mb-4 md:mb-8 reveal-fade stagger-2 ${subcatInView ? 'in-view' : ''}`}>
               <div className="flex flex-wrap gap-1.5 md:gap-3">
                 {currentCategory?.subcategories.map((subcategory) => {
                   const isActive = activeSubcategory === subcategory.id;
@@ -707,7 +713,7 @@ export default function Catalog() {
         </div>
 
         {/* Quote Form - Mobile only (before FAQ) */}
-        <div className="lg:hidden mt-20 mb-8">
+        <div ref={quoteFormRef} className={`lg:hidden mt-20 mb-8 reveal ${quoteFormInView ? 'in-view' : ''}`}>
           <QuoteForm />
         </div>
 
@@ -728,9 +734,9 @@ export default function Catalog() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-8 md:mb-12">
+          <div ref={blogCardsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-8 md:mb-12">
             {/* Tip 1 */}
-            <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300">
+            <div className={`group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 reveal stagger-1 ${blogCardsInView ? 'in-view' : ''}`}>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-primary/20 transition-all">
                   <BookOpen className="text-orange-primary" size={24} />
@@ -747,7 +753,7 @@ export default function Catalog() {
             </div>
 
             {/* Tip 2 */}
-            <div className="group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300">
+            <div className={`group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 reveal stagger-2 ${blogCardsInView ? 'in-view' : ''}`}>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-primary/20 transition-all">
                   <Calendar className="text-orange-primary" size={24} />

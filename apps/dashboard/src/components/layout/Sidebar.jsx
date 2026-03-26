@@ -203,7 +203,7 @@ export default function Sidebar({ open, onClose }) {
             className="group flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-white/50 transition-all"
           >
             <div className="w-5 h-5 rounded bg-gray-900 flex items-center justify-center flex-shrink-0 overflow-hidden">
-              <img src="/logo_mdntech.png" alt="M.D.N Tech" className="w-4 h-4 object-contain" />
+              <img src="/logo_mdntech.webp" alt="M.D.N Tech" className="w-4 h-4 object-contain" />
             </div>
             <div className="flex items-center gap-1 min-w-0">
               <span className="text-[10px] text-gray-400 group-hover:text-gray-600 transition-colors">

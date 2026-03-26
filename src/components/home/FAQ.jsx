@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { ChevronDown, Phone, Mail, MessageCircle } from 'lucide-react';
+import { useInView } from '../../hooks/useInView';
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
+  const [faqHeadingRef, faqHeadingInView] = useInView();
+  const [faqListRef, faqListInView] = useInView();
+  const [faqSideRef, faqSideInView] = useInView();
 
   const faqs = [
     {
@@ -167,7 +171,7 @@ export default function FAQ() {
     <div id="faq" className="relative pt-12 md:pt-32 pb-8 md:pb-16 overflow-hidden">
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
-        <div className="text-center mb-6 md:mb-12">
+        <div ref={faqHeadingRef} className={`text-center mb-6 md:mb-12 reveal ${faqHeadingInView ? 'in-view' : ''}`}>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4">
             Máte <span className="text-orange-primary">otázky?</span>
           </h2>
@@ -179,7 +183,7 @@ export default function FAQ() {
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Left Side - Support Image/Info - Hidden on mobile */}
-          <div className="hidden lg:block lg:col-span-2">
+          <div ref={faqSideRef} className={`hidden lg:block lg:col-span-2 reveal-left ${faqSideInView ? 'in-view' : ''}`}>
             <div className="sticky top-24">
               {/* Image Container */}
               <div className="relative rounded-2xl overflow-hidden border-2 border-orange-primary/30 mb-6">
@@ -250,12 +254,12 @@ export default function FAQ() {
           </div>
 
           {/* Right Side - FAQ Accordion */}
-          <div className="lg:col-span-3">
+          <div ref={faqListRef} className="lg:col-span-3">
             <div className="space-y-2 md:space-y-4">
               {faqs.map((faq, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/30 transition-all"
+                  className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/30 transition-all reveal stagger-${Math.min(index + 1, 8)} ${faqListInView ? 'in-view' : ''}`}
                 >
                   {/* Question Button */}
                   <button

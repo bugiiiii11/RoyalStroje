@@ -14,7 +14,7 @@ export default function Blog() {
       dateSort: '2026-03-20',
       author: 'Royal Stroje',
       readTime: '9 min',
-      image: '/pictures/graphics/blog - kupa prenajom.png',
+      image: '/pictures/graphics/blog - kupa prenajom.webp',
       category: 'Tipy a rady',
     },
     {
