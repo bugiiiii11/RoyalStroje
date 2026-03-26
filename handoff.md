@@ -6,6 +6,7 @@
 | 1 | 2026-03-18/19 | MVP Complete (Sprints 1-5) | Full rental management system: dashboard, portal, Supabase backend, invoicing, reports |
 | 2 | 2026-03-19 | Design Rebrand + Bug Fixes | Orange #FF6600 rebrand, sidebar redesign, PDF diacritics fix, VAT 23% fix, portal RLS fix |
 | 3 | 2026-03-20–26 | Website Features + Mobile UX | Supabase live sync, image upload, PO/FO contracts, 6th service, mobile hero, scroll animations |
+| 4 | 2026-03-26 | Hero Redesign + Desktop Animations + Performance | New hero image, desktop scroll animations, header white icons, PNG-to-WebP, fix lazy-load spinner |
 
 ## What Was Done (Session 3) -- Website Features + Mobile UX
 
@@ -37,6 +38,30 @@
 17. **Blog** -- Article dates corrected, `prenajom-vs-kupa` moved to 1st position via `dateSort`, cover image added.
 18. **Knowledgebase** -- Multiple `.md` files updated for chatbot (Pan Krivosudský persona).
 
+## What Was Done (Session 4) -- Hero Redesign + Desktop Animations + Performance
+
+### Hero Section
+1. **New hero background image** -- Replaced `hero1.webp` with `hero-main.webp` (excavator sunset scene). Dark lower-left area designed for text overlay. Applied to both desktop (`Hero.jsx`) and mobile (`MobileHero.jsx`). Committed: 2af232b.
+2. **Desktop hero text repositioned** -- Text moved from vertically centered to bottom-left (`items-end`, `pb-28 lg:pb-32`). Gradient overlays adjusted for new image. Committed: 2af232b.
+3. **Desktop hero entrance animations** -- Staggered fade-up animations: headline (0.15s), description (0.35s), CTA buttons (0.55s). CSS `@keyframes heroDeskFadeUp` in `Hero.jsx`. Committed: 2af232b.
+
+### Header
+4. **White icons and nav links** -- Active nav link text + underline changed to white (was orange). Inactive links `white/70`. Social icons (WhatsApp, Telegram, Phone) changed to white. Hover remains orange. Committed: 2af232b.
+5. **Logo scroll-to-top** -- Added `onClick` to logo Link to smooth-scroll to top when already on home page. Committed: 2af232b.
+
+### Scroll Animations (Desktop + Mobile)
+6. **New CSS animation variants** -- Added `reveal-left`, `reveal-right`, `reveal-scale` classes in `index.css`. Committed: 2af232b.
+7. **Catalog section animations** -- Desktop header (reveal), filter bar (reveal-fade), category sidebar (reveal-left), subcategory filters (reveal-fade), mobile QuoteForm (reveal). Committed: 2af232b.
+8. **FAQ section animations** -- Heading (reveal), left sidebar image+contact (reveal-left), FAQ accordion items (staggered reveal). Committed: 2af232b.
+9. **Blog CTA cards** -- Staggered reveal on the two tip cards. Committed: 2af232b.
+
+### Image Optimization
+10. **PNG-to-WebP conversion** -- 13 PNG files converted to WebP. Total savings: 15.1 MB (87.7%). Hero image: 2.8 MB -> 167 KB. All code references updated automatically. Committed: 2af232b.
+
+### Performance Fix
+11. **Home page no longer lazy-loaded** -- Removed `React.lazy()` from Home import in `App.jsx`. Home now loads in the main bundle, eliminating the Suspense spinner that showed header+footer before hero. Committed: a7888e0.
+12. **Hero image preload** -- `<link rel="preload">` in `index.html` for `hero-main.webp` so browser downloads it before React mounts. Committed: a59a376.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
@@ -44,7 +69,7 @@
 | 2 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
 | 3 | Product images | Upload product photos via dashboard image upload feature |
 | 4 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
-| 5 | Mobile UX -- other pages | Scroll animations applied to Požičovňa only -- extend to Služby, Blog, Kontakt |
+| 5 | Scroll animations -- other pages | Desktop + mobile done for Požičovňa. Extend to Služby, Blog, Kontakt |
 | 6 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
 | 7 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
 | 8 | Online payment | Stripe/GoPay integration (post-MVP) |
@@ -53,7 +78,8 @@
 | File | Purpose |
 |------|---------|
 | `src/pages/Home.jsx` | Home page -- renders MobileHero (mobile) + Catalog |
-| `src/components/home/MobileHero.jsx` | Mobile-only hero with CSS animations |
+| `src/components/home/Hero.jsx` | Desktop hero with entrance animations + hero-main.webp |
+| `src/components/home/MobileHero.jsx` | Mobile-only hero with CSS animations + hero-main.webp |
 | `src/components/home/Catalog.jsx` | Main catalog with URL-persisted filters + scroll animations |
 | `src/hooks/useInView.js` | IntersectionObserver hook for scroll reveal |
 | `src/hooks/useProducts.js` | Supabase product fetching + filter helpers |
