@@ -57,9 +57,9 @@ export default function Footer() {
       <hr className="absolute top-0 left-0 right-0 border-0 h-[2px] bg-[#FF6600] w-full m-0" />
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12 mb-12">
           {/* Column 1: About */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <div className="text-2xl font-black mb-4">
               <span className="text-white">ROYAL</span>
               <span className="text-orange-primary"> STROJE</span>
@@ -168,7 +168,7 @@ export default function Footer() {
           </div>
 
           {/* Column 4: Kontakt */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <h4 className="text-white font-bold text-sm uppercase tracking-wider mb-4">
               Kontakt
             </h4>

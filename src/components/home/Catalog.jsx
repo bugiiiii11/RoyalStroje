@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import { useInView } from '../../hooks/useInView';
 import {
   ShoppingCart, X, Send, Calendar,
   Hammer, Cog, HardHat, ArrowUpFromLine,
@@ -38,6 +39,11 @@ export default function Catalog() {
 
   const [selectedDays, setSelectedDays] = useState([]);
   const [customerType, setCustomerType] = useState('po'); // 'po' or 'fo'
+
+  // Scroll reveal refs
+  const [headerRef, headerInView] = useInView();
+  const [gridRef, gridInView] = useInView();
+  const [blogCtaRef, blogCtaInView] = useInView();
 
   // Feature flag to show/hide cart functionality
   const showCart = false;
@@ -216,7 +222,7 @@ export default function Catalog() {
 
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pb-16 md:py-16">
         {/* Mobile Header */}
-        <div className="md:hidden text-center mb-6 pt-16 md:pt-0">
+        <div ref={headerRef} className={`md:hidden text-center mb-6 pt-16 md:pt-0 reveal ${headerInView ? 'in-view' : ''}`}>
           <h2 className="text-xl font-black text-white mb-2 leading-tight">
             <span className="text-orange-primary">Katalóg</span> strojov na prenájom
           </h2>
@@ -615,9 +621,11 @@ export default function Catalog() {
               </div>
             ) : currentProducts.length > 0 ? (
               <>
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-5 mb-8">
-                  {currentProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} customerType={customerType} />
+                <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-5 mb-8">
+                  {currentProducts.map((product, i) => (
+                    <div key={product.id} className={`reveal stagger-${Math.min(i + 1, 8)} ${gridInView ? 'in-view' : ''}`}>
+                      <ProductCard product={product} customerType={customerType} />
+                    </div>
                   ))}
                 </div>
 
@@ -721,7 +729,7 @@ export default function Catalog() {
         <FAQ />
 
         {/* Blog CTA Section */}
-        <div className="relative mt-16 md:mt-24 pt-12 md:pt-16">
+        <div ref={blogCtaRef} className={`relative mt-16 md:mt-24 pt-12 md:pt-16 reveal ${blogCtaInView ? 'in-view' : ''}`}>
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4">
               Chcete vedieť viac?
