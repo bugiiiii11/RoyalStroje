@@ -1,6 +1,11 @@
 import { Phone, Mail, Hammer, Wrench, Drill, Tractor, CircleDot, Truck } from 'lucide-react';
+import { useInView } from '../hooks/useInView';
 
 export default function ZemnePrace() {
+  const [heroRef, heroInView] = useInView();
+  const [headingRef, headingInView] = useInView();
+  const [gridRef, gridInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
   const services = [
     {
       id: 'vykopy-zaklady',
@@ -72,12 +77,12 @@ export default function ZemnePrace() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Zemné a búracie práce
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Výkopy základov, prípojky inžinierskych sietí, búracie práce s hydraulickým kladivom, terénne úpravy a odvoz odpadu.
             </p>
           </div>
@@ -197,22 +202,22 @@ export default function ZemnePrace() {
         `}</style>
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-          <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+          <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
             <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
               Kompletné <span className="text-orange-primary">zemné práce</span>
             </h1>
-            <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+            <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Profesionálne služby pre všetky typy projektov
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service) => {
+          <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, index) => {
               const IconComponent = service.icon;
               return (
                 <div
                   key={service.id}
-                  className="bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group"
+                  className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                 >
                   <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                     <IconComponent className="text-orange-primary" size={28} />
@@ -238,7 +243,7 @@ export default function ZemnePrace() {
 
       {/* CTA Section */}
       <section className="py-16 bg-black">
-        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center">
+        <div ref={ctaRef} className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
             Potrebujete zemné alebo búracie práce?
           </h2>

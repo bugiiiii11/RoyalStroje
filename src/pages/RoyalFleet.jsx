@@ -1,8 +1,17 @@
 import { Phone, Mail, Check, TrendingDown, Shield, Calendar } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 export default function RoyalFleet() {
+  const [heroRef, heroInView] = useInView();
+  const [introRef, introInView] = useInView();
+  const [modelsRef, modelsInView] = useInView();
+  const [exampleRef, exampleInView] = useInView();
+  const [benefitsRef, benefitsInView] = useInView();
+  const [stepsRef, stepsInView] = useInView();
+  const [whoRef, whoInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
   const models = [
     {
       id: 'flexi-rent',
@@ -92,12 +101,12 @@ export default function RoyalFleet() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Vlastná flotila bez kúpy. <span className="text-orange-primary">Fixná mesačná platba od 109 €.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Stroje denne k dispozícii, žiadne viazanie kapitálu. Royal Fleet pre firmy po celom Slovensku.
             </p>
           </div>
@@ -121,11 +130,11 @@ export default function RoyalFleet() {
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Intro Section */}
           <div className="mb-12 md:mb-16">
-            <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+            <div ref={introRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${introInView ? 'in-view' : ''}`}>
               <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
                 Dlhodobý prenájom pre firmy. <span className="text-orange-primary">Fixné náklady, žiadne prekvapenia.</span>
               </h1>
-              <p className="text-white/70 text-sm md:text-lg max-w-3xl mx-auto mb-4 md:mb-6">
+              <p className={`text-white/70 text-sm md:text-lg max-w-3xl mx-auto mb-4 md:mb-6 reveal-fade stagger-2 ${introInView ? 'in-view' : ''}`}>
                 Royal Fleet je program dlhodobého prenájmu profesionálneho náradia a mechanizácie s fixnou mesačnou platbou.
               </p>
               <p className="text-white/60 text-xs md:text-base max-w-2xl mx-auto">
@@ -145,11 +154,11 @@ export default function RoyalFleet() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-              {models.map((model) => (
+            <div ref={modelsRef} className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+              {models.map((model, index) => (
                 <div
                   key={model.id}
-                  className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group"
+                  className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group reveal stagger-${Math.min(index + 1, 3)} ${modelsInView ? 'in-view' : ''}`}
                 >
                   <h3 className="text-orange-primary font-black text-xl md:text-2xl mb-2">{model.title}</h3>
                   <p className="text-white font-bold text-sm md:text-base mb-3">{model.subtitle}</p>
@@ -175,7 +184,7 @@ export default function RoyalFleet() {
           </div>
 
           {/* Real Example */}
-          <div className="mb-12 md:mb-16">
+          <div ref={exampleRef} className={`mb-12 md:mb-16 reveal-scale ${exampleInView ? 'in-view' : ''}`}>
             <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/30 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 text-center">
                 Reálny príklad <span className="text-orange-primary">úspor</span>
@@ -236,13 +245,13 @@ export default function RoyalFleet() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div ref={benefitsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {benefits.map((benefit, idx) => {
                 const IconComponent = benefit.icon;
                 return (
                   <div
                     key={idx}
-                    className="bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all"
+                    className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all reveal stagger-${Math.min(idx + 1, 4)} ${benefitsInView ? 'in-view' : ''}`}
                   >
                     <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4">
                       <IconComponent className="text-orange-primary" size={28} />
@@ -265,15 +274,15 @@ export default function RoyalFleet() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
+            <div ref={stepsRef} className="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
               {[
                 { step: '1', title: 'Vyberiete si stroj', desc: 'Z našej ponuky alebo navrhniete vlastný' },
                 { step: '2', title: 'Nastavíme dĺžku', desc: '12 – 24 – 36 mesiacov' },
                 { step: '3', title: 'Schválime spoluprácu', desc: 'Individuálne podmienky pre každú firmu' },
                 { step: '4', title: 'Fixná mesačná suma', desc: 'Platíte pravidelne bez prekvapení' },
                 { step: '5', title: 'Servis a podpora', desc: 'Zabezpečujeme technickú podporu' },
-              ].map((item) => (
-                <div key={item.step} className="bg-zinc-900 border border-white/10 rounded-2xl p-4 text-center">
+              ].map((item, index) => (
+                <div key={item.step} className={`bg-zinc-900 border border-white/10 rounded-2xl p-4 text-center reveal stagger-${Math.min(index + 1, 5)} ${stepsInView ? 'in-view' : ''}`}>
                   <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-3 mx-auto text-orange-primary font-black text-xl">
                     {item.step}
                   </div>
@@ -287,7 +296,7 @@ export default function RoyalFleet() {
           </div>
 
           {/* Who Is It For */}
-          <div className="mb-12 md:mb-16">
+          <div ref={whoRef} className={`mb-12 md:mb-16 reveal ${whoInView ? 'in-view' : ''}`}>
             <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 text-center">
                 Pre koho je <span className="text-orange-primary">Royal Fleet</span> ideálny?
@@ -337,7 +346,7 @@ export default function RoyalFleet() {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center">
+          <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <h2 className="text-2xl md:text-4xl font-black text-white mb-4">
               Zaujíma vás Royal Fleet?
             </h2>

@@ -4,12 +4,18 @@ import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { blogMeta, loadArticle } from '../data/blogArticles';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 export default function BlogDetail() {
   const { slug } = useParams();
   const meta = blogMeta[slug];
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const [heroRef, heroInView] = useInView();
+  const [articleRef, articleInView] = useInView();
+  const [shareRef, shareInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
 
   useEffect(() => {
     let cancelled = false;
@@ -96,7 +102,7 @@ export default function BlogDetail() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-4xl">
             {/* Back Button - Prominent */}
             <Link
@@ -112,7 +118,7 @@ export default function BlogDetail() {
             </h1>
 
             {/* Meta Info */}
-            <div className="flex flex-wrap items-center gap-4 text-white/80">
+            <div className={`flex flex-wrap items-center gap-4 text-white/80 reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               <span className="flex items-center gap-2">
                 <Calendar size={18} />
                 {meta.date}
@@ -143,7 +149,7 @@ export default function BlogDetail() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 lg:px-12">
           {/* Mobile Header */}
-          <div className="md:hidden text-center mb-6 pt-16">
+          <div className={`md:hidden text-center mb-6 pt-16 reveal ${heroInView ? 'in-view' : ''}`}>
             {/* Back Button - Prominent */}
             <Link
               to="/blog"
@@ -172,7 +178,7 @@ export default function BlogDetail() {
           </div>
 
           {/* Article Body */}
-          <article className="prose prose-invert prose-lg max-w-none">
+          <article ref={articleRef} className={`prose prose-invert prose-lg max-w-none reveal-fade ${articleInView ? 'in-view' : ''}`}>
             {loading ? (
               <div className="flex items-center justify-center py-20">
                 <div className="w-10 h-10 border-4 border-orange-primary border-t-transparent rounded-full animate-spin"></div>
@@ -185,7 +191,7 @@ export default function BlogDetail() {
           </article>
 
           {/* Share Section */}
-          <div className="mt-16 pt-8 border-t border-white/10">
+          <div ref={shareRef} className={`mt-16 pt-8 border-t border-white/10 reveal ${shareInView ? 'in-view' : ''}`}>
             <p className="text-white/70 text-center mb-4">Páčil sa vám tento článok? Zdieľajte ho!</p>
             <div className="flex justify-center gap-4">
               <a
@@ -208,23 +214,23 @@ export default function BlogDetail() {
           </div>
 
           {/* CTA Section - Integrated */}
-          <div className="mt-16 text-center max-w-3xl mx-auto">
+          <div ref={ctaRef} className={`mt-16 text-center max-w-3xl mx-auto reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
               Potrebujete poradiť?
             </h2>
-            <p className="text-white/70 text-lg mb-8 leading-relaxed">
+            <p className={`text-white/70 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
               Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt.
             </p>
             <a
               href="tel:+421948555551"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+              className={`inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}
             >
               <span>Zavolať teraz: 0948 555 551</span>
             </a>
           </div>
 
           {/* Related Articles */}
-          <div className="mt-16">
+          <div className={`mt-16 reveal ${ctaInView ? 'in-view' : ''}`}>
             <h3 className="text-2xl md:text-3xl font-black text-white mb-8 text-center">
               Ďalšie <span className="text-orange-primary">články</span>
             </h3>

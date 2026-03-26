@@ -1,7 +1,13 @@
 import { Phone } from 'lucide-react';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 export default function Partneri() {
+  const [heroRef, heroInView] = useInView();
+  const [headingRef, headingInView] = useInView();
+  const [gridRef, gridInView] = useInView();
+  const [infoRef, infoInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
   const partners = [
     {
       id: 1,
@@ -61,12 +67,12 @@ export default function Partneri() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Sieť overených profesionálov. <span className="text-orange-primary">Jeden kontakt, všetky služby.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Partneri Royal Stroje v Senci, Bratislave a okolí - stavbári, ktorým dôverujeme.
             </p>
           </div>
@@ -90,11 +96,11 @@ export default function Partneri() {
         <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
 
           {/* Section Heading */}
-          <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+          <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
             <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
               Naši <span className="text-orange-primary">partneri</span>
             </h1>
-            <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-2 md:mb-4">
+            <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-2 md:mb-4 reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Stavebné firmy a dodávatelia, s ktorými spolupracujeme v regióne Senec - Bratislava.
             </p>
             <p className="text-white/60 text-xs md:text-base max-w-2xl mx-auto hidden md:block">
@@ -103,8 +109,8 @@ export default function Partneri() {
           </div>
 
           {/* Partners Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 mb-8 md:mb-16">
-            {partners.map((partner) => {
+          <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 mb-8 md:mb-16">
+            {partners.map((partner, index) => {
               const cardContent = (
                 <>
                   {/* Hover gradient overlay */}
@@ -136,7 +142,7 @@ export default function Partneri() {
                 </>
               );
 
-              const cardClasses = "group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-2xl md:rounded-3xl p-3 md:p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[140px] md:min-h-[220px] overflow-hidden";
+              const cardClasses = `group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-2xl md:rounded-3xl p-3 md:p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[140px] md:min-h-[220px] overflow-hidden reveal stagger-${Math.min(index + 1, 5)} ${gridInView ? 'in-view' : ''}`;
 
               return partner.website ? (
                 <a
@@ -160,7 +166,7 @@ export default function Partneri() {
           </div>
 
           {/* Partnership Info Section */}
-          <div className="text-center mb-6 md:mb-12">
+          <div ref={infoRef} className={`text-center mb-6 md:mb-12 reveal ${infoInView ? 'in-view' : ''}`}>
             <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
               Čo znamená <span className="text-orange-primary">partnerstvo</span>
             </h2>
@@ -192,7 +198,7 @@ export default function Partneri() {
             </div>
           </div>
 
-          <div className="text-center">
+          <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
               <p className="text-white/60 text-xs md:text-sm mb-3 md:mb-4">
                 Máte záujem o spoluprácu? Kontaktujte nás a začnime budovať dôveru.
               </p>

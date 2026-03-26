@@ -2,8 +2,14 @@ import { Phone, MessageCircle, ShoppingCart, Package, Tag, Zap, Shield, Wrench, 
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 export default function PredajTechniky() {
+  const [heroRef, heroInView] = useInView();
+  const [promoRef, promoInView] = useInView();
+  const [catRef, catInView] = useInView();
+  const [catGridRef, catGridInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
   // Akciové produkty - Jarná akcia
   const promoProducts = [
     {
@@ -149,12 +155,12 @@ export default function PredajTechniky() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Predaj náradia<span className="text-orange-primary"> a príslušenstva</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Diamantové kotúče, vrtáky, príslušenstvo a BOZP pomôcky. Férové ceny, odborné poradenstvo a okamžitý odber na prevádzke v Senci.
             </p>
           </div>
@@ -179,7 +185,7 @@ export default function PredajTechniky() {
 
           {/* JARNÁ AKCIA - Akciové produkty */}
           <div className="mb-12 md:mb-20 pt-16 md:pt-0">
-            <div className="text-center mb-8 md:mb-12">
+            <div ref={promoRef} className={`text-center mb-8 md:mb-12 reveal ${promoInView ? 'in-view' : ''}`}>
               <div className="hidden md:inline-flex items-center gap-2 bg-orange-primary/20 border border-orange-primary/50 rounded-full px-4 py-2 mb-4">
                 <Tag className="text-orange-primary" size={18} />
                 <span className="text-orange-primary font-bold text-sm uppercase tracking-wider">Jarná akcia</span>
@@ -187,17 +193,17 @@ export default function PredajTechniky() {
               <h1 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-4 leading-tight">
                 Akciové produkty <span className="text-orange-primary">skladom</span>
               </h1>
-              <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+              <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${promoInView ? 'in-view' : ''}`}>
                 Vybrané náradie a príslušenstvo za výhodné ceny. Osobný odber v Senci alebo doručenie cez Packetu.
               </p>
             </div>
 
             {/* Produkty grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              {promoProducts.map((product) => (
+              {promoProducts.map((product, index) => (
                 <div
                   key={product.id}
-                  className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-xl overflow-hidden hover:border-orange-primary/80 hover:shadow-xl hover:shadow-orange-primary/40 shadow-lg shadow-black/50 hover:scale-[1.01] transition-all duration-500"
+                  className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-xl overflow-hidden hover:border-orange-primary/80 hover:shadow-xl hover:shadow-orange-primary/40 shadow-lg shadow-black/50 hover:scale-[1.01] transition-all duration-500 reveal stagger-${Math.min(index + 1, 3)} ${promoInView ? 'in-view' : ''}`}
                 >
                   {/* Product Image / Placeholder */}
                   <div className="aspect-[4/3] bg-gradient-to-br from-zinc-600 to-zinc-700 flex items-center justify-center p-4">
@@ -265,23 +271,23 @@ export default function PredajTechniky() {
 
           {/* Categories Grid */}
           <div className="mb-12 md:mb-16">
-            <div className="text-center mb-6 md:mb-12">
+            <div ref={catRef} className={`text-center mb-6 md:mb-12 reveal ${catInView ? 'in-view' : ''}`}>
               <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 leading-tight">
                 Kúpte náradie, ktoré používame my. <span className="text-orange-primary">Overené na stavbách.</span>
               </h2>
-              <p className="text-white/70 text-sm md:text-lg">
+              <p className={`text-white/70 text-sm md:text-lg reveal-fade stagger-2 ${catInView ? 'in-view' : ''}`}>
                 Predaj náradia a techniky v Senci. To čo používame, to aj predávame. Viac informácií poskytneme telefonicky.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-              {categories.map((category) => {
+            <div ref={catGridRef} className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+              {categories.map((category, index) => {
                 const IconComponent = category.icon;
                 const DeliveryIcon = category.deliveryIcon;
                 return (
                   <div
                     key={category.id}
-                    className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border border-orange-primary/30 rounded-xl p-4 md:p-5 hover:border-orange-primary/60 hover:shadow-xl hover:shadow-orange-primary/30 shadow-lg shadow-black/50 hover:scale-[1.01] transition-all duration-500 overflow-hidden"
+                    className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border border-orange-primary/30 rounded-xl p-4 md:p-5 hover:border-orange-primary/60 hover:shadow-xl hover:shadow-orange-primary/30 shadow-lg shadow-black/50 hover:scale-[1.01] transition-all duration-500 overflow-hidden reveal stagger-${Math.min(index + 1, 4)} ${catGridInView ? 'in-view' : ''}`}
                   >
                     <div className="relative">
                       <div className="flex items-start gap-3 mb-3">
@@ -517,7 +523,7 @@ export default function PredajTechniky() {
           </div>
 
           {/* CTA Content */}
-          <div className="mt-10 md:mt-20">
+          <div ref={ctaRef} className={`mt-10 md:mt-20 reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <div className="text-center mb-6 md:mb-12">
               <h2 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-4">
                 Navštívte našu <span className="text-orange-primary">kamennú predajňu</span>

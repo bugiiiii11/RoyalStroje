@@ -1,8 +1,15 @@
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 export default function Kontakt() {
+  const [heroRef, heroInView] = useInView();
+  const [headingRef, headingInView] = useInView();
+  const [cardsRef, cardsInView] = useInView();
+  const [visitRef, visitInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
+
   return (
     <div className="min-h-screen">
       <Helmet>
@@ -67,12 +74,12 @@ export default function Kontakt() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
               Zavolajte teraz. <span className="text-orange-primary">Stroje budú na stavbe zajtra.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-4">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed mb-4 reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Nonstop telefonická dostupnosť • Senec, Recká cesta 182 • Odpoveď do 15 minút
             </p>
             <p className="text-base md:text-lg text-white/80 leading-relaxed">
@@ -99,21 +106,21 @@ export default function Kontakt() {
         <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
 
           {/* Section Heading */}
-          <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+          <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
             <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
               Vyberte si <span className="text-orange-primary">spôsob kontaktu</span>
             </h1>
-            <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-lg">
+            <p className={`text-white/70 max-w-2xl mx-auto text-sm md:text-lg reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Sme dostupní telefonicky, cez email aj prostredníctvom moderných komunikačných aplikácií.
             </p>
           </div>
 
           {/* Contact Methods - 4 Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8 md:mb-12">
+          <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8 md:mb-12">
             {/* Phone */}
             <a
               href="tel:+421948555551"
-              className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+              className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden reveal stagger-1 ${cardsInView ? 'in-view' : ''}`}
             >
               {/* Animated border glow on hover */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
@@ -140,7 +147,7 @@ export default function Kontakt() {
               href="https://wa.me/421948555551"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+              className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden reveal stagger-2 ${cardsInView ? 'in-view' : ''}`}
             >
               {/* Animated border glow on hover */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
@@ -167,7 +174,7 @@ export default function Kontakt() {
               href="https://t.me/Royalstroje"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+              className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden reveal stagger-3 ${cardsInView ? 'in-view' : ''}`}
             >
               {/* Animated border glow on hover */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
@@ -192,7 +199,7 @@ export default function Kontakt() {
             {/* Email */}
             <a
               href="mailto:info@royalstroje.sk"
-              className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+              className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden reveal stagger-4 ${cardsInView ? 'in-view' : ''}`}
             >
               {/* Animated border glow on hover */}
               <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
@@ -218,7 +225,7 @@ export default function Kontakt() {
           {/* Visit Us Section */}
           <div className="space-y-4 md:space-y-8">
             {/* Section Header */}
-            <div className="text-center mb-3 md:mb-12">
+            <div ref={visitRef} className={`text-center mb-3 md:mb-12 reveal ${visitInView ? 'in-view' : ''}`}>
               <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
                 Navštívte nás v <span className="text-orange-primary">Senci</span>
               </h2>
@@ -409,7 +416,7 @@ export default function Kontakt() {
             </div> */}
 
             {/* CTA Button */}
-            <div className="text-center pt-4 md:pt-8">
+            <div ref={ctaRef} className={`text-center pt-4 md:pt-8 reveal-scale ${ctaInView ? 'in-view' : ''}`}>
               <a
                 href="tel:+421948555551"
                 className="inline-flex items-center justify-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-lg rounded-full hover:scale-105 transition-all shadow-2xl shadow-orange-primary/50"

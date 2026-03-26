@@ -2,8 +2,15 @@ import { CheckCircle, Clock, Calculator, UserCheck } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContactForm from '../components/contact/ContactForm';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 export default function CenovaPonuka() {
+  const [heroRef, heroInView] = useInView();
+  const [headingRef, headingInView] = useInView();
+  const [gridRef, gridInView] = useInView();
+  const [whyRef, whyInView] = useInView();
+  const [stepsRef, stepsInView] = useInView();
+  const [formRef, formInView] = useInView();
   const services = [
     {
       id: 'presna-kalkulacia',
@@ -74,12 +81,12 @@ export default function CenovaPonuka() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Bezplatná konzultácia. <span className="text-orange-primary">Pripravíme do 24 hodín.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Detailná kalkulácia na mieru. Transparentný rozpis bez skrytých poplatkov.
             </p>
           </div>
@@ -103,22 +110,22 @@ export default function CenovaPonuka() {
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Services Grid */}
           <div className="mb-12 md:mb-16">
-            <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+            <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
               <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
                 Cenová ponuka do 24 hodín. <span className="text-orange-primary">Presne, férovo.</span>
               </h1>
-              <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+              <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
                 Presná kalkulácia na mieru. Transparentný rozpis bez skrytých poplatkov.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {services.map((service) => {
+            <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {services.map((service, index) => {
                 const IconComponent = service.icon;
                 return (
                   <div
                     key={service.id}
-                    className="bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group"
+                    className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                   >
                     <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                       <IconComponent className="text-orange-primary" size={28} />
@@ -142,9 +149,9 @@ export default function CenovaPonuka() {
           </div>
 
           {/* Why Request a Quote Section */}
-          <div className="mb-16">
+          <div ref={whyRef} className="mb-16">
             <div className="max-w-4xl mx-auto">
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/30 rounded-3xl p-8 md:p-12">
+              <div className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/30 rounded-3xl p-8 md:p-12 reveal-scale ${whyInView ? 'in-view' : ''}`}>
                 <div className="text-center mb-6">
                   <h2 className="text-2xl md:text-3xl font-black text-white mb-4">
                     Prečo si vyžiadať <span className="text-orange-primary">ponuku?</span>
@@ -172,8 +179,8 @@ export default function CenovaPonuka() {
           </div>
 
           {/* Benefits Section */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
+          <div ref={stepsRef} className="mb-16">
+            <div className={`text-center mb-12 reveal ${stepsInView ? 'in-view' : ''}`}>
               <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
                 Ako to <span className="text-orange-primary">funguje?</span>
               </h2>
@@ -183,7 +190,7 @@ export default function CenovaPonuka() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:border-orange-primary/50 transition-all">
+              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:border-orange-primary/50 transition-all reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   1
                 </div>
@@ -192,7 +199,7 @@ export default function CenovaPonuka() {
                   Popíšte nám vaše požiadavky a potreby
                 </p>
               </div>
-              <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:border-orange-primary/50 transition-all">
+              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:border-orange-primary/50 transition-all reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   2
                 </div>
@@ -201,7 +208,7 @@ export default function CenovaPonuka() {
                   Spoločne nájdeme najlepšie riešenie
                 </p>
               </div>
-              <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:border-orange-primary/50 transition-all">
+              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:border-orange-primary/50 transition-all reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   3
                 </div>
@@ -214,7 +221,7 @@ export default function CenovaPonuka() {
           </div>
 
           {/* Contact Form Section */}
-          <div className="mb-16">
+          <div ref={formRef} className={`mb-16 reveal ${formInView ? 'in-view' : ''}`}>
             <ContactForm />
           </div>
         </div>

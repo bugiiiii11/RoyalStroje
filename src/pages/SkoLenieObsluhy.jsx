@@ -1,6 +1,7 @@
 import { Phone, Mail, Check, Shield, Award, BookOpen, Users, ClipboardList, GraduationCap } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 const certTypes = [
   {
@@ -85,6 +86,14 @@ const steps = [
 ];
 
 export default function SkoLenieObsluhy() {
+  const [heroRef, heroInView] = useInView();
+  const [introRef, introInView] = useInView();
+  const [partnerRef, partnerInView] = useInView();
+  const [coursesRef, coursesInView] = useInView();
+  const [benefitsRef, benefitsInView] = useInView();
+  const [stepsRef, stepsInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
+
   return (
     <div className="min-h-screen">
       <Helmet>
@@ -113,7 +122,7 @@ export default function SkoLenieObsluhy() {
           className="absolute bottom-0 left-0 right-0 pointer-events-none"
           style={{ height: '160px', background: 'linear-gradient(to bottom, transparent, #181818)' }}
         />
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-primary/20 border border-orange-primary/40 rounded-full text-orange-primary text-sm font-bold mb-6">
               <GraduationCap size={16} />
@@ -122,7 +131,7 @@ export default function SkoLenieObsluhy() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Preukaz obsluhy strojov. <span className="text-orange-primary">Rýchlo a legálne.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Certifikované kurzy pre rýpadlá, nakladače, VZV a manipulátory. Akreditované školenia s platným preukazom obsluhy.
             </p>
           </div>
@@ -140,11 +149,11 @@ export default function SkoLenieObsluhy() {
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
 
           {/* Intro */}
-          <div className="text-center mb-10 md:mb-16 pt-16 md:pt-0">
+          <div ref={introRef} className={`text-center mb-10 md:mb-16 pt-16 md:pt-0 reveal ${introInView ? 'in-view' : ''}`}>
             <h1 className="text-xl md:text-4xl font-black text-white mb-3 md:mb-4">
               Školenie obsluhy <span className="text-orange-primary">stavebných strojov</span>
             </h1>
-            <p className="text-white/70 text-sm md:text-lg max-w-3xl mx-auto mb-4">
+            <p className={`text-white/70 text-sm md:text-lg max-w-3xl mx-auto mb-4 reveal-fade stagger-2 ${introInView ? 'in-view' : ''}`}>
               Royal Stroje v spolupráci s akreditovaným partnerom <a href="https://alphasafety.sk/kurzy/stavebne-stroje" target="_blank" rel="noopener noreferrer" className="text-white font-bold hover:text-orange-primary transition-colors duration-200">Alpha Safety s.r.o.</a> zabezpečuje odborné kurzy obsluhy stavebných strojov. Získajte platný preukaz, ktorý je zákonnou podmienkou pre prácu s mechanizáciou na Slovensku.
             </p>
             <p className="text-white/50 text-xs md:text-sm max-w-2xl mx-auto">
@@ -154,7 +163,7 @@ export default function SkoLenieObsluhy() {
 
           {/* Alpha Safety Partner Banner */}
           <div className="mb-10 md:mb-16">
-            <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/30 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6">
+            <div ref={partnerRef} className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/30 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 reveal-scale ${partnerInView ? 'in-view' : ''}`}>
               <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0">
                 <Shield className="text-orange-primary" size={32} />
               </div>
@@ -172,7 +181,7 @@ export default function SkoLenieObsluhy() {
 
           {/* Course Types */}
           <div className="mb-10 md:mb-16">
-            <div className="text-center mb-6 md:mb-12">
+            <div ref={coursesRef} className={`text-center mb-6 md:mb-12 reveal ${coursesInView ? 'in-view' : ''}`}>
               <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4">
                 Typy <span className="text-orange-primary">kurzov</span>
               </h2>
@@ -182,10 +191,10 @@ export default function SkoLenieObsluhy() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {certTypes.map((cert) => (
+              {certTypes.map((cert, index) => (
                 <div
                   key={cert.id}
-                  className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all group"
+                  className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all group reveal stagger-${Math.min(index + 1, 6)} ${coursesInView ? 'in-view' : ''}`}
                 >
                   <div className="text-3xl mb-4">{cert.icon}</div>
                   <h3 className="text-white font-black text-lg md:text-xl mb-1 group-hover:text-orange-primary transition">
@@ -204,7 +213,7 @@ export default function SkoLenieObsluhy() {
 
           {/* Benefits */}
           <div className="mb-10 md:mb-16">
-            <div className="text-center mb-6 md:mb-12">
+            <div ref={benefitsRef} className={`text-center mb-6 md:mb-12 reveal ${benefitsInView ? 'in-view' : ''}`}>
               <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4">
                 Prečo absolvovať <span className="text-orange-primary">školenie u nás?</span>
               </h2>
@@ -216,7 +225,7 @@ export default function SkoLenieObsluhy() {
                 return (
                   <div
                     key={idx}
-                    className="bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all"
+                    className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all reveal stagger-${Math.min(idx + 1, 4)} ${benefitsInView ? 'in-view' : ''}`}
                   >
                     <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4">
                       <Icon className="text-orange-primary" size={28} />
@@ -231,15 +240,15 @@ export default function SkoLenieObsluhy() {
 
           {/* How It Works */}
           <div className="mb-10 md:mb-16">
-            <div className="text-center mb-6 md:mb-12">
+            <div ref={stepsRef} className={`text-center mb-6 md:mb-12 reveal ${stepsInView ? 'in-view' : ''}`}>
               <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4">
                 Ako to <span className="text-orange-primary">funguje?</span>
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
-              {steps.map((item) => (
-                <div key={item.step} className="bg-zinc-900 border border-white/10 rounded-2xl p-4 text-center">
+              {steps.map((item, index) => (
+                <div key={item.step} className={`bg-zinc-900 border border-white/10 rounded-2xl p-4 text-center reveal stagger-${Math.min(index + 1, 5)} ${stepsInView ? 'in-view' : ''}`}>
                   <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-3 mx-auto text-orange-primary font-black text-xl">
                     {item.step}
                   </div>
@@ -299,11 +308,11 @@ export default function SkoLenieObsluhy() {
           </div>
 
           {/* CTA */}
-          <div className="text-center">
+          <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <h2 className="text-2xl md:text-4xl font-black text-white mb-4">
               Záujem o školenie?
             </h2>
-            <p className="text-white/70 text-sm md:text-lg mb-8 max-w-2xl mx-auto">
+            <p className={`text-white/70 text-sm md:text-lg mb-8 max-w-2xl mx-auto reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
               Kontaktujte nás – dohodneme termín, typ kurzu a všetky detaily. Školenie zabezpečíme rýchlo a bez zbytočnej byrokracie.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">

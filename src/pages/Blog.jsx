@@ -2,6 +2,7 @@ import { Calendar, ArrowRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 export default function Blog() {
   const blogPosts = [
@@ -223,6 +224,11 @@ export default function Blog() {
     },
   ];
 
+  const [heroRef, heroInView] = useInView();
+  const [headingRef, headingInView] = useInView();
+  const [gridRef, gridInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
+
   // Filter out hidden articles
   // Sort by date from newest to oldest
   const visiblePosts = blogPosts
@@ -267,12 +273,12 @@ export default function Blog() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Stavajte efektívnejšie. <span className="text-orange-primary">Tipy od profesionálov.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Praktické rady, návody a novinky zo sveta stavebnej mechanizácie pre región Senec - Bratislava.
             </p>
           </div>
@@ -296,23 +302,23 @@ export default function Blog() {
         <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
 
           {/* Section Heading - Improved Typography */}
-          <div className="text-center mb-10 md:mb-16 pt-16 md:pt-0">
-            <h1 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-6 tracking-tight leading-tight">
+          <div ref={headingRef} className="text-center mb-10 md:mb-16 pt-16 md:pt-0">
+            <h1 className={`text-2xl md:text-5xl font-black text-white mb-3 md:mb-6 tracking-tight leading-tight reveal ${headingInView ? 'in-view' : ''}`}>
               Najnovšie články <span className="text-orange-primary">a praktické návody</span>
             </h1>
-            <p className="text-white/80 text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
+            <p className={`text-white/80 text-base md:text-xl max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Odborné know-how z 20 rokov praxe v stavebníctve. Konkrétne riešenia pre vaše projekty.
             </p>
           </div>
 
           {/* Blog Posts Grid - Enhanced Spacing */}
           <div className="mb-12 md:mb-20">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {visiblePosts.map((post) => (
+            <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {visiblePosts.map((post, index) => (
                 <Link
                   key={post.id}
                   to={`/blog/${post.slug}`}
-                  className="group bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 ease-out relative"
+                  className={`group bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 ease-out relative reveal stagger-${Math.min(index + 1, 8)} ${gridInView ? 'in-view' : ''}`}
                 >
                   {/* Image - Enhanced with Zoom Effect */}
                   <div className="relative h-48 md:h-64 overflow-hidden bg-gradient-to-br from-orange-100 via-orange-50 to-zinc-100">
@@ -370,7 +376,7 @@ export default function Blog() {
           </div>
 
           {/* CTA Section - Enhanced with Gradient */}
-          <div className="relative mt-12 md:mt-20">
+          <div ref={ctaRef} className={`relative mt-12 md:mt-20 reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             {/* Gradient Background - Subtle */}
             <div className="absolute inset-0 bg-gradient-to-br from-zinc-700/20 via-zinc-600/10 to-transparent rounded-3xl blur-3xl"></div>
 
@@ -378,10 +384,10 @@ export default function Blog() {
               <h2 className="text-2xl md:text-4xl font-black text-white mb-4 md:mb-6 tracking-tight">
                 Zaujala vás naša ponuka?
               </h2>
-              <p className="text-white/80 text-base md:text-xl mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed">
+              <p className={`text-white/80 text-base md:text-xl mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
                 Kontaktujte nás a radi vám pomôžeme s výberom správnej techniky pre váš projekt.
               </p>
-              <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+              <div className={`flex flex-wrap justify-center gap-4 md:gap-6 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}>
                 <Link
                   to="/kontakt"
                   className="inline-flex items-center gap-2 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-base md:text-lg rounded-full hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-orange-primary/50 hover:shadow-orange-primary/70"

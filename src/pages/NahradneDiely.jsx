@@ -1,8 +1,14 @@
 import { Phone, Mail, Package, Wrench, Clock, Shield } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 export default function NahradneDiely() {
+  const [heroRef, heroInView] = useInView();
+  const [headingRef, headingInView] = useInView();
+  const [gridRef, gridInView] = useInView();
+  const [stepsRef, stepsInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
   const services = [
     {
       id: 'originalne-diely',
@@ -73,12 +79,12 @@ export default function NahradneDiely() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Okamžitý odber alebo dodanie do 48 hodín. <span className="text-orange-primary">Iba originálne diely.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Široký sortiment náhradných dielov pre stavebné stroje a náradie. Sklad v Senci.
             </p>
           </div>
@@ -102,22 +108,22 @@ export default function NahradneDiely() {
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Services Grid */}
           <div className="mb-12 md:mb-16">
-            <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+            <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
               <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
                 Náhradné diely skladom. <span className="text-orange-primary">Originál, rýchlo.</span>
               </h1>
-              <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+              <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
                 Originálne diely pre stavebné náradie. Express dodanie.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {services.map((service) => {
+            <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {services.map((service, index) => {
                 const IconComponent = service.icon;
                 return (
                   <div
                     key={service.id}
-                    className="bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group"
+                    className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                   >
                     <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                       <IconComponent className="text-orange-primary" size={28} />
@@ -141,8 +147,8 @@ export default function NahradneDiely() {
           </div>
 
           {/* FAQ Section */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
+          <div ref={stepsRef} className="mb-16">
+            <div className={`text-center mb-12 reveal ${stepsInView ? 'in-view' : ''}`}>
               <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
                 Ako objednať <span className="text-orange-primary">náhradný diel?</span>
               </h2>
@@ -152,7 +158,7 @@ export default function NahradneDiely() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-              <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center">
+              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   1
                 </div>
@@ -161,7 +167,7 @@ export default function NahradneDiely() {
                   Kontaktujte nás s označením stroja alebo dielu
                 </p>
               </div>
-              <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center">
+              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   2
                 </div>
@@ -170,7 +176,7 @@ export default function NahradneDiely() {
                   Overíme dostupnosť a cenu dielu
                 </p>
               </div>
-              <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center">
+              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   3
                 </div>
@@ -179,7 +185,7 @@ export default function NahradneDiely() {
                   Potvrdíte objednávku a spôsob platby
                 </p>
               </div>
-              <div className="bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center">
+              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center reveal stagger-4 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   4
                 </div>
@@ -192,7 +198,7 @@ export default function NahradneDiely() {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center">
+          <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
               Hľadáte náhradný diel?
             </h2>

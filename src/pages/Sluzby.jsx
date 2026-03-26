@@ -2,8 +2,14 @@ import { Link } from 'react-router-dom';
 import { ShoppingCart, FileText, Package, Wrench, Truck, GraduationCap } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import { useInView } from '../hooks/useInView';
 
 export default function Sluzby() {
+  const [heroRef, heroInView] = useInView();
+  const [headingRef, headingInView] = useInView();
+  const [gridRef, gridInView] = useInView();
+  const [ctaRef, ctaInView] = useInView();
+
   const services = [
     {
       id: 'prenajom',
@@ -99,12 +105,12 @@ export default function Sluzby() {
         />
 
         {/* Content */}
-        <div className="relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
               Všetko pre vašu stavbu. <span className="text-orange-primary">Pod jednou strechou.</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
               Prenájom stavebnej techniky, predaj náradia, náhradné diely a odborné poradenstvo v Senci.
             </p>
           </div>
@@ -127,23 +133,23 @@ export default function Sluzby() {
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Services section */}
-          <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
+          <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
             <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
               Čo pre vás <span className="text-orange-primary">môžeme urobiť?</span>
             </h1>
-            <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+            <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Profesionálne služby pre stavebné firmy, remeselníkov aj súkromné osoby
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-16">
-            {services.map((service) => {
+          <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 mb-6 md:mb-16">
+            {services.map((service, index) => {
               const IconComponent = service.icon;
               return (
                 <Link
                   key={service.id}
                   to={service.path}
-                  className="relative bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 hover:border-orange-primary/50 transition-all group overflow-hidden"
+                  className={`relative bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 hover:border-orange-primary/50 transition-all group overflow-hidden reveal stagger-${Math.min(index + 1, 6)} ${gridInView ? 'in-view' : ''}`}
                 >
                   {/* Background Image */}
                   <div className="absolute inset-0 z-0">
@@ -189,16 +195,16 @@ export default function Sluzby() {
           </div>
 
           {/* CTA Section - Integrated */}
-          <div className="mt-16 text-center max-w-3xl mx-auto">
+          <div ref={ctaRef} className={`mt-16 text-center max-w-3xl mx-auto reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
               Potrebujete poradiť?
             </h2>
-            <p className="text-white/70 text-lg mb-8 leading-relaxed">
+            <p className={`text-white/70 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
               Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt.
             </p>
             <a
               href="tel:+421948555551"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+              className={`inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}
             >
               <span>Zavolať teraz: 0948 555 551</span>
             </a>
