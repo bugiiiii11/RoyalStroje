@@ -5,52 +5,68 @@
 |---------|------|-------|-------------|
 | 1 | 2026-03-18/19 | MVP Complete (Sprints 1-5) | Full rental management system: dashboard, portal, Supabase backend, invoicing, reports |
 | 2 | 2026-03-19 | Design Rebrand + Bug Fixes | Orange #FF6600 rebrand, sidebar redesign, PDF diacritics fix, VAT 23% fix, portal RLS fix |
+| 3 | 2026-03-20–26 | Website Features + Mobile UX | Supabase live sync, image upload, PO/FO contracts, 6th service, mobile hero, scroll animations |
 
-## What Was Done (Session 2) -- Design Rebrand + Critical Fixes
+## What Was Done (Session 3) -- Website Features + Mobile UX
 
-### Design Rebrand (Dashboard + Portal)
-1. **Color palette swap** -- Replaced gold #ffc107 with orange #FF6600 across both Tailwind configs. New `royal` scale from royal-50 to royal-900. Files: `apps/dashboard/tailwind.config.js`, `apps/portal/tailwind.config.js`.
-2. **CSS animation system** -- Added shine sweep, card lift, table row hover with orange accent, input glow, button press, page enter animations. Files: `apps/dashboard/src/index.css`, `apps/portal/src/index.css`.
-3. **Dashboard UI overhaul** -- Gradient orange CTA buttons (rounded-full + glow shadow), softer card borders, modal backdrop blur + slide-up, improved spinner, orange-tinted pagination. Updated all 9 UI components in `components/ui/` and all 24 page files.
-4. **Portal UI overhaul** -- Same treatment: gradient buttons, card lift effects, shine sweep on hero, image scale on hover, page enter animations. Updated all 8 portal source files.
-5. **Sidebar redesign** -- Light sidebar with warm gradient bg, real RS logo (`znak.webp`), orange CTA button, expanded stats panel (6 metrics: active rentals, monthly revenue, clients, equipment, today events, overdue invoices in red), "Made by M.D.N Tech" credit with logo linking to mdntech.org. Custom right border with orange glow. File: `Sidebar.jsx`, `Header.jsx`, `DashboardLayout.jsx`.
-6. **Table alignment fix** -- Removed broken `position: relative` on `<tr>` elements, switched to `td:first-child` border-left approach. Added `table-fixed` layout with `<colgroup>` column widths to DataTable. Files: `DataTable.jsx`, `EquipmentTable.jsx`, `ClientDirectory.jsx`, `InvoiceList.jsx`.
+### Backend / Data
+1. **Website reads products from Supabase** -- `useProducts.js` hook fetches live data. Env vars added to Vercel. No more manual CSV sync.
+2. **Image upload** -- Supabase Storage bucket `equipment-images` (migration 008). Dashboard form updated with file picker. Images served via public URL.
+3. **FO/PO client types** -- `client_type` field in DB. Contract PDF generator selects correct template based on type.
 
-### PDF Diacritics Fix
-7. **Embedded Inter font for PDFs** -- Downloaded full Inter TTF (Regular + Bold, ~830KB total) from official GitHub release. Created `pdfFonts.js` utility that fetches/caches fonts and registers with jsPDF. Updated all 3 PDF generators to use async `createPdfDoc()` with Inter font. Slovak characters (DODAVATEL, Sadzba/den, etc.) now render correctly. Files: `pdfFonts.js`, `generateInvoicePdf.js`, `generateQuotePdf.js`, `generateAgreementPdf.js`, `public/fonts/Inter-*.ttf`.
+### Dashboard -- PDF Contracts
+4. **FO agreement PDF** -- Full rewrite to match original HTML template exactly. Orange #e8720a, Arial font, 8.5pt, borders #999999. Dynamic equipment rows (only actual items). Compact 3-column signature layout. Fits single A4 page.
+5. **PO agreement PDF** -- Separate generator (`generateAgreementPdfPO.js`) for legal entities (§269 Obchodný zákonník). Overenie oprávnenia section, 2-party signature layout.
 
-### VAT + RLS Fixes
-8. **VAT 23% fix** -- Frontend now passes pre-calculated `subtotal`, `vat_amount`, `total` when creating reservations (both dashboard and portal), so DB trigger is no longer the sole source of truth. Migration `007_fix_portal_items_insert.sql` also updates the DB function. Files: `NewDeal.jsx`, `Booking.jsx`, `007_fix_portal_items_insert.sql`.
-9. **Portal booking RLS fix** -- Added `items_own_insert` INSERT policy on `reservation_items` for portal users. Previously only SELECT was allowed. Migration: `supabase/migrations/007_fix_portal_items_insert.sql`. Applied to live DB.
-10. **Stats hook expanded** -- `useDashboardStats` now queries overdue invoices and active equipment count in addition to existing metrics.
+### Website -- Content + Pages
+6. **6th service card** -- "Školenie obsluhy stavebných strojov" added to Služby. Grid changed from 5-card row to 3+3 layout.
+7. **New page `/sluzby/skolenie-obsluhy`** -- Full course info: 6 course types, benefits, 5-step process, legal requirement section, Alpha Safety s.r.o. partner banner with external link.
+8. **Catalog cleanup** -- Removed duplicate "Krovinorezy" subcategory from Malé náradie. Accessories (príslušenstvo) hidden from "Všetko" view.
+9. **Catalog filter persistence** -- Filters stored in URL params (`?category=X&subcategory=Y&page=Z`). Browser back button restores filter state naturally. "Späť na katalóg" uses `navigate(-1)`.
+10. **WhyRoyalStroje section** -- Moved below catalog, above FAQ. Now visible on mobile too.
+
+### Website -- Mobile UX
+11. **Mobile Hero** -- New `MobileHero.jsx`: full-height hero with background image, staggered CSS entrance animations (headline → subline → CTAs → scroll indicator).
+12. **Scroll reveal animations** -- `useInView` hook (IntersectionObserver). CSS classes `reveal`, `reveal-fade`, `stagger-1..8`. Applied to product cards (staggered fade-up), WhyRoyalStroje cards, blog CTA.
+13. **Footer mobile 2-col grid** -- About + Kontakt full-width; Služby + Stránky side-by-side. `pb-24` clears fixed bottom nav bar.
+14. **MDN Tech chatbot widget** -- `<script src="https://mdntech.org/widget.js">` added before `</body>` in `index.html`. Chatbot ID: `b1637181-da22-4ae2-b79e-11c10b967b4f`.
+
+### Website -- Design / Copy
+15. **Promo popup redesign** -- Orange border (`border-orange-primary/40`), solid dark bg (no glass blur), orange close button.
+16. **Footer MDN Tech credit** -- Logo + "Vytvorené M.D.N Tech" with orange hover link to mdntech.org.
+17. **Blog** -- Article dates corrected, `prenajom-vs-kupa` moved to 1st position via `dateSort`, cover image added.
+18. **Knowledgebase** -- Multiple `.md` files updated for chatbot (Pan Krivosudský persona).
 
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
-| 1 | Verify Vercel deployments | Dashboard (app.royalstroje.sk) and Portal (portal.royalstroje.sk) -- add custom domains, set Supabase redirect URLs |
-| 2 | Add IBAN to company info | Currently placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
-| 3 | Commit + push Session 2 changes | ~40 files changed, not yet committed |
-| 4 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
-| 5 | Supabase Edge Functions | /generate-quote, /invite-royal-card, /dashboard-stats, /check-availability |
-| 6 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
-| 7 | Online payment | Stripe/GoPay integration (post-MVP) |
+| 1 | PO contract -- dashboard integration | Generator exists, wire it up in dashboard like FO |
+| 2 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
+| 3 | Product images | Upload product photos via dashboard image upload feature |
+| 4 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
+| 5 | Mobile UX -- other pages | Scroll animations applied to Požičovňa only -- extend to Služby, Blog, Kontakt |
+| 6 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 7 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
+| 8 | Online payment | Stripe/GoPay integration (post-MVP) |
 
 ## Key Files
 | File | Purpose |
 |------|---------|
-| `apps/dashboard/` | Internal team dashboard (port 3001) |
-| `apps/portal/` | Royal Card client portal (port 3002) |
-| `packages/shared/` | Shared Supabase client + constants |
-| `supabase/migrations/` | DB schema (001-007), RLS, functions |
-| `supabase/seed.sql` | Equipment catalog seed (142 items) |
-| `apps/dashboard/src/lib/companyInfo.js` | Royal Stroje company details for PDFs |
-| `apps/dashboard/src/lib/pdfFonts.js` | Inter font loader for jsPDF (fixes diacritics) |
-| `apps/dashboard/src/lib/generateQuotePdf.js` | Quote PDF generator |
-| `apps/dashboard/src/lib/generateAgreementPdf.js` | Rental agreement PDF |
-| `apps/dashboard/src/lib/generateInvoicePdf.js` | Invoice/proforma/credit note PDF |
-| `apps/dashboard/public/fonts/` | Inter TTF fonts for PDF generation |
-| `apps/dashboard/public/znak.webp` | RS logo (orange shield, transparent bg) |
-| `apps/dashboard/public/logo_mdntech.png` | M.D.N Tech logo for sidebar credit |
+| `src/pages/Home.jsx` | Home page -- renders MobileHero (mobile) + Catalog |
+| `src/components/home/MobileHero.jsx` | Mobile-only hero with CSS animations |
+| `src/components/home/Catalog.jsx` | Main catalog with URL-persisted filters + scroll animations |
+| `src/hooks/useInView.js` | IntersectionObserver hook for scroll reveal |
+| `src/hooks/useProducts.js` | Supabase product fetching + filter helpers |
+| `src/pages/Sluzby.jsx` | Services page (3+3 grid, 6 cards) |
+| `src/pages/SkoLenieObsluhy.jsx` | Školenie obsluhy service detail page |
+| `src/components/common/Footer.jsx` | Footer (mobile 2-col, MDN Tech credit) |
+| `src/components/common/Header.jsx` | Header + promo popup (hidden on mobile) |
+| `src/data/categories.js` | Static frontend category structure |
+| `apps/dashboard/src/lib/generateAgreementPdf.js` | FO rental agreement PDF |
+| `apps/dashboard/src/lib/generateAgreementPdfPO.js` | PO rental agreement PDF |
+| `knowledgebase/` | Chatbot knowledge base (.md files) |
+| `index.html` | MDN Tech chatbot widget script tag |
+| `supabase/migrations/008_equipment_images_storage.sql` | Supabase Storage bucket for equipment images |
 
 ## Architecture
 ```
@@ -62,14 +78,16 @@ RoyalStroje/
   packages/
     shared/               # Shared types, Supabase client, constants
   supabase/
-    migrations/           # 7 SQL migrations
+    migrations/           # 8 SQL migrations
     seed.sql              # Equipment catalog data
+  knowledgebase/          # Chatbot knowledge base (.md files)
 ```
 
 ## Supabase
 - **Project:** royal-stroje-system (Pro plan, EU region)
 - **URL:** https://dvmdoczuppmcumykhktm.supabase.co
 - **Tables:** equipment_categories, equipment_subcategories, equipment, clients, reservations, reservation_items, invoices, partners, royal_card_invitations, activity_log
+- **Storage:** `equipment-images` bucket (public read, staff write) -- migration 008
 - **Auth:** Email/password, roles in user_metadata (admin, staff, royal_card)
 - **Admin user:** info@royalstroje.sk (app_role: admin)
-- **RLS note:** Migration 007 added `items_own_insert` policy and fixed VAT function to 23%. Applied to live DB on 2026-03-19.
+- **Website env vars:** `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY` set in Vercel for royalstroje.sk

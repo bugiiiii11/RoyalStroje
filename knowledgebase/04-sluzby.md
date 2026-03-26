@@ -9,7 +9,7 @@ Royal Stroje ponúka komplexné služby v oblasti prenájmu, predaja a servisu s
 Malé náradie, stredná a ťažká mechanizácia. Od 1 dňa s dovozom na stavbu.
 
 **Hlavné výhody:**
-- Dovoz do 4 hodín (malé náradie a stredná mechanizácia)
+- Dovoz do 24 hodín (malé náradie a stredná mechanizácia)
 - Non-stop telefonická podpora
 - Región Senec – Bratislava a okolie
 - Prenájom už od 1 dňa
