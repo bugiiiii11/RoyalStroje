@@ -7,6 +7,7 @@
 | 2 | 2026-03-19 | Design Rebrand + Bug Fixes | Orange #FF6600 rebrand, sidebar redesign, PDF diacritics fix, VAT 23% fix, portal RLS fix |
 | 3 | 2026-03-20–26 | Website Features + Mobile UX | Supabase live sync, image upload, PO/FO contracts, 6th service, mobile hero, scroll animations |
 | 4 | 2026-03-26 | Hero Redesign + Desktop Animations + Performance | New hero image, desktop scroll animations, header white icons, PNG-to-WebP, fix lazy-load spinner |
+| 5 | 2026-03-27 | Scroll Animations -- All Pages | Added useInView scroll reveal animations to 14 pages (desktop + mobile), fixed ProductDetail visibility bug |
 
 ## What Was Done (Session 3) -- Website Features + Mobile UX
 
@@ -65,6 +66,30 @@
 ### Footer
 13. **Copyright row centered on desktop** -- Changed from `justify-between` to `justify-center` with `|` separator between copyright and MDN Tech credit. Mobile layout unchanged. Committed: d335a83.
 
+## What Was Done (Session 5) -- Scroll Animations -- All Pages
+
+### Scroll Reveal Animations
+1. **Sluzby.jsx** -- Hero text reveal, heading + subtitle stagger, 6 service cards staggered fade-up (stagger-1 to 6), CTA reveal-scale. Committed: 7063485.
+2. **Blog.jsx** -- Hero, heading, staggered blog article cards (up to stagger-8), CTA reveal-scale. Committed: 7063485.
+3. **BlogDetail.jsx** -- Hero, mobile header, article body reveal-fade, share section, CTA reveal-scale, related articles. Committed: 7063485.
+4. **Kontakt.jsx** -- Hero, heading, 4 contact method cards staggered, visit section, CTA reveal-scale. Committed: 7063485.
+5. **SkoLenieObsluhy.jsx** -- Hero, intro, partner banner reveal-scale, 6 course cards staggered, 4 benefits staggered, 5 steps staggered, CTA. Committed: 7063485.
+6. **PredajTechniky.jsx** -- Hero, promo products staggered, categories heading + grid staggered, CTA reveal-scale. Committed: 7063485.
+7. **RoyalFleet.jsx** -- Hero, intro, 3 models staggered, example reveal-scale, 4 benefits staggered, 5 steps staggered, who section, CTA. Committed: 7063485.
+8. **DovozTechniky.jsx** -- Hero, heading, 6 service cards staggered, pricing section, CTA reveal-scale. Committed: 7063485.
+9. **ServisNaradia.jsx** -- Hero, heading, 6 service cards staggered, why-us 4 items staggered, CTA reveal-scale. Committed: 7063485.
+10. **NahradneDiely.jsx** -- Hero, heading, 4 service cards staggered, 4 order steps staggered, CTA reveal-scale. Committed: 7063485.
+11. **ZemnePrace.jsx** -- Hero, heading, 6 service cards staggered, CTA reveal-scale. Committed: 7063485.
+12. **CenovaPonuka.jsx** -- Hero, heading, 4 service cards staggered, why section reveal-scale, 3 steps staggered, form reveal. Committed: 7063485.
+13. **Partneri.jsx** -- Hero, heading, 5 partner cards staggered, info section, CTA reveal-scale. Committed: 7063485.
+
+### Bug Fix
+14. **ProductDetail.jsx** -- Removed reveal-left/reveal-right/reveal-scale animations that caused content to be invisible. The reveal classes start at opacity:0 and the IntersectionObserver never triggered for already-visible above-fold content. Committed: 318e4e1.
+
+### Skipped Pages
+- GDPR, ObchodnePodmienky -- legal text, no animations needed.
+- Kosik -- cart/form page, no animations needed.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
@@ -72,10 +97,9 @@
 | 2 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
 | 3 | Product images | Upload product photos via dashboard image upload feature |
 | 4 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
-| 5 | Scroll animations -- other pages | Desktop + mobile done for Požičovňa. Extend to Služby, Blog, Kontakt |
-| 6 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
-| 7 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
-| 8 | Online payment | Stripe/GoPay integration (post-MVP) |
+| 5 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 6 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
+| 7 | Online payment | Stripe/GoPay integration (post-MVP) |
 
 ## Key Files
 | File | Purpose |
