@@ -2,15 +2,11 @@ import { Phone, ArrowLeft, Clock, Shield, Truck, Check, ChevronRight, MessageCir
 import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import useProducts from '../hooks/useProducts';
-import { useInView } from '../hooks/useInView';
 
 export default function ProductDetail() {
   const { productId } = useParams();
   const navigate = useNavigate();
   const { products, loading } = useProducts();
-  const [imageRef, imageInView] = useInView();
-  const [specsRef, specsInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
 
   // Find product by ID
   const productData = products.find(p => p.id === productId);
@@ -159,7 +155,7 @@ export default function ProductDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 mb-10 md:mb-16">
 
             {/* LEFT: Product Image */}
-            <div ref={imageRef} className={`lg:col-span-5 reveal-left${imageInView ? ' in-view' : ''}`}>
+            <div className="lg:col-span-5">
               <div className="sticky top-24">
                 <div className="relative bg-gradient-to-br from-zinc-900 to-zinc-800 border border-white/10 rounded-2xl p-4 md:p-6">
                   <div className="bg-white rounded-xl aspect-square flex items-center justify-center p-6">
@@ -174,7 +170,7 @@ export default function ProductDetail() {
             </div>
 
             {/* RIGHT: Price + CTA + Specs */}
-            <div ref={specsRef} className={`lg:col-span-7 space-y-6 reveal-right${specsInView ? ' in-view' : ''}`}>
+            <div className="lg:col-span-7 space-y-6">
 
               {/* ── Price & CTA Card ── */}
               <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl overflow-hidden">
@@ -264,7 +260,7 @@ export default function ProductDetail() {
           </div>
 
           {/* ─── Bottom CTA Section ─── */}
-          <div ref={ctaRef} className={`relative bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-950 border border-white/10 rounded-2xl md:rounded-3xl p-6 md:p-10 overflow-hidden reveal-scale${ctaInView ? ' in-view' : ''}`}>
+          <div className="relative bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-950 border border-white/10 rounded-2xl md:rounded-3xl p-6 md:p-10 overflow-hidden">
             {/* Subtle accent line */}
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-primary/50 to-transparent" />
 
