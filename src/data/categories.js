@@ -105,6 +105,7 @@ export const categories = [
       { id: 'kosacky-na-travu', name: 'Kosačky na trávu', slug: 'kosacky-na-travu' },
       { id: 'krovinorezy-a-motorove-pily', name: 'Krovinorezy a motorové píly', slug: 'krovinorezy-a-motorove-pily' },
       { id: 'rotavatory', name: 'Rotavátory', slug: 'rotavatory' },
+      { id: 'drvice', name: 'Drviče', slug: 'drvice' },
     ]
   },
 ];

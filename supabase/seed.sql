@@ -54,6 +54,7 @@ DECLARE
   v_sub_zahradna_technika__kosacky_na_travu UUID;
   v_sub_zahradna_technika__krovinorezy_a_motorove_pily UUID;
   v_sub_zahradna_technika__rotavatory UUID;
+  v_sub_zahradna_technika__drvice UUID;
 BEGIN
 
 -- ============================================================
@@ -453,8 +454,16 @@ IF v_sub_zahradna_technika__rotavatory IS NULL THEN
   SELECT id INTO v_sub_zahradna_technika__rotavatory FROM equipment_subcategories WHERE category_id = v_cat_zahradna_technika AND slug = 'rotavatory';
 END IF;
 
+INSERT INTO equipment_subcategories (category_id, name, slug, sort_order)
+VALUES (v_cat_zahradna_technika, 'Drviče', 'drvice', 30)
+ON CONFLICT (category_id, slug) DO NOTHING
+RETURNING id INTO v_sub_zahradna_technika__drvice;
+IF v_sub_zahradna_technika__drvice IS NULL THEN
+  SELECT id INTO v_sub_zahradna_technika__drvice FROM equipment_subcategories WHERE category_id = v_cat_zahradna_technika AND slug = 'drvice';
+END IF;
+
 -- ============================================================
--- Equipment (142 items)
+-- Equipment (146 items)
 -- ============================================================
 INSERT INTO equipment (category_id, subcategory_id, slug, name, description, image_path, features, daily_rate_base, daily_rate_vat, pricing_type, ownership_type, in_stock, is_new, is_popular, blog_article_slug)
 VALUES (v_cat_auta_privesy, v_sub_auta_privesy__auta_a_dodavky, 'citroen-jumper', 'Citroen Jumper', 'Dodávka do 3,5t', '/pictures/Katalog-PNG/Autá a prívesné vozíky/Autá a dodávky/dodavka-3500.webp', '["Palivo - nafta"]', 0, 0, 'negotiable', 'partner', true, false, false, NULL)
@@ -1085,6 +1094,23 @@ ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO equipment (category_id, subcategory_id, slug, name, description, features, daily_rate_base, daily_rate_vat, pricing_type, ownership_type, in_stock)
 VALUES (v_cat_male_naradie, v_sub_male_naradie__prislusenstvo, 'accessory-15-elektr-da', 'Elektróda - cena/ks', 'Elektróda', '["cena/ks"]', 0.2, 0.246, 'fixed', 'owned', true)
+ON CONFLICT (slug) DO NOTHING;
+
+-- New products (2026-03-29)
+INSERT INTO equipment (category_id, subcategory_id, slug, name, description, image_path, features, daily_rate_base, daily_rate_vat, pricing_type, ownership_type, in_stock, is_new, is_popular, blog_article_slug)
+VALUES (v_cat_tazka_technika, v_sub_tazka_technika__pasove_mini_rypadla, 'wacker-neuson-et18', 'Wacker Neuson ET18', 'Mini-rýpadlo 2t', '/pictures/Katalog-PNG/Ťažká technika/Pásové mini-rýpadlá/Wacker_neusonET18.webp', '["Príslušenstvo v cene - Lopata 300 / 500 / svahovacia hydr. 1050 mm","Rozmery (D x Š x V) - 3800 / 990 - 1300 / 2390 mm","Hĺbkový dosah / Výsypná výška - 2295 / 2720 mm"]', 95, 116.85, 'fixed', 'owned', true, true, false, NULL)
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO equipment (category_id, subcategory_id, slug, name, description, image_path, features, daily_rate_base, daily_rate_vat, pricing_type, ownership_type, in_stock, is_new, is_popular, blog_article_slug)
+VALUES (v_cat_tazka_technika, v_sub_tazka_technika__pasove_mini_rypadla, 'jcb-19c-i', 'JCB 19C-I', 'Mini-rýpadlo 2t', '/pictures/Katalog-PNG/Ťažká technika/Pásové mini-rýpadlá/JCB-19C-I.webp', '["Príslušenstvo v cene - Lopata 300 / 500 / svahovacia hydr. 1050 mm","Rozmery (D x Š x V) - 3860 / 980 - 1330 / 2324 mm","Hĺbkový dosah / Výsypná výška - 2426 / 2637 mm * podľa násady"]', 95, 116.85, 'fixed', 'owned', true, true, false, NULL)
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO equipment (category_id, subcategory_id, slug, name, description, image_path, features, daily_rate_base, daily_rate_vat, pricing_type, ownership_type, in_stock, is_new, is_popular, blog_article_slug)
+VALUES (v_cat_tazka_technika, v_sub_tazka_technika__pasove_mini_rypadla, 'wacker-neuson-et24', 'Wacker Neuson ET24', 'Mini-rýpadlo 2t', '/pictures/Katalog-PNG/Ťažká technika/Pásové mini-rýpadlá/Wacker_neusonET24.webp', '["Príslušenstvo v cene - Lopata 300 / 500 / svahovacia hydr. 1300 mm","Rozmery (D x Š x V) - 4000 / 1400 / 2400 mm","Hĺbkový dosah / Výsypná výška - 2600 / 2800 mm"]', 95, 116.85, 'fixed', 'owned', true, true, false, NULL)
+ON CONFLICT (slug) DO NOTHING;
+
+INSERT INTO equipment (category_id, subcategory_id, slug, name, description, image_path, features, daily_rate_base, daily_rate_vat, pricing_type, ownership_type, in_stock, is_new, is_popular, blog_article_slug)
+VALUES (v_cat_zahradna_technika, v_sub_zahradna_technika__drvice, 'makita-ud2500', 'Makita UD2500', 'Elektrický drvič na konáre', '/pictures/Katalog-PNG/Záhradná technika/Drviče/UD2500.webp', '["Max. priemer konárov - 45 mm","Objem zbernej nádoby - 67 l","Hmotnosť - 29,7 kg"]', 20, 24.6, 'fixed', 'owned', true, true, false, NULL)
 ON CONFLICT (slug) DO NOTHING;
 
 END;
