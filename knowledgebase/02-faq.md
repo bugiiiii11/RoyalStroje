@@ -59,10 +59,10 @@ Okamžite nás kontaktujte na **0948 555 551**. Zabezpečíme opravu alebo náhr
 
 ### Poškodenie vašim zavinením:
 - Hradíte skutočné náklady na opravu (s DPH)
-- Strata počas opravy sa účtuje ako pokračujúci prenájom
 - Pri závažnom poškodení máme právo na úhradu zostatkovej hodnoty stroja
 
-Odporúčame informovať sa o možnosti základného poistenia, ktoré kryje bežné prevádzkové riziká.
+### ROYAL GUARD – ochrana v cene prenájmu:
+Vybrané stroje majú v cene službu ROYAL GUARD, ktorá kryje náhodné poškodenie pri bežnom používaní. V prípade škody sa uplatňuje spoluúčasť 5% z výšky škody. Nevzťahuje sa na úmyselné poškodenie a hrubú nedbanlivosť. Využite službu ROYAL GUARD, ktorá výrazne znižuje riziko nákladov pri poškodení stroja.
 
 ## Aké sú platobné možnosti?
 

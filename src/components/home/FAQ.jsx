@@ -118,12 +118,15 @@ export default function FAQ() {
           <p>Pri poškodení stroja vašim zavinením sa uplatňuje:</p>
           <ul className="space-y-1 ml-4 list-disc mt-2">
             <li>Hradíte skutočné náklady na opravu (s DPH)</li>
-            <li>Strata počas opravy sa účtuje ako pokračujúci prenájom</li>
             <li>Pri závažnom poškodení máme právo na úhradu zostatkové hodnoty stroja</li>
           </ul>
 
+        
+          <p><strong className="text-orange-primary">ROYAL GUARD – ochrana v cene prenájmu</strong></p>
+          <p>Vybrané stroje majú v cene službu <strong className="text-white">ROYAL GUARD</strong>, ktorá kryje náhodné poškodenie pri bežnom používaní. V prípade škody sa uplatňuje spoluúčasť 5% z výšky škody. Nevzťahuje sa na úmyselné poškodenie a hrubú nedbanlivosť.</p>
+
           <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 mt-4">
-            <p className="text-sm"><strong className="text-blue-400">💡 Odporúčame:</strong> Informujte sa o možnosti základného poistenia, ktoré kryje bežné prevádzkové riziká.</p>
+            <p className="text-sm"><strong className="text-blue-400">💡 Odporúčame:</strong> Využite službu ROYAL GUARD, ktorá výrazne znižuje riziko nákladov pri poškodení stroja.</p>
           </div>
         </div>
       )
