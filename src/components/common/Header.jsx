@@ -85,7 +85,7 @@ export default function Header() {
               Čoskoro otvárame!
             </h3>
             <p className="text-white/70 text-sm leading-relaxed mb-5">
-              Pripravujeme pre vás niečo výnimočné. Sledujte nás pre najnovšie informácie.
+              Pripravujeme pre vás požičovňu náradia. Sledujte nás pre najnovšie informácie.
             </p>
 
             <Link
