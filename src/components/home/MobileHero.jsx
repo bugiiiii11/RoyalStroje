@@ -6,7 +6,7 @@ export default function MobileHero() {
       {/* Background image */}
       <div className="absolute inset-0">
         <img
-          src="/hero-main.webp"
+          src="/hero-11.webp"
           alt="Royal Stroje - požičovňa stavebnej techniky Senec"
           className="w-full h-full object-cover object-center"
           fetchPriority="high"

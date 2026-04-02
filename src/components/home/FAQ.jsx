@@ -191,8 +191,8 @@ export default function FAQ() {
               {/* Image Container */}
               <div className="relative rounded-2xl overflow-hidden border-2 border-orange-primary/30 mb-6">
                 <img
-                  src="/pictures/graphics/dovoz.webp"
-                  alt="Sme tu pre vás"
+                  src="/pictures/faq-1.webp"
+                  alt="Royal Stroje - FAQ"
                   className="w-full h-auto object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>

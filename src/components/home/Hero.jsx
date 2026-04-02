@@ -7,7 +7,7 @@ export default function Hero() {
       {/* Fullscreen Background Image */}
       <div className="absolute inset-0">
         <img
-          src="/hero-main.webp"
+          src="/hero-11.webp"
           alt="Požičovňa stavebnej techniky Royal Stroje Senec - profesionálne náradie a stroje na prenájom"
           className="w-full h-full object-cover"
           width={1920}
