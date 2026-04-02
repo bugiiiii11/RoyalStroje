@@ -8,6 +8,7 @@
 | 3 | 2026-03-20–26 | Website Features + Mobile UX | Supabase live sync, image upload, PO/FO contracts, 6th service, mobile hero, scroll animations |
 | 4 | 2026-03-26 | Hero Redesign + Desktop Animations + Performance | New hero image, desktop scroll animations, header white icons, PNG-to-WebP, fix lazy-load spinner |
 | 5 | 2026-03-27 | Scroll Animations -- All Pages | Added useInView scroll reveal animations to 14 pages (desktop + mobile), fixed ProductDetail visibility bug |
+| 6 | 2026-04-02 | New Products + Image Updates | 4 new products (3x mini-rýpadlá, 1x drvič), new hero image, new FAQ image, PNG-to-WebP conversions |
 
 ## What Was Done (Session 3) -- Website Features + Mobile UX
 
@@ -89,6 +90,18 @@
 ### Skipped Pages
 - GDPR, ObchodnePodmienky -- legal text, no animations needed.
 - Kosik -- cart/form page, no animations needed.
+
+## What Was Done (Session 6) -- New Products + Image Updates
+
+### New Products
+1. **4 new products added** -- 3x Pásové mini-rýpadlá (Wacker Neuson ET18, ET24, JCB 19C-I) + 1x Elektrický drvič (Makita UD2500). New subcategory "Drviče" in Záhradná technika. Migration `010_new_products_2026_03_29.sql` created. PNG images converted to WebP. Files: `src/data/categories.js`, `supabase/seed.sql`, migration 010. Committed: 574c081.
+
+### Image Updates
+2. **Hero image replaced** -- `hero-main.webp` → `hero-11.webp` on desktop (Hero.jsx), mobile (MobileHero.jsx), and preload (index.html). Committed: c5cf8f0.
+3. **FAQ image replaced** -- `dovoz.webp` → `faq-1.webp` in FAQ sidebar. PNG converted to WebP (2.3 MB → 193 KB). Committed: c5cf8f0.
+
+### Pending
+- Migration 010 needs to be run in Supabase SQL Editor for products to appear on website.
 
 ## What To Do Next
 | Priority | Task | Notes |
