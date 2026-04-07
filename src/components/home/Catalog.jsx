@@ -219,7 +219,7 @@ export default function Catalog() {
         {/* Mobile Header */}
         <div ref={headerRef} className={`md:hidden text-center mb-6 pt-6 reveal ${headerInView ? 'in-view' : ''}`}>
           <h2 className="text-xl font-black text-white mb-2 leading-tight">
-            <span className="text-orange-primary">Katalóg</span> strojov na prenájom
+            <span className="text-orange-primary">Katalóg náradia</span> a strojov na prenájom
           </h2>
           <p className="text-white/70 text-sm leading-relaxed max-w-2xl mx-auto">
             Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
