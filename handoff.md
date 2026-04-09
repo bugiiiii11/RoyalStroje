@@ -10,6 +10,7 @@
 | 5 | 2026-03-27 | Scroll Animations -- All Pages | Added useInView scroll reveal animations to 14 pages (desktop + mobile), fixed ProductDetail visibility bug |
 | 6 | 2026-04-02 | New Products + Image Updates | 4 new products (3x mini-rýpadlá, 1x drvič), new hero image, new FAQ image, PNG-to-WebP conversions |
 | 7 | 2026-04-09 | Dashboard Contracts + Contacts Overhaul | Contract návrh→finálna flow, rental day algorithm, zábezpeka field, multi-contact clients, Faktúry merged view with delete |
+| 8 | 2026-04-09 | Dashboard UX + PDF Polish + Equipment rate_unit | New client UX simplified, Dátum do picker, PDF datums/prices/signatures fixed, rate_unit column + Zemné vrtáky subcategory |
 
 ## What Was Done (Session 3) -- Website Features + Mobile UX
 
@@ -122,13 +123,32 @@
 ### Client Contacts
 8. **Multiple contact persons (max 5)** -- PO new-client form in NewDeal supports dynamic contact list (min 1, max 5 with add/remove). Contacts saved to `client_contacts` table after client creation. ClientDetail sidebar shows all contacts with add/delete. `useClient.js` extended to fetch `client_contacts`. Files: `NewDealStepClient.jsx`, `ClientDetail.jsx`, `useClient.js`. Committed: d9662b2.
 
+## What Was Done (Session 8) -- Dashboard UX + PDF Polish + Equipment rate_unit
+
+### New Client Flow
+1. **Simplified new client form** -- Removed "Pokračovať s klientom" button. "Ďalej" renamed to "Vytvoriť obchod" (selects client + advances step). "Uložiť klienta" saves to DB and navigates to /clients. Client list hidden when form open. Files: `NewDealStepClient.jsx`, `NewDeal.jsx`. Committed: `0b77a9b`, `dfd7898`.
+2. **Fix contract number collision (409)** -- Prevented duplicate ZN- numbers on rapid deal creation. Fixed finalization for deals without pre-existing contract record. Committed: `bef02bb`.
+3. **Fix time_from seconds** -- `combineDatetime` stripped HH:MM:SS to HH:MM to prevent "08:00:00" showing in PDF. Files: `rentalDays.js`. Committed: `f28b81c`.
+
+### PDF Contracts
+4. **Dátum od/do labels + blank price on návrh** -- FO+PO: "Začiatok prenájmu" relabeled to "Dátum od", "Dohodnutá dĺžka" relabeled to "Dátum do". For návrh contracts: total/DPH left blank (filled only on finalization). Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `7dc477b`.
+5. **Wider signature rows** -- Signatures section restructured into two side-by-side `autoTable` calls. "Podpis prenajímateľa" and "Podpis nájomcu" rows use `colSpan:2` + `minCellHeight:15` for wide printable signature lines. Same layout for Protocol o vrátení PP. Committed: `7dc477b`.
+6. **Pre-fill signature date + place** -- Both parties get today's date (sk-SK locale) pre-filled. Lessor gets "Miesto: Boldog – Senec" / "V Boldog – Senec dňa…" pre-filled. Committed: `5ecdc39`.
+
+### NewDeal Step 2
+7. **Editable Dátum do picker** -- "Dátum do" field added to step 2 (Zariadenia). Auto-fills to dateFrom+1 day, but user can override. Days recalculate on change. Committed: `2c31f90`.
+8. **Timezone fix (UTC+2)** -- `toISOString()` was returning dateFrom instead of +1 in UTC+2. Fixed with `localDateStr()` using local date components. Files: `NewDealStepItems.jsx`. Committed: `5ecdc39`.
+
+### Equipment Catalog
+9. **rate_unit column + Zemné vrtáky subcategory** -- Migration 012: adds `rate_unit TEXT DEFAULT 'deň'` to equipment, inserts "Zemné vrtáky" subcategory under Záhradná technika, updates Kotúč diamantový items to `rate_unit='mm'`. EquipmentForm: new "Jednotka sadzby" dropdown (Denná/mm/Hodinová). PDF: `rateUnitLabel()` maps rate_unit to Druh sadzby column. Files: `EquipmentForm.jsx`, `DealDetail.jsx`, `generateAgreementPdf.js`, `generateAgreementPdfPO.js`, `012_rate_unit_zemne_vrtaky.sql`. Committed: `6a91ace`.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
-| 1 | Run migration 010 in Supabase | New products (ET18, ET24, JCB, UD2500) not visible on website until migration 010 is run |
-| 2 | Test contract flow end-to-end | Create deal → check ZN- appears in Faktúry → Sfinalizovať → check ZF- + PDF |
-| 3 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
-| 4 | Product images | Upload product photos via dashboard image upload feature |
+| 1 | Run migration 012 in Supabase SQL Editor | Adds rate_unit column, Zemné vrtáky subcategory, sets mm for diamond discs. SQL in `supabase/migrations/012_rate_unit_zemne_vrtaky.sql` |
+| 2 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
+| 3 | Product images | Upload product photos via dashboard image upload feature |
+| 4 | Add Zemné vrtáky products via dashboard | Subcategory now exists after migration 012 -- add Makita DG002GZ etc. |
 | 5 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
 | 6 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
 | 7 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
@@ -153,6 +173,8 @@
 | `apps/dashboard/src/lib/rentalDays.js` | Rental day calculation algorithm (24h/26h/28h thresholds) |
 | `apps/dashboard/src/pages/deals/FinalizeContractModal.jsx` | Modal for finalizing contract on product return |
 | `apps/dashboard/src/hooks/useContracts.js` | Supabase hook for contracts table |
+| `apps/dashboard/src/pages/deals/NewDealStepItems.jsx` | Step 2: Dátum od/do pickers, time, equipment search + cart |
+| `supabase/migrations/012_rate_unit_zemne_vrtaky.sql` | Adds rate_unit column, Zemné vrtáky subcategory, mm for diamond discs |
 | `knowledgebase/` | Chatbot knowledge base (.md files) |
 | `index.html` | MDN Tech chatbot widget script tag |
 | `supabase/migrations/008_equipment_images_storage.sql` | Supabase Storage bucket for equipment images |
