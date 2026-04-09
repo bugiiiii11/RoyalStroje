@@ -191,7 +191,13 @@ export default function NewDeal() {
         <div className="bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm mb-4">{error}</div>
       )}
 
-      {step === 0 && <NewDealStepClient selected={client} onSelect={setClient} />}
+      {step === 0 && (
+        <NewDealStepClient
+          selected={client}
+          onSelect={setClient}
+          onSelectAndNext={(clientData) => { setClient(clientData); setStep(1); }}
+        />
+      )}
       {step === 1 && (
         <NewDealStepItems
           dateFrom={dateFrom}

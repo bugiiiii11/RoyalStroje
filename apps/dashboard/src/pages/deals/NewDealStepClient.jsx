@@ -11,7 +11,7 @@ const EMPTY_PO = { company_name: '', email: '', phone: '', ico: '', dic: '', ic_
 const EMPTY_FO = { company_name: '', email: '', phone: '', address: '', city: '', postal_code: '', birth_date: '', id_card_number: '' };
 const EMPTY_CONTACT = { name: '', phone: '', email: '', position: '' };
 
-export default function NewDealStepClient({ selected, onSelect }) {
+export default function NewDealStepClient({ selected, onSelect, onSelectAndNext }) {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [showNew, setShowNew] = useState(false);
@@ -44,17 +44,21 @@ export default function NewDealStepClient({ selected, onSelect }) {
     setContacts(updated);
   };
 
-  const handleNewClient = () => {
-    if (!newClient.company_name.trim()) return;
-    // For PO: embed contacts; for FO: use single contact as primary info
+  const buildClientData = () => {
     const primaryContact = contacts[0];
     const clientData = { ...newClient, _isNew: true, entity_type: entityType, client_type: 'standard', discount_percent: 0 };
     if (entityType === 'po') {
       clientData._contacts = contacts;
-      // Keep legacy contact_person from primary contact name for backwards compat
       clientData.contact_person = primaryContact?.name || '';
     }
+    return clientData;
+  };
+
+  const handleCreateDeal = () => {
+    if (!newClient.company_name.trim()) return;
+    const clientData = buildClientData();
     onSelect(clientData);
+    onSelectAndNext?.(clientData);
   };
 
   const handleSaveClient = async () => {
@@ -254,11 +258,11 @@ export default function NewDealStepClient({ selected, onSelect }) {
           )}
           <div className="flex gap-3">
             <button
-              onClick={handleNewClient}
+              onClick={handleCreateDeal}
               disabled={!newClient.company_name.trim()}
               className="bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-glow hover:shadow-glow-md disabled:opacity-50 transition-all btn-press"
             >
-              Pokračovať s klientom
+              Vytvoriť obchod
             </button>
             <button
               onClick={handleSaveClient}
@@ -271,7 +275,7 @@ export default function NewDealStepClient({ selected, onSelect }) {
         </div>
       )}
 
-      <div className="space-y-2 max-h-[400px] overflow-y-auto">
+      {!showNew && <div className="space-y-2 max-h-[400px] overflow-y-auto">
         {loading && <p className="text-sm text-gray-400 py-4 text-center">Načítavam...</p>}
         {!loading && clients?.length === 0 && (
           <p className="text-sm text-gray-400 py-4 text-center">Žiadni klienti nenájdení</p>
@@ -309,7 +313,7 @@ export default function NewDealStepClient({ selected, onSelect }) {
             </div>
           );
         })}
-      </div>
+      </div>}
     </div>
   );
 }
