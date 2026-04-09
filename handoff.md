@@ -9,6 +9,7 @@
 | 4 | 2026-03-26 | Hero Redesign + Desktop Animations + Performance | New hero image, desktop scroll animations, header white icons, PNG-to-WebP, fix lazy-load spinner |
 | 5 | 2026-03-27 | Scroll Animations -- All Pages | Added useInView scroll reveal animations to 14 pages (desktop + mobile), fixed ProductDetail visibility bug |
 | 6 | 2026-04-02 | New Products + Image Updates | 4 new products (3x mini-rýpadlá, 1x drvič), new hero image, new FAQ image, PNG-to-WebP conversions |
+| 7 | 2026-04-09 | Dashboard Contracts + Contacts Overhaul | Contract návrh→finálna flow, rental day algorithm, zábezpeka field, multi-contact clients, Faktúry merged view with delete |
 
 ## What Was Done (Session 3) -- Website Features + Mobile UX
 
@@ -103,16 +104,35 @@
 ### Pending
 - Migration 010 needs to be run in Supabase SQL Editor for products to appear on website.
 
+## What Was Done (Session 7) -- Dashboard Contracts + Contacts Overhaul
+
+### DB
+1. **Migration 011** -- New `contracts` table (contract_number ZN-/ZF-, type navrh/finalna, time_from, return_date, time_to, calculated_days, final_total) + `client_contacts` table (id, client_id, name, phone, email, position, is_primary). RLS policies for both. Files: `supabase/migrations/011_contracts_contacts.sql`. Committed: d9662b2.
+
+### Contract Flow (návrh → finálna)
+2. **New deal: time_from + zábezpeka** -- Time picker "Čas vyzdvihnutia" added to NewDealStepItems. "Interné poznámky" replaced with "Zábezpeka (€)" numeric field (maps to `deposit_amount`). Files: `NewDealStepItems.jsx`, `NewDealStepReview.jsx`. Committed: d9662b2.
+3. **Auto-create contract on deal creation** -- After reservation insert, automatically inserts a `contracts` record (type='navrh', ZN-YYYY-XXXX number). Files: `NewDeal.jsx`. Committed: d9662b2.
+4. **Rental day algorithm** -- `rentalDays.js` utility: ≤24h→1d, 24–26h→1d (negotiable flag), 26–28h→1.5d, >28h→2d, extends per 24h period. Files: `apps/dashboard/src/lib/rentalDays.js`. Committed: d9662b2.
+5. **FinalizeContractModal** -- Modal triggered from DealDetail. Sets return date/time, auto-calculates days via algorithm, shows negotiable warning, editable final price (pre-filled from calculation), generates final PDF. Files: `FinalizeContractModal.jsx`, `DealDetail.jsx`. Committed: d9662b2.
+6. **PDF generators updated** -- Both FO and PO generators accept optional `contractData` param: "NÁVRH" suffix in title when draft, time_from shown in rental start, actual return date/time + final_total shown when finálna. Zábezpeka shown. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: d9662b2.
+
+### Faktúry Page
+7. **Merged contracts + invoices view** -- InvoiceList now fetches from both `invoices` and `contracts` tables (via new `useContracts` hook), merges into single sorted list. Type filter extended with "Návrh zmluvy" / "Finálna zmluva". Delete button on each row with confirm modal (contract delete cascades reservation). Files: `InvoiceList.jsx`, `useContracts.js`. Committed: d9662b2.
+
+### Client Contacts
+8. **Multiple contact persons (max 5)** -- PO new-client form in NewDeal supports dynamic contact list (min 1, max 5 with add/remove). Contacts saved to `client_contacts` table after client creation. ClientDetail sidebar shows all contacts with add/delete. `useClient.js` extended to fetch `client_contacts`. Files: `NewDealStepClient.jsx`, `ClientDetail.jsx`, `useClient.js`. Committed: d9662b2.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
-| 1 | PO contract -- dashboard integration | Generator exists, wire it up in dashboard like FO |
-| 2 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
-| 3 | Product images | Upload product photos via dashboard image upload feature |
-| 4 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
-| 5 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
-| 6 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
-| 7 | Online payment | Stripe/GoPay integration (post-MVP) |
+| 1 | Run migration 010 in Supabase | New products (ET18, ET24, JCB, UD2500) not visible on website until migration 010 is run |
+| 2 | Test contract flow end-to-end | Create deal → check ZN- appears in Faktúry → Sfinalizovať → check ZF- + PDF |
+| 3 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
+| 4 | Product images | Upload product photos via dashboard image upload feature |
+| 5 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
+| 6 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 7 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
+| 8 | Online payment | Stripe/GoPay integration (post-MVP) |
 
 ## Key Files
 | File | Purpose |
@@ -128,8 +148,11 @@
 | `src/components/common/Footer.jsx` | Footer (mobile 2-col, MDN Tech credit) |
 | `src/components/common/Header.jsx` | Header + promo popup (hidden on mobile) |
 | `src/data/categories.js` | Static frontend category structure |
-| `apps/dashboard/src/lib/generateAgreementPdf.js` | FO rental agreement PDF |
-| `apps/dashboard/src/lib/generateAgreementPdfPO.js` | PO rental agreement PDF |
+| `apps/dashboard/src/lib/generateAgreementPdf.js` | FO rental agreement PDF (návrh/finálna, time_from, contractData param) |
+| `apps/dashboard/src/lib/generateAgreementPdfPO.js` | PO rental agreement PDF (návrh/finálna, time_from, contractData param) |
+| `apps/dashboard/src/lib/rentalDays.js` | Rental day calculation algorithm (24h/26h/28h thresholds) |
+| `apps/dashboard/src/pages/deals/FinalizeContractModal.jsx` | Modal for finalizing contract on product return |
+| `apps/dashboard/src/hooks/useContracts.js` | Supabase hook for contracts table |
 | `knowledgebase/` | Chatbot knowledge base (.md files) |
 | `index.html` | MDN Tech chatbot widget script tag |
 | `supabase/migrations/008_equipment_images_storage.sql` | Supabase Storage bucket for equipment images |
@@ -152,7 +175,7 @@ RoyalStroje/
 ## Supabase
 - **Project:** royal-stroje-system (Pro plan, EU region)
 - **URL:** https://dvmdoczuppmcumykhktm.supabase.co
-- **Tables:** equipment_categories, equipment_subcategories, equipment, clients, reservations, reservation_items, invoices, partners, royal_card_invitations, activity_log
+- **Tables:** equipment_categories, equipment_subcategories, equipment, clients, client_contacts, reservations, reservation_items, invoices, contracts, partners, royal_card_invitations, activity_log
 - **Storage:** `equipment-images` bucket (public read, staff write) -- migration 008
 - **Auth:** Email/password, roles in user_metadata (admin, staff, royal_card)
 - **Admin user:** info@royalstroje.sk (app_role: admin)
