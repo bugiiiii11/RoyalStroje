@@ -13,6 +13,7 @@ const EMPTY_FORM = {
   subcategory_id: '',
   image_path: '',
   daily_rate_base: '',
+  rate_unit: 'deň',
   pricing_type: 'fixed',
   ownership_type: 'owned',
   total_units: 1,
@@ -88,6 +89,7 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
         subcategory_id: item.subcategory_id || '',
         image_path: item.image_path || '',
         daily_rate_base: item.daily_rate_base ?? '',
+        rate_unit: item.rate_unit || 'deň',
         pricing_type: item.pricing_type || 'fixed',
         ownership_type: item.ownership_type || 'owned',
         total_units: item.total_units ?? 1,
@@ -174,6 +176,7 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
       image_path: imagePath,
       daily_rate_base: baseRate,
       daily_rate_vat: Math.round(vatRate * 100) / 100,
+      rate_unit: form.rate_unit || 'deň',
       pricing_type: form.pricing_type,
       ownership_type: form.ownership_type,
       total_units: parseInt(form.total_units, 10) || 1,
@@ -326,6 +329,18 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
             >
               <option value="fixed">Pevná cena</option>
               <option value="negotiable">Na požiadanie</option>
+            </select>
+          </div>
+          <div>
+            <label className={labelClass}>Jednotka sadzby</label>
+            <select
+              value={form.rate_unit}
+              onChange={(e) => update('rate_unit', e.target.value)}
+              className={inputClass}
+            >
+              <option value="deň">Denná (deň)</option>
+              <option value="mm">Na mm (mm)</option>
+              <option value="hod">Hodinová (hod)</option>
             </select>
           </div>
           <div>

@@ -74,7 +74,8 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   y = doc.lastAutoTable.finalY + 2;
 
   // ═══ II. PREDMET NÁJMU, DOBA NÁJMU A PLATOBNÉ PODMIENKY ═══
-  const eq = (items || []).map((it) => [it.equipment?.name || it.name || '—', '', 'Denná', fmtPrice(it.daily_rate)]);
+  const rateUnitLabel = (u) => u === 'mm' ? 'mm' : u === 'hod' ? 'Hodinová' : 'Denná';
+  const eq = (items || []).map((it) => [it.equipment?.name || it.name || '—', '', rateUnitLabel(it.equipment?.rate_unit), fmtPrice(it.daily_rate)]);
   autoTable(doc, {
     startY: y,
     head: [[{ content: 'II. PREDMET NÁJMU — Názov, typ, druh a informácie o PP', colSpan: 2, styles: hdr(f) }, { content: 'Výrobné číslo', styles: hdr(f) }, { content: 'Druh sadzby', styles: hdr(f) }, { content: 'bez DPH v EUR', styles: hdr(f) }]],

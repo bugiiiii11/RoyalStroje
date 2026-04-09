@@ -78,7 +78,8 @@ export default async function generateAgreementPdf(reservation, items, client, c
   y = doc.lastAutoTable.finalY + 2;
 
   // ═══ EQUIPMENT ═══
-  const eq = (items || []).map((it) => [it.equipment?.name || it.name || '\u2014', '', 'Denn\u00E1', fmtPrice(it.daily_rate * 1.23)]);
+  const rateUnitLabel = (u) => u === 'mm' ? 'mm' : u === 'hod' ? 'Hodinov\u00E1' : 'Denn\u00E1';
+  const eq = (items || []).map((it) => [it.equipment?.name || it.name || '\u2014', '', rateUnitLabel(it.equipment?.rate_unit), fmtPrice(it.daily_rate * 1.23)]);
   autoTable(doc, {
     startY: y,
     head: [[{ content: 'N\u00E1zov, typ a popis predmetu pren\u00E1jmu (PP)', styles: hdr(f) }, { content: 'V\u00FDrobn\u00E9 \u010D\u00EDslo', styles: hdr(f) }, { content: 'Druh sadzby', styles: hdr(f) }, { content: 'Sadzba/de\u0148 vr\u00E1tane DPH (EUR)', styles: hdr(f) }]],

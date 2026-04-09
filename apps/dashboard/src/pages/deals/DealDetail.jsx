@@ -39,7 +39,7 @@ export default function DealDetail() {
   const { data: items } = useSupabaseQuery(
     () => supabase
       .from('reservation_items')
-      .select('*, equipment(name, slug)')
+      .select('*, equipment(name, slug, rate_unit)')
       .eq('reservation_id', id),
     [id]
   );
