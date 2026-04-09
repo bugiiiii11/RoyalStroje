@@ -143,18 +143,19 @@ export default function NewDeal() {
 
       // Auto-create contract draft (návrh zmluvy)
       const currentYear = new Date().getFullYear();
-      const { data: contractCount } = await supabase
+      const { count: contractCount } = await supabase
         .from('contracts')
-        .select('id', { count: 'exact', head: true })
+        .select('*', { count: 'exact', head: true })
         .or(`contract_number.like.ZN-${currentYear}-%,contract_number.like.ZF-${currentYear}-%`);
       const nextSeq = String((contractCount || 0) + 1).padStart(4, '0');
       const contractNumber = `ZN-${currentYear}-${nextSeq}`;
-      await supabase.from('contracts').insert({
+      const { error: contractErr } = await supabase.from('contracts').insert({
         contract_number: contractNumber,
         reservation_id: reservation.id,
         type: 'navrh',
         time_from: finalData.timeFrom || null,
       });
+      if (contractErr) throw contractErr;
 
       // Log activity
       await supabase.rpc('log_activity', {

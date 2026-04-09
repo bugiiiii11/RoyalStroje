@@ -36,9 +36,34 @@ export default function FinalizeContractModal({ open, onClose, reservation, item
   }, [suggestedTotal]);
 
   const handleConfirm = async () => {
-    if (!returnDate || !contract) return;
+    if (!returnDate) return;
     setSaving(true);
     try {
+      let contractId = contract?.id;
+
+      // If no contract exists yet (failed during deal creation), auto-create one now
+      if (!contractId) {
+        const currentYear = new Date().getFullYear();
+        const { count: contractCount } = await supabase
+          .from('contracts')
+          .select('*', { count: 'exact', head: true })
+          .or(`contract_number.like.ZN-${currentYear}-%,contract_number.like.ZF-${currentYear}-%`);
+        const nextSeq = String((contractCount || 0) + 1).padStart(4, '0');
+        const contractNumber = `ZN-${currentYear}-${nextSeq}`;
+        const { data: newContract, error: createErr } = await supabase
+          .from('contracts')
+          .insert({
+            contract_number: contractNumber,
+            reservation_id: reservation?.id,
+            type: 'navrh',
+            time_from: reservation?.date_from ? '08:00' : null,
+          })
+          .select()
+          .single();
+        if (createErr) throw createErr;
+        contractId = newContract.id;
+      }
+
       const { error } = await supabase
         .from('contracts')
         .update({
@@ -49,12 +74,13 @@ export default function FinalizeContractModal({ open, onClose, reservation, item
           final_total: parseFloat(finalTotal) || 0,
           notes: notes || null,
         })
-        .eq('id', contract.id);
+        .eq('id', contractId);
       if (error) throw error;
 
       // Generate final PDF
       const contractData = {
-        ...contract,
+        ...(contract || {}),
+        id: contractId,
         type: 'finalna',
         return_date: returnDate,
         time_to: returnTime,
