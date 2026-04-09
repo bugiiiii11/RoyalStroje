@@ -106,6 +106,7 @@ export const categories = [
       { id: 'krovinorezy-a-motorove-pily', name: 'Krovinorezy a motorové píly', slug: 'krovinorezy-a-motorove-pily' },
       { id: 'rotavatory', name: 'Rotavátory', slug: 'rotavatory' },
       { id: 'drvice', name: 'Drviče', slug: 'drvice' },
+      { id: 'zemne-vrtaky', name: 'Zemné vrtáky', slug: 'zemne-vrtaky' },
     ]
   },
 ];

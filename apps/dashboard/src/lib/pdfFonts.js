@@ -35,9 +35,9 @@ export async function createPdfDoc(orientation = 'p') {
 
   if (fontsLoaded) {
     doc.addFileToVFS('Inter-Regular.ttf', fontRegular);
-    doc.addFont('Inter-Regular.ttf', 'Inter', 'normal');
+    doc.addFont('Inter-Regular.ttf', 'Inter', 'normal', 'Identity-H');
     doc.addFileToVFS('Inter-Bold.ttf', fontBold);
-    doc.addFont('Inter-Bold.ttf', 'Inter', 'bold');
+    doc.addFont('Inter-Bold.ttf', 'Inter', 'bold', 'Identity-H');
     doc.setFont('Inter');
   }
 
