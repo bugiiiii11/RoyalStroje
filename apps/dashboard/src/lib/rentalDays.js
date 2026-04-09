@@ -46,6 +46,7 @@ export function calculateRentalDays(pickupDatetime, returnDatetime) {
  */
 export function combineDatetime(dateStr, timeStr) {
   if (!dateStr) return null;
-  const time = timeStr || '00:00';
+  // Accept HH:MM or HH:MM:SS — always use only HH:MM
+  const time = (timeStr || '00:00').slice(0, 5);
   return new Date(`${dateStr}T${time}:00`);
 }
