@@ -1,20 +1,25 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserPlus, Check, Building2, User, Plus, Trash2 } from 'lucide-react';
 import SearchInput from '../../components/ui/SearchInput';
 import useClients from '../../hooks/useClients';
 import Badge from '../../components/ui/Badge';
 import { CLIENT_TYPES } from '../../lib/constants';
+import { supabase } from '../../lib/supabase';
 
 const EMPTY_PO = { company_name: '', email: '', phone: '', ico: '', dic: '', ic_dph: '', address: '', city: '', postal_code: '' };
 const EMPTY_FO = { company_name: '', email: '', phone: '', address: '', city: '', postal_code: '', birth_date: '', id_card_number: '' };
 const EMPTY_CONTACT = { name: '', phone: '', email: '', position: '' };
 
 export default function NewDealStepClient({ selected, onSelect }) {
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [showNew, setShowNew] = useState(false);
   const [entityType, setEntityType] = useState('po');
   const [newClient, setNewClient] = useState(EMPTY_PO);
   const [contacts, setContacts] = useState([{ ...EMPTY_CONTACT, is_primary: true }]);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState('');
   const { data: clients, loading } = useClients(search);
 
   const switchEntityType = (type) => {
@@ -50,6 +55,60 @@ export default function NewDealStepClient({ selected, onSelect }) {
       clientData.contact_person = primaryContact?.name || '';
     }
     onSelect(clientData);
+  };
+
+  const handleSaveClient = async () => {
+    if (!newClient.company_name.trim()) return;
+    setSaving(true);
+    setSaveError('');
+    try {
+      const isFO = entityType === 'fo';
+      const clientPayload = {
+        company_name: newClient.company_name,
+        email: newClient.email || null,
+        phone: newClient.phone || null,
+        entity_type: entityType,
+        client_type: 'standard',
+        discount_percent: 0,
+        address: newClient.address || null,
+        city: newClient.city || null,
+        postal_code: newClient.postal_code || null,
+      };
+      if (isFO) {
+        clientPayload.birth_date = newClient.birth_date || null;
+        clientPayload.id_card_number = newClient.id_card_number || null;
+      } else {
+        clientPayload.contact_person = contacts[0]?.name || null;
+        clientPayload.ico = newClient.ico || null;
+        clientPayload.dic = newClient.dic || null;
+        clientPayload.ic_dph = newClient.ic_dph || null;
+      }
+      const { data: saved, error: clientErr } = await supabase
+        .from('clients')
+        .insert(clientPayload)
+        .select()
+        .single();
+      if (clientErr) throw clientErr;
+
+      if (!isFO && contacts.length > 0) {
+        const contactsPayload = contacts.map((c, idx) => ({
+          client_id: saved.id,
+          name: c.name,
+          phone: c.phone || null,
+          email: c.email || null,
+          position: c.position || null,
+          is_primary: idx === 0,
+        })).filter(c => c.name.trim());
+        if (contactsPayload.length > 0) {
+          await supabase.from('client_contacts').insert(contactsPayload);
+        }
+      }
+      navigate('/clients');
+    } catch (e) {
+      setSaveError(e.message || 'Chyba pri ukladaní klienta');
+    } finally {
+      setSaving(false);
+    }
   };
 
   const inputClass = 'px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow';
@@ -190,13 +249,25 @@ export default function NewDealStepClient({ selected, onSelect }) {
             </div>
           )}
 
-          <button
-            onClick={handleNewClient}
-            disabled={!newClient.company_name.trim()}
-            className="bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-glow hover:shadow-glow-md disabled:opacity-50 transition-all btn-press"
-          >
-            Vybrať nového klienta
-          </button>
+          {saveError && (
+            <p className="text-xs text-red-600">{saveError}</p>
+          )}
+          <div className="flex gap-3">
+            <button
+              onClick={handleNewClient}
+              disabled={!newClient.company_name.trim()}
+              className="bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-glow hover:shadow-glow-md disabled:opacity-50 transition-all btn-press"
+            >
+              Pokračovať s klientom
+            </button>
+            <button
+              onClick={handleSaveClient}
+              disabled={!newClient.company_name.trim() || saving}
+              className="px-4 py-2 border border-gray-200 rounded-full text-sm font-medium hover:bg-gray-50 disabled:opacity-50 transition-colors"
+            >
+              {saving ? 'Ukladám...' : 'Uložiť klienta'}
+            </button>
+          </div>
         </div>
       )}
 

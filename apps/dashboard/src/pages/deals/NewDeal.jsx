@@ -45,7 +45,7 @@ export default function NewDeal() {
 
   const canNext = () => {
     if (step === 0) return !!client;
-    if (step === 1) return dateFrom && dateTo && items.length > 0;
+    if (step === 1) return dateFrom && items.length > 0;
     return true;
   };
 
@@ -226,7 +226,7 @@ export default function NewDeal() {
             disabled={!canNext()}
             className="px-6 py-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white rounded-full text-sm font-semibold shadow-glow hover:shadow-glow-md disabled:opacity-50 transition-all btn-press"
           >
-            Ďalej
+            {step === 1 ? 'Vytvoriť obchod' : 'Ďalej'}
           </button>
         </div>
       )}

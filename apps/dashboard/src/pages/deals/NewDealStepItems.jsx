@@ -30,11 +30,16 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
     onItemsChange(items.filter((_, i) => i !== idx));
   };
 
-  // Update days on all items when dates change
-  const handleDateChange = (field, value) => {
-    const newDates = { dateFrom, dateTo, [field]: value };
-    onDatesChange(newDates.dateFrom, newDates.dateTo);
-    const newDays = daysBetween(newDates.dateFrom, newDates.dateTo);
+  // When dateFrom changes, auto-set dateTo = dateFrom + 1 day (návrh = 1 deň)
+  const handleDateFromChange = (value) => {
+    let autoDateTo = '';
+    if (value) {
+      const d = new Date(value + 'T00:00:00');
+      d.setDate(d.getDate() + 1);
+      autoDateTo = d.toISOString().split('T')[0];
+    }
+    onDatesChange(value, autoDateTo);
+    const newDays = daysBetween(value, autoDateTo);
     if (newDays > 0) {
       onItemsChange(items.map((i) => ({ ...i, days: newDays })));
     }
@@ -54,7 +59,7 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
           <input
             type="date"
             value={dateFrom}
-            onChange={(e) => handleDateChange('dateFrom', e.target.value)}
+            onChange={(e) => handleDateFromChange(e.target.value)}
             className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
           />
         </div>
@@ -67,19 +72,9 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
             className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
           />
         </div>
-        <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">Dátum do</label>
-          <input
-            type="date"
-            value={dateTo}
-            min={dateFrom}
-            onChange={(e) => handleDateChange('dateTo', e.target.value)}
-            className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
-          />
-        </div>
-        {days > 0 && (
+        {dateTo && (
           <div className="flex items-end">
-            <span className="text-sm text-gray-500 pb-2">{days} {days === 1 ? 'deň' : days < 5 ? 'dni' : 'dní'}</span>
+            <span className="text-sm text-gray-400 pb-2">Predpokladaný návrat: <span className="text-gray-600 font-medium">{dateTo}</span> (1 deň — návrh)</span>
           </div>
         )}
       </div>
