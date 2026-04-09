@@ -86,12 +86,13 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   y = doc.lastAutoTable.finalY + 2;
 
   // ═══ RENTAL DETAILS + FINANCIAL ═══
-  const displayTotal = isFinalna && contractData?.final_total != null ? contractData.final_total : reservation.total;
-  const netto = displayTotal ? (displayTotal / 1.23) : 0;
-  const dph = displayTotal ? (displayTotal - netto) : 0;
-  const timeFromStr = contractData?.time_from ? ` o ${contractData.time_from}` : '';
+  // For návrh: leave price blank; only fill in after finalization
+  const displayTotal = isFinalna && contractData?.final_total != null ? contractData.final_total : null;
+  const netto = displayTotal != null ? (displayTotal / 1.23) : null;
+  const dph = displayTotal != null ? (displayTotal - netto) : null;
+  const timeFromStr = contractData?.time_from ? ` o ${contractData.time_from.slice(0, 5)}` : '';
   const actualReturnStr = isFinalna && contractData?.return_date
-    ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to}` : '')
+    ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to.slice(0, 5)}` : '')
     : '';
   const depositStr = reservation.deposit_amount > 0
     ? fmtPrice(reservation.deposit_amount)
@@ -102,10 +103,10 @@ export default async function generateAgreementPdfPO(reservation, items, client,
     head: [[{ content: 'DOBA NÁJMU A ODOVZDANIE', colSpan: 2, styles: hdr(f) }, { content: 'PLATOBNÉ PODMIENKY', colSpan: 2, styles: hdr(f) }]],
     body: [
       [{ content: 'Ostatné info o PP a príslušenstve:', styles: L }, reservation.notes || '', { content: 'Celkové nájomné:', styles: { ...L, fontStyle: 'bold' } }, ''],
-      [{ content: 'Miesto používania PP:', styles: L }, reservation.delivery_address || '', { content: 'bez DPH', styles: L }, fmtPrice(netto)],
-      [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, Senec', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, fmtPrice(dph)],
-      [{ content: 'Začiatok prenájmu:', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, fmtPrice(displayTotal)],
-      [{ content: 'Dohodnutá dĺžka prenájmu:', styles: L }, fmtDate(reservation.date_to), { content: 'Zábezpeka v EUR:', styles: L }, depositStr],
+      [{ content: 'Miesto používania PP:', styles: L }, reservation.delivery_address || '', { content: 'bez DPH', styles: L }, netto != null ? fmtPrice(netto) : ''],
+      [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, Senec', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, dph != null ? fmtPrice(dph) : ''],
+      [{ content: 'Začiatok prenájmu (dátum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, displayTotal != null ? fmtPrice(displayTotal) : ''],
+      [{ content: 'Dátum do (dohodnutý koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Zábezpeka v EUR:', styles: L }, depositStr],
       [{ content: 'Skutočný koniec prenájmu:', styles: L }, actualReturnStr, { content: 'Vrátená zábezpeka v EUR:', styles: L }, ''],
       [{ content: 'Neúčtované dni PP:', styles: L }, '', { content: 'Platobné podmienky:', styles: L }, 'Prevod / Hotovosť'],
     ],
@@ -143,50 +144,53 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   doc.text(zaver, M, y);
   y += zaver.length * 2.2 + 2;
 
-  // ═══ OVERENIE + PODPISY ═══
+  // ═══ OVERENIE + PODPISY (two side-by-side tables for wider signature rows) ═══
   const repName = COMPANY.represented.replace(/, konateľ/i, '');
   const lesseeName = client?.contact_person || client?.company_name || '';
+  const returnProtocol = isFinalna && contractData?.return_date
+    ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to.slice(0, 5)}` : '')
+    : '';
   const s = { fontSize: 7, textColor: LBL_C };
+  const sigY = y;
 
+  // LEFT: Overenie + signatures
   autoTable(doc, {
-    startY: y,
-    head: [[
-      { content: 'OVERENIE OPRÁVNENIA A PODPISY', colSpan: 2, styles: hdr(f) },
-      { content: 'V. PROTOKOL O VRÁTENÍ PP', colSpan: 2, styles: hdr(f) },
-    ]],
+    startY: sigY,
+    head: [[{ content: 'OVERENIE OPRÁVNENIA A PODPISY', colSpan: 2, styles: hdr(f) }]],
     body: [
-      [{ content: '1. Osoba podpisujúca Zmluvu v mene Nájomcu prehlasuje,\n    že je na to riadne oprávnená (štatutárny orgán\n    alebo splnomocnená osoba).', colSpan: 2, styles: { ...s, fontSize: 6, fillColor: [250, 250, 250] } },
-       { content: 'Dátum a čas vrátenia:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: '', styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: `V ____________ dňa ____________`, colSpan: 2, styles: { ...s, fontSize: 6.5 } },
-       { content: 'Stav PP pri vrátení:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: '', styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: 'Za prenajímateľa:', styles: { ...s, fontStyle: 'bold' } },
-       { content: 'Za nájomcu:', styles: { ...s, fontStyle: 'bold' } },
-       { content: 'Poškodenia / chýbajúce:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: '', styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: `Meno: ${repName}`, styles: s },
-       { content: `Meno: ${lesseeName}`, styles: s },
-       { content: 'Vyčistený: ☐ Áno ☐ Nie', styles: { ...s, fillColor: NOTES_BG } },
-       { content: 'Foto: ☐ Áno ☐ Nie', styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: 'Podpis:', styles: s },
-       { content: 'Podpis:', styles: s },
-       { content: 'Podpis prenajímateľa:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: '', styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: '', styles: s },
-       { content: '', styles: s },
-       { content: 'Podpis nájomcu:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: '', styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: '1. Osoba podpisujúca Zmluvu v mene Nájomcu prehlasuje, že je na to riadne oprávnená (štatutárny orgán alebo splnomocnená osoba).', colSpan: 2, styles: { ...s, fontSize: 6, fillColor: [250, 250, 250] } }],
+      [{ content: 'V ____________ dňa ____________', colSpan: 2, styles: { ...s, fontSize: 6.5 } }],
+      [{ content: 'Za prenajímateľa:', styles: { ...s, fontStyle: 'bold' } }, { content: 'Za nájomcu:', styles: { ...s, fontStyle: 'bold' } }],
+      [{ content: `Meno: ${repName}`, styles: s }, { content: `Meno: ${lesseeName}`, styles: s }],
+      [{ content: 'Podpis prenajímateľa:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
+      [{ content: 'Podpis nájomcu:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
     ],
     styles: { ...base(f), cellPadding: { top: 1.4, bottom: 1.4, left: 3, right: 2 } },
-    columnStyles: {
-      0: { cellWidth: H * 0.5 },
-      1: { cellWidth: H * 0.5 },
-      2: { cellWidth: H * 0.45 },
-      3: { cellWidth: H * 0.55 },
-    },
-    margin: { left: M, right: M }, theme: 'grid',
+    columnStyles: { 0: { cellWidth: H * 0.5 }, 1: { cellWidth: H * 0.5 } },
+    margin: { left: M, right: M + H },
+    theme: 'grid',
   });
+  const finalYLeft = doc.lastAutoTable.finalY;
+
+  // RIGHT: Return protocol
+  autoTable(doc, {
+    startY: sigY,
+    head: [[{ content: 'V. PROTOKOL O VRÁTENÍ PP', colSpan: 2, styles: hdr(f) }]],
+    body: [
+      [{ content: 'Dátum a čas vrátenia:', styles: { ...s, fillColor: NOTES_BG } }, { content: returnProtocol, styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: 'Stav PP pri vrátení:', styles: { ...s, fillColor: NOTES_BG } }, { content: '', styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: 'Poškodenia / chýbajúce:', styles: { ...s, fillColor: NOTES_BG } }, { content: '', styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: 'Vyčistený: ☐ Áno ☐ Nie', styles: { ...s, fillColor: NOTES_BG } }, { content: 'Foto: ☐ Áno ☐ Nie', styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: 'Podpis prenajímateľa:', colSpan: 2, styles: { ...s, fillColor: NOTES_BG, minCellHeight: 15 } }],
+      [{ content: 'Podpis nájomcu:', colSpan: 2, styles: { ...s, fillColor: NOTES_BG, minCellHeight: 15 } }],
+    ],
+    styles: { ...base(f), cellPadding: { top: 1.4, bottom: 1.4, left: 3, right: 2 } },
+    columnStyles: { 0: { cellWidth: H * 0.45 }, 1: { cellWidth: H * 0.55 } },
+    margin: { left: M + H, right: M },
+    theme: 'grid',
+  });
+  const finalYRight = doc.lastAutoTable.finalY;
+  y = Math.max(finalYLeft, finalYRight);
 
   const typeTag = isFinalna ? 'finalna' : 'navrh';
   doc.save(`zmluva-PO-${typeTag}-${reservation.reservation_number}.pdf`);

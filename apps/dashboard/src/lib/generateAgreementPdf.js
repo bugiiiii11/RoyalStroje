@@ -90,20 +90,21 @@ export default async function generateAgreementPdf(reservation, items, client, c
   y = doc.lastAutoTable.finalY + 2;
 
   // ═══ RENTAL + FINANCIAL ═══
-  const timeFromStr = contractData?.time_from ? ` o ${contractData.time_from}` : '';
+  const timeFromStr = contractData?.time_from ? ` o ${contractData.time_from.slice(0, 5)}` : '';
   const actualReturnStr = isFinalna && contractData?.return_date
-    ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to}` : '')
+    ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to.slice(0, 5)}` : '')
     : '';
+  // For návrh: leave price blank; only fill in after finalization
   const displayTotal = isFinalna && contractData?.final_total != null
     ? fmtPrice(contractData.final_total)
-    : fmtPrice(reservation.total);
+    : '';
   const depositStr = reservation.deposit_amount > 0
     ? fmtPrice(reservation.deposit_amount)
     : (reservation.deposit_required ? '\u00C1no' : 'Nie');
 
   const rf = [
-    [{ content: 'Za\u010Diatok pren\u00E1jmu:', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 'Celkov\u00E9 n\u00E1jomn\u00E9 vr\u00E1t. DPH (EUR):', styles: L }, displayTotal],
-    [{ content: 'Dohodnut\u00E1 d\u013A\u017Eka / koniec:', styles: L }, fmtDate(reservation.date_to), { content: 'Z\u00E1bezpeka (depozit) (EUR):', styles: L }, depositStr],
+    [{ content: 'Za\u010Diatok pren\u00E1jmu (d\u00E1tum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 'Celkov\u00E9 n\u00E1jomn\u00E9 vr\u00E1t. DPH (EUR):', styles: L }, displayTotal],
+    [{ content: 'D\u00E1tum do (dohodnut\u00FD koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Z\u00E1bezpeka (depozit) (EUR):', styles: L }, depositStr],
     [{ content: 'Skuto\u010Dn\u00FD koniec pren\u00E1jmu:', styles: L }, actualReturnStr, { content: 'Z\u00E1bezpeka vr\u00E1ten\u00E1 (EUR):', styles: L }, ''],
     [{ content: 'Miesto pou\u017E\u00EDvania PP:', styles: L }, reservation.delivery_address || '', { content: 'Sp\u00F4sob platby n\u00E1jomn\u00E9ho:', styles: L }, 'Prevod / Hotovos\u0165'],
     [{ content: 'Miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Reck\u00E1 cesta 182, Senec', { content: 'Sp\u00F4sob \u00FAhrady z\u00E1bezpeky:', styles: L }, 'Prevod / Hotovos\u0165'],
@@ -139,59 +140,54 @@ export default async function generateAgreementPdf(reservation, items, client, c
   y += ll.length * 2.8 + 2;
   doc.setTextColor(0, 0, 0);
 
-  // ═══ SIGNATURES (row-based, compact) ═══
+  // ═══ SIGNATURES (two side-by-side tables for wider signature rows) ═══
   const lesseeTitle = isFO ? 'N\u00E1jomca \u2013 spotrebite\u013E:' : 'N\u00E1jomca:';
   const lesseeName = isFO ? (client?.company_name || '') : (client?.contact_person || client?.company_name || '');
   const repName = COMPANY.represented.replace(/, konate\u013E/i, '');
-  const line1 = '';
-  const line2 = '';
   const returnProtocol = isFinalna && contractData?.return_date
-    ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to}` : '')
-    : line2;
+    ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to.slice(0, 5)}` : '')
+    : '';
   const s = { fontSize: 7, textColor: LBL_C };
+  const sigY = y;
 
-  // Use structured rows instead of multiline text - much more compact
+  // LEFT: Signature table
   autoTable(doc, {
-    startY: y,
-    head: [[
-      { content: 'PODPISY ZMLUVN\u00DDCH STR\u00C1N', colSpan: 2, styles: hdr(f) },
-      { content: 'PROTOKOL O VR\u00C1TEN\u00CD PP', colSpan: 2, styles: hdr(f) },
-    ]],
+    startY: sigY,
+    head: [[{ content: 'PODPISY ZMLUVN\u00DDCH STR\u00C1N', colSpan: 2, styles: hdr(f) }]],
     body: [
-      [{ content: 'Za prenaj\u00EDmate\u013Ea:', styles: { ...s, fontStyle: 'bold' } },
-       { content: `${lesseeTitle}`, styles: { ...s, fontStyle: 'bold' } },
-       { content: 'D\u00E1tum a \u010Das vr\u00E1tenia:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: returnProtocol, styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: `Meno: ${repName}`, styles: s },
-       { content: `Meno: ${lesseeName}`, styles: s },
-       { content: 'Stav PP pri vr\u00E1ten\u00ED:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: line2, styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: `D\u00E1tum:  ${line1}`, styles: s },
-       { content: `D\u00E1tum:  ${line1}`, styles: s },
-       { content: 'Po\u0161kodenia / ch\u00FDbaj\u00FAce:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: line2, styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: `Miesto:  ${line1}`, styles: s },
-       { content: `Miesto:  ${line1}`, styles: s },
-       { content: 'Vy\u010Disten\u00FD: \u25A1 \u00C1no \u25A1 Nie', styles: { ...s, fillColor: NOTES_BG } },
-       { content: 'Foto: \u25A1 \u00C1no \u25A1 Nie', styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: `Podpis:  ${line1}`, styles: s },
-       { content: `Podpis:  ${line1}`, styles: s },
-       { content: 'Podpis prenaj\u00EDmate\u013Ea:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: line2, styles: { ...s, fillColor: NOTES_BG } }],
-      [{ content: '', styles: s },
-       { content: '', styles: s },
-       { content: 'Podpis n\u00E1jomcu:', styles: { ...s, fillColor: NOTES_BG } },
-       { content: line2, styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: 'Za prenaj\u00EDmate\u013Ea:', styles: { ...s, fontStyle: 'bold' } }, { content: lesseeTitle, styles: { ...s, fontStyle: 'bold' } }],
+      [{ content: `Meno: ${repName}`, styles: s }, { content: `Meno: ${lesseeName}`, styles: s }],
+      [{ content: 'D\u00E1tum:', styles: s }, { content: 'D\u00E1tum:', styles: s }],
+      [{ content: 'Miesto:', styles: s }, { content: 'Miesto:', styles: s }],
+      [{ content: 'Podpis prenaj\u00EDmate\u013Ea:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
+      [{ content: 'Podpis n\u00E1jomcu:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
     ],
     styles: { ...base(f), cellPadding: { top: 1.5, bottom: 1.5, left: 3, right: 2 } },
-    columnStyles: {
-      0: { cellWidth: H * 0.5 },
-      1: { cellWidth: H * 0.5 },
-      2: { cellWidth: H * 0.45 },
-      3: { cellWidth: H * 0.55 },
-    },
-    margin: { left: M, right: M }, theme: 'grid',
+    columnStyles: { 0: { cellWidth: H * 0.5 }, 1: { cellWidth: H * 0.5 } },
+    margin: { left: M, right: M + H },
+    theme: 'grid',
   });
+  const finalYLeft = doc.lastAutoTable.finalY;
+
+  // RIGHT: Return protocol table
+  autoTable(doc, {
+    startY: sigY,
+    head: [[{ content: 'PROTOKOL O VR\u00C1TEN\u00CD PP', colSpan: 2, styles: hdr(f) }]],
+    body: [
+      [{ content: 'D\u00E1tum a \u010Das vr\u00E1tenia:', styles: { ...s, fillColor: NOTES_BG } }, { content: returnProtocol, styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: 'Stav PP pri vr\u00E1ten\u00ED:', styles: { ...s, fillColor: NOTES_BG } }, { content: '', styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: 'Po\u0161kodenia / ch\u00FDbaj\u00FAce:', styles: { ...s, fillColor: NOTES_BG } }, { content: '', styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: 'Vy\u010Disten\u00FD: \u25A1 \u00C1no \u25A1 Nie', styles: { ...s, fillColor: NOTES_BG } }, { content: 'Foto: \u25A1 \u00C1no \u25A1 Nie', styles: { ...s, fillColor: NOTES_BG } }],
+      [{ content: 'Podpis prenaj\u00EDmate\u013Ea:', colSpan: 2, styles: { ...s, fillColor: NOTES_BG, minCellHeight: 15 } }],
+      [{ content: 'Podpis n\u00E1jomcu:', colSpan: 2, styles: { ...s, fillColor: NOTES_BG, minCellHeight: 15 } }],
+    ],
+    styles: { ...base(f), cellPadding: { top: 1.5, bottom: 1.5, left: 3, right: 2 } },
+    columnStyles: { 0: { cellWidth: H * 0.45 }, 1: { cellWidth: H * 0.55 } },
+    margin: { left: M + H, right: M },
+    theme: 'grid',
+  });
+  const finalYRight = doc.lastAutoTable.finalY;
+  y = Math.max(finalYLeft, finalYRight);
 
   const typeTag = isFinalna ? 'finalna' : 'navrh';
   doc.save(`zmluva-${isFO ? 'FO' : 'PO'}-${typeTag}-${reservation.reservation_number}.pdf`);
