@@ -152,6 +152,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
     : '';
   const s = { fontSize: 7, textColor: LBL_C };
   const sigY = y;
+  const todayStr = new Date().toLocaleDateString('sk-SK');
 
   // LEFT: Overenie + signatures
   autoTable(doc, {
@@ -159,11 +160,11 @@ export default async function generateAgreementPdfPO(reservation, items, client,
     head: [[{ content: 'OVERENIE OPRÁVNENIA A PODPISY', colSpan: 2, styles: hdr(f) }]],
     body: [
       [{ content: '1. Osoba podpisujúca Zmluvu v mene Nájomcu prehlasuje, že je na to riadne oprávnená (štatutárny orgán alebo splnomocnená osoba).', colSpan: 2, styles: { ...s, fontSize: 6, fillColor: [250, 250, 250] } }],
-      [{ content: 'V ____________ dňa ____________', colSpan: 2, styles: { ...s, fontSize: 6.5 } }],
-      [{ content: 'Za prenajímateľa:', styles: { ...s, fontStyle: 'bold' } }, { content: 'Za nájomcu:', styles: { ...s, fontStyle: 'bold' } }],
+      [{ content: `V Boldog \u2013 Senec d\u0148a ${todayStr}`, colSpan: 2, styles: { ...s, fontSize: 6.5 } }],
+      [{ content: 'Za prenaj\u00EDmate\u013Ea:', styles: { ...s, fontStyle: 'bold' } }, { content: 'Za n\u00E1jomcu:', styles: { ...s, fontStyle: 'bold' } }],
       [{ content: `Meno: ${repName}`, styles: s }, { content: `Meno: ${lesseeName}`, styles: s }],
-      [{ content: 'Podpis prenajímateľa:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
-      [{ content: 'Podpis nájomcu:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
+      [{ content: 'Podpis prenaj\u00EDmate\u013Ea:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
+      [{ content: 'Podpis n\u00E1jomcu:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
     ],
     styles: { ...base(f), cellPadding: { top: 1.4, bottom: 1.4, left: 3, right: 2 } },
     columnStyles: { 0: { cellWidth: H * 0.5 }, 1: { cellWidth: H * 0.5 } },

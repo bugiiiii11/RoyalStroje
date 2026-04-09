@@ -149,6 +149,7 @@ export default async function generateAgreementPdf(reservation, items, client, c
     : '';
   const s = { fontSize: 7, textColor: LBL_C };
   const sigY = y;
+  const todayStr = new Date().toLocaleDateString('sk-SK');
 
   // LEFT: Signature table
   autoTable(doc, {
@@ -157,8 +158,8 @@ export default async function generateAgreementPdf(reservation, items, client, c
     body: [
       [{ content: 'Za prenaj\u00EDmate\u013Ea:', styles: { ...s, fontStyle: 'bold' } }, { content: lesseeTitle, styles: { ...s, fontStyle: 'bold' } }],
       [{ content: `Meno: ${repName}`, styles: s }, { content: `Meno: ${lesseeName}`, styles: s }],
-      [{ content: 'D\u00E1tum:', styles: s }, { content: 'D\u00E1tum:', styles: s }],
-      [{ content: 'Miesto:', styles: s }, { content: 'Miesto:', styles: s }],
+      [{ content: `D\u00E1tum: ${todayStr}`, styles: s }, { content: `D\u00E1tum: ${todayStr}`, styles: s }],
+      [{ content: 'Miesto: Boldog \u2013 Senec', styles: s }, { content: 'Miesto:', styles: s }],
       [{ content: 'Podpis prenaj\u00EDmate\u013Ea:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
       [{ content: 'Podpis n\u00E1jomcu:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
     ],

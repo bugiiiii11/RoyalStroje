@@ -30,13 +30,18 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
     onItemsChange(items.filter((_, i) => i !== idx));
   };
 
+  const localDateStr = (d) => {
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  };
+
   // When dateFrom changes, auto-set dateTo = dateFrom + 1 day as default
   const handleDateFromChange = (value) => {
     let autoDateTo = '';
     if (value) {
       const d = new Date(value + 'T00:00:00');
       d.setDate(d.getDate() + 1);
-      autoDateTo = d.toISOString().split('T')[0];
+      autoDateTo = localDateStr(d);
     }
     onDatesChange(value, autoDateTo);
     const newDays = daysBetween(value, autoDateTo);
