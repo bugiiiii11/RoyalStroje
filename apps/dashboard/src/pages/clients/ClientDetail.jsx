@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Building2, Phone, Mail, MapPin, Crown, Send, User, Calendar, CreditCard } from 'lucide-react';
+import { ArrowLeft, Building2, Phone, Mail, MapPin, Crown, User, Calendar, CreditCard, Plus, Trash2, Star } from 'lucide-react';
 import useClient from '../../hooks/useClient';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
@@ -17,7 +17,10 @@ export default function ClientDetail() {
   const { user } = useAuth();
   const [inviting, setInviting] = useState(false);
   const [inviteResult, setInviteResult] = useState(null);
-  const { client: { data: client, loading }, reservations: { data: deals, loading: dealsLoading } } = useClient(id);
+  const [showAddContact, setShowAddContact] = useState(false);
+  const [newContact, setNewContact] = useState({ name: '', phone: '', email: '', position: '' });
+  const [savingContact, setSavingContact] = useState(false);
+  const { client: { data: client, loading }, reservations: { data: deals, loading: dealsLoading }, contacts: { data: contactsList, refetch: refetchContacts } } = useClient(id);
 
   if (loading) {
     return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
@@ -130,6 +133,94 @@ export default function ClientDetail() {
               )}
             </div>
           </ContentCard>
+
+          {/* Contact Persons (PO only) */}
+          {!isFO && (
+            <ContentCard title={`Kontaktné osoby (${contactsList?.length || 0}/5)`}>
+              <div className="space-y-3">
+                {(contactsList || []).map((c) => (
+                  <div key={c.id} className="flex items-start justify-between gap-2 p-2 rounded-lg bg-gray-50">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5">
+                        {c.is_primary && <Star className="w-3 h-3 text-amber-500 fill-amber-500 flex-shrink-0" />}
+                        <p className="text-sm font-medium text-gray-900 truncate">{c.name}</p>
+                      </div>
+                      {c.position && <p className="text-xs text-gray-400">{c.position}</p>}
+                      {c.phone && <p className="text-xs text-gray-600">{c.phone}</p>}
+                      {c.email && <p className="text-xs text-gray-600 truncate">{c.email}</p>}
+                    </div>
+                    {!c.is_primary && (
+                      <button
+                        onClick={async () => {
+                          await supabase.from('client_contacts').delete().eq('id', c.id);
+                          refetchContacts();
+                        }}
+                        className="p-1 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded flex-shrink-0"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+
+                {(contactsList?.length || 0) < 5 && !showAddContact && (
+                  <button
+                    onClick={() => setShowAddContact(true)}
+                    className="flex items-center gap-1.5 text-sm text-royal-600 hover:text-royal-700 font-medium w-full justify-center py-1.5 border border-dashed border-royal-300 rounded-lg hover:border-royal-400 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" /> Pridať kontakt
+                  </button>
+                )}
+
+                {showAddContact && (
+                  <div className="bg-blue-50 rounded-lg p-3 space-y-2">
+                    <input placeholder="Meno a priezvisko *" value={newContact.name}
+                      onChange={(e) => setNewContact(p => ({ ...p, name: e.target.value }))}
+                      className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    <input placeholder="Pozícia" value={newContact.position}
+                      onChange={(e) => setNewContact(p => ({ ...p, position: e.target.value }))}
+                      className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    <input placeholder="Telefón" value={newContact.phone}
+                      onChange={(e) => setNewContact(p => ({ ...p, phone: e.target.value }))}
+                      className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    <input placeholder="Email" type="email" value={newContact.email}
+                      onChange={(e) => setNewContact(p => ({ ...p, email: e.target.value }))}
+                      className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={async () => {
+                          if (!newContact.name.trim()) return;
+                          setSavingContact(true);
+                          try {
+                            await supabase.from('client_contacts').insert({
+                              client_id: id,
+                              name: newContact.name,
+                              phone: newContact.phone || null,
+                              email: newContact.email || null,
+                              position: newContact.position || null,
+                              is_primary: (contactsList?.length || 0) === 0,
+                            });
+                            setNewContact({ name: '', phone: '', email: '', position: '' });
+                            setShowAddContact(false);
+                            refetchContacts();
+                          } catch (e) { alert(e.message); }
+                          finally { setSavingContact(false); }
+                        }}
+                        disabled={savingContact || !newContact.name.trim()}
+                        className="flex-1 bg-royal-500 text-white text-xs font-semibold py-1.5 rounded-lg disabled:opacity-50"
+                      >
+                        {savingContact ? 'Ukladá...' : 'Uložiť'}
+                      </button>
+                      <button onClick={() => setShowAddContact(false)}
+                        className="px-3 py-1.5 border border-gray-200 rounded-lg text-xs hover:bg-gray-50">
+                        Zrušiť
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </ContentCard>
+          )}
 
           {/* Business/Personal Details */}
           <ContentCard title={isFO ? 'Osobné údaje' : 'Firemné údaje'}>

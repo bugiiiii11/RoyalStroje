@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Building2, Phone, Mail, FileDown, FileText, Receipt } from 'lucide-react';
+import { ArrowLeft, Building2, Phone, Mail, FileDown, FileText, Receipt, CheckCircle } from 'lucide-react';
 import useSupabaseQuery from '../../hooks/useSupabaseQuery';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
@@ -15,6 +15,7 @@ import generateQuotePdf from '../../lib/generateQuotePdf';
 import generateAgreementPdf from '../../lib/generateAgreementPdf';
 import generateAgreementPdfPO from '../../lib/generateAgreementPdfPO';
 import CreateInvoiceModal from '../invoices/CreateInvoiceModal';
+import FinalizeContractModal from './FinalizeContractModal';
 import { VALID_TRANSITIONS, RESERVATION_STATUSES, formatDate, formatPrice } from '../../lib/constants';
 
 export default function DealDetail() {
@@ -24,6 +25,7 @@ export default function DealDetail() {
   const [transitioning, setTransitioning] = useState(false);
   const [confirmStatus, setConfirmStatus] = useState(null);
   const [showInvoice, setShowInvoice] = useState(false);
+  const [showFinalize, setShowFinalize] = useState(false);
 
   const { data: reservation, loading, refetch } = useSupabaseQuery(
     () => supabase
@@ -39,6 +41,17 @@ export default function DealDetail() {
       .from('reservation_items')
       .select('*, equipment(name, slug)')
       .eq('reservation_id', id),
+    [id]
+  );
+
+  const { data: contractData, refetch: refetchContract } = useSupabaseQuery(
+    () => supabase
+      .from('contracts')
+      .select('*')
+      .eq('reservation_id', id)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle(),
     [id]
   );
 
@@ -113,17 +126,41 @@ export default function DealDetail() {
               Ponuka
             </button>
           )}
-          <button
-            onClick={async () => {
-              const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
-              await gen(reservation, items, client);
-            }}
-            className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
-            title="Stiahnuť zmluvu"
-          >
-            <FileText className="w-4 h-4" />
-            Zmluva
-          </button>
+          {contractData?.type === 'finalna' ? (
+            <button
+              onClick={async () => {
+                const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
+                await gen(reservation, items, client, contractData);
+              }}
+              className="flex items-center gap-1.5 px-3 py-2 border border-purple-300 text-purple-700 hover:bg-purple-50 rounded-lg text-sm font-medium transition-all"
+              title="Stiahnuť finálnu zmluvu"
+            >
+              <FileText className="w-4 h-4" />
+              Finálna zmluva
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={async () => {
+                  const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
+                  await gen(reservation, items, client, contractData);
+                }}
+                className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
+                title="Stiahnuť návrh zmluvy"
+              >
+                <FileText className="w-4 h-4" />
+                Návrh zmluvy
+              </button>
+              <button
+                onClick={() => setShowFinalize(true)}
+                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white rounded-lg text-sm font-medium shadow-glow hover:shadow-glow-md btn-press transition-all"
+                title="Sfinalizovať zmluvu pri vrátení"
+              >
+                <CheckCircle className="w-4 h-4" />
+                Sfinalizovať zmluvu
+              </button>
+            </>
+          )}
           {['completed', 'invoiced', 'paid'].includes(reservation.status) && (
             <button
               onClick={() => setShowInvoice(true)}
@@ -250,6 +287,17 @@ export default function DealDetail() {
           )}
         </div>
       </div>
+
+      {/* Finalize Contract Modal */}
+      <FinalizeContractModal
+        open={showFinalize}
+        onClose={() => setShowFinalize(false)}
+        reservation={reservation}
+        items={items}
+        client={client}
+        contract={contractData}
+        onFinalized={() => { setShowFinalize(false); refetchContract(); }}
+      />
 
       {/* Invoice Modal */}
       <CreateInvoiceModal

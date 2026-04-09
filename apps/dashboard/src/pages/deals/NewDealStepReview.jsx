@@ -7,9 +7,9 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryFee, setDeliveryFee] = useState(0);
   const [notes, setNotes] = useState('');
-  const [internalNotes, setInternalNotes] = useState('');
+  const [depositAmount, setDepositAmount] = useState('');
 
-  const { client, items, dateFrom, dateTo } = dealData;
+  const { client, items, dateFrom, dateTo, timeFrom } = dealData;
   const days = daysBetween(dateFrom, dateTo);
   const subtotal = items.reduce((sum, i) => sum + i.quantity * i.daily_rate * i.days, 0);
   const discountPercent = client?.discount_percent || CLIENT_TYPES[client?.client_type]?.discount || 0;
@@ -17,6 +17,8 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
   const deliveryFeeNum = parseFloat(deliveryFee) || 0;
   const vatAmount = Math.round((subtotal - discountAmount + deliveryFeeNum) * VAT_RATE * 100) / 100;
   const total = subtotal - discountAmount + deliveryFeeNum + vatAmount;
+
+  const depositAmountNum = parseFloat(depositAmount) || 0;
 
   const handleSubmit = () => {
     onSubmit({
@@ -26,7 +28,8 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
       deliveryFee: deliveryFeeNum,
       discountPercent,
       notes,
-      internalNotes,
+      depositAmount: depositAmountNum,
+      depositRequired: depositAmountNum > 0,
       subtotal,
       discountAmount,
       vatAmount,
@@ -53,7 +56,8 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
       <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">
         <p className="text-xs font-medium text-gray-500 uppercase mb-2">Termín</p>
         <p className="text-sm text-gray-900">
-          {formatDate(dateFrom)} – {formatDate(dateTo)} ({days} {days === 1 ? 'deň' : days < 5 ? 'dni' : 'dní'})
+          {formatDate(dateFrom)}{timeFrom ? ` o ${timeFrom}` : ''} – {formatDate(dateTo)}{' '}
+          ({days} {days === 1 ? 'deň' : days < 5 ? 'dni' : 'dní'})
         </p>
       </div>
 
@@ -105,7 +109,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
         )}
       </div>
 
-      {/* Notes */}
+      {/* Notes + Zábezpeka */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div>
           <label className="block text-xs font-medium text-gray-500 mb-1">Poznámky (pre klienta)</label>
@@ -117,13 +121,17 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">Interné poznámky</label>
-          <textarea
-            value={internalNotes}
-            onChange={(e) => setInternalNotes(e.target.value)}
-            rows={3}
+          <label className="block text-xs font-medium text-gray-500 mb-1">Zábezpeka (€)</label>
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="0.00"
+            value={depositAmount}
+            onChange={(e) => setDepositAmount(e.target.value)}
             className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow"
           />
+          <p className="text-xs text-gray-400 mt-1">Záloha prijatá pri prevzatí zariadenia</p>
         </div>
       </div>
 

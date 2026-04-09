@@ -23,7 +23,8 @@ const hdr = (f) => ({ fillColor: ORANGE, textColor: WHITE, fontStyle: 'bold', fo
 const secHdr = (f) => ({ fillColor: [245, 245, 245], textColor: [40, 40, 40], fontStyle: 'bold', font: f, fontSize: 8 });
 const L = { fontStyle: 'bold', textColor: LBL_C };
 
-export default async function generateAgreementPdfPO(reservation, items, client) {
+export default async function generateAgreementPdfPO(reservation, items, client, contractData = null) {
+  const isFinalna = contractData?.type === 'finalna';
   const doc = await createPdfDoc();
   const f = FONT_NAME;
   const w = doc.internal.pageSize.getWidth();
@@ -34,7 +35,8 @@ export default async function generateAgreementPdfPO(reservation, items, client)
 
   // ═══ TITLE ═══
   doc.setFont(f, 'bold'); doc.setFontSize(10.5); doc.setTextColor(...ORANGE);
-  doc.text('ZMLUVA O PRENÁJME HNUTEĽNÝCH VECÍ', M, y);
+  const titleSuffix = contractData && !isFinalna ? ' \u2013 N\u00C1VRH' : '';
+  doc.text('ZMLUVA O PREN\u00C1JME HNUTE\u013DN\u00DDCH VEC\u00CD' + titleSuffix, M, y);
   y += 3.5;
   doc.setFontSize(6.5); doc.setFont(f, 'normal'); doc.setTextColor(...LBL_C);
   doc.text('uzatvorená podľa § 269 ods. 2 zákona č. 513/1991 Zb. Obchodný zákonník | ROYAL STROJE s.r.o. | IČO: 57 405 425 | VPPM-PO 2026.02', M, y);
@@ -84,8 +86,16 @@ export default async function generateAgreementPdfPO(reservation, items, client)
   y = doc.lastAutoTable.finalY + 2;
 
   // ═══ RENTAL DETAILS + FINANCIAL ═══
-  const netto = reservation.total ? (reservation.total / 1.23) : 0;
-  const dph = reservation.total ? (reservation.total - netto) : 0;
+  const displayTotal = isFinalna && contractData?.final_total != null ? contractData.final_total : reservation.total;
+  const netto = displayTotal ? (displayTotal / 1.23) : 0;
+  const dph = displayTotal ? (displayTotal - netto) : 0;
+  const timeFromStr = contractData?.time_from ? ` o ${contractData.time_from}` : '';
+  const actualReturnStr = isFinalna && contractData?.return_date
+    ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to}` : '')
+    : '';
+  const depositStr = reservation.deposit_amount > 0
+    ? fmtPrice(reservation.deposit_amount)
+    : (reservation.deposit_required ? fmtPrice(0) : '\u2014');
 
   autoTable(doc, {
     startY: y,
@@ -94,9 +104,9 @@ export default async function generateAgreementPdfPO(reservation, items, client)
       [{ content: 'Ostatné info o PP a príslušenstve:', styles: L }, reservation.notes || '', { content: 'Celkové nájomné:', styles: { ...L, fontStyle: 'bold' } }, ''],
       [{ content: 'Miesto používania PP:', styles: L }, reservation.delivery_address || '', { content: 'bez DPH', styles: L }, fmtPrice(netto)],
       [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, Senec', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, fmtPrice(dph)],
-      [{ content: 'Začiatok prenájmu:', styles: L }, fmtDate(reservation.date_from), { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, fmtPrice(reservation.total)],
-      [{ content: 'Dohodnutá dĺžka prenájmu:', styles: L }, fmtDate(reservation.date_to), { content: 'Ponechaná zábezpeka v EUR:', styles: L }, reservation.deposit_required ? fmtPrice(reservation.deposit_amount || 0) : '—'],
-      [{ content: 'Skutočný koniec prenájmu:', styles: L }, '', { content: 'Vrátená zábezpeka v EUR:', styles: L }, ''],
+      [{ content: 'Začiatok prenájmu:', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, fmtPrice(displayTotal)],
+      [{ content: 'Dohodnutá dĺžka prenájmu:', styles: L }, fmtDate(reservation.date_to), { content: 'Zábezpeka v EUR:', styles: L }, depositStr],
+      [{ content: 'Skutočný koniec prenájmu:', styles: L }, actualReturnStr, { content: 'Vrátená zábezpeka v EUR:', styles: L }, ''],
       [{ content: 'Neúčtované dni PP:', styles: L }, '', { content: 'Platobné podmienky:', styles: L }, 'Prevod / Hotovosť'],
     ],
     styles: base(f),
@@ -178,5 +188,6 @@ export default async function generateAgreementPdfPO(reservation, items, client)
     margin: { left: M, right: M }, theme: 'grid',
   });
 
-  doc.save(`zmluva-PO-${reservation.reservation_number}.pdf`);
+  const typeTag = isFinalna ? 'finalna' : 'navrh';
+  doc.save(`zmluva-PO-${typeTag}-${reservation.reservation_number}.pdf`);
 }

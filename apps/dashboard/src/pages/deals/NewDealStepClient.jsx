@@ -1,28 +1,55 @@
 import { useState } from 'react';
-import { UserPlus, Check, Building2, User } from 'lucide-react';
+import { UserPlus, Check, Building2, User, Plus, Trash2 } from 'lucide-react';
 import SearchInput from '../../components/ui/SearchInput';
 import useClients from '../../hooks/useClients';
 import Badge from '../../components/ui/Badge';
 import { CLIENT_TYPES } from '../../lib/constants';
 
-const EMPTY_PO = { company_name: '', contact_person: '', email: '', phone: '', ico: '', dic: '', ic_dph: '', address: '', city: '', postal_code: '' };
+const EMPTY_PO = { company_name: '', email: '', phone: '', ico: '', dic: '', ic_dph: '', address: '', city: '', postal_code: '' };
 const EMPTY_FO = { company_name: '', email: '', phone: '', address: '', city: '', postal_code: '', birth_date: '', id_card_number: '' };
+const EMPTY_CONTACT = { name: '', phone: '', email: '', position: '' };
 
 export default function NewDealStepClient({ selected, onSelect }) {
   const [search, setSearch] = useState('');
   const [showNew, setShowNew] = useState(false);
   const [entityType, setEntityType] = useState('po');
   const [newClient, setNewClient] = useState(EMPTY_PO);
+  const [contacts, setContacts] = useState([{ ...EMPTY_CONTACT, is_primary: true }]);
   const { data: clients, loading } = useClients(search);
 
   const switchEntityType = (type) => {
     setEntityType(type);
     setNewClient(type === 'po' ? EMPTY_PO : EMPTY_FO);
+    setContacts([{ ...EMPTY_CONTACT, is_primary: true }]);
+  };
+
+  const addContact = () => {
+    if (contacts.length >= 5) return;
+    setContacts([...contacts, { ...EMPTY_CONTACT, is_primary: false }]);
+  };
+
+  const removeContact = (idx) => {
+    if (contacts.length <= 1) return;
+    setContacts(contacts.filter((_, i) => i !== idx));
+  };
+
+  const updateContact = (idx, field, value) => {
+    const updated = [...contacts];
+    updated[idx] = { ...updated[idx], [field]: value };
+    setContacts(updated);
   };
 
   const handleNewClient = () => {
     if (!newClient.company_name.trim()) return;
-    onSelect({ ...newClient, _isNew: true, entity_type: entityType, client_type: 'standard', discount_percent: 0 });
+    // For PO: embed contacts; for FO: use single contact as primary info
+    const primaryContact = contacts[0];
+    const clientData = { ...newClient, _isNew: true, entity_type: entityType, client_type: 'standard', discount_percent: 0 };
+    if (entityType === 'po') {
+      clientData._contacts = contacts;
+      // Keep legacy contact_person from primary contact name for backwards compat
+      clientData.contact_person = primaryContact?.name || '';
+    }
+    onSelect(clientData);
   };
 
   const inputClass = 'px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow';
@@ -80,12 +107,8 @@ export default function NewDealStepClient({ selected, onSelect }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <input placeholder="Obchodné meno *" value={newClient.company_name}
                   onChange={(e) => setNewClient(p => ({ ...p, company_name: e.target.value }))} className={inputClass} />
-                <input placeholder="Kontaktná osoba" value={newClient.contact_person}
-                  onChange={(e) => setNewClient(p => ({ ...p, contact_person: e.target.value }))} className={inputClass} />
-                <input placeholder="Email" type="email" value={newClient.email}
+                <input placeholder="Email firmy" type="email" value={newClient.email}
                   onChange={(e) => setNewClient(p => ({ ...p, email: e.target.value }))} className={inputClass} />
-                <input placeholder="Telefón" value={newClient.phone}
-                  onChange={(e) => setNewClient(p => ({ ...p, phone: e.target.value }))} className={inputClass} />
                 <input placeholder="IČO" value={newClient.ico}
                   onChange={(e) => setNewClient(p => ({ ...p, ico: e.target.value }))} className={inputClass} />
                 <input placeholder="DIČ" value={newClient.dic}
@@ -100,6 +123,44 @@ export default function NewDealStepClient({ selected, onSelect }) {
                   onChange={(e) => setNewClient(p => ({ ...p, city: e.target.value }))} className={inputClass} />
                 <input placeholder="PSČ" value={newClient.postal_code}
                   onChange={(e) => setNewClient(p => ({ ...p, postal_code: e.target.value }))} className={inputClass} />
+              </div>
+
+              {/* Kontaktné osoby */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="text-sm font-medium text-gray-700">Kontaktné osoby ({contacts.length}/5)</h4>
+                  {contacts.length < 5 && (
+                    <button onClick={addContact} className="flex items-center gap-1 text-xs text-royal-600 hover:text-royal-700 font-medium">
+                      <Plus className="w-3 h-3" /> Pridať osobu
+                    </button>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  {contacts.map((contact, idx) => (
+                    <div key={idx} className="bg-gray-50 rounded-lg p-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-medium text-gray-500">
+                          {idx === 0 ? 'Primárny kontakt *' : `Kontakt ${idx + 1}`}
+                        </span>
+                        {idx > 0 && (
+                          <button onClick={() => removeContact(idx)} className="p-1 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded">
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <input placeholder="Meno a priezvisko *" value={contact.name}
+                          onChange={(e) => updateContact(idx, 'name', e.target.value)} className={`${inputClass} col-span-2`} />
+                        <input placeholder="Pozícia (napr. konateľ)" value={contact.position}
+                          onChange={(e) => updateContact(idx, 'position', e.target.value)} className={inputClass} />
+                        <input placeholder="Telefón" value={contact.phone}
+                          onChange={(e) => updateContact(idx, 'phone', e.target.value)} className={inputClass} />
+                        <input placeholder="Email" type="email" value={contact.email}
+                          onChange={(e) => updateContact(idx, 'email', e.target.value)} className={`${inputClass} col-span-2`} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (

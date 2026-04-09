@@ -4,7 +4,7 @@ import SearchInput from '../../components/ui/SearchInput';
 import useEquipment from '../../hooks/useEquipment';
 import { formatPrice, daysBetween } from '../../lib/constants';
 
-export default function NewDealStepItems({ dateFrom, dateTo, items, onDatesChange, onItemsChange }) {
+export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, onDatesChange, onTimeFromChange, onItemsChange }) {
   const [search, setSearch] = useState('');
   const { data: equipment, loading } = useEquipment({ search, pageSize: 50 });
   const days = daysBetween(dateFrom, dateTo);
@@ -48,13 +48,22 @@ export default function NewDealStepItems({ dateFrom, dateTo, items, onDatesChang
       <p className="text-sm text-gray-500 mb-4">Vyberte dátumy a pridajte zariadenia</p>
 
       {/* Date Range */}
-      <div className="flex gap-4 mb-6">
+      <div className="flex flex-wrap gap-4 mb-6">
         <div>
           <label className="block text-xs font-medium text-gray-500 mb-1">Dátum od</label>
           <input
             type="date"
             value={dateFrom}
             onChange={(e) => handleDateChange('dateFrom', e.target.value)}
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-gray-500 mb-1">Čas vyzdvihnutia</label>
+          <input
+            type="time"
+            value={timeFrom}
+            onChange={(e) => onTimeFromChange(e.target.value)}
             className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
           />
         </div>

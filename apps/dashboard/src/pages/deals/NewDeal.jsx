@@ -40,6 +40,7 @@ export default function NewDeal() {
   const [client, setClient] = useState(null);
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
+  const [timeFrom, setTimeFrom] = useState('08:00');
   const [items, setItems] = useState([]);
 
   const canNext = () => {
@@ -83,6 +84,21 @@ export default function NewDeal() {
           .single();
         if (clientErr) throw clientErr;
         clientId = newClient.id;
+
+        // Save contact persons (PO only)
+        if (!isFO && finalData.client._contacts?.length > 0) {
+          const contactsPayload = finalData.client._contacts.map((c, idx) => ({
+            client_id: newClient.id,
+            name: c.name,
+            phone: c.phone || null,
+            email: c.email || null,
+            position: c.position || null,
+            is_primary: idx === 0,
+          })).filter(c => c.name.trim());
+          if (contactsPayload.length > 0) {
+            await supabase.from('client_contacts').insert(contactsPayload);
+          }
+        }
       }
 
       // Create reservation with pre-calculated financials
@@ -101,9 +117,9 @@ export default function NewDeal() {
           subtotal: finalData.subtotal || 0,
           vat_amount: finalData.vatAmount || 0,
           total: finalData.total || 0,
-          deposit_required: finalData.client.client_type !== 'royal_card',
+          deposit_required: finalData.depositRequired ?? (finalData.client.client_type !== 'royal_card'),
+          deposit_amount: finalData.depositAmount || 0,
           notes: finalData.notes || null,
-          internal_notes: finalData.internalNotes || null,
           created_by: user?.id,
         })
         .select()
@@ -124,6 +140,21 @@ export default function NewDeal() {
         .from('reservation_items')
         .insert(itemsToInsert);
       if (itemsErr) throw itemsErr;
+
+      // Auto-create contract draft (návrh zmluvy)
+      const currentYear = new Date().getFullYear();
+      const { data: contractCount } = await supabase
+        .from('contracts')
+        .select('id', { count: 'exact', head: true })
+        .or(`contract_number.like.ZN-${currentYear}-%,contract_number.like.ZF-${currentYear}-%`);
+      const nextSeq = String((contractCount || 0) + 1).padStart(4, '0');
+      const contractNumber = `ZN-${currentYear}-${nextSeq}`;
+      await supabase.from('contracts').insert({
+        contract_number: contractNumber,
+        reservation_id: reservation.id,
+        type: 'navrh',
+        time_from: finalData.timeFrom || null,
+      });
 
       // Log activity
       await supabase.rpc('log_activity', {
@@ -164,14 +195,16 @@ export default function NewDeal() {
         <NewDealStepItems
           dateFrom={dateFrom}
           dateTo={dateTo}
+          timeFrom={timeFrom}
           items={items}
           onDatesChange={(f, t) => { setDateFrom(f); setDateTo(t); }}
+          onTimeFromChange={setTimeFrom}
           onItemsChange={setItems}
         />
       )}
       {step === 2 && (
         <NewDealStepReview
-          dealData={{ client, items, dateFrom, dateTo }}
+          dealData={{ client, items, dateFrom, dateTo, timeFrom }}
           onSubmit={handleSubmit}
           submitting={submitting}
         />

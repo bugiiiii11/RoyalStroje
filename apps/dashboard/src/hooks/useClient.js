@@ -16,5 +16,14 @@ export default function useClient(clientId) {
     [clientId]
   );
 
-  return { client, reservations };
+  const contacts = useSupabaseQuery(
+    () => supabase
+      .from('client_contacts')
+      .select('*')
+      .eq('client_id', clientId)
+      .order('is_primary', { ascending: false }),
+    [clientId]
+  );
+
+  return { client, reservations, contacts };
 }
