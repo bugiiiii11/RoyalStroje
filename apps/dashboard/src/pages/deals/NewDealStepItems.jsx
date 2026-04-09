@@ -30,7 +30,7 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
     onItemsChange(items.filter((_, i) => i !== idx));
   };
 
-  // When dateFrom changes, auto-set dateTo = dateFrom + 1 day (návrh = 1 deň)
+  // When dateFrom changes, auto-set dateTo = dateFrom + 1 day as default
   const handleDateFromChange = (value) => {
     let autoDateTo = '';
     if (value) {
@@ -40,6 +40,14 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
     }
     onDatesChange(value, autoDateTo);
     const newDays = daysBetween(value, autoDateTo);
+    if (newDays > 0) {
+      onItemsChange(items.map((i) => ({ ...i, days: newDays })));
+    }
+  };
+
+  const handleDateToChange = (value) => {
+    onDatesChange(dateFrom, value);
+    const newDays = daysBetween(dateFrom, value);
     if (newDays > 0) {
       onItemsChange(items.map((i) => ({ ...i, days: newDays })));
     }
@@ -72,11 +80,16 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
             className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
           />
         </div>
-        {dateTo && (
-          <div className="flex items-end">
-            <span className="text-sm text-gray-400 pb-2">Predpokladaný návrat: <span className="text-gray-600 font-medium">{dateTo}</span> (1 deň — návrh)</span>
-          </div>
-        )}
+        <div>
+          <label className="block text-xs font-medium text-gray-500 mb-1">Dátum do</label>
+          <input
+            type="date"
+            value={dateTo}
+            min={dateFrom || undefined}
+            onChange={(e) => handleDateToChange(e.target.value)}
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
+          />
+        </div>
       </div>
 
       {/* Equipment Search */}
