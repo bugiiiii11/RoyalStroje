@@ -109,7 +109,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
     head: [[{ content: 'DOBA NÁJMU A ODOVZDANIE', colSpan: 2, styles: hdr(f) }, { content: 'PLATOBNÉ PODMIENKY', colSpan: 2, styles: hdr(f) }]],
     body: [
       [{ content: 'Ostatné info o PP a príslušenstve:', styles: L }, reservation.notes || '', { content: 'Celkové nájomné:', styles: { ...L, fontStyle: 'bold' } }, ''],
-      [{ content: 'Miesto používania PP:', styles: L }, reservation.delivery_address || '', { content: 'bez DPH', styles: L }, netto != null ? fmtPrice(netto) : ''],
+      [{ content: 'Miesto používania PP:', styles: L }, reservation.usage_location || reservation.delivery_address || '', { content: 'bez DPH', styles: L }, netto != null ? fmtPrice(netto) : ''],
       [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, Senec', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, dph != null ? fmtPrice(dph) : ''],
       [{ content: 'Začiatok prenájmu (dátum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, displayTotal != null ? fmtPrice(displayTotal) : ''],
       [{ content: 'Dátum do (dohodnutý koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Zábezpeka v EUR:', styles: L }, depositStr],

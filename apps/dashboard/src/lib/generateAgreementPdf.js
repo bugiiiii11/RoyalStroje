@@ -112,7 +112,7 @@ export default async function generateAgreementPdf(reservation, items, client, c
     [{ content: 'Za\u010Diatok pren\u00E1jmu (d\u00E1tum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 'Celkov\u00E9 n\u00E1jomn\u00E9 vr\u00E1t. DPH (EUR):', styles: L }, displayTotal],
     [{ content: 'D\u00E1tum do (dohodnut\u00FD koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Z\u00E1bezpeka (depozit) (EUR):', styles: L }, depositStr],
     [{ content: 'Skuto\u010Dn\u00FD koniec pren\u00E1jmu:', styles: L }, actualReturnStr, { content: 'Z\u00E1bezpeka vr\u00E1ten\u00E1 (EUR):', styles: L }, ''],
-    [{ content: 'Miesto pou\u017E\u00EDvania PP:', styles: L }, reservation.delivery_address || '', { content: 'Sp\u00F4sob platby n\u00E1jomn\u00E9ho:', styles: L }, 'Prevod / Hotovos\u0165'],
+    [{ content: 'Miesto pou\u017E\u00EDvania PP:', styles: L }, reservation.usage_location || reservation.delivery_address || '', { content: 'Sp\u00F4sob platby n\u00E1jomn\u00E9ho:', styles: L }, 'Prevod / Hotovos\u0165'],
     [{ content: 'Miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Reck\u00E1 cesta 182, Senec', { content: 'Sp\u00F4sob \u00FAhrady z\u00E1bezpeky:', styles: L }, 'Prevod / Hotovos\u0165'],
   ];
   autoTable(doc, {

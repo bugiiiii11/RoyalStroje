@@ -6,6 +6,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
   const [deliveryRequired, setDeliveryRequired] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryFee, setDeliveryFee] = useState(0);
+  const [usageLocation, setUsageLocation] = useState('');
   const [notes, setNotes] = useState('');
   const [depositAmount, setDepositAmount] = useState('');
 
@@ -26,6 +27,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
       deliveryRequired,
       deliveryAddress,
       deliveryFee: deliveryFeeNum,
+      usageLocation,
       discountPercent,
       notes,
       depositAmount: depositAmountNum,
@@ -107,6 +109,18 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
             </div>
           </div>
         )}
+      </div>
+
+      {/* Miesto používania PP */}
+      <div className="mb-4">
+        <label className="block text-xs font-medium text-gray-500 mb-1">Miesto používania PP</label>
+        <input
+          placeholder="Adresa, kde bude predmet prenájmu používaný"
+          value={usageLocation}
+          onChange={(e) => setUsageLocation(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow"
+        />
+        <p className="text-xs text-gray-400 mt-1">Vyplní sa automaticky do zmluvy</p>
       </div>
 
       {/* Notes + Zábezpeka */}

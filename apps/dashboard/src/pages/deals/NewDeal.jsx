@@ -112,6 +112,7 @@ export default function NewDeal() {
           delivery_required: finalData.deliveryRequired,
           delivery_address: finalData.deliveryAddress || null,
           delivery_fee: finalData.deliveryFee || 0,
+          usage_location: finalData.usageLocation || null,
           discount_percent: finalData.discountPercent || 0,
           discount_amount: finalData.discountAmount || 0,
           subtotal: finalData.subtotal || 0,
