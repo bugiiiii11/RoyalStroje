@@ -11,6 +11,7 @@
 | 6 | 2026-04-02 | New Products + Image Updates | 4 new products (3x mini-rýpadlá, 1x drvič), new hero image, new FAQ image, PNG-to-WebP conversions |
 | 7 | 2026-04-09 | Dashboard Contracts + Contacts Overhaul | Contract návrh→finálna flow, rental day algorithm, zábezpeka field, multi-contact clients, Faktúry merged view with delete |
 | 8 | 2026-04-09 | Dashboard UX + PDF Polish + Equipment rate_unit | New client UX simplified, Dátum do picker, PDF datums/prices/signatures fixed, rate_unit column + Zemné vrtáky subcategory |
+| 9 | 2026-04-10 | PDF Diacritics + PO Alignment + Usage Location | Fix ľ rendering (Identity-H), Zemné vrtáky on landing, PO signature/protocol alignment, Miesto používania PP field |
 
 ## What Was Done (Session 3) -- Website Features + Mobile UX
 
@@ -142,17 +143,31 @@
 ### Equipment Catalog
 9. **rate_unit column + Zemné vrtáky subcategory** -- Migration 012: adds `rate_unit TEXT DEFAULT 'deň'` to equipment, inserts "Zemné vrtáky" subcategory under Záhradná technika, updates Kotúč diamantový items to `rate_unit='mm'`. EquipmentForm: new "Jednotka sadzby" dropdown (Denná/mm/Hodinová). PDF: `rateUnitLabel()` maps rate_unit to Druh sadzby column. Files: `EquipmentForm.jsx`, `DealDetail.jsx`, `generateAgreementPdf.js`, `generateAgreementPdfPO.js`, `012_rate_unit_zemne_vrtaky.sql`. Committed: `6a91ace`.
 
+## What Was Done (Session 9) -- PDF Diacritics + PO Alignment + Usage Location
+
+### PDF Fixes
+1. **Fix ľ rendering in both PDFs** -- jsPDF `addFont()` without encoding param strips high byte from Latin Extended-A chars (ľ U+013E → `>` 0x3E). Added `'Identity-H'` encoding to Inter-Regular and Inter-Bold registrations. Also fixes ď, ť, ň, Ľ, Ď, Ť, Ň. Files: `apps/dashboard/src/lib/pdfFonts.js`. Committed: `fe19188`.
+2. **PO contract signature/protocol alignment** -- Left "Overenie oprávnenia a podpisy" table and right "Protokol o vrátení PP" table drifted out of sync because the right first row ("Dátum a čas vrátenia") was shorter than the wrapped left prehlasenie text. Set `minCellHeight: 8` on both first rows. Also removed leading "1. " from the overenie text per client feedback. Files: `apps/dashboard/src/lib/generateAgreementPdfPO.js`. Committed: `0d399f6`.
+
+### Landing Page
+3. **Zemné vrtáky subcategory on landing** -- Added to `categories.js` so the Záhradná technika filter bar on the public site shows the new subcategory (DB side was already done in migration 012). Files: `src/data/categories.js`. Committed: `fe19188`.
+
+### Miesto používania PP Field
+4. **Migration 013: usage_location column** -- New TEXT column on `reservations` table for "Miesto používania PP" (where equipment is used — distinct from delivery address). Files: `supabase/migrations/013_usage_location.sql`. Applied in Supabase. Committed: `d5a1396`.
+5. **NewDealStepReview input** -- New optional "Miesto používania PP" text input between Dovoz and Poznámky sections with helper text "Vyplní sa automaticky do zmluvy". Passes through `usageLocation` to finalData. Files: `NewDealStepReview.jsx`. Committed: `d5a1396`.
+6. **NewDeal insert** -- Inserts `usage_location` into reservations row alongside delivery_address. Files: `NewDeal.jsx`. Committed: `d5a1396`.
+7. **Both PDFs use usage_location** -- "Miesto používania PP" cell in FO and PO contracts now reads `reservation.usage_location || reservation.delivery_address || ''` (fallback to delivery_address for backwards compatibility). "Miesto odovzdania PP" still uses delivery_address as before. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `d5a1396`.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
-| 1 | Run migration 012 in Supabase SQL Editor | Adds rate_unit column, Zemné vrtáky subcategory, sets mm for diamond discs. SQL in `supabase/migrations/012_rate_unit_zemne_vrtaky.sql` |
-| 2 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
-| 3 | Product images | Upload product photos via dashboard image upload feature |
-| 4 | Add Zemné vrtáky products via dashboard | Subcategory now exists after migration 012 -- add Makita DG002GZ etc. |
-| 5 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
-| 6 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
-| 7 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
-| 8 | Online payment | Stripe/GoPay integration (post-MVP) |
+| 1 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
+| 2 | Product images | Upload product photos via dashboard image upload feature |
+| 3 | Add Zemné vrtáky products via dashboard | Subcategory exists in DB + frontend catalog -- add Makita DG002GZ etc. |
+| 4 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
+| 5 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 6 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
+| 7 | Online payment | Stripe/GoPay integration (post-MVP) |
 
 ## Key Files
 | File | Purpose |
@@ -175,6 +190,8 @@
 | `apps/dashboard/src/hooks/useContracts.js` | Supabase hook for contracts table |
 | `apps/dashboard/src/pages/deals/NewDealStepItems.jsx` | Step 2: Dátum od/do pickers, time, equipment search + cart |
 | `supabase/migrations/012_rate_unit_zemne_vrtaky.sql` | Adds rate_unit column, Zemné vrtáky subcategory, mm for diamond discs |
+| `supabase/migrations/013_usage_location.sql` | Adds usage_location TEXT column to reservations for "Miesto používania PP" |
+| `apps/dashboard/src/lib/pdfFonts.js` | Inter font loading for jsPDF with Identity-H encoding for Slovak diacritics |
 | `knowledgebase/` | Chatbot knowledge base (.md files) |
 | `index.html` | MDN Tech chatbot widget script tag |
 | `supabase/migrations/008_equipment_images_storage.sql` | Supabase Storage bucket for equipment images |
