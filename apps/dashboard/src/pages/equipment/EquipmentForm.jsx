@@ -23,6 +23,7 @@ const EMPTY_FORM = {
   blog_article_slug: '',
   status: 'active',
   features: [],
+  serial_numbers: [],
 };
 
 function slugify(text) {
@@ -58,6 +59,7 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
   const isEdit = !!item;
   const [form, setForm] = useState(EMPTY_FORM);
   const [newFeature, setNewFeature] = useState('');
+  const [newSerial, setNewSerial] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -99,12 +101,14 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
         blog_article_slug: item.blog_article_slug || '',
         status: item.status || 'active',
         features: Array.isArray(item.features) ? [...item.features] : [],
+        serial_numbers: Array.isArray(item.serial_numbers) ? [...item.serial_numbers] : [],
       });
     } else if (open) {
       setForm(EMPTY_FORM);
     }
     setError(null);
     setNewFeature('');
+    setNewSerial('');
     setImageFile(null);
     setImagePreview(null);
   }, [open, item]);
@@ -135,6 +139,22 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
     setForm((prev) => ({
       ...prev,
       features: prev.features.filter((_, i) => i !== index),
+    }));
+  };
+
+  const addSerial = () => {
+    const trimmed = newSerial.trim();
+    if (!trimmed) return;
+    if (form.serial_numbers.includes(trimmed)) return setError('Toto výrobné číslo už existuje');
+    setForm((prev) => ({ ...prev, serial_numbers: [...prev.serial_numbers, trimmed] }));
+    setNewSerial('');
+    setError(null);
+  };
+
+  const removeSerial = (index) => {
+    setForm((prev) => ({
+      ...prev,
+      serial_numbers: prev.serial_numbers.filter((_, i) => i !== index),
     }));
   };
 
@@ -186,6 +206,7 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
       blog_article_slug: form.blog_article_slug.trim() || null,
       status: form.status,
       features: form.features,
+      serial_numbers: form.serial_numbers,
     };
 
     setSaving(true);
@@ -457,6 +478,52 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
                 <Plus className="w-4 h-4 text-gray-600" />
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Výrobné čísla */}
+        <div>
+          <label className={labelClass}>Výrobné čísla</label>
+          <div className="space-y-2">
+            {form.serial_numbers.map((sn, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <span className="flex-1 text-sm text-gray-700 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100 font-mono">
+                  {sn}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => removeSerial(i)}
+                  className="p-1.5 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={newSerial}
+                onChange={(e) => setNewSerial(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addSerial();
+                  }
+                }}
+                className={inputClass}
+                placeholder="Napr.: SN-2024-001"
+              />
+              <button
+                type="button"
+                onClick={addSerial}
+                className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors flex-shrink-0"
+              >
+                <Plus className="w-4 h-4 text-gray-600" />
+              </button>
+            </div>
+            {form.serial_numbers.length === 0 && (
+              <p className="text-xs text-gray-400">Žiadne výrobné čísla — v obchode sa stĺpec ponechá prázdny</p>
+            )}
           </div>
         </div>
 

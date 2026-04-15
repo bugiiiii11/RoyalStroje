@@ -81,8 +81,9 @@ export default async function generateAgreementPdf(reservation, items, client, c
   const eq = [];
   (items || []).forEach((it) => {
     const qty = it.quantity || 1;
+    const serials = Array.isArray(it.serial_numbers) ? it.serial_numbers : [];
     for (let i = 0; i < qty; i++) {
-      eq.push([it.equipment?.name || it.name || '\u2014', '', rateUnitLabel(it.equipment?.rate_unit), fmtPrice(it.daily_rate * 1.23)]);
+      eq.push([it.equipment?.name || it.name || '\u2014', serials[i] || '', rateUnitLabel(it.equipment?.rate_unit), fmtPrice(it.daily_rate * 1.23)]);
     }
   });
   autoTable(doc, {

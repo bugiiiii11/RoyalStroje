@@ -135,6 +135,7 @@ export default function NewDeal() {
         daily_rate: item.daily_rate,
         days: item.days,
         line_total: item.quantity * item.daily_rate * item.days,
+        serial_numbers: (item.serial_numbers || []).filter(Boolean),
       }));
 
       const { error: itemsErr } = await supabase
