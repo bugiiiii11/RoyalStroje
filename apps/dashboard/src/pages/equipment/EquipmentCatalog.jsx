@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { LayoutGrid, List, Plus, Download } from 'lucide-react';
-import useEquipment, { deleteEquipment, toggleEquipmentStock, exportEquipmentCsv } from '../../hooks/useEquipment';
+import useEquipment, { deleteEquipment, toggleEquipmentStock, exportEquipmentCsv, fetchRentedSerials } from '../../hooks/useEquipment';
 import EquipmentFilters from './EquipmentFilters';
 import EquipmentTable from './EquipmentTable';
 import EquipmentGrid from './EquipmentGrid';
@@ -9,15 +9,47 @@ import EquipmentForm from './EquipmentForm';
 import Pagination from '../../components/ui/Pagination';
 
 export default function EquipmentCatalog() {
-  const [filters, setFilters] = useState({ search: '', categoryId: null, status: null, inStock: null, page: 1, sortBy: 'name', sortAsc: true });
+  const [filters, setFilters] = useState({ search: '', categoryId: null, skladFilter: null, page: 1, sortBy: 'name', sortAsc: true });
   const [viewMode, setViewMode] = useState('table');
   const [selectedItem, setSelectedItem] = useState(null);
   const [formOpen, setFormOpen] = useState(false);
   const [editItem, setEditItem] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [exporting, setExporting] = useState(false);
+  const [rentedSerials, setRentedSerials] = useState(new Set());
 
   const { data, loading, refetch } = useEquipment(filters);
+
+  // Fetch rented serials on mount and after refetch
+  useEffect(() => {
+    fetchRentedSerials().then(setRentedSerials).catch(() => setRentedSerials(new Set()));
+  }, [data]);
+
+  // Expand equipment into rows per serial number
+  const expandedData = useMemo(() => {
+    if (!data) return null;
+    const rows = [];
+    data.forEach((eq) => {
+      const serials = Array.isArray(eq.serial_numbers) ? eq.serial_numbers.filter(Boolean) : [];
+      if (serials.length === 0) {
+        // No serial numbers — single row with empty serial
+        rows.push({ ...eq, _serial: '', _rented: false, _rowKey: eq.id });
+      } else {
+        serials.forEach((sn) => {
+          const isRented = rentedSerials.has(`${eq.id}:${sn}`);
+          rows.push({ ...eq, _serial: sn, _rented: isRented, _rowKey: `${eq.id}:${sn}` });
+        });
+      }
+    });
+    // Apply sklad filter
+    if (filters.skladFilter === 'na_sklade') {
+      return rows.filter((r) => !r._rented);
+    }
+    if (filters.skladFilter === 'pozicane') {
+      return rows.filter((r) => r._rented);
+    }
+    return rows;
+  }, [data, rentedSerials, filters.skladFilter]);
 
   const handleSort = (key) => {
     setFilters((prev) => ({
@@ -140,7 +172,7 @@ export default function EquipmentCatalog() {
       <div className="bg-white rounded-xl border border-gray-100 shadow-card">
         {viewMode === 'table' ? (
           <EquipmentTable
-            data={data}
+            data={expandedData}
             loading={loading}
             sortBy={filters.sortBy}
             sortAsc={filters.sortAsc}

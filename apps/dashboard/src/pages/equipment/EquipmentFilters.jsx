@@ -32,25 +32,14 @@ export default function EquipmentFilters({ filters, onChange }) {
       </select>
 
       <select
-        value={filters.status || ''}
-        onChange={(e) => update('status', e.target.value || null)}
+        value={filters.skladFilter || ''}
+        onChange={(e) => update('skladFilter', e.target.value || null)}
         className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
       >
-        <option value="">Všetky stavy</option>
-        <option value="active">Aktívne</option>
-        <option value="inactive">Neaktívne</option>
-        <option value="maintenance">Údržba</option>
+        <option value="">Všetky</option>
+        <option value="na_sklade">Na sklade</option>
+        <option value="pozicane">Požičané</option>
       </select>
-
-      <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-        <input
-          type="checkbox"
-          checked={filters.inStock === true}
-          onChange={(e) => update('inStock', e.target.checked ? true : null)}
-          className="rounded border-gray-300 text-royal-500 focus:ring-royal-500"
-        />
-        Len na sklade
-      </label>
     </div>
   );
 }

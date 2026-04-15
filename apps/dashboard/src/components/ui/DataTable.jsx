@@ -40,7 +40,7 @@ export default function DataTable({ columns, data, loading, sortBy, sortAsc, onS
         <tbody className="divide-y divide-gray-50">
           {data.map((row, i) => (
             <tr
-              key={row.id || i}
+              key={row._rowKey || row.id || i}
               onClick={() => onRowClick?.(row)}
               className={onRowClick ? 'cursor-pointer table-row-hover' : ''}
             >
