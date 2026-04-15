@@ -62,7 +62,7 @@ export default async function generateAgreementPdf(reservation, items, client, c
     [{ content: 'Obchodn\u00E9 meno:', styles: L }, COMPANY.name, { content: 'Obchodn\u00E9 meno:', styles: L }, client?.company_name || ''],
     [{ content: 'S\u00EDdlo:', styles: L }, `${COMPANY.address}, ${COMPANY.city}`, { content: 'S\u00EDdlo:', styles: L }, addr],
     [{ content: 'I\u010CO / DI\u010C / I\u010C DPH:', styles: L }, `${COMPANY.ico} / ${COMPANY.dic} / ${COMPANY.ic_dph}`, { content: 'I\u010CO / DI\u010C / I\u010C DPH:', styles: L }, ids],
-    [{ content: 'Zast\u00FApen\u00FD:', styles: L }, COMPANY.represented, { content: 'Kontakt:', styles: L }, client?.contact_person || ''],
+    [{ content: 'Zast\u00FApen\u00FD:', styles: L }, COMPANY.represented, { content: 'Kontakt:', styles: L }, reservation.contact_person || client?.contact_person || ''],
     [{ content: 'Tel. / E-mail:', styles: L }, `${COMPANY.phone} / ${COMPANY.email}`, { content: 'Tel. / E-mail:', styles: L }, ct],
     [{ content: 'Zmluva \u010D.:', styles: L }, reservation.reservation_number || '', { content: 'Faktura\u010Dn\u00FD e-mail:', styles: L }, client?.email || ''],
   ];
@@ -149,7 +149,7 @@ export default async function generateAgreementPdf(reservation, items, client, c
 
   // ═══ SIGNATURES (two side-by-side tables for wider signature rows) ═══
   const lesseeTitle = isFO ? 'N\u00E1jomca \u2013 spotrebite\u013E:' : 'N\u00E1jomca:';
-  const lesseeName = isFO ? (client?.company_name || '') : (client?.contact_person || client?.company_name || '');
+  const lesseeName = isFO ? (client?.company_name || '') : (reservation.contact_person || client?.contact_person || client?.company_name || '');
   const repName = COMPANY.represented.replace(/, konate\u013E/i, '');
   const returnProtocol = isFinalna && contractData?.return_date
     ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to.slice(0, 5)}` : '')

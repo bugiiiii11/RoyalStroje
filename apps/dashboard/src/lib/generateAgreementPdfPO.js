@@ -62,7 +62,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
       [{ content: 'IČO:', styles: L }, COMPANY.ico, { content: 'IČO:', styles: L }, client?.ico || ''],
       [{ content: 'DIČ:', styles: L }, COMPANY.dic, { content: 'DIČ:', styles: L }, client?.dic || ''],
       [{ content: 'IČ DPH:', styles: L }, COMPANY.ic_dph, { content: 'IČ DPH:', styles: L }, client?.ic_dph || ''],
-      [{ content: 'Zastúpený:', styles: L }, COMPANY.represented, { content: 'Zastúpený:', styles: L }, client?.contact_person || ''],
+      [{ content: 'Zastúpený:', styles: L }, COMPANY.represented, { content: 'Zastúpený:', styles: L }, reservation.contact_person || client?.contact_person || ''],
       [{ content: 'Tel / Email:', styles: L }, `${COMPANY.phone} / ${COMPANY.email}`, { content: 'Tel / Email:', styles: L }, [client?.phone, client?.email].filter(Boolean).join(' / ')],
       [{ content: 'Zmluva č. / Obj. č.:', styles: L }, reservation.reservation_number || '', { content: 'Email (fakturačný):', styles: L }, client?.billing_email || client?.email || ''],
     ],
@@ -153,7 +153,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
 
   // ═══ OVERENIE + PODPISY (two side-by-side tables for wider signature rows) ═══
   const repName = COMPANY.represented.replace(/, konateľ/i, '');
-  const lesseeName = client?.contact_person || client?.company_name || '';
+  const lesseeName = reservation.contact_person || client?.contact_person || client?.company_name || '';
   const returnProtocol = isFinalna && contractData?.return_date
     ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to.slice(0, 5)}` : '')
     : '';

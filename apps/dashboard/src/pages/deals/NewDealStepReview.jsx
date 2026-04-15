@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import StatusBadge from '../../components/ui/StatusBadge';
+import { supabase } from '../../lib/supabase';
 import { formatPrice, formatDate, daysBetween, VAT_RATE, CLIENT_TYPES } from '../../lib/constants';
 
 export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
@@ -9,8 +10,26 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
   const [usageLocation, setUsageLocation] = useState('');
   const [notes, setNotes] = useState('');
   const [depositAmount, setDepositAmount] = useState('');
+  const [contacts, setContacts] = useState([]);
+  const [selectedContact, setSelectedContact] = useState('');
 
   const { client, items, dateFrom, dateTo, timeFrom } = dealData;
+
+  // Fetch contact persons for this client
+  useEffect(() => {
+    if (!client?.id || client?._isNew) return;
+    supabase
+      .from('client_contacts')
+      .select('*')
+      .eq('client_id', client.id)
+      .order('is_primary', { ascending: false })
+      .then(({ data }) => {
+        setContacts(data || []);
+        // Auto-select primary contact or client.contact_person
+        const primary = (data || []).find((c) => c.is_primary);
+        setSelectedContact(primary?.name || client?.contact_person || '');
+      });
+  }, [client?.id]);
   const days = daysBetween(dateFrom, dateTo);
   const subtotal = items.reduce((sum, i) => sum + i.quantity * i.daily_rate * i.days, 0);
   const discountPercent = client?.discount_percent || CLIENT_TYPES[client?.client_type]?.discount || 0;
@@ -36,6 +55,7 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
       discountAmount,
       vatAmount,
       total,
+      contactPerson: selectedContact || client?.contact_person || '',
     });
   };
 
@@ -53,6 +73,34 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
           <p className="text-sm text-green-600 mt-1">Zľava: {discountPercent}%</p>
         )}
       </div>
+
+      {/* Contact person selection */}
+      {(contacts.length > 1 || (contacts.length === 0 && client?.entity_type === 'po')) && (
+        <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">
+          <label className="block text-xs font-medium text-gray-500 uppercase mb-2">Kontaktná osoba (na zmluvu)</label>
+          {contacts.length > 0 ? (
+            <select
+              value={selectedContact}
+              onChange={(e) => setSelectedContact(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow"
+            >
+              {contacts.map((c) => (
+                <option key={c.id} value={c.name}>
+                  {c.name}{c.position ? ` — ${c.position}` : ''}{c.is_primary ? ' (hlavná)' : ''}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type="text"
+              value={selectedContact}
+              onChange={(e) => setSelectedContact(e.target.value)}
+              placeholder="Meno kontaktnej osoby"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow"
+            />
+          )}
+        </div>
+      )}
 
       {/* Dates */}
       <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">

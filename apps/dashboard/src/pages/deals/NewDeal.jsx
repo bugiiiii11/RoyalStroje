@@ -121,6 +121,7 @@ export default function NewDeal() {
           deposit_required: finalData.depositRequired ?? (finalData.client.client_type !== 'royal_card'),
           deposit_amount: finalData.depositAmount || 0,
           notes: finalData.notes || null,
+          contact_person: finalData.contactPerson || null,
           created_by: user?.id,
         })
         .select()
@@ -145,11 +146,17 @@ export default function NewDeal() {
 
       // Auto-create contract draft (návrh zmluvy)
       const currentYear = new Date().getFullYear();
-      const { count: contractCount } = await supabase
+      const { data: lastContract } = await supabase
         .from('contracts')
-        .select('*', { count: 'exact', head: true })
-        .or(`contract_number.like.ZN-${currentYear}-%,contract_number.like.ZF-${currentYear}-%`);
-      const nextSeq = String((contractCount || 0) + 1).padStart(4, '0');
+        .select('contract_number')
+        .or(`contract_number.like.ZN-${currentYear}-%,contract_number.like.ZF-${currentYear}-%`)
+        .order('contract_number', { ascending: false })
+        .limit(1)
+        .single();
+      const lastSeq = lastContract?.contract_number
+        ? parseInt(lastContract.contract_number.split('-').pop(), 10) || 0
+        : 0;
+      const nextSeq = String(lastSeq + 1).padStart(4, '0');
       const contractNumber = `ZN-${currentYear}-${nextSeq}`;
       const { error: contractErr } = await supabase.from('contracts').insert({
         contract_number: contractNumber,
