@@ -2,7 +2,7 @@ import useSupabaseQuery from './useSupabaseQuery';
 import { supabase } from '../lib/supabase';
 
 export default function useEquipment(filters = {}) {
-  const { search, categoryId, status, inStock, page = 1, pageSize = 20, sortBy = 'name', sortAsc = true } = filters;
+  const { search, categoryId, subcategoryId, status, inStock, page = 1, pageSize = 20, sortBy = 'name', sortAsc = true } = filters;
 
   const query = useSupabaseQuery(async () => {
     let q = supabase
@@ -17,6 +17,9 @@ export default function useEquipment(filters = {}) {
     if (categoryId) {
       q = q.eq('category_id', categoryId);
     }
+    if (subcategoryId) {
+      q = q.eq('subcategory_id', subcategoryId);
+    }
     if (status) {
       q = q.eq('status', status);
     }
@@ -25,7 +28,7 @@ export default function useEquipment(filters = {}) {
     }
 
     return q;
-  }, [search, categoryId, status, inStock, page, pageSize, sortBy, sortAsc]);
+  }, [search, categoryId, subcategoryId, status, inStock, page, pageSize, sortBy, sortAsc]);
 
   return { ...query, totalPages: query.data ? Math.ceil((query.data.length || 0) / pageSize) : 0 };
 }

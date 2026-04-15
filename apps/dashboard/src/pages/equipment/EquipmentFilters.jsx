@@ -8,6 +8,17 @@ export default function EquipmentFilters({ filters, onChange }) {
     []
   );
 
+  const { data: subcategories } = useSupabaseQuery(
+    () => {
+      let q = supabase.from('equipment_subcategories').select('id, name, slug, category_id').order('sort_order');
+      if (filters.categoryId) {
+        q = q.eq('category_id', filters.categoryId);
+      }
+      return q;
+    },
+    [filters.categoryId]
+  );
+
   const update = (key, value) => onChange({ ...filters, [key]: value, page: 1 });
 
   return (
@@ -22,12 +33,26 @@ export default function EquipmentFilters({ filters, onChange }) {
 
       <select
         value={filters.categoryId || ''}
-        onChange={(e) => update('categoryId', e.target.value || null)}
+        onChange={(e) => {
+          const val = e.target.value || null;
+          onChange({ ...filters, categoryId: val, subcategoryId: null, page: 1 });
+        }}
         className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
       >
         <option value="">Všetky kategórie</option>
         {(categories || []).map((c) => (
           <option key={c.id} value={c.id}>{c.name}</option>
+        ))}
+      </select>
+
+      <select
+        value={filters.subcategoryId || ''}
+        onChange={(e) => update('subcategoryId', e.target.value || null)}
+        className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
+      >
+        <option value="">Všetky podkategórie</option>
+        {(subcategories || []).map((sc) => (
+          <option key={sc.id} value={sc.id}>{sc.name}</option>
         ))}
       </select>
 
