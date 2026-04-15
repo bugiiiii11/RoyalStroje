@@ -27,7 +27,7 @@ export default function MobileHero() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-end flex-1 px-5 pb-8 pt-16">
-
+       <div className="backdrop-blur-sm bg-black/25 rounded-2xl p-5">
         {/* Headline */}
         <h1 className="hero-anim-1 text-[2.1rem] leading-[1.1] font-black text-white mb-4">
           Požičovňa náradia<br />
@@ -60,6 +60,7 @@ export default function MobileHero() {
             <ArrowDown size={16} className="text-orange-primary" />
           </a>
         </div>
+       </div>
       </div>
 
       {/* Scroll bounce indicator */}

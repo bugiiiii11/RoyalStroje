@@ -46,7 +46,7 @@ export default function Hero() {
       {/* Content Container */}
       <div className="relative z-10 min-h-screen flex items-end">
         <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 w-full pb-28 lg:pb-32">
-          <div className="max-w-2xl">
+          <div className="max-w-2xl backdrop-blur-sm bg-black/30 rounded-2xl p-6 md:p-8 lg:p-10">
             {/* Headline */}
             <h1 className="hero-desk-1 text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-4 md:mb-6">
               Požičovňa náradia a{' '}
