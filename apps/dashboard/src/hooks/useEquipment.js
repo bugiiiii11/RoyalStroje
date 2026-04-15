@@ -30,24 +30,23 @@ export default function useEquipment(filters = {}) {
   return { ...query, totalPages: query.data ? Math.ceil((query.data.length || 0) / pageSize) : 0 };
 }
 
-// Fetch serial numbers currently rented out (in active reservations)
-export async function fetchRentedSerials() {
-  const { data, error } = await supabase
-    .from('reservation_items')
-    .select('equipment_id, serial_numbers, reservations!inner(status)')
-    .in('reservations.status', ['confirmed', 'active']);
-
+// Toggle a serial number's rented status on the equipment record
+export async function toggleSerialRented(equipmentId, serialNumber, currentlyRented, currentRentedSerials) {
+  const rented = Array.isArray(currentRentedSerials) ? [...currentRentedSerials] : [];
+  let updated;
+  if (currentlyRented) {
+    // Remove from rented
+    updated = rented.filter((sn) => sn !== serialNumber);
+  } else {
+    // Add to rented
+    if (!rented.includes(serialNumber)) rented.push(serialNumber);
+    updated = rented;
+  }
+  const { error } = await supabase
+    .from('equipment')
+    .update({ rented_serials: updated })
+    .eq('id', equipmentId);
   if (error) throw error;
-
-  // Build a Set of "equipmentId:serialNumber" for quick lookup
-  const rented = new Set();
-  (data || []).forEach((item) => {
-    const serials = Array.isArray(item.serial_numbers) ? item.serial_numbers : [];
-    serials.forEach((sn) => {
-      if (sn) rented.add(`${item.equipment_id}:${sn}`);
-    });
-  });
-  return rented;
 }
 
 // --- Mutation helpers (standalone, call refetch after) ---

@@ -1,6 +1,6 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { LayoutGrid, List, Plus, Download } from 'lucide-react';
-import useEquipment, { deleteEquipment, toggleEquipmentStock, exportEquipmentCsv, fetchRentedSerials } from '../../hooks/useEquipment';
+import useEquipment, { deleteEquipment, toggleSerialRented, exportEquipmentCsv } from '../../hooks/useEquipment';
 import EquipmentFilters from './EquipmentFilters';
 import EquipmentTable from './EquipmentTable';
 import EquipmentGrid from './EquipmentGrid';
@@ -16,14 +16,8 @@ export default function EquipmentCatalog() {
   const [editItem, setEditItem] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [exporting, setExporting] = useState(false);
-  const [rentedSerials, setRentedSerials] = useState(new Set());
 
   const { data, loading, refetch } = useEquipment(filters);
-
-  // Fetch rented serials on mount and after refetch
-  useEffect(() => {
-    fetchRentedSerials().then(setRentedSerials).catch(() => setRentedSerials(new Set()));
-  }, [data]);
 
   // Expand equipment into rows per serial number
   const expandedData = useMemo(() => {
@@ -31,12 +25,13 @@ export default function EquipmentCatalog() {
     const rows = [];
     data.forEach((eq) => {
       const serials = Array.isArray(eq.serial_numbers) ? eq.serial_numbers.filter(Boolean) : [];
+      const rented = Array.isArray(eq.rented_serials) ? eq.rented_serials : [];
       if (serials.length === 0) {
         // No serial numbers — single row with empty serial
         rows.push({ ...eq, _serial: '', _rented: false, _rowKey: eq.id });
       } else {
         serials.forEach((sn) => {
-          const isRented = rentedSerials.has(`${eq.id}:${sn}`);
+          const isRented = rented.includes(sn);
           rows.push({ ...eq, _serial: sn, _rented: isRented, _rowKey: `${eq.id}:${sn}` });
         });
       }
@@ -49,7 +44,7 @@ export default function EquipmentCatalog() {
       return rows.filter((r) => r._rented);
     }
     return rows;
-  }, [data, rentedSerials, filters.skladFilter]);
+  }, [data, filters.skladFilter]);
 
   const handleSort = (key) => {
     setFilters((prev) => ({
@@ -86,10 +81,10 @@ export default function EquipmentCatalog() {
   };
 
   const handleToggleStock = async (item) => {
+    if (!item._serial) return; // Cannot toggle items without serial number
     try {
-      await toggleEquipmentStock(item.id, item.in_stock);
+      await toggleSerialRented(item.id, item._serial, item._rented, item.rented_serials);
       refetch();
-      setSelectedItem(null);
     } catch {
       alert('Chyba pri zmene dostupnosti');
     }

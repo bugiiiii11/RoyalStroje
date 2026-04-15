@@ -75,17 +75,19 @@ export default function EquipmentTable({ data, loading, sortBy, sortAsc, onSort,
           >
             <Pencil className="w-4 h-4" />
           </button>
-          <button
-            onClick={() => onToggleStock?.(row)}
-            className={`p-1.5 rounded-lg transition-colors ${
-              row.in_stock
-                ? 'text-gray-400 hover:text-orange-600 hover:bg-orange-50'
-                : 'text-orange-500 hover:text-green-600 hover:bg-green-50'
-            }`}
-            title={row.in_stock ? 'Označiť ako nedostupné' : 'Označiť ako na sklade'}
-          >
-            {row.in_stock ? <PackageX className="w-4 h-4" /> : <PackageCheck className="w-4 h-4" />}
-          </button>
+          {row._serial && (
+            <button
+              onClick={() => onToggleStock?.(row)}
+              className={`p-1.5 rounded-lg transition-colors ${
+                row._rented
+                  ? 'text-orange-500 hover:text-green-600 hover:bg-green-50'
+                  : 'text-gray-400 hover:text-orange-600 hover:bg-orange-50'
+              }`}
+              title={row._rented ? 'Označiť ako na sklade' : 'Označiť ako požičané'}
+            >
+              {row._rented ? <PackageCheck className="w-4 h-4" /> : <PackageX className="w-4 h-4" />}
+            </button>
+          )}
           <button
             onClick={() => onDelete?.(row)}
             className={`p-1.5 rounded-lg transition-colors ${
