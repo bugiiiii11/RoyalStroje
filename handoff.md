@@ -12,6 +12,7 @@
 | 7 | 2026-04-09 | Dashboard Contracts + Contacts Overhaul | Contract návrh→finálna flow, rental day algorithm, zábezpeka field, multi-contact clients, Faktúry merged view with delete |
 | 8 | 2026-04-09 | Dashboard UX + PDF Polish + Equipment rate_unit | New client UX simplified, Dátum do picker, PDF datums/prices/signatures fixed, rate_unit column + Zemné vrtáky subcategory |
 | 9 | 2026-04-10 | PDF Diacritics + PO Alignment + Usage Location | Fix ľ rendering (Identity-H), Zemné vrtáky on landing, PO signature/protocol alignment, Miesto používania PP field |
+| 10 | 2026-04-15 | Serial Numbers + Contact Person + Hero Backdrop | Equipment serial numbers (catalog + deal + PDF), hero text backdrop blur, contact person selection in deals, contract number collision fix |
 
 ## What Was Done (Session 3) -- Website Features + Mobile UX
 
@@ -158,6 +159,29 @@
 6. **NewDeal insert** -- Inserts `usage_location` into reservations row alongside delivery_address. Files: `NewDeal.jsx`. Committed: `d5a1396`.
 7. **Both PDFs use usage_location** -- "Miesto používania PP" cell in FO and PO contracts now reads `reservation.usage_location || reservation.delivery_address || ''` (fallback to delivery_address for backwards compatibility). "Miesto odovzdania PP" still uses delivery_address as before. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `d5a1396`.
 
+## What Was Done (Session 10) -- Serial Numbers + Contact Person + Hero Backdrop
+
+### Equipment Serial Numbers (Výrobné čísla)
+1. **Migration 014** -- `serial_numbers JSONB` on `equipment` (list of available serials) and `reservation_items` (selected serials for deal). Files: `supabase/migrations/014_serial_numbers.sql`. Applied. Committed: `0edf491`.
+2. **EquipmentForm** -- New "Výrobné čísla" section below Technické parametre. Add/remove serial numbers with duplicate check, font-mono display. Files: `EquipmentForm.jsx`. Committed: `0edf491`.
+3. **NewDealStepItems** -- Serial number picker shown for every equipment item (not just those with existing serials). Dropdown for existing serials + inline "Pridať nové číslo" input that saves to equipment DB. Auto-select when only 1 serial exists. Prevents same serial in multiple slots. Files: `NewDealStepItems.jsx`. Committed: `0edf491`, `c5a1a33`.
+4. **NewDeal.jsx** -- Selected serial numbers saved to `reservation_items.serial_numbers`. Files: `NewDeal.jsx`. Committed: `0edf491`.
+5. **PDF generators** -- "Výrobné číslo" column now filled from `reservation_items.serial_numbers` (was always empty). Each expanded row gets its corresponding serial. Both FO and PO PDFs updated. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `0edf491`.
+
+### Hero Text Backdrop
+6. **Desktop + Mobile hero** -- Added `backdrop-blur-sm bg-black/30 rounded-2xl` container behind text/CTA for better readability over background image. Files: `Hero.jsx`, `MobileHero.jsx`. Committed: `fc41001`.
+
+### Contact Person Selection
+7. **Migration 015** -- `contact_person TEXT` on `reservations`. Stores selected contact for this specific deal. Files: `supabase/migrations/015_reservation_contact_person.sql`. Applied. Committed: `704e94a`.
+8. **Step 3 (Súhrn) dropdown** -- Fetches `client_contacts` for PO clients. If multiple contacts exist, shows dropdown with position and "(hlavná)" label. Auto-selects primary contact. Files: `NewDealStepReview.jsx`. Committed: `704e94a`.
+9. **PDF contact person** -- Both FO and PO PDFs now prefer `reservation.contact_person` over `client.contact_person` for "Zastúpený/Kontakt" field and lessee signature name. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `704e94a`.
+
+### Bug Fix
+10. **Contract number collision** -- Changed from `COUNT` to `MAX` sequence number when generating contract numbers. Prevents "duplicate key" error after client/contract deletions. Files: `NewDeal.jsx`. Committed: `704e94a`.
+
+### Data Cleanup
+11. **Deleted all clients except** František Laky and Free Housing s.r.o. (with cascading deletion of reservations, items, contracts). Done via Supabase SQL Editor.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
@@ -188,9 +212,13 @@
 | `apps/dashboard/src/lib/rentalDays.js` | Rental day calculation algorithm (24h/26h/28h thresholds) |
 | `apps/dashboard/src/pages/deals/FinalizeContractModal.jsx` | Modal for finalizing contract on product return |
 | `apps/dashboard/src/hooks/useContracts.js` | Supabase hook for contracts table |
-| `apps/dashboard/src/pages/deals/NewDealStepItems.jsx` | Step 2: Dátum od/do pickers, time, equipment search + cart |
+| `apps/dashboard/src/pages/deals/NewDealStepItems.jsx` | Step 2: Dátum od/do pickers, time, equipment search + cart, serial number picker |
+| `apps/dashboard/src/pages/deals/NewDealStepReview.jsx` | Step 3: Súhrn with contact person dropdown, delivery, deposit, financials |
+| `apps/dashboard/src/pages/equipment/EquipmentForm.jsx` | Equipment create/edit modal with serial numbers, image upload, features |
 | `supabase/migrations/012_rate_unit_zemne_vrtaky.sql` | Adds rate_unit column, Zemné vrtáky subcategory, mm for diamond discs |
 | `supabase/migrations/013_usage_location.sql` | Adds usage_location TEXT column to reservations for "Miesto používania PP" |
+| `supabase/migrations/014_serial_numbers.sql` | Adds serial_numbers JSONB to equipment + reservation_items |
+| `supabase/migrations/015_reservation_contact_person.sql` | Adds contact_person TEXT to reservations |
 | `apps/dashboard/src/lib/pdfFonts.js` | Inter font loading for jsPDF with Identity-H encoding for Slovak diacritics |
 | `knowledgebase/` | Chatbot knowledge base (.md files) |
 | `index.html` | MDN Tech chatbot widget script tag |
@@ -206,7 +234,7 @@ RoyalStroje/
   packages/
     shared/               # Shared types, Supabase client, constants
   supabase/
-    migrations/           # 8 SQL migrations
+    migrations/           # 15 SQL migrations
     seed.sql              # Equipment catalog data
   knowledgebase/          # Chatbot knowledge base (.md files)
 ```
