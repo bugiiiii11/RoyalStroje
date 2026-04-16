@@ -23,8 +23,15 @@ const hdr = (f) => ({ fillColor: ORANGE, textColor: WHITE, fontStyle: 'bold', fo
 const secHdr = (f) => ({ fillColor: [245, 245, 245], textColor: [40, 40, 40], fontStyle: 'bold', font: f, fontSize: 8 });
 const L = { fontStyle: 'bold', textColor: LBL_C };
 
-export default async function generateAgreementPdfPO(reservation, items, client, contractData = null) {
+const INVOICE_TITLES = {
+  proforma: 'PROFORMA FAKT\u00DARA',
+  invoice: 'FAKT\u00DARA',
+  credit_note: 'DOBROPIS',
+};
+
+export default async function generateAgreementPdfPO(reservation, items, client, contractData = null, invoiceData = null) {
   const isFinalna = contractData?.type === 'finalna';
+  const isInvoice = !!invoiceData;
   const doc = await createPdfDoc();
   const f = FONT_NAME;
   const w = doc.internal.pageSize.getWidth();
@@ -35,7 +42,10 @@ export default async function generateAgreementPdfPO(reservation, items, client,
 
   // ═══ TITLE ═══
   doc.setFont(f, 'bold'); doc.setFontSize(10.5); doc.setTextColor(...ORANGE);
-  doc.text('ZMLUVA O PREN\u00C1JME HNUTE\u013DN\u00DDCH VEC\u00CD', M, y);
+  const baseTitle = isInvoice
+    ? `${INVOICE_TITLES[invoiceData.type] || 'FAKT\u00DARA'}  \u2014  \u010D. ${invoiceData.invoice_number || ''}`
+    : 'ZMLUVA O PREN\u00C1JME HNUTE\u013DN\u00DDCH VEC\u00CD';
+  doc.text(baseTitle, M, y);
   y += 3.5;
   doc.setFontSize(6.5); doc.setFont(f, 'normal'); doc.setTextColor(...LBL_C);
   doc.text('uzatvorená podľa § 269 ods. 2 zákona č. 513/1991 Zb. Obchodný zákonník | ROYAL STROJE s.r.o. | IČO: 57 405 425 | VPPM-PO 2026.02', M, y);
@@ -105,18 +115,36 @@ export default async function generateAgreementPdfPO(reservation, items, client,
     ? fmtPrice(reservation.deposit_amount)
     : (reservation.deposit_required ? fmtPrice(0) : '\u2014');
 
+  // Invoice-specific overrides for the right-hand financial column
+  const invTotal = isInvoice && invoiceData?.total != null ? invoiceData.total : displayTotal;
+  const invSubtotal = isInvoice && invoiceData?.subtotal != null ? invoiceData.subtotal : netto;
+  const invVat = isInvoice && invoiceData?.vat_amount != null ? invoiceData.vat_amount : dph;
+  const vsRow = isInvoice ? (invoiceData.invoice_number || '').replace(/\D/g, '') : '';
+  const dueRow = isInvoice && invoiceData?.due_date ? fmtDate(invoiceData.due_date) : '';
+  const ibanRow = isInvoice ? (COMPANY.iban || 'DOPLNI\u0164') : '';
+
+  const rfBody = isInvoice ? [
+    [{ content: 'Ostatné info o PP a príslušenstve:', styles: L }, reservation.notes || '', { content: 'Celkom k úhrade:', styles: { ...L, fontStyle: 'bold' } }, ''],
+    [{ content: 'Miesto používania PP:', styles: L }, reservation.usage_location || reservation.delivery_address || '', { content: 'bez DPH', styles: L }, invSubtotal != null ? fmtPrice(invSubtotal) : ''],
+    [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, Senec', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, invVat != null ? fmtPrice(invVat) : ''],
+    [{ content: 'Začiatok prenájmu (dátum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, invTotal != null ? fmtPrice(invTotal) : ''],
+    [{ content: 'Dátum do (dohodnutý koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Dátum splatnosti:', styles: L }, dueRow],
+    [{ content: 'Skutočný koniec prenájmu:', styles: L }, actualReturnStr, { content: 'IBAN:', styles: L }, ibanRow],
+    [{ content: 'Neúčtované dni PP:', styles: L }, '', { content: 'Variabilný symbol:', styles: L }, vsRow],
+  ] : [
+    [{ content: 'Ostatné info o PP a príslušenstve:', styles: L }, reservation.notes || '', { content: 'Celkové nájomné:', styles: { ...L, fontStyle: 'bold' } }, ''],
+    [{ content: 'Miesto používania PP:', styles: L }, reservation.usage_location || reservation.delivery_address || '', { content: 'bez DPH', styles: L }, netto != null ? fmtPrice(netto) : ''],
+    [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, Senec', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, dph != null ? fmtPrice(dph) : ''],
+    [{ content: 'Začiatok prenájmu (dátum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, displayTotal != null ? fmtPrice(displayTotal) : ''],
+    [{ content: 'Dátum do (dohodnutý koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Zábezpeka v EUR:', styles: L }, depositStr],
+    [{ content: 'Skutočný koniec prenájmu:', styles: L }, actualReturnStr, { content: 'Vrátená zábezpeka v EUR:', styles: L }, ''],
+    [{ content: 'Neúčtované dni PP:', styles: L }, '', { content: 'Platobné podmienky:', styles: L }, 'Prevod / Hotovosť'],
+  ];
+
   autoTable(doc, {
     startY: y,
-    head: [[{ content: 'DOBA NÁJMU A ODOVZDANIE', colSpan: 2, styles: hdr(f) }, { content: 'PLATOBNÉ PODMIENKY', colSpan: 2, styles: hdr(f) }]],
-    body: [
-      [{ content: 'Ostatné info o PP a príslušenstve:', styles: L }, reservation.notes || '', { content: 'Celkové nájomné:', styles: { ...L, fontStyle: 'bold' } }, ''],
-      [{ content: 'Miesto používania PP:', styles: L }, reservation.usage_location || reservation.delivery_address || '', { content: 'bez DPH', styles: L }, netto != null ? fmtPrice(netto) : ''],
-      [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, Senec', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, dph != null ? fmtPrice(dph) : ''],
-      [{ content: 'Začiatok prenájmu (dátum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, displayTotal != null ? fmtPrice(displayTotal) : ''],
-      [{ content: 'Dátum do (dohodnutý koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Zábezpeka v EUR:', styles: L }, depositStr],
-      [{ content: 'Skutočný koniec prenájmu:', styles: L }, actualReturnStr, { content: 'Vrátená zábezpeka v EUR:', styles: L }, ''],
-      [{ content: 'Neúčtované dni PP:', styles: L }, '', { content: 'Platobné podmienky:', styles: L }, 'Prevod / Hotovosť'],
-    ],
+    head: [[{ content: 'DOBA NÁJMU A ODOVZDANIE', colSpan: 2, styles: hdr(f) }, { content: isInvoice ? 'PLATOBNÉ ÚDAJE' : 'PLATOBNÉ PODMIENKY', colSpan: 2, styles: hdr(f) }]],
+    body: rfBody,
     styles: base(f),
     columnStyles: { 0: { cellWidth: H * 0.46 }, 1: { cellWidth: H * 0.54 }, 2: { cellWidth: H * 0.46 }, 3: { cellWidth: H * 0.54 } },
     margin: { left: M, right: M }, theme: 'grid',
@@ -200,6 +228,11 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   const finalYRight = doc.lastAutoTable.finalY;
   y = Math.max(finalYLeft, finalYRight);
 
-  const typeTag = isFinalna ? 'finalna' : 'navrh';
-  doc.save(`zmluva-PO-${typeTag}-${reservation.reservation_number}.pdf`);
+  if (isInvoice) {
+    const prefix = invoiceData.type === 'proforma' ? 'proforma' : invoiceData.type === 'credit_note' ? 'dobropis' : 'faktura';
+    doc.save(`${prefix}-${invoiceData.invoice_number}.pdf`);
+  } else {
+    const typeTag = isFinalna ? 'finalna' : 'navrh';
+    doc.save(`zmluva-PO-${typeTag}-${reservation.reservation_number}.pdf`);
+  }
 }

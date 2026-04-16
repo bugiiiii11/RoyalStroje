@@ -22,9 +22,16 @@ const base = (f) => ({ font: f, fontSize: 8, textColor: VAL_C, lineColor: BORDER
 const hdr = (f) => ({ fillColor: ORANGE, textColor: WHITE, fontStyle: 'bold', font: f, fontSize: 8.5, cellPadding: { top: 2.5, bottom: 2.5, left: 3, right: 3 } });
 const L = { fontStyle: 'bold', textColor: LBL_C };
 
-export default async function generateAgreementPdf(reservation, items, client, contractData = null) {
+const INVOICE_TITLES = {
+  proforma: 'PROFORMA FAKT\u00DARA',
+  invoice: 'FAKT\u00DARA',
+  credit_note: 'DOBROPIS',
+};
+
+export default async function generateAgreementPdf(reservation, items, client, contractData = null, invoiceData = null) {
   const isFO = client?.entity_type === 'fo';
   const isFinalna = contractData?.type === 'finalna';
+  const isInvoice = !!invoiceData;
   const doc = await createPdfDoc();
   const f = FONT_NAME;
   const w = doc.internal.pageSize.getWidth();
@@ -35,7 +42,9 @@ export default async function generateAgreementPdf(reservation, items, client, c
 
   // ═══ TITLE ═══
   doc.setFont(f, 'bold'); doc.setFontSize(10.5); doc.setTextColor(...ORANGE);
-  const baseTitle = isFO ? 'ZMLUVA O PREN\u00C1JME HNUTE\u013DN\u00DDCH VEC\u00CD \u2013 SPOTREBITE\u013DSK\u00C1 ZMLUVA' : 'N\u00C1JOMN\u00C1 ZMLUVA';
+  const baseTitle = isInvoice
+    ? `${INVOICE_TITLES[invoiceData.type] || 'FAKT\u00DARA'}  \u2014  \u010D. ${invoiceData.invoice_number || ''}`
+    : (isFO ? 'ZMLUVA O PREN\u00C1JME HNUTE\u013DN\u00DDCH VEC\u00CD \u2013 SPOTREBITE\u013DSK\u00C1 ZMLUVA' : 'N\u00C1JOMN\u00C1 ZMLUVA');
   doc.text(baseTitle, M, y);
   y += 3.5;
   doc.setFontSize(6.5); doc.setFont(f, 'normal'); doc.setTextColor(...LBL_C);
@@ -109,7 +118,20 @@ export default async function generateAgreementPdf(reservation, items, client, c
     ? fmtPrice(reservation.deposit_amount)
     : (reservation.deposit_required ? '\u00C1no' : 'Nie');
 
-  const rf = [
+  const invoiceTotal = isInvoice && invoiceData?.total != null
+    ? fmtPrice(invoiceData.total)
+    : displayTotal;
+  const vsRow = isInvoice ? (invoiceData.invoice_number || '').replace(/\D/g, '') : '';
+  const dueRow = isInvoice && invoiceData?.due_date ? fmtDate(invoiceData.due_date) : '';
+  const ibanRow = isInvoice ? (COMPANY.iban || 'DOPLNI\u0164') : '';
+
+  const rf = isInvoice ? [
+    [{ content: 'Za\u010Diatok pren\u00E1jmu (d\u00E1tum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 'Celkom k \u00FAhrade vr\u00E1t. DPH (EUR):', styles: L }, invoiceTotal],
+    [{ content: 'D\u00E1tum do (dohodnut\u00FD koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'D\u00E1tum splatnosti:', styles: L }, dueRow],
+    [{ content: 'Skuto\u010Dn\u00FD koniec pren\u00E1jmu:', styles: L }, actualReturnStr, { content: 'IBAN:', styles: L }, ibanRow],
+    [{ content: 'Miesto pou\u017E\u00EDvania PP:', styles: L }, reservation.usage_location || reservation.delivery_address || '', { content: 'Variabiln\u00FD symbol:', styles: L }, vsRow],
+    [{ content: 'Miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Reck\u00E1 cesta 182, Senec', { content: 'Sp\u00F4sob \u00FAhrady:', styles: L }, 'Prevod / Hotovos\u0165'],
+  ] : [
     [{ content: 'Za\u010Diatok pren\u00E1jmu (d\u00E1tum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 'Celkov\u00E9 n\u00E1jomn\u00E9 vr\u00E1t. DPH (EUR):', styles: L }, displayTotal],
     [{ content: 'D\u00E1tum do (dohodnut\u00FD koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Z\u00E1bezpeka (depozit) (EUR):', styles: L }, depositStr],
     [{ content: 'Skuto\u010Dn\u00FD koniec pren\u00E1jmu:', styles: L }, actualReturnStr, { content: 'Z\u00E1bezpeka vr\u00E1ten\u00E1 (EUR):', styles: L }, ''],
@@ -118,7 +140,7 @@ export default async function generateAgreementPdf(reservation, items, client, c
   ];
   autoTable(doc, {
     startY: y,
-    head: [[{ content: 'INFORM\u00C1CIE O PREN\u00C1JME', colSpan: 2, styles: hdr(f) }, { content: 'FINAN\u010CN\u00C9 PODMIENKY', colSpan: 2, styles: hdr(f) }]],
+    head: [[{ content: 'INFORM\u00C1CIE O PREN\u00C1JME', colSpan: 2, styles: hdr(f) }, { content: isInvoice ? 'PLATOBN\u00C9 \u00DADAJE' : 'FINAN\u010CN\u00C9 PODMIENKY', colSpan: 2, styles: hdr(f) }]],
     body: rf, styles: base(f),
     columnStyles: { 0: { cellWidth: H * 0.41 }, 1: { cellWidth: H * 0.59 }, 2: { cellWidth: H * 0.45 }, 3: { cellWidth: H * 0.55 } },
     margin: { left: M, right: M }, theme: 'grid',
@@ -197,6 +219,11 @@ export default async function generateAgreementPdf(reservation, items, client, c
   const finalYRight = doc.lastAutoTable.finalY;
   y = Math.max(finalYLeft, finalYRight);
 
-  const typeTag = isFinalna ? 'finalna' : 'navrh';
-  doc.save(`zmluva-${isFO ? 'FO' : 'PO'}-${typeTag}-${reservation.reservation_number}.pdf`);
+  if (isInvoice) {
+    const prefix = invoiceData.type === 'proforma' ? 'proforma' : invoiceData.type === 'credit_note' ? 'dobropis' : 'faktura';
+    doc.save(`${prefix}-${invoiceData.invoice_number}.pdf`);
+  } else {
+    const typeTag = isFinalna ? 'finalna' : 'navrh';
+    doc.save(`zmluva-${isFO ? 'FO' : 'PO'}-${typeTag}-${reservation.reservation_number}.pdf`);
+  }
 }

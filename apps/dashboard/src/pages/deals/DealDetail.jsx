@@ -137,8 +137,8 @@ export default function DealDetail() {
               Ponuka
             </button>
           )}
-          {/* Návrh zmluvy — available while any item still out */}
-          {hasPendingReturns && (
+          {/* Návrh zmluvy — always available once deal exists */}
+          {items && items.length > 0 && (
             <button
               onClick={async () => {
                 const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
