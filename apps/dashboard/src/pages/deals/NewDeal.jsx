@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
+import { generateNextNavrhNumber } from '../../lib/contractNumbers';
 import NewDealStepClient from './NewDealStepClient';
 import NewDealStepItems from './NewDealStepItems';
 import NewDealStepReview from './NewDealStepReview';
@@ -145,19 +146,7 @@ export default function NewDeal() {
       if (itemsErr) throw itemsErr;
 
       // Auto-create contract draft (návrh zmluvy)
-      const currentYear = new Date().getFullYear();
-      const { data: lastContract } = await supabase
-        .from('contracts')
-        .select('contract_number')
-        .or(`contract_number.like.ZN-${currentYear}-%,contract_number.like.ZF-${currentYear}-%`)
-        .order('contract_number', { ascending: false })
-        .limit(1)
-        .single();
-      const lastSeq = lastContract?.contract_number
-        ? parseInt(lastContract.contract_number.split('-').pop(), 10) || 0
-        : 0;
-      const nextSeq = String(lastSeq + 1).padStart(4, '0');
-      const contractNumber = `ZN-${currentYear}-${nextSeq}`;
+      const contractNumber = await generateNextNavrhNumber();
       const { error: contractErr } = await supabase.from('contracts').insert({
         contract_number: contractNumber,
         reservation_id: reservation.id,

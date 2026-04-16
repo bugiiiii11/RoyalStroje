@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Building2, Phone, Mail, FileDown, FileText, Receipt, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Building2, Phone, Mail, FileDown, FileText, Receipt, CheckCircle, ChevronDown } from 'lucide-react';
 import useSupabaseQuery from '../../hooks/useSupabaseQuery';
+import useReservationContracts from '../../hooks/useReservationContracts';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
 import StatusBadge from '../../components/ui/StatusBadge';
@@ -15,7 +16,7 @@ import generateQuotePdf from '../../lib/generateQuotePdf';
 import generateAgreementPdf from '../../lib/generateAgreementPdf';
 import generateAgreementPdfPO from '../../lib/generateAgreementPdfPO';
 import CreateInvoiceModal from '../invoices/CreateInvoiceModal';
-import FinalizeContractModal from './FinalizeContractModal';
+import ReturnItemsModal from './ReturnItemsModal';
 import { VALID_TRANSITIONS, RESERVATION_STATUSES, formatDate, formatPrice } from '../../lib/constants';
 
 export default function DealDetail() {
@@ -25,7 +26,8 @@ export default function DealDetail() {
   const [transitioning, setTransitioning] = useState(false);
   const [confirmStatus, setConfirmStatus] = useState(null);
   const [showInvoice, setShowInvoice] = useState(false);
-  const [showFinalize, setShowFinalize] = useState(false);
+  const [showReturn, setShowReturn] = useState(false);
+  const [finalDropdownOpen, setFinalDropdownOpen] = useState(false);
 
   const { data: reservation, loading, refetch } = useSupabaseQuery(
     () => supabase
@@ -44,16 +46,25 @@ export default function DealDetail() {
     [id]
   );
 
-  const { data: contractData, refetch: refetchContract } = useSupabaseQuery(
-    () => supabase
-      .from('contracts')
-      .select('*')
-      .eq('reservation_id', id)
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .maybeSingle(),
-    [id]
-  );
+  const { data: contractInfo, refetch: refetchContract } = useReservationContracts(id);
+  const contracts = contractInfo?.contracts || [];
+  const finalContracts = contractInfo?.finalContracts || [];
+  const returnedBySerial = contractInfo?.returnedBySerial || {};
+  const returnedQty = contractInfo?.returnedQty || {};
+  const navrhContract = contracts.find((c) => c.type === 'navrh');
+
+  // Determine how many units are still NOT returned
+  const remainingUnits = (items || []).reduce((count, item) => {
+    const serials = Array.isArray(item.serial_numbers) ? item.serial_numbers.filter(Boolean) : [];
+    if (serials.length > 0) {
+      const returned = returnedBySerial[item.id] || new Set();
+      return count + serials.filter((sn) => !returned.has(sn)).length;
+    }
+    const qty = parseInt(item.quantity, 10) || 1;
+    const alreadyReturned = returnedQty[item.id] || 0;
+    return count + Math.max(0, qty - alreadyReturned);
+  }, 0);
+  const hasPendingReturns = remainingUnits > 0 && items && items.length > 0;
 
   const handleStatusChange = async (newStatus) => {
     setTransitioning(true);
@@ -126,40 +137,99 @@ export default function DealDetail() {
               Ponuka
             </button>
           )}
-          {contractData?.type === 'finalna' ? (
+          {/* Návrh zmluvy — available while any item still out */}
+          {hasPendingReturns && (
             <button
               onClick={async () => {
                 const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
-                await gen(reservation, items, client, contractData);
+                await gen(reservation, items, client, navrhContract || null);
               }}
-              className="flex items-center gap-1.5 px-3 py-2 border border-purple-300 text-purple-700 hover:bg-purple-50 rounded-lg text-sm font-medium transition-all"
-              title="Stiahnuť finálnu zmluvu"
+              className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
+              title="Stiahnuť návrh zmluvy"
             >
               <FileText className="w-4 h-4" />
-              Finálna zmluva
+              Návrh zmluvy
             </button>
-          ) : (
-            <>
+          )}
+
+          {/* Finálne zmluvy dropdown (one or more) */}
+          {finalContracts.length > 0 && (
+            <div className="relative">
               <button
-                onClick={async () => {
-                  const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
-                  await gen(reservation, items, client, contractData);
-                }}
-                className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
-                title="Stiahnuť návrh zmluvy"
+                onClick={() => setFinalDropdownOpen((v) => !v)}
+                className="flex items-center gap-1.5 px-3 py-2 border border-purple-300 text-purple-700 hover:bg-purple-50 rounded-lg text-sm font-medium transition-all"
+                title="Finálne zmluvy"
               >
                 <FileText className="w-4 h-4" />
-                Návrh zmluvy
+                {finalContracts.length === 1 ? 'Finálna zmluva' : `Finálne zmluvy (${finalContracts.length})`}
+                <ChevronDown className="w-3.5 h-3.5" />
               </button>
-              <button
-                onClick={() => setShowFinalize(true)}
-                className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white rounded-lg text-sm font-medium shadow-glow hover:shadow-glow-md btn-press transition-all"
-                title="Sfinalizovať zmluvu pri vrátení"
-              >
-                <CheckCircle className="w-4 h-4" />
-                Sfinalizovať zmluvu
-              </button>
-            </>
+              {finalDropdownOpen && (
+                <>
+                  <div className="fixed inset-0 z-10" onClick={() => setFinalDropdownOpen(false)} />
+                  <div className="absolute right-0 top-full mt-1 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-20 py-1">
+                    {finalContracts.map((fc) => {
+                      const count = fc.contract_returned_items?.length || 0;
+                      return (
+                        <button
+                          key={fc.id}
+                          onClick={async () => {
+                            setFinalDropdownOpen(false);
+                            // Rebuild items with only the returned ones for this contract
+                            const returnedMap = {};
+                            for (const r of fc.contract_returned_items || []) {
+                              if (!returnedMap[r.reservation_item_id]) returnedMap[r.reservation_item_id] = [];
+                              returnedMap[r.reservation_item_id].push(r);
+                            }
+                            const pdfItems = (items || [])
+                              .map((item) => {
+                                const own = returnedMap[item.id];
+                                if (!own || own.length === 0) return null;
+                                const serials = own.filter((r) => r.serial_number).map((r) => r.serial_number);
+                                const qty = serials.length > 0
+                                  ? serials.length
+                                  : own.reduce((s, r) => s + (r.quantity || 0), 0);
+                                const days = fc.calculated_days || 0;
+                                return {
+                                  ...item,
+                                  quantity: qty,
+                                  serial_numbers: serials,
+                                  days,
+                                  line_total: (parseFloat(item.daily_rate) || 0) * qty * days,
+                                };
+                              })
+                              .filter(Boolean);
+                            const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
+                            await gen(reservation, pdfItems, client, fc);
+                          }}
+                          className="w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center justify-between"
+                        >
+                          <div>
+                            <p className="text-sm font-mono font-medium text-gray-900">{fc.contract_number}</p>
+                            <p className="text-xs text-gray-500">
+                              {fc.return_date ? formatDate(fc.return_date) : '—'} · {count} {count === 1 ? 'položka' : 'položky'}
+                            </p>
+                          </div>
+                          <FileDown className="w-4 h-4 text-gray-400" />
+                        </button>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* Vrátiť zariadenia — while any item still out */}
+          {hasPendingReturns && (
+            <button
+              onClick={() => setShowReturn(true)}
+              className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white rounded-lg text-sm font-medium shadow-glow hover:shadow-glow-md btn-press transition-all"
+              title="Vrátiť zariadenia a generovať finálnu zmluvu"
+            >
+              <CheckCircle className="w-4 h-4" />
+              Vrátiť zariadenia
+            </button>
           )}
           {['completed', 'invoiced', 'paid'].includes(reservation.status) && (
             <button
@@ -222,7 +292,11 @@ export default function DealDetail() {
 
           {/* Items */}
           <ContentCard title="Zariadenia">
-            <DealItemsTable items={items} />
+            <DealItemsTable
+              items={items}
+              returnedBySerial={returnedBySerial}
+              returnedQty={returnedQty}
+            />
           </ContentCard>
 
           {/* Notes */}
@@ -288,15 +362,17 @@ export default function DealDetail() {
         </div>
       </div>
 
-      {/* Finalize Contract Modal */}
-      <FinalizeContractModal
-        open={showFinalize}
-        onClose={() => setShowFinalize(false)}
+      {/* Return Items Modal */}
+      <ReturnItemsModal
+        open={showReturn}
+        onClose={() => setShowReturn(false)}
         reservation={reservation}
         items={items}
         client={client}
-        contract={contractData}
-        onFinalized={() => { setShowFinalize(false); refetchContract(); }}
+        contracts={contracts}
+        returnedBySerial={returnedBySerial}
+        returnedQty={returnedQty}
+        onFinalized={() => { setShowReturn(false); refetchContract(); refetch(); }}
       />
 
       {/* Invoice Modal */}
