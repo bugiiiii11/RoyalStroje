@@ -17,7 +17,7 @@ export default function EquipmentCatalog() {
   const [confirmDelete, setConfirmDelete] = useState(null);
   const [exporting, setExporting] = useState(false);
 
-  const { data, loading, refetch } = useEquipment(filters);
+  const { data, loading, refetch, totalPages } = useEquipment(filters);
 
   // Expand equipment into rows per serial number
   const expandedData = useMemo(() => {
@@ -104,8 +104,6 @@ export default function EquipmentCatalog() {
   const handleFormSave = () => {
     refetch();
   };
-
-  const totalPages = data ? Math.ceil(data.length / 20) : 0;
 
   return (
     <div>

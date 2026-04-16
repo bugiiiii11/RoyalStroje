@@ -30,7 +30,8 @@ export default function useEquipment(filters = {}) {
     return q;
   }, [search, categoryId, subcategoryId, status, inStock, page, pageSize, sortBy, sortAsc]);
 
-  return { ...query, totalPages: query.data ? Math.ceil((query.data.length || 0) / pageSize) : 0 };
+  const totalPages = query.count != null ? Math.ceil(query.count / pageSize) : 0;
+  return { ...query, totalPages };
 }
 
 // Toggle a serial number's rented status on the equipment record
