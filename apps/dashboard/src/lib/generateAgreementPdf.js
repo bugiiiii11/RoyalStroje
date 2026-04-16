@@ -22,10 +22,10 @@ const base = (f) => ({ font: f, fontSize: 8, textColor: VAL_C, lineColor: BORDER
 const hdr = (f) => ({ fillColor: ORANGE, textColor: WHITE, fontStyle: 'bold', font: f, fontSize: 8.5, cellPadding: { top: 2.5, bottom: 2.5, left: 3, right: 3 } });
 const L = { fontStyle: 'bold', textColor: LBL_C };
 
-const INVOICE_TITLES = {
-  proforma: 'PROFORMA FAKT\u00DARA',
-  invoice: 'FAKT\u00DARA',
-  credit_note: 'DOBROPIS',
+const INVOICE_LABELS = {
+  proforma: 'Proforma fakt\u00FAra',
+  invoice: 'Fakt\u00FAra',
+  credit_note: 'Dobropis',
 };
 
 export default async function generateAgreementPdf(reservation, items, client, contractData = null, invoiceData = null) {
@@ -42,15 +42,16 @@ export default async function generateAgreementPdf(reservation, items, client, c
 
   // ═══ TITLE ═══
   doc.setFont(f, 'bold'); doc.setFontSize(10.5); doc.setTextColor(...ORANGE);
-  const baseTitle = isInvoice
-    ? `${INVOICE_TITLES[invoiceData.type] || 'FAKT\u00DARA'}  \u2014  \u010D. ${invoiceData.invoice_number || ''}`
-    : (isFO ? 'ZMLUVA O PREN\u00C1JME HNUTE\u013DN\u00DDCH VEC\u00CD \u2013 SPOTREBITE\u013DSK\u00C1 ZMLUVA' : 'N\u00C1JOMN\u00C1 ZMLUVA');
+  const baseTitle = isFO ? 'ZMLUVA O PREN\u00C1JME HNUTE\u013DN\u00DDCH VEC\u00CD \u2013 SPOTREBITE\u013DSK\u00C1 ZMLUVA' : 'N\u00C1JOMN\u00C1 ZMLUVA';
   doc.text(baseTitle, M, y);
   y += 3.5;
   doc.setFontSize(6.5); doc.setFont(f, 'normal'); doc.setTextColor(...LBL_C);
-  doc.text(isFO
+  const invoiceTag = isInvoice
+    ? ` | ${INVOICE_LABELS[invoiceData.type] || 'Fakt\u00FAra'} \u010D. ${invoiceData.invoice_number || ''}`
+    : '';
+  doc.text((isFO
     ? `| \u00A7 663 a n\u00E1sl. z\u00E1k. \u010D. 40/1964 Zb. OZ | ROYAL STROJE s.r.o. | I\u010CO: 57 405 425 | VPPM-FO 2026.01`
-    : `| ROYAL STROJE s.r.o. | I\u010CO: 57 405 425 | VPPM-PO 2026.01`, M, y);
+    : `| ROYAL STROJE s.r.o. | I\u010CO: 57 405 425 | VPPM-PO 2026.01`) + invoiceTag, M, y);
   doc.setDrawColor(...ORANGE); doc.setLineWidth(0.7); doc.line(M, y + 1.5, w - M, y + 1.5);
   doc.setDrawColor(...BORDER); doc.setLineWidth(0.4);
   y += 5;

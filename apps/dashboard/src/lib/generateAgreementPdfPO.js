@@ -23,10 +23,10 @@ const hdr = (f) => ({ fillColor: ORANGE, textColor: WHITE, fontStyle: 'bold', fo
 const secHdr = (f) => ({ fillColor: [245, 245, 245], textColor: [40, 40, 40], fontStyle: 'bold', font: f, fontSize: 8 });
 const L = { fontStyle: 'bold', textColor: LBL_C };
 
-const INVOICE_TITLES = {
-  proforma: 'PROFORMA FAKT\u00DARA',
-  invoice: 'FAKT\u00DARA',
-  credit_note: 'DOBROPIS',
+const INVOICE_LABELS = {
+  proforma: 'Proforma fakt\u00FAra',
+  invoice: 'Fakt\u00FAra',
+  credit_note: 'Dobropis',
 };
 
 export default async function generateAgreementPdfPO(reservation, items, client, contractData = null, invoiceData = null) {
@@ -42,13 +42,13 @@ export default async function generateAgreementPdfPO(reservation, items, client,
 
   // ═══ TITLE ═══
   doc.setFont(f, 'bold'); doc.setFontSize(10.5); doc.setTextColor(...ORANGE);
-  const baseTitle = isInvoice
-    ? `${INVOICE_TITLES[invoiceData.type] || 'FAKT\u00DARA'}  \u2014  \u010D. ${invoiceData.invoice_number || ''}`
-    : 'ZMLUVA O PREN\u00C1JME HNUTE\u013DN\u00DDCH VEC\u00CD';
-  doc.text(baseTitle, M, y);
+  doc.text('ZMLUVA O PREN\u00C1JME HNUTE\u013DN\u00DDCH VEC\u00CD', M, y);
   y += 3.5;
   doc.setFontSize(6.5); doc.setFont(f, 'normal'); doc.setTextColor(...LBL_C);
-  doc.text('uzatvorená podľa § 269 ods. 2 zákona č. 513/1991 Zb. Obchodný zákonník | ROYAL STROJE s.r.o. | IČO: 57 405 425 | VPPM-PO 2026.02', M, y);
+  const invoiceTag = isInvoice
+    ? ` | ${INVOICE_LABELS[invoiceData.type] || 'Fakt\u00FAra'} \u010D. ${invoiceData.invoice_number || ''}`
+    : '';
+  doc.text('uzatvorená podľa § 269 ods. 2 zákona č. 513/1991 Zb. Obchodný zákonník | ROYAL STROJE s.r.o. | IČO: 57 405 425 | VPPM-PO 2026.02' + invoiceTag, M, y);
   doc.setDrawColor(...ORANGE); doc.setLineWidth(0.7); doc.line(M, y + 1.5, w - M, y + 1.5);
   doc.setDrawColor(...BORDER); doc.setLineWidth(0.4);
   y += 4.5;
