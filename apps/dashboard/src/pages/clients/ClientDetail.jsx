@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Building2, Phone, Mail, MapPin, Crown, User, Calendar, CreditCard, Plus, Trash2, Star, Pencil } from 'lucide-react';
+import { ArrowLeft, Building2, Phone, Mail, MapPin, Crown, User, Calendar, CreditCard, Plus, Trash2, Star, Pencil, Loader2 } from 'lucide-react';
 import useClient from '../../hooks/useClient';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
@@ -22,7 +22,35 @@ export default function ClientDetail() {
   const [newContact, setNewContact] = useState({ name: '', phone: '', email: '', position: '' });
   const [savingContact, setSavingContact] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const { client: { data: client, loading, refetch: refetchClient }, reservations: { data: deals, loading: dealsLoading }, contacts: { data: contactsList, refetch: refetchContacts } } = useClient(id);
+
+  const handleDelete = async () => {
+    if (!confirmDelete) {
+      setConfirmDelete(true);
+      return;
+    }
+    setDeleting(true);
+    try {
+      const { error } = await supabase.from('clients').delete().eq('id', id);
+      if (error) {
+        if (error.code === '23503' || /foreign key|violates/i.test(error.message)) {
+          alert('Klienta nie je možné zmazať — má priradené obchody. Najprv ich odstráň alebo archivuj.');
+        } else {
+          alert('Chyba pri mazaní: ' + error.message);
+        }
+        setConfirmDelete(false);
+        return;
+      }
+      navigate('/clients');
+    } catch (e) {
+      alert('Chyba: ' + e.message);
+      setConfirmDelete(false);
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   if (loading) {
     return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
@@ -66,13 +94,27 @@ export default function ClientDetail() {
             <p className="text-sm text-gray-500 mt-0.5">{client.contact_person}</p>
           )}
         </div>
-        <button
-          onClick={() => setEditOpen(true)}
-          className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 rounded-lg shadow-glow hover:shadow-glow-md transition-all btn-press"
-        >
-          <Pencil className="w-4 h-4" />
-          Upraviť
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 ${
+              confirmDelete
+                ? 'bg-red-600 text-white hover:bg-red-700'
+                : 'text-red-600 bg-white border border-red-200 hover:bg-red-50'
+            }`}
+          >
+            {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+            {deleting ? 'Mažem...' : confirmDelete ? 'Naozaj zmazať?' : 'Vymazať klienta'}
+          </button>
+          <button
+            onClick={() => setEditOpen(true)}
+            className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 rounded-lg shadow-glow hover:shadow-glow-md transition-all btn-press"
+          >
+            <Pencil className="w-4 h-4" />
+            Upraviť
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
