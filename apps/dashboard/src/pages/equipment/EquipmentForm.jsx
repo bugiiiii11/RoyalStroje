@@ -4,6 +4,7 @@ import Modal from '../../components/ui/Modal';
 import useSupabaseQuery from '../../hooks/useSupabaseQuery';
 import { supabase } from '../../lib/supabase';
 import { VAT_RATE } from '../../lib/constants';
+import { deleteEquipment } from '../../hooks/useEquipment';
 
 const EMPTY_FORM = {
   name: '',
@@ -63,6 +64,8 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const fileInputRef = useRef(null);
@@ -111,7 +114,27 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
     setNewSerial('');
     setImageFile(null);
     setImagePreview(null);
+    setConfirmDelete(false);
   }, [open, item]);
+
+  const handleDelete = async () => {
+    if (!isEdit || !item?.id) return;
+    if (!confirmDelete) {
+      setConfirmDelete(true);
+      return;
+    }
+    setDeleting(true);
+    setError(null);
+    try {
+      await deleteEquipment(item.id);
+      onSave?.();
+      onClose();
+    } catch (err) {
+      setError(err.message || 'Chyba pri mazaní zariadenia');
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   const update = (key, value) => {
     setForm((prev) => {
@@ -595,7 +618,23 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
         </div>
 
         {/* Actions */}
-        <div className="flex justify-end gap-3 pt-2 border-t border-gray-100">
+        <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
+          {isEdit && (
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={deleting || saving || uploading}
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50 ${
+                confirmDelete
+                  ? 'bg-red-600 text-white hover:bg-red-700'
+                  : 'text-red-600 bg-white border border-red-200 hover:bg-red-50'
+              }`}
+            >
+              {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+              {deleting ? 'Mažem...' : confirmDelete ? 'Naozaj zmazať?' : 'Zmazať zariadenie'}
+            </button>
+          )}
+          <div className="flex-1" />
           <button
             type="button"
             onClick={onClose}
@@ -605,7 +644,7 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
           </button>
           <button
             type="submit"
-            disabled={saving || uploading}
+            disabled={saving || uploading || deleting}
             className="px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 rounded-lg shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50 flex items-center gap-2"
           >
             {(saving || uploading) && <Loader2 className="w-4 h-4 animate-spin" />}
