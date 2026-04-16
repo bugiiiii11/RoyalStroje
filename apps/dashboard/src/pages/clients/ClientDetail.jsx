@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Building2, Phone, Mail, MapPin, Crown, User, Calendar, CreditCard, Plus, Trash2, Star } from 'lucide-react';
+import { ArrowLeft, Building2, Phone, Mail, MapPin, Crown, User, Calendar, CreditCard, Plus, Trash2, Star, Pencil } from 'lucide-react';
 import useClient from '../../hooks/useClient';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
@@ -10,6 +10,7 @@ import Badge from '../../components/ui/Badge';
 import Spinner from '../../components/ui/Spinner';
 import EmptyState from '../../components/ui/EmptyState';
 import { formatPrice, formatDate, CLIENT_TYPES } from '../../lib/constants';
+import ClientEditForm from './ClientEditForm';
 
 export default function ClientDetail() {
   const { id } = useParams();
@@ -20,7 +21,8 @@ export default function ClientDetail() {
   const [showAddContact, setShowAddContact] = useState(false);
   const [newContact, setNewContact] = useState({ name: '', phone: '', email: '', position: '' });
   const [savingContact, setSavingContact] = useState(false);
-  const { client: { data: client, loading }, reservations: { data: deals, loading: dealsLoading }, contacts: { data: contactsList, refetch: refetchContacts } } = useClient(id);
+  const [editOpen, setEditOpen] = useState(false);
+  const { client: { data: client, loading, refetch: refetchClient }, reservations: { data: deals, loading: dealsLoading }, contacts: { data: contactsList, refetch: refetchContacts } } = useClient(id);
 
   if (loading) {
     return <div className="flex justify-center py-20"><Spinner size="lg" /></div>;
@@ -64,6 +66,13 @@ export default function ClientDetail() {
             <p className="text-sm text-gray-500 mt-0.5">{client.contact_person}</p>
           )}
         </div>
+        <button
+          onClick={() => setEditOpen(true)}
+          className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 rounded-lg shadow-glow hover:shadow-glow-md transition-all btn-press"
+        >
+          <Pencil className="w-4 h-4" />
+          Upraviť
+        </button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -313,6 +322,13 @@ export default function ClientDetail() {
           )}
         </div>
       </div>
+
+      <ClientEditForm
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+        onSave={refetchClient}
+        client={client}
+      />
     </div>
   );
 }
