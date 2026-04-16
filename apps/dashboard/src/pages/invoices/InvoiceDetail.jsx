@@ -43,7 +43,7 @@ export default function InvoiceDetail() {
 
   const { data: items } = useSupabaseQuery(
     () => invoice?.reservation_id
-      ? supabase.from('reservation_items').select('*, equipment(name)').eq('reservation_id', invoice.reservation_id)
+      ? supabase.from('reservation_items').select('*, equipment(name, rate_unit)').eq('reservation_id', invoice.reservation_id)
       : Promise.resolve({ data: [] }),
     [invoice?.reservation_id]
   );
