@@ -64,6 +64,7 @@ export default function EquipmentFilters({ filters, onChange }) {
         <option value="">Všetky</option>
         <option value="na_sklade">Na sklade</option>
         <option value="pozicane">Požičané</option>
+        <option value="nedostupne">Nedostupné</option>
       </select>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { LayoutGrid, List, Plus, Download } from 'lucide-react';
-import useEquipment, { deleteEquipment, toggleSerialRented, exportEquipmentCsv } from '../../hooks/useEquipment';
+import useEquipment, { deleteEquipment, toggleSerialRented, updateEquipmentStatus, exportEquipmentCsv } from '../../hooks/useEquipment';
 import EquipmentFilters from './EquipmentFilters';
 import EquipmentTable from './EquipmentTable';
 import EquipmentGrid from './EquipmentGrid';
@@ -38,10 +38,13 @@ export default function EquipmentCatalog() {
     });
     // Apply sklad filter
     if (filters.skladFilter === 'na_sklade') {
-      return rows.filter((r) => !r._rented);
+      return rows.filter((r) => !r._rented && r.status !== 'inactive');
     }
     if (filters.skladFilter === 'pozicane') {
       return rows.filter((r) => r._rented);
+    }
+    if (filters.skladFilter === 'nedostupne') {
+      return rows.filter((r) => r.status === 'inactive');
     }
     return rows;
   }, [data, filters.skladFilter]);
@@ -84,6 +87,16 @@ export default function EquipmentCatalog() {
     if (!item._serial) return; // Cannot toggle items without serial number
     try {
       await toggleSerialRented(item.id, item._serial, item._rented, item.rented_serials);
+      refetch();
+    } catch {
+      alert('Chyba pri zmene dostupnosti');
+    }
+  };
+
+  const handleToggleAvailability = async (item) => {
+    const newStatus = item.status === 'inactive' ? 'active' : 'inactive';
+    try {
+      await updateEquipmentStatus(item.id, newStatus);
       refetch();
     } catch {
       alert('Chyba pri zmene dostupnosti');
@@ -174,6 +187,7 @@ export default function EquipmentCatalog() {
             onEdit={handleEdit}
             onDelete={handleDelete}
             onToggleStock={handleToggleStock}
+            onToggleAvailability={handleToggleAvailability}
             confirmDeleteId={confirmDelete?.id}
           />
         ) : (

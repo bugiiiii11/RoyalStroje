@@ -1,9 +1,9 @@
 import DataTable from '../../components/ui/DataTable';
 import Badge from '../../components/ui/Badge';
 import { formatPrice } from '../../lib/constants';
-import { Pencil, Trash2, PackageX, PackageCheck } from 'lucide-react';
+import { Pencil, Trash2, PackageX, PackageCheck, EyeOff, Eye } from 'lucide-react';
 
-export default function EquipmentTable({ data, loading, sortBy, sortAsc, onSort, onRowClick, onEdit, onDelete, onToggleStock, confirmDeleteId }) {
+export default function EquipmentTable({ data, loading, sortBy, sortAsc, onSort, onRowClick, onEdit, onDelete, onToggleStock, onToggleAvailability, confirmDeleteId }) {
   const columns = [
     {
       key: 'name',
@@ -54,13 +54,18 @@ export default function EquipmentTable({ data, loading, sortBy, sortAsc, onSort,
       key: 'in_stock',
       label: 'Sklad',
       width: '12%',
-      render: (row) => (
-        <Badge
-          label={row._rented ? 'Požičané' : 'Na sklade'}
-          bg={row._rented ? 'bg-orange-100' : 'bg-green-100'}
-          text={row._rented ? 'text-orange-700' : 'text-green-700'}
-        />
-      ),
+      render: (row) => {
+        if (row.status === 'inactive') {
+          return <Badge label="Nedostupné" bg="bg-gray-100" text="text-gray-500" />;
+        }
+        return (
+          <Badge
+            label={row._rented ? 'Požičané' : 'Na sklade'}
+            bg={row._rented ? 'bg-orange-100' : 'bg-green-100'}
+            text={row._rented ? 'text-orange-700' : 'text-green-700'}
+          />
+        );
+      },
     },
     {
       key: 'actions',
@@ -88,6 +93,17 @@ export default function EquipmentTable({ data, loading, sortBy, sortAsc, onSort,
               {row._rented ? <PackageCheck className="w-4 h-4" /> : <PackageX className="w-4 h-4" />}
             </button>
           )}
+          <button
+            onClick={() => onToggleAvailability?.(row)}
+            className={`p-1.5 rounded-lg transition-colors ${
+              row.status === 'inactive'
+                ? 'text-gray-400 hover:text-green-600 hover:bg-green-50'
+                : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'
+            }`}
+            title={row.status === 'inactive' ? 'Sprístupniť na webe' : 'Označiť ako nedostupné'}
+          >
+            {row.status === 'inactive' ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+          </button>
           <button
             onClick={() => onDelete?.(row)}
             className={`p-1.5 rounded-lg transition-colors ${
