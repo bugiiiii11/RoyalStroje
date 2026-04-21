@@ -14,6 +14,7 @@
 | 9 | 2026-04-10 | PDF Diacritics + PO Alignment + Usage Location | Fix ľ rendering (Identity-H), Zemné vrtáky on landing, PO signature/protocol alignment, Miesto používania PP field |
 | 10 | 2026-04-15 | Serial Numbers + Contact Person + Hero Backdrop | Equipment serial numbers (catalog + deal + PDF), hero text backdrop blur, contact person selection in deals, contract number collision fix |
 | 11 | 2026-04-17 | Partial Returns + Unified PDFs + Catalog UX | Partial return flow, unified invoice/agreement PDF structure, subcategory filter, nedostupne toggle, client edit/delete, equipment delete |
+| 12 | 2026-04-21 | Partners Page Redesign + WebP Optimization | Minimal grid design (Option 1), 8 partners (M&M Wood, Terra, Wacker, Makita + rest), PNG→WebP conversion (58% savings), logo visibility fix |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -119,6 +120,21 @@ Date: 2026-04-17
 13. **Vercel env vars for portal** -- After Supabase migration, royalstroje.sk portal had old `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` in Vercel. User updated manually + redeployed.
 14. **Custers subcategory bug** -- Lešenie products appearing in other subcategories due to wrong `subcategory_id` in DB after migration. Diagnosed via SQL, user fixed data manually.
 
+## What Was Done (Session 12) -- Partners Page Redesign + WebP Optimization
+Date: 2026-04-21
+
+### Partners Page Design
+1. **Option 1 minimal grid implementation** -- Clean white logo containers, hover lift effect (scale 1.05 + shadow), responsive 2 cols mobile → 4 cols desktop. Removed reveal animations and lazy loading for immediate visibility. Files: `src/pages/Partneri.jsx`. Committed: `60a9c69`.
+
+### Partner List Update
+2. **8 partners with reordered list** -- Added 3 new partners (Terra, Wacker Neuson, Makita) in positions 2-4. Final order: M&M Wood (1), Terra (2), Wacker Neuson (3), Makita (4), Zsolika (5), Mobilbox (6), Eskopa (7), Moba (8). Updated partners array with website URLs for new partners.
+
+### WebP Optimization
+3. **PNG to WebP conversion** -- Converted 7 PNG logos to WebP format with quality 85. Total savings: 88.7 KB → 37.2 KB (58.1% reduction). Individual savings: mmwood 41%, terra 42.8%, wacker 56.4%, makita 52.5%, zsolika 62.1%, mobilbox 67.2%, eskopa 59.4%. All code references auto-updated.
+
+### Bug Fix
+4. **Logo visibility issue** -- Removed lazy loading and reveal/stagger animations that were blocking logo display. Logos now render immediately in white containers with proper hover effects. Committed: `60a9c69`.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
@@ -141,6 +157,7 @@ Date: 2026-04-17
 | `src/hooks/useProducts.js` | Supabase product fetching + filter helpers |
 | `src/pages/Sluzby.jsx` | Services page (3+3 grid, 6 cards) |
 | `src/pages/SkoLenieObsluhy.jsx` | Školenie obsluhy service detail page |
+| `src/pages/Partneri.jsx` | Partners page with minimal grid design (8 partners, WebP logos, hover effects) |
 | `src/components/common/Footer.jsx` | Footer (mobile 2-col, MDN Tech credit) |
 | `src/components/common/Header.jsx` | Header + promo popup (hidden on mobile) |
 | `src/data/categories.js` | Static frontend category structure |
