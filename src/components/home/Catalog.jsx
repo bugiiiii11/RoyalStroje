@@ -254,7 +254,7 @@ export default function Catalog() {
             {/* Right Product Image */}
             <div className="hidden lg:block flex-shrink-0">
               <img
-                src="/pictures/graphics/mini-rypadlo-1000-transparent.webp"
+                src="/pictures/graphics/Wacker_neuson_803-transparent.png"
                 alt="Produkt"
                 className="w-64 h-auto opacity-75 select-none pointer-events-none"
                 width={800}

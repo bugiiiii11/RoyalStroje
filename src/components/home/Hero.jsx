@@ -45,10 +45,10 @@ export default function Hero() {
 
       {/* Content Container */}
       <div className="relative z-10 min-h-screen flex items-end">
-        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 w-full pb-28 lg:pb-32">
-          <div className="max-w-2xl backdrop-blur-sm bg-black/30 rounded-2xl p-6 md:p-8 lg:p-10">
+        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 w-full pb-20 lg:pb-24">
+          <div className="max-w-xl backdrop-blur-sm bg-black/40 rounded-2xl p-6 md:p-8">
             {/* Headline */}
-            <h1 className="hero-desk-1 text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white leading-tight mb-4 md:mb-6">
+            <h1 className="hero-desk-1 text-2xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-3 md:mb-4">
               Požičovňa náradia a{' '}
               <span className="bg-gradient-to-r from-orange-primary to-orange-hover bg-clip-text text-transparent">
                 stavebnej techniky v Senci.
@@ -57,29 +57,29 @@ export default function Hero() {
 
             {/* Description */}
             <div className="hero-desk-2">
-              <p className="text-base md:text-xl text-white/90 leading-relaxed mb-2">
+              <p className="text-sm md:text-lg text-white/90 leading-relaxed mb-2">
                 Obsluhujeme Bratislavu a okolie s dovozom na stavbu.
               </p>
-              <p className="text-base md:text-xl text-orange-primary font-bold leading-relaxed mb-6 md:mb-8">
+              <p className="text-sm md:text-lg text-orange-primary font-bold leading-relaxed mb-4 md:mb-6">
                 Po-Pia 7-16 • Nonstop linka +421 948 555 551
               </p>
             </div>
 
             {/* CTA Buttons */}
-            <div className="hero-desk-3 flex flex-col sm:flex-row gap-3 md:gap-4">
+            <div className="hero-desk-3 flex flex-col sm:flex-row gap-2.5 md:gap-3">
               <a
                 href="tel:+421948555551"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-base rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-xs md:text-sm rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
               >
-                <Phone size={18} className="md:w-5 md:h-5" />
+                <Phone size={16} className="md:w-4 md:h-4" />
                 <span>Zavolať teraz</span>
               </a>
               <a
                 href="#katalog"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-zinc-800 border-2 border-orange-primary/30 text-white font-bold text-sm md:text-base rounded-full hover:bg-zinc-700 hover:border-orange-primary transition-all hover:scale-105 active:scale-95 shadow-lg"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-zinc-800 border-2 border-orange-primary/30 text-white font-bold text-xs md:text-sm rounded-full hover:bg-zinc-700 hover:border-orange-primary transition-all hover:scale-105 active:scale-95 shadow-lg"
               >
                 <span>Zobraziť katalóg</span>
-                <ArrowDown size={18} className="md:w-5 md:h-5" />
+                <ArrowDown size={16} className="md:w-4 md:h-4" />
               </a>
             </div>
           </div>
