@@ -232,7 +232,7 @@ export default function Catalog() {
             {/* Left Product Image */}
             <div className="hidden lg:block flex-shrink-0">
               <img
-                src="/pictures/graphics/toughbuilt-tb-c700-transparent.webp"
+                src="/pictures/graphics/JCB-19C-transparent.png"
                 alt="Produkt"
                 className="w-64 h-auto opacity-75 select-none pointer-events-none"
                 width={800}
