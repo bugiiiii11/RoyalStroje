@@ -5,7 +5,7 @@ import { useInView } from '../hooks/useInView';
 export default function Partneri() {
   const [heroRef, heroInView] = useInView();
   const [headingRef, headingInView] = useInView();
-  const [gridRef, gridInView] = useInView();
+  const [gridRef] = useInView();
   const [infoRef, infoInView] = useInView();
   const [ctaRef, ctaInView] = useInView();
   const partners = [
@@ -127,8 +127,8 @@ export default function Partneri() {
           </div>
 
           {/* Partners Grid - Option 1: Minimal with Hover Lift */}
-          <div ref={gridRef} className={`grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-16 ${gridInView ? 'in-view' : ''}`}>
-            {partners.map((partner, index) => {
+          <div ref={gridRef} className={`grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-16`}>
+            {partners.map((partner) => {
               const innerContent = (
                 <div className="group flex flex-col items-center justify-center w-full h-full">
                   {/* Logo Container - White square background */}
@@ -136,7 +136,6 @@ export default function Partneri() {
                     <img
                       src={partner.logo}
                       alt={partner.name}
-                      loading="lazy"
                       className="h-24 w-24 md:h-28 md:w-28 object-contain"
                     />
                   </div>
@@ -148,20 +147,18 @@ export default function Partneri() {
                 </div>
               );
 
-              const staggerClass = `reveal stagger-${Math.min(index + 1, 8)}`;
-
               return partner.website ? (
                 <a
                   key={partner.id}
                   href={partner.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${staggerClass} cursor-pointer`}
+                  className="cursor-pointer hover:opacity-80 transition-opacity"
                 >
                   {innerContent}
                 </a>
               ) : (
-                <div key={partner.id} className={staggerClass}>
+                <div key={partner.id}>
                   {innerContent}
                 </div>
               );
