@@ -130,7 +130,12 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
       onSave?.();
       onClose();
     } catch (err) {
-      setError(err.message || 'Chyba pri mazaní zariadenia');
+      let msg = err.message || 'Chyba pri mazaní zariadenia';
+      // Handle foreign key constraint error
+      if (msg.includes('reservation_items_equipment_id_fkey') || msg.includes('foreign key')) {
+        msg = 'Toto zariadenie sa používa v obchodoch a nemôže byť odstránené. Aby ste ho mohli odstrániť, musíte najprv odstrániť alebo upraviť obchody, ktoré ho používajú.';
+      }
+      setError(msg);
     } finally {
       setDeleting(false);
     }

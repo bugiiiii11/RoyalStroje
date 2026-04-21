@@ -81,7 +81,11 @@ export default function EquipmentCatalog() {
         setDeleteError(null);
         refetch();
       } catch (err) {
-        const msg = err.message || 'Chyba pri mazaní zariadenia';
+        let msg = err.message || 'Chyba pri mazaní zariadenia';
+        // Handle foreign key constraint error
+        if (msg.includes('reservation_items_equipment_id_fkey') || msg.includes('foreign key')) {
+          msg = 'Toto zariadenie sa používa v obchodoch a nemôže byť odstránené. Aby ste ho mohli odstrániť, musíte najprv odstrániť alebo upraviť obchody, ktoré ho používajú.';
+        }
         setDeleteError(msg);
         console.error('Delete equipment error:', err);
       } finally {
