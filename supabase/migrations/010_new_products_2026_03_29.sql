@@ -16,7 +16,7 @@ SELECT
   'Wacker Neuson ET18',
   'Mini-rýpadlo 2t',
   '/pictures/Katalog-PNG/Ťažká technika/Pásové mini-rýpadlá/Wacker_neusonET18.webp',
-  '["Príslušenstvo v cene - Lopata 300 / 500 / svahovacia hydr. 1050 mm","Rozmery (D x Š x V) - 3800 / 990 - 1300 / 2390 mm","Hĺbkový dosah / Výsypná výška - 2295 / 2720 mm"]',
+  '["Príslušenstvo v cene - Lopata 300 / 500 / svahovacia hydr. 1050 mm","Rozmery (D x Š x V) - 3800 / 990-1300 / 2390 mm","Hĺbkový dosah / Výsypná výška - 2295 / 2720 mm"]',
   95, 116.85, 'fixed', 'owned', true, true, false
 FROM equipment_categories c
 JOIN equipment_subcategories s ON s.category_id = c.id AND s.slug = 'pasove-mini-rypadla'

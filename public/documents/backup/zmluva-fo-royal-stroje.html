@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zmluva o prenájme - ROYAL STROJE s.r.o. | FO</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 15mm 18mm 15mm 18mm;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.35;
+      color: #1a1a1a;
+      background: #fff;
+    }
+
+    /* ── Header ── */
+    .doc-header {
+      border-bottom: 3px solid #e87400;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+
+    .doc-header h1 {
+      font-size: 13pt;
+      font-weight: 800;
+      color: #e87400;
+      margin: 0;
+    }
+
+    .doc-header h1 span {
+      color: #1a1a1a;
+    }
+
+    .doc-header .subtitle {
+      font-size: 8pt;
+      color: #555;
+      margin-top: 1px;
+    }
+
+    .doc-header .ref {
+      font-size: 8pt;
+      color: #888;
+      margin-top: 1px;
+    }
+
+    /* ── Tables – global ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+
+    td, th {
+      border: 1.5px solid #1a1a1a;
+      padding: 5px 7px;
+      vertical-align: top;
+      font-size: 9.5pt;
+    }
+
+    th {
+      background: #e87400;
+      color: #fff;
+      font-weight: 700;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      text-align: left;
+    }
+
+    /* ── Parties table ── */
+    .parties-table {
+      margin-bottom: 10px;
+    }
+
+    .parties-table th {
+      font-size: 9.5pt;
+      padding: 6px 8px;
+    }
+
+    .parties-table td {
+      height: 22px;
+    }
+
+    .parties-table .label {
+      font-weight: 700;
+      white-space: nowrap;
+      width: 130px;
+      background: #fdf4e8;
+    }
+
+    .parties-table .value {
+      min-width: 140px;
+    }
+
+    /* ── Product table ── */
+    .product-table th {
+      text-align: center;
+    }
+
+    .product-table td {
+      height: 28px;
+    }
+
+    /* Extra rows for handwriting */
+    .product-table .extra-row td {
+      height: 28px;
+    }
+
+    /* ── Info / finance split table ── */
+    .info-finance-table {
+      margin-bottom: 10px;
+    }
+
+    .info-finance-table th {
+      text-align: center;
+      width: 50%;
+    }
+
+    .info-finance-table .label {
+      font-weight: 700;
+      width: 45%;
+      background: #fdf4e8;
+    }
+
+    .info-finance-table .value {
+      width: 55%;
+    }
+
+    .info-finance-table td {
+      height: 22px;
+    }
+
+    /* ── Notes table ── */
+    .notes-table td {
+      height: 50px;
+    }
+
+    .notes-table th {
+      font-size: 8.5pt;
+    }
+
+    /* ── Legal text ── */
+    .legal-text {
+      font-size: 7.5pt;
+      line-height: 1.4;
+      color: #333;
+      margin: 10px 0;
+      text-align: justify;
+    }
+
+    /* ── Signatures ── */
+    .signatures-table {
+      margin-top: 8px;
+      page-break-inside: avoid;
+    }
+
+    .signatures-table th {
+      font-size: 9.5pt;
+      text-align: center;
+    }
+
+    .signatures-table td {
+      height: 22px;
+    }
+
+    .signatures-table .label {
+      font-weight: 700;
+      background: #fdf4e8;
+      width: 35%;
+    }
+
+    .sig-location {
+      text-align: center;
+      font-weight: 700;
+      font-size: 10pt;
+      padding: 8px;
+      border: 1.5px solid #1a1a1a;
+      background: #fff;
+    }
+
+    /* ── Return protocol ── */
+    .return-table {
+      page-break-inside: avoid;
+    }
+
+    .return-table th {
+      text-align: center;
+    }
+
+    .return-table td {
+      height: 22px;
+    }
+
+    .return-table .label {
+      font-weight: 700;
+      background: #fdf4e8;
+      width: 40%;
+    }
+
+    .checkbox-row td {
+      font-size: 9pt;
+    }
+
+    .checkbox {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid #1a1a1a;
+      vertical-align: middle;
+      margin-right: 3px;
+    }
+
+    /* ── Section gap ── */
+    .section-gap {
+      height: 6px;
+    }
+
+    /* ── Print styles ── */
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      td, th {
+        border: 1.5px solid #000 !important;
+      }
+
+      th {
+        background: #e87400 !important;
+        color: #fff !important;
+      }
+
+      .label {
+        background: #fdf4e8 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════ HEADER ═══════ -->
+  <div class="doc-header">
+    <h1><span>ZMLUVA O PRENAJME HNUTELNYCH VECI</span> &ndash; <span>SPOTREBITELSKA ZMLUVA</span></h1>
+    <div class="subtitle">&sect; 663 a nasl. zak. c. 40/1964 Zb. OZ</div>
+    <div class="ref">ROYAL STROJE s.r.o. &nbsp;|&nbsp; ICO: 57 405 425 &nbsp;|&nbsp; VPPM-FO 2026.01</div>
+  </div>
+
+  <!-- ═══════ PARTIES ═══════ -->
+  <table class="parties-table">
+    <thead>
+      <tr>
+        <th colspan="2">Prenajimatel</th>
+        <th colspan="2">Najomca &ndash; Spotrebitel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">Obchodne meno:</td>
+        <td class="value">ROYAL STROJE s.r.o.</td>
+        <td class="label">Meno a priezvisko:</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Sidlo:</td>
+        <td class="value">Recka cesta 182, 925 26 Boldog &ndash; Senec</td>
+        <td class="label">Adresa trvaleho bydliska:</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">ICO / DIC / IC DPH:</td>
+        <td class="value">57 405 425 / 2122722063 / SK2122722063</td>
+        <td class="label">Datum narodenia:</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Zastupeny:</td>
+        <td class="value">Peter Krivosudsky, konatel</td>
+        <td class="label">Cislo OP / pasu:</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Tel. / E-mail:</td>
+        <td class="value">+421 948 555 551 / info@royalstroje.sk</td>
+        <td class="label">Telefon / E-mail:</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Zmluva c.:</td>
+        <td class="value"></td>
+        <td class="label">Fakturacny e-mail:</td>
+        <td class="value"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════ PRODUCT TABLE ═══════ -->
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th style="width: 40%;">Nazov, typ a popis predmetu prenajmu (PP)</th>
+        <th style="width: 20%;">Vyrobne cislo</th>
+        <th style="width: 20%;">Druh sadzby</th>
+        <th style="width: 20%;">Sadzba/den vratane DPH (EUR)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="extra-row"><td></td><td></td><td></td><td></td></tr>
+      <tr class="extra-row"><td></td><td></td><td></td><td></td></tr>
+      <tr class="extra-row"><td></td><td></td><td></td><td></td></tr>
+      <tr class="extra-row"><td></td><td></td><td></td><td></td></tr>
+      <tr class="extra-row"><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════ INFO / FINANCE ═══════ -->
+  <table class="info-finance-table">
+    <thead>
+      <tr>
+        <th colspan="2">Informacie o prenajme</th>
+        <th colspan="2">Financne podmienky</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="label">Zaciatok prenajmu:</td>
+        <td class="value"></td>
+        <td class="label">Celkove najomne vrat. DPH (EUR):</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Dohodunta dlzka / koniec:</td>
+        <td class="value"></td>
+        <td class="label">Zaloha (depozit) pozadovana (EUR):</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Skutocny koniec prenajmu:</td>
+        <td class="value"></td>
+        <td class="label">Zaloha (depozit) vratena (EUR):</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Miesto pouzivania PP:</td>
+        <td class="value"></td>
+        <td class="label">Sposob platby najomneho:</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Miesto odovzdania PP:</td>
+        <td class="value"></td>
+        <td class="label">Sposob uhrady zalohy:</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Platobne podmienky:</td>
+        <td class="value"></td>
+        <td class="label">Neuctovane dni PP:</td>
+        <td class="value"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════ NOTES ═══════ -->
+  <table class="notes-table">
+    <thead>
+      <tr>
+        <th style="width: 50%;">Ostatne informacie o PP a prislusenstve</th>
+        <th style="width: 50%;">Prevzatie PP &ndash; vyhrady k stavu (ak ziadne, nechajte prazdne)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════ LEGAL TEXT ═══════ -->
+  <div class="legal-text">
+    PP je odovzdavany v stave zodpovedajucom jeho veku a opotrebeniu. Najomca (Spotrebitel) potvrdzuje prevzatie PP funkcneho a bez vyhrad
+    (okrem uvedenych). Prilohou c. 1 su VPPM-FO 2026.01 &ndash; neoddelitelna sucast Zmluvy; v pripade rozporu ma prednost Zmluva. Najomca
+    vyhlasuje, ze VPPM-FO si prestudoval, obdrzal ich v papierovej forme a v plnom rozsahu akceptuje. Zmluva sa spravuje zakonom c. 40/1964 Zb.
+    OZ a zakonom c. 250/2007 Z. z. o ochrane spotrebitela. Zmluva je vyhotovena v 2 rovnopisoch. Prenajimatel spracuva osobne udaje podla cl. 6
+    ods. 1 pism. b) GDPR; podrobnosti na www.royalstroje.sk. Miestna prislusnost sudu sa riadi platnymi predpismi; Spotrebitel moze podat zalobu aj
+    na sude v mieste svojho bydliska.
+  </div>
+
+  <!-- ═══════ SIGNATURES + RETURN PROTOCOL ═══════ -->
+  <table class="signatures-table" style="margin-bottom: 0;">
+    <thead>
+      <tr>
+        <th colspan="2">Podpisy zmluvnych stran</th>
+        <th colspan="2">Protokol o vrateni PP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2" class="sig-location">V ______________________________ dna __________________</td>
+        <td class="label">Datum a cas vratenia:</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td colspan="2" rowspan="1" style="border-bottom: none; padding-top: 8px;">
+          <strong>Za prenajimatela:</strong>
+        </td>
+        <td class="label">Stav PP pri vrateni:</td>
+        <td class="value"></td>
+      </tr>
+      <tr>
+        <td class="label">Meno a priezvisko:</td>
+        <td class="value"></td>
+        <td class="label" rowspan="2">Poskodenia / chybajuce prislusenstvo:</td>
+        <td class="value" rowspan="2"></td>
+      </tr>
+      <tr>
+        <td class="label">Podpis:</td>
+        <td class="value" style="height: 35px;"></td>
+      </tr>
+      <tr>
+        <td class="label">Datum:</td>
+        <td class="value"></td>
+        <td colspan="2" style="font-size: 9pt; height: 28px;">
+          Vycisteny: &nbsp;<span class="checkbox"></span> Ano &nbsp;&nbsp;<span class="checkbox"></span> Nie
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          Fotodokumentacia: &nbsp;<span class="checkbox"></span> Ano &nbsp;&nbsp;<span class="checkbox"></span> Nie
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border-bottom: none; padding-top: 8px;">
+          <strong>Najomca &ndash; spotrebitel:</strong>
+        </td>
+        <td class="label">Podpis prenajimatela:</td>
+        <td class="value" style="height: 35px;"></td>
+      </tr>
+      <tr>
+        <td class="label">Meno a priezvisko:</td>
+        <td class="value"></td>
+        <td class="label" rowspan="3">Podpis najomcu:</td>
+        <td class="value" rowspan="3" style="height: 35px;"></td>
+      </tr>
+      <tr>
+        <td class="label">Podpis:</td>
+        <td class="value" style="height: 35px;"></td>
+      </tr>
+      <tr>
+        <td class="label">Datum:</td>
+        <td class="value"></td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

@@ -13,99 +13,9 @@
 | 8 | 2026-04-09 | Dashboard UX + PDF Polish + Equipment rate_unit | New client UX simplified, Dátum do picker, PDF datums/prices/signatures fixed, rate_unit column + Zemné vrtáky subcategory |
 | 9 | 2026-04-10 | PDF Diacritics + PO Alignment + Usage Location | Fix ľ rendering (Identity-H), Zemné vrtáky on landing, PO signature/protocol alignment, Miesto používania PP field |
 | 10 | 2026-04-15 | Serial Numbers + Contact Person + Hero Backdrop | Equipment serial numbers (catalog + deal + PDF), hero text backdrop blur, contact person selection in deals, contract number collision fix |
+| 11 | 2026-04-17 | Partial Returns + Unified PDFs + Catalog UX | Partial return flow, unified invoice/agreement PDF structure, subcategory filter, nedostupne toggle, client edit/delete, equipment delete |
 
-## What Was Done (Session 3) -- Website Features + Mobile UX
-
-### Backend / Data
-1. **Website reads products from Supabase** -- `useProducts.js` hook fetches live data. Env vars added to Vercel. No more manual CSV sync.
-2. **Image upload** -- Supabase Storage bucket `equipment-images` (migration 008). Dashboard form updated with file picker. Images served via public URL.
-3. **FO/PO client types** -- `client_type` field in DB. Contract PDF generator selects correct template based on type.
-
-### Dashboard -- PDF Contracts
-4. **FO agreement PDF** -- Full rewrite to match original HTML template exactly. Orange #e8720a, Arial font, 8.5pt, borders #999999. Dynamic equipment rows (only actual items). Compact 3-column signature layout. Fits single A4 page.
-5. **PO agreement PDF** -- Separate generator (`generateAgreementPdfPO.js`) for legal entities (§269 Obchodný zákonník). Overenie oprávnenia section, 2-party signature layout.
-
-### Website -- Content + Pages
-6. **6th service card** -- "Školenie obsluhy stavebných strojov" added to Služby. Grid changed from 5-card row to 3+3 layout.
-7. **New page `/sluzby/skolenie-obsluhy`** -- Full course info: 6 course types, benefits, 5-step process, legal requirement section, Alpha Safety s.r.o. partner banner with external link.
-8. **Catalog cleanup** -- Removed duplicate "Krovinorezy" subcategory from Malé náradie. Accessories (príslušenstvo) hidden from "Všetko" view.
-9. **Catalog filter persistence** -- Filters stored in URL params (`?category=X&subcategory=Y&page=Z`). Browser back button restores filter state naturally. "Späť na katalóg" uses `navigate(-1)`.
-10. **WhyRoyalStroje section** -- Moved below catalog, above FAQ. Now visible on mobile too.
-
-### Website -- Mobile UX
-11. **Mobile Hero** -- New `MobileHero.jsx`: full-height hero with background image, staggered CSS entrance animations (headline → subline → CTAs → scroll indicator).
-12. **Scroll reveal animations** -- `useInView` hook (IntersectionObserver). CSS classes `reveal`, `reveal-fade`, `stagger-1..8`. Applied to product cards (staggered fade-up), WhyRoyalStroje cards, blog CTA.
-13. **Footer mobile 2-col grid** -- About + Kontakt full-width; Služby + Stránky side-by-side. `pb-24` clears fixed bottom nav bar.
-14. **MDN Tech chatbot widget** -- `<script src="https://mdntech.org/widget.js">` added before `</body>` in `index.html`. Chatbot ID: `b1637181-da22-4ae2-b79e-11c10b967b4f`.
-
-### Website -- Design / Copy
-15. **Promo popup redesign** -- Orange border (`border-orange-primary/40`), solid dark bg (no glass blur), orange close button.
-16. **Footer MDN Tech credit** -- Logo + "Vytvorené M.D.N Tech" with orange hover link to mdntech.org.
-17. **Blog** -- Article dates corrected, `prenajom-vs-kupa` moved to 1st position via `dateSort`, cover image added.
-18. **Knowledgebase** -- Multiple `.md` files updated for chatbot (Pan Krivosudský persona).
-
-## What Was Done (Session 4) -- Hero Redesign + Desktop Animations + Performance
-
-### Hero Section
-1. **New hero background image** -- Replaced `hero1.webp` with `hero-main.webp` (excavator sunset scene). Dark lower-left area designed for text overlay. Applied to both desktop (`Hero.jsx`) and mobile (`MobileHero.jsx`). Committed: 2af232b.
-2. **Desktop hero text repositioned** -- Text moved from vertically centered to bottom-left (`items-end`, `pb-28 lg:pb-32`). Gradient overlays adjusted for new image. Committed: 2af232b.
-3. **Desktop hero entrance animations** -- Staggered fade-up animations: headline (0.15s), description (0.35s), CTA buttons (0.55s). CSS `@keyframes heroDeskFadeUp` in `Hero.jsx`. Committed: 2af232b.
-
-### Header
-4. **White icons and nav links** -- Active nav link text + underline changed to white (was orange). Inactive links `white/70`. Social icons (WhatsApp, Telegram, Phone) changed to white. Hover remains orange. Committed: 2af232b.
-5. **Logo scroll-to-top** -- Added `onClick` to logo Link to smooth-scroll to top when already on home page. Committed: 2af232b.
-
-### Scroll Animations (Desktop + Mobile)
-6. **New CSS animation variants** -- Added `reveal-left`, `reveal-right`, `reveal-scale` classes in `index.css`. Committed: 2af232b.
-7. **Catalog section animations** -- Desktop header (reveal), filter bar (reveal-fade), category sidebar (reveal-left), subcategory filters (reveal-fade), mobile QuoteForm (reveal). Committed: 2af232b.
-8. **FAQ section animations** -- Heading (reveal), left sidebar image+contact (reveal-left), FAQ accordion items (staggered reveal). Committed: 2af232b.
-9. **Blog CTA cards** -- Staggered reveal on the two tip cards. Committed: 2af232b.
-
-### Image Optimization
-10. **PNG-to-WebP conversion** -- 13 PNG files converted to WebP. Total savings: 15.1 MB (87.7%). Hero image: 2.8 MB -> 167 KB. All code references updated automatically. Committed: 2af232b.
-
-### Performance Fix
-11. **Removed lazy loading from all pages** -- Removed `React.lazy()` and `Suspense` from all page imports in `App.jsx`. All pages now load in the main bundle (207KB gzip), eliminating the spinner on every page refresh. Committed: e670d0a.
-12. **Hero image preload** -- `<link rel="preload">` in `index.html` for `hero-main.webp` so browser downloads it before React mounts. Committed: a59a376.
-
-### Footer
-13. **Copyright row centered on desktop** -- Changed from `justify-between` to `justify-center` with `|` separator between copyright and MDN Tech credit. Mobile layout unchanged. Committed: d335a83.
-
-## What Was Done (Session 5) -- Scroll Animations -- All Pages
-
-### Scroll Reveal Animations
-1. **Sluzby.jsx** -- Hero text reveal, heading + subtitle stagger, 6 service cards staggered fade-up (stagger-1 to 6), CTA reveal-scale. Committed: 7063485.
-2. **Blog.jsx** -- Hero, heading, staggered blog article cards (up to stagger-8), CTA reveal-scale. Committed: 7063485.
-3. **BlogDetail.jsx** -- Hero, mobile header, article body reveal-fade, share section, CTA reveal-scale, related articles. Committed: 7063485.
-4. **Kontakt.jsx** -- Hero, heading, 4 contact method cards staggered, visit section, CTA reveal-scale. Committed: 7063485.
-5. **SkoLenieObsluhy.jsx** -- Hero, intro, partner banner reveal-scale, 6 course cards staggered, 4 benefits staggered, 5 steps staggered, CTA. Committed: 7063485.
-6. **PredajTechniky.jsx** -- Hero, promo products staggered, categories heading + grid staggered, CTA reveal-scale. Committed: 7063485.
-7. **RoyalFleet.jsx** -- Hero, intro, 3 models staggered, example reveal-scale, 4 benefits staggered, 5 steps staggered, who section, CTA. Committed: 7063485.
-8. **DovozTechniky.jsx** -- Hero, heading, 6 service cards staggered, pricing section, CTA reveal-scale. Committed: 7063485.
-9. **ServisNaradia.jsx** -- Hero, heading, 6 service cards staggered, why-us 4 items staggered, CTA reveal-scale. Committed: 7063485.
-10. **NahradneDiely.jsx** -- Hero, heading, 4 service cards staggered, 4 order steps staggered, CTA reveal-scale. Committed: 7063485.
-11. **ZemnePrace.jsx** -- Hero, heading, 6 service cards staggered, CTA reveal-scale. Committed: 7063485.
-12. **CenovaPonuka.jsx** -- Hero, heading, 4 service cards staggered, why section reveal-scale, 3 steps staggered, form reveal. Committed: 7063485.
-13. **Partneri.jsx** -- Hero, heading, 5 partner cards staggered, info section, CTA reveal-scale. Committed: 7063485.
-
-### Bug Fix
-14. **ProductDetail.jsx** -- Removed reveal-left/reveal-right/reveal-scale animations that caused content to be invisible. The reveal classes start at opacity:0 and the IntersectionObserver never triggered for already-visible above-fold content. Committed: 318e4e1.
-
-### Skipped Pages
-- GDPR, ObchodnePodmienky -- legal text, no animations needed.
-- Kosik -- cart/form page, no animations needed.
-
-## What Was Done (Session 6) -- New Products + Image Updates
-
-### New Products
-1. **4 new products added** -- 3x Pásové mini-rýpadlá (Wacker Neuson ET18, ET24, JCB 19C-I) + 1x Elektrický drvič (Makita UD2500). New subcategory "Drviče" in Záhradná technika. Migration `010_new_products_2026_03_29.sql` created. PNG images converted to WebP. Files: `src/data/categories.js`, `supabase/seed.sql`, migration 010. Committed: 574c081.
-
-### Image Updates
-2. **Hero image replaced** -- `hero-main.webp` → `hero-11.webp` on desktop (Hero.jsx), mobile (MobileHero.jsx), and preload (index.html). Committed: c5cf8f0.
-3. **FAQ image replaced** -- `dovoz.webp` → `faq-1.webp` in FAQ sidebar. PNG converted to WebP (2.3 MB → 193 KB). Committed: c5cf8f0.
-
-### Pending
-- Migration 010 needs to be run in Supabase SQL Editor for products to appear on website.
+<!-- Sessions 3-6 archived in session summary table above -->
 
 ## What Was Done (Session 7) -- Dashboard Contracts + Contacts Overhaul
 
@@ -182,14 +92,41 @@
 ### Data Cleanup
 11. **Deleted all clients except** František Laky and Free Housing s.r.o. (with cascading deletion of reservations, items, contracts). Done via Supabase SQL Editor.
 
+## What Was Done (Session 11) -- Partial Returns + Unified PDFs + Catalog UX
+Date: 2026-04-17
+
+### Dashboard Catalog
+1. **Subcategory filter** -- Dropdown next to category filter, auto-filtered by selected category, resets on category change. Files: `EquipmentFilters.jsx`, `useEquipment.js`. Committed: `8973f6b`.
+2. **"Nedostupne" toggle** -- EyeOff/Eye button sets equipment `status=inactive/active`. Inactive items stay in dashboard but hidden from royalstroje.sk (portal already filters `.eq('status', 'active')`). Gray badge + filter option. Files: `EquipmentTable.jsx`, `EquipmentCatalog.jsx`, `EquipmentFilters.jsx`. Committed: `25d34dd`.
+3. **Delete equipment** -- Button added to equipment edit form with confirmation. Files: `EquipmentForm.jsx`. Committed: `2ba8381`.
+
+### Partial Return Flow
+4. **Migration 017: contract_returned_items** -- Junction table tracking which items are returned per final contract. RLS policy for authenticated users. Files: `supabase/migrations/017_contract_returned_items.sql`. Committed: `66fe595`.
+5. **ReturnItemsModal** -- Select which items to return (checkbox per item), set return date/time, auto-calculate rental days + price per selected item. Creates new final contract + inserts returned item records. Reservation auto-completes when all items returned. Files: `ReturnItemsModal.jsx`, `DealDetail.jsx`. Committed: `66fe595`.
+6. **Multiple final contracts** -- DealDetail shows "Finalne zmluvy (N)" dropdown listing all partial return contracts. Each generates its own PDF with only the returned items. Files: `DealDetail.jsx`. Committed: `66fe595`.
+7. **RLS fix** -- Added missing `WITH CHECK (true)` to `contract_returned_items` policy (user ran SQL manually).
+
+### Unified PDF Structure
+8. **Invoice PDF uses agreement layout** -- Rewrote `generateInvoicePdf.js` to call `generateAgreementPdf`/`PO` with `invoiceData` param. Same parties, equipment, rental, signatures, protocol sections. Added IBAN/VS/Splatnost to financial column. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`, `generateInvoicePdf.js`. Committed: `810e036`, `a196ce0`.
+9. **Keep ZMLUVA header on invoices** -- Invoice title stays "ZMLUVA O PRENAJME HNUTELNYCH VECI" (same contract, just with payment info). Invoice number appended to metadata subtitle. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `6f37b2d`.
+10. **Navrh zmluvy always visible** -- Button no longer hidden after reservation completed. Available for all confirmed reservations. Files: `DealDetail.jsx`. Committed: `66fe595`.
+
+### Client Management
+11. **Edit client data** -- "Upravit" button on ClientDetail opens inline edit form for all client fields. Files: `ClientDetail.jsx`. Committed: `cba4bac`.
+12. **Delete client** -- "Vymazat klienta" button with confirmation on client detail page. Files: `ClientDetail.jsx`. Committed: `9e0cf55`.
+
+### Infrastructure Fix
+13. **Vercel env vars for portal** -- After Supabase migration, royalstroje.sk portal had old `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` in Vercel. User updated manually + redeployed.
+14. **Custers subcategory bug** -- Lešenie products appearing in other subcategories due to wrong `subcategory_id` in DB after migration. Diagnosed via SQL, user fixed data manually.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
-| 1 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` |
-| 2 | Product images | Upload product photos via dashboard image upload feature |
-| 3 | Add Zemné vrtáky products via dashboard | Subcategory exists in DB + frontend catalog -- add Makita DG002GZ etc. |
-| 4 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
-| 5 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 1 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
+| 2 | Verify subcategory data integrity | After Supabase migration some products had wrong subcategory_id (Custers bug). Run audit query across all products. |
+| 3 | Product images | Upload product photos via dashboard image upload feature |
+| 4 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 5 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
 | 6 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
 | 7 | Online payment | Stripe/GoPay integration (post-MVP) |
 
@@ -210,7 +147,8 @@
 | `apps/dashboard/src/lib/generateAgreementPdf.js` | FO rental agreement PDF (návrh/finálna, time_from, contractData param) |
 | `apps/dashboard/src/lib/generateAgreementPdfPO.js` | PO rental agreement PDF (návrh/finálna, time_from, contractData param) |
 | `apps/dashboard/src/lib/rentalDays.js` | Rental day calculation algorithm (24h/26h/28h thresholds) |
-| `apps/dashboard/src/pages/deals/FinalizeContractModal.jsx` | Modal for finalizing contract on product return |
+| `apps/dashboard/src/pages/deals/ReturnItemsModal.jsx` | Modal for partial/full return: select items, set return date, generate final contract |
+| `apps/dashboard/src/pages/equipment/EquipmentFilters.jsx` | Catalog filters: search, category, subcategory, sklad status |
 | `apps/dashboard/src/hooks/useContracts.js` | Supabase hook for contracts table |
 | `apps/dashboard/src/pages/deals/NewDealStepItems.jsx` | Step 2: Dátum od/do pickers, time, equipment search + cart, serial number picker |
 | `apps/dashboard/src/pages/deals/NewDealStepReview.jsx` | Step 3: Súhrn with contact person dropdown, delivery, deposit, financials |
@@ -234,7 +172,7 @@ RoyalStroje/
   packages/
     shared/               # Shared types, Supabase client, constants
   supabase/
-    migrations/           # 15 SQL migrations
+    migrations/           # 17 SQL migrations
     seed.sql              # Equipment catalog data
   knowledgebase/          # Chatbot knowledge base (.md files)
 ```

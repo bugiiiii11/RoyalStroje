@@ -33,7 +33,119 @@
       "Bash(python -m playwright:*)",
       "Bash(python scripts/convert.py:*)",
       "Bash(python:*)",
-      "Bash(del \"public\\\\pictures\\\\graphics\\\\royal_stroje_krivosudsky.png\")"
+      "Bash(del \"public\\\\pictures\\\\graphics\\\\royal_stroje_krivosudsky.png\")",
+      "Skill(png-to-webp)",
+      "Skill(png-to-webp:*)",
+      "Bash(npx skills:*)",
+      "Bash(playwright install:*)",
+      "Bash(curl -s \"https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://royalstroje.sk&strategy=mobile&category=performance\")",
+      "Bash(grep -E \"\\\\.\\(js|json|ts|tsx\\)$\")",
+      "Bash(find c:/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/public/pictures/ -type f \\\\\\(-name *.png -o -name *.jpg -o -name *.jpeg \\\\\\) -size +100k)",
+      "Bash(PYTHONIOENCODING=utf-8 python -c \":*)",
+      "Bash(find /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/public -maxdepth 1 -type f \\\\\\(-name hero* -o -name *background* -o -name *bg* \\\\\\))",
+      "Bash(grep -r \"ZMLUVA O PRENÁJME\\\\|contract\\\\|zmluva\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/src --include=*.jsx --include=*.js)",
+      "Bash(xargs grep:*)",
+      "Bash(grep -r \"Zmluva o prenájme\\\\|ZMLUVA O PRENÁJME\\\\|rental agreement\\\\|rental contract\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/src --include=*.jsx --include=*.js)",
+      "Bash(grep -r \"jsPDF\\\\|pdfkit\\\\|pdf-lib\\\\|generatePDF\\\\|exportPDF\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje --include=*.jsx --include=*.js)",
+      "Bash(grep -r \"VPPM2026.02\\\\|VPPM-FO\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje --include=*.jsx --include=*.js --include=*.md)",
+      "Bash(npm run:*)",
+      "Bash(wc -l /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/src/data/blog*.jsx)",
+      "Bash(wc -l C:/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/src/data/articles/*.jsx)",
+      "Bash(npx vite:*)",
+      "Bash(grep -E \"\\\\.jsx$\")",
+      "Bash(mkdir -p c:/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/supabase/migrations)",
+      "Bash(mkdir -p c:/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/src)",
+      "Bash(mkdir -p c:/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/portal/src)",
+      "Bash(mkdir -p c:/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/packages/shared/src)",
+      "Bash(VITE_SUPABASE_URL=https://placeholder.supabase.co VITE_SUPABASE_ANON_KEY=placeholder npx vite build)",
+      "Bash(VITE_SUPABASE_URL=https://dvmdoczuppmcumykhktm.supabase.co VITE_SUPABASE_ANON_KEY=placeholder npx vite build)",
+      "Bash(find c:UserscryptomedaDesktopSwarmmyprojectsRoyalStrojeappsdashboardsrc -type f \\\\\\(-name *.jsx -o -name *.tsx \\\\\\))",
+      "Bash(grep -r \"IČO\\\\|IBAN\\\\|dic\\\\|ico\\\\|VAT\" c:UserscryptomedaDesktopSwarmmyprojectsRoyalStroje --include=*.js --include=*.jsx --include=*.sql --include=*.md)",
+      "Bash(curl -sL -o \"/c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/public/fonts/Inter-Regular.ttf\" \"https://github.com/rsms/inter/raw/master/fonts/desktop/Inter-Regular.otf\")",
+      "Bash(curl -L --connect-timeout 10 -o \"/c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/public/fonts/Inter-Regular.ttf\" \"https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-ext-400-normal.ttf\")",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(curl -L --connect-timeout 10 -o \"/c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/public/fonts/Inter-Bold.ttf\" \"https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-ext-700-normal.ttf\")",
+      "Bash(curl -L --connect-timeout 15 -o \"/tmp/Inter.zip\" \"https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip\")",
+      "Bash(curl -kL --connect-timeout 15 -o \"/tmp/Inter.zip\" \"https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip\")",
+      "Bash(cd /tmp)",
+      "Bash(unzip -l Inter.zip)",
+      "Bash(unzip -o Inter.zip \"extras/ttf/Inter-Regular.ttf\" \"extras/ttf/Inter-Bold.ttf\")",
+      "Bash(cp /tmp/extras/ttf/Inter-Regular.ttf \"/c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/public/fonts/Inter-Regular.ttf\")",
+      "Bash(cp /tmp/extras/ttf/Inter-Bold.ttf \"/c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/public/fonts/Inter-Bold.ttf\")",
+      "Bash(grep -r \"supabaseUrl\\\\|supabaseKey\\\\|@supabase\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/src --include=*.js --include=*.jsx --include=*.ts --include=*.tsx)",
+      "Bash(find /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/src -type f \\\\\\(-name *.js -o -name *.jsx -o -name *.ts -o -name *.tsx \\\\\\))",
+      "Bash(find /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/portal/src -type f \\\\\\(-name *.js -o -name *.jsx -o -name *.ts -o -name *.tsx \\\\\\))",
+      "Bash(grep -r \"supabase\\\\|Supabase\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/src --include=*.js --include=*.jsx --include=*.ts --include=*.tsx)",
+      "Bash(grep -r \"import.*from.*data/products\\\\|from ''.*data/products''\\\\|from \"\".*data/products\"\"\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/src --include=\"*.js\" --include=\"*.jsx\" --include=\"*.ts\" --include=\"*.tsx\")",
+      "Bash(grep -r \"import.*csv\\\\|upload\\\\|file.*input\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/src --include=*.jsx --include=*.js)",
+      "Bash(npx vercel:*)",
+      "Bash(grep -E \"pg_cron|pgvector|uuid-ossp|unaccent|CREATE EXTENSION|DROP EXTENSION\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/supabase/migrations/*.sql)",
+      "Bash(grep -r \"signUp\\\\|signInWithOAuth\\\\|passwordReset\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps --include=*.jsx --include=*.tsx)",
+      "Bash(grep -r \"storage\\\\|bucket\\\\|upload\\\\|download\" /c/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/apps/dashboard/src/lib --include=*.js)",
+      "Read(//c/Users/cryptomeda/Desktop/Swarm/myprojects/**)",
+      "Bash(mkdir -p \"c:/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/public/pictures/Katalog-PNG/Záhradná technika/Drviče\")",
+      "Bash(mv \"c:/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/public/pictures/Katalog-PNG/Ťažká technika/Drviče/UD2500.png\" \"c:/Users/cryptomeda/Desktop/Swarm/myprojects/RoyalStroje/public/pictures/Katalog-PNG/Záhradná technika/Drviče/UD2500.png\")",
+      "Bash(npx sharp-cli:*)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\cryptomeda\\Desktop\\Swarm\\myprojects\\RoyalStroje",
+      "c:\\Users\\cryptomeda\\Desktop\\Swarm\\myprojects\\RoyalStroje\\public\\pictures\\Katalog-PNG\\Ťažká technika\\Drviče"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-dangerous.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-internal-urls.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect-files.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|WebFetch|WebSearch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/audit-all.sh\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Read|WebFetch|WebSearch|Bash|Grep|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scan-injection.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   }
 }

@@ -17,24 +17,42 @@ export default function Partneri() {
     },
     {
       id: 2,
+      name: 'TERRA',
+      logo: '/pictures/graphics/partneri/logo_terra.webp',
+      website: 'https://www.terra-world.sk/',
+    },
+    {
+      id: 3,
+      name: 'WACKER NEUSON',
+      logo: '/pictures/graphics/partneri/logo_wacker.webp',
+      website: 'https://www.wackerneuson.sk/',
+    },
+    {
+      id: 4,
+      name: 'MAKITA',
+      logo: '/pictures/graphics/partneri/logo_makita.webp',
+      website: 'https://makita.sk/',
+    },
+    {
+      id: 5,
       name: 'ZSOLIKA',
       logo: '/pictures/graphics/partneri/logo_zsolika.webp',
       website: 'https://www.zsolika.sk/',
     },
     {
-      id: 3,
+      id: 6,
       name: 'MOBILBOX',
       logo: '/pictures/graphics/partneri/logo_mobilbox.webp',
       website: 'https://mobilbox.sk/',
     },
     {
-      id: 4,
+      id: 7,
       name: 'ESKOPA',
       logo: '/pictures/graphics/partneri/logo_eskopa.webp',
       website: null,
     },
     {
-      id: 5,
+      id: 8,
       name: 'MOBA',
       logo: '/pictures/graphics/partneri/logo_moba.webp',
       website: 'https://moba.sk/',
@@ -108,41 +126,29 @@ export default function Partneri() {
             </p>
           </div>
 
-          {/* Partners Grid */}
-          <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 mb-8 md:mb-16">
+          {/* Partners Grid - Option 1: Minimal with Hover Lift */}
+          <div ref={gridRef} className={`grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-16 ${gridInView ? 'in-view' : ''}`}>
             {partners.map((partner, index) => {
-              const cardContent = (
-                <>
-                  {/* Hover gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/5 group-hover:to-orange-primary/10 transition-all duration-300 rounded-2xl md:rounded-3xl"></div>
-
-                  {/* Content */}
-                  <div className="relative z-10 flex flex-col items-center">
-                    {/* Logo */}
-                    <div className="w-20 h-20 md:w-32 md:h-32 rounded-xl md:rounded-2xl bg-white flex items-center justify-center mb-2 md:mb-5 group-hover:shadow-lg group-hover:shadow-orange-primary/30 transition-all duration-300 overflow-hidden">
-                      <img
-                        src={partner.logo}
-                        alt={partner.name}
-                        className="w-full h-full object-contain p-2 md:p-3"
-                      />
-                    </div>
-
-                    {/* Company Name */}
-                    <h3 className="text-white font-bold text-xs md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors line-clamp-2">
-                      {partner.name}
-                    </h3>
-
-                    {/* Visit indicator - only show if website exists */}
-                    {partner.website && (
-                      <span className="text-white/40 text-[10px] md:text-xs group-hover:text-orange-primary/70 transition-colors">
-                        Navštíviť web →
-                      </span>
-                    )}
+              const innerContent = (
+                <div className="group flex flex-col items-center justify-center w-full h-full">
+                  {/* Logo Container - White square background */}
+                  <div className="bg-white rounded-lg p-4 flex items-center justify-center h-32 w-32 md:h-40 md:w-40 mb-3 md:mb-4 transition-all duration-200 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-black/20">
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      loading="lazy"
+                      className="h-24 w-24 md:h-28 md:w-28 object-contain"
+                    />
                   </div>
-                </>
+
+                  {/* Partner Name */}
+                  <h3 className="text-center text-xs md:text-sm text-gray-300 font-medium line-clamp-2">
+                    {partner.name}
+                  </h3>
+                </div>
               );
 
-              const cardClasses = `group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-2xl md:rounded-3xl p-3 md:p-8 hover:border-orange-primary hover:shadow-2xl hover:shadow-orange-primary/20 hover:scale-105 transition-all duration-300 flex flex-col items-center justify-center text-center min-h-[140px] md:min-h-[220px] overflow-hidden reveal stagger-${Math.min(index + 1, 5)} ${gridInView ? 'in-view' : ''}`;
+              const staggerClass = `reveal stagger-${Math.min(index + 1, 8)}`;
 
               return partner.website ? (
                 <a
@@ -150,16 +156,13 @@ export default function Partneri() {
                   href={partner.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={cardClasses}
+                  className={`${staggerClass} cursor-pointer`}
                 >
-                  {cardContent}
+                  {innerContent}
                 </a>
               ) : (
-                <div
-                  key={partner.id}
-                  className={cardClasses}
-                >
-                  {cardContent}
+                <div key={partner.id} className={staggerClass}>
+                  {innerContent}
                 </div>
               );
             })}
