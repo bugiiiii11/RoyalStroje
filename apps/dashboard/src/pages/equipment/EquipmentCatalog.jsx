@@ -15,6 +15,8 @@ export default function EquipmentCatalog() {
   const [formOpen, setFormOpen] = useState(false);
   const [editItem, setEditItem] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
   const [exporting, setExporting] = useState(false);
 
   const { data, loading, refetch, totalPages } = useEquipment(filters);
@@ -70,16 +72,24 @@ export default function EquipmentCatalog() {
 
   const handleDelete = async (item) => {
     if (confirmDelete?.id === item.id) {
+      setDeleting(true);
+      setDeleteError(null);
       try {
         await deleteEquipment(item.id);
         setConfirmDelete(null);
         setSelectedItem(null);
+        setDeleteError(null);
         refetch();
-      } catch {
-        alert('Chyba pri mazaní zariadenia');
+      } catch (err) {
+        const msg = err.message || 'Chyba pri mazaní zariadenia';
+        setDeleteError(msg);
+        console.error('Delete equipment error:', err);
+      } finally {
+        setDeleting(false);
       }
     } else {
       setConfirmDelete(item);
+      setDeleteError(null);
     }
   };
 
@@ -176,6 +186,11 @@ export default function EquipmentCatalog() {
       )}
 
       <div className="bg-white rounded-xl border border-gray-100 shadow-card">
+        {deleteError && (
+          <div className="bg-red-50 text-red-700 text-sm px-4 py-3 border-b border-red-200">
+            Chyba: {deleteError}
+          </div>
+        )}
         {viewMode === 'table' ? (
           <EquipmentTable
             data={expandedData}
@@ -189,6 +204,7 @@ export default function EquipmentCatalog() {
             onToggleStock={handleToggleStock}
             onToggleAvailability={handleToggleAvailability}
             confirmDeleteId={confirmDelete?.id}
+            deleting={deleting}
           />
         ) : (
           <div className="p-4">

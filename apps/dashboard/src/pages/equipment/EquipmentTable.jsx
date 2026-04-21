@@ -1,9 +1,9 @@
 import DataTable from '../../components/ui/DataTable';
 import Badge from '../../components/ui/Badge';
 import { formatPrice } from '../../lib/constants';
-import { Pencil, Trash2, PackageX, PackageCheck, EyeOff, Eye } from 'lucide-react';
+import { Pencil, Trash2, PackageX, PackageCheck, EyeOff, Eye, Loader2 } from 'lucide-react';
 
-export default function EquipmentTable({ data, loading, sortBy, sortAsc, onSort, onRowClick, onEdit, onDelete, onToggleStock, onToggleAvailability, confirmDeleteId }) {
+export default function EquipmentTable({ data, loading, sortBy, sortAsc, onSort, onRowClick, onEdit, onDelete, onToggleStock, onToggleAvailability, confirmDeleteId, deleting }) {
   const columns = [
     {
       key: 'name',
@@ -106,14 +106,19 @@ export default function EquipmentTable({ data, loading, sortBy, sortAsc, onSort,
           </button>
           <button
             onClick={() => onDelete?.(row)}
-            className={`p-1.5 rounded-lg transition-colors ${
+            disabled={deleting}
+            className={`p-1.5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
               confirmDeleteId === row.id
-                ? 'text-white bg-red-500 hover:bg-red-600'
+                ? 'text-white bg-red-500 hover:bg-red-600 disabled:hover:bg-red-500'
                 : 'text-gray-400 hover:text-red-600 hover:bg-red-50'
             }`}
             title={confirmDeleteId === row.id ? 'Potvrdiť odstránenie' : 'Odstrániť'}
           >
-            <Trash2 className="w-4 h-4" />
+            {deleting && confirmDeleteId === row.id ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Trash2 className="w-4 h-4" />
+            )}
           </button>
         </div>
       ),
