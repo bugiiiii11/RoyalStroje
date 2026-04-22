@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSearchParams, useLocation, Link } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
 import {
   ShoppingCart, X, Send, Calendar,
@@ -29,7 +29,17 @@ const categoryIcons = {
 
 export default function Catalog() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   const { products } = useProducts();
+
+  // Scroll to #katalog when URL has the hash (e.g. from blog CTA links).
+  // React Router doesn't handle hash anchors natively, and the element
+  // mounts after hydration so native browser scroll-to-anchor misses it.
+  useEffect(() => {
+    if (location.hash !== '#katalog') return;
+    const el = document.getElementById('katalog');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [location.hash, products.length]);
 
   // Read filter state from URL params (persists across navigation)
   const activeCategory = searchParams.get('category') || 'male-naradie';
@@ -618,7 +628,7 @@ export default function Catalog() {
               <>
                 <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-5 mb-8">
                   {currentProducts.map((product, i) => (
-                    <div key={product.id} className={`reveal stagger-${Math.min(i + 1, 8)} ${gridInView ? 'in-view' : ''}`}>
+                    <div key={product.id} className={`reveal stagger-${Math.min(i + 1, 8)} ${gridInView || searchQuery ? 'in-view' : ''}`}>
                       <ProductCard product={product} customerType={customerType} />
                     </div>
                   ))}
