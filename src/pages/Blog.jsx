@@ -244,7 +244,7 @@ export default function Blog() {
   // Filter out hidden articles
   // Sort by date from newest to oldest
   const visiblePosts = blogPosts
-    .filter(post => ![3, 4, 5, 7, 9, 10, 11, 12].includes(post.id))
+    .filter(post => ![3, 4, 5, 7, 9, 10, 11, 12, 19].includes(post.id))
     .sort((a, b) => new Date(b.dateSort) - new Date(a.dateSort));
 
   return (
