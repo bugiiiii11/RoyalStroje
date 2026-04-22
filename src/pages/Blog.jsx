@@ -231,7 +231,7 @@ export default function Blog() {
       dateSort: '2026-04-22',
       author: 'Royal Stroje',
       readTime: '11 min',
-      image: '/pictures/graphics/blog_jcb.png',
+      image: '/pictures/graphics/blog_jcb.webp',
       category: 'Návody',
     },
   ];

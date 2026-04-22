@@ -232,7 +232,7 @@ export default function Catalog() {
             {/* Left Product Image */}
             <div className="hidden lg:block flex-shrink-0">
               <img
-                src="/pictures/graphics/JCB-19C-transparent.png"
+                src="/pictures/graphics/JCB-19C-transparent.webp"
                 alt="Produkt"
                 className="w-64 h-auto opacity-75 select-none pointer-events-none"
                 width={800}
@@ -254,7 +254,7 @@ export default function Catalog() {
             {/* Right Product Image */}
             <div className="hidden lg:block flex-shrink-0">
               <img
-                src="/pictures/graphics/wacker-neuson-803-transparent.png"
+                src="/pictures/graphics/wacker-neuson-803-transparent.webp"
                 alt="Produkt"
                 className="w-64 h-auto opacity-75 select-none pointer-events-none"
                 width={800}
