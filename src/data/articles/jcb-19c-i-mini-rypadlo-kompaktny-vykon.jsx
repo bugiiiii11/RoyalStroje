@@ -453,7 +453,7 @@ const article = {
               <span>Zavolať: 0948 555 551</span>
             </a>
             <a
-              href="/?search=JCB+19C-I#katalog"
+              href="/?search=JCB+19C#katalog"
               className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-800 border-2 border-orange-primary/50 text-white font-bold rounded-full hover:bg-zinc-700 transition-all"
             >
               <span>Pozrieť v katalógu</span>
