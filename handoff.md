@@ -16,6 +16,7 @@
 | 11 | 2026-04-17 | Partial Returns + Unified PDFs + Catalog UX | Partial return flow, unified invoice/agreement PDF structure, subcategory filter, nedostupne toggle, client edit/delete, equipment delete |
 | 12 | 2026-04-21 | Partners Page Redesign + WebP Optimization | Minimal grid design (Option 1), 8 partners (M&M Wood, Terra, Wacker, Makita + rest), PNG→WebP conversion (58% savings), logo visibility fix |
 | 13 | 2026-04-22 | Equipment Delete Error Handling | Fixed delete button UX: loading state, better error messages, FK constraint handling |
+| 14 | 2026-04-22 | JCB 19C-I Blog Article + Catalog Bug Fix | New blog article for JCB 19C-I mini-rýpadlo, PNG→WebP (-86%), fixed #katalog hash scroll + Supabase-only search reveal bug |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -144,6 +145,21 @@ Date: 2026-04-22
 2. **Better error display** -- Error messages now show at top of table with actual error details instead of generic alert. Console logging for debugging. Files: `EquipmentCatalog.jsx`. Committed: `489cdf1`.
 3. **FK constraint error handling** -- Equipment cannot be deleted if used in reservations (foreign key constraint). Added user-friendly Slovak error message: "Toto zariadenie sa používa v obchodoch a nemôže byť odstránené. Aby ste ho mohli odstrániť, musíte najprv odstrániť alebo upraviť obchody, ktoré ho používajú." Applied to both table delete and form delete. Files: `EquipmentCatalog.jsx`, `EquipmentForm.jsx`. Committed: `70a934d`.
 
+## What Was Done (Session 14) -- JCB 19C-I Blog Article + Catalog Bug Fix
+Date: 2026-04-22
+
+### Blog Article
+1. **New JCB 19C-I article** -- Full review of mini-rýpadlo (1.83t, 2.4m dig depth) in same style as Makita TW001GM201: intro, technical specs grid, compact dimensions section, robust construction, practical applications (4 segments), target audience cards, real-world performance metrics, comparison vs Takeuchi TB216 and Kubota U17-3, rental economics, pros/cons + 9.3/10 rating, CTA. Files: `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`, `src/data/blogArticles.jsx`, `src/pages/Blog.jsx`. Committed: `f6898e6`.
+2. **Product-to-blog link** -- User set `blog_article_slug = 'jcb-19c-i-mini-rypadlo-kompaktny-vykon'` in Supabase via dashboard EquipmentForm. ProductCard auto-renders "Prečítať článok o produkte" link.
+
+### Image Optimization
+3. **PNG to WebP conversion** -- Converted 3 PNG files: `blog_jcb.png` (2.97 MB → 377 KB, -87%), `wacker-neuson-803-transparent.png` (555 KB → 87 KB, -84%), `JCB-19C-transparent.png` (553 KB → 82 KB, -85%). Total: 4.0 MB → 547 KB (-86.4%). Updated refs in Blog.jsx + Catalog.jsx. PNG originals kept as fallback. Audit confirmed all other PNGs in `public/pictures/` already had WebP counterparts. Committed: `9e57416`.
+
+### Catalog Bug Fixes
+4. **Search link query simplified** -- Changed CTA URL from `?search=JCB+19C-I` to `?search=JCB+19C` to avoid I/l character ambiguity. Files: `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`. Committed: `dd7d559`.
+5. **#katalog hash scroll fix** -- React Router doesn't handle anchor scrolling natively, and `#katalog` element mounts after hydration so native browser scroll-to-anchor missed it. Added useEffect with `useLocation` that scrolls on hash change AND when products array length changes (re-trigger after Supabase load). Files: `src/components/home/Catalog.jsx`. Committed: `37e8bdf`.
+6. **Search reveal animation fix** -- URL search like `?search=JCB+19C` showed empty results for Supabase-only products (e.g. JCB 19C-I). Root cause: `useProducts()` initial state is `staticProducts` (157 products from `products.js`, missing JCB 19C-I which is dashboard-only). After Supabase fetch, products mounted into grid but `reveal` className kept them at `opacity: 0` until `useInView` IntersectionObserver triggered — and since `#katalog` wasn't scrolling, grid stayed below fold and observer never fired. Makita TW001GM201 worked because it's in static products and rendered immediately. Fix: force `in-view` className when `searchQuery` is active. Files: `src/components/home/Catalog.jsx`. Committed: `37e8bdf`.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
@@ -184,6 +200,10 @@ Date: 2026-04-22
 | `supabase/migrations/014_serial_numbers.sql` | Adds serial_numbers JSONB to equipment + reservation_items |
 | `supabase/migrations/015_reservation_contact_person.sql` | Adds contact_person TEXT to reservations |
 | `apps/dashboard/src/lib/pdfFonts.js` | Inter font loading for jsPDF with Identity-H encoding for Slovak diacritics |
+| `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx` | JCB 19C-I blog article (linked from product card via blog_article_slug) |
+| `src/data/blogArticles.jsx` | Blog metadata + lazy loader for all article modules |
+| `src/components/home/Catalog.jsx` | Public catalog with URL params (search, category, page), hash scroll, reveal animations |
+| `src/hooks/useProducts.js` | Supabase product fetch with staticProducts fallback (SSR-safe initial state) |
 | `knowledgebase/` | Chatbot knowledge base (.md files) |
 | `index.html` | MDN Tech chatbot widget script tag |
 | `supabase/migrations/008_equipment_images_storage.sql` | Supabase Storage bucket for equipment images |
