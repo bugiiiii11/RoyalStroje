@@ -15,6 +15,7 @@
 | 10 | 2026-04-15 | Serial Numbers + Contact Person + Hero Backdrop | Equipment serial numbers (catalog + deal + PDF), hero text backdrop blur, contact person selection in deals, contract number collision fix |
 | 11 | 2026-04-17 | Partial Returns + Unified PDFs + Catalog UX | Partial return flow, unified invoice/agreement PDF structure, subcategory filter, nedostupne toggle, client edit/delete, equipment delete |
 | 12 | 2026-04-21 | Partners Page Redesign + WebP Optimization | Minimal grid design (Option 1), 8 partners (M&M Wood, Terra, Wacker, Makita + rest), PNG→WebP conversion (58% savings), logo visibility fix |
+| 13 | 2026-04-22 | Equipment Delete Error Handling | Fixed delete button UX: loading state, better error messages, FK constraint handling |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -134,6 +135,14 @@ Date: 2026-04-21
 
 ### Bug Fix
 4. **Logo visibility issue** -- Removed lazy loading and reveal/stagger animations that were blocking logo display. Logos now render immediately in white containers with proper hover effects. Committed: `60a9c69`.
+
+## What Was Done (Session 13) -- Equipment Delete Error Handling
+Date: 2026-04-22
+
+### Dashboard Equipment Catalog
+1. **Delete button UX improvements** -- Added loading state (`deleting` flag) to prevent multiple clicks while deletion in progress. Delete button now shows spinner and is disabled during deletion. Files: `EquipmentCatalog.jsx`, `EquipmentTable.jsx`. Committed: `489cdf1`.
+2. **Better error display** -- Error messages now show at top of table with actual error details instead of generic alert. Console logging for debugging. Files: `EquipmentCatalog.jsx`. Committed: `489cdf1`.
+3. **FK constraint error handling** -- Equipment cannot be deleted if used in reservations (foreign key constraint). Added user-friendly Slovak error message: "Toto zariadenie sa používa v obchodoch a nemôže byť odstránené. Aby ste ho mohli odstrániť, musíte najprv odstrániť alebo upraviť obchody, ktoré ho používajú." Applied to both table delete and form delete. Files: `EquipmentCatalog.jsx`, `EquipmentForm.jsx`. Committed: `70a934d`.
 
 ## What To Do Next
 | Priority | Task | Notes |
