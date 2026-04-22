@@ -144,6 +144,14 @@ export const blogMeta = {
     category: 'Návody',
     excerpt: 'Kompletný prehľad rotačného lasera Nivel NL520R - dosah 500 m, presnosť 1,0 mm/10 m, elektronický kompenzátor a 50 hodín prevádzky. Prečo je tento laser ideálny pre veľké stavebné projekty?',
   },
+  'jcb-19c-i-mini-rypadlo-kompaktny-vykon': {
+    title: 'JCB 19C-I: Kompaktné Mini-Rýpadlo s Výkonom Pre Náročné Stavby',
+    date: '22. Apríl 2026',
+    author: 'Royal Stroje',
+    readTime: '11 min',
+    category: 'Návody',
+    excerpt: 'Kompletný prehľad mini-rýpadla JCB 19C-I - 1,83 tony hmotnosti, hĺbka výkopu 2,4 m, kompaktné rozmery pre stiesnené priestory a robustný H-rám. Prečo je toto mini-rýpadlo ideálnou voľbou pre malé stavby, výkopy a terénne úpravy?',
+  },
 };
 
 // Lazy loader - only loads article content when needed
@@ -167,6 +175,7 @@ export async function loadArticle(slug) {
     'nivel-cl3g-krizovy-laser-zeleny-profesionalny-nastroj': () => import('./articles/nivel-cl3g-krizovy-laser-zeleny-profesionalny-nastroj.jsx'),
     'nivel-n32x-opticky-nivelacny-pristroj-profesionalny-nastroj': () => import('./articles/nivel-n32x-opticky-nivelacny-pristroj-profesionalny-nastroj.jsx'),
     'nivel-nl520r-rotacny-laser-cerveny-profesionalny-nastroj': () => import('./articles/nivel-nl520r-rotacny-laser-cerveny-profesionalny-nastroj.jsx'),
+    'jcb-19c-i-mini-rypadlo-kompaktny-vykon': () => import('./articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx'),
   };
 
   if (!modules[slug]) return null;

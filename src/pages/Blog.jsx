@@ -222,6 +222,18 @@ export default function Blog() {
       image: '/pictures/graphics/nivel-NL520R-blog.webp',
       category: 'Návody',
     },
+    {
+      id: 19,
+      slug: 'jcb-19c-i-mini-rypadlo-kompaktny-vykon',
+      title: 'JCB 19C-I: Kompaktné Mini-Rýpadlo s Výkonom Pre Náročné Stavby',
+      excerpt: 'Kompletný prehľad mini-rýpadla JCB 19C-I - 1,83 tony hmotnosti, hĺbka výkopu 2,4 m, kompaktné rozmery pre stiesnené priestory a robustný H-rám. Prečo je toto mini-rýpadlo ideálnou voľbou pre malé stavby, výkopy a terénne úpravy?',
+      date: '22. Apríl 2026',
+      dateSort: '2026-04-22',
+      author: 'Royal Stroje',
+      readTime: '11 min',
+      image: '/pictures/graphics/blog_jcb.png',
+      category: 'Návody',
+    },
   ];
 
   const [heroRef, heroInView] = useInView();
