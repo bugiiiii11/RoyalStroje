@@ -57,6 +57,12 @@ export default function Partneri() {
       logo: '/pictures/graphics/partneri/logo_moba.webp',
       website: 'https://moba.sk/',
     },
+    {
+      id: 9,
+      name: 'MK Stavebná činnosť',
+      logo: '/pictures/graphics/partneri/logo_mk_stavebna_cinnost.webp',
+      website: 'https://www.facebook.com/people/MK-Stavebn%C3%A1-%C4%8Cinnos%C5%A5/61579051122998/',
+    },
   ];
 
   return (
