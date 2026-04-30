@@ -16,24 +16,6 @@ export default function Hero() {
         />
       </div>
 
-      {/* Dark gradient overlay - bottom-left corner for text readability */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `
-            linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.15) 55%, transparent 100%)
-          `
-        }}
-      />
-
-      {/* Strong bottom gradient for text area */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 25%, transparent 50%)'
-        }}
-      />
-
       {/* Gradient fade na spodok - prechod do content sekcie */}
       <div
         className="absolute bottom-0 left-0 right-0 pointer-events-none"
