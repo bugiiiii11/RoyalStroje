@@ -63,6 +63,7 @@ export default function ReturnItemsModal({
 }) {
   const [returnDate, setReturnDate] = useState('');
   const [returnTime, setReturnTime] = useState('08:00');
+  const [daysInput, setDaysInput] = useState('');
   const [finalTotal, setFinalTotal] = useState('');
   const [notes, setNotes] = useState('');
   const [selected, setSelected] = useState(new Set());
@@ -73,9 +74,15 @@ export default function ReturnItemsModal({
   const pickupDatetime = combineDatetime(reservation?.date_from, timeFrom);
   const returnDatetime = combineDatetime(returnDate, returnTime);
 
-  const { days, isNegotiable } = (pickupDatetime && returnDatetime && returnDatetime > pickupDatetime)
+  const { days: autoDays, isNegotiable } = (pickupDatetime && returnDatetime && returnDatetime > pickupDatetime)
     ? calculateRentalDays(pickupDatetime, returnDatetime)
     : { days: null, isNegotiable: false };
+
+  // Days actually used for price (user can override autoDays via input)
+  const parsedDaysInput = parseFloat((daysInput || '').replace(',', '.'));
+  const effectiveDays = Number.isFinite(parsedDaysInput) && parsedDaysInput > 0
+    ? parsedDaysInput
+    : (autoDays || null);
 
   const rows = useMemo(
     () => buildReturnableRows(items, returnedBySerial, returnedQty),
@@ -88,14 +95,20 @@ export default function ReturnItemsModal({
       setSelected(new Set(rows.map((r) => r.key)));
       setReturnDate('');
       setReturnTime('08:00');
+      setDaysInput('');
       setNotes('');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
+  // When auto-calculated days change (e.g. user updated return date), sync input
+  useEffect(() => {
+    if (autoDays != null) setDaysInput(String(autoDays));
+  }, [autoDays]);
+
   const selectedRows = rows.filter((r) => selected.has(r.key));
   const dailySubtotal = selectedRows.reduce((sum, r) => sum + r.dailyRate * r.quantity, 0);
-  const suggestedNet = days != null ? dailySubtotal * days : null;
+  const suggestedNet = effectiveDays != null ? dailySubtotal * effectiveDays : null;
   const suggestedTotal = suggestedNet != null
     ? Math.round(suggestedNet * (1 + VAT_RATE) * 100) / 100
     : null;
@@ -137,7 +150,7 @@ export default function ReturnItemsModal({
           type: 'finalna',
           return_date: returnDate,
           time_to: returnTime || null,
-          calculated_days: days,
+          calculated_days: effectiveDays,
           final_total: parseFloat(finalTotal) || 0,
           notes: notes || null,
         })
@@ -164,12 +177,12 @@ export default function ReturnItemsModal({
             ? ownRows.length
             : ownRows.reduce((s, r) => s + r.quantity, 0);
           const serials = isSerial ? ownRows.map((r) => r.serialNumber) : [];
-          const lineTotal = (parseFloat(item.daily_rate) || 0) * qty * (days || 0);
+          const lineTotal = (parseFloat(item.daily_rate) || 0) * qty * (effectiveDays || 0);
           return {
             ...item,
             quantity: qty,
             serial_numbers: serials,
-            days: days,
+            days: effectiveDays,
             line_total: lineTotal,
           };
         })
@@ -183,7 +196,7 @@ export default function ReturnItemsModal({
         time_from: timeFrom,
         time_to: returnTime,
         return_date: returnDate,
-        calculated_days: days,
+        calculated_days: effectiveDays,
         final_total: parseFloat(finalTotal) || 0,
       };
       const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
@@ -293,24 +306,36 @@ export default function ReturnItemsModal({
           </div>
         </div>
 
-        {/* Calculated days */}
-        {days != null && (
-          <div className={`rounded-lg p-3 text-sm ${isNegotiable ? 'bg-amber-50 border border-amber-200' : 'bg-blue-50 border border-blue-200'}`}>
-            <div className="flex items-start gap-2">
-              {isNegotiable && <AlertCircle className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />}
-              <div>
-                <p className={`font-semibold ${isNegotiable ? 'text-amber-800' : 'text-blue-800'}`}>
-                  Vypočítaný prenájom: <strong>{days} {days === 1 ? 'deň' : days < 5 ? 'dni' : 'dní'}</strong>
-                </p>
-                {isNegotiable && (
-                  <p className="text-amber-700 text-xs mt-0.5">
-                    Čas vrátenia je do 2h od hranice — zvyčajne sa účtuje rovnaký počet dní (podľa dohody).
-                  </p>
-                )}
-              </div>
-            </div>
+        {/* Editable rental days */}
+        <div>
+          <label className="block text-xs font-medium text-gray-500 mb-1">Počet dní prenájmu</label>
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              inputMode="decimal"
+              value={daysInput}
+              onChange={(e) => setDaysInput(e.target.value)}
+              placeholder={autoDays != null ? String(autoDays) : '0'}
+              className={`${inputClass} w-32`}
+            />
+            <span className="text-sm text-gray-500">
+              {effectiveDays != null ? (effectiveDays === 1 ? 'deň' : effectiveDays < 5 ? 'dni' : 'dní') : 'dní'}
+            </span>
           </div>
-        )}
+          {autoDays != null && (
+            <p className="text-xs text-gray-400 mt-1">
+              Vypočítané z dátumov: <strong>{autoDays} {autoDays === 1 ? 'deň' : autoDays < 5 ? 'dni' : 'dní'}</strong> — môžete prepísať (napr. 3,5)
+            </p>
+          )}
+          {isNegotiable && (
+            <div className="mt-2 rounded-lg p-2.5 bg-amber-50 border border-amber-200 flex items-start gap-2">
+              <AlertCircle className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+              <p className="text-amber-700 text-xs">
+                Čas vrátenia je do 2h od hranice — zvyčajne sa účtuje rovnaký počet dní (podľa dohody).
+              </p>
+            </div>
+          )}
+        </div>
 
         {/* Editable final price */}
         <div>
@@ -325,7 +350,7 @@ export default function ReturnItemsModal({
           />
           {suggestedTotal != null && (
             <p className="text-xs text-gray-400 mt-1">
-              Navrhovaná cena: {formatPrice(suggestedTotal)} ({days} dní × {formatPrice(dailySubtotal)}/deň + {Math.round(VAT_RATE * 100)}% DPH)
+              Navrhovaná cena: {formatPrice(suggestedTotal)} ({effectiveDays} {effectiveDays === 1 ? 'deň' : effectiveDays < 5 ? 'dni' : 'dní'} × {formatPrice(dailySubtotal)}/deň + {Math.round(VAT_RATE * 100)}% DPH)
             </p>
           )}
         </div>

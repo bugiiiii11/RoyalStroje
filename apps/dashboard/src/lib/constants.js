@@ -1,7 +1,7 @@
 // Re-export from shared + dashboard-specific helpers
 
 export const RESERVATION_STATUSES = {
-  inquiry: { label: 'Dopyt', color: 'gray' },
+  inquiry: { label: 'V prenájme', color: 'gray' },
   quoted: { label: 'Cenová ponuka', color: 'blue' },
   confirmed: { label: 'Potvrdená', color: 'green' },
   active: { label: 'Aktívna', color: 'orange' },
