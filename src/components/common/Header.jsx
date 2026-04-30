@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, X } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 // WhatsApp icon
@@ -20,20 +20,7 @@ export default function Header() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [phoneHovered, setPhoneHovered] = useState(false);
-  const [promoVisible, setPromoVisible] = useState(false);
-  const [promoClosed, setPromoClosed] = useState(false);
   const isActive = (path) => location.pathname === path;
-
-  // Show promo banner after delay
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!promoClosed) {
-        setPromoVisible(true);
-      }
-    }, 2000); // Show after 2 seconds
-
-    return () => clearTimeout(timer);
-  }, [promoClosed]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,67 +31,8 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleClosePromo = () => {
-    setPromoVisible(false);
-    setPromoClosed(true);
-  };
-
   return (
     <>
-      {/* Promo Banner - Slide in from right - Desktop only */}
-      <div
-        className={`hidden md:block fixed top-24 right-0 z-[60] transition-all duration-500 ease-out ${
-          promoVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        }`}
-      >
-        <div className="relative bg-zinc-950 border border-orange-primary/40 rounded-l-2xl overflow-hidden w-[320px]" style={{boxShadow: '0 0 0 1px rgba(232,114,10,0.25), 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(232,114,10,0.08)'}}>
-          {/* Top accent line */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-orange-primary/60 via-orange-primary to-orange-primary/60"></div>
-
-          {/* Left accent bar */}
-          <div className="absolute top-0 left-0 bottom-0 w-[3px] bg-gradient-to-b from-orange-primary via-orange-primary/70 to-orange-primary/20"></div>
-
-          {/* Close button */}
-          <button
-            onClick={handleClosePromo}
-            className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center text-orange-primary hover:text-white hover:bg-orange-primary rounded-lg border border-orange-primary/40 hover:border-orange-primary transition-all z-10"
-            aria-label="Zavrieť"
-          >
-            <X size={14} />
-          </button>
-
-          {/* Content */}
-          <div className="p-6 pr-12">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-1.5 bg-orange-primary/10 border border-orange-primary/20 rounded-full px-3 py-1 mb-4">
-              <span className="w-1.5 h-1.5 bg-orange-primary rounded-full animate-pulse"></span>
-              <span className="text-orange-primary text-xs font-semibold uppercase tracking-wider">Testovacia prevádzka</span>
-            </div>
-
-            <h3 className="text-white font-black text-xl leading-tight mb-2">
-              Čoskoro otvárame!
-            </h3>
-            <p className="text-white/70 text-sm leading-relaxed mb-5">
-              Pripravujeme pre vás požičovňu náradia. Sledujte nás pre najnovšie informácie.
-            </p>
-
-            <Link
-              to="/kontakt"
-              onClick={() => setPromoVisible(false)}
-              className="group inline-flex items-center gap-2 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold py-2.5 px-5 rounded-lg hover:shadow-lg hover:shadow-orange-primary/25 transition-all duration-300"
-            >
-              Kontaktujte nás
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-
-          {/* Subtle decorative glow */}
-          <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-orange-primary/5 rounded-full blur-3xl"></div>
-        </div>
-      </div>
-
       <header
         className={`hidden md:block fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled

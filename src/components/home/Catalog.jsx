@@ -4,7 +4,7 @@ import { useInView } from '../../hooks/useInView';
 import {
   ShoppingCart, X, Send, Calendar,
   Hammer, Cog, HardHat, ArrowUpFromLine,
-  Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, BookOpen, ArrowRight
+  Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, BookOpen, ArrowRight, Info
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import { accessories } from '../../data/accessories';
@@ -597,6 +597,12 @@ export default function Catalog() {
                   );
                 })}
               </div>
+            </div>
+
+            {/* Image disclaimer */}
+            <div className="flex items-center gap-2 mb-3 md:mb-4 text-white/50 text-[11px] md:text-xs italic">
+              <Info size={12} className="flex-shrink-0 text-orange-primary/60" />
+              <span>Obrázky v katalógu sú ilustračné — skutočné prevedenie sa môže líšiť.</span>
             </div>
 
             {/* Products Grid or Accessories Table */}
