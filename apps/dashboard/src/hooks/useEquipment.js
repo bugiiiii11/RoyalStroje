@@ -1,37 +1,51 @@
+import { useMemo } from 'react';
 import useSupabaseQuery from './useSupabaseQuery';
 import { supabase } from '../lib/supabase';
 
+const removeDiacritics = (str) => (str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
 export default function useEquipment(filters = {}) {
   const { search, categoryId, subcategoryId, status, inStock, page = 1, pageSize = 20, sortBy = 'name', sortAsc = true } = filters;
+  const hasSearch = !!(search && search.trim());
 
   const query = useSupabaseQuery(async () => {
     let q = supabase
       .from('equipment')
       .select('*, equipment_categories(name, slug), equipment_subcategories(name, slug)', { count: 'exact' })
-      .order(sortBy, { ascending: sortAsc })
-      .range((page - 1) * pageSize, page * pageSize - 1);
+      .order(sortBy, { ascending: sortAsc });
 
-    if (search) {
-      q = q.ilike('name', `%${search}%`);
-    }
-    if (categoryId) {
-      q = q.eq('category_id', categoryId);
-    }
-    if (subcategoryId) {
-      q = q.eq('subcategory_id', subcategoryId);
-    }
-    if (status) {
-      q = q.eq('status', status);
-    }
-    if (inStock !== undefined && inStock !== null) {
-      q = q.eq('in_stock', inStock);
+    if (categoryId) q = q.eq('category_id', categoryId);
+    if (subcategoryId) q = q.eq('subcategory_id', subcategoryId);
+    if (status) q = q.eq('status', status);
+    if (inStock !== undefined && inStock !== null) q = q.eq('in_stock', inStock);
+
+    // When search is active, fetch all matches (up to 500) and filter client-side
+    // so the match is diacritic-insensitive and covers name + description.
+    if (hasSearch) {
+      q = q.range(0, 499);
+    } else {
+      q = q.range((page - 1) * pageSize, page * pageSize - 1);
     }
 
     return q;
-  }, [search, categoryId, subcategoryId, status, inStock, page, pageSize, sortBy, sortAsc]);
+  }, [hasSearch, categoryId, subcategoryId, status, inStock, page, pageSize, sortBy, sortAsc]);
 
-  const totalPages = query.count != null ? Math.ceil(query.count / pageSize) : 0;
-  return { ...query, totalPages };
+  const filtered = useMemo(() => {
+    if (!hasSearch || !query.data) return query.data;
+    const needle = removeDiacritics(search.toLowerCase()).trim();
+    return query.data.filter((item) => {
+      const name = removeDiacritics((item.name || '').toLowerCase());
+      const description = removeDiacritics((item.description || '').toLowerCase());
+      return name.includes(needle) || description.includes(needle);
+    });
+  }, [hasSearch, search, query.data]);
+
+  const effectiveCount = hasSearch ? (filtered?.length ?? 0) : query.count;
+  const totalPages = hasSearch
+    ? 1
+    : (query.count != null ? Math.ceil(query.count / pageSize) : 0);
+
+  return { ...query, data: filtered, count: effectiveCount, totalPages };
 }
 
 // Toggle a serial number's rented status on the equipment record
