@@ -191,7 +191,7 @@ export default function FAQ() {
               {/* Image Container */}
               <div className="relative rounded-2xl overflow-hidden border-2 border-orange-primary/30 mb-6">
                 <img
-                  src="/pictures/faq-1.webp"
+                  src="/pictures/graphics/predajna-4.webp"
                   alt="Royal Stroje - FAQ"
                   className="w-full h-auto object-cover"
                 />

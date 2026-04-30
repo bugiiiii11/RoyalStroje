@@ -86,7 +86,7 @@ export default function Sluzby() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/hero-pozicovna.webp"
+            src="/pictures/graphics/predajna-1.webp"
             alt="Royal Stroje - Služby"
             className="w-full h-full object-cover"
           />
