@@ -1,14 +1,44 @@
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 import { useInView } from '../hooks/useInView';
+
+const GALLERY_IMAGES = [
+  { src: '/pictures/graphics/predajna-1.webp', alt: 'Royal Stroje predajňa - pohľad 1' },
+  { src: '/pictures/graphics/predajna-2.webp', alt: 'Royal Stroje predajňa - pohľad 2' },
+  { src: '/pictures/graphics/stroje-jcb-rameno.webp', alt: 'JCB rameno - detail' },
+  { src: '/pictures/graphics/predajna-3.webp', alt: 'Royal Stroje predajňa - pohľad 3' },
+  { src: '/pictures/graphics/predajna-4.webp', alt: 'Royal Stroje predajňa - pohľad 4' },
+];
 
 export default function Kontakt() {
   const [heroRef, heroInView] = useInView();
   const [headingRef, headingInView] = useInView();
   const [cardsRef, cardsInView] = useInView();
   const [visitRef, visitInView] = useInView();
+  const [galleryRef, galleryInView] = useInView();
   const [ctaRef, ctaInView] = useInView();
+  const [lightboxIdx, setLightboxIdx] = useState(null);
+
+  const closeLightbox = () => setLightboxIdx(null);
+  const prevImage = () => setLightboxIdx((i) => (i === 0 ? GALLERY_IMAGES.length - 1 : i - 1));
+  const nextImage = () => setLightboxIdx((i) => (i === GALLERY_IMAGES.length - 1 ? 0 : i + 1));
+
+  useEffect(() => {
+    if (lightboxIdx === null) return;
+    const onKey = (e) => {
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowLeft') prevImage();
+      else if (e.key === 'ArrowRight') nextImage();
+    };
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [lightboxIdx]);
 
   return (
     <div className="min-h-screen">
@@ -363,6 +393,37 @@ export default function Kontakt() {
               </a>
             </div>
 
+            {/* Gallery - photos of the shop */}
+            <div ref={galleryRef} className={`mt-8 md:mt-12 reveal ${galleryInView ? 'in-view' : ''}`}>
+              <div className="text-center mb-6 md:mb-10">
+                <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+                  Pohľad do <span className="text-orange-primary">našej predajne</span>
+                </h2>
+                <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-lg">
+                  Niekoľko fotiek z prevádzky v Senci.
+                </p>
+              </div>
+
+              <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 md:gap-4 [&>*]:mb-3 md:[&>*]:mb-4">
+                {GALLERY_IMAGES.map((img, idx) => (
+                  <button
+                    key={img.src}
+                    type="button"
+                    onClick={() => setLightboxIdx(idx)}
+                    className="group block w-full overflow-hidden rounded-xl md:rounded-2xl border-2 border-white/10 hover:border-orange-primary/60 transition-all duration-300 break-inside-avoid"
+                    aria-label={`Otvoriť fotografiu: ${img.alt}`}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      loading="lazy"
+                      className="w-full h-auto block transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Social Media Section - Hidden until accounts are set up */}
             {/* <div className="text-center mb-6 md:mb-8">
               <h3 className="text-white font-black text-lg md:text-2xl mb-3 md:mb-6">
@@ -453,6 +514,60 @@ export default function Kontakt() {
           </div>
         </div>
       </ContentSection>
+
+      {/* Lightbox modal */}
+      {lightboxIdx !== null && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Galéria - zväčšený obrázok"
+        >
+          {/* Close */}
+          <button
+            type="button"
+            onClick={closeLightbox}
+            className="absolute top-3 right-3 md:top-6 md:right-6 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
+            aria-label="Zavrieť"
+          >
+            <X size={22} />
+          </button>
+
+          {/* Prev */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
+            aria-label="Predchádzajúci obrázok"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          {/* Next */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-10"
+            aria-label="Ďalší obrázok"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* Image */}
+          <img
+            src={GALLERY_IMAGES[lightboxIdx].src}
+            alt={GALLERY_IMAGES[lightboxIdx].alt}
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-full max-h-[90vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
+          />
+
+          {/* Counter */}
+          <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white/10 text-white text-xs md:text-sm font-medium">
+            {lightboxIdx + 1} / {GALLERY_IMAGES.length}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
