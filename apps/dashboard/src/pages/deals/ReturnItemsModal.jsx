@@ -24,7 +24,7 @@ function buildReturnableRows(items, returnedBySerial, returnedQty) {
           rows.push({
             key: `${item.id}:${sn}`,
             itemId: item.id,
-            equipmentName: item.equipment?.name || '—',
+            equipmentName: item.equipment?.name || item.custom_name || '—',
             serialNumber: sn,
             dailyRate: parseFloat(item.daily_rate) || 0,
             quantity: 1,
@@ -39,7 +39,7 @@ function buildReturnableRows(items, returnedBySerial, returnedQty) {
         rows.push({
           key: `${item.id}:noserial`,
           itemId: item.id,
-          equipmentName: item.equipment?.name || '—',
+          equipmentName: item.equipment?.name || item.custom_name || '—',
           serialNumber: null,
           dailyRate: parseFloat(item.daily_rate) || 0,
           quantity: remaining,

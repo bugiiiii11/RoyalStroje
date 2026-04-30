@@ -107,10 +107,10 @@ export default function Reports() {
       // Top equipment
       const { data: itemsData } = await supabase
         .from('reservation_items')
-        .select('equipment_id, equipment(name), quantity');
+        .select('equipment_id, equipment(name), custom_name, quantity');
       const equipMap = {};
       (itemsData || []).forEach(item => {
-        const name = item.equipment?.name || '—';
+        const name = item.equipment?.name || item.custom_name || '—';
         equipMap[name] = (equipMap[name] || 0) + item.quantity;
       });
       const topEquipment = Object.entries(equipMap)

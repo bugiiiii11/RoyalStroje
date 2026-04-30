@@ -132,7 +132,9 @@ export default function NewDeal() {
       // Create reservation items
       const itemsToInsert = finalData.items.map((item) => ({
         reservation_id: reservation.id,
-        equipment_id: item.equipment_id,
+        equipment_id: item.equipment_id || null,
+        custom_name: item.is_custom ? item.name : null,
+        custom_rate_unit: item.is_custom ? (item.custom_rate_unit || 'deň') : null,
         quantity: item.quantity,
         daily_rate: item.daily_rate,
         days: item.days,

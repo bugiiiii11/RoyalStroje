@@ -42,7 +42,10 @@ export default function DealItemsTable({ items, returnedBySerial, returnedQty })
           return (
             <tr key={item.id}>
               <td className="px-4 py-3 font-medium text-gray-900">
-                {item.equipment?.name || '—'}
+                {item.equipment?.name || item.custom_name || '—'}
+                {!item.equipment_id && (
+                  <span className="ml-2 text-[10px] uppercase tracking-wider font-semibold text-royal-600 bg-royal-50 px-1.5 py-0.5 rounded">Vlastný</span>
+                )}
                 {serials.length > 0 && (
                   <p className="text-xs text-gray-400 font-mono mt-0.5">
                     SN: {serials.join(', ')}

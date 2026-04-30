@@ -116,10 +116,13 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
         <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
           <p className="text-xs font-medium text-gray-500 uppercase">Zariadenia ({items.length})</p>
         </div>
-        {items.map((item) => (
-          <div key={item.equipment_id} className="flex items-center justify-between px-4 py-3 border-b border-gray-100 last:border-0 text-sm">
+        {items.map((item, idx) => (
+          <div key={item.is_custom ? `custom-${idx}` : item.equipment_id} className="flex items-center justify-between px-4 py-3 border-b border-gray-100 last:border-0 text-sm">
             <div>
               <span className="font-medium text-gray-900">{item.name}</span>
+              {item.is_custom && (
+                <span className="ml-2 text-[10px] uppercase tracking-wider font-semibold text-royal-600 bg-royal-50 px-1.5 py-0.5 rounded">Vlastný</span>
+              )}
               <span className="text-gray-400 ml-2">x{item.quantity}</span>
             </div>
             <span className="font-medium">{formatPrice(item.quantity * item.daily_rate * item.days)}</span>

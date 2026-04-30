@@ -5,11 +5,21 @@ import useEquipment from '../../hooks/useEquipment';
 import { supabase } from '../../lib/supabase';
 import { formatPrice, daysBetween } from '../../lib/constants';
 
+const RATE_UNIT_OPTIONS = [
+  { value: 'deň', label: 'Denná' },
+  { value: 'mm', label: 'mm' },
+  { value: 'hod', label: 'Hodinová' },
+];
+
+const emptyCustomForm = { name: '', serial: '', rate_unit: 'deň', daily_rate: '' };
+
 export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, onDatesChange, onTimeFromChange, onItemsChange }) {
   const [search, setSearch] = useState('');
   const { data: equipment, loading } = useEquipment({ search, pageSize: 50 });
   const days = daysBetween(dateFrom, dateTo);
   const [newSerialInputs, setNewSerialInputs] = useState({}); // { "itemIdx-slotIdx": "value" }
+  const [showCustomForm, setShowCustomForm] = useState(false);
+  const [customForm, setCustomForm] = useState(emptyCustomForm);
 
   const addItem = (eq) => {
     if (items.find((i) => i.equipment_id === eq.id)) return;
@@ -23,6 +33,32 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
       available_serials: availableSerials,
       serial_numbers: availableSerials.length === 1 ? [availableSerials[0]] : [''],
     }]);
+  };
+
+  const addCustomItem = () => {
+    const name = customForm.name.trim();
+    const rate = parseFloat(customForm.daily_rate);
+    if (!name || !(rate >= 0)) return;
+    onItemsChange([...items, {
+      equipment_id: null,
+      is_custom: true,
+      name,
+      custom_rate_unit: customForm.rate_unit,
+      daily_rate: rate,
+      quantity: 1,
+      days,
+      available_serials: [],
+      serial_numbers: [customForm.serial.trim()].filter(Boolean),
+    }]);
+    setCustomForm(emptyCustomForm);
+    setShowCustomForm(false);
+  };
+
+  const updateCustomSerial = (idx, value) => {
+    const updated = [...items];
+    const item = { ...updated[idx], serial_numbers: [value] };
+    updated[idx] = item;
+    onItemsChange(updated);
   };
 
   const updateSerial = (itemIdx, slotIdx, value) => {
@@ -153,8 +189,89 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
       </div>
 
       {/* Equipment Search */}
-      <div className="mb-4">
+      <div className="mb-3">
         <SearchInput value={search} onChange={setSearch} placeholder="Hľadať zariadenie na pridanie..." />
+      </div>
+
+      {/* Custom (ad-hoc) item — toggle + inline form */}
+      <div className="mb-4">
+        {!showCustomForm ? (
+          <button
+            type="button"
+            onClick={() => setShowCustomForm(true)}
+            className="text-sm text-royal-600 hover:text-royal-700 font-medium inline-flex items-center gap-1"
+          >
+            <Plus className="w-4 h-4" /> Pridať vlastný stroj (mimo katalógu)
+          </button>
+        ) : (
+          <div className="border border-dashed border-gray-300 rounded-xl p-4 bg-gray-50/50">
+            <p className="text-xs font-medium text-gray-500 uppercase mb-3">Vlastný stroj</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">Názov stroja</label>
+                <input
+                  type="text"
+                  value={customForm.name}
+                  onChange={(e) => setCustomForm({ ...customForm, name: e.target.value })}
+                  placeholder="napr. Makita VC2512L"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
+                  autoFocus
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">Výrobné číslo</label>
+                <input
+                  type="text"
+                  value={customForm.serial}
+                  onChange={(e) => setCustomForm({ ...customForm, serial: e.target.value })}
+                  placeholder="(voliteľné)"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">Druh sadzby</label>
+                <select
+                  value={customForm.rate_unit}
+                  onChange={(e) => setCustomForm({ ...customForm, rate_unit: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none"
+                >
+                  {RATE_UNIT_OPTIONS.map((o) => (
+                    <option key={o.value} value={o.value}>{o.label}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">Cena bez DPH (€)</label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={customForm.daily_rate}
+                  onChange={(e) => setCustomForm({ ...customForm, daily_rate: e.target.value })}
+                  placeholder="0.00"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => { setShowCustomForm(false); setCustomForm(emptyCustomForm); }}
+                className="px-3 py-1.5 text-xs text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                Zrušiť
+              </button>
+              <button
+                type="button"
+                onClick={addCustomItem}
+                disabled={!customForm.name.trim() || !customForm.daily_rate}
+                className="px-3 py-1.5 text-xs font-medium text-white bg-royal-500 hover:bg-royal-600 rounded-lg disabled:opacity-50 transition-colors"
+              >
+                Pridať do obchodu
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {search && (
@@ -197,23 +314,36 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
             const availableSerials = item.available_serials || [];
             // Serials already picked for OTHER slots of this item
             const usedSerials = (item.serial_numbers || []).filter(Boolean);
+            const isCustom = !!item.is_custom;
             return (
-              <div key={item.equipment_id} className="border-b border-gray-100 last:border-0">
+              <div key={isCustom ? `custom-${idx}` : item.equipment_id} className="border-b border-gray-100 last:border-0">
                 <div className="flex items-center justify-between px-4 py-3">
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-900">{item.name}</p>
+                    <p className="text-sm font-medium text-gray-900">
+                      {item.name}
+                      {isCustom && (
+                        <span className="ml-2 text-[10px] uppercase tracking-wider font-semibold text-royal-600 bg-royal-50 px-1.5 py-0.5 rounded">
+                          Vlastný
+                        </span>
+                      )}
+                    </p>
                     <p className="text-xs text-gray-400">{formatPrice(item.daily_rate)} x {item.days} dní</p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-1">
-                      <button onClick={() => updateQty(idx, -1)} className="p-1 hover:bg-gray-100 rounded">
-                        <Minus className="w-3 h-3" />
-                      </button>
-                      <span className="text-sm font-medium w-6 text-center">{item.quantity}</span>
-                      <button onClick={() => updateQty(idx, 1)} className="p-1 hover:bg-gray-100 rounded">
-                        <Plus className="w-3 h-3" />
-                      </button>
-                    </div>
+                    {!isCustom && (
+                      <div className="flex items-center gap-1">
+                        <button onClick={() => updateQty(idx, -1)} className="p-1 hover:bg-gray-100 rounded">
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="text-sm font-medium w-6 text-center">{item.quantity}</span>
+                        <button onClick={() => updateQty(idx, 1)} className="p-1 hover:bg-gray-100 rounded">
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
+                    )}
+                    {isCustom && (
+                      <span className="text-xs text-gray-400 w-16 text-center">1 ks</span>
+                    )}
                     <span className="text-sm font-semibold w-20 text-right">
                       {formatPrice(item.quantity * item.daily_rate * item.days)}
                     </span>
@@ -224,7 +354,19 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
                 </div>
                 {/* Serial number pickers — always visible */}
                 <div className="px-4 pb-3 space-y-1.5">
-                  {Array.from({ length: item.quantity }).map((_, slotIdx) => {
+                  {isCustom ? (
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-gray-400 w-16 shrink-0">Výr. č.:</span>
+                      <input
+                        type="text"
+                        value={item.serial_numbers?.[0] || ''}
+                        onChange={(e) => updateCustomSerial(idx, e.target.value)}
+                        placeholder="(voliteľné)"
+                        className="flex-1 px-2 py-1 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none"
+                      />
+                    </div>
+                  ) : (
+                  Array.from({ length: item.quantity }).map((_, slotIdx) => {
                     const currentVal = item.serial_numbers?.[slotIdx] || '';
                     const inputKey = `${idx}-${slotIdx}`;
                     const isAddingNew = newSerialInputs[inputKey] !== undefined && newSerialInputs[inputKey] !== null;
@@ -303,7 +445,8 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
                         )}
                       </div>
                     );
-                  })}
+                  })
+                  )}
                 </div>
               </div>
             );
