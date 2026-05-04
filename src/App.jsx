@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/common/Header';
@@ -6,6 +7,7 @@ import MobileNav from './components/common/MobileNav';
 import HamburgerMenu from './components/common/HamburgerMenu';
 import AnimatedBackground from './components/common/AnimatedBackground';
 import ScrollToTop from './components/common/ScrollToTop';
+import CookieBanner from './components/common/CookieBanner';
 import { CartProvider } from './context/CartContext';
 import Home from './pages/Home';
 import Sluzby from './pages/Sluzby';
@@ -20,10 +22,31 @@ import Kontakt from './pages/Kontakt';
 import Kosik from './pages/Kosik';
 import Partneri from './pages/Partneri';
 import GDPR from './pages/GDPR';
+import Cookies from './pages/Cookies';
 import ObchodnePodmienky from './pages/ObchodnePodmienky';
 import ProductDetail from './pages/ProductDetail';
 
+const CHATBOT_ID = 'b1637181-da22-4ae2-b79e-11c10b967b4f';
+
 function App() {
+  useEffect(() => {
+    const loadChatbot = () => {
+      if (document.querySelector('script[data-chatbot-id]')) return;
+      const script = document.createElement('script');
+      script.src = 'https://www.mdntech.org/widget.js';
+      script.setAttribute('data-chatbot-id', CHATBOT_ID);
+      script.async = true;
+      document.body.appendChild(script);
+    };
+
+    if ('requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(loadChatbot, { timeout: 3000 });
+      return () => window.cancelIdleCallback?.(id);
+    }
+    const t = setTimeout(loadChatbot, 1500);
+    return () => clearTimeout(t);
+  }, []);
+
   return (
     <HelmetProvider>
       <CartProvider>
@@ -51,6 +74,7 @@ function App() {
                 <Route path="/kosik" element={<Kosik />} />
                 <Route path="/partneri" element={<Partneri />} />
                 <Route path="/gdpr" element={<GDPR />} />
+                <Route path="/cookies" element={<Cookies />} />
                 <Route path="/obchodne-podmienky" element={<ObchodnePodmienky />} />
                 {/* Product Detail Pages - Dynamic Route */}
                 <Route path="/:productId" element={<ProductDetail />} />
@@ -58,6 +82,7 @@ function App() {
           </main>
           <Footer />
           <MobileNav />
+          <CookieBanner />
         </div>
       </div>
       </Router>

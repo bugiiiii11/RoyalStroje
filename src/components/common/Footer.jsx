@@ -164,6 +164,11 @@ export default function Footer() {
                   GDPR
                 </Link>
               </li>
+              <li>
+                <Link to="/cookies" className="text-white/70 hover:text-orange-primary transition">
+                  Cookies
+                </Link>
+              </li>
             </ul>
           </div>
 
