@@ -17,6 +17,8 @@
 | 12 | 2026-04-21 | Partners Page Redesign + WebP Optimization | Minimal grid design (Option 1), 8 partners (M&M Wood, Terra, Wacker, Makita + rest), PNG→WebP conversion (58% savings), logo visibility fix |
 | 13 | 2026-04-22 | Equipment Delete Error Handling | Fixed delete button UX: loading state, better error messages, FK constraint handling |
 | 14 | 2026-04-22 | JCB 19C-I Blog Article + Catalog Bug Fix | New blog article for JCB 19C-I mini-rýpadlo, PNG→WebP (-86%), fixed #katalog hash scroll + Supabase-only search reveal bug |
+| 15 | 2026-04-30 | Real Photos + Ad-hoc Items + Gallery + Editable Days | Real shop photos in Sluzby/Kontakt/FAQ headers, hero overlays removed, popup retired, MK partner #9, 2-vehicle delivery pricing, ad-hoc reservation items (mig 018), Kontakt photo gallery + lightbox, "Dopyt"→"V prenájme", editable decimal days on returns, diacritic-insensitive name+description search, DB wipe + sequence reset |
+| 16 | 2026-05-04 | Dashboard custom domain + favicon | Migrated dashboard to `app.royalstroje.sk` via Active24 CNAME + Vercel domain transfer; added shared favicon.png to dashboard project |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -160,16 +162,45 @@ Date: 2026-04-22
 5. **#katalog hash scroll fix** -- React Router doesn't handle anchor scrolling natively, and `#katalog` element mounts after hydration so native browser scroll-to-anchor missed it. Added useEffect with `useLocation` that scrolls on hash change AND when products array length changes (re-trigger after Supabase load). Files: `src/components/home/Catalog.jsx`. Committed: `37e8bdf`.
 6. **Search reveal animation fix** -- URL search like `?search=JCB+19C` showed empty results for Supabase-only products (e.g. JCB 19C-I). Root cause: `useProducts()` initial state is `staticProducts` (157 products from `products.js`, missing JCB 19C-I which is dashboard-only). After Supabase fetch, products mounted into grid but `reveal` className kept them at `opacity: 0` until `useInView` IntersectionObserver triggered — and since `#katalog` wasn't scrolling, grid stayed below fold and observer never fired. Makita TW001GM201 worked because it's in static products and rendered immediately. Fix: force `in-view` className when `searchQuery` is active. Files: `src/components/home/Catalog.jsx`. Committed: `37e8bdf`.
 
+## What Was Done (Session 15) -- Real Photos + Ad-hoc Items + Gallery + Editable Days
+Date: 2026-04-30
+
+### Website
+1. **MK Stavebná činnosť as 9th partner** -- JPG→WebP conversion (-28%), Facebook profile link with tracking params stripped. Files: `src/pages/Partneri.jsx`, `public/pictures/graphics/partneri/logo_mk_stavebna_cinnost.{jpg,webp}`. Committed: `d01940f`.
+2. **Real shop photos in headers** -- Sluzby hero now uses `predajna-1.webp`, Kontakt hero uses `stroje-dvor.webp`, FAQ sidebar uses `predajna-4.webp`. JPGs from `royal obrazky/` folder converted with adaptive quality (q=80 → 72 fallback if WebP > JPG). Files: `src/pages/Sluzby.jsx`, `src/pages/Kontakt.jsx`, `src/components/home/FAQ.jsx`, `public/pictures/graphics/predajna-{1,4}.webp`, `public/pictures/graphics/stroje-dvor.webp`. Committed: `8392351`.
+3. **Hero darkening overlays removed** -- two `linear-gradient(rgba(0,0,0,...))` overlays deleted from desktop Hero so the background photo shows in true colors. Text remains readable via the existing `backdrop-blur-sm bg-black/40` container. Files: `src/components/home/Hero.jsx`. Committed: `540f830`.
+4. **"Testovacia prevádzka" popup removed + catalog image disclaimer** -- entire 50-line slide-in promo banner deleted from Header (state, useEffect, X icon import). Added subtle italic line above the catalog grid noting product images are illustrative, with `Info` icon in orange/60. Files: `src/components/common/Header.jsx`, `src/components/home/Catalog.jsx`. Committed: `8ff41f6`.
+5. **FAQ delivery pricing for two vehicle types** -- replaced single Senec/BA/Ostatne block with Dodávka (Senec 10€, ostatné 1€/km min 10€) and Pick-up + prívesný vozík do 3500 kg (1,2€/km min 10€). Files: `src/components/home/FAQ.jsx`. Committed: `25d67c7`.
+6. **Photo gallery on Kontakt page** -- masonry grid via CSS columns (1→2→3 by breakpoint) with 5 photos below the map: predajna-1, predajna-2, stroje-jcb-rameno (portrait), predajna-3, predajna-4. Lightbox modal: fullscreen overlay, prev/next buttons, keyboard arrows + Escape, click-outside closes, body scroll lock. Mixed aspect ratios flow without cropping. Files: `src/pages/Kontakt.jsx`, `public/pictures/graphics/predajna-{2,3}.webp`, `public/pictures/graphics/stroje-jcb-rameno.webp`. Committed: `435f57c`.
+
+### Dashboard + DB
+7. **Ad-hoc reservation items (not in catalog)** -- migration 018 makes `reservation_items.equipment_id` nullable and adds `custom_name TEXT` + `custom_rate_unit TEXT` with `CHECK (equipment_id IS NOT NULL OR custom_name IS NOT NULL)`. NewDealStepItems has a "+ Pridať vlastný stroj" button opening an inline form (názov, výrobné číslo, druh sadzby, cena bez DPH). Custom items are forced to qty=1, render a "Vlastný" badge, and flow through PDFs (FO+PO), DealItemsTable, ReturnItemsModal, and Reports with `it.custom_name` / `it.custom_rate_unit` fallback. Files: `supabase/migrations/018_adhoc_reservation_items.sql`, `apps/dashboard/src/pages/deals/{NewDealStepItems,NewDealStepReview,NewDeal,DealItemsTable,ReturnItemsModal}.jsx`, `apps/dashboard/src/lib/{generateAgreementPdf,generateAgreementPdfPO}.js`, `apps/dashboard/src/pages/reports/Reports.jsx`. Migration applied manually in Supabase. Committed: `bf791fb`.
+8. **"Dopyt" → "V prenájme" status label** -- internal status code (`inquiry`) unchanged; only the displayed label in `RESERVATION_STATUSES` flipped, so it propagates through pipeline columns + status badges everywhere. Files: `apps/dashboard/src/lib/constants.js`. Committed: `eccfc38`.
+9. **Editable decimal rental days on partial return** -- ReturnItemsModal replaces the read-only "Vypočítaný prenájom" info banner with an editable text input that accepts both `,` and `.` separators (e.g. `3,5`). Auto-calculated days from pickup/return datetimes still pre-fill the input but can be overridden; `effectiveDays` drives the suggested final price and is what's persisted to `contracts.calculated_days` (NUMERIC(10,2) so decimals work). Files: `apps/dashboard/src/pages/deals/ReturnItemsModal.jsx`. Committed: `eccfc38`.
+10. **Diacritic-insensitive name+description search in dashboard catalog** -- `useEquipment` now branches on whether a search term is active. With search: fetches up to 500 candidate rows and filters client-side using NFD normalisation against `name` AND `description` (matches website's `Catalog.jsx` logic). Without search: server-side pagination as before. So "kalove" finds "Kálové ponorné čerpadlo". Files: `apps/dashboard/src/hooks/useEquipment.js`. Committed: `e9721de`.
+11. **Database wipe + sequence reset** -- user manually ran SQL in Supabase: `DELETE FROM invoices/contracts/reservations` (cascades clean reservation_items + contract_returned_items), then `ALTER SEQUENCE reservation_number_seq / invoice_*_seq RESTART WITH 1`. Next deal starts at `RS-2026-0001`, next contract at `ZN-2026-0001` (contract numbers are app-generated via MAX query, no PG sequence to reset). Clients and equipment kept intact.
+
+### Hidden Content
+12. **JCB 19C-I blog article hidden** -- added id 19 to the blog filter list in `src/pages/Blog.jsx`. User also cleared `blog_article_slug` on the JCB equipment row in Supabase so the product card no longer links to it. To be re-published after technical-spec corrections. (Commit was made by user directly: `3e280bb`.)
+
+## What Was Done (Session 16) -- Dashboard custom domain + favicon
+Date: 2026-05-04
+
+### Infrastructure
+1. **Dashboard moved to `app.royalstroje.sk`** -- DNS provider Active24: added `CNAME app → 643b2c6b1e12e326.vercel-dns-017.com` (new Vercel IP-range endpoint, replaces legacy `cname.vercel-dns.com`). Initial mistake: subdomain was first added to the public-website Vercel project (`royal-stroje`), so `app.royalstroje.sk` served the marketing site. Fix: removed it from `royal-stroje` project's Settings → Domains, then added it to the `royal-stroje-dashboard` project. SSL auto-provisioned by Vercel. Old `royal-stroje-dashboard.vercel.app` URL still works in parallel (no redirect set).
+2. **Shared favicon on dashboard** -- `apps/dashboard/index.html` was linking to non-existent `/favicon.svg`. Copied `public/favicon.png` (Royal Stroje crown logo, 5.7 KB) to `apps/dashboard/public/favicon.png` and updated the link tag to `type="image/png" href="/favicon.png"`. Files: `apps/dashboard/index.html`, `apps/dashboard/public/favicon.png`. Committed: `7f01156`.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
 | 1 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
-| 2 | Verify subcategory data integrity | After Supabase migration some products had wrong subcategory_id (Custers bug). Run audit query across all products. |
-| 3 | Product images | Upload product photos via dashboard image upload feature |
-| 4 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
-| 5 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
-| 6 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
-| 7 | Online payment | Stripe/GoPay integration (post-MVP) |
+| 2 | Re-publish JCB 19C-I article | Update technical specs in `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`, then remove `19` from the filter in `src/pages/Blog.jsx:247` and re-set `blog_article_slug` on the JCB product in Supabase |
+| 3 | Verify subcategory data integrity | After Supabase migration some products had wrong subcategory_id (Custers bug). Run audit query across all products. |
+| 4 | Product images | Upload product photos via dashboard image upload feature |
+| 5 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 6 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
+| 7 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
+| 8 | Online payment | Stripe/GoPay integration (post-MVP) |
 
 ## Key Files
 | File | Purpose |
@@ -199,6 +230,9 @@ Date: 2026-04-22
 | `supabase/migrations/013_usage_location.sql` | Adds usage_location TEXT column to reservations for "Miesto používania PP" |
 | `supabase/migrations/014_serial_numbers.sql` | Adds serial_numbers JSONB to equipment + reservation_items |
 | `supabase/migrations/015_reservation_contact_person.sql` | Adds contact_person TEXT to reservations |
+| `supabase/migrations/018_adhoc_reservation_items.sql` | Makes equipment_id nullable on reservation_items, adds custom_name + custom_rate_unit columns with CHECK constraint |
+| `apps/dashboard/src/hooks/useEquipment.js` | Equipment list hook with diacritic-insensitive name+description search (client-side filter when search active) |
+| `src/pages/Kontakt.jsx` | Contact page with hero, contact cards, opening hours, map, photo gallery + lightbox below the map |
 | `apps/dashboard/src/lib/pdfFonts.js` | Inter font loading for jsPDF with Identity-H encoding for Slovak diacritics |
 | `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx` | JCB 19C-I blog article (linked from product card via blog_article_slug) |
 | `src/data/blogArticles.jsx` | Blog metadata + lazy loader for all article modules |
