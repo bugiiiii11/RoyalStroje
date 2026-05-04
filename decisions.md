@@ -1,5 +1,10 @@
 # RoyalStroje -- Decision Log
 
+### 2026-05-04 -- Session 17
+**Decision:** Cookie banner is info-only (single "Rozumiem" + close, no consent categories) for now -- to be expanded into a full Accept/Reject/Customize flow with Google Consent Mode v2 once GA4 is added.
+**Why:** Site currently sets only strictly-necessary cookies (`_GRECAPTCHA` for bot protection + MDN chatbot which doesn't store user identifiers) and a few `localStorage` keys for cart/rate-limit/consent. Under SK ÚOOÚ guidance, strictly-necessary cookies don't require granular consent -- only transparent disclosure. Building a full consent UI and 12-month re-prompt logic before any analytics/marketing tooling exists would be over-engineering and would also lose ~30-50 % of analytics data prematurely.
+**Alternatives:** (B) Build the full 3-category banner + Consent Mode v2 now and wire GA4 later -- more work upfront, harder to test correctly with no real analytics tag to gate. (C) Skip the banner entirely (legally defensible since only strictly-necessary cookies are set) -- but visible disclosure is the SK norm and the GDPR page already promises one. Option A is the smallest correct step that covers compliance now and leaves a clean upgrade path.
+
 ### 2026-05-04 -- Session 16
 **Decision:** Dashboard moved to dedicated `app.royalstroje.sk` subdomain (kept `royal-stroje-dashboard.vercel.app` working in parallel, no redirect).
 **Why:** Branded URL is what staff will share verbally and is easier to remember; matches the convention `web → royalstroje.sk`, `dashboard → app.royalstroje.sk`. Keeping the vercel.app URL alive avoids breaking any existing bookmarks or email links during transition.

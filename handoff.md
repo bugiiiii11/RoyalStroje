@@ -19,6 +19,7 @@
 | 14 | 2026-04-22 | JCB 19C-I Blog Article + Catalog Bug Fix | New blog article for JCB 19C-I mini-rýpadlo, PNG→WebP (-86%), fixed #katalog hash scroll + Supabase-only search reveal bug |
 | 15 | 2026-04-30 | Real Photos + Ad-hoc Items + Gallery + Editable Days | Real shop photos in Sluzby/Kontakt/FAQ headers, hero overlays removed, popup retired, MK partner #9, 2-vehicle delivery pricing, ad-hoc reservation items (mig 018), Kontakt photo gallery + lightbox, "Dopyt"→"V prenájme", editable decimal days on returns, diacritic-insensitive name+description search, DB wipe + sequence reset |
 | 16 | 2026-05-04 | Dashboard custom domain + favicon | Migrated dashboard to `app.royalstroje.sk` via Active24 CNAME + Vercel domain transfer; added shared favicon.png to dashboard project |
+| 17 | 2026-05-04 | Cookie banner + /cookies page + chatbot lazy-load | Info-only cookie banner (no analytics yet), new /cookies page with mobile card layout, footer link, MDN chatbot moved out of index.html to requestIdleCallback |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -190,17 +191,30 @@ Date: 2026-05-04
 1. **Dashboard moved to `app.royalstroje.sk`** -- DNS provider Active24: added `CNAME app → 643b2c6b1e12e326.vercel-dns-017.com` (new Vercel IP-range endpoint, replaces legacy `cname.vercel-dns.com`). Initial mistake: subdomain was first added to the public-website Vercel project (`royal-stroje`), so `app.royalstroje.sk` served the marketing site. Fix: removed it from `royal-stroje` project's Settings → Domains, then added it to the `royal-stroje-dashboard` project. SSL auto-provisioned by Vercel. Old `royal-stroje-dashboard.vercel.app` URL still works in parallel (no redirect set).
 2. **Shared favicon on dashboard** -- `apps/dashboard/index.html` was linking to non-existent `/favicon.svg`. Copied `public/favicon.png` (Royal Stroje crown logo, 5.7 KB) to `apps/dashboard/public/favicon.png` and updated the link tag to `type="image/png" href="/favicon.png"`. Files: `apps/dashboard/index.html`, `apps/dashboard/public/favicon.png`. Committed: `7f01156`.
 
+## What Was Done (Session 17) -- Cookie banner + /cookies page + chatbot lazy-load
+Date: 2026-05-04
+
+### Public website
+1. **Cookie banner (info-only, no analytics yet)** -- thin full-width slide-up bar at the bottom, 800 ms delay after page load, "Rozumiem" + close, dismissal stored in `localStorage.royalstroje_cookie_consent`. Positioned `bottom-20 md:bottom-0 z-[60]` to sit above MobileNav on mobile. Files: `src/components/common/CookieBanner.jsx`. Committed: `927b3ca`.
+2. **/cookies page** -- new route with intro ("we use no analytics/marketing"), list of all cookies + localStorage entries (`_GRECAPTCHA`, `royalstroje_cart`, `formSubmissions`, `royalstroje_cookie_consent`, MDN chatbot). Desktop = table, mobile = card-per-cookie layout with `Typ / Účel / Doba / Poskytovateľ` rows. "Znova zobraziť oznámenie" button clears consent key + redirects to `/`. Files: `src/pages/Cookies.jsx`, route added in `src/App.jsx`. Committed: `927b3ca`.
+3. **Footer link** -- "Cookies" added to "Stránky" column under GDPR. Files: `src/components/common/Footer.jsx`. Committed: `927b3ca`.
+4. **Chatbot lazy-load** -- MDN Tech widget script removed from `index.html` and now injected via `useEffect` in `App.jsx` using `requestIdleCallback` (3 s timeout) with `setTimeout(1500)` fallback. First paint no longer blocked by external chatbot script. Files: `index.html`, `src/App.jsx`. Committed: `927b3ca`.
+
+### Decision
+- **Cesta b) info-only banner** chosen over full consent flow — site currently uses no analytics or marketing cookies (only `_GRECAPTCHA` strictly necessary + MDN chatbot which doesn't store user identifiers). When GA4 is added in a future session, the banner + /cookies page will be expanded into a proper Accept/Reject/Customize flow with Consent Mode v2.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
 | 1 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
-| 2 | Re-publish JCB 19C-I article | Update technical specs in `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`, then remove `19` from the filter in `src/pages/Blog.jsx:247` and re-set `blog_article_slug` on the JCB product in Supabase |
-| 3 | Verify subcategory data integrity | After Supabase migration some products had wrong subcategory_id (Custers bug). Run audit query across all products. |
-| 4 | Product images | Upload product photos via dashboard image upload feature |
-| 5 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
-| 6 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
-| 7 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
-| 8 | Online payment | Stripe/GoPay integration (post-MVP) |
+| 2 | GA4 + expand cookie banner to full consent flow | When GA4 added: convert info-only banner into 3-category banner (Necessary/Analytics/Marketing), wire Google Consent Mode v2, gate GA4 + chatbot loading on consent, extend `/cookies` table with analytics rows |
+| 3 | Re-publish JCB 19C-I article | Update technical specs in `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`, then remove `19` from the filter in `src/pages/Blog.jsx:247` and re-set `blog_article_slug` on the JCB product in Supabase |
+| 4 | Verify subcategory data integrity | After Supabase migration some products had wrong subcategory_id (Custers bug). Run audit query across all products. |
+| 5 | Product images | Upload product photos via dashboard image upload feature |
+| 6 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 7 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
+| 8 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
+| 9 | Online payment | Stripe/GoPay integration (post-MVP) |
 
 ## Key Files
 | File | Purpose |
@@ -233,6 +247,8 @@ Date: 2026-05-04
 | `supabase/migrations/018_adhoc_reservation_items.sql` | Makes equipment_id nullable on reservation_items, adds custom_name + custom_rate_unit columns with CHECK constraint |
 | `apps/dashboard/src/hooks/useEquipment.js` | Equipment list hook with diacritic-insensitive name+description search (client-side filter when search active) |
 | `src/pages/Kontakt.jsx` | Contact page with hero, contact cards, opening hours, map, photo gallery + lightbox below the map |
+| `src/components/common/CookieBanner.jsx` | Info-only cookie notice (slide-up bar, 800ms delay, dismissal in localStorage `royalstroje_cookie_consent`) |
+| `src/pages/Cookies.jsx` | /cookies page: cookie/localStorage table (desktop) + card layout (mobile), "re-show notice" reset button |
 | `apps/dashboard/src/lib/pdfFonts.js` | Inter font loading for jsPDF with Identity-H encoding for Slovak diacritics |
 | `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx` | JCB 19C-I blog article (linked from product card via blog_article_slug) |
 | `src/data/blogArticles.jsx` | Blog metadata + lazy loader for all article modules |
