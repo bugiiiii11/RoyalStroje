@@ -7,7 +7,6 @@ import {
   Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, BookOpen, ArrowRight, Info
 } from 'lucide-react';
 import { categories } from '../../data/categories';
-import { accessories } from '../../data/accessories';
 import useProducts, { getProductsBySubcategory } from '../../hooks/useProducts';
 import ProductCard from '../product/ProductCard';
 import { useCart } from '../../context/CartContext';
@@ -616,18 +615,32 @@ export default function Catalog() {
                     <span className="text-orange-primary font-bold text-xs md:text-sm uppercase tracking-wider text-right">Cena bez DPH</span>
                     <span className="text-orange-primary font-bold text-xs md:text-sm uppercase tracking-wider text-right">Cena s DPH</span>
                   </div>
-                  {/* Table rows */}
-                  {accessories.map((item, index) => (
-                    <div
-                      key={index}
-                      className="grid grid-cols-4 px-4 md:px-6 py-3 md:py-4 items-center border-b border-white/5 last:border-b-0 hover:bg-white/5 transition-colors"
-                    >
-                      <span className="text-white font-medium text-sm md:text-base">{item.name}</span>
-                      <span className="text-white/60 text-sm md:text-base text-center">{item.parameter}</span>
-                      <span className="text-white/80 text-sm md:text-base text-right">{item.pricePerDay.toFixed(2)}€</span>
-                      <span className="text-orange-primary font-bold text-sm md:text-base text-right">{item.priceWithVat.toFixed(2)}€</span>
-                    </div>
-                  ))}
+                  {/* Table rows -- prices pulled live from Supabase via useProducts() */}
+                  {products
+                    .filter(p => p.category === 'male-naradie' && p.subcategory === 'prislusenstvo')
+                    .map((item) => {
+                      const dashIdx = item.name.indexOf(' - ');
+                      const productName = dashIdx > 0 ? item.name.slice(0, dashIdx) : item.name;
+                      const parameter = dashIdx > 0 ? item.name.slice(dashIdx + 3) : (item.features?.[0] || '');
+                      const priceBez = item.pricePerDay || 0;
+                      const priceSdph = Math.round(priceBez * 1.23 * 100) / 100;
+                      const isNeg = priceBez === 0;
+                      return (
+                        <div
+                          key={item.id}
+                          className="grid grid-cols-4 px-4 md:px-6 py-3 md:py-4 items-center border-b border-white/5 last:border-b-0 hover:bg-white/5 transition-colors"
+                        >
+                          <span className="text-white font-medium text-sm md:text-base">{productName}</span>
+                          <span className="text-white/60 text-sm md:text-base text-center">{parameter}</span>
+                          <span className="text-white/80 text-sm md:text-base text-right">
+                            {isNeg ? 'Na požiadanie' : `${priceBez.toFixed(2)}€`}
+                          </span>
+                          <span className="text-orange-primary font-bold text-sm md:text-base text-right">
+                            {isNeg ? '—' : `${priceSdph.toFixed(2)}€`}
+                          </span>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             ) : currentProducts.length > 0 ? (
