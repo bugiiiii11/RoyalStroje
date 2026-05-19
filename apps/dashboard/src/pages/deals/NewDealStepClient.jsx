@@ -172,6 +172,8 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
                   onChange={(e) => setNewClient(p => ({ ...p, company_name: e.target.value }))} className={inputClass} />
                 <input placeholder="Email firmy" type="email" value={newClient.email}
                   onChange={(e) => setNewClient(p => ({ ...p, email: e.target.value }))} className={inputClass} />
+                <input placeholder="Telefón firmy" value={newClient.phone}
+                  onChange={(e) => setNewClient(p => ({ ...p, phone: e.target.value }))} className={inputClass} />
                 <input placeholder="IČO" value={newClient.ico}
                   onChange={(e) => setNewClient(p => ({ ...p, ico: e.target.value }))} className={inputClass} />
                 <input placeholder="DIČ" value={newClient.dic}
