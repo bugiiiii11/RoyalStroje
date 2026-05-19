@@ -11,7 +11,7 @@ export const RESERVATION_STATUSES = {
   cancelled: { label: 'Zrušená', color: 'red' },
 };
 
-export const PIPELINE_STATUSES = ['inquiry', 'quoted', 'confirmed', 'active', 'completed', 'invoiced'];
+export const PIPELINE_STATUSES = ['inquiry', 'completed'];
 
 export const VALID_TRANSITIONS = {
   inquiry: ['quoted', 'cancelled'],

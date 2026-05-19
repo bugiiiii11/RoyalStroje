@@ -72,7 +72,11 @@ export default function Sidebar({ open, onClose }) {
         {/* Brand header with real logo */}
         <div className="px-5 pt-4 pb-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
+            <NavLink
+              to="/"
+              onClick={onClose}
+              className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
+            >
               <img src="/znak.webp" alt="Royal Stroje" className="w-9 h-9 object-contain" />
               <div>
                 <h1 className="text-[15px] font-bold text-gray-900 leading-tight tracking-tight">
@@ -82,7 +86,7 @@ export default function Sidebar({ open, onClose }) {
                   Dashboard
                 </p>
               </div>
-            </div>
+            </NavLink>
             <button
               onClick={onClose}
               className="lg:hidden p-1.5 hover:bg-gray-200/60 rounded-lg transition-colors"
