@@ -76,18 +76,20 @@ export default function Reports() {
       const yearStart = `${year}-01-01`;
 
       const [monthRes, yearRes, invoiceCountRes, paidCountRes, equipRes, activeEquipRes] = await Promise.all([
-        supabase.from('invoices').select('total').eq('status', 'paid').gte('paid_at', monthStart),
-        supabase.from('invoices').select('total').eq('status', 'paid').gte('paid_at', yearStart),
+        supabase.from('reservations').select('total, vat_amount').in('status', ['completed', 'invoiced', 'paid']).gte('created_at', monthStart),
+        supabase.from('reservations').select('total, vat_amount').in('status', ['completed', 'invoiced', 'paid']).gte('created_at', yearStart),
         supabase.from('invoices').select('id', { count: 'exact', head: true }),
         supabase.from('invoices').select('id', { count: 'exact', head: true }).eq('status', 'paid'),
         supabase.from('equipment').select('id', { count: 'exact', head: true }),
         supabase.from('equipment').select('id', { count: 'exact', head: true }).eq('status', 'active'),
       ]);
 
-      const monthRevenue = (monthRes.data || []).reduce((s, r) => s + parseFloat(r.total || 0), 0);
-      const yearRevenue = (yearRes.data || []).reduce((s, r) => s + parseFloat(r.total || 0), 0);
+      const netRevenue = (rows) =>
+        (rows || []).reduce((s, r) => s + ((parseFloat(r.total) || 0) - (parseFloat(r.vat_amount) || 0)), 0);
+      const monthRevenue = netRevenue(monthRes.data);
+      const yearRevenue = netRevenue(yearRes.data);
 
-      // Monthly revenue (last 6 months from reservations)
+      // Monthly revenue (last 6 months from reservations, bez DPH)
       const monthlyData = [];
       for (let i = 5; i >= 0; i--) {
         const d = new Date(year, now.getMonth() - i, 1);
@@ -95,13 +97,12 @@ export default function Reports() {
         const mEnd = new Date(d.getFullYear(), d.getMonth() + 1, 0).toISOString().split('T')[0];
         const { data: mData } = await supabase
           .from('reservations')
-          .select('total')
+          .select('total, vat_amount')
           .in('status', ['completed', 'invoiced', 'paid'])
           .gte('date_from', mStart)
           .lte('date_from', mEnd);
-        const total = (mData || []).reduce((s, r) => s + parseFloat(r.total || 0), 0);
         const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Máj', 'Jún', 'Júl', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
-        monthlyData.push({ label: monthNames[d.getMonth()], value: total });
+        monthlyData.push({ label: monthNames[d.getMonth()], value: netRevenue(mData) });
       }
 
       // Top equipment
@@ -155,14 +156,14 @@ export default function Reports() {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard icon={TrendingUp} label="Tržby tento mesiac (bez DPH)" value={formatPrice(stats.monthRevenue)} color="bg-green-500" />
-        <StatCard icon={BarChart3} label="Tento rok" value={formatPrice(stats.yearRevenue)} color="bg-blue-500" />
+        <StatCard icon={BarChart3} label="Tržby tento rok (bez DPH)" value={formatPrice(stats.yearRevenue)} color="bg-blue-500" />
         <StatCard icon={Package} label="Zariadenia" value={`${stats.activeEquipment}/${stats.totalEquipment}`} color="bg-purple-500" />
         <StatCard icon={Users} label="Faktúry (zaplatené)" value={`${stats.paidInvoices}/${stats.totalInvoices}`} color="bg-orange-500" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Revenue Chart */}
-        <ContentCard title="Obrat za posledných 6 mesiacov">
+        <ContentCard title="Obrat za posledných 6 mesiacov (bez DPH)">
           <BarChart data={stats.monthlyData} />
         </ContentCard>
 
