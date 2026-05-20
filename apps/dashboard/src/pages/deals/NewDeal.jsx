@@ -94,6 +94,8 @@ export default function NewDeal() {
             phone: c.phone || null,
             email: c.email || null,
             position: c.position || null,
+            birth_date: c.birth_date || null,
+            id_card_number: c.id_card_number || null,
             is_primary: idx === 0,
           })).filter(c => c.name.trim());
           if (contactsPayload.length > 0) {

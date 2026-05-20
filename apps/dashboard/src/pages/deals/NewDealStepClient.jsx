@@ -9,7 +9,7 @@ import { supabase } from '../../lib/supabase';
 
 const EMPTY_PO = { company_name: '', email: '', phone: '', ico: '', dic: '', ic_dph: '', address: '', city: '', postal_code: '' };
 const EMPTY_FO = { company_name: '', email: '', phone: '', address: '', city: '', postal_code: '', birth_date: '', id_card_number: '' };
-const EMPTY_CONTACT = { name: '', phone: '', email: '', position: '' };
+const EMPTY_CONTACT = { name: '', phone: '', email: '', position: '', birth_date: '', id_card_number: '' };
 
 export default function NewDealStepClient({ selected, onSelect, onSelectAndNext }) {
   const navigate = useNavigate();
@@ -101,6 +101,8 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
           phone: c.phone || null,
           email: c.email || null,
           position: c.position || null,
+          birth_date: c.birth_date || null,
+          id_card_number: c.id_card_number || null,
           is_primary: idx === 0,
         })).filter(c => c.name.trim());
         if (contactsPayload.length > 0) {
@@ -222,6 +224,10 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
                           onChange={(e) => updateContact(idx, 'phone', e.target.value)} className={inputClass} />
                         <input placeholder="Email" type="email" value={contact.email}
                           onChange={(e) => updateContact(idx, 'email', e.target.value)} className={`${inputClass} col-span-2`} />
+                        <input placeholder="Dátum narodenia" type="date" value={contact.birth_date}
+                          onChange={(e) => updateContact(idx, 'birth_date', e.target.value)} className={inputClass} />
+                        <input placeholder="Číslo OP" value={contact.id_card_number}
+                          onChange={(e) => updateContact(idx, 'id_card_number', e.target.value)} className={inputClass} />
                       </div>
                     </div>
                   ))}

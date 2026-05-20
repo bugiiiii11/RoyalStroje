@@ -19,7 +19,8 @@ export default function ClientDetail() {
   const [inviting, setInviting] = useState(false);
   const [inviteResult, setInviteResult] = useState(null);
   const [showAddContact, setShowAddContact] = useState(false);
-  const [newContact, setNewContact] = useState({ name: '', phone: '', email: '', position: '' });
+  const [newContact, setNewContact] = useState({ name: '', phone: '', email: '', position: '', birth_date: '', id_card_number: '' });
+  const [editingContact, setEditingContact] = useState(null);
   const [savingContact, setSavingContact] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -189,7 +190,59 @@ export default function ClientDetail() {
           {!isFO && (
             <ContentCard title={`Kontaktné osoby (${contactsList?.length || 0}/5)`}>
               <div className="space-y-3">
-                {(contactsList || []).map((c) => (
+                {(contactsList || []).map((c) => editingContact?.id === c.id ? (
+                  <div key={c.id} className="bg-blue-50 rounded-lg p-3 space-y-2">
+                    <input placeholder="Meno a priezvisko *" value={editingContact.name}
+                      onChange={(e) => setEditingContact(p => ({ ...p, name: e.target.value }))}
+                      className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    <input placeholder="Pozícia" value={editingContact.position || ''}
+                      onChange={(e) => setEditingContact(p => ({ ...p, position: e.target.value }))}
+                      className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    <input placeholder="Telefón" value={editingContact.phone || ''}
+                      onChange={(e) => setEditingContact(p => ({ ...p, phone: e.target.value }))}
+                      className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    <input placeholder="Email" type="email" value={editingContact.email || ''}
+                      onChange={(e) => setEditingContact(p => ({ ...p, email: e.target.value }))}
+                      className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    <div className="grid grid-cols-2 gap-2">
+                      <input placeholder="Dátum narodenia" type="date" value={editingContact.birth_date || ''}
+                        onChange={(e) => setEditingContact(p => ({ ...p, birth_date: e.target.value }))}
+                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                      <input placeholder="Číslo OP" value={editingContact.id_card_number || ''}
+                        onChange={(e) => setEditingContact(p => ({ ...p, id_card_number: e.target.value }))}
+                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={async () => {
+                          if (!editingContact.name.trim()) return;
+                          setSavingContact(true);
+                          try {
+                            await supabase.from('client_contacts').update({
+                              name: editingContact.name,
+                              phone: editingContact.phone || null,
+                              email: editingContact.email || null,
+                              position: editingContact.position || null,
+                              birth_date: editingContact.birth_date || null,
+                              id_card_number: editingContact.id_card_number || null,
+                            }).eq('id', editingContact.id);
+                            setEditingContact(null);
+                            refetchContacts();
+                          } catch (e) { alert(e.message); }
+                          finally { setSavingContact(false); }
+                        }}
+                        disabled={savingContact || !editingContact.name.trim()}
+                        className="flex-1 bg-royal-500 text-white text-xs font-semibold py-1.5 rounded-lg disabled:opacity-50"
+                      >
+                        {savingContact ? 'Ukladá...' : 'Uložiť'}
+                      </button>
+                      <button onClick={() => setEditingContact(null)}
+                        className="px-3 py-1.5 border border-gray-200 rounded-lg text-xs hover:bg-gray-50">
+                        Zrušiť
+                      </button>
+                    </div>
+                  </div>
+                ) : (
                   <div key={c.id} className="flex items-start justify-between gap-2 p-2 rounded-lg bg-gray-50">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5">
@@ -199,18 +252,38 @@ export default function ClientDetail() {
                       {c.position && <p className="text-xs text-gray-400">{c.position}</p>}
                       {c.phone && <p className="text-xs text-gray-600">{c.phone}</p>}
                       {c.email && <p className="text-xs text-gray-600 truncate">{c.email}</p>}
+                      {c.birth_date && (
+                        <p className="text-xs text-gray-500 flex items-center gap-1 mt-0.5">
+                          <Calendar className="w-3 h-3" />
+                          {new Date(c.birth_date).toLocaleDateString('sk-SK')}
+                        </p>
+                      )}
+                      {c.id_card_number && (
+                        <p className="text-xs text-gray-500 flex items-center gap-1">
+                          <CreditCard className="w-3 h-3" />
+                          {c.id_card_number}
+                        </p>
+                      )}
                     </div>
-                    {!c.is_primary && (
+                    <div className="flex items-center gap-0.5 flex-shrink-0">
                       <button
-                        onClick={async () => {
-                          await supabase.from('client_contacts').delete().eq('id', c.id);
-                          refetchContacts();
-                        }}
-                        className="p-1 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded flex-shrink-0"
+                        onClick={() => setEditingContact(c)}
+                        className="p-1 hover:bg-royal-50 text-gray-400 hover:text-royal-600 rounded"
                       >
-                        <Trash2 className="w-3.5 h-3.5" />
+                        <Pencil className="w-3.5 h-3.5" />
                       </button>
-                    )}
+                      {!c.is_primary && (
+                        <button
+                          onClick={async () => {
+                            await supabase.from('client_contacts').delete().eq('id', c.id);
+                            refetchContacts();
+                          }}
+                          className="p-1 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 ))}
 
@@ -237,6 +310,14 @@ export default function ClientDetail() {
                     <input placeholder="Email" type="email" value={newContact.email}
                       onChange={(e) => setNewContact(p => ({ ...p, email: e.target.value }))}
                       className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    <div className="grid grid-cols-2 gap-2">
+                      <input placeholder="Dátum narodenia" type="date" value={newContact.birth_date}
+                        onChange={(e) => setNewContact(p => ({ ...p, birth_date: e.target.value }))}
+                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                      <input placeholder="Číslo OP" value={newContact.id_card_number}
+                        onChange={(e) => setNewContact(p => ({ ...p, id_card_number: e.target.value }))}
+                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                    </div>
                     <div className="flex gap-2">
                       <button
                         onClick={async () => {
@@ -249,9 +330,11 @@ export default function ClientDetail() {
                               phone: newContact.phone || null,
                               email: newContact.email || null,
                               position: newContact.position || null,
+                              birth_date: newContact.birth_date || null,
+                              id_card_number: newContact.id_card_number || null,
                               is_primary: (contactsList?.length || 0) === 0,
                             });
-                            setNewContact({ name: '', phone: '', email: '', position: '' });
+                            setNewContact({ name: '', phone: '', email: '', position: '', birth_date: '', id_card_number: '' });
                             setShowAddContact(false);
                             refetchContacts();
                           } catch (e) { alert(e.message); }
