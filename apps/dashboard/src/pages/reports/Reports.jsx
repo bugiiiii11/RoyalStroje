@@ -154,7 +154,7 @@ export default function Reports() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <StatCard icon={TrendingUp} label="Tento mesiac" value={formatPrice(stats.monthRevenue)} color="bg-green-500" />
+        <StatCard icon={TrendingUp} label="Tržby tento mesiac (bez DPH)" value={formatPrice(stats.monthRevenue)} color="bg-green-500" />
         <StatCard icon={BarChart3} label="Tento rok" value={formatPrice(stats.yearRevenue)} color="bg-blue-500" />
         <StatCard icon={Package} label="Zariadenia" value={`${stats.activeEquipment}/${stats.totalEquipment}`} color="bg-purple-500" />
         <StatCard icon={Users} label="Faktúry (zaplatené)" value={`${stats.paidInvoices}/${stats.totalInvoices}`} color="bg-orange-500" />

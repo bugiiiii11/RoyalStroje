@@ -134,7 +134,7 @@ export default function Dashboard() {
         />
         <StatCard
           icon={BarChart3}
-          label="Tento mesiac"
+          label="Tržby tento mesiac (bez DPH)"
           value={statsLoading ? '…' : formatPrice(stats.monthRevenue)}
           color="bg-green-500"
         />

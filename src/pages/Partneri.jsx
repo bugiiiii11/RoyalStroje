@@ -63,6 +63,12 @@ export default function Partneri() {
       logo: '/pictures/graphics/partneri/logo_mk_stavebna_cinnost.webp',
       website: 'https://www.facebook.com/people/MK-Stavebn%C3%A1-%C4%8Cinnos%C5%A5/61579051122998/',
     },
+    {
+      id: 10,
+      name: 'UNICON',
+      logo: '/pictures/graphics/partneri/logo_unicon.webp',
+      website: 'https://www.unicon.cz/',
+    },
   ];
 
   return (
