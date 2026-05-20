@@ -6,7 +6,7 @@ import { formatPrice, formatDate, daysBetween, VAT_RATE, CLIENT_TYPES } from '..
 export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
   const [deliveryRequired, setDeliveryRequired] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState('');
-  const [deliveryFee, setDeliveryFee] = useState(0);
+  const deliveryFee = 0;
   const [usageLocation, setUsageLocation] = useState('');
   const [notes, setNotes] = useState('');
   const [depositAmount, setDepositAmount] = useState('');
@@ -142,22 +142,13 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
           Dovoz na miesto
         </label>
         {deliveryRequired && (
-          <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="mt-3">
             <input
               placeholder="Adresa dovozu"
               value={deliveryAddress}
               onChange={(e) => setDeliveryAddress(e.target.value)}
-              className="px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow"
             />
-            <div>
-              <input
-                type="number"
-                placeholder="Poplatok za dovoz"
-                value={deliveryFee || ''}
-                onChange={(e) => setDeliveryFee(e.target.value)}
-                className="px-3 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 input-glow w-full"
-              />
-            </div>
           </div>
         )}
       </div>

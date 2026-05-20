@@ -16,14 +16,17 @@ export default function useDashboardStats() {
 
       const [activeRes, revenueRes, clientsRes, todayRes, overdueRes, equipRes] = await Promise.all([
         supabase.from('reservations').select('id', { count: 'exact', head: true }).eq('status', 'active'),
-        supabase.from('reservations').select('total').in('status', ['completed', 'invoiced', 'paid']).gte('created_at', monthStart),
+        supabase.from('reservations').select('total, vat_amount').in('status', ['completed', 'invoiced', 'paid']).gte('created_at', monthStart),
         supabase.from('clients').select('id', { count: 'exact', head: true }),
         supabase.from('reservations').select('id', { count: 'exact', head: true }).or(`date_from.eq.${today},date_to.eq.${today}`),
         supabase.from('invoices').select('id', { count: 'exact', head: true }).in('status', ['draft', 'sent']).lt('due_date', today),
         supabase.from('equipment').select('id', { count: 'exact', head: true }).eq('status', 'active'),
       ]);
 
-      const revenue = (revenueRes.data || []).reduce((sum, r) => sum + (parseFloat(r.total) || 0), 0);
+      const revenue = (revenueRes.data || []).reduce(
+        (sum, r) => sum + ((parseFloat(r.total) || 0) - (parseFloat(r.vat_amount) || 0)),
+        0,
+      );
 
       setStats({
         activeRentals: activeRes.count || 0,
