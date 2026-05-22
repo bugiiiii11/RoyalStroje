@@ -84,7 +84,7 @@ export default function FAQ() {
             <div>
               <p className="font-bold text-white mb-1">Dodávka</p>
               <ul className="space-y-1 ml-4">
-                <li>• <strong className="text-white">Senec:</strong> 10 €</li>
+                <li>• <strong className="text-white">Senec:</strong> 15 €</li>
                 <li>• <strong className="text-white">Ostatné:</strong> 1 €/km (min. 10 €)</li>
               </ul>
             </div>
@@ -92,11 +92,11 @@ export default function FAQ() {
             <div>
               <p className="font-bold text-white mb-1">Pick-up + prívesný vozík (do 3 500 kg)</p>
               <ul className="space-y-1 ml-4">
-                <li>• <strong className="text-white">1,2 €/km</strong> (min. 10 €)</li>
+                <li>• <strong className="text-white">1,2 €/km</strong> (min. 15 €)</li>
               </ul>
             </div>
           </div>
-          <p className="text-sm text-white/70 mt-3">Cena dopravy závisí od typu a hmotnosti techniky. Pri objednávke vám oznámime presnú cenu.</p>
+          <p className="text-sm text-white/70 mt-3">Cena dopravy závisí od typu a hmotnosti techniky. Pri objednávke vám oznámime presnú cenu. Uvedené ceny sú bez DPH.</p>
         </div>
       )
     },
