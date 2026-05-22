@@ -1,5 +1,20 @@
 # RoyalStroje -- Decision Log
 
+### 2026-05-22 -- Session 18
+**Decision:** Replaced native `<input type="date">` with `<input type="text" placeholder="DD.MM.YYYY">` for the new contact `birth_date` field, parsed via `isoToDmy` / `dmyToISO` helpers in `constants.js`.
+**Why:** Native date inputs render with browser-locale-dependent placeholder formats ("11-Oct-yyyy" on English-locale browsers, "dd.mm.rrrr" on Slovak ones). Operator was confused by the inconsistent month-name display and wanted a numeric `DD.MM.YYYY` everywhere regardless of OS/browser. A controlled text input gives full format control and accepts `.`, `/`, `-`, space separators. Trade-off: lose the native date picker UI -- acceptable since the field is occasional and the format is short.
+**Alternatives:** (B) Force browser locale via `lang="sk-SK"` attribute -- inconsistently respected across browsers and doesn't solve the placeholder issue. (C) Build a custom date picker component -- overkill for a few sporadic inputs; can revisit if there's broader date-entry UX work later.
+
+### 2026-05-22 -- Session 18
+**Decision:** Reports page monthly/yearly revenue cards switched from `invoices` table (filtered by `status='paid'` + `paid_at`) to `reservations` table (filtered by `status IN ('completed','invoiced','paid')` + `created_at`), with VAT subtracted (`Σ(total - vat_amount)`).
+**Why:** The invoices-based query was returning 0 because the current workflow never marks invoices as `paid` -- deals go `inquiry → completed` and that's where the revenue lives. The Dashboard StatCard + Sidebar MiniStat were already using reservations and showing correct numbers; Reports was the outlier. Aligning all three eliminates the contradiction where the sidebar said 3 301 € and the Reports card said 0 €.
+**Alternatives:** (B) Fix the workflow to actually mark invoices as paid before they show up in Reports -- requires user behaviour change and doesn't help retrospectively. (C) Show both "invoiced revenue" and "completed revenue" as separate cards -- more UI complexity for a metric the operator currently treats as one number.
+
+### 2026-05-22 -- Session 18
+**Decision:** Active24 hosting paket `fabacv0r_1` kept active after deleting WordPress (files + DB), solely to retain the email service for `info@royalstroje.sk`.
+**Why:** Live website runs on Vercel (`royalstroje.sk` A record → 216.198.79.1), so the Active24 web stack was dead weight (378 MB old WordPress files + 23 MB DB filling the 1 GB quota). But MX records still route mail to `mx10/mx20.active24.cz`, which depends on the hosting paket being active. Deleting WordPress freed ~400 MB without breaking email continuity. Confirmed approach: delete via `webftp.royalstroje.sk` (Monsta file manager) + `dbadmin.royalstroje.sk` (PhpMyAdmin DROP database `QVceRP65aOtvb3zi`); never click "Odstrániť službu / Navždy smazat" on the domain attachment (would destroy mailboxes).
+**Alternatives:** (B) Migrate emails to Google Workspace (~6€/user) or Zoho and cancel Active24 -- cheaper long-term if only 1-2 mailboxes, but requires MX migration + mail import + onboarding. Logged as priority 3 in handoff for future evaluation. (C) Keep WordPress in place -- no benefit, just risk of stale plugins becoming a security liability.
+
 ### 2026-05-04 -- Session 17
 **Decision:** Cookie banner is info-only (single "Rozumiem" + close, no consent categories) for now -- to be expanded into a full Accept/Reject/Customize flow with Google Consent Mode v2 once GA4 is added.
 **Why:** Site currently sets only strictly-necessary cookies (`_GRECAPTCHA` for bot protection + MDN chatbot which doesn't store user identifiers) and a few `localStorage` keys for cart/rate-limit/consent. Under SK ÚOOÚ guidance, strictly-necessary cookies don't require granular consent -- only transparent disclosure. Building a full consent UI and 12-month re-prompt logic before any analytics/marketing tooling exists would be over-engineering and would also lose ~30-50 % of analytics data prematurely.

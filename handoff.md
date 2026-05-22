@@ -20,6 +20,7 @@
 | 15 | 2026-04-30 | Real Photos + Ad-hoc Items + Gallery + Editable Days | Real shop photos in Sluzby/Kontakt/FAQ headers, hero overlays removed, popup retired, MK partner #9, 2-vehicle delivery pricing, ad-hoc reservation items (mig 018), Kontakt photo gallery + lightbox, "Dopyt"→"V prenájme", editable decimal days on returns, diacritic-insensitive name+description search, DB wipe + sequence reset |
 | 16 | 2026-05-04 | Dashboard custom domain + favicon | Migrated dashboard to `app.royalstroje.sk` via Active24 CNAME + Vercel domain transfer; added shared favicon.png to dashboard project |
 | 17 | 2026-05-04 | Cookie banner + /cookies page + chatbot lazy-load | Info-only cookie banner (no analytics yet), new /cookies page with mobile card layout, footer link, MDN chatbot moved out of index.html to requestIdleCallback |
+| 18 | 2026-05-22 | Dashboard UX + PO contact birth/OP + contract restructure | Company phone for PO, sidebar logo→home, pipeline trimmed to 2 cols, monthly revenue bez DPH, Reports rewired to reservations, dashboard Vercel SPA rewrite, Unicon partner, Active24 cleanup, PO contact birth_date+OP (mig 019), DD.MM.YYYY format, PO PDF signature block restructured with OP/nar. cell |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -203,18 +204,46 @@ Date: 2026-05-04
 ### Decision
 - **Cesta b) info-only banner** chosen over full consent flow — site currently uses no analytics or marketing cookies (only `_GRECAPTCHA` strictly necessary + MDN chatbot which doesn't store user identifiers). When GA4 is added in a future session, the banner + /cookies page will be expanded into a proper Accept/Reject/Customize flow with Consent Mode v2.
 
+## What Was Done (Session 18) -- Dashboard UX + PO contact birth/OP + contract restructure
+Date: 2026-05-22
+
+### Dashboard UX
+1. **Company phone field for new PO client** -- "Telefón firmy" input added between Email firmy and IČO. State and save handler already supported phone, only UI was missing. Files: `apps/dashboard/src/pages/deals/NewDealStepClient.jsx`. Committed: `48942e6`.
+2. **Sidebar brand is now a home link** -- logo + "ROYAL STROJE" + "Dashboard" subtitle wrapped in `NavLink to="/"`. Files: `apps/dashboard/src/components/layout/Sidebar.jsx`. Committed: `0f5ad28`.
+3. **Pipeline trimmed to V prenájme + Ukončená** -- `PIPELINE_STATUSES` cut from 6 to 2 statuses. RESERVATION_STATUSES kept intact (used elsewhere). Files: `apps/dashboard/src/lib/constants.js`. Committed: `0f5ad28`.
+4. **Monthly revenue without VAT + delivery fee field removed** -- Dashboard StatCard + Sidebar MiniStat now compute `Σ(total - vat_amount)`. NewDealStepReview drops the "Poplatok za dovoz" input (state hardcoded to 0 to keep NewDeal insert intact). Files: `apps/dashboard/src/hooks/useDashboardStats.js`, `apps/dashboard/src/pages/deals/NewDealStepReview.jsx`. Committed: `f7058cc`.
+5. **"Tržby tento mesiac (bez DPH)" label** -- Dashboard + Reports StatCard relabeled. Files: `apps/dashboard/src/pages/Dashboard.jsx`, `apps/dashboard/src/pages/reports/Reports.jsx`. Committed: `ded315c`.
+6. **Reports page rewired** -- StatCards were pulling from `invoices.status=paid` (always 0 since no invoices marked paid) -- switched to `reservations` with `completed/invoiced/paid` and bez DPH. 6-month chart also bez DPH for consistency. Year card relabeled to "Tržby tento rok (bez DPH)", chart title "(bez DPH)". Files: `apps/dashboard/src/pages/reports/Reports.jsx`. Committed: `dd3927c`.
+7. **Dashboard Vercel SPA rewrite** -- Hitting refresh on `/reports`, `/clients`, etc. returned Vercel 404 because dashboard had no `vercel.json`. Added rewrite of `/(.*)` → `/index.html`. Files: `apps/dashboard/vercel.json` (new). Committed: `8df1de0`.
+
+### Public website
+8. **Unicon as 10th partner** -- Added to partners array with `https://www.unicon.cz/`. PNG→WebP conversion: `logo_unicon.png` 13.1 KB → `logo_unicon.webp` 2.1 KB (-84%) via Pillow q=85 method=6. Files: `src/pages/Partneri.jsx`, `public/pictures/graphics/partneri/logo_unicon.{png,webp}`. Committed: `ded315c`.
+
+### Active24 hosting cleanup (non-code)
+9. **WordPress removed from hosting** -- old WordPress install from previous site version was eating 378 MB files + 23 MB DB on Active24 `fabacv0r_1` plan (royalstroje.sk web is on Vercel, but emails go through Active24 mail server). User manually deleted via webftp.royalstroje.sk (file manager at `/royalstroje.sk/web/`) + dbadmin.royalstroje.sk (PhpMyAdmin) DROP database `QVceRP65aOtvb3zi`. Hosting paket kept active for email continuity. Verified by DNS check: A record `royalstroje.sk → 216.198.79.1` (Vercel), MX `→ mx10/mx20.active24.cz`. Active24 *Využitie hostingu* refresh is ~24 h.
+
+### Dashboard + DB -- PO contact personal fields
+10. **Migration 019: birth_date + id_card_number on client_contacts** -- new columns for lessee identification. Applied in Supabase. Files: `supabase/migrations/019_client_contacts_personal.sql`. Committed: `2b2fa15`.
+11. **PO contact form -- add + edit** -- NewDealStepClient PO contact card got 2 new inputs. ClientDetail's inline "Pridať kontakt" form extended. New **Pencil edit icon** on each contact card opens inline edit form (including primary contact, which previously couldn't be edited). Contact card displays birth date with Calendar icon and OP with CreditCard icon. Files: `apps/dashboard/src/pages/deals/NewDealStepClient.jsx`, `apps/dashboard/src/pages/deals/NewDeal.jsx`, `apps/dashboard/src/pages/clients/ClientDetail.jsx`. Committed: `2b2fa15`.
+12. **DD.MM.YYYY text input** -- native `type="date"` showed browser-locale-dependent month names (e.g. "11-Oct-yyyy" placeholder in English-locale browsers). Replaced with `type="text"` + explicit "Dátum narodenia" label + placeholder "DD.MM.YYYY". New helpers `isoToDmy()` + `dmyToISO()` in `constants.js` parse on save / format on load. Accepts `.`, `/`, `-`, space separators. Files: `apps/dashboard/src/lib/constants.js`, `apps/dashboard/src/pages/deals/{NewDealStepClient,NewDeal}.jsx`, `apps/dashboard/src/pages/clients/ClientDetail.jsx`. Committed: `e2ad048`.
+
+### PO PDF contract -- signature block restructure
+13. **OVERENIE OPRÁVNENIA A PODPISY layout** -- moved "Za prenajímateľa / Za nájomcu" headers above the date row. Split the previously full-width "V Boldog – Senec dňa..." into two columns: place+date on left, "OP/nar.: AB123456, 11.10.1990" on right. Signature rows (Podpis prenajímateľa / nájomcu) unchanged. OP+birth populated by fetching from `client_contacts` matching `client.id + reservation.contact_person` (exact name match). New `fmtBirthDate()` helper for DD.MM.YYYY in PDF. Files: `apps/dashboard/src/lib/generateAgreementPdfPO.js`. Committed: `d579f36`.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
 | 1 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
-| 2 | GA4 + expand cookie banner to full consent flow | When GA4 added: convert info-only banner into 3-category banner (Necessary/Analytics/Marketing), wire Google Consent Mode v2, gate GA4 + chatbot loading on consent, extend `/cookies` table with analytics rows |
-| 3 | Re-publish JCB 19C-I article | Update technical specs in `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`, then remove `19` from the filter in `src/pages/Blog.jsx:247` and re-set `blog_article_slug` on the JCB product in Supabase |
-| 4 | Verify subcategory data integrity | After Supabase migration some products had wrong subcategory_id (Custers bug). Run audit query across all products. |
-| 5 | Product images | Upload product photos via dashboard image upload feature |
-| 6 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
-| 7 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
-| 8 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
-| 9 | Online payment | Stripe/GoPay integration (post-MVP) |
+| 2 | Backfill OP + birth dates on existing PO contacts | Migration 019 added columns; existing contacts have NULL. Owner needs to fill via ClientDetail Pencil edit before generating new contracts to get OP/nar. line populated |
+| 3 | Consider Workspace migration for emails | Active24 hosting paket (~10€/mo) is kept active solely for email. If only 1-2 mailboxes, Google Workspace (~6€/user) or Zoho could be cheaper. Requires MX migration. |
+| 4 | GA4 + expand cookie banner to full consent flow | When GA4 added: convert info-only banner into 3-category (Necessary/Analytics/Marketing), wire Consent Mode v2, gate GA4 + chatbot loading on consent, extend `/cookies` table |
+| 5 | Re-publish JCB 19C-I article | Update specs in `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`, remove `19` from filter in `src/pages/Blog.jsx:247`, re-set `blog_article_slug` in Supabase |
+| 6 | Verify subcategory data integrity | After Supabase migration some products had wrong subcategory_id (Custers bug). Run audit query across all products. |
+| 7 | Product images | Upload product photos via dashboard image upload feature |
+| 8 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 9 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
+| 10 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
+| 11 | Online payment | Stripe/GoPay integration (post-MVP) |
 
 ## Key Files
 | File | Purpose |
@@ -245,6 +274,9 @@ Date: 2026-05-04
 | `supabase/migrations/014_serial_numbers.sql` | Adds serial_numbers JSONB to equipment + reservation_items |
 | `supabase/migrations/015_reservation_contact_person.sql` | Adds contact_person TEXT to reservations |
 | `supabase/migrations/018_adhoc_reservation_items.sql` | Makes equipment_id nullable on reservation_items, adds custom_name + custom_rate_unit columns with CHECK constraint |
+| `supabase/migrations/019_client_contacts_personal.sql` | Adds birth_date + id_card_number columns to client_contacts for lessee identification on PO contracts |
+| `apps/dashboard/src/lib/constants.js` | Adds `isoToDmy()` / `dmyToISO()` helpers + `PIPELINE_STATUSES` trimmed to `['inquiry', 'completed']` |
+| `apps/dashboard/vercel.json` | SPA rewrite for dashboard app (refresh on /reports etc.); separate from root vercel.json |
 | `apps/dashboard/src/hooks/useEquipment.js` | Equipment list hook with diacritic-insensitive name+description search (client-side filter when search active) |
 | `src/pages/Kontakt.jsx` | Contact page with hero, contact cards, opening hours, map, photo gallery + lightbox below the map |
 | `src/components/common/CookieBanner.jsx` | Info-only cookie notice (slide-up bar, 800ms delay, dismissal in localStorage `royalstroje_cookie_consent`) |

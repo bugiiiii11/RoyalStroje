@@ -25,3 +25,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Source photos archive (originals kept locally, converted WebPs in /pictures/graphics/)
+/public/pictures/graphics/royal obrazky/
