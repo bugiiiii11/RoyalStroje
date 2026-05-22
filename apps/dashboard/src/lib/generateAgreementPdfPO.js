@@ -1,6 +1,7 @@
 import autoTable from 'jspdf-autotable';
 import { COMPANY } from './companyInfo';
 import { createPdfDoc, FONT_NAME } from './pdfFonts';
+import { supabase } from './supabase';
 
 function fmtPrice(val) {
   if (val == null || isNaN(val)) return '0,00 €';
@@ -9,6 +10,11 @@ function fmtPrice(val) {
 function fmtDate(d) {
   if (!d) return '';
   return new Date(d).toLocaleDateString('sk-SK');
+}
+function fmtBirthDate(iso) {
+  if (!iso) return '';
+  const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return m ? `${m[3]}.${m[2]}.${m[1]}` : '';
 }
 
 const ORANGE = [232, 114, 10];
@@ -189,15 +195,31 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   const sigY = y;
   const todayStr = new Date().toLocaleDateString('sk-SK');
 
+  // Fetch contact's OP + birth date by matching contact_person name on this client
+  let contactExtra = null;
+  if (client?.id && reservation?.contact_person) {
+    const { data } = await supabase
+      .from('client_contacts')
+      .select('birth_date, id_card_number')
+      .eq('client_id', client.id)
+      .eq('name', reservation.contact_person)
+      .maybeSingle();
+    contactExtra = data;
+  }
+  const opBirthParts = [];
+  if (contactExtra?.id_card_number) opBirthParts.push(contactExtra.id_card_number);
+  if (contactExtra?.birth_date) opBirthParts.push(fmtBirthDate(contactExtra.birth_date));
+  const opBirthStr = opBirthParts.length > 0 ? `OP/nar.: ${opBirthParts.join(', ')}` : '';
+
   // LEFT: Overenie + signatures
   autoTable(doc, {
     startY: sigY,
     head: [[{ content: 'OVERENIE OPRÁVNENIA A PODPISY', colSpan: 2, styles: hdr(f) }]],
     body: [
       [{ content: 'Osoba podpisujúca Zmluvu v mene Nájomcu prehlasuje, že je na to riadne oprávnená (štatutárny orgán alebo splnomocnená osoba)', colSpan: 2, styles: { ...s, fontSize: 6, fillColor: [250, 250, 250], minCellHeight: 8 } }],
-      [{ content: `V Boldog \u2013 Senec d\u0148a ${todayStr}`, colSpan: 2, styles: { ...s, fontSize: 6.5 } }],
       [{ content: 'Za prenaj\u00EDmate\u013Ea:', styles: { ...s, fontStyle: 'bold' } }, { content: 'Za n\u00E1jomcu:', styles: { ...s, fontStyle: 'bold' } }],
       [{ content: `Meno: ${repName}`, styles: s }, { content: `Meno: ${lesseeName}`, styles: s }],
+      [{ content: `V Boldog \u2013 Senec d\u0148a ${todayStr}`, styles: { ...s, fontSize: 6.5 } }, { content: opBirthStr, styles: { ...s, fontSize: 6.5 } }],
       [{ content: 'Podpis prenaj\u00EDmate\u013Ea:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
       [{ content: 'Podpis n\u00E1jomcu:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
     ],
