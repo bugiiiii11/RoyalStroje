@@ -85,7 +85,7 @@ export default function FAQ() {
               <p className="font-bold text-white mb-1">Dodávka</p>
               <ul className="space-y-1 ml-4">
                 <li>• <strong className="text-white">Senec:</strong> 15 €</li>
-                <li>• <strong className="text-white">Ostatné:</strong> 1 €/km (min. 10 €)</li>
+                <li>• <strong className="text-white">Ostatné:</strong> 1 €/km (min. 15 €)</li>
               </ul>
             </div>
 
