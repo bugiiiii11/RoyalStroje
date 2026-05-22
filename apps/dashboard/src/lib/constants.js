@@ -63,6 +63,19 @@ export function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('sk-SK');
 }
 
+export function isoToDmy(iso) {
+  if (!iso) return '';
+  const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return m ? `${m[3]}.${m[2]}.${m[1]}` : '';
+}
+
+export function dmyToISO(dmy) {
+  if (!dmy || !String(dmy).trim()) return null;
+  const m = String(dmy).trim().match(/^(\d{1,2})[.\s/-](\d{1,2})[.\s/-](\d{4})$/);
+  if (!m) return null;
+  return `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`;
+}
+
 export const SITE_URL = 'https://royalstroje.sk';
 
 export function imageUrl(path) {

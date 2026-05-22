@@ -4,7 +4,7 @@ import { UserPlus, Check, Building2, User, Plus, Trash2 } from 'lucide-react';
 import SearchInput from '../../components/ui/SearchInput';
 import useClients from '../../hooks/useClients';
 import Badge from '../../components/ui/Badge';
-import { CLIENT_TYPES } from '../../lib/constants';
+import { CLIENT_TYPES, dmyToISO } from '../../lib/constants';
 import { supabase } from '../../lib/supabase';
 
 const EMPTY_PO = { company_name: '', email: '', phone: '', ico: '', dic: '', ic_dph: '', address: '', city: '', postal_code: '' };
@@ -101,7 +101,7 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
           phone: c.phone || null,
           email: c.email || null,
           position: c.position || null,
-          birth_date: c.birth_date || null,
+          birth_date: dmyToISO(c.birth_date),
           id_card_number: c.id_card_number || null,
           is_primary: idx === 0,
         })).filter(c => c.name.trim());
@@ -224,10 +224,16 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
                           onChange={(e) => updateContact(idx, 'phone', e.target.value)} className={inputClass} />
                         <input placeholder="Email" type="email" value={contact.email}
                           onChange={(e) => updateContact(idx, 'email', e.target.value)} className={`${inputClass} col-span-2`} />
-                        <input placeholder="Dátum narodenia" type="date" value={contact.birth_date}
-                          onChange={(e) => updateContact(idx, 'birth_date', e.target.value)} className={inputClass} />
-                        <input placeholder="Číslo OP" value={contact.id_card_number}
-                          onChange={(e) => updateContact(idx, 'id_card_number', e.target.value)} className={inputClass} />
+                        <div className="col-span-1">
+                          <label className="block text-[10px] uppercase tracking-wider font-medium text-gray-500 mb-1">Dátum narodenia</label>
+                          <input placeholder="DD.MM.YYYY" inputMode="numeric" value={contact.birth_date}
+                            onChange={(e) => updateContact(idx, 'birth_date', e.target.value)} className={`${inputClass} w-full`} />
+                        </div>
+                        <div className="col-span-1">
+                          <label className="block text-[10px] uppercase tracking-wider font-medium text-gray-500 mb-1">Číslo OP</label>
+                          <input placeholder="napr. AB123456" value={contact.id_card_number}
+                            onChange={(e) => updateContact(idx, 'id_card_number', e.target.value)} className={`${inputClass} w-full`} />
+                        </div>
                       </div>
                     </div>
                   ))}

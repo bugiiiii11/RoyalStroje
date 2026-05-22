@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
 import { generateNextNavrhNumber } from '../../lib/contractNumbers';
+import { dmyToISO } from '../../lib/constants';
 import NewDealStepClient from './NewDealStepClient';
 import NewDealStepItems from './NewDealStepItems';
 import NewDealStepReview from './NewDealStepReview';
@@ -94,7 +95,7 @@ export default function NewDeal() {
             phone: c.phone || null,
             email: c.email || null,
             position: c.position || null,
-            birth_date: c.birth_date || null,
+            birth_date: dmyToISO(c.birth_date),
             id_card_number: c.id_card_number || null,
             is_primary: idx === 0,
           })).filter(c => c.name.trim());

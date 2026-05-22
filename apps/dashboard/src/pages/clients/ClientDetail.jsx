@@ -9,7 +9,7 @@ import StatusBadge from '../../components/ui/StatusBadge';
 import Badge from '../../components/ui/Badge';
 import Spinner from '../../components/ui/Spinner';
 import EmptyState from '../../components/ui/EmptyState';
-import { formatPrice, formatDate, CLIENT_TYPES } from '../../lib/constants';
+import { formatPrice, formatDate, CLIENT_TYPES, isoToDmy, dmyToISO } from '../../lib/constants';
 import ClientEditForm from './ClientEditForm';
 
 export default function ClientDetail() {
@@ -205,12 +205,18 @@ export default function ClientDetail() {
                       onChange={(e) => setEditingContact(p => ({ ...p, email: e.target.value }))}
                       className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
                     <div className="grid grid-cols-2 gap-2">
-                      <input placeholder="Dátum narodenia" type="date" value={editingContact.birth_date || ''}
-                        onChange={(e) => setEditingContact(p => ({ ...p, birth_date: e.target.value }))}
-                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
-                      <input placeholder="Číslo OP" value={editingContact.id_card_number || ''}
-                        onChange={(e) => setEditingContact(p => ({ ...p, id_card_number: e.target.value }))}
-                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                      <div>
+                        <label className="block text-[10px] uppercase tracking-wider font-medium text-gray-500 mb-1">Dátum narodenia</label>
+                        <input placeholder="DD.MM.YYYY" inputMode="numeric" value={editingContact.birth_date || ''}
+                          onChange={(e) => setEditingContact(p => ({ ...p, birth_date: e.target.value }))}
+                          className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] uppercase tracking-wider font-medium text-gray-500 mb-1">Číslo OP</label>
+                        <input placeholder="napr. AB123456" value={editingContact.id_card_number || ''}
+                          onChange={(e) => setEditingContact(p => ({ ...p, id_card_number: e.target.value }))}
+                          className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                      </div>
                     </div>
                     <div className="flex gap-2">
                       <button
@@ -223,7 +229,7 @@ export default function ClientDetail() {
                               phone: editingContact.phone || null,
                               email: editingContact.email || null,
                               position: editingContact.position || null,
-                              birth_date: editingContact.birth_date || null,
+                              birth_date: dmyToISO(editingContact.birth_date),
                               id_card_number: editingContact.id_card_number || null,
                             }).eq('id', editingContact.id);
                             setEditingContact(null);
@@ -267,7 +273,7 @@ export default function ClientDetail() {
                     </div>
                     <div className="flex items-center gap-0.5 flex-shrink-0">
                       <button
-                        onClick={() => setEditingContact(c)}
+                        onClick={() => setEditingContact({ ...c, birth_date: isoToDmy(c.birth_date) })}
                         className="p-1 hover:bg-royal-50 text-gray-400 hover:text-royal-600 rounded"
                       >
                         <Pencil className="w-3.5 h-3.5" />
@@ -311,12 +317,18 @@ export default function ClientDetail() {
                       onChange={(e) => setNewContact(p => ({ ...p, email: e.target.value }))}
                       className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
                     <div className="grid grid-cols-2 gap-2">
-                      <input placeholder="Dátum narodenia" type="date" value={newContact.birth_date}
-                        onChange={(e) => setNewContact(p => ({ ...p, birth_date: e.target.value }))}
-                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
-                      <input placeholder="Číslo OP" value={newContact.id_card_number}
-                        onChange={(e) => setNewContact(p => ({ ...p, id_card_number: e.target.value }))}
-                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                      <div>
+                        <label className="block text-[10px] uppercase tracking-wider font-medium text-gray-500 mb-1">Dátum narodenia</label>
+                        <input placeholder="DD.MM.YYYY" inputMode="numeric" value={newContact.birth_date}
+                          onChange={(e) => setNewContact(p => ({ ...p, birth_date: e.target.value }))}
+                          className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] uppercase tracking-wider font-medium text-gray-500 mb-1">Číslo OP</label>
+                        <input placeholder="napr. AB123456" value={newContact.id_card_number}
+                          onChange={(e) => setNewContact(p => ({ ...p, id_card_number: e.target.value }))}
+                          className="w-full px-3 py-1.5 border border-gray-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500" />
+                      </div>
                     </div>
                     <div className="flex gap-2">
                       <button
@@ -330,7 +342,7 @@ export default function ClientDetail() {
                               phone: newContact.phone || null,
                               email: newContact.email || null,
                               position: newContact.position || null,
-                              birth_date: newContact.birth_date || null,
+                              birth_date: dmyToISO(newContact.birth_date),
                               id_card_number: newContact.id_card_number || null,
                               is_primary: (contactsList?.length || 0) === 0,
                             });
