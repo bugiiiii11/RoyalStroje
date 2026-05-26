@@ -20,15 +20,26 @@ export function parseContractNumber(num) {
 /** Generate a fresh YYXXXX number for a brand-new návrh. */
 export async function generateNextNavrhNumber() {
   const yy = String(new Date().getFullYear()).slice(-2);
+  const year = `20${yy}`;
+  // Fetch both new format (YYXXXX) and legacy format (ZN/ZF-YYYY-XXXX)
   const { data } = await supabase
     .from('contracts')
     .select('contract_number')
-    .like('contract_number', `${yy}%`);
+    .or(`contract_number.like.${yy}%,contract_number.like.ZN-${year}-%,contract_number.like.ZF-${year}-%`);
   let maxSeq = 0;
   for (const row of data || []) {
-    const p = parseContractNumber(row.contract_number);
-    if (p && p.yy === yy) {
-      const n = parseInt(p.seq, 10);
+    const num = String(row.contract_number);
+    // New format: YYXXXX or YYXXXX-N
+    const newFmt = num.match(/^(\d{2})(\d{4})(?:-\d+)?$/);
+    if (newFmt && newFmt[1] === yy) {
+      const n = parseInt(newFmt[2], 10);
+      if (n > maxSeq) maxSeq = n;
+      continue;
+    }
+    // Legacy format: ZN-YYYY-XXXX or ZF-YYYY-XXXX
+    const oldFmt = num.match(/^Z[NF]-(\d{4})-(\d{4})(?:-\d+)?$/);
+    if (oldFmt && oldFmt[1] === year) {
+      const n = parseInt(oldFmt[2], 10);
       if (n > maxSeq) maxSeq = n;
     }
   }

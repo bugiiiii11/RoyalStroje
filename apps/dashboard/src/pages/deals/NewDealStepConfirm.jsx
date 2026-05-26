@@ -8,8 +8,8 @@ export default function NewDealStepConfirm({ reservation }) {
     <div className="flex flex-col items-center justify-center py-8">
       <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
       <h2 className="text-2xl font-bold text-gray-900 mb-2">Obchod vytvorený!</h2>
-      <p className="text-gray-500 mb-1">Číslo obchodu</p>
-      <p className="text-3xl font-mono font-bold text-royal-600 mb-8">{reservation?.reservation_number}</p>
+      <p className="text-gray-500 mb-1">Číslo zmluvy</p>
+      <p className="text-3xl font-mono font-bold text-royal-600 mb-8">{reservation?.contract_number || reservation?.reservation_number}</p>
 
       <div className="flex gap-3">
         <button

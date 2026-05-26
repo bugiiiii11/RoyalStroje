@@ -176,7 +176,7 @@ export default function NewDeal() {
         .eq('id', reservation.id)
         .single();
 
-      setResult(updated || reservation);
+      setResult({ ...(updated || reservation), contract_number: contractNumber });
       setStep(3);
     } catch (e) {
       setError(e.message || 'Chyba pri vytváraní obchodu');
