@@ -21,6 +21,7 @@
 | 16 | 2026-05-04 | Dashboard custom domain + favicon | Migrated dashboard to `app.royalstroje.sk` via Active24 CNAME + Vercel domain transfer; added shared favicon.png to dashboard project |
 | 17 | 2026-05-04 | Cookie banner + /cookies page + chatbot lazy-load | Info-only cookie banner (no analytics yet), new /cookies page with mobile card layout, footer link, MDN chatbot moved out of index.html to requestIdleCallback |
 | 18 | 2026-05-22 | Dashboard UX + PO contact birth/OP + contract restructure | Company phone for PO, sidebar logo→home, pipeline trimmed to 2 cols, monthly revenue bez DPH, Reports rewired to reservations, dashboard Vercel SPA rewrite, Unicon partner, Active24 cleanup, PO contact birth_date+OP (mig 019), DD.MM.YYYY format, PO PDF signature block restructured with OP/nar. cell |
+| 19 | 2026-05-26 | Contract number format YYXXXX + PDF filename overhaul | New contract number format 260147 (YY+XXXX), PDF filename "{number} {client} - ukončené", migration 020 drops unique constraint for partial returns, confirm screen shows contract number |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -230,6 +231,17 @@ Date: 2026-05-22
 ### PO PDF contract -- signature block restructure
 13. **OVERENIE OPRÁVNENIA A PODPISY layout** -- moved "Za prenajímateľa / Za nájomcu" headers above the date row. Split the previously full-width "V Boldog – Senec dňa..." into two columns: place+date on left, "OP/nar.: AB123456, 11.10.1990" on right. Signature rows (Podpis prenajímateľa / nájomcu) unchanged. OP+birth populated by fetching from `client_contacts` matching `client.id + reservation.contact_person` (exact name match). New `fmtBirthDate()` helper for DD.MM.YYYY in PDF. Files: `apps/dashboard/src/lib/generateAgreementPdfPO.js`. Committed: `d579f36`.
 
+## What Was Done (Session 19) -- Contract Number Format YYXXXX + PDF Filename Overhaul
+Date: 2026-05-26
+
+### Contract Number Format
+1. **New format YYXXXX** -- Replaced `ZN/ZF-YYYY-XXXX` with `YYXXXX` (e.g. `260147`). YY = 2-digit year, XXXX = 4-digit sequence. Návrh and finálna share the same number. Sequence floor set to 146 so numbering starts at 0147 matching manually renamed PC files. `generateNextNavrhNumber()` scans both new and legacy format contracts to find true max. Files: `apps/dashboard/src/lib/contractNumbers.js`. Committed: `3fac6e1`, `c899714`, `cab37a8`, `a0d625a`.
+2. **PDF filename updated** -- Old: `zmluva-PO-navrh-RS-2026-0083.pdf`. New: `260147 LC-Construct.pdf` (návrh) / `260147 LC-Construct - ukončené.pdf` (finálna). No PO/FO prefix. Files: `apps/dashboard/src/lib/generateAgreementPdf.js`, `apps/dashboard/src/lib/generateAgreementPdfPO.js`. Committed: `3fac6e1`.
+3. **"Zmluva č." field in PDF** -- Now reads from `contractData.contract_number` (e.g. `260147`) instead of `reservation.reservation_number`. Both FO and PO PDFs updated. Committed: `3fac6e1`.
+4. **Confirm screen** -- "Číslo obchodu" relabeled to "Číslo zmluvy", shows contract number (`260147`) instead of reservation number (`RS-2026-0085`). Files: `apps/dashboard/src/pages/deals/NewDealStepConfirm.jsx`, `apps/dashboard/src/pages/deals/NewDeal.jsx`. Committed: `c899714`.
+5. **Partial returns share same number** -- All finalizácie of a deal (full + partial returns) use the same base number with no `-N` suffix. Committed: `a0d625a`.
+6. **Migration 020: drop unique constraint** -- `contracts_contract_number_key` unique constraint dropped so multiple contract rows can share the same number (required for partial returns). File: `supabase/migrations/020_contracts_drop_unique_number.sql`. Applied in Supabase. Committed: `e3c90c0`.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
@@ -275,6 +287,9 @@ Date: 2026-05-22
 | `supabase/migrations/015_reservation_contact_person.sql` | Adds contact_person TEXT to reservations |
 | `supabase/migrations/018_adhoc_reservation_items.sql` | Makes equipment_id nullable on reservation_items, adds custom_name + custom_rate_unit columns with CHECK constraint |
 | `supabase/migrations/019_client_contacts_personal.sql` | Adds birth_date + id_card_number columns to client_contacts for lessee identification on PO contracts |
+| `supabase/migrations/020_contracts_drop_unique_number.sql` | Drops unique constraint on contracts.contract_number so partial returns can share the same number |
+| `apps/dashboard/src/lib/contractNumbers.js` | Contract number generation: YYXXXX format, legacy ZN/ZF scan, floor at 146, no -N suffix for partials |
+| `apps/dashboard/src/pages/deals/NewDealStepConfirm.jsx` | Post-deal confirm screen -- shows contract number (260147) instead of reservation number |
 | `apps/dashboard/src/lib/constants.js` | Adds `isoToDmy()` / `dmyToISO()` helpers + `PIPELINE_STATUSES` trimmed to `['inquiry', 'completed']` |
 | `apps/dashboard/vercel.json` | SPA rewrite for dashboard app (refresh on /reports etc.); separate from root vercel.json |
 | `apps/dashboard/src/hooks/useEquipment.js` | Equipment list hook with diacritic-insensitive name+description search (client-side filter when search active) |
