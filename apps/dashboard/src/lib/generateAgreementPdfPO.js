@@ -80,7 +80,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
       [{ content: 'IČ DPH:', styles: L }, COMPANY.ic_dph, { content: 'IČ DPH:', styles: L }, client?.ic_dph || ''],
       [{ content: 'Zastúpený:', styles: L }, COMPANY.represented, { content: 'Zastúpený:', styles: L }, reservation.contact_person || client?.contact_person || ''],
       [{ content: 'Tel / Email:', styles: L }, `${COMPANY.phone} / ${COMPANY.email}`, { content: 'Tel / Email:', styles: L }, [client?.phone, client?.email].filter(Boolean).join(' / ')],
-      [{ content: 'Zmluva č. / Obj. č.:', styles: L }, reservation.reservation_number || '', { content: 'Email (fakturačný):', styles: L }, client?.billing_email || client?.email || ''],
+      [{ content: 'Zmluva č. / Obj. č.:', styles: L }, contractData?.contract_number || reservation.reservation_number || '', { content: 'Email (fakturačný):', styles: L }, client?.billing_email || client?.email || ''],
     ],
     styles: base(f),
     columnStyles: { 0: { cellWidth: H * 0.34 }, 1: { cellWidth: H * 0.66 }, 2: { cellWidth: H * 0.34 }, 3: { cellWidth: H * 0.66 } },
@@ -254,7 +254,9 @@ export default async function generateAgreementPdfPO(reservation, items, client,
     const prefix = invoiceData.type === 'proforma' ? 'proforma' : invoiceData.type === 'credit_note' ? 'dobropis' : 'faktura';
     doc.save(`${prefix}-${invoiceData.invoice_number}.pdf`);
   } else {
-    const typeTag = isFinalna ? 'finalna' : 'navrh';
-    doc.save(`zmluva-PO-${typeTag}-${reservation.reservation_number}.pdf`);
+    const contractNum = contractData?.contract_number || reservation.reservation_number;
+    const clientName = client?.company_name || '';
+    const suffix = isFinalna ? ' - ukončené' : '';
+    doc.save(`${contractNum} ${clientName}${suffix}.pdf`);
   }
 }

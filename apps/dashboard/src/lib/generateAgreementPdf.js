@@ -67,14 +67,14 @@ export default async function generateAgreementPdf(reservation, items, client, c
     [{ content: 'I\u010CO / DI\u010C / I\u010C DPH:', styles: L }, `${COMPANY.ico} / ${COMPANY.dic} / ${COMPANY.ic_dph}`, { content: 'D\u00E1tum narodenia:', styles: L }, client?.birth_date ? fmtDate(client.birth_date) : ''],
     [{ content: 'Zast\u00FApen\u00FD:', styles: L }, COMPANY.represented, { content: '\u010C\u00EDslo OP / pasu:', styles: L }, client?.id_card_number || ''],
     [{ content: 'Tel. / E-mail:', styles: L }, `${COMPANY.phone} / ${COMPANY.email}`, { content: 'Telef\u00F3n / E-mail:', styles: L }, ct],
-    [{ content: 'Zmluva \u010D.:', styles: L }, reservation.reservation_number || '', { content: 'Faktura\u010Dn\u00FD e-mail:', styles: L }, client?.email || ''],
+    [{ content: 'Zmluva \u010D.:', styles: L }, contractData?.contract_number || reservation.reservation_number || '', { content: 'Faktura\u010Dn\u00FD e-mail:', styles: L }, client?.email || ''],
   ] : [
     [{ content: 'Obchodn\u00E9 meno:', styles: L }, COMPANY.name, { content: 'Obchodn\u00E9 meno:', styles: L }, client?.company_name || ''],
     [{ content: 'S\u00EDdlo:', styles: L }, `${COMPANY.address}, ${COMPANY.city}`, { content: 'S\u00EDdlo:', styles: L }, addr],
     [{ content: 'I\u010CO / DI\u010C / I\u010C DPH:', styles: L }, `${COMPANY.ico} / ${COMPANY.dic} / ${COMPANY.ic_dph}`, { content: 'I\u010CO / DI\u010C / I\u010C DPH:', styles: L }, ids],
     [{ content: 'Zast\u00FApen\u00FD:', styles: L }, COMPANY.represented, { content: 'Kontakt:', styles: L }, reservation.contact_person || client?.contact_person || ''],
     [{ content: 'Tel. / E-mail:', styles: L }, `${COMPANY.phone} / ${COMPANY.email}`, { content: 'Tel. / E-mail:', styles: L }, ct],
-    [{ content: 'Zmluva \u010D.:', styles: L }, reservation.reservation_number || '', { content: 'Faktura\u010Dn\u00FD e-mail:', styles: L }, client?.email || ''],
+    [{ content: 'Zmluva \u010D.:', styles: L }, contractData?.contract_number || reservation.reservation_number || '', { content: 'Faktura\u010Dn\u00FD e-mail:', styles: L }, client?.email || ''],
   ];
 
   autoTable(doc, {
@@ -224,7 +224,9 @@ export default async function generateAgreementPdf(reservation, items, client, c
     const prefix = invoiceData.type === 'proforma' ? 'proforma' : invoiceData.type === 'credit_note' ? 'dobropis' : 'faktura';
     doc.save(`${prefix}-${invoiceData.invoice_number}.pdf`);
   } else {
-    const typeTag = isFinalna ? 'finalna' : 'navrh';
-    doc.save(`zmluva-${isFO ? 'FO' : 'PO'}-${typeTag}-${reservation.reservation_number}.pdf`);
+    const contractNum = contractData?.contract_number || reservation.reservation_number;
+    const clientName = client?.company_name || '';
+    const suffix = isFinalna ? ' - ukončené' : '';
+    doc.save(`${contractNum} ${clientName}${suffix}.pdf`);
   }
 }

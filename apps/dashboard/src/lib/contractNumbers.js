@@ -1,42 +1,39 @@
 import { supabase } from './supabase';
 
-// Contract number formats:
-//   ZN-YYYY-XXXX        návrh (draft)
-//   ZF-YYYY-XXXX        first finálna (renamed from návrh)
-//   ZF-YYYY-XXXX-N      subsequent finálne (partial returns), N starts at 2
+// Contract number format: YYXXXX
+//   YY   = 2-digit year (26 for 2026, 27 for 2027, …)
+//   XXXX = 4-digit zero-padded sequence, shared by návrh and finálna
+//   YYXXXX-N  subsequent finálne (partial returns), N starts at 2
 
-const SEQ_PATTERN = /^Z[NF]-(\d{4})-(\d{4})(?:-(\d+))?$/;
-
-/** Parse a contract number into { prefix, year, seq, suffix }. */
+/** Parse a contract number into { yy, seq, suffix }. */
 export function parseContractNumber(num) {
   if (!num) return null;
-  const m = num.match(/^(Z[NF])-(\d{4})-(\d{4})(?:-(\d+))?$/);
+  const m = String(num).match(/^(\d{2})(\d{4})(?:-(\d+))?$/);
   if (!m) return null;
   return {
-    prefix: m[1],            // 'ZN' | 'ZF'
-    year: m[2],
-    seq: m[3],               // 4-digit zero-padded
-    suffix: m[4] ? parseInt(m[4], 10) : null,
+    yy: m[1],
+    seq: m[2],               // 4-digit zero-padded
+    suffix: m[3] ? parseInt(m[3], 10) : null,
   };
 }
 
-/** Generate a fresh ZN-YYYY-XXXX number for a brand-new návrh. */
+/** Generate a fresh YYXXXX number for a brand-new návrh. */
 export async function generateNextNavrhNumber() {
-  const year = String(new Date().getFullYear());
+  const yy = String(new Date().getFullYear()).slice(-2);
   const { data } = await supabase
     .from('contracts')
     .select('contract_number')
-    .or(`contract_number.like.ZN-${year}-%,contract_number.like.ZF-${year}-%`);
+    .like('contract_number', `${yy}%`);
   let maxSeq = 0;
   for (const row of data || []) {
     const p = parseContractNumber(row.contract_number);
-    if (p && p.year === year) {
+    if (p && p.yy === yy) {
       const n = parseInt(p.seq, 10);
       if (n > maxSeq) maxSeq = n;
     }
   }
   const nextSeq = String(maxSeq + 1).padStart(4, '0');
-  return `ZN-${year}-${nextSeq}`;
+  return `${yy}${nextSeq}`;
 }
 
 /**
@@ -52,23 +49,21 @@ export async function prepareFinalizationContract({ reservationId, reservationDa
   const finals = (contracts || []).filter((c) => c.type === 'finalna');
 
   if (finals.length === 0 && navrh) {
-    // First finalization: rename ZN to ZF (keep same contract row)
-    const newNumber = navrh.contract_number.replace(/^ZN-/, 'ZF-');
-    return { mode: 'reuse', contractId: navrh.id, contractNumber: newNumber };
+    // First finalization: keep same number (no rename needed in new format)
+    return { mode: 'reuse', contractId: navrh.id, contractNumber: navrh.contract_number };
   }
 
-  // Subsequent finalization: figure base ZF number and add -N suffix
+  // Subsequent finalization: base number + -N suffix
   let baseNumber;
   if (finals.length > 0) {
     const firstFinal = finals[0];
     const p = parseContractNumber(firstFinal.contract_number);
-    baseNumber = p ? `ZF-${p.year}-${p.seq}` : firstFinal.contract_number.replace(/-\d+$/, '');
+    baseNumber = p ? `${p.yy}${p.seq}` : firstFinal.contract_number.replace(/-\d+$/, '');
   } else if (navrh) {
-    baseNumber = navrh.contract_number.replace(/^ZN-/, 'ZF-');
+    baseNumber = navrh.contract_number;
   } else {
-    // No návrh, no finálne — generate new ZF number from scratch
-    const fresh = await generateNextNavrhNumber();
-    baseNumber = fresh.replace(/^ZN-/, 'ZF-');
+    // No návrh, no finálne — generate new number from scratch
+    baseNumber = await generateNextNavrhNumber();
   }
 
   // Find next available -N suffix by counting existing finals
