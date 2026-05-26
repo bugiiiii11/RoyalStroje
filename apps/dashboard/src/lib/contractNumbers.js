@@ -26,7 +26,7 @@ export async function generateNextNavrhNumber() {
     .from('contracts')
     .select('contract_number')
     .or(`contract_number.like.${yy}%,contract_number.like.ZN-${year}-%,contract_number.like.ZF-${year}-%`);
-  let maxSeq = 0;
+  let maxSeq = 146; // contracts 1–146 were manually renamed on PC; start DB sequence from 147
   for (const row of data || []) {
     const num = String(row.contract_number);
     // New format: YYXXXX or YYXXXX-N
