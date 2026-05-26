@@ -64,29 +64,17 @@ export async function prepareFinalizationContract({ reservationId, reservationDa
     return { mode: 'reuse', contractId: navrh.id, contractNumber: navrh.contract_number };
   }
 
-  // Subsequent finalization: base number + -N suffix
-  let baseNumber;
+  // Subsequent finalization: keep same number as first finalization (no suffix)
+  let contractNumber;
   if (finals.length > 0) {
     const firstFinal = finals[0];
     const p = parseContractNumber(firstFinal.contract_number);
-    baseNumber = p ? `${p.yy}${p.seq}` : firstFinal.contract_number.replace(/-\d+$/, '');
+    contractNumber = p ? `${p.yy}${p.seq}` : firstFinal.contract_number.replace(/-\d+$/, '');
   } else if (navrh) {
-    baseNumber = navrh.contract_number;
+    contractNumber = navrh.contract_number;
   } else {
-    // No návrh, no finálne — generate new number from scratch
-    baseNumber = await generateNextNavrhNumber();
+    contractNumber = await generateNextNavrhNumber();
   }
-
-  // Find next available -N suffix by counting existing finals
-  // (or by inspecting their suffixes if numbering is sparse)
-  const usedSuffixes = new Set(
-    finals.map((c) => parseContractNumber(c.contract_number)?.suffix).filter((s) => s != null)
-  );
-  // First final has no suffix; second uses -2, third -3, etc.
-  let nextSuffix = 2;
-  while (usedSuffixes.has(nextSuffix)) nextSuffix += 1;
-
-  const contractNumber = `${baseNumber}-${nextSuffix}`;
 
   const { data: created, error } = await supabase
     .from('contracts')
