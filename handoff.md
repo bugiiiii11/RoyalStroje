@@ -22,6 +22,7 @@
 | 17 | 2026-05-04 | Cookie banner + /cookies page + chatbot lazy-load | Info-only cookie banner (no analytics yet), new /cookies page with mobile card layout, footer link, MDN chatbot moved out of index.html to requestIdleCallback |
 | 18 | 2026-05-22 | Dashboard UX + PO contact birth/OP + contract restructure | Company phone for PO, sidebar logo→home, pipeline trimmed to 2 cols, monthly revenue bez DPH, Reports rewired to reservations, dashboard Vercel SPA rewrite, Unicon partner, Active24 cleanup, PO contact birth_date+OP (mig 019), DD.MM.YYYY format, PO PDF signature block restructured with OP/nar. cell |
 | 19 | 2026-05-26 | Contract number format YYXXXX + PDF filename overhaul | New contract number format 260147 (YY+XXXX), PDF filename "{number} {client} - ukončené", migration 020 drops unique constraint for partial returns, confirm screen shows contract number |
+| 20 | 2026-05-29 | Dashboard cleanup + daysBetween fix | Fixed `daysBetween` off-by-one (29.5.→30.5. = 1 day, not 2), capped Ukončená pipeline at 5 cards with link to Faktúry, fixed `activeRentals` query (`active` → `inquiry`), renamed "Dnes" → "Dnešné udalosti" |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -242,6 +243,18 @@ Date: 2026-05-26
 5. **Partial returns share same number** -- All finalizácie of a deal (full + partial returns) use the same base number with no `-N` suffix. Committed: `a0d625a`.
 6. **Migration 020: drop unique constraint** -- `contracts_contract_number_key` unique constraint dropped so multiple contract rows can share the same number (required for partial returns). File: `supabase/migrations/020_contracts_drop_unique_number.sql`. Applied in Supabase. Committed: `e3c90c0`.
 
+## What Was Done (Session 20) -- Dashboard cleanup + daysBetween fix
+Date: 2026-05-29
+
+### Rental day calculation
+1. **Fix `daysBetween` off-by-one** -- Calendar-day diff was `Math.ceil(diff / 86400000) + 1`, so 29.5. → 30.5. counted as 2 days instead of 1. Removed the `+1`. Used in NewDealStepItems and NewDealStepReview for date-range price estimate. `rentalDays.js` (hour-based, used at finalization) was already correct and untouched. Files: `apps/dashboard/src/lib/constants.js`. Committed: `53081b2`.
+
+### Dashboard pipeline + stats
+2. **Fix `activeRentals` StatCard = 0 bug** -- `useDashboardStats` was querying `status = 'active'`, but new deals carry `status = 'inquiry'` (PIPELINE_STATUSES was trimmed to inquiry+completed in session 18). Switched to `'inquiry'`. Fix propagates to Sidebar MiniStat automatically. Files: `apps/dashboard/src/hooks/useDashboardStats.js`. Committed: `0c935bb`.
+3. **Cap "Ukončená" pipeline column at 5 cards** -- Column with 73 completed deals was unscrollable. Added `limit` + `onShowAll` props to `PipelineColumn`. Ukončená shows 5 most recent + "Zobraziť všetkých {N} →" link that navigates to `/invoices?type=finalna`. V prenájme stays unlimited (operational focus). Files: `apps/dashboard/src/pages/Dashboard.jsx`. Committed: `0c935bb`.
+4. **Deep-link support in Faktúry page** -- `InvoiceList` now reads `?type=` URL param on mount and pre-selects the type filter (validated against `navrh`, `finalna`, `proforma`, `invoice`, `credit_note`). No URL↔state two-way sync; manual filter changes don't update URL. Files: `apps/dashboard/src/pages/invoices/InvoiceList.jsx`. Committed: `0c935bb`.
+5. **Rename "Dnes" StatCard → "Dnešné udalosti"** -- Old label was cryptic. New label matches the "Dnešný rozvrh" section heading and the Sidebar MiniStat. Underlying logic unchanged: counts reservations where `date_from = today OR date_to = today`. Files: `apps/dashboard/src/pages/Dashboard.jsx`. Committed: `042946c`.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
@@ -293,6 +306,9 @@ Date: 2026-05-26
 | `apps/dashboard/src/lib/constants.js` | Adds `isoToDmy()` / `dmyToISO()` helpers + `PIPELINE_STATUSES` trimmed to `['inquiry', 'completed']` |
 | `apps/dashboard/vercel.json` | SPA rewrite for dashboard app (refresh on /reports etc.); separate from root vercel.json |
 | `apps/dashboard/src/hooks/useEquipment.js` | Equipment list hook with diacritic-insensitive name+description search (client-side filter when search active) |
+| `apps/dashboard/src/hooks/useDashboardStats.js` | Dashboard stats hook -- `activeRentals` counts `status='inquiry'`, monthRevenue sums bez DPH for completed+invoiced+paid |
+| `apps/dashboard/src/pages/Dashboard.jsx` | Dashboard page with PipelineColumn (limit prop for capping completed at 5 + "Zobraziť všetky" link to /invoices?type=finalna) |
+| `apps/dashboard/src/pages/invoices/InvoiceList.jsx` | Faktúry & Zmluvy merged list -- reads `?type=` URL param on mount for deep-linking from Dashboard |
 | `src/pages/Kontakt.jsx` | Contact page with hero, contact cards, opening hours, map, photo gallery + lightbox below the map |
 | `src/components/common/CookieBanner.jsx` | Info-only cookie notice (slide-up bar, 800ms delay, dismissal in localStorage `royalstroje_cookie_consent`) |
 | `src/pages/Cookies.jsx` | /cookies page: cookie/localStorage table (desktop) + card layout (mobile), "re-show notice" reset button |
