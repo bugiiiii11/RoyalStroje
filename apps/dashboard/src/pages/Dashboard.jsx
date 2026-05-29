@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package, BarChart3, Users, Calendar, PlusCircle, ArrowRight } from 'lucide-react';
+import { Package, BarChart3, Users, Calendar, PlusCircle, ArrowRight, ChevronRight } from 'lucide-react';
 import { StatCard } from '../components/ui/Card';
 import StatusBadge from '../components/ui/StatusBadge';
 import Spinner from '../components/ui/Spinner';
@@ -32,9 +32,11 @@ function DealCard({ deal, onClick }) {
   );
 }
 
-function PipelineColumn({ status, deals, onDealClick }) {
+function PipelineColumn({ status, deals, onDealClick, limit, onShowAll }) {
   const colors = getStatusColors(status);
   const info = RESERVATION_STATUSES[status];
+  const visibleDeals = limit && deals.length > limit ? deals.slice(0, limit) : deals;
+  const hasMore = limit && deals.length > limit;
 
   return (
     <div className="flex-shrink-0 w-64">
@@ -46,11 +48,20 @@ function PipelineColumn({ status, deals, onDealClick }) {
         </span>
       </div>
       <div className="space-y-2 min-h-[100px]">
-        {deals.map((deal) => (
+        {visibleDeals.map((deal) => (
           <DealCard key={deal.id} deal={deal} onClick={onDealClick} />
         ))}
         {deals.length === 0 && (
           <p className="text-xs text-gray-300 text-center py-8">Žiadne obchody</p>
+        )}
+        {hasMore && (
+          <button
+            onClick={onShowAll}
+            className="w-full flex items-center justify-center gap-1 text-xs text-royal-600 hover:text-royal-700 hover:bg-royal-50 font-medium py-2.5 rounded-lg transition-colors"
+          >
+            Zobraziť všetkých {deals.length}
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
         )}
       </div>
     </div>
@@ -159,14 +170,18 @@ export default function Dashboard() {
           <div className="flex justify-center py-8"><Spinner /></div>
         ) : (
           <div className="flex gap-4 overflow-x-auto pb-2">
-            {PIPELINE_STATUSES.map((status) => (
-              <PipelineColumn
-                key={status}
-                status={status}
-                deals={grouped[status] || []}
-                onDealClick={handleDealClick}
-              />
-            ))}
+            <PipelineColumn
+              status="inquiry"
+              deals={grouped.inquiry || []}
+              onDealClick={handleDealClick}
+            />
+            <PipelineColumn
+              status="completed"
+              deals={grouped.completed || []}
+              onDealClick={handleDealClick}
+              limit={5}
+              onShowAll={() => navigate('/invoices?type=finalna')}
+            />
           </div>
         )}
       </div>

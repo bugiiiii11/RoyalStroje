@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Plus, Trash2 } from 'lucide-react';
 import useInvoices from '../../hooks/useInvoices';
 import useContracts from '../../hooks/useContracts';
@@ -28,9 +28,13 @@ const STATUS_MAP = {
   finalna:   { label: 'Finálna',   bg: 'bg-purple-100',text: 'text-purple-700' },
 };
 
+const VALID_TYPE_PARAMS = ['navrh', 'finalna', 'proforma', 'invoice', 'credit_note'];
+
 export default function InvoiceList() {
   const navigate = useNavigate();
-  const [filters, setFilters] = useState({ type: '', status: '', search: '' });
+  const [searchParams] = useSearchParams();
+  const initialType = VALID_TYPE_PARAMS.includes(searchParams.get('type')) ? searchParams.get('type') : '';
+  const [filters, setFilters] = useState({ type: initialType, status: '', search: '' });
   const [showCreate, setShowCreate] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null); // { id, kind: 'invoice'|'contract', reservationId? }
   const [deleting, setDeleting] = useState(false);

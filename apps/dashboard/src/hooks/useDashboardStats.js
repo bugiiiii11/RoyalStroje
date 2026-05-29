@@ -15,7 +15,7 @@ export default function useDashboardStats() {
       const monthStart = today.slice(0, 7) + '-01';
 
       const [activeRes, revenueRes, clientsRes, todayRes, overdueRes, equipRes] = await Promise.all([
-        supabase.from('reservations').select('id', { count: 'exact', head: true }).eq('status', 'active'),
+        supabase.from('reservations').select('id', { count: 'exact', head: true }).eq('status', 'inquiry'),
         supabase.from('reservations').select('total, vat_amount').in('status', ['completed', 'invoiced', 'paid']).gte('created_at', monthStart),
         supabase.from('clients').select('id', { count: 'exact', head: true }),
         supabase.from('reservations').select('id', { count: 'exact', head: true }).or(`date_from.eq.${today},date_to.eq.${today}`),
