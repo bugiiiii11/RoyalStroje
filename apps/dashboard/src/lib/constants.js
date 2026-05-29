@@ -89,5 +89,5 @@ export function imageUrl(path) {
 export function daysBetween(from, to) {
   if (!from || !to) return 0;
   const diff = new Date(to) - new Date(from);
-  return Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1);
+  return Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)));
 }
