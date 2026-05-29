@@ -157,7 +157,7 @@ export default function Dashboard() {
         />
         <StatCard
           icon={Calendar}
-          label="Dnes"
+          label="Dnešné udalosti"
           value={statsLoading ? '…' : stats.todayEvents}
           color="bg-orange-500"
         />
