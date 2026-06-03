@@ -31,19 +31,19 @@ export default function ProductCard({ product, customerType = 'po' }) {
 
           {/* Status Badges */}
           {product.isNew && (
-            <div className="absolute top-3 left-3 px-2 py-0.5 bg-orange-primary/20 border border-orange-primary/40 backdrop-blur-sm text-orange-primary text-[10px] font-bold rounded uppercase shadow-lg transition-all group-hover:scale-110" style={{ zIndex: 2 }}>
+            <div className="absolute top-3 left-3 px-2 py-0.5 bg-orange-primary/30 md:bg-orange-primary/20 border border-orange-primary/40 md:backdrop-blur-sm text-orange-primary text-[10px] font-bold rounded uppercase shadow-lg transition-all group-hover:scale-110" style={{ zIndex: 2 }}>
               Novinka
             </div>
           )}
 
           {product.badge && (
-            <div className="absolute bottom-3 left-3 px-2 py-0.5 bg-zinc-900/90 border border-white/20 backdrop-blur-sm text-white text-[10px] font-bold rounded uppercase shadow-lg transition-all group-hover:scale-110" style={{ zIndex: 2 }}>
+            <div className="absolute bottom-3 left-3 px-2 py-0.5 bg-zinc-900/95 md:bg-zinc-900/90 border border-white/20 md:backdrop-blur-sm text-white text-[10px] font-bold rounded uppercase shadow-lg transition-all group-hover:scale-110" style={{ zIndex: 2 }}>
               {product.badge}
             </div>
           )}
 
           {/* Price Badge - Bottom Right */}
-          <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 bg-zinc-900/95 border border-orange-primary/40 backdrop-blur-md rounded-lg px-2 py-1.5 md:px-3 md:py-2 shadow-lg shadow-black/50" style={{ zIndex: 2 }}>
+          <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 bg-zinc-900 md:bg-zinc-900/95 border border-orange-primary/40 md:backdrop-blur-md rounded-lg px-2 py-1.5 md:px-3 md:py-2 shadow-lg shadow-black/50" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-end">
               {hasValidPrice ? (
                 <>

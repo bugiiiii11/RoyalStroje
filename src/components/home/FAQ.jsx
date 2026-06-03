@@ -181,7 +181,7 @@ export default function FAQ() {
   };
 
   return (
-    <div id="faq" className="relative pt-12 md:pt-32 pb-8 md:pb-16 lg:overflow-hidden">
+    <div id="faq" className="relative pt-12 md:pt-32 pb-8 md:pb-16 overflow-hidden">
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
         <div ref={faqHeadingRef} className={`text-center mb-6 md:mb-12 reveal ${faqHeadingInView ? 'in-view' : ''}`}>
