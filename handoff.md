@@ -23,6 +23,7 @@
 | 18 | 2026-05-22 | Dashboard UX + PO contact birth/OP + contract restructure | Company phone for PO, sidebar logo→home, pipeline trimmed to 2 cols, monthly revenue bez DPH, Reports rewired to reservations, dashboard Vercel SPA rewrite, Unicon partner, Active24 cleanup, PO contact birth_date+OP (mig 019), DD.MM.YYYY format, PO PDF signature block restructured with OP/nar. cell |
 | 19 | 2026-05-26 | Contract number format YYXXXX + PDF filename overhaul | New contract number format 260147 (YY+XXXX), PDF filename "{number} {client} - ukončené", migration 020 drops unique constraint for partial returns, confirm screen shows contract number |
 | 20 | 2026-05-29 | Dashboard cleanup + daysBetween fix | Fixed `daysBetween` off-by-one (29.5.→30.5. = 1 day, not 2), capped Ukončená pipeline at 5 cards with link to Faktúry, fixed `activeRentals` query (`active` → `inquiry`), renamed "Dnes" → "Dnešné udalosti" |
+| 21 | 2026-06-03 | Mobile footer gap + mobile GPU garbage fix | Removed `main pb-20` black gap above footer on mobile; fixed scrambled GPU garbage/tearing bands on real Android (FAQ + product grid) — root cause was `backdrop-filter` on the fixed hamburger button forcing whole-page read-back compositing |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -255,6 +256,19 @@ Date: 2026-05-29
 4. **Deep-link support in Faktúry page** -- `InvoiceList` now reads `?type=` URL param on mount and pre-selects the type filter (validated against `navrh`, `finalna`, `proforma`, `invoice`, `credit_note`). No URL↔state two-way sync; manual filter changes don't update URL. Files: `apps/dashboard/src/pages/invoices/InvoiceList.jsx`. Committed: `0c935bb`.
 5. **Rename "Dnes" StatCard → "Dnešné udalosti"** -- Old label was cryptic. New label matches the "Dnešný rozvrh" section heading and the Sidebar MiniStat. Underlying logic unchanged: counts reservations where `date_from = today OR date_to = today`. Files: `apps/dashboard/src/pages/Dashboard.jsx`. Committed: `042946c`.
 
+## What Was Done (Session 21) -- Mobile Footer Gap + Mobile GPU Garbage Fix
+Date: 2026-06-03
+
+### Mobile footer gap
+1. **Removed black gap above footer on mobile** -- `<main>` carried `pb-20 md:pb-0`, adding 5rem of `bg-zinc-950` (near-black) padding between the dark content and the footer's orange separator on mobile. The footer already clears the fixed MobileNav via its own `pb-24`, so the `main` padding was redundant and only created the gap. Removed it entirely (was already `md:pb-0` on desktop, so desktop is unchanged). Files: `src/App.jsx`. Committed: `7fdb182`.
+
+### Mobile GPU garbage bands (the big one)
+2. **Root cause: `backdrop-filter` on a fixed element** -- Scrambled GPU garbage / "black band that fills in while scrolling" (checkerboarding / tile-rasterization failure) appeared on **real Android only** (budget Xiaomi/Mali GPU) at the FAQ section and the 2nd product row. Did **not** reproduce in Chrome DevTools mobile-view. The trigger: the `HamburgerMenu` button is `fixed top-2 right-2 backdrop-blur-md` and sits on top during every mobile scroll. `backdrop-filter` on a fixed element forces Chromium to keep the page-tall content behind it composited as a read-back backdrop layer, which the budget GPU can't sustain during scroll → garbage. **Fix:** removed `backdrop-blur-md` from the hamburger button + its overlay (backgrounds already 90-95% opaque, so visually invisible), and gated the CookieBanner blur to desktop (`md:backdrop-blur-md`). Files: `src/components/common/HamburgerMenu.jsx`, `src/components/common/CookieBanner.jsx`. Committed: `ae01ea4`.
+3. **Reveal animations de-promoted** -- `.reveal*.in-view` end states changed from `translateY(0)`/`scale(1)` to `transform: none` so cards drop their GPU compositing layer once the animation finishes (`none` is the identity matrix, so the slide/scale animation is unchanged). Cuts the live composited-layer count. Files: `src/index.css`. Committed: `ae01ea4`.
+4. **AnimatedBackground disabled on mobile** -- gated behind `hidden lg:block` in `src/App.jsx`. Was part of the debugging (its three `fixed` layers are also a compositing trigger) and left disabled to keep mobile GPU load minimal. Its effects are 0.03-0.08 alpha (near-invisible), so mobile loses nothing visible. **Follow-up:** can re-add the subtle gradient/grid/vignette via a non-compositing CSS `body` background if desired. Committed: `ff5c5f0`.
+5. **ProductCard badge blurs gated to desktop** -- the price/Novinka/badge `backdrop-blur-*` on product cards is now `md:backdrop-blur-*` with bumped mobile opacity. Part of the hunt; harmless and reduces mobile GPU surfaces. Files: `src/components/product/ProductCard.jsx`. Committed: `4f7c0a0`.
+6. **Dead ends (reverted, documented in git history)** -- `overflow-x-clip` / `overflow: visible` on root div / ContentSection / FAQ (commits `6733a9a`, `6a7cbb7`, `dede89c`) and AnimatedBackground `translateZ` promotion did **not** fix it and were reverted. Lesson: the fixed-element `backdrop-filter` was the real trigger the whole time. **Never put `backdrop-filter` on a `fixed`/`sticky` element that stays on screen during scroll on budget Android.**
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
@@ -269,6 +283,7 @@ Date: 2026-05-29
 | 9 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
 | 10 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
 | 11 | Online payment | Stripe/GoPay integration (post-MVP) |
+| 12 | (Optional) Re-add mobile background | `AnimatedBackground` is now `hidden lg:block` (disabled on mobile during the GPU garbage fix). If the subtle gradient/grid/vignette is wanted back on mobile, re-add it via a non-compositing CSS `body` background (NOT fixed DOM layers). See `src/App.jsx`. |
 
 ## Key Files
 | File | Purpose |
@@ -284,6 +299,9 @@ Date: 2026-05-29
 | `src/pages/Partneri.jsx` | Partners page with minimal grid design (8 partners, WebP logos, hover effects) |
 | `src/components/common/Footer.jsx` | Footer (mobile 2-col, MDN Tech credit) |
 | `src/components/common/Header.jsx` | Header + promo popup (hidden on mobile) |
+| `src/components/common/AnimatedBackground.jsx` | Fixed gradient/grid/vignette bg layers -- **gated `hidden lg:block` (desktop only)**; fixed layers are a mobile GPU compositing trigger |
+| `src/components/common/HamburgerMenu.jsx` | Mobile fixed hamburger button -- **no `backdrop-filter`** (caused mobile GPU garbage; backgrounds are opaque instead) |
+| `src/index.css` | Global styles incl. `.reveal*` scroll animations -- in-view end state is `transform: none` so cards de-promote off the GPU after animating |
 | `src/data/categories.js` | Static frontend category structure |
 | `apps/dashboard/src/lib/generateAgreementPdf.js` | FO rental agreement PDF (návrh/finálna, time_from, contractData param) |
 | `apps/dashboard/src/lib/generateAgreementPdfPO.js` | PO rental agreement PDF (návrh/finálna, time_from, contractData param) |
