@@ -53,8 +53,14 @@ function App() {
         <Router>
         <ScrollToTop />
         <div className="min-h-screen bg-zinc-950 text-white relative overflow-x-hidden">
-        {/* Animated Background */}
-        <AnimatedBackground />
+        {/* Animated Background - desktop only. On mobile the fixed full-viewport
+            layers force the page-tall content (relative z-10) to be composited so
+            it can stack above them; that single layer exceeds the budget Android
+            GPU's max texture size (~8192px) and renders as garbage bands further
+            down the page (around the FAQ). The effects are near-invisible anyway. */}
+        <div className="hidden lg:block">
+          <AnimatedBackground />
+        </div>
 
         <div className="relative z-10">
           <Header />
