@@ -17,7 +17,7 @@ export default function HamburgerMenu() {
       {/* Hamburger Button - Mobile only */}
       <button
         onClick={() => setIsOpen(true)}
-        className="md:hidden fixed top-2 right-2 z-50 w-10 h-10 flex items-center justify-center bg-zinc-900/90 backdrop-blur-md border border-white/20 rounded-lg hover:bg-zinc-800 hover:border-orange-primary/50 transition-all"
+        className="md:hidden fixed top-2 right-2 z-50 w-10 h-10 flex items-center justify-center bg-zinc-900/95 border border-white/20 rounded-lg hover:bg-zinc-800 hover:border-orange-primary/50 transition-all"
         aria-label="Open menu"
       >
         <Menu className="text-white" size={20} />
@@ -26,7 +26,7 @@ export default function HamburgerMenu() {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+          className="md:hidden fixed inset-0 bg-black/70 z-[60]"
           onClick={() => setIsOpen(false)}
         />
       )}

@@ -41,7 +41,7 @@ export default function CookieBanner() {
         animateIn ? 'translate-y-0' : 'translate-y-full'
       }`}
     >
-      <div className="bg-zinc-950/95 backdrop-blur-md border-t border-orange-primary/40 shadow-[0_-8px_24px_rgba(0,0,0,0.5)]">
+      <div className="bg-zinc-950/95 md:backdrop-blur-md border-t border-orange-primary/40 shadow-[0_-8px_24px_rgba(0,0,0,0.5)]">
         <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 py-3 md:py-4 flex flex-col md:flex-row md:items-center gap-3 md:gap-4">
           <div className="flex items-start md:items-center gap-3 flex-1 min-w-0">
             <Cookie size={20} className="text-orange-primary flex-shrink-0 mt-0.5 md:mt-0" />

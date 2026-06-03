@@ -41,7 +41,12 @@
   }
 }
 
-/* ─── Scroll reveal animations ─── */
+/* ─── Scroll reveal animations ───
+   in-view end states use `transform: none` (not translateY(0)/scale(1)) so the
+   element drops its GPU compositing layer once the animation finishes. Keeping a
+   non-none transform on ~157 product cards permanently promotes them all, which
+   exhausts budget Android GPUs and causes tile-rasterization garbage/black bands.
+   `none` is the identity matrix, so the slide/scale animation is unchanged. */
 .reveal {
   opacity: 0;
   transform: translateY(22px);
@@ -49,7 +54,7 @@
 }
 .reveal.in-view {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .reveal-fade {
@@ -67,7 +72,7 @@
 }
 .reveal-left.in-view {
   opacity: 1;
-  transform: translateX(0);
+  transform: none;
 }
 
 .reveal-right {
@@ -77,7 +82,7 @@
 }
 .reveal-right.in-view {
   opacity: 1;
-  transform: translateX(0);
+  transform: none;
 }
 
 .reveal-scale {
@@ -87,7 +92,7 @@
 }
 .reveal-scale.in-view {
   opacity: 1;
-  transform: scale(1);
+  transform: none;
 }
 
 /* Stagger delays for child elements */
