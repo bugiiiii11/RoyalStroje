@@ -52,7 +52,7 @@ function App() {
       <CartProvider>
         <Router>
         <ScrollToTop />
-        <div className="min-h-screen bg-zinc-950 text-white relative overflow-x-hidden">
+        <div className="min-h-screen bg-zinc-950 text-white relative overflow-x-clip">
         {/* Animated Background */}
         <AnimatedBackground />
 
