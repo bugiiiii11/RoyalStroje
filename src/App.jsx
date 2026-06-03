@@ -59,7 +59,7 @@ function App() {
         <div className="relative z-10">
           <Header />
           <HamburgerMenu />
-          <main className="pb-20 md:pb-0">
+          <main>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/sluzby" element={<Sluzby />} />
