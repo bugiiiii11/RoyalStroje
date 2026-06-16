@@ -227,7 +227,8 @@ export default function Catalog() {
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pb-16 md:py-16">
         {/* Mobile Header */}
         <div ref={headerRef} className={`md:hidden text-center mb-6 pt-6 reveal ${headerInView ? 'in-view' : ''}`}>
-          <h2 className="text-xl font-black text-white mb-2 leading-tight">
+          <span className="eyebrow eyebrow--center mb-3">Katalóg</span>
+          <h2 className="text-xl font-black text-white mb-2 mt-3 leading-tight">
             <span className="text-orange-primary">Katalóg náradia</span> a strojov na prenájom
           </h2>
           <p className="text-white/70 text-sm leading-relaxed max-w-2xl mx-auto">
@@ -252,7 +253,8 @@ export default function Catalog() {
 
             {/* Center Content */}
             <div className="text-center flex-1">
-              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Strojový park</span>
+              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
                 <span className="text-orange-primary">Katalóg</span> strojov na prenájom
               </h2>
               <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-6">
@@ -333,7 +335,8 @@ export default function Catalog() {
           {/* Left Sidebar - Categories */}
           <aside ref={sidebarRef} className={`lg:w-80 flex-shrink-0 reveal-left stagger-1 ${sidebarInView ? 'in-view' : ''}`}>
             <div className="bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 sticky top-24">
-              <h3 className="text-white font-black text-sm md:text-lg uppercase tracking-wide mb-3 md:mb-6 px-1 md:px-2">
+              <h3 className="flex items-center gap-2.5 text-white font-black text-sm md:text-lg uppercase tracking-wide mb-3 md:mb-6 px-1 md:px-2">
+                <span className="inline-block w-5 md:w-6 h-0.5 bg-orange-primary" />
                 Kategórie
               </h3>
               <div className="space-y-1.5 md:space-y-3">
@@ -755,10 +758,11 @@ export default function Catalog() {
         {/* Blog CTA Section */}
         <div ref={blogCtaRef} className={`relative mt-16 md:mt-24 pt-12 md:pt-16 reveal ${blogCtaInView ? 'in-view' : ''}`}>
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Blog</span>
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4 mt-4">
               Chcete vedieť viac?
             </h2>
-            <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+            <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto">
               Navštívte náš blog plný užitočných rád, tipov a noviniek zo sveta stavebnej mechanizácie
             </p>
           </div>
@@ -802,7 +806,7 @@ export default function Catalog() {
           <div className="text-center">
             <Link
               to="/blog"
-              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-base rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+              className="btn-primary gap-3 px-8 py-4 text-base"
             >
               <BookOpen size={20} />
               <span>Prečítať blog</span>

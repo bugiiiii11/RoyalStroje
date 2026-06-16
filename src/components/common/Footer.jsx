@@ -60,7 +60,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12 mb-12">
           {/* Column 1: About */}
           <div className="col-span-2 lg:col-span-1">
-            <div className="text-2xl font-black mb-4">
+            <div className="font-display text-2xl font-black tracking-tight mb-4">
               <span className="text-white">ROYAL</span>
               <span className="text-orange-primary"> STROJE</span>
             </div>

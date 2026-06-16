@@ -78,7 +78,7 @@ export default function Header() {
               >
                 Požičovňa
                 {isActive('/') && (
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-white rounded-t-full"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-orange-primary rounded-t-full"></span>
                 )}
               </Link>
               <Link
@@ -91,7 +91,7 @@ export default function Header() {
               >
                 Služby
                 {(isActive('/sluzby') || location.pathname.startsWith('/sluzby/')) && (
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-white rounded-t-full"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-orange-primary rounded-t-full"></span>
                 )}
               </Link>
               <Link
@@ -104,7 +104,7 @@ export default function Header() {
               >
                 Kontakt
                 {isActive('/kontakt') && (
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-white rounded-t-full"></span>
+                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-orange-primary rounded-t-full"></span>
                 )}
               </Link>
             </nav>

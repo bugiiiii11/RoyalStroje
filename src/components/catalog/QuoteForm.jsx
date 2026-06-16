@@ -129,7 +129,7 @@ function QuoteFormInner() {
   }
 
   return (
-    <div className="bg-zinc-900 border border-white/10 rounded-2xl overflow-visible">
+    <div className="bg-zinc-900 border border-white/10 border-t-2 border-t-orange-primary/60 rounded-2xl overflow-visible">
       {/* Header with Title and Description */}
       <div className="bg-zinc-900 border-b border-white/10 px-4 py-4 md:py-5 rounded-t-2xl">
         <div className="flex items-center gap-2 mb-2">
@@ -165,7 +165,7 @@ function QuoteFormInner() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full bg-zinc-800 border border-white/10 rounded-lg px-3 py-2 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
             placeholder="Meno a priezvisko *"
           />
         </div>
@@ -178,7 +178,7 @@ function QuoteFormInner() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full bg-zinc-800 border border-white/10 rounded-lg px-3 py-2 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
             placeholder="Email *"
           />
         </div>
@@ -191,7 +191,7 @@ function QuoteFormInner() {
             value={formData.phone}
             onChange={handleChange}
             required
-            className="w-full bg-zinc-800 border border-white/10 rounded-lg px-3 py-2 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
             placeholder="Telefón *"
           />
         </div>
@@ -222,7 +222,7 @@ function QuoteFormInner() {
             value={formData.message}
             onChange={handleChange}
             rows="3"
-            className="w-full bg-zinc-800 border border-white/10 rounded-lg px-3 py-2 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all resize-none"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all resize-none"
             placeholder="Správa (voliteľné)"
           ></textarea>
         </div>
@@ -242,7 +242,7 @@ function QuoteFormInner() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="btn-primary w-full px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
         >
           <Send size={16} />
           <span>{isSubmitting ? 'Odosiela sa...' : 'Odoslať'}</span>

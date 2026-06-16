@@ -185,10 +185,11 @@ export default function FAQ() {
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
         <div ref={faqHeadingRef} className={`text-center mb-6 md:mb-12 reveal ${faqHeadingInView ? 'in-view' : ''}`}>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4">
+          <span className="eyebrow eyebrow--center mb-4">Časté otázky</span>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4 mt-4">
             Máte <span className="text-orange-primary">otázky?</span>
           </h2>
-          <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto">
             Tu nájdete odpovede na najčastejšie otázky o prenájme stavebnej mechanizácie
           </p>
         </div>
@@ -199,51 +200,53 @@ export default function FAQ() {
           <div ref={faqSideRef} className={`hidden lg:block lg:col-span-2 reveal-left ${faqSideInView ? 'in-view' : ''}`}>
             <div className="sticky top-24">
               {/* Image Container */}
-              <div className="relative rounded-2xl overflow-hidden border-2 border-orange-primary/30 mb-6">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 mb-6">
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-10" />
                 <img
                   src="/pictures/graphics/predajna-4.webp"
                   alt="Royal Stroje - FAQ"
                   className="w-full h-auto object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
 
                 {/* Text Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-black text-white mb-2">
+                  <span className="eyebrow mb-2">Royal Stroje</span>
+                  <h3 className="text-2xl font-black text-white mb-1 mt-2">
                     Sme tu pre vás
                   </h3>
-                  <p className="text-white/90 text-sm">
+                  <p className="text-white/80 text-sm">
                     Profesionálny prístup a spoľahlivosť
                   </p>
                 </div>
               </div>
 
               {/* Contact Options */}
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 space-y-4">
+              <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 space-y-3">
                 <h4 className="text-white font-bold text-lg mb-4">Neviete si rady?</h4>
 
                 <a
                   href="tel:+421948555551"
-                  className="flex items-center gap-3 p-3 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all group"
+                  className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-orange-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 rounded-lg bg-orange-primary/15 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/25 transition-colors">
                     <Phone size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-white/70 text-xs">Zavolajte nám</p>
+                    <p className="text-white/55 text-xs">Zavolajte nám</p>
                     <p className="text-white font-bold">0948 555 551</p>
                   </div>
                 </a>
 
                 <a
                   href="mailto:info@royalstroje.sk"
-                  className="flex items-center gap-3 p-3 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all group"
+                  className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-orange-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 rounded-lg bg-orange-primary/15 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/25 transition-colors">
                     <Mail size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-white/70 text-xs">Napíšte nám</p>
+                    <p className="text-white/55 text-xs">Napíšte nám</p>
                     <p className="text-white font-bold">info@royalstroje.sk</p>
                   </div>
                 </a>
@@ -252,13 +255,13 @@ export default function FAQ() {
                   href="https://wa.me/421948555551"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-zinc-800/50 hover:bg-zinc-800 rounded-xl transition-all group"
+                  className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-orange-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 rounded-lg bg-orange-primary/15 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/25 transition-colors">
                     <MessageCircle size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-white/70 text-xs">WhatsApp</p>
+                    <p className="text-white/55 text-xs">WhatsApp</p>
                     <p className="text-white font-bold">Rýchla odpoveď</p>
                   </div>
                 </a>
@@ -272,14 +275,14 @@ export default function FAQ() {
               {faqs.map((faq, index) => (
                 <div
                   key={index}
-                  className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/30 transition-all reveal stagger-${Math.min(index + 1, 8)} ${faqListInView ? 'in-view' : ''}`}
+                  className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border rounded-xl md:rounded-2xl overflow-hidden transition-colors reveal stagger-${Math.min(index + 1, 8)} ${faqListInView ? 'in-view' : ''} ${openIndex === index ? 'border-orange-primary/40' : 'border-white/10 hover:border-orange-primary/30'}`}
                 >
                   {/* Question Button */}
                   <button
                     onClick={() => toggleFAQ(index)}
                     className="w-full flex items-center justify-between gap-2 md:gap-4 p-3 md:p-6 text-left group"
                   >
-                    <h3 className="text-white font-bold text-xs md:text-lg flex-1 group-hover:text-orange-primary transition-colors leading-tight">
+                    <h3 className={`font-bold text-xs md:text-lg flex-1 transition-colors leading-tight ${openIndex === index ? 'text-orange-primary' : 'text-white group-hover:text-orange-primary'}`}>
                       {faq.question}
                     </h3>
                     <div

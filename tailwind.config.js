@@ -10,6 +10,10 @@ export default {
         'orange-primary': '#FF6600',
         'orange-hover': '#ff8533',
       },
+      fontFamily: {
+        sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
       animation: {
         'float-slow': 'float 20s ease-in-out infinite',
         'float-slower': 'float 25s ease-in-out infinite reverse',

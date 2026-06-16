@@ -44,11 +44,12 @@ export default function WhyRoyalStroje() {
           ref={headingRef}
           className={`text-center mb-8 md:mb-12 lg:mb-16 reveal ${headingInView ? 'in-view' : ''}`}
         >
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-black text-white mb-3 md:mb-4">
+          <span className="eyebrow eyebrow--center mb-4">Prečo Royal Stroje</span>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 md:mb-4 mt-4">
             Prečo si nás vyberajú stavbári v{' '}
             <span className="text-orange-primary">Senci a Bratislave</span>
           </h2>
-          <p className="text-white/70 text-sm md:text-lg max-w-3xl mx-auto">
+          <p className="text-white/60 text-sm md:text-lg max-w-3xl mx-auto">
             20 rokov skúseností v prenájme stavebnej techniky pre firmy aj súkromné osoby
           </p>
         </div>
@@ -63,30 +64,28 @@ export default function WhyRoyalStroje() {
             return (
               <div
                 key={benefit.title}
-                className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-xl md:rounded-2xl p-4 md:p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden reveal stagger-${i + 1} ${gridInView ? 'in-view' : ''}`}
+                className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${gridInView ? 'in-view' : ''}`}
               >
-                {/* Animated border glow on hover */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                  backgroundSize: '200% 200%',
-                  animation: 'gradient-shift 3s ease infinite'
-                }}></div>
+                {/* Big faint index number */}
+                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-3xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                  0{i + 1}
+                </span>
 
                 <div className="relative">
-                  <div className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                  <div className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
                     <Icon className="text-orange-primary" size={20} />
                   </div>
 
                   <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors leading-tight">
                     {benefit.title}
                   </h3>
-                  <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                  <p className="text-white/60 text-xs md:text-sm leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
+                {/* Bottom accent line grows on hover (width transition — no GPU layer) */}
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
               </div>
             );
           })}

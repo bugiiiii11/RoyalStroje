@@ -16,38 +16,38 @@ export default function ProductCard({ product, customerType = 'po' }) {
 
   return (
     <>
-      <div className="group bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 ease-out relative">
+      <div className="group bg-gradient-to-b from-zinc-800/80 to-zinc-900 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/60 hover:shadow-2xl hover:shadow-orange-primary/20 shadow-lg shadow-black/40 hover:-translate-y-1 transition-all duration-300 ease-out relative">
         {/* Image Container - Compact on mobile, square on desktop */}
         <div className="relative aspect-[4/3] md:aspect-square bg-gradient-to-br from-orange-100 via-orange-50 to-zinc-100 overflow-hidden">
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover select-none transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-110"
+            className="w-full h-full object-cover select-none transition-transform duration-700 ease-out group-hover:scale-105"
             loading="lazy"
             draggable="false"
           />
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/30 via-transparent to-transparent group-hover:from-zinc-900/20 transition-all duration-500 pointer-events-none select-none" style={{ zIndex: 1 }}></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent pointer-events-none select-none" style={{ zIndex: 1 }}></div>
 
           {/* Status Badges */}
           {product.isNew && (
-            <div className="absolute top-3 left-3 px-2 py-0.5 bg-orange-primary/30 md:bg-orange-primary/20 border border-orange-primary/40 md:backdrop-blur-sm text-orange-primary text-[10px] font-bold rounded uppercase shadow-lg transition-all group-hover:scale-110" style={{ zIndex: 2 }}>
+            <div className="absolute top-3 left-3 px-2 py-0.5 bg-orange-primary/30 md:bg-orange-primary/20 border border-orange-primary/40 md:backdrop-blur-sm text-orange-primary text-[10px] font-bold rounded uppercase tracking-wide shadow-lg" style={{ zIndex: 2 }}>
               Novinka
             </div>
           )}
 
           {product.badge && (
-            <div className="absolute bottom-3 left-3 px-2 py-0.5 bg-zinc-900/95 md:bg-zinc-900/90 border border-white/20 md:backdrop-blur-sm text-white text-[10px] font-bold rounded uppercase shadow-lg transition-all group-hover:scale-110" style={{ zIndex: 2 }}>
+            <div className="absolute bottom-3 left-3 px-2 py-0.5 bg-zinc-950/95 md:bg-zinc-950/90 border border-white/20 md:backdrop-blur-sm text-white text-[10px] font-bold rounded uppercase tracking-wide shadow-lg" style={{ zIndex: 2 }}>
               {product.badge}
             </div>
           )}
 
           {/* Price Badge - Bottom Right */}
-          <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 bg-zinc-900 md:bg-zinc-900/95 border border-orange-primary/40 md:backdrop-blur-md rounded-lg px-2 py-1.5 md:px-3 md:py-2 shadow-lg shadow-black/50" style={{ zIndex: 2 }}>
+          <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 bg-zinc-950 md:bg-zinc-950/95 border border-orange-primary/40 md:backdrop-blur-md rounded-lg px-2 py-1.5 md:px-3 md:py-2 shadow-lg shadow-black/50" style={{ zIndex: 2 }}>
             <div className="flex flex-col items-end">
               {hasValidPrice ? (
                 <>
-                  <span className="text-orange-primary text-lg md:text-2xl font-black leading-none">{displayPrice.toFixed(2)}€</span>
+                  <span className="font-display text-orange-primary text-lg md:text-2xl font-black leading-none">{displayPrice.toFixed(2)}€</span>
                   <span className="text-white/50 text-[9px] md:text-[10px] font-medium mt-0.5">{priceLabel}</span>
                 </>
               ) : (
@@ -65,7 +65,7 @@ export default function ProductCard({ product, customerType = 'po' }) {
           </h3>
 
           {/* Description */}
-          <p className="text-white text-xs md:text-sm mb-2 md:mb-4 leading-relaxed line-clamp-1">
+          <p className="text-white/60 text-xs md:text-sm mb-2 md:mb-4 leading-relaxed line-clamp-1">
             {product.name}
           </p>
 
@@ -74,7 +74,7 @@ export default function ProductCard({ product, customerType = 'po' }) {
             {/* Product Detail Link - Primary Action */}
             <Link
               to={`/${product.id}`}
-              className="relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-2.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-full transition-all overflow-hidden group/detail bg-black text-orange-primary hover:scale-105 min-h-[44px]"
+              className="relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-2.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-lg transition-colors overflow-hidden group/detail bg-white/[0.04] border border-white/10 text-white hover:border-orange-primary/50 hover:text-orange-primary active:scale-[0.98] min-h-[44px]"
             >
               <span className="relative z-10">Zobraziť detail</span>
               <ChevronRight size={14} className="relative z-10 md:w-4 md:h-4 group-hover/detail:translate-x-0.5 transition-transform" />
@@ -91,10 +91,10 @@ export default function ProductCard({ product, customerType = 'po' }) {
                 }
                 // On mobile, allow default behavior (tel: link)
               }}
-              className="relative inline-flex items-center justify-center gap-1 md:gap-1.5 px-2 py-2.5 md:px-3 md:py-2.5 font-bold text-xs md:text-sm rounded-full transition-all overflow-hidden group/cart bg-gradient-to-r from-orange-primary to-orange-hover text-white hover:scale-105 min-h-[44px]"
+              className="btn-primary px-2 py-2.5 md:px-3 md:py-2.5 rounded-lg min-h-[44px]"
             >
-              <Phone size={14} className="relative z-10 md:w-4 md:h-4" />
-              <span className="relative z-10">{showPhone ? '0948 555 551' : 'Zavolať'}</span>
+              <Phone size={14} className="md:w-4 md:h-4" />
+              <span>{showPhone ? '0948 555 551' : 'Zavolať'}</span>
             </a>
 
             {/* Blog Article Link - Only show if product has blog article */}

@@ -11,9 +11,16 @@
 
   /* Better font rendering and prevent horizontal overflow */
   body {
+    font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+  }
+
+  /* Display type for headings — industrial grotesque, tightened tracking */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.015em;
   }
 
   /* Remove default margins */
@@ -21,6 +28,47 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+}
+
+/* ─── Industrial-premium primitives ─── */
+@layer components {
+  /* Section eyebrow: small uppercase orange label with a leading rule.
+     Usage: <span className="eyebrow">01 — Katalóg</span> */
+  .eyebrow {
+    @apply inline-flex items-center gap-2.5 text-[0.7rem] md:text-xs font-bold uppercase tracking-[0.22em] text-orange-primary;
+    font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply inline-block w-6 md:w-8 h-px bg-orange-primary/70;
+  }
+  .eyebrow--center {
+    @apply justify-center;
+  }
+  .eyebrow--center::after {
+    content: '';
+    @apply inline-block w-6 md:w-8 h-px bg-orange-primary/70;
+  }
+
+  /* Hairline divider: thin orange→transparent rule between sections */
+  .hairline {
+    @apply h-px w-full;
+    background: linear-gradient(to right, transparent, rgba(255, 102, 0, 0.5), transparent);
+  }
+
+  /* Primary CTA: orange gradient with inner highlight + lift */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98];
+    box-shadow: 0 10px 20px -6px rgba(255, 102, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 14px 28px -6px rgba(255, 102, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  }
+
+  /* Secondary CTA: outlined, becomes orange-edged on hover */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm text-white bg-white/[0.04] border border-white/15 transition-all duration-200 hover:bg-white/[0.08] hover:border-orange-primary/60 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98];
   }
 }
 
