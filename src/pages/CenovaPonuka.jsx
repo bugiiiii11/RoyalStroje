@@ -24,7 +24,7 @@ export default function CenovaPonuka() {
       icon: Clock,
       title: 'Ponuka do 24 hodín',
       description: 'Pripravíme a odošleme cenovú ponuku do 24 hodín od požiadavky.',
-      features: ['Ponuka do 24h', 'Email + SMS', 'Možnosť konzultácie', '20 rokov skúseností'],
+      features: ['Email + Formulár do 24hodín','Okamžitá ponuka na osobnom stretnutí','Napíšte nám a my sa ozveme','Možnosť telefonickej konzultácie'],
     },
     {
       id: 'individualny-pristup',
@@ -163,12 +163,12 @@ export default function CenovaPonuka() {
                     Prečo si vyžiadať <span className="text-orange-primary">ponuku?</span>
                   </h2>
                   <p className="text-white/80 leading-relaxed text-base md:text-lg">
-                    Vďaka našim <strong className="text-orange-primary">12-ročným skúsenostiam</strong> v odvetví vieme poskytnúť presnú cenovú ponuku prispôsobenú vašim potrebám. Dokážeme vám naceniť a zabezpečiť všetok potrebný tovar k realizácii projektu, čím vás odbremeníme od zbytočných komplikácií a šetríme váš čas.
+                    Vďaka našim <strong className="text-orange-primary">20-ročným skúsenostiam</strong> v odvetví vieme poskytnúť presnú cenovú ponuku prispôsobenú vašim potrebám. Dokážeme vám naceniť a zabezpečiť všetok potrebný tovar k realizácii projektu, čím vás odbremeníme od zbytočných komplikácií a šetríme váš čas.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
                   <div className="bg-zinc-950/50 rounded-xl p-4 border border-white/5 text-center">
-                    <div className="text-orange-primary font-black text-3xl mb-2">12+</div>
+                    <div className="text-orange-primary font-black text-3xl mb-2">20</div>
                     <p className="text-white/70 text-sm">rokov skúseností</p>
                   </div>
                   <div className="bg-zinc-950/50 rounded-xl p-4 border border-white/5 text-center">

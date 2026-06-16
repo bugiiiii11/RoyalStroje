@@ -253,7 +253,7 @@ export default function Catalog() {
 
             {/* Center Content */}
             <div className="text-center flex-1">
-              <span className="eyebrow eyebrow--center mb-4">Strojový park</span>
+              <span className="eyebrow eyebrow--center mb-4">Požičovňa</span>
               <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
                 <span className="text-orange-primary">Katalóg</span> strojov na prenájom
               </h2>
