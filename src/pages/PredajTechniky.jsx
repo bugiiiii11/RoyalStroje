@@ -187,10 +187,6 @@ export default function PredajTechniky() {
           {/* JARNÁ AKCIA - Akciové produkty */}
           <div className="mb-12 md:mb-20 pt-16 md:pt-0">
             <div ref={promoRef} className={`text-center mb-8 md:mb-12 reveal ${promoInView ? 'in-view' : ''}`}>
-              <div className="hidden md:inline-flex items-center gap-2 bg-orange-primary/20 border border-orange-primary/50 rounded-full px-4 py-2 mb-4">
-                <Tag className="text-orange-primary" size={18} />
-                <span className="text-orange-primary font-bold text-sm uppercase tracking-wider">Jarná akcia</span>
-              </div>
               <span className="eyebrow eyebrow--center mb-4">Akcia</span>
               <h1 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-4 mt-4 leading-tight">
                 Akciové produkty <span className="text-orange-primary">skladom</span>
