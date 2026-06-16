@@ -111,7 +111,8 @@ export default function Kosik() {
       <div className="container mx-auto px-4 max-w-2xl">
         {/* Header */}
         <div className="mb-6 text-center pt-16 md:pt-0">
-          <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+          <span className="eyebrow eyebrow--center mb-4">Košík</span>
+          <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
             <span className="text-orange-primary">Nezáväzná</span> objednávka
           </h1>
           <p className="text-white/70 text-sm md:text-lg">
@@ -120,7 +121,7 @@ export default function Kosik() {
         </div>
 
         {/* Customer Type Selector */}
-        <div className="bg-zinc-900/50 backdrop-blur-sm rounded-2xl border border-white/10 p-4 mb-4">
+        <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-2xl border border-white/10 p-4 mb-4">
           <div className="flex items-center gap-2 mb-3">
             <User size={16} className="text-orange-primary" />
             <span className="text-white/70 text-sm font-semibold">Typ zákazníka</span>
@@ -154,7 +155,7 @@ export default function Kosik() {
         </div>
 
         {/* Cart Items */}
-        <div className="bg-zinc-900/50 backdrop-blur-sm rounded-2xl border border-white/10 p-4 mb-4">
+        <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-2xl border border-white/10 p-4 mb-4">
           <div className="flex items-center gap-2 mb-3">
             <ShoppingCart size={16} className="text-orange-primary" />
             <span className="text-white/70 text-sm font-semibold">
@@ -168,7 +169,7 @@ export default function Kosik() {
               <p className="text-white/40 text-sm">Košík je prázdny</p>
               <a
                 href="/"
-                className="inline-block mt-4 px-6 py-2 bg-orange-primary text-white font-bold text-sm rounded-full hover:bg-orange-hover transition-all"
+                className="btn-primary mt-4"
               >
                 Prejsť do požičovne
               </a>
@@ -225,7 +226,7 @@ export default function Kosik() {
 
         {/* Calendar - only show if cart has items */}
         {cartItems.length > 0 && (
-          <div className="bg-zinc-900/50 backdrop-blur-sm rounded-2xl border border-white/10 p-4 mb-4">
+          <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-2xl border border-white/10 p-4 mb-4">
             <div className="flex items-center gap-2 mb-3">
               <Calendar size={16} className="text-orange-primary" />
               <span className="text-orange-primary text-sm font-bold">{getMonthsInRange()}</span>
@@ -301,7 +302,7 @@ export default function Kosik() {
 
         {/* Total Price - only show if cart has items */}
         {cartItems.length > 0 && (
-          <div className="bg-zinc-900/50 backdrop-blur-sm rounded-2xl border border-white/10 p-4 mb-4">
+          <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-2xl border border-white/10 p-4 mb-4">
             <div className="flex items-center justify-between">
               <span className="text-white/70 text-sm">
                 {customerType === 'po' ? 'Cena bez DPH:' : 'Cena s DPH:'}
@@ -324,7 +325,7 @@ export default function Kosik() {
         {cartItems.length > 0 && (
           <button
             onClick={handleSendOrder}
-            className="relative w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-base rounded-full hover:scale-105 transition-all shadow-lg shadow-orange-primary/40 overflow-hidden group"
+            className="relative btn-primary w-full text-base py-4 overflow-hidden group"
           >
             {/* Shine effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>

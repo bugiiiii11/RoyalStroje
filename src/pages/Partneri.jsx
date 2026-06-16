@@ -99,7 +99,8 @@ export default function Partneri() {
         {/* Content */}
         <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+            <span className="eyebrow mb-5">Partneri · Senec — Bratislava</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
               Sieť overených profesionálov. <span className="text-orange-primary">Jeden kontakt, všetky služby.</span>
             </h1>
             <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
@@ -127,7 +128,8 @@ export default function Partneri() {
 
           {/* Section Heading */}
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Spolupráca</span>
+            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
               Naši <span className="text-orange-primary">partneri</span>
             </h1>
             <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-2 md:mb-4 reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
@@ -144,7 +146,7 @@ export default function Partneri() {
               const innerContent = (
                 <div className="group flex flex-col items-center justify-center w-full h-full">
                   {/* Logo Container - White square background */}
-                  <div className="bg-white rounded-lg p-4 flex items-center justify-center h-32 w-32 md:h-40 md:w-40 mb-3 md:mb-4 transition-all duration-200 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-black/20">
+                  <div className="bg-white rounded-xl ring-1 ring-white/10 p-4 flex items-center justify-center h-32 w-32 md:h-40 md:w-40 mb-3 md:mb-4 transition-all duration-200 group-hover:scale-105 group-hover:ring-orange-primary/50 group-hover:shadow-lg group-hover:shadow-orange-primary/20">
                     <img
                       src={partner.logo}
                       alt={partner.name}
@@ -179,7 +181,8 @@ export default function Partneri() {
 
           {/* Partnership Info Section */}
           <div ref={infoRef} className={`text-center mb-6 md:mb-12 reveal ${infoInView ? 'in-view' : ''}`}>
-            <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Filozofia</span>
+            <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
               Čo znamená <span className="text-orange-primary">partnerstvo</span>
             </h2>
             <p className="text-white/80 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed">
@@ -187,27 +190,35 @@ export default function Partneri() {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-6 md:space-y-8 mb-8 md:mb-12">
-            <div>
-              <h3 className="text-white font-bold text-lg md:text-2xl mb-2 md:mb-4">Ako vzniká partnerstvo?</h3>
-              <p className="text-white/70 text-sm md:text-lg leading-relaxed">
-                Nevyhľadávame nových partnerov. Partnerstvo vzniká prirodzene po dlhodobej kvalitnej spolupráci ako poďakovanie za dôveru a profesionalitu. Len naši najbližší a najspoľahlivejší klienti sa môžu stať oficiálnymi partnermi.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-white font-bold text-lg md:text-2xl mb-2 md:mb-4">Vzájomné odporúčanie</h3>
-              <p className="text-white/70 text-sm md:text-lg leading-relaxed">
-                Partnerstvo znamená vzájomnú dôveru. Radi odporúčame služby našich partnerov aj našim klientom a spoločne vytvárame sieť spoľahlivých profesionálov v stavebnom priemysle.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-white font-bold text-lg md:text-2xl mb-2 md:mb-4">Komplexné pokrytie stavebníctva</h3>
-              <p className="text-white/70 text-sm md:text-lg leading-relaxed">
-                Naša sieť partnerov pokrýva široké spektrum stavebných služieb — od prenájmu strojov, cez zemné práce, až po dodávky materiálu. Pre našich klientov to znamená jedno spoľahlivé kontaktné miesto a rýchle riešenia.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 max-w-6xl mx-auto mb-8 md:mb-12">
+            {[
+              {
+                title: 'Ako vzniká partnerstvo?',
+                text: 'Nevyhľadávame nových partnerov. Partnerstvo vzniká prirodzene po dlhodobej kvalitnej spolupráci ako poďakovanie za dôveru a profesionalitu. Len naši najbližší a najspoľahlivejší klienti sa môžu stať oficiálnymi partnermi.',
+              },
+              {
+                title: 'Vzájomné odporúčanie',
+                text: 'Partnerstvo znamená vzájomnú dôveru. Radi odporúčame služby našich partnerov aj našim klientom a spoločne vytvárame sieť spoľahlivých profesionálov v stavebnom priemysle.',
+              },
+              {
+                title: 'Komplexné pokrytie stavebníctva',
+                text: 'Naša sieť partnerov pokrýva široké spektrum stavebných služieb — od prenájmu strojov, cez zemné práce, až po dodávky materiálu. Pre našich klientov to znamená jedno spoľahlivé kontaktné miesto a rýchle riešenia.',
+              },
+            ].map((item, i) => (
+              <div
+                key={item.title}
+                className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-5 md:p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 overflow-hidden"
+              >
+                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                  0{i + 1}
+                </span>
+                <div className="relative">
+                  <h3 className="text-white font-bold text-base md:text-xl mb-2 md:mb-3 group-hover:text-orange-primary transition-colors leading-tight">{item.title}</h3>
+                  <p className="text-white/65 text-sm md:text-base leading-relaxed">{item.text}</p>
+                </div>
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
+              </div>
+            ))}
           </div>
 
           <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
@@ -216,7 +227,7 @@ export default function Partneri() {
               </p>
               <a
                 href="tel:+421948555551"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-base rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+                className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
               >
                 <Phone size={16} className="md:w-5 md:h-5" />
                 <span>Zavolať: 0948 555 551</span>

@@ -83,7 +83,8 @@ export default function CenovaPonuka() {
         {/* Content */}
         <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+            <span className="eyebrow mb-5">Cenová ponuka</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
               Bezplatná konzultácia. <span className="text-orange-primary">Pripravíme do 24 hodín.</span>
             </h1>
             <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
@@ -111,7 +112,8 @@ export default function CenovaPonuka() {
           {/* Services Grid */}
           <div className="mb-12 md:mb-16">
             <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-              <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Ako pracujeme</span>
+              <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
                 Cenová ponuka do 24 hodín. <span className="text-orange-primary">Presne, férovo.</span>
               </h1>
               <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
@@ -125,9 +127,12 @@ export default function CenovaPonuka() {
                 return (
                   <div
                     key={service.id}
-                    className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
+                    className={`relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 group overflow-hidden reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                   >
-                    <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
+                    <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                      0{index + 1}
+                    </span>
+                    <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                       <IconComponent className="text-orange-primary" size={28} />
                     </div>
                     <h3 className="text-xl font-black text-white mb-3">{service.title}</h3>
@@ -151,7 +156,8 @@ export default function CenovaPonuka() {
           {/* Why Request a Quote Section */}
           <div ref={whyRef} className="mb-16">
             <div className="max-w-4xl mx-auto">
-              <div className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/30 rounded-3xl p-8 md:p-12 reveal-scale ${whyInView ? 'in-view' : ''}`}>
+              <div className={`relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-8 md:p-12 overflow-hidden shadow-lg shadow-black/40 reveal-scale ${whyInView ? 'in-view' : ''}`}>
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
                 <div className="text-center mb-6">
                   <h2 className="text-2xl md:text-3xl font-black text-white mb-4">
                     Prečo si vyžiadať <span className="text-orange-primary">ponuku?</span>
@@ -181,7 +187,8 @@ export default function CenovaPonuka() {
           {/* Benefits Section */}
           <div ref={stepsRef} className="mb-16">
             <div className={`text-center mb-12 reveal ${stepsInView ? 'in-view' : ''}`}>
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+              <span className="eyebrow eyebrow--center mb-4">3 kroky</span>
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
                 Ako to <span className="text-orange-primary">funguje?</span>
               </h2>
               <p className="text-white/70 max-w-3xl mx-auto mb-8">
@@ -190,7 +197,7 @@ export default function CenovaPonuka() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:border-orange-primary/50 transition-all reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   1
                 </div>
@@ -199,7 +206,7 @@ export default function CenovaPonuka() {
                   Popíšte nám vaše požiadavky a potreby
                 </p>
               </div>
-              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:border-orange-primary/50 transition-all reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   2
                 </div>
@@ -208,7 +215,7 @@ export default function CenovaPonuka() {
                   Spoločne nájdeme najlepšie riešenie
                 </p>
               </div>
-              <div className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 text-center hover:border-orange-primary/50 transition-all reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   3
                 </div>

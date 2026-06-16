@@ -54,7 +54,7 @@ export default function Cookies() {
       setTimeout(() => {
         window.location.href = '/';
       }, 1200);
-    } catch (e) {
+    } catch {
       // ignore
     }
   };
@@ -75,7 +75,8 @@ export default function Cookies() {
         <div className="relative z-10 max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Heading */}
           <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Cookies</span>
+            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
               <span className="text-orange-primary">Súbory</span> cookies
             </h1>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
@@ -84,7 +85,7 @@ export default function Cookies() {
           </div>
 
           {/* Intro */}
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
+          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
             <h2 className="text-lg md:text-2xl font-black text-white mb-3 md:mb-4">
               <span className="text-orange-primary">Stručne</span>
             </h2>
@@ -196,7 +197,7 @@ export default function Cookies() {
               ) : (
                 <button
                   onClick={handleReset}
-                  className="inline-flex items-center gap-2 px-5 md:px-6 py-2.5 md:py-3 bg-orange-primary hover:bg-orange-hover text-white text-sm md:text-base font-bold rounded-full transition-colors"
+                  className="btn-primary px-5 md:px-6 py-2.5 md:py-3 text-sm md:text-base rounded-full"
                 >
                   <RotateCcw size={18} />
                   Znova zobraziť oznámenie
@@ -206,7 +207,7 @@ export default function Cookies() {
           </div>
 
           {/* Related */}
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
+          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
             <h2 className="text-lg md:text-2xl font-black text-white mb-3 md:mb-4">
               Súvisiace dokumenty
             </h2>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, FileText, Package, Wrench, Truck, GraduationCap } from 'lucide-react';
+import { ShoppingCart, FileText, Package, Wrench, Truck, GraduationCap, Phone } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 import { useInView } from '../hooks/useInView';
@@ -107,7 +107,8 @@ export default function Sluzby() {
         {/* Content */}
         <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+            <span className="eyebrow mb-5">Služby · Senec</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
               Všetko pre vašu stavbu. <span className="text-orange-primary">Pod jednou strechou.</span>
             </h1>
             <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
@@ -134,7 +135,8 @@ export default function Sluzby() {
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Services section */}
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Naše služby</span>
+            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
               Čo pre vás <span className="text-orange-primary">môžeme urobiť?</span>
             </h1>
             <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
@@ -149,8 +151,11 @@ export default function Sluzby() {
                 <Link
                   key={service.id}
                   to={service.path}
-                  className={`relative bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 hover:border-orange-primary/50 transition-all group overflow-hidden reveal stagger-${Math.min(index + 1, 6)} ${gridInView ? 'in-view' : ''}`}
+                  className={`relative bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/10 transition-all group overflow-hidden reveal stagger-${Math.min(index + 1, 6)} ${gridInView ? 'in-view' : ''}`}
                 >
+                  {/* Orange top accent rule */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-20 opacity-70 group-hover:opacity-100 transition-opacity" />
+
                   {/* Background Image */}
                   <div className="absolute inset-0 z-0">
                     <img
@@ -196,7 +201,8 @@ export default function Sluzby() {
 
           {/* CTA Section - Integrated */}
           <div ref={ctaRef} className={`mt-16 text-center max-w-3xl mx-auto reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Poradenstvo zdarma</span>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
               Potrebujete poradiť?
             </h2>
             <p className={`text-white/70 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
@@ -204,8 +210,9 @@ export default function Sluzby() {
             </p>
             <a
               href="tel:+421948555551"
-              className={`inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}
+              className={`btn-primary text-base px-8 py-4 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}
             >
+              <Phone size={18} />
               <span>Zavolať teraz: 0948 555 551</span>
             </a>
           </div>

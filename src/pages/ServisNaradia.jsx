@@ -80,7 +80,8 @@ export default function ServisNaradia() {
         {/* Content */}
         <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+            <span className="eyebrow mb-5">Servis náradia</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
               Servis náradia
             </h1>
             <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
@@ -204,7 +205,8 @@ export default function ServisNaradia() {
 
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Servis náradia</span>
+            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
               Komplexný <span className="text-orange-primary">servis a údržba</span>
             </h1>
             <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
@@ -218,9 +220,9 @@ export default function ServisNaradia() {
               return (
                 <div
                   key={service.id}
-                  className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
+                  className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
+                  <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                     <IconComponent className="text-orange-primary" size={28} />
                   </div>
                   <h3 className="text-xl font-black text-white mb-3">{service.title}</h3>
@@ -306,35 +308,36 @@ export default function ServisNaradia() {
 
         <div ref={whyRef} className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div className={`text-center mb-12 reveal ${whyInView ? 'in-view' : ''}`}>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Výhody</span>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
               Prečo si vybrať náš <span className="text-orange-primary">servis</span>
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className={`text-center reveal stagger-1 ${whyInView ? 'in-view' : ''}`}>
-              <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
+              <div className="w-16 h-16 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
                 <Wrench className="text-orange-primary" size={32} />
               </div>
               <h3 className="text-white font-bold mb-2">Skúsení technici</h3>
               <p className="text-white/60 text-sm">Certifikovaní servisní technici s 10+ rokmi praxe</p>
             </div>
             <div className={`text-center reveal stagger-2 ${whyInView ? 'in-view' : ''}`}>
-              <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
+              <div className="w-16 h-16 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
                 <Zap className="text-orange-primary" size={32} />
               </div>
               <h3 className="text-white font-bold mb-2">Rýchle termíny</h3>
               <p className="text-white/60 text-sm">Expresný servis do 24 hodín</p>
             </div>
             <div className={`text-center reveal stagger-3 ${whyInView ? 'in-view' : ''}`}>
-              <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
+              <div className="w-16 h-16 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
                 <Settings className="text-orange-primary" size={32} />
               </div>
               <h3 className="text-white font-bold mb-2">Kvalitné diely</h3>
               <p className="text-white/60 text-sm">Len originálne a overené náhradné diely</p>
             </div>
             <div className={`text-center reveal stagger-4 ${whyInView ? 'in-view' : ''}`}>
-              <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
+              <div className="w-16 h-16 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 mx-auto">
                 <Phone className="text-orange-primary" size={32} />
               </div>
               <h3 className="text-white font-bold mb-2">Férové ceny</h3>
@@ -347,7 +350,8 @@ export default function ServisNaradia() {
       {/* CTA Section */}
       <section className="py-16 bg-black">
         <div ref={ctaRef} className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+          <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
             Potrebujete servis alebo opravu?
           </h2>
           <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
@@ -367,14 +371,14 @@ export default function ServisNaradia() {
           <div className="flex flex-wrap justify-center gap-4">
             <a
               href="tel:+421948555551"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+              className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
             >
               <Phone size={20} />
               <span>Zavolať teraz</span>
             </a>
             <a
               href="mailto:info@royalstroje.sk"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-800 border-2 border-zinc-700 text-white font-bold rounded-full hover:bg-zinc-700 transition-all"
+              className="btn-secondary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
             >
               <Mail size={20} />
               <span>Napísať email</span>

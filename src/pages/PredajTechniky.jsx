@@ -157,7 +157,8 @@ export default function PredajTechniky() {
         {/* Content */}
         <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+            <span className="eyebrow mb-5">Predaj techniky</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
               Predaj náradia<span className="text-orange-primary"> a príslušenstva</span>
             </h1>
             <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
@@ -190,7 +191,8 @@ export default function PredajTechniky() {
                 <Tag className="text-orange-primary" size={18} />
                 <span className="text-orange-primary font-bold text-sm uppercase tracking-wider">Jarná akcia</span>
               </div>
-              <h1 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-4 leading-tight">
+              <span className="eyebrow eyebrow--center mb-4">Akcia</span>
+              <h1 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-4 mt-4 leading-tight">
                 Akciové produkty <span className="text-orange-primary">skladom</span>
               </h1>
               <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${promoInView ? 'in-view' : ''}`}>
@@ -203,7 +205,7 @@ export default function PredajTechniky() {
               {promoProducts.map((product, index) => (
                 <div
                   key={product.id}
-                  className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-xl overflow-hidden hover:border-orange-primary/80 hover:shadow-xl hover:shadow-orange-primary/40 shadow-lg shadow-black/50 hover:scale-[1.01] transition-all duration-500 reveal stagger-${Math.min(index + 1, 3)} ${promoInView ? 'in-view' : ''}`}
+                  className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl overflow-hidden shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-${Math.min(index + 1, 3)} ${promoInView ? 'in-view' : ''}`}
                 >
                   {/* Product Image / Placeholder */}
                   <div className="aspect-[4/3] bg-gradient-to-br from-zinc-600 to-zinc-700 flex items-center justify-center p-4">
@@ -245,7 +247,7 @@ export default function PredajTechniky() {
                     <div className="flex flex-col gap-2">
                       <a
                         href="tel:+421948555551"
-                        className="inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-xs rounded-lg hover:scale-105 transition-all shadow-md shadow-orange-primary/30"
+                        className="btn-primary text-xs px-3 py-2.5"
                       >
                         <Phone size={14} />
                         <span>Kontaktovať nás</span>
@@ -253,7 +255,7 @@ export default function PredajTechniky() {
                       {product.blogLink && (
                         <Link
                           to={product.blogLink}
-                          className="inline-flex items-center justify-center gap-2 px-3 py-2 bg-zinc-800 border border-white/10 text-white/80 font-medium text-xs rounded-lg hover:bg-zinc-700 hover:border-orange-primary/30 transition-all"
+                          className="btn-secondary text-xs px-3 py-2"
                         >
                           <ExternalLink size={12} />
                           <span>Viac info</span>
@@ -272,7 +274,8 @@ export default function PredajTechniky() {
           {/* Categories Grid */}
           <div className="mb-12 md:mb-16">
             <div ref={catRef} className={`text-center mb-6 md:mb-12 reveal ${catInView ? 'in-view' : ''}`}>
-              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 leading-tight">
+              <span className="eyebrow eyebrow--center mb-4">Sortiment</span>
+              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4 leading-tight">
                 Kúpte náradie, ktoré používame my. <span className="text-orange-primary">Overené na stavbách.</span>
               </h2>
               <p className={`text-white/70 text-sm md:text-lg reveal-fade stagger-2 ${catInView ? 'in-view' : ''}`}>
@@ -287,7 +290,7 @@ export default function PredajTechniky() {
                 return (
                   <div
                     key={category.id}
-                    className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border border-orange-primary/30 rounded-xl p-4 md:p-5 hover:border-orange-primary/60 hover:shadow-xl hover:shadow-orange-primary/30 shadow-lg shadow-black/50 hover:scale-[1.01] transition-all duration-500 overflow-hidden reveal stagger-${Math.min(index + 1, 4)} ${catGridInView ? 'in-view' : ''}`}
+                    className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-4 md:p-5 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 overflow-hidden reveal stagger-${Math.min(index + 1, 4)} ${catGridInView ? 'in-view' : ''}`}
                   >
                     <div className="relative">
                       <div className="flex items-start gap-3 mb-3">
@@ -335,7 +338,7 @@ export default function PredajTechniky() {
 
           {/* Autorizovaný predajca Makita */}
           <div className="mb-12 md:mb-16">
-            <div className="relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-teal-500/30 rounded-xl p-5 md:p-8 overflow-hidden">
+            <div className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-teal-500/30 rounded-xl p-5 md:p-8 overflow-hidden shadow-lg shadow-black/40">
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-48 h-48 bg-teal-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
@@ -383,7 +386,7 @@ export default function PredajTechniky() {
 
           {/* Nivel System */}
           <div className="mb-12 md:mb-16">
-            <div className="relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-yellow-500/30 rounded-xl p-5 md:p-8 overflow-hidden">
+            <div className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-yellow-500/30 rounded-xl p-5 md:p-8 overflow-hidden shadow-lg shadow-black/40">
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-48 h-48 bg-yellow-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
@@ -431,7 +434,8 @@ export default function PredajTechniky() {
 
           {/* Intro Section */}
           <div className="text-center mb-6 md:mb-12">
-            <h2 className="text-xl md:text-4xl lg:text-5xl font-black text-white mb-3 md:mb-6 leading-tight">
+            <span className="eyebrow eyebrow--center mb-4">Prečo my</span>
+            <h2 className="text-xl md:text-4xl lg:text-5xl font-black text-white mb-3 md:mb-6 mt-4 leading-tight">
               Overené značky, <span className="text-orange-primary">férové ceny</span>
             </h2>
             <div className="max-w-4xl mx-auto">
@@ -448,25 +452,15 @@ export default function PredajTechniky() {
               return (
                 <div
                   key={idx}
-                  className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-4 md:p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden"
+                  className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-4 md:p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 overflow-hidden"
                 >
-                  {/* Animated border glow on hover */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                    background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                    backgroundSize: '200% 200%',
-                    animation: 'gradient-shift 3s ease infinite'
-                  }}></div>
-
                   <div className="relative text-center">
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-orange-primary/20 transition-all">
                       <IconComponent className="text-orange-primary" size={24} />
                     </div>
                     <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors">{advantage.title}</h3>
                     <p className="text-white/60 text-xs md:text-sm leading-relaxed">{advantage.description}</p>
                   </div>
-
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
                 </div>
               );
             })}
@@ -474,7 +468,8 @@ export default function PredajTechniky() {
 
           {/* Pripravujeme eshop - info banner */}
           <div className="mb-12 md:mb-16">
-            <div className="relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 md:p-10 overflow-hidden">
+            <div className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-10 overflow-hidden shadow-lg shadow-black/40">
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-orange-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
@@ -525,7 +520,8 @@ export default function PredajTechniky() {
           {/* CTA Content */}
           <div ref={ctaRef} className={`mt-10 md:mt-20 reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <div className="text-center mb-6 md:mb-12">
-              <h2 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Predajňa</span>
+              <h2 className="text-2xl md:text-5xl font-black text-white mb-3 md:mb-4 mt-4">
                 Navštívte našu <span className="text-orange-primary">kamennú predajňu</span>
               </h2>
               <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
@@ -536,16 +532,9 @@ export default function PredajTechniky() {
           {/* Info Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-12 max-w-6xl mx-auto">
             {/* Opening Hours */}
-            <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
-              {/* Animated border glow on hover */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                backgroundSize: '200% 200%',
-                animation: 'gradient-shift 3s ease infinite'
-              }}></div>
-
+            <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 overflow-hidden">
               <div className="relative text-center">
-                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 transition-all">
                   <svg className="w-7 h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -554,22 +543,12 @@ export default function PredajTechniky() {
                 <p className="text-orange-primary font-bold text-base mb-1">Po - Pi</p>
                 <p className="text-white/60 text-sm leading-relaxed">7:00 - 16:00</p>
               </div>
-
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </div>
 
             {/* Address */}
-            <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
-              {/* Animated border glow on hover */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                backgroundSize: '200% 200%',
-                animation: 'gradient-shift 3s ease infinite'
-              }}></div>
-
+            <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 overflow-hidden">
               <div className="relative text-center">
-                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 transition-all">
                   <svg className="w-7 h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -579,31 +558,18 @@ export default function PredajTechniky() {
                 <p className="text-white/80 text-base mb-1">Recká cesta 182</p>
                 <p className="text-orange-primary font-bold text-base">925 26 Senec</p>
               </div>
-
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </div>
 
             {/* Contact */}
-            <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
-              {/* Animated border glow on hover */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                backgroundSize: '200% 200%',
-                animation: 'gradient-shift 3s ease infinite'
-              }}></div>
-
+            <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 overflow-hidden">
               <div className="relative text-center">
-                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
+                <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 transition-all">
                   <Phone className="text-orange-primary" size={28} />
                 </div>
                 <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Kontakt</h3>
                 <p className="text-orange-primary font-bold text-base mb-1">+421 948 555 551</p>
                 <p className="text-white/60 text-sm leading-relaxed">info@royalstroje.sk</p>
               </div>
-
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
             </div>
           </div>
 
@@ -627,7 +593,7 @@ export default function PredajTechniky() {
             <div className="flex flex-wrap justify-center gap-3 md:gap-4">
               <a
                 href="tel:+421948555551"
-                className="inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-lg rounded-full hover:scale-105 transition-all shadow-2xl shadow-orange-primary/40 hover:shadow-orange-primary/60"
+                className="btn-primary text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 gap-2 md:gap-3"
               >
                 <Phone className="w-[18px] h-[18px] md:w-[22px] md:h-[22px]" />
                 <span>Zavolať teraz</span>
@@ -636,7 +602,7 @@ export default function PredajTechniky() {
                 href="https://wa.me/421948555551"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 bg-zinc-900 border border-zinc-700 md:border-2 text-white font-bold text-sm md:text-lg rounded-full hover:bg-zinc-800 hover:border-orange-primary/50 transition-all"
+                className="btn-secondary text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 gap-2 md:gap-3"
               >
                 <MessageCircle className="w-[18px] h-[18px] md:w-[22px] md:h-[22px] text-green-400" />
                 <span>WhatsApp</span>

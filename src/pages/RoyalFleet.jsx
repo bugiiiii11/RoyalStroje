@@ -103,7 +103,8 @@ export default function RoyalFleet() {
         {/* Content */}
         <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+            <span className="eyebrow mb-5">Royal Fleet</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
               Vlastná flotila bez kúpy. <span className="text-orange-primary">Fixná mesačná platba od 109 €.</span>
             </h1>
             <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
@@ -131,7 +132,8 @@ export default function RoyalFleet() {
           {/* Intro Section */}
           <div className="mb-12 md:mb-16">
             <div ref={introRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${introInView ? 'in-view' : ''}`}>
-              <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Royal Fleet</span>
+              <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
                 Dlhodobý prenájom pre firmy. <span className="text-orange-primary">Fixné náklady, žiadne prekvapenia.</span>
               </h1>
               <p className={`text-white/70 text-sm md:text-lg max-w-3xl mx-auto mb-4 md:mb-6 reveal-fade stagger-2 ${introInView ? 'in-view' : ''}`}>
@@ -146,7 +148,8 @@ export default function RoyalFleet() {
           {/* 3 Models of Cooperation */}
           <div className="mb-12 md:mb-16">
             <div className="text-center mb-6 md:mb-12">
-              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Modely</span>
+              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4 mt-4">
                 3 modely <span className="text-orange-primary">spolupráce</span>
               </h2>
               <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
@@ -158,7 +161,7 @@ export default function RoyalFleet() {
               {models.map((model, index) => (
                 <div
                   key={model.id}
-                  className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:bg-zinc-800 transition-all group reveal stagger-${Math.min(index + 1, 3)} ${modelsInView ? 'in-view' : ''}`}
+                  className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 group reveal stagger-${Math.min(index + 1, 3)} ${modelsInView ? 'in-view' : ''}`}
                 >
                   <h3 className="text-orange-primary font-black text-xl md:text-2xl mb-2">{model.title}</h3>
                   <p className="text-white font-bold text-sm md:text-base mb-3">{model.subtitle}</p>
@@ -185,8 +188,10 @@ export default function RoyalFleet() {
 
           {/* Real Example */}
           <div ref={exampleRef} className={`mb-12 md:mb-16 reveal-scale ${exampleInView ? 'in-view' : ''}`}>
-            <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/30 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 text-center">
+            <div className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto shadow-lg shadow-black/40">
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
+              <span className="eyebrow eyebrow--center mb-4">Úspora</span>
+              <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 mt-4 text-center">
                 Reálny príklad <span className="text-orange-primary">úspor</span>
               </h2>
               <p className="text-white/70 text-sm md:text-base mb-6 text-center">
@@ -240,7 +245,8 @@ export default function RoyalFleet() {
           {/* What's Included */}
           <div className="mb-12 md:mb-16">
             <div className="text-center mb-6 md:mb-12">
-              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">V cene</span>
+              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4 mt-4">
                 Čo je zahrnuté v <span className="text-orange-primary">mesačnej platbe?</span>
               </h2>
             </div>
@@ -251,9 +257,9 @@ export default function RoyalFleet() {
                 return (
                   <div
                     key={idx}
-                    className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all reveal stagger-${Math.min(idx + 1, 4)} ${benefitsInView ? 'in-view' : ''}`}
+                    className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-${Math.min(idx + 1, 4)} ${benefitsInView ? 'in-view' : ''}`}
                   >
-                    <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4">
+                    <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4">
                       <IconComponent className="text-orange-primary" size={28} />
                     </div>
                     <h3 className="text-white font-bold text-lg mb-2">{benefit.title}</h3>
@@ -269,7 +275,8 @@ export default function RoyalFleet() {
           {/* How It Works */}
           <div className="mb-12 md:mb-16">
             <div className="text-center mb-6 md:mb-12">
-              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Ako to funguje</span>
+              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4 mt-4">
                 Ako Royal Fleet <span className="text-orange-primary">funguje?</span>
               </h2>
             </div>
@@ -282,7 +289,7 @@ export default function RoyalFleet() {
                 { step: '4', title: 'Fixná mesačná suma', desc: 'Platíte pravidelne bez prekvapení' },
                 { step: '5', title: 'Servis a podpora', desc: 'Zabezpečujeme technickú podporu' },
               ].map((item, index) => (
-                <div key={item.step} className={`bg-zinc-900 border border-white/10 rounded-2xl p-4 text-center reveal stagger-${Math.min(index + 1, 5)} ${stepsInView ? 'in-view' : ''}`}>
+                <div key={item.step} className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-4 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-${Math.min(index + 1, 5)} ${stepsInView ? 'in-view' : ''}`}>
                   <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-3 mx-auto text-orange-primary font-black text-xl">
                     {item.step}
                   </div>
@@ -297,8 +304,10 @@ export default function RoyalFleet() {
 
           {/* Who Is It For */}
           <div ref={whoRef} className={`mb-12 md:mb-16 reveal ${whoInView ? 'in-view' : ''}`}>
-            <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 text-center">
+            <div className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto shadow-lg shadow-black/40">
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
+              <span className="eyebrow eyebrow--center mb-4">Pre koho</span>
+              <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 mt-4 text-center">
                 Pre koho je <span className="text-orange-primary">Royal Fleet</span> ideálny?
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -321,8 +330,10 @@ export default function RoyalFleet() {
 
           {/* Conditions */}
           <div className="mb-12 md:mb-16">
-            <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/20 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto">
-              <h2 className="text-xl md:text-2xl font-black text-white mb-4 text-center">
+            <div className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto shadow-lg shadow-black/40">
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
+              <span className="eyebrow eyebrow--center mb-4">Podmienky</span>
+              <h2 className="text-xl md:text-2xl font-black text-white mb-4 mt-4 text-center">
                 Podmienky <span className="text-orange-primary">spolupráce</span>
               </h2>
               <p className="text-white/70 text-sm md:text-base mb-4 leading-relaxed text-center">
@@ -347,7 +358,8 @@ export default function RoyalFleet() {
 
           {/* CTA Section */}
           <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <h2 className="text-2xl md:text-4xl font-black text-white mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
+            <h2 className="text-2xl md:text-4xl font-black text-white mb-4 mt-4">
               Zaujíma vás Royal Fleet?
             </h2>
             <p className="text-white/70 text-sm md:text-lg mb-8 max-w-2xl mx-auto">
@@ -367,14 +379,14 @@ export default function RoyalFleet() {
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="tel:+421948555551"
-                className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-base rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+                className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
               >
                 <Phone size={20} />
                 <span>Zavolať teraz</span>
               </a>
               <a
                 href="mailto:info@royalstroje.sk"
-                className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-zinc-800 border border-zinc-700 md:border-2 text-white font-bold text-sm md:text-base rounded-full hover:bg-zinc-700 transition-all"
+                className="btn-secondary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
               >
                 <Mail size={20} />
                 <span>Napísať email</span>

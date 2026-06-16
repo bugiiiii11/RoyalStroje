@@ -25,7 +25,8 @@ export default function GDPR() {
 
           {/* Section Heading */}
           <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Ochrana údajov</span>
+            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
               <span className="text-orange-primary">Ochrana</span> osobných údajov
             </h1>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
@@ -34,7 +35,7 @@ export default function GDPR() {
           </div>
 
           {/* Header Info */}
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
+          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-xs md:text-base">
               <div>
                 <p className="text-white/60 mb-1 text-[10px] md:text-sm">Prevádzkovateľ</p>
@@ -282,7 +283,7 @@ export default function GDPR() {
             </div>
 
             {/* Section VIII - Contact Info */}
-            <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
+            <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8">
               <h2 className="text-2xl md:text-3xl font-black text-white mb-6">
                 <span className="text-orange-primary">VIII.</span> Dozorný orgán
               </h2>

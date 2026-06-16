@@ -287,7 +287,8 @@ export default function Blog() {
         {/* Content */}
         <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+            <span className="eyebrow mb-5">Blog</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
               Stavajte efektívnejšie. <span className="text-orange-primary">Tipy od profesionálov.</span>
             </h1>
             <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
@@ -315,7 +316,8 @@ export default function Blog() {
 
           {/* Section Heading - Improved Typography */}
           <div ref={headingRef} className="text-center mb-10 md:mb-16 pt-16 md:pt-0">
-            <h1 className={`text-2xl md:text-5xl font-black text-white mb-3 md:mb-6 tracking-tight leading-tight reveal ${headingInView ? 'in-view' : ''}`}>
+            <span className={`eyebrow eyebrow--center mb-4 reveal ${headingInView ? 'in-view' : ''}`}>Články &amp; návody</span>
+            <h1 className={`text-2xl md:text-5xl font-black text-white mb-3 md:mb-6 mt-4 tracking-tight leading-tight reveal ${headingInView ? 'in-view' : ''}`}>
               Najnovšie články <span className="text-orange-primary">a praktické návody</span>
             </h1>
             <p className={`text-white/80 text-base md:text-xl max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
@@ -330,8 +332,11 @@ export default function Blog() {
                 <Link
                   key={post.id}
                   to={`/blog/${post.slug}`}
-                  className={`group bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 ease-out relative reveal stagger-${Math.min(index + 1, 8)} ${gridInView ? 'in-view' : ''}`}
+                  className={`group bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 hover:-translate-y-1 transition-all duration-300 relative reveal stagger-${Math.min(index + 1, 8)} ${gridInView ? 'in-view' : ''}`}
                 >
+                  {/* Orange top accent rule */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-20 opacity-0 group-hover:opacity-100 transition-opacity" />
+
                   {/* Image - Enhanced with Zoom Effect */}
                   <div className="relative h-48 md:h-64 overflow-hidden bg-gradient-to-br from-orange-100 via-orange-50 to-zinc-100">
                     <img
@@ -373,15 +378,8 @@ export default function Blog() {
                     </div>
                   </div>
 
-                  {/* Hover overlay - Enhanced Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/10 group-hover:to-orange-primary/5 transition-all duration-500 pointer-events-none"></div>
-
-                  {/* Animated border glow on hover */}
-                  <div className="absolute inset-0 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                    background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                    backgroundSize: '200% 200%',
-                    animation: 'gradient-shift 3s ease infinite'
-                  }}></div>
+                  {/* Hover overlay - subtle tint */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/0 to-orange-primary/0 group-hover:from-orange-primary/[0.07] group-hover:to-orange-primary/[0.03] transition-all duration-300 pointer-events-none"></div>
                 </Link>
               ))}
             </div>
@@ -393,7 +391,8 @@ export default function Blog() {
             <div className="absolute inset-0 bg-gradient-to-br from-zinc-700/20 via-zinc-600/10 to-transparent rounded-3xl blur-3xl"></div>
 
             <div className="relative text-center py-12 md:py-16 px-4">
-              <h2 className="text-2xl md:text-4xl font-black text-white mb-4 md:mb-6 tracking-tight">
+              <span className="eyebrow eyebrow--center mb-4">Potrebujete techniku?</span>
+              <h2 className="text-2xl md:text-4xl font-black text-white mb-4 md:mb-6 mt-4 tracking-tight">
                 Zaujala vás naša ponuka?
               </h2>
               <p className={`text-white/80 text-base md:text-xl mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
@@ -402,13 +401,13 @@ export default function Blog() {
               <div className={`flex flex-wrap justify-center gap-4 md:gap-6 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}>
                 <Link
                   to="/kontakt"
-                  className="inline-flex items-center gap-2 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-base md:text-lg rounded-full hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-orange-primary/50 hover:shadow-orange-primary/70"
+                  className="btn-primary text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
                 >
                   <span>Kontaktujte nás</span>
                 </Link>
                 <Link
                   to="/sluzby"
-                  className="inline-flex items-center gap-2 px-8 py-4 md:px-10 md:py-5 bg-zinc-800 border-2 border-orange-primary/30 text-white font-bold text-base md:text-lg rounded-full hover:bg-zinc-700 hover:border-orange-primary transition-all hover:scale-105 active:scale-95 shadow-lg"
+                  className="btn-secondary text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
                 >
                   <span>Naše služby</span>
                 </Link>

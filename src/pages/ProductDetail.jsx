@@ -121,8 +121,8 @@ export default function ProductDetail() {
               <span>Späť na katalóg</span>
             </button>
 
-            <p className="text-orange-primary text-sm font-bold uppercase tracking-wider mb-1">{product.name}</p>
-            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight">
+            <span className="eyebrow mb-5">{product.name}</span>
+            <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black text-white mt-5 leading-tight">
               {product.brand} <span className="text-orange-primary">{product.model}</span>
             </h1>
           </div>
@@ -157,7 +157,7 @@ export default function ProductDetail() {
             {/* LEFT: Product Image */}
             <div className="lg:col-span-5">
               <div className="sticky top-24">
-                <div className="relative bg-gradient-to-br from-zinc-900 to-zinc-800 border border-white/10 rounded-2xl p-4 md:p-6">
+                <div className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-4 md:p-6 shadow-lg shadow-black/40">
                   <div className="bg-white rounded-xl aspect-square flex items-center justify-center p-6">
                     <img
                       src={product.image}
@@ -173,7 +173,9 @@ export default function ProductDetail() {
             <div className="lg:col-span-7 space-y-6">
 
               {/* ── Price & CTA Card ── */}
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl overflow-hidden">
+              <div className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl shadow-lg shadow-black/40 overflow-hidden">
+                {/* Orange top accent rule */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
                 {/* Price section */}
                 <div className="p-5 md:p-7">
                   <h2 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Cena prenájmu na deň</h2>
@@ -227,7 +229,8 @@ export default function ProductDetail() {
               {product.parameters.length > 0 && (
                 <div className="bg-zinc-900/50 border border-white/10 rounded-2xl overflow-hidden">
                   <div className="px-5 py-4 md:px-7 md:py-5 border-b border-white/10">
-                    <h2 className="text-white font-black text-lg md:text-xl">Technické parametre</h2>
+                    <span className="eyebrow mb-2">Špecifikácie</span>
+                    <h2 className="text-white font-black text-lg md:text-xl mt-2">Technické parametre</h2>
                   </div>
                   <div className="divide-y divide-white/5">
                     {product.parameters.map((param, idx) => (
@@ -260,13 +263,14 @@ export default function ProductDetail() {
           </div>
 
           {/* ─── Bottom CTA Section ─── */}
-          <div className="relative bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-950 border border-white/10 rounded-2xl md:rounded-3xl p-6 md:p-10 overflow-hidden">
-            {/* Subtle accent line */}
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-primary/50 to-transparent" />
+          <div className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl shadow-lg shadow-black/40 p-6 md:p-10 overflow-hidden">
+            {/* Orange top accent rule */}
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
 
             <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div className="lg:max-w-lg">
-                <h2 className="text-white font-black text-xl md:text-2xl lg:text-3xl mb-2">
+                <span className="eyebrow mb-4">Kontakt</span>
+                <h2 className="text-white font-black text-xl md:text-2xl lg:text-3xl mb-2 mt-4">
                   Máte záujem o <span className="text-orange-primary">tento produkt?</span>
                 </h2>
                 <p className="text-white/70 text-sm md:text-base">
@@ -282,7 +286,7 @@ export default function ProductDetail() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
                   href="tel:+421948555551"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-base rounded-xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-orange-primary/30"
+                  className="btn-primary text-base px-7 py-4"
                 >
                   <Phone size={20} />
                   <span>Zavolať teraz</span>
@@ -291,7 +295,7 @@ export default function ProductDetail() {
                   href="https://wa.me/421948555551"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-zinc-800 border border-white/10 text-white font-bold text-base rounded-xl hover:bg-zinc-700 hover:border-orange-primary/30 transition-all"
+                  className="btn-secondary text-base px-7 py-4"
                 >
                   <MessageCircle size={20} className="text-green-400" />
                   <span>WhatsApp</span>

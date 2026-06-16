@@ -124,11 +124,12 @@ export default function SkoLenieObsluhy() {
         />
         <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
           <div className="max-w-3xl">
+            <span className="eyebrow mb-5">Školenie obsluhy</span>
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-primary/20 border border-orange-primary/40 rounded-full text-orange-primary text-sm font-bold mb-6">
               <GraduationCap size={16} />
               V spolupráci s Alpha Safety s.r.o.
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
               Preukaz obsluhy strojov. <span className="text-orange-primary">Rýchlo a legálne.</span>
             </h1>
             <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
@@ -150,7 +151,8 @@ export default function SkoLenieObsluhy() {
 
           {/* Intro */}
           <div ref={introRef} className={`text-center mb-10 md:mb-16 pt-16 md:pt-0 reveal ${introInView ? 'in-view' : ''}`}>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-3 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Školenie obsluhy</span>
+            <h1 className="text-xl md:text-4xl font-black text-white mb-3 md:mb-4 mt-4">
               Školenie obsluhy <span className="text-orange-primary">stavebných strojov</span>
             </h1>
             <p className={`text-white/70 text-sm md:text-lg max-w-3xl mx-auto mb-4 reveal-fade stagger-2 ${introInView ? 'in-view' : ''}`}>
@@ -163,8 +165,9 @@ export default function SkoLenieObsluhy() {
 
           {/* Alpha Safety Partner Banner */}
           <div className="mb-10 md:mb-16">
-            <div ref={partnerRef} className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/30 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 reveal-scale ${partnerInView ? 'in-view' : ''}`}>
-              <div className="w-16 h-16 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0">
+            <div ref={partnerRef} className={`relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 shadow-lg shadow-black/40 reveal-scale ${partnerInView ? 'in-view' : ''}`}>
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
+              <div className="w-16 h-16 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0">
                 <Shield className="text-orange-primary" size={32} />
               </div>
               <div className="text-center md:text-left">
@@ -182,7 +185,8 @@ export default function SkoLenieObsluhy() {
           {/* Course Types */}
           <div className="mb-10 md:mb-16">
             <div ref={coursesRef} className={`text-center mb-6 md:mb-12 reveal ${coursesInView ? 'in-view' : ''}`}>
-              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Kurzy</span>
+              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4 mt-4">
                 Typy <span className="text-orange-primary">kurzov</span>
               </h2>
               <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
@@ -194,7 +198,7 @@ export default function SkoLenieObsluhy() {
               {certTypes.map((cert, index) => (
                 <div
                   key={cert.id}
-                  className={`bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all group reveal stagger-${Math.min(index + 1, 6)} ${coursesInView ? 'in-view' : ''}`}
+                  className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 group reveal stagger-${Math.min(index + 1, 6)} ${coursesInView ? 'in-view' : ''}`}
                 >
                   <div className="text-3xl mb-4">{cert.icon}</div>
                   <h3 className="text-white font-black text-lg md:text-xl mb-1 group-hover:text-orange-primary transition">
@@ -214,7 +218,8 @@ export default function SkoLenieObsluhy() {
           {/* Benefits */}
           <div className="mb-10 md:mb-16">
             <div ref={benefitsRef} className={`text-center mb-6 md:mb-12 reveal ${benefitsInView ? 'in-view' : ''}`}>
-              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Výhody</span>
+              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4 mt-4">
                 Prečo absolvovať <span className="text-orange-primary">školenie u nás?</span>
               </h2>
             </div>
@@ -225,9 +230,9 @@ export default function SkoLenieObsluhy() {
                 return (
                   <div
                     key={idx}
-                    className={`bg-zinc-900 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all reveal stagger-${Math.min(idx + 1, 4)} ${benefitsInView ? 'in-view' : ''}`}
+                    className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-${Math.min(idx + 1, 4)} ${benefitsInView ? 'in-view' : ''}`}
                   >
-                    <div className="w-14 h-14 rounded-2xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4">
+                    <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4">
                       <Icon className="text-orange-primary" size={28} />
                     </div>
                     <h3 className="text-white font-bold text-lg mb-2">{benefit.title}</h3>
@@ -241,14 +246,15 @@ export default function SkoLenieObsluhy() {
           {/* How It Works */}
           <div className="mb-10 md:mb-16">
             <div ref={stepsRef} className={`text-center mb-6 md:mb-12 reveal ${stepsInView ? 'in-view' : ''}`}>
-              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Postup</span>
+              <h2 className="text-2xl md:text-4xl font-black text-white mb-3 md:mb-4 mt-4">
                 Ako to <span className="text-orange-primary">funguje?</span>
               </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
               {steps.map((item, index) => (
-                <div key={item.step} className={`bg-zinc-900 border border-white/10 rounded-2xl p-4 text-center reveal stagger-${Math.min(index + 1, 5)} ${stepsInView ? 'in-view' : ''}`}>
+                <div key={item.step} className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-4 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-${Math.min(index + 1, 5)} ${stepsInView ? 'in-view' : ''}`}>
                   <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-3 mx-auto text-orange-primary font-black text-xl">
                     {item.step}
                   </div>
@@ -261,8 +267,9 @@ export default function SkoLenieObsluhy() {
 
           {/* Who Is It For */}
           <div className="mb-10 md:mb-16">
-            <div className="bg-zinc-900/50 border border-white/10 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 text-center">
+            <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto shadow-lg shadow-black/40">
+              <span className="eyebrow eyebrow--center mb-4">Pre koho</span>
+              <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 mt-4 text-center">
                 Pre koho je školenie <span className="text-orange-primary">určené?</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -285,8 +292,10 @@ export default function SkoLenieObsluhy() {
 
           {/* Legal Note */}
           <div className="mb-10 md:mb-16">
-            <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/20 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto">
-              <h2 className="text-xl md:text-2xl font-black text-white mb-3 text-center">
+            <div className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto shadow-lg shadow-black/40">
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
+              <span className="eyebrow eyebrow--center mb-4">Legislatíva</span>
+              <h2 className="text-xl md:text-2xl font-black text-white mb-3 mt-4 text-center">
                 Legislatívna <span className="text-orange-primary">povinnosť</span>
               </h2>
               <p className="text-white/70 text-sm md:text-base leading-relaxed text-center mb-4">
@@ -309,7 +318,8 @@ export default function SkoLenieObsluhy() {
 
           {/* CTA */}
           <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <h2 className="text-2xl md:text-4xl font-black text-white mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
+            <h2 className="text-2xl md:text-4xl font-black text-white mb-4 mt-4">
               Záujem o školenie?
             </h2>
             <p className={`text-white/70 text-sm md:text-lg mb-8 max-w-2xl mx-auto reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
@@ -329,14 +339,14 @@ export default function SkoLenieObsluhy() {
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="tel:+421948555551"
-                className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-base rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40"
+                className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
               >
                 <Phone size={20} />
                 <span>Zavolať teraz</span>
               </a>
               <a
                 href="mailto:info@royalstroje.sk"
-                className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-zinc-800 border border-zinc-700 md:border-2 text-white font-bold text-sm md:text-base rounded-full hover:bg-zinc-700 transition-all"
+                className="btn-secondary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
               >
                 <Mail size={20} />
                 <span>Napísať email</span>

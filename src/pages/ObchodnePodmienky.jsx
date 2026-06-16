@@ -29,7 +29,8 @@ export default function ObchodnePodmienky() {
 
           {/* Section Heading */}
           <div className="text-center mb-6 md:mb-12 pt-16 md:pt-0">
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Obchodné podmienky</span>
+            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
               <span className="text-orange-primary">Obchodné</span> podmienky
             </h1>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-4 md:mb-0">
@@ -69,7 +70,7 @@ export default function ObchodnePodmienky() {
           {activeTab === 'po' && (
             <>
               {/* Header Info */}
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-xs md:text-base">
                   <div>
                     <p className="text-white/60 mb-1 text-[10px] md:text-sm">Verzia</p>
@@ -365,7 +366,7 @@ export default function ObchodnePodmienky() {
           {activeTab === 'fo' && (
             <>
               {/* Header Info */}
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 mb-6 md:mb-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-xs md:text-base">
                   <div>
                     <p className="text-white/60 mb-1 text-[10px] md:text-sm">Verzia</p>

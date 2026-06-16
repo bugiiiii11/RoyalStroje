@@ -113,7 +113,8 @@ export default function BlogDetail() {
               <span>Späť na blog</span>
             </Link>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
+            <span className="eyebrow mb-5">Článok</span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 mt-5 leading-tight">
               {meta.title}
             </h1>
 
@@ -215,7 +216,8 @@ export default function BlogDetail() {
 
           {/* CTA Section - Integrated */}
           <div ref={ctaRef} className={`mt-16 text-center max-w-3xl mx-auto reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
               Potrebujete poradiť?
             </h2>
             <p className={`text-white/70 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
@@ -223,15 +225,16 @@ export default function BlogDetail() {
             </p>
             <a
               href="tel:+421948555551"
-              className={`inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold rounded-full hover:scale-105 transition-all shadow-xl shadow-orange-primary/40 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}
+              className={`btn-primary text-base px-8 py-4 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}
             >
               <span>Zavolať teraz: 0948 555 551</span>
             </a>
           </div>
 
           {/* Related Articles */}
-          <div className={`mt-16 reveal ${ctaInView ? 'in-view' : ''}`}>
-            <h3 className="text-2xl md:text-3xl font-black text-white mb-8 text-center">
+          <div className={`mt-16 text-center reveal ${ctaInView ? 'in-view' : ''}`}>
+            <span className="eyebrow eyebrow--center mb-4">Súvisiace</span>
+            <h3 className="text-2xl md:text-3xl font-black text-white mb-8 mt-4 text-center">
               Ďalšie <span className="text-orange-primary">články</span>
             </h3>
             <div className="text-center">

@@ -137,7 +137,8 @@ export default function Kontakt() {
 
           {/* Section Heading */}
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+            <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
+            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
               Vyberte si <span className="text-orange-primary">spôsob kontaktu</span>
             </h1>
             <p className={`text-white/70 max-w-2xl mx-auto text-sm md:text-lg reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
@@ -150,15 +151,8 @@ export default function Kontakt() {
             {/* Phone */}
             <a
               href="tel:+421948555551"
-              className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden reveal stagger-1 ${cardsInView ? 'in-view' : ''}`}
+              className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden reveal stagger-1 ${cardsInView ? 'in-view' : ''}`}
             >
-              {/* Animated border glow on hover */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                backgroundSize: '200% 200%',
-                animation: 'gradient-shift 3s ease infinite'
-              }}></div>
-
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                   <Phone className="text-orange-primary" size={28} />
@@ -177,15 +171,8 @@ export default function Kontakt() {
               href="https://wa.me/421948555551"
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden reveal stagger-2 ${cardsInView ? 'in-view' : ''}`}
+              className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden reveal stagger-2 ${cardsInView ? 'in-view' : ''}`}
             >
-              {/* Animated border glow on hover */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                backgroundSize: '200% 200%',
-                animation: 'gradient-shift 3s ease infinite'
-              }}></div>
-
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                   <MessageCircle className="text-orange-primary" size={28} />
@@ -204,15 +191,8 @@ export default function Kontakt() {
               href="https://t.me/Royalstroje"
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden reveal stagger-3 ${cardsInView ? 'in-view' : ''}`}
+              className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden reveal stagger-3 ${cardsInView ? 'in-view' : ''}`}
             >
-              {/* Animated border glow on hover */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                backgroundSize: '200% 200%',
-                animation: 'gradient-shift 3s ease infinite'
-              }}></div>
-
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                   <Send className="text-orange-primary" size={28} />
@@ -229,15 +209,8 @@ export default function Kontakt() {
             {/* Email */}
             <a
               href="mailto:info@royalstroje.sk"
-              className={`group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden reveal stagger-4 ${cardsInView ? 'in-view' : ''}`}
+              className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden reveal stagger-4 ${cardsInView ? 'in-view' : ''}`}
             >
-              {/* Animated border glow on hover */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                backgroundSize: '200% 200%',
-                animation: 'gradient-shift 3s ease infinite'
-              }}></div>
-
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                   <Mail className="text-orange-primary" size={28} />
@@ -256,7 +229,8 @@ export default function Kontakt() {
           <div className="space-y-4 md:space-y-8">
             {/* Section Header */}
             <div ref={visitRef} className={`text-center mb-3 md:mb-12 reveal ${visitInView ? 'in-view' : ''}`}>
-              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+              <span className="eyebrow eyebrow--center mb-4">Predajňa</span>
+              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
                 Navštívte nás v <span className="text-orange-primary">Senci</span>
               </h2>
               <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-lg hidden md:block">
@@ -267,14 +241,7 @@ export default function Kontakt() {
             {/* Opening Hours & Address - 2 Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8 md:mb-12">
               {/* Opening Hours */}
-              <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
-                {/* Animated border glow on hover */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                  backgroundSize: '200% 200%',
-                  animation: 'gradient-shift 3s ease infinite'
-                }}></div>
-
+              <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden">
                 <div className="relative text-center">
                   <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                     <Clock className="text-orange-primary" size={28} />
@@ -289,14 +256,7 @@ export default function Kontakt() {
               </div>
 
               {/* Address */}
-              <div className="group relative bg-gradient-to-br from-zinc-800 to-zinc-900 border-2 border-orange-primary/30 rounded-2xl p-6 hover:border-orange-primary/80 hover:shadow-2xl hover:shadow-orange-primary/50 shadow-lg shadow-black/50 hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 overflow-hidden">
-                {/* Animated border glow on hover */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{
-                  background: 'linear-gradient(45deg, transparent 30%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-                  backgroundSize: '200% 200%',
-                  animation: 'gradient-shift 3s ease infinite'
-                }}></div>
-
+              <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden">
                 <div className="relative text-center">
                   <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                     <MapPin className="text-orange-primary" size={28} />
@@ -314,7 +274,7 @@ export default function Kontakt() {
             {/* Map and Company Info - 2 Column Grid - Hidden on mobile */}
             <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Map */}
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-6 overflow-hidden">
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 overflow-hidden">
                 <h3 className="text-white font-black text-xl mb-4 px-2">Nájdete nás tu</h3>
                 <div className="rounded-2xl overflow-hidden border-2 border-white/10 h-[350px] mb-4">
                   <iframe
@@ -340,7 +300,7 @@ export default function Kontakt() {
               </div>
 
               {/* Company Info & About */}
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl overflow-hidden">
+              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl overflow-hidden">
                 {/* Content */}
                 <div className="p-8">
                   {/* Company Information */}
@@ -368,7 +328,7 @@ export default function Kontakt() {
             </div>
 
             {/* Mobile Map */}
-            <div className="md:hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-white/10 rounded-3xl p-4 overflow-hidden">
+            <div className="md:hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-4 overflow-hidden">
               <h3 className="text-white font-black text-lg mb-3">Nájdete nás tu</h3>
               <div className="rounded-2xl overflow-hidden border-2 border-white/10 h-[250px] mb-3">
                 <iframe
@@ -396,7 +356,8 @@ export default function Kontakt() {
             {/* Gallery - photos of the shop */}
             <div ref={galleryRef} className={`mt-8 md:mt-12 reveal ${galleryInView ? 'in-view' : ''}`}>
               <div className="text-center mb-6 md:mb-10">
-                <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4">
+                <span className="eyebrow eyebrow--center mb-4">Galéria</span>
+                <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
                   Pohľad do <span className="text-orange-primary">našej predajne</span>
                 </h2>
                 <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-lg">
@@ -480,7 +441,7 @@ export default function Kontakt() {
             <div ref={ctaRef} className={`text-center pt-4 md:pt-8 reveal-scale ${ctaInView ? 'in-view' : ''}`}>
               <a
                 href="tel:+421948555551"
-                className="inline-flex items-center justify-center gap-2 md:gap-3 px-6 py-3 md:px-10 md:py-5 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm md:text-lg rounded-full hover:scale-105 transition-all shadow-2xl shadow-orange-primary/50"
+                className="btn-primary text-sm md:text-lg px-6 py-3 md:px-10 md:py-5"
               >
                 <Phone size={18} className="md:w-6 md:h-6" />
                 <span>Zavolať: 0948 555 551</span>
@@ -518,7 +479,7 @@ export default function Kontakt() {
       {/* Lightbox modal */}
       {lightboxIdx !== null && (
         <div
-          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+          className="fixed inset-0 z-[100] bg-black/90 md:backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
           onClick={closeLightbox}
           role="dialog"
           aria-modal="true"
