@@ -24,6 +24,8 @@
 | 19 | 2026-05-26 | Contract number format YYXXXX + PDF filename overhaul | New contract number format 260147 (YY+XXXX), PDF filename "{number} {client} - ukončené", migration 020 drops unique constraint for partial returns, confirm screen shows contract number |
 | 20 | 2026-05-29 | Dashboard cleanup + daysBetween fix | Fixed `daysBetween` off-by-one (29.5.→30.5. = 1 day, not 2), capped Ukončená pipeline at 5 cards with link to Faktúry, fixed `activeRentals` query (`active` → `inquiry`), renamed "Dnes" → "Dnešné udalosti" |
 | 21 | 2026-06-03 | Mobile footer gap + mobile GPU garbage fix | Removed `main pb-20` black gap above footer on mobile; fixed scrambled GPU garbage/tearing bands on real Android (FAQ + product grid) — root cause was `backdrop-filter` on the fixed hamburger button forcing whole-page read-back compositing |
+| 22 | 2026-06-16 | Landing page redesign — Industrial Premium | New type system (Archivo display + Manrope body via Google Fonts), eyebrow/hairline/button primitives, refined hero (desktop+mobile), numbered why-us cards, cleaner FAQ, modernized catalog shell + product cards + quote form, header/footer cohesion. Dark+orange+white kept, hero image + all texts/CTAs preserved. Committed `bf57e7d` (session 23). |
+| 23 | 2026-06-16 | Industrial-premium rollout to all remaining pages | Applied the session-22 design system across all 18 remaining public pages (Sluzby, Kontakt, Partneri, CenovaPonuka, Kosik, Blog, BlogDetail, ProductDetail, 7 service pages, 3 legal pages): eyebrows, `.btn-primary`/`.btn-secondary` CTAs, canonical card style, orange top-accent rules, removed loud cards + `gradient-shift` sheen. GPU guard upheld. Build + lint clean. Committed `f8d1d38` + pushed. |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -269,9 +271,66 @@ Date: 2026-06-03
 5. **ProductCard badge blurs gated to desktop** -- the price/Novinka/badge `backdrop-blur-*` on product cards is now `md:backdrop-blur-*` with bumped mobile opacity. Part of the hunt; harmless and reduces mobile GPU surfaces. Files: `src/components/product/ProductCard.jsx`. Committed: `4f7c0a0`.
 6. **Dead ends (reverted, documented in git history)** -- `overflow-x-clip` / `overflow: visible` on root div / ContentSection / FAQ (commits `6733a9a`, `6a7cbb7`, `dede89c`) and AnimatedBackground `translateZ` promotion did **not** fix it and were reverted. Lesson: the fixed-element `backdrop-filter` was the real trigger the whole time. **Never put `backdrop-filter` on a `fixed`/`sticky` element that stays on screen during scroll on budget Android.**
 
+## What Was Done (Session 22) -- Landing Page Redesign (Industrial Premium)
+Date: 2026-06-16
+**Status: UNCOMMITTED** -- 12 files modified, not yet committed/pushed (owner wants to verify on a real mobile device first). Dev server was run locally at `localhost:5173` for screenshot review.
+
+### Design direction
+- User asked for a more modern landing page; chose **industrial-premium** direction with an **industrial font pairing**, scope = **whole page**. Constraints kept: dark theme, orange `#FF6600` primary, white secondary, hero image (`/stroje2.webp`), all texts + CTAs preserved. Implementation guided by the `frontend-design` skill. Hero shown to owner for sign-off before rolling across the catalog (approved).
+
+### Foundation (type system + primitives)
+1. **Fonts (the big change)** -- site previously used **system default fonts (no web font)**. Added **Archivo** (display/headings, wght 600–900) + **Manrope** (body, wght 400–800) via Google Fonts in `index.html` (preconnect + `display=swap`; `latin-ext` subset auto-served for Slovak diacritics). Wired `fontFamily.sans = Manrope`, `fontFamily.display = Archivo` in `tailwind.config.js`. Base `body`→Manrope, `h1–h6`→Archivo with `letter-spacing: -0.015em` in `src/index.css`. Files: `index.html`, `tailwind.config.js`, `src/index.css`.
+2. **Reusable primitives** in `src/index.css` (`@layer components`): `.eyebrow` (orange uppercase label with leading rule; `.eyebrow--center` adds trailing rule) used above every section title; `.hairline` (orange→transparent divider); `.btn-primary` (orange gradient + inset highlight + hover lift) and `.btn-secondary` (outline). Radius moved from `rounded-full` pills toward `rounded-xl` for the engineered look.
+
+### Sections
+3. **Hero (desktop)** `src/components/home/Hero.jsx` -- glass "spec panel" with orange top accent rule, eyebrow `SENEC · BRATISLAVA`, Archivo headline, `.btn-primary`/`.btn-secondary` CTAs, and a stat strip (`20+ rokov · 24 h dovoz · 24/7 linka`, derived from existing copy). No image-wide dark overlay (kept session-15 true-color decision). Blur stays (panel is `relative`, not fixed → GPU-safe). Staggered entrance extended to 5 steps.
+4. **Hero (mobile)** `src/components/home/MobileHero.jsx` -- same treatment scaled; eyebrow, stat strip, panel bumped to `bg-black/35`. Kept image, both CTAs, accent line, scroll indicator.
+5. **Why-us** `src/components/home/WhyRoyalStroje.jsx` -- numbered cards `01–04` (big faint index number), orange icon tiles, hairline borders, eyebrow `Prečo Royal Stroje`. **Non-transform hover only** (border/shadow/bottom-accent-line width) to keep the `.reveal` de-promotion constraint rock-solid; dropped old `hover:scale`/`hover:-translate`.
+6. **FAQ** `src/components/home/FAQ.jsx` -- eyebrow `Časté otázky`, image card with orange top accent + `ROYAL STROJE` eyebrow, contact box rebuilt with hairline icon-tile rows (phone/email/WhatsApp), accordion items get orange border + orange question text when open. All Q&A + contact details verbatim, toggle logic untouched.
+7. **Catalog shell** `src/components/home/Catalog.jsx` -- eyebrows on mobile+desktop headers (`Katalóg` / `Strojový park`) and blog CTA (`Blog`); `Kategórie` heading gets an orange accent bar; blog "Prečítať blog" button → `.btn-primary`. Filter/search/cart logic untouched.
+8. **Product cards** `src/components/product/ProductCard.jsx` -- hairline border (was thick orange/30) → orange on hover, subtle `hover:-translate-y-1`, refined badges/price chip (kept `md:backdrop-blur-*` gating), detail button = outline, call button = `.btn-primary`. "Momentálne nedostupné" kept.
+9. **Quote form** `src/components/catalog/QuoteForm.jsx` -- orange top accent on card, darker inputs with focus ring, submit → `.btn-primary`. EmailJS/reCAPTCHA/fields untouched.
+10. **Header/Footer cohesion** `Header.jsx` (active-nav underline white→orange), `Footer.jsx` (`ROYAL STROJE` wordmark → `font-display`). Header blur stays (`hidden md:block`, desktop-only → GPU-safe).
+
+### Verified
+- `npm run build` clean (CSS 69.8 kB / 11.3 kB gzip); ESLint clean on all 12 changed files (the repo's 602 baseline lint errors are pre-existing in untouched files). Slovak diacritics render correctly in the new fonts. Mobile-GPU guard: no new `backdrop-filter` on any `fixed`/`sticky` element on mobile; all `.reveal*.in-view` end states remain `transform: none`. All CTAs (`tel:`, `#katalog`, `mailto:`, `wa.me`) preserved.
+
+### Heads-up for next session
+- **Font change is GLOBAL** -- Manrope/Archivo now apply to the **entire site** (Služby, Kontakt, Blog, Partneri, Kosik, ProductDetail, dashboard is separate). Intended consistency win, but those pages also shifted visually and weren't individually reviewed this session.
+- **Verify on a real budget Android** before committing (the session-21 GPU bug only repros on real hardware, not DevTools).
+- Plan file: `C:\Users\cryptomeda\.claude\plans\chcel-by-som-upravit-purrfect-pony.md`.
+
+## What Was Done (Session 23) -- Industrial-Premium Rollout to All Remaining Pages
+Date: 2026-06-16
+**Status: COMMITTED + PUSHED.** Session 22 landing redesign committed as `bf57e7d`; this session's page rollout as `f8d1d38`. Both pushed to `origin/main`. Owner approved the look ("vzhľad je teraz podstatne lepší").
+
+### What & why
+Session 22's font change was global, so every page already rendered in Archivo/Manrope but still carried the *old* component styling (loud cards, `rounded-full` pills, no eyebrows) — looked half-finished. This session finished the rollout, applying the session-22 design system to **all 18 remaining public pages**.
+
+### Pages restyled (18)
+- **By hand** (design-judgment): `Sluzby.jsx`, `Kontakt.jsx`, `Partneri.jsx`, `CenovaPonuka.jsx`, `Kosik.jsx`, `Blog.jsx`.
+- **Via 4 parallel subagents** (mechanical, tight spec): `BlogDetail.jsx`, `ProductDetail.jsx`; service pages `RoyalFleet.jsx`, `PredajTechniky.jsx`, `NahradneDiely.jsx`, `SkoLenieObsluhy.jsx`, `ServisNaradia.jsx`, `DovozTechniky.jsx`, `ZemnePrace.jsx`; legal `GDPR.jsx`, `ObchodnePodmienky.jsx`, `Cookies.jsx`.
+
+### Transformations applied consistently
+1. **Eyebrows** (`.eyebrow` / `.eyebrow--center`) above hero + every section heading.
+2. **CTAs** → `.btn-primary` / `.btn-secondary`, replacing the old `bg-gradient-to-r from-orange-primary to-orange-hover rounded-full hover:scale-105` pills.
+3. **Cards** normalized to the canonical `bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10` + restrained `hover:shadow-orange-primary/15`, dropping the loud `border-2 border-orange-primary/30 + hover:scale-[1.02] + -translate-y-2 + shadow-2xl` style.
+4. **Removed** the animated `gradient-shift` sheen overlay divs (Kontakt, Blog, PredajTechniky).
+5. **Orange top-accent rules** (`h-[3px] from-orange-primary…to-transparent`) on prominent feature/highlight cards.
+6. **Partneri** "Čo znamená partnerstvo" text blocks → numbered industrial cards (01–03).
+
+### GPU guard upheld (see [[mobile-gpu-garbage-bug]] / session 21)
+- No new `backdrop-filter` on any `fixed`/`sticky` element. Kontakt lightbox `backdrop-blur-sm` gated to `md:`; dropped a no-op in-flow `backdrop-blur` on Kosik panels.
+- All `.reveal*.in-view` end states left at `transform: none`; only restrained / `hover:-translate-y-1` hovers used.
+
+### Verified
+- `npm run build` clean (11.56 s). ESLint clean on all 18 changed files (also fixed a pre-existing unused-var `catch (e)` in `Cookies.jsx`).
+- **Still not device-tested** — the session-22 heads-up about verifying on a real budget Android applies to the whole site now; the GPU guard was kept intact but real-hardware confirmation is still pending.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
+| 0 | **Verify redesign on a real budget Android** | Sessions 22+23 committed + pushed (`bf57e7d`, `f8d1d38`). Whole site now uses Archivo/Manrope + new component styling. GPU guard was kept intact but the session-21 bug only repros on real hardware, not DevTools — scroll-check FAQ + product grid + the restyled pages on a real Xiaomi/Mali device. |
 | 1 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
 | 2 | Backfill OP + birth dates on existing PO contacts | Migration 019 added columns; existing contacts have NULL. Owner needs to fill via ClientDetail Pencil edit before generating new contracts to get OP/nar. line populated |
 | 3 | Consider Workspace migration for emails | Active24 hosting paket (~10€/mo) is kept active solely for email. If only 1-2 mailboxes, Google Workspace (~6€/user) or Zoho could be cheaper. Requires MX migration. |
@@ -301,7 +360,9 @@ Date: 2026-06-03
 | `src/components/common/Header.jsx` | Header + promo popup (hidden on mobile) |
 | `src/components/common/AnimatedBackground.jsx` | Fixed gradient/grid/vignette bg layers -- **gated `hidden lg:block` (desktop only)**; fixed layers are a mobile GPU compositing trigger |
 | `src/components/common/HamburgerMenu.jsx` | Mobile fixed hamburger button -- **no `backdrop-filter`** (caused mobile GPU garbage; backgrounds are opaque instead) |
-| `src/index.css` | Global styles incl. `.reveal*` scroll animations -- in-view end state is `transform: none` so cards de-promote off the GPU after animating |
+| `src/index.css` | Global styles: base type (body=Manrope, h1–h6=Archivo), industrial-premium primitives (`.eyebrow`, `.hairline`, `.btn-primary`, `.btn-secondary`), `.reveal*` scroll animations -- in-view end state is `transform: none` so cards de-promote off the GPU after animating |
+| `index.html` | Loads Archivo (display) + Manrope (body) from Google Fonts (preconnect + `display=swap`, latin-ext for Slovak); preloads hero image |
+| `tailwind.config.js` | Orange tokens + `fontFamily.sans` (Manrope) / `fontFamily.display` (Archivo) |
 | `src/data/categories.js` | Static frontend category structure |
 | `apps/dashboard/src/lib/generateAgreementPdf.js` | FO rental agreement PDF (návrh/finálna, time_from, contractData param) |
 | `apps/dashboard/src/lib/generateAgreementPdfPO.js` | PO rental agreement PDF (návrh/finálna, time_from, contractData param) |
