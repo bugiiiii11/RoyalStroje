@@ -1,11 +1,5 @@
 import { Phone, ArrowDown } from 'lucide-react';
 
-const stats = [
-  { value: '20+', label: 'rokov' },
-  { value: '24 h', label: 'dovoz' },
-  { value: '24/7', label: 'linka' },
-];
-
 export default function Hero() {
 
   return (
@@ -34,7 +28,7 @@ export default function Hero() {
       {/* Content Container */}
       <div className="relative z-10 min-h-screen flex items-end">
         <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 w-full pb-20 lg:pb-24">
-          <div className="relative max-w-xl rounded-2xl border border-white/10 bg-black/45 backdrop-blur-md p-6 md:p-8 overflow-hidden shadow-2xl shadow-black/40">
+          <div className="relative max-w-xl rounded-2xl border border-white/10 bg-black/60 backdrop-blur-md p-6 md:p-8 overflow-hidden shadow-2xl shadow-black/40">
             {/* Top orange accent rule */}
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
 
@@ -42,7 +36,7 @@ export default function Hero() {
             <span className="hero-desk-0 eyebrow">Senec · Bratislava · Okolie</span>
 
             {/* Headline */}
-            <h1 className="hero-desk-1 text-3xl md:text-4xl lg:text-[3.25rem] font-black text-white leading-[1.05] mt-4 mb-3 md:mb-4">
+            <h1 className="hero-desk-1 text-[1.7rem] md:text-[2rem] lg:text-[2.75rem] font-black text-white leading-[1.15] mt-4 mb-3 md:mb-4">
               Požičovňa náradia a{' '}
               <span className="bg-gradient-to-r from-orange-primary to-orange-hover bg-clip-text text-transparent">
                 stavebnej techniky v Senci.
@@ -69,19 +63,6 @@ export default function Hero() {
                 <span>Zobraziť katalóg</span>
                 <ArrowDown size={16} className="text-orange-primary" />
               </a>
-            </div>
-
-            {/* Stat strip */}
-            <div className="hero-desk-4 mt-6 pt-5 border-t border-white/10 flex items-center gap-4 md:gap-6">
-              {stats.map((s, i) => (
-                <div
-                  key={s.label}
-                  className={`flex items-baseline gap-1.5 ${i > 0 ? 'pl-4 md:pl-6 border-l border-white/10' : ''}`}
-                >
-                  <span className="font-display text-xl md:text-2xl font-black text-white leading-none">{s.value}</span>
-                  <span className="text-[0.65rem] md:text-xs uppercase tracking-wider text-white/55">{s.label}</span>
-                </div>
-              ))}
             </div>
           </div>
 

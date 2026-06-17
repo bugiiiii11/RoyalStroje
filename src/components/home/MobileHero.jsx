@@ -1,11 +1,5 @@
 import { Phone, ArrowDown } from 'lucide-react';
 
-const stats = [
-  { value: '20+', label: 'rokov' },
-  { value: '24 h', label: 'dovoz' },
-  { value: '24/7', label: 'linka' },
-];
-
 export default function MobileHero() {
   return (
     <section className="relative min-h-[88svh] bg-black overflow-hidden flex flex-col md:hidden">
@@ -33,7 +27,7 @@ export default function MobileHero() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-end flex-1 px-5 pb-8 pt-16">
-       <div className="relative rounded-2xl border border-white/10 bg-black/35 backdrop-blur-sm p-5 overflow-hidden">
+       <div className="relative rounded-2xl border border-white/10 bg-black/55 backdrop-blur-sm p-5 overflow-hidden">
         {/* Top orange accent rule */}
         <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-orange-primary via-orange-primary/60 to-transparent" />
 
@@ -41,7 +35,7 @@ export default function MobileHero() {
         <span className="hero-anim-0 eyebrow mb-3">Senec · Bratislava</span>
 
         {/* Headline */}
-        <h1 className="hero-anim-1 text-[2.1rem] leading-[1.1] font-black text-white mt-3 mb-4">
+        <h1 className="hero-anim-1 text-[1.8rem] leading-[1.15] font-black text-white mt-3 mb-4">
           Požičovňa náradia<br />
           a{' '}
           <span className="text-orange-primary">stavebnej<br />techniky</span>{' '}
@@ -65,19 +59,6 @@ export default function MobileHero() {
             Katalóg
             <ArrowDown size={16} className="text-orange-primary" />
           </a>
-        </div>
-
-        {/* Stat strip */}
-        <div className="hero-anim-4 mt-5 pt-4 border-t border-white/10 flex items-center gap-3">
-          {stats.map((s, i) => (
-            <div
-              key={s.label}
-              className={`flex items-baseline gap-1 ${i > 0 ? 'pl-3 border-l border-white/10' : ''}`}
-            >
-              <span className="font-display text-base font-black text-white leading-none">{s.value}</span>
-              <span className="text-[0.6rem] uppercase tracking-wider text-white/55">{s.label}</span>
-            </div>
-          ))}
         </div>
        </div>
       </div>

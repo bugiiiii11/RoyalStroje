@@ -201,7 +201,7 @@ export default function Sidebar({ open, onClose }) {
         {/* MDN Tech credit */}
         <div className="px-4 pb-2">
           <a
-            href="https://mdntech.org"
+            href="https://mdntech.org/sk"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-white/50 transition-all"

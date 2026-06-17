@@ -212,7 +212,7 @@ export default function Footer() {
           </p>
           <span className="hidden md:inline text-white/20">|</span>
           <a
-            href="https://mdntech.org"
+            href="https://mdntech.org/sk"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-white/40 hover:text-orange-primary transition-colors duration-200 text-sm group"
