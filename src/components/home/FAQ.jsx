@@ -95,6 +95,13 @@ export default function FAQ() {
                 <li>• <strong className="text-white">1,2 €/km</strong> (min. 15 €)</li>
               </ul>
             </div>
+
+            <div>
+              <p className="font-bold text-white mb-1">Preprava cudzieho stroja/náradia (nie z našej požičovne)</p>
+              <ul className="space-y-1 ml-4">
+                <li>• <strong className="text-white">1,50 €/km</strong> (min. 30 €)</li>
+              </ul>
+            </div>
           </div>
           <p className="text-sm text-white/70 mt-3">Cena dopravy závisí od typu a hmotnosti techniky. Pri objednávke vám oznámime presnú cenu. Uvedené ceny sú bez DPH.</p>
         </div>
