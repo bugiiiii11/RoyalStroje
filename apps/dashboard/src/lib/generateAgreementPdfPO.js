@@ -69,6 +69,22 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   // ═══ I. ZMLUVNÉ STRANY ═══
   const addr = [client?.address, client?.city, client?.postal_code].filter(Boolean).join(', ');
 
+  // Fetch the selected contact person (by name on this client) — phone/email for the Tel/Email row,
+  // OP + birth date for the signature block. Single lookup reused below.
+  let contactExtra = null;
+  if (client?.id && reservation?.contact_person) {
+    const { data } = await supabase
+      .from('client_contacts')
+      .select('phone, email, birth_date, id_card_number')
+      .eq('client_id', client.id)
+      .eq('name', reservation.contact_person)
+      .maybeSingle();
+    contactExtra = data;
+  }
+  // Prefer the selected contact's phone/email; fall back to the client's company-level contact
+  const lesseePhone = contactExtra?.phone || client?.phone || '';
+  const lesseeEmail = contactExtra?.email || client?.email || '';
+
   autoTable(doc, {
     startY: y,
     head: [[{ content: 'I. ZMLUVNÉ STRANY — Prenajímateľ', colSpan: 2, styles: hdr(f) }, { content: 'Nájomca', colSpan: 2, styles: hdr(f) }]],
@@ -79,7 +95,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
       [{ content: 'DIČ:', styles: L }, COMPANY.dic, { content: 'DIČ:', styles: L }, client?.dic || ''],
       [{ content: 'IČ DPH:', styles: L }, COMPANY.ic_dph, { content: 'IČ DPH:', styles: L }, client?.ic_dph || ''],
       [{ content: 'Zastúpený:', styles: L }, COMPANY.represented, { content: 'Zastúpený:', styles: L }, reservation.contact_person || client?.contact_person || ''],
-      [{ content: 'Tel / Email:', styles: L }, `${COMPANY.phone} / ${COMPANY.email}`, { content: 'Tel / Email:', styles: L }, [client?.phone, client?.email].filter(Boolean).join(' / ')],
+      [{ content: 'Tel / Email:', styles: L }, `${COMPANY.phone} / ${COMPANY.email}`, { content: 'Tel / Email:', styles: L }, [lesseePhone, lesseeEmail].filter(Boolean).join(' / ')],
       [{ content: 'Zmluva č. / Obj. č.:', styles: L }, contractData?.contract_number || reservation.reservation_number || '', { content: 'Email (fakturačný):', styles: L }, client?.billing_email || client?.email || ''],
     ],
     styles: base(f),
@@ -195,17 +211,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   const sigY = y;
   const todayStr = new Date().toLocaleDateString('sk-SK');
 
-  // Fetch contact's OP + birth date by matching contact_person name on this client
-  let contactExtra = null;
-  if (client?.id && reservation?.contact_person) {
-    const { data } = await supabase
-      .from('client_contacts')
-      .select('birth_date, id_card_number')
-      .eq('client_id', client.id)
-      .eq('name', reservation.contact_person)
-      .maybeSingle();
-    contactExtra = data;
-  }
+  // OP + birth date from the contact looked up above (matched by contact_person name)
   const opBirthParts = [];
   if (contactExtra?.id_card_number) opBirthParts.push(contactExtra.id_card_number);
   if (contactExtra?.birth_date) opBirthParts.push(fmtBirthDate(contactExtra.birth_date));
