@@ -1,8 +1,8 @@
 import { Phone, Mail, Hammer, Wrench, Drill, Tractor, CircleDot, Truck } from 'lucide-react';
+import PageHero from '../components/common/PageHero';
 import { useInView } from '../hooks/useInView';
 
 export default function ZemnePrace() {
-  const [heroRef, heroInView] = useInView();
   const [headingRef, headingInView] = useInView();
   const [gridRef, gridInView] = useInView();
   const [ctaRef, ctaInView] = useInView();
@@ -53,45 +53,27 @@ export default function ZemnePrace() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Desktop only */}
-      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/hero-pozicovna.webp"
-            alt="Royal Stroje - Zemné a búracie práce"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Gradient fade na spodok - prechod do content sekcie */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none"
-          style={{
-            height: '160px',
-            background: 'linear-gradient(to bottom, transparent, #181818)'
-          }}
-        />
-
-        {/* Content */}
-        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
-          <div className="max-w-3xl">
-            <span className="eyebrow mb-5">Zemné práce</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
-              Zemné a búracie práce
-            </h1>
-            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
-              Výkopy základov, prípojky inžinierskych sietí, búracie práce s hydraulickým kladivom, terénne úpravy a odvoz odpadu.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Zemné práce"
+        title={<>Zemné a búracie práce</>}
+        subtitle="Výkopy základov, prípojky inžinierskych sietí, búracie práce s hydraulickým kladivom, terénne úpravy a odvoz odpadu."
+        image="/hero-pozicovna.webp"
+        imageAlt="Royal Stroje - Zemné a búracie práce"
+        actions={
+          <>
+            <a href="tel:+421948555551" className="btn-primary">
+              <Phone size={16} />
+              Zavolať teraz
+            </a>
+            <a href="/#katalog" className="btn-outline-light px-5 py-3">
+              Zobraziť techniku
+            </a>
+          </>
+        }
+      />
 
       {/* Services Grid */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
+      <section className="relative py-16 overflow-hidden" style={{ background: '#FAFAFA' }}>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -101,114 +83,13 @@ export default function ZemnePrace() {
           />
         </div>
 
-        {/* Radial gradient overlay - wider spread */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
-          }}
-        />
-
-        {/* Diagonal subtle lines for technical feel */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
-          }}
-        />
-
-        {/* Orange accent glow - top right (animated) */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            top: '10%',
-            right: '10%',
-            width: '600px',
-            height: '600px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
-            filter: 'blur(100px)',
-            opacity: 0.15,
-            animation: 'floatGlow1 8s ease-in-out infinite'
-          }}
-        />
-
-        {/* Orange accent glow - bottom left (animated) */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            bottom: '10%',
-            left: '10%',
-            width: '550px',
-            height: '550px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            opacity: 0.12,
-            animation: 'floatGlow2 10s ease-in-out infinite'
-          }}
-        />
-
-        {/* Center pulsing glow */}
-        <div
-          className="absolute top-1/2 left-1/2 pointer-events-none z-0"
-          style={{
-            width: '800px',
-            height: '800px',
-            marginLeft: '-400px',
-            marginTop: '-400px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-            filter: 'blur(120px)',
-            animation: 'pulseGlow 6s ease-in-out infinite'
-          }}
-        />
-
-        {/* Animation keyframes */}
-        <style>{`
-          @keyframes floatGlow1 {
-            0%, 100% {
-              transform: translate(0, 0) scale(1);
-            }
-            25% {
-              transform: translate(-120px, 100px) scale(1.2);
-            }
-            50% {
-              transform: translate(80px, -120px) scale(0.85);
-            }
-            75% {
-              transform: translate(100px, 60px) scale(1.1);
-            }
-          }
-
-          @keyframes floatGlow2 {
-            0%, 100% {
-              transform: translate(0, 0) scale(1);
-            }
-            33% {
-              transform: translate(140px, -100px) scale(1.25);
-            }
-            66% {
-              transform: translate(-100px, 120px) scale(0.8);
-            }
-          }
-
-          @keyframes pulseGlow {
-            0%, 100% {
-              transform: scale(1);
-              opacity: 0.08;
-            }
-            50% {
-              transform: scale(1.4);
-              opacity: 0.18;
-            }
-          }
-        `}</style>
-
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Zemné práce</span>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
               Kompletné <span className="text-orange-primary">zemné práce</span>
             </h1>
-            <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
+            <p className={`text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Profesionálne služby pre všetky typy projektov
             </p>
           </div>
@@ -219,18 +100,18 @@ export default function ZemnePrace() {
               return (
                 <div
                   key={service.id}
-                  className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
+                  className={`bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                 >
                   <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                     <IconComponent className="text-orange-primary" size={28} />
                   </div>
-                  <h3 className="text-xl font-black text-white mb-3">{service.title}</h3>
-                  <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                  <h3 className="text-xl font-black text-zinc-900 mb-3">{service.title}</h3>
+                  <p className="text-zinc-700 text-sm mb-4 leading-relaxed">
                     {service.description}
                   </p>
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-white/60">
+                      <li key={idx} className="flex items-start gap-2 text-sm text-zinc-600">
                         <span className="text-orange-primary mt-0.5">•</span>
                         <span>{feature}</span>
                       </li>
@@ -244,23 +125,23 @@ export default function ZemnePrace() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-black">
+      <section className="py-16" style={{ background: '#FAFAFA' }}>
         <div ref={ctaRef} className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
           <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
+          <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
             Potrebujete zemné alebo búracie práce?
           </h2>
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-zinc-700 text-lg mb-8 max-w-2xl mx-auto">
             Zavolajte nám ešte dnes – dohodneme obhliadku a termín v najbližšom možnom čase.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <span className="flex items-center gap-2 text-white/70">
+            <span className="flex items-center gap-2 text-zinc-700">
               <span className="text-orange-primary">✓</span> Obhliadka je ZDARMA
             </span>
-            <span className="flex items-center gap-2 text-white/70">
+            <span className="flex items-center gap-2 text-zinc-700">
               <span className="text-orange-primary">✓</span> Transparentné ceny
             </span>
-            <span className="flex items-center gap-2 text-white/70">
+            <span className="flex items-center gap-2 text-zinc-700">
               <span className="text-orange-primary">✓</span> Rýchle termíny
             </span>
           </div>
@@ -274,7 +155,7 @@ export default function ZemnePrace() {
             </a>
             <a
               href="mailto:info@royalstroje.sk"
-              className="btn-secondary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
+              className="btn-outline-light text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
             >
               <Mail size={20} />
               <span>Napísať email</span>

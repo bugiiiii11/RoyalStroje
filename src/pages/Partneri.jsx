@@ -1,9 +1,9 @@
 import { Phone } from 'lucide-react';
 import ContentSection from '../components/common/ContentSection';
+import PageHero from '../components/common/PageHero';
 import { useInView } from '../hooks/useInView';
 
 export default function Partneri() {
-  const [heroRef, heroInView] = useInView();
   const [headingRef, headingInView] = useInView();
   const [gridRef] = useInView();
   const [infoRef, infoInView] = useInView();
@@ -73,48 +73,31 @@ export default function Partneri() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Desktop only */}
-      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/hero-pozicovna.webp"
-            alt="Royal Stroje - Partneri"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Gradient fade na spodok - prechod do content sekcie */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none"
-          style={{
-            height: '160px',
-            background: 'linear-gradient(to bottom, transparent, #181818)'
-          }}
-        />
-
-        {/* Content */}
-        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
-          <div className="max-w-3xl">
-            <span className="eyebrow mb-5">Partneri · Senec — Bratislava</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
-              Sieť overených profesionálov. <span className="text-orange-primary">Jeden kontakt, všetky služby.</span>
-            </h1>
-            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
-              Partneri Royal Stroje v Senci, Bratislave a okolí - stavbári, ktorým dôverujeme.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Separator line between hero and content */}
-      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
+      <PageHero
+        eyebrow="Partneri · Senec — Bratislava"
+        title={
+          <>
+            Sieť overených profesionálov. <span className="text-orange-primary">Jeden kontakt, všetky služby.</span>
+          </>
+        }
+        subtitle="Partneri Royal Stroje v Senci, Bratislave a okolí - stavbári, ktorým dôverujeme."
+        image="/hero-pozicovna.webp"
+        imageAlt="Royal Stroje - Partneri"
+        actions={
+          <>
+            <a href="tel:+421948555551" className="btn-primary">
+              <Phone size={16} />
+              Zavolať teraz
+            </a>
+            <a href="/#katalog" className="btn-outline-light px-5 py-3">
+              Zobraziť techniku
+            </a>
+          </>
+        }
+      />
 
       {/* Main Content Section */}
-      <ContentSection>
+      <ContentSection light>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -129,13 +112,13 @@ export default function Partneri() {
           {/* Section Heading */}
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Spolupráca</span>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
               Naši <span className="text-orange-primary">partneri</span>
             </h1>
-            <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-2 md:mb-4 reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
+            <p className={`text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto mb-2 md:mb-4 reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Stavebné firmy a dodávatelia, s ktorými spolupracujeme v regióne Senec - Bratislava.
             </p>
-            <p className="text-white/60 text-xs md:text-base max-w-2xl mx-auto hidden md:block">
+            <p className="text-zinc-600 text-xs md:text-base max-w-2xl mx-auto hidden md:block">
               Partnerstvo vzniká prirodzene po dlhodobej kvalitnej spolupráci. Len naši najspoľahlivejší partneri sú uvedení na tomto zozname.
             </p>
           </div>
@@ -155,7 +138,7 @@ export default function Partneri() {
                   </div>
 
                   {/* Partner Name */}
-                  <h3 className="text-center text-xs md:text-sm text-gray-300 font-medium line-clamp-2">
+                  <h3 className="text-center text-xs md:text-sm text-zinc-700 font-medium line-clamp-2">
                     {partner.name}
                   </h3>
                 </div>
@@ -182,10 +165,10 @@ export default function Partneri() {
           {/* Partnership Info Section */}
           <div ref={infoRef} className={`text-center mb-6 md:mb-12 reveal ${infoInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Filozofia</span>
-            <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+            <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
               Čo znamená <span className="text-orange-primary">partnerstvo</span>
             </h2>
-            <p className="text-white/80 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed">
+            <p className="text-zinc-700 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed">
               Naši partneri sú <strong className="text-orange-primary">základom našej úspešnej práce</strong>. Si vážime každého z nich a spoločne vytvárame sieť dôveryhodných profesionálov v stavebnom priemysle, ktorí sa môžu navzájom odporúčať a spolupracovať.
             </p>
           </div>
@@ -207,14 +190,14 @@ export default function Partneri() {
             ].map((item, i) => (
               <div
                 key={item.title}
-                className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-5 md:p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 overflow-hidden"
+                className="group relative bg-white border border-zinc-200 rounded-xl md:rounded-2xl p-5 md:p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden"
               >
-                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-zinc-900/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
                   0{i + 1}
                 </span>
                 <div className="relative">
-                  <h3 className="text-white font-bold text-base md:text-xl mb-2 md:mb-3 group-hover:text-orange-primary transition-colors leading-tight">{item.title}</h3>
-                  <p className="text-white/65 text-sm md:text-base leading-relaxed">{item.text}</p>
+                  <h3 className="text-zinc-900 font-bold text-base md:text-xl mb-2 md:mb-3 group-hover:text-orange-primary transition-colors leading-tight">{item.title}</h3>
+                  <p className="text-zinc-700 text-sm md:text-base leading-relaxed">{item.text}</p>
                 </div>
                 <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
               </div>
@@ -222,7 +205,7 @@ export default function Partneri() {
           </div>
 
           <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-              <p className="text-white/60 text-xs md:text-sm mb-3 md:mb-4">
+              <p className="text-zinc-600 text-xs md:text-sm mb-3 md:mb-4">
                 Máte záujem o spoluprácu? Kontaktujte nás a začnime budovať dôveru.
               </p>
               <a

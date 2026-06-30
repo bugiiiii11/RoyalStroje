@@ -1,10 +1,10 @@
 import { Phone, Mail, Package, Wrench, Clock, Shield } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import PageHero from '../components/common/PageHero';
 import { useInView } from '../hooks/useInView';
 
 export default function NahradneDiely() {
-  const [heroRef, heroInView] = useInView();
   const [headingRef, headingInView] = useInView();
   const [gridRef, gridInView] = useInView();
   const [stepsRef, stepsInView] = useInView();
@@ -55,48 +55,27 @@ export default function NahradneDiely() {
         <meta property="og:url" content="https://royalstroje.sk/sluzby/nahradne-diely" />
       </Helmet>
 
-      {/* Hero Section - Desktop only */}
-      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/hero-pozicovna.webp"
-            alt="Royal Stroje - Predaj náhradných dielov"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Gradient fade na spodok - prechod do content sekcie */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none"
-          style={{
-            height: '160px',
-            background: 'linear-gradient(to bottom, transparent, #181818)'
-          }}
-        />
-
-        {/* Content */}
-        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
-          <div className="max-w-3xl">
-            <span className="eyebrow mb-5">Náhradné diely</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
-              Okamžitý odber alebo dodanie do 48 hodín. <span className="text-orange-primary">Iba originálne diely.</span>
-            </h1>
-            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
-              Široký sortiment náhradných dielov pre stavebné stroje a náradie. Sklad v Senci.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Separator line between hero and content */}
-      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
+      <PageHero
+        eyebrow="Náhradné diely"
+        title={<>Okamžitý odber alebo dodanie do 48 hodín. <span className="text-orange-primary">Iba originálne diely.</span></>}
+        subtitle="Široký sortiment náhradných dielov pre stavebné stroje a náradie. Sklad v Senci."
+        image="/hero-pozicovna.webp"
+        imageAlt="Royal Stroje - Predaj náhradných dielov"
+        actions={
+          <>
+            <a href="tel:+421948555551" className="btn-primary">
+              <Phone size={16} />
+              Zavolať teraz
+            </a>
+            <a href="/#katalog" className="btn-outline-light px-5 py-3">
+              Zobraziť techniku
+            </a>
+          </>
+        }
+      />
 
       {/* Main Content Section */}
-      <ContentSection>
+      <ContentSection light>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -111,10 +90,10 @@ export default function NahradneDiely() {
           <div className="mb-12 md:mb-16">
             <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
               <span className="eyebrow eyebrow--center mb-4">Sortiment</span>
-              <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+              <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
                 Náhradné diely skladom. <span className="text-orange-primary">Originál, rýchlo.</span>
               </h1>
-              <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
+              <p className={`text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
                 Originálne diely pre stavebné náradie. Express dodanie.
               </p>
             </div>
@@ -125,18 +104,18 @@ export default function NahradneDiely() {
                 return (
                   <div
                     key={service.id}
-                    className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
+                    className={`bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                   >
                     <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                       <IconComponent className="text-orange-primary" size={28} />
                     </div>
-                    <h3 className="text-xl font-black text-white mb-3">{service.title}</h3>
-                    <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                    <h3 className="text-xl font-black text-zinc-900 mb-3">{service.title}</h3>
+                    <p className="text-zinc-700 text-sm mb-4 leading-relaxed">
                       {service.description}
                     </p>
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-white/60">
+                        <li key={idx} className="flex items-start gap-2 text-sm text-zinc-600">
                           <span className="text-orange-primary mt-0.5">•</span>
                           <span>{feature}</span>
                         </li>
@@ -152,48 +131,48 @@ export default function NahradneDiely() {
           <div ref={stepsRef} className="mb-16">
             <div className={`text-center mb-12 reveal ${stepsInView ? 'in-view' : ''}`}>
               <span className="eyebrow eyebrow--center mb-4">Ako objednať</span>
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
+              <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
                 Ako objednať <span className="text-orange-primary">náhradný diel?</span>
               </h2>
-              <p className="text-white/70 max-w-2xl mx-auto mb-8">
+              <p className="text-zinc-700 max-w-2xl mx-auto mb-8">
                 Od identifikácie po dodanie - 4 jednoduché kroky
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   1
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Identifikácia</h3>
-                <p className="text-white/60 text-sm">
+                <h3 className="text-zinc-900 font-bold text-lg mb-2">Identifikácia</h3>
+                <p className="text-zinc-600 text-sm">
                   Kontaktujte nás s označením stroja alebo dielu
                 </p>
               </div>
-              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   2
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Overenie</h3>
-                <p className="text-white/60 text-sm">
+                <h3 className="text-zinc-900 font-bold text-lg mb-2">Overenie</h3>
+                <p className="text-zinc-600 text-sm">
                   Overíme dostupnosť a cenu dielu
                 </p>
               </div>
-              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   3
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Objednávka</h3>
-                <p className="text-white/60 text-sm">
+                <h3 className="text-zinc-900 font-bold text-lg mb-2">Objednávka</h3>
+                <p className="text-zinc-600 text-sm">
                   Potvrdíte objednávku a spôsob platby
                 </p>
               </div>
-              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-4 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-4 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   4
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Dodanie</h3>
-                <p className="text-white/60 text-sm">
+                <h3 className="text-zinc-900 font-bold text-lg mb-2">Dodanie</h3>
+                <p className="text-zinc-600 text-sm">
                   Odber skladom alebo dovoz do 48 hodín
                 </p>
               </div>
@@ -203,20 +182,20 @@ export default function NahradneDiely() {
           {/* CTA Section */}
           <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
+            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
               Hľadáte náhradný diel?
             </h2>
-            <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-zinc-700 text-lg mb-8 max-w-2xl mx-auto">
               Zavolejte nám a pomôžeme vám nájsť správny diel.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <span className="flex items-center gap-2 text-white/70">
+              <span className="flex items-center gap-2 text-zinc-700">
                 <span className="text-orange-primary">✓</span> Originálne diely
               </span>
-              <span className="flex items-center gap-2 text-white/70">
+              <span className="flex items-center gap-2 text-zinc-700">
                 <span className="text-orange-primary">✓</span> Skladom
               </span>
-              <span className="flex items-center gap-2 text-white/70">
+              <span className="flex items-center gap-2 text-zinc-700">
                 <span className="text-orange-primary">✓</span> Express dodanie
               </span>
             </div>
@@ -230,7 +209,7 @@ export default function NahradneDiely() {
               </a>
               <a
                 href="mailto:info@royalstroje.sk"
-                className="btn-secondary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
+                className="btn-outline-light text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
               >
                 <Mail size={20} />
                 <span>Napísať email</span>

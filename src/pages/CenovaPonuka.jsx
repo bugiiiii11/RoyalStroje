@@ -1,11 +1,11 @@
-import { CheckCircle, Clock, Calculator, UserCheck } from 'lucide-react';
+import { CheckCircle, Clock, Calculator, UserCheck, Phone } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContactForm from '../components/contact/ContactForm';
 import ContentSection from '../components/common/ContentSection';
+import PageHero from '../components/common/PageHero';
 import { useInView } from '../hooks/useInView';
 
 export default function CenovaPonuka() {
-  const [heroRef, heroInView] = useInView();
   const [headingRef, headingInView] = useInView();
   const [gridRef, gridInView] = useInView();
   const [whyRef, whyInView] = useInView();
@@ -57,48 +57,27 @@ export default function CenovaPonuka() {
         <meta property="og:url" content="https://royalstroje.sk/sluzby/cenova-ponuka" />
       </Helmet>
 
-      {/* Hero Section - Desktop only */}
-      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/hero-pozicovna.webp"
-            alt="Royal Stroje - Cenová ponuka"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Gradient fade na spodok - prechod do content sekcie */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none"
-          style={{
-            height: '160px',
-            background: 'linear-gradient(to bottom, transparent, #181818)'
-          }}
-        />
-
-        {/* Content */}
-        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
-          <div className="max-w-3xl">
-            <span className="eyebrow mb-5">Cenová ponuka</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
-              Bezplatná konzultácia. <span className="text-orange-primary">Pripravíme do 24 hodín.</span>
-            </h1>
-            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
-              Detailná kalkulácia na mieru. Transparentný rozpis bez skrytých poplatkov.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Separator line between hero and content */}
-      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
+      <PageHero
+        eyebrow="Cenová ponuka"
+        title={<>Bezplatná konzultácia. <span className="text-orange-primary">Pripravíme do 24 hodín.</span></>}
+        subtitle="Detailná kalkulácia na mieru. Transparentný rozpis bez skrytých poplatkov."
+        image="/hero-pozicovna.webp"
+        imageAlt="Royal Stroje - Cenová ponuka"
+        actions={
+          <>
+            <a href="tel:+421948555551" className="btn-primary">
+              <Phone size={16} />
+              Zavolať teraz
+            </a>
+            <a href="/#katalog" className="btn-outline-light px-5 py-3">
+              Zobraziť techniku
+            </a>
+          </>
+        }
+      />
 
       {/* Main Content Section */}
-      <ContentSection>
+      <ContentSection light>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -113,10 +92,10 @@ export default function CenovaPonuka() {
           <div className="mb-12 md:mb-16">
             <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
               <span className="eyebrow eyebrow--center mb-4">Ako pracujeme</span>
-              <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+              <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
                 Cenová ponuka do 24 hodín. <span className="text-orange-primary">Presne, férovo.</span>
               </h1>
-              <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
+              <p className={`text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
                 Presná kalkulácia na mieru. Transparentný rozpis bez skrytých poplatkov.
               </p>
             </div>
@@ -127,21 +106,21 @@ export default function CenovaPonuka() {
                 return (
                   <div
                     key={service.id}
-                    className={`relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 group overflow-hidden reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
+                    className={`relative bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 group overflow-hidden reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                   >
-                    <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                    <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-zinc-900/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
                       0{index + 1}
                     </span>
                     <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                       <IconComponent className="text-orange-primary" size={28} />
                     </div>
-                    <h3 className="text-xl font-black text-white mb-3">{service.title}</h3>
-                    <p className="text-white/70 text-sm mb-4 leading-relaxed">
+                    <h3 className="text-xl font-black text-zinc-900 mb-3">{service.title}</h3>
+                    <p className="text-zinc-700 text-sm mb-4 leading-relaxed">
                       {service.description}
                     </p>
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-white/60">
+                        <li key={idx} className="flex items-start gap-2 text-sm text-zinc-600">
                           <span className="text-orange-primary mt-0.5">•</span>
                           <span>{feature}</span>
                         </li>
@@ -156,28 +135,28 @@ export default function CenovaPonuka() {
           {/* Why Request a Quote Section */}
           <div ref={whyRef} className="mb-16">
             <div className="max-w-4xl mx-auto">
-              <div className={`relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-8 md:p-12 overflow-hidden shadow-lg shadow-black/40 reveal-scale ${whyInView ? 'in-view' : ''}`}>
+              <div className={`relative bg-white border border-zinc-200 rounded-2xl p-8 md:p-12 overflow-hidden shadow-sm shadow-zinc-900/5 reveal-scale ${whyInView ? 'in-view' : ''}`}>
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
                 <div className="text-center mb-6">
-                  <h2 className="text-2xl md:text-3xl font-black text-white mb-4">
+                  <h2 className="text-2xl md:text-3xl font-black text-zinc-900 mb-4">
                     Prečo si vyžiadať <span className="text-orange-primary">ponuku?</span>
                   </h2>
-                  <p className="text-white/80 leading-relaxed text-base md:text-lg">
+                  <p className="text-zinc-700 leading-relaxed text-base md:text-lg">
                     Vďaka našim <strong className="text-orange-primary">20-ročným skúsenostiam</strong> v odvetví vieme poskytnúť presnú cenovú ponuku prispôsobenú vašim potrebám. Dokážeme vám naceniť a zabezpečiť všetok potrebný tovar k realizácii projektu, čím vás odbremeníme od zbytočných komplikácií a šetríme váš čas.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                  <div className="bg-zinc-950/50 rounded-xl p-4 border border-white/5 text-center">
+                  <div className="bg-zinc-50 rounded-xl p-4 border border-zinc-200 text-center">
                     <div className="text-orange-primary font-black text-3xl mb-2">20</div>
-                    <p className="text-white/70 text-sm">rokov skúseností</p>
+                    <p className="text-zinc-700 text-sm">rokov skúseností</p>
                   </div>
-                  <div className="bg-zinc-950/50 rounded-xl p-4 border border-white/5 text-center">
+                  <div className="bg-zinc-50 rounded-xl p-4 border border-zinc-200 text-center">
                     <div className="text-orange-primary font-black text-3xl mb-2">24h</div>
-                    <p className="text-white/70 text-sm">príprava ponuky</p>
+                    <p className="text-zinc-700 text-sm">príprava ponuky</p>
                   </div>
-                  <div className="bg-zinc-950/50 rounded-xl p-4 border border-white/5 text-center">
+                  <div className="bg-zinc-50 rounded-xl p-4 border border-zinc-200 text-center">
                     <div className="text-orange-primary font-black text-3xl mb-2">100%</div>
-                    <p className="text-white/70 text-sm">na mieru</p>
+                    <p className="text-zinc-700 text-sm">na mieru</p>
                   </div>
                 </div>
               </div>
@@ -188,39 +167,39 @@ export default function CenovaPonuka() {
           <div ref={stepsRef} className="mb-16">
             <div className={`text-center mb-12 reveal ${stepsInView ? 'in-view' : ''}`}>
               <span className="eyebrow eyebrow--center mb-4">3 kroky</span>
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
+              <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
                 Ako to <span className="text-orange-primary">funguje?</span>
               </h2>
-              <p className="text-white/70 max-w-3xl mx-auto mb-8">
+              <p className="text-zinc-700 max-w-3xl mx-auto mb-8">
                 3 jednoduché kroky k presnej cenovej ponuke
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   1
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Vyplňte formulár</h3>
-                <p className="text-white/60 text-sm">
+                <h3 className="text-zinc-900 font-bold text-lg mb-2">Vyplňte formulár</h3>
+                <p className="text-zinc-600 text-sm">
                   Popíšte nám vaše požiadavky a potreby
                 </p>
               </div>
-              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   2
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Konzultácia</h3>
-                <p className="text-white/60 text-sm">
+                <h3 className="text-zinc-900 font-bold text-lg mb-2">Konzultácia</h3>
+                <p className="text-zinc-600 text-sm">
                   Spoločne nájdeme najlepšie riešenie
                 </p>
               </div>
-              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   3
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2">Cenová ponuka</h3>
-                <p className="text-white/60 text-sm">
+                <h3 className="text-zinc-900 font-bold text-lg mb-2">Cenová ponuka</h3>
+                <p className="text-zinc-600 text-sm">
                   Dostanete detailnú kalkuláciu do 24h
                 </p>
               </div>

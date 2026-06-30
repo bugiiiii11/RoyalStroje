@@ -70,11 +70,25 @@
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm text-white bg-white/[0.04] border border-white/15 transition-all duration-200 hover:bg-white/[0.08] hover:border-orange-primary/60 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98];
   }
+
+  /* ─── Light-theme surfaces (home page only — dark hero/footer unchanged) ─── */
+  /* White panel that lifts off the #FAFAFA page background */
+  .card-light {
+    @apply bg-white border border-zinc-200 rounded-2xl shadow-sm shadow-zinc-900/5;
+  }
+  /* White form control with orange focus ring */
+  .input-light {
+    @apply w-full bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder-zinc-400 transition-all focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20;
+  }
+  /* Outlined secondary button for light backgrounds (NOT .btn-secondary — that one is for the dark hero) */
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-bold text-sm text-zinc-700 bg-white border border-zinc-200 transition-all duration-200 hover:border-orange-primary/50 hover:text-orange-primary active:scale-[0.98];
+  }
 }
 
-/* Subcategory button hover effect */
+/* Subcategory button hover effect (light theme — orange glow, no dark insets) */
 .subcategory-btn:not(.subcategory-btn--active):hover {
-  box-shadow: 0 6px 20px -3px rgba(255, 102, 0, 0.3), 0 3px 8px -2px rgba(255, 102, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -2px 0 rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 6px 18px -4px rgba(255, 102, 0, 0.25), 0 2px 6px -2px rgba(255, 102, 0, 0.15) !important;
   border: 1px solid rgba(255, 102, 0, 0.4) !important;
   transform: translateY(-2px) !important;
 }

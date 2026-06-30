@@ -127,12 +127,12 @@ function ContactFormInner() {
   // Error state with fallback contact options
   if (error === 'limit') {
     return (
-      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl md:rounded-3xl p-8 md:p-12 text-center">
-        <div className="w-20 h-20 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mx-auto mb-6">
+      <div className="bg-white border border-orange-primary/30 rounded-2xl md:rounded-3xl shadow-sm shadow-zinc-900/5 p-8 md:p-12 text-center">
+        <div className="w-20 h-20 rounded-full bg-orange-primary/10 border-2 border-orange-primary flex items-center justify-center mx-auto mb-6">
           <Phone className="text-orange-primary" size={40} />
         </div>
-        <h3 className="text-white font-black text-2xl mb-4">Formulár je momentálne nedostupný</h3>
-        <p className="text-white/70 mb-6 leading-relaxed">
+        <h3 className="text-zinc-900 font-black text-2xl mb-4">Formulár je momentálne nedostupný</h3>
+        <p className="text-zinc-600 mb-6 leading-relaxed">
           Dosiahli sme mesačný limit správ. Kontaktujte nás prosím priamo:
         </p>
         <div className="flex flex-col md:flex-row gap-4 justify-center mb-6">
@@ -165,12 +165,12 @@ function ContactFormInner() {
 
   if (error === 'general') {
     return (
-      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl md:rounded-3xl p-8 md:p-12 text-center">
-        <div className="w-20 h-20 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mx-auto mb-6">
+      <div className="bg-white border border-orange-primary/30 rounded-2xl md:rounded-3xl shadow-sm shadow-zinc-900/5 p-8 md:p-12 text-center">
+        <div className="w-20 h-20 rounded-full bg-orange-primary/10 border-2 border-orange-primary flex items-center justify-center mx-auto mb-6">
           <Phone className="text-orange-primary" size={40} />
         </div>
-        <h3 className="text-white font-black text-2xl mb-4">Nastala chyba</h3>
-        <p className="text-white/70 mb-6 leading-relaxed">
+        <h3 className="text-zinc-900 font-black text-2xl mb-4">Nastala chyba</h3>
+        <p className="text-zinc-600 mb-6 leading-relaxed">
           Správu sa nepodarilo odoslať. Prosím kontaktujte nás priamo:
         </p>
         <div className="flex flex-col md:flex-row gap-4 justify-center mb-6">
@@ -183,7 +183,7 @@ function ContactFormInner() {
           </a>
           <a
             href="mailto:info@royalstroje.sk"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-800 text-white font-bold rounded-full hover:scale-105 transition-all"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-100 border border-zinc-200 text-zinc-900 font-bold rounded-full hover:bg-zinc-200 transition-all"
           >
             <span>info@royalstroje.sk</span>
           </a>
@@ -201,12 +201,12 @@ function ContactFormInner() {
   // Success state
   if (isSubmitted) {
     return (
-      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl md:rounded-3xl p-8 md:p-12 text-center">
+      <div className="bg-white border border-zinc-200 rounded-2xl md:rounded-3xl shadow-sm shadow-zinc-900/5 p-8 md:p-12 text-center">
         <div className="w-20 h-20 rounded-full bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="text-white" size={40} />
         </div>
-        <h3 className="text-white font-black text-2xl mb-4">Ďakujeme za správu!</h3>
-        <p className="text-white/70 mb-6">
+        <h3 className="text-zinc-900 font-black text-2xl mb-4">Ďakujeme za správu!</h3>
+        <p className="text-zinc-600 mb-6">
           Ozveme sa vám do 24 hodín s cenovou ponukou.
         </p>
         <button
@@ -221,12 +221,12 @@ function ContactFormInner() {
 
   // Form state
   return (
-    <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 md:border-2 rounded-2xl md:rounded-3xl p-6 md:p-12 overflow-visible">
+    <div className="bg-white border border-zinc-200 border-t-2 border-t-orange-primary/60 rounded-2xl md:rounded-3xl shadow-sm shadow-zinc-900/5 p-6 md:p-12 overflow-visible">
       <div className="mb-6 md:mb-8 text-center">
-        <h3 className="text-white font-black text-2xl md:text-3xl mb-3 md:mb-4">
+        <h3 className="text-zinc-900 font-black text-2xl md:text-3xl mb-3 md:mb-4">
           Potrebujete <span className="text-orange-primary">cenovú ponuku?</span>
         </h3>
-        <p className="text-white/70 text-sm md:text-base">
+        <p className="text-zinc-600 text-sm md:text-base">
           Vyplňte formulár a ozveme sa vám do 24 hodín s nezáväznou ponukou.
         </p>
       </div>
@@ -245,7 +245,7 @@ function ContactFormInner() {
 
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block text-white font-bold text-sm md:text-base mb-2">
+          <label htmlFor="name" className="block text-zinc-900 font-bold text-sm md:text-base mb-2">
             Meno a priezvisko <span className="text-orange-primary">*</span>
           </label>
           <input
@@ -255,7 +255,7 @@ function ContactFormInner() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full bg-zinc-800 border border-white/10 rounded-xl px-4 py-3 md:py-4 text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+            className="input-light rounded-xl px-4 py-3 md:py-4 text-base"
             placeholder="Ján Novák"
           />
         </div>
@@ -263,7 +263,7 @@ function ContactFormInner() {
         {/* Email & Phone - Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div>
-            <label htmlFor="email" className="block text-white font-bold text-sm md:text-base mb-2">
+            <label htmlFor="email" className="block text-zinc-900 font-bold text-sm md:text-base mb-2">
               Email <span className="text-orange-primary">*</span>
             </label>
             <input
@@ -273,13 +273,13 @@ function ContactFormInner() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full bg-zinc-800 border border-white/10 rounded-xl px-4 py-3 md:py-4 text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+              className="input-light rounded-xl px-4 py-3 md:py-4 text-base"
               placeholder="jan.novak@email.sk"
             />
           </div>
 
           <div>
-            <label htmlFor="phone" className="block text-white font-bold text-sm md:text-base mb-2">
+            <label htmlFor="phone" className="block text-zinc-900 font-bold text-sm md:text-base mb-2">
               Telefón <span className="text-orange-primary">*</span>
             </label>
             <input
@@ -289,7 +289,7 @@ function ContactFormInner() {
               value={formData.phone}
               onChange={handleChange}
               required
-              className="w-full bg-zinc-800 border border-white/10 rounded-xl px-4 py-3 md:py-4 text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all"
+              className="input-light rounded-xl px-4 py-3 md:py-4 text-base"
               placeholder="0900 123 456"
             />
           </div>
@@ -297,7 +297,7 @@ function ContactFormInner() {
 
         {/* Project Type */}
         <div>
-          <label htmlFor="projectType" className="block text-white font-bold text-sm md:text-base mb-2">
+          <label htmlFor="projectType" className="block text-zinc-900 font-bold text-sm md:text-base mb-2">
             Typ projektu <span className="text-orange-primary">*</span>
           </label>
           <CustomSelect
@@ -305,6 +305,7 @@ function ContactFormInner() {
             value={formData.projectType}
             onChange={handleChange}
             required
+            light
             placeholder="Vyberte typ projektu"
             options={[
               { value: 'Stavba domu', label: 'Stavba domu' },
@@ -319,7 +320,7 @@ function ContactFormInner() {
 
         {/* Message */}
         <div>
-          <label htmlFor="message" className="block text-white font-bold text-sm md:text-base mb-2">
+          <label htmlFor="message" className="block text-zinc-900 font-bold text-sm md:text-base mb-2">
             Správa
           </label>
           <textarea
@@ -328,7 +329,7 @@ function ContactFormInner() {
             value={formData.message}
             onChange={handleChange}
             rows="5"
-            className="w-full bg-zinc-800 border border-white/10 rounded-xl px-4 py-3 md:py-4 text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all resize-none"
+            className="input-light rounded-xl px-4 py-3 md:py-4 text-base resize-none"
             placeholder="Popíšte nám vašu požiadavku..."
           ></textarea>
         </div>
@@ -344,7 +345,7 @@ function ContactFormInner() {
         </button>
 
         {/* Info Pills */}
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 pt-4 text-xs md:text-sm text-white/60">
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4 pt-4 text-xs md:text-sm text-zinc-600">
           <span className="flex items-center gap-1">
             <span className="text-orange-primary">✓</span> Odpoveď do 24 hodín
           </span>
@@ -357,7 +358,7 @@ function ContactFormInner() {
         </div>
 
         {/* reCAPTCHA Badge Info */}
-        <p className="text-center text-white/40 text-xs mt-4">
+        <p className="text-center text-zinc-500 text-xs mt-4">
           Táto stránka je chránená službou reCAPTCHA. Platia{' '}
           <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-orange-primary hover:text-orange-hover">
             Zásady ochrany osobných údajov

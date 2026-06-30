@@ -7,7 +7,8 @@ export default function CustomSelect({
   options,
   placeholder = 'Vyberte možnosť',
   required = false,
-  name = 'select'
+  name = 'select',
+  light = false
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
@@ -39,14 +40,18 @@ export default function CustomSelect({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full bg-black border-2 rounded-lg px-3 py-2 text-white text-sm text-left focus:outline-none transition-all flex items-center justify-between shadow-md ${
+        className={`w-full rounded-lg px-3 py-2 text-sm text-left focus:outline-none transition-all flex items-center justify-between ${
+          light ? 'bg-white border text-zinc-900 shadow-sm' : 'bg-black border-2 text-white shadow-md'
+        } ${
           isOpen
             ? 'border-orange-primary/80 shadow-[0_0_0_3px_rgba(255,102,0,0.15)]'
-            : 'border-orange-primary/20 hover:border-orange-primary/50 hover:shadow-orange-primary/20'
+            : light
+              ? 'border-zinc-200 hover:border-orange-primary/50'
+              : 'border-orange-primary/20 hover:border-orange-primary/50 hover:shadow-orange-primary/20'
         }`}
         required={required}
       >
-        <span className={value ? 'text-white font-medium' : 'text-white/70 font-medium'}>
+        <span className={value ? (light ? 'text-zinc-900 font-medium' : 'text-white font-medium') : (light ? 'text-zinc-400 font-medium' : 'text-white/70 font-medium')}>
           {displayText}
         </span>
         <ChevronDown
@@ -59,7 +64,11 @@ export default function CustomSelect({
 
       {/* Dropdown Menu with FAQ-style animation */}
       <div
-        className={`absolute top-full left-0 right-0 mt-2 bg-zinc-900 border-2 border-orange-primary/40 rounded-lg shadow-2xl shadow-orange-primary/20 z-[9999] overflow-hidden transition-all duration-300 ${
+        className={`absolute top-full left-0 right-0 mt-2 rounded-lg z-[9999] overflow-hidden transition-all duration-300 ${
+          light
+            ? 'bg-white border border-zinc-200 shadow-xl shadow-zinc-900/10'
+            : 'bg-zinc-900 border-2 border-orange-primary/40 shadow-2xl shadow-orange-primary/20'
+        } ${
           isOpen
             ? 'max-h-[500px] opacity-100'
             : 'max-h-0 opacity-0 pointer-events-none'
@@ -73,8 +82,12 @@ export default function CustomSelect({
               onClick={() => handleSelect(option.value)}
               className={`w-full text-left px-4 py-3 text-sm font-medium transition-all ${
                 value === option.value
-                  ? 'bg-orange-primary/25 text-orange-primary font-bold border-l-4 border-orange-primary'
-                  : 'text-white hover:bg-orange-primary/15 hover:text-orange-primary hover:pl-5'
+                  ? (light
+                      ? 'bg-orange-50 text-orange-primary font-bold border-l-4 border-orange-primary'
+                      : 'bg-orange-primary/25 text-orange-primary font-bold border-l-4 border-orange-primary')
+                  : (light
+                      ? 'text-zinc-700 hover:bg-orange-50 hover:text-orange-primary hover:pl-5'
+                      : 'text-white hover:bg-orange-primary/15 hover:text-orange-primary hover:pl-5')
               }`}
             >
               {option.label}

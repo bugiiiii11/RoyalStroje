@@ -1,402 +1,266 @@
-import { Phone, Mail, Truck, RefreshCw, Zap, TruckIcon, Package, Shield, MapPin, Lightbulb } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Phone, Mail, Truck, Zap, PackageCheck, MapPin, Package, ArrowLeftRight } from 'lucide-react';
+import PageHero from '../components/common/PageHero';
 import { useInView } from '../hooks/useInView';
 
+const PHONE = 'tel:+421948555551';
+
+const benefits = [
+  {
+    icon: Zap,
+    title: 'Expresne načas',
+    text: 'Malé náradie a stredná mechanizácia často v ten istý deň, ťažká technika do 24 hodín.',
+  },
+  {
+    icon: PackageCheck,
+    title: 'Naložíme aj vyložíme',
+    text: 'Techniku naložíme u nás a vyložíme priamo na mieste — nepotrebujete vlastný transport ani manipuláciu.',
+  },
+  {
+    icon: Truck,
+    title: 'Vlastná flotila',
+    text: 'Dodávka, pick-up s prívesným vozíkom do 3 500 kg aj preprava ťažších strojov. Vyberieme správny spôsob.',
+  },
+  {
+    icon: MapPin,
+    title: 'Po celom okolí',
+    text: 'Senec, Bratislava, Galanta, Trnava, Pezinok, Šamorín a široké okolie.',
+  },
+];
+
+const steps = [
+  {
+    n: '01',
+    title: 'Ozvite sa nám',
+    text: 'Telefonicky, e-mailom alebo cez WhatsApp / Telegram. Radi poradíme s výberom techniky.',
+  },
+  {
+    n: '02',
+    title: 'Dohodneme termín a dopravu',
+    text: 'Potvrdíme dostupnosť a vyberieme vhodný spôsob prepravy podľa typu a hmotnosti techniky.',
+  },
+  {
+    n: '03',
+    title: 'Privezieme a vyložíme',
+    text: 'V dohodnutom čase doručíme techniku priamo na stavbu. Po skončení prenájmu ju odvezieme.',
+  },
+];
+
+const pricing = [
+  {
+    icon: Truck,
+    title: 'Dodávka',
+    subtitle: 'Malé náradie a stredná mechanizácia',
+    rows: [
+      { label: 'Senec', value: '15 €' },
+      { label: 'Ostatné', value: '1 €/km', note: 'min. 15 €' },
+    ],
+  },
+  {
+    icon: Package,
+    title: 'Pick-up + prívesný vozík',
+    subtitle: 'Do 3 500 kg — ťažšie stroje a minirýpadlá',
+    rows: [{ label: 'Doprava', value: '1,2 €/km', note: 'min. 15 €' }],
+  },
+  {
+    icon: ArrowLeftRight,
+    title: 'Preprava cudzej techniky',
+    subtitle: 'Aj stroje, ktoré nie sú z našej požičovne',
+    rows: [{ label: 'Doprava', value: '1,50 €/km', note: 'min. 30 €' }],
+  },
+];
+
 export default function DovozTechniky() {
-  const [heroRef, heroInView] = useInView();
-  const [headingRef, headingInView] = useInView();
-  const [gridRef, gridInView] = useInView();
+  const [benefitsRef, benefitsInView] = useInView();
+  const [stepsRef, stepsInView] = useInView();
   const [pricingRef, pricingInView] = useInView();
   const [ctaRef, ctaInView] = useInView();
-  const services = [
-    {
-      id: 'dovoz-na-stavbu',
-      icon: Truck,
-      title: 'Dovoz na stavbu',
-      description: 'Rýchly a spoľahlivý dovoz náradia a techniky priamo na vašu stavbu.',
-      features: ['Dovoz do 24 hodín', 'Celé Slovensko', 'Presný termín', 'Asistenčná služba'],
-    },
-    {
-      id: 'odvoz-po-skonceni',
-      icon: RefreshCw,
-      title: 'Odvoz po skončení',
-      description: 'Odvoz techniky zo stavby po skončení prenájmu. Flexibilné termíny.',
-      features: ['Flexibilný čas', 'Víkendy a sviatky', 'Predĺženie prenájmu', 'Bezplatný odvoz'],
-    },
-    {
-      id: 'express-doprava',
-      icon: Zap,
-      title: 'Express doprava',
-      description: 'Expresné doručenie v prípade havárie alebo poruchy stroja na stavbe.',
-      features: ['Non-stop dostupnosť', 'Náhradný stroj', 'Do 4 hodín', 'Prioritná podpora'],
-    },
-    {
-      id: 'preprava-tazka-mechanizacia',
-      icon: TruckIcon,
-      title: 'Preprava ťažkej mechanizácie',
-      description: 'Preprava bagrov, rýpadiel a inej ťažkej techniky na stavbu.',
-      features: ['Vlastné podvalníky', 'Skúsení vodiči', 'Povolenia a dokumenty', 'Naloženie/vyloženie'],
-    },
-    {
-      id: 'skladovanie',
-      icon: Package,
-      title: 'Skladovanie techniky',
-      description: 'Krátkodobé alebo dlhodobé skladovanie vašej techniky.',
-      features: ['Strážený areál', 'Prístrešky', 'Nabíjanie batérií', 'Dohľad technikov'],
-    },
-    {
-      id: 'poistenie-prepravy',
-      icon: Shield,
-      title: 'Poistenie prepravy',
-      description: 'Plné poistenie techniky počas prepravy na stavbu a späť.',
-      features: ['Havarijné poistenie', 'Odcudzenie', 'Škody pri preprave', 'Bez rizika'],
-    },
-  ];
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Desktop only */}
-      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/hero-pozicovna.webp"
-            alt="Royal Stroje - Dovoz techniky"
-            className="w-full h-full object-cover"
-          />
+      <Helmet>
+        <title>Dovoz techniky na stavbu — Senec, Bratislava a okolie | Royal Stroje</title>
+        <meta
+          name="description"
+          content="Dovezieme stavebnú techniku a náradie priamo na vašu stavbu. Naloženie aj vyloženie, dovoz do 24 h, vlastná flotila. Senec, Bratislava a okolie. Transparentný cenník dopravy."
+        />
+        <link rel="canonical" href="https://royalstroje.sk/sluzby/dovoz-techniky" />
+        <meta property="og:title" content="Dovoz techniky na stavbu | Royal Stroje" />
+        <meta property="og:description" content="Naložíme, privezieme a vyložíme techniku priamo na vašej stavbe. Dovoz do 24 h, Senec · Bratislava · okolie." />
+        <meta property="og:url" content="https://royalstroje.sk/sluzby/dovoz-techniky" />
+      </Helmet>
+
+      {/* Hero (desktop, light) */}
+      <PageHero
+        eyebrow="Služby · Doprava"
+        title={<>Dovoz techniky <span className="text-orange-primary">priamo na vašu stavbu</span></>}
+        subtitle="Naložíme, privezieme a vyložíme techniku presne tam, kde pracujete. Načas, spoľahlivo a po celom okolí Senca a Bratislavy — vy sa staráte o stavbu, my o jej dovoz."
+        image="/pictures/graphics/dovoz.webp"
+        imageAlt="Dodávka Royal Stroje s dovozom techniky na stavbu"
+        chips={['Dovoz do 24 h', 'Naloženie aj vyloženie', 'Senec · Bratislava · okolie']}
+        actions={
+          <>
+            <a href={PHONE} className="btn-primary">
+              <Phone size={16} />
+              Zavolať teraz
+            </a>
+            <a href="#cennik" className="btn-outline-light px-5 py-3">
+              Cenník dopravy
+            </a>
+          </>
+        }
+      />
+
+      <div className="bg-[#FAFAFA]">
+        {/* Mobile brand logo */}
+        <div className="md:hidden pt-4 px-4">
+          <img src="/logoroyal-dark.webp" alt="Royal Stroje" className="h-8 w-auto" />
         </div>
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Gradient fade na spodok - prechod do content sekcie */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none"
-          style={{
-            height: '160px',
-            background: 'linear-gradient(to bottom, transparent, #181818)'
-          }}
-        />
-
-        {/* Content */}
-        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
-          <div className="max-w-3xl">
-            <span className="eyebrow mb-5">Dovoz techniky</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
-              Dovoz techniky
-            </h1>
-            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
-              Rýchly a spoľahlivý dovoz náradia a techniky priamo na vašu stavbu.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Grid */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
-        {/* Mobile Logo - Top Left */}
-        <div className="md:hidden absolute top-3 left-3 z-30">
-          <img
-            src="/logoroyal.webp"
-            alt="Royal Stroje"
-            className="h-8 w-auto"
-          />
+        {/* Mobile heading */}
+        <div className="md:hidden px-4 pt-6 pb-2 text-center">
+          <span className="eyebrow eyebrow--center mb-3">Dovoz techniky</span>
+          <h1 className="text-2xl font-black text-zinc-900 mt-3">
+            Dovoz techniky <span className="text-orange-primary">na stavbu</span>
+          </h1>
+          <p className="text-zinc-600 text-sm mt-3">
+            Naložíme, privezieme a vyložíme techniku priamo na vašej stavbe.
+          </p>
         </div>
 
-        {/* Radial gradient overlay - wider spread */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
-          }}
-        />
-
-        {/* Diagonal subtle lines for technical feel */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
-          }}
-        />
-
-        {/* Orange accent glow - top right (animated) */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            top: '10%',
-            right: '10%',
-            width: '600px',
-            height: '600px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
-            filter: 'blur(100px)',
-            opacity: 0.15,
-            animation: 'floatGlow1 8s ease-in-out infinite'
-          }}
-        />
-
-        {/* Orange accent glow - bottom left (animated) */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            bottom: '10%',
-            left: '10%',
-            width: '550px',
-            height: '550px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            opacity: 0.12,
-            animation: 'floatGlow2 10s ease-in-out infinite'
-          }}
-        />
-
-        {/* Center pulsing glow */}
-        <div
-          className="absolute top-1/2 left-1/2 pointer-events-none z-0"
-          style={{
-            width: '800px',
-            height: '800px',
-            marginLeft: '-400px',
-            marginTop: '-400px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-            filter: 'blur(120px)',
-            animation: 'pulseGlow 6s ease-in-out infinite'
-          }}
-        />
-
-        {/* Animation keyframes */}
-        <style>{`
-          @keyframes floatGlow1 {
-            0%, 100% {
-              transform: translate(0, 0) scale(1);
-            }
-            25% {
-              transform: translate(-120px, 100px) scale(1.2);
-            }
-            50% {
-              transform: translate(80px, -120px) scale(0.85);
-            }
-            75% {
-              transform: translate(100px, 60px) scale(1.1);
-            }
-          }
-
-          @keyframes floatGlow2 {
-            0%, 100% {
-              transform: translate(0, 0) scale(1);
-            }
-            33% {
-              transform: translate(140px, -100px) scale(1.25);
-            }
-            66% {
-              transform: translate(-100px, 120px) scale(0.8);
-            }
-          }
-
-          @keyframes pulseGlow {
-            0%, 100% {
-              transform: scale(1);
-              opacity: 0.08;
-            }
-            50% {
-              transform: scale(1.4);
-              opacity: 0.18;
-            }
-          }
-        `}</style>
-
-        <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-          <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Dovoz techniky</span>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
-              Komplexné <span className="text-orange-primary">dopravné služby</span>
-            </h1>
-            <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
-              Dovoz a odvoz techniky kedykoľvek potrebujete
-            </p>
-          </div>
-
-          <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => {
-              const IconComponent = service.icon;
-              return (
-                <div
-                  key={service.id}
-                  className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
-                >
-                  <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
-                    <IconComponent className="text-orange-primary" size={28} />
+        {/* Benefits */}
+        <section className="py-12 md:py-16 lg:py-20">
+          <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+            <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
+              <span className="eyebrow eyebrow--center mb-4">Prečo Royal Stroje</span>
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mt-4">
+                Dovoz, na ktorý sa <span className="text-orange-primary">môžete spoľahnúť</span>
+              </h2>
+            </div>
+            <div
+              ref={benefitsRef}
+              className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6"
+            >
+              {benefits.map((b, i) => {
+                const Icon = b.icon;
+                return (
+                  <div
+                    key={b.title}
+                    className={`group relative bg-white border border-zinc-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${benefitsInView ? 'in-view' : ''}`}
+                  >
+                    <div className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
+                      <Icon className="text-orange-primary" size={22} />
+                    </div>
+                    <h3 className="text-zinc-900 font-bold text-sm md:text-lg mb-1 md:mb-2 leading-tight">{b.title}</h3>
+                    <p className="text-zinc-600 text-xs md:text-sm leading-relaxed">{b.text}</p>
+                    <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
                   </div>
-                  <h3 className="text-xl font-black text-white mb-3">{service.title}</h3>
-                  <p className="text-white/70 text-sm mb-4 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm text-white/60">
-                        <span className="text-orange-primary mt-0.5">•</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* How it works */}
+        <section className="py-12 md:py-16 lg:py-20 border-t border-zinc-200/70">
+          <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+            <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
+              <span className="eyebrow eyebrow--center mb-4">Ako to funguje</span>
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mt-4">
+                Od telefonátu <span className="text-orange-primary">po vyloženie na stavbe</span>
+              </h2>
+            </div>
+            <div ref={stepsRef} className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+              {steps.map((s, i) => (
+                <div
+                  key={s.n}
+                  className={`group relative bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${stepsInView ? 'in-view' : ''}`}
+                >
+                  <span className="absolute top-3 right-4 font-display text-5xl md:text-6xl font-black text-zinc-900/[0.05] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                    {s.n}
+                  </span>
+                  <div className="relative">
+                    <h3 className="text-zinc-900 font-black text-lg md:text-xl mb-2 group-hover:text-orange-primary transition-colors">{s.title}</h3>
+                    <p className="text-zinc-600 text-sm md:text-base leading-relaxed max-w-[40ch]">{s.text}</p>
+                  </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Info Section */}
-      <section className="relative py-16 bg-zinc-950 overflow-hidden">
-        {/* Radial gradient overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.7) 0%, rgba(9, 9, 11, 1) 75%)'
-          }}
-        />
-
-        {/* Diagonal subtle lines */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.08] z-0"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px)'
-          }}
-        />
-
-        {/* Orange accent glow - top right */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            top: '10%',
-            right: '10%',
-            width: '600px',
-            height: '600px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.6) 0%, rgba(255,102,0,0.2) 40%, transparent 70%)',
-            filter: 'blur(100px)',
-            opacity: 0.15,
-            animation: 'floatGlow1 8s ease-in-out infinite'
-          }}
-        />
-
-        {/* Orange accent glow - bottom left */}
-        <div
-          className="absolute pointer-events-none z-0"
-          style={{
-            bottom: '10%',
-            left: '10%',
-            width: '550px',
-            height: '550px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.5) 0%, rgba(255,102,0,0.15) 40%, transparent 70%)',
-            filter: 'blur(90px)',
-            opacity: 0.12,
-            animation: 'floatGlow2 10s ease-in-out infinite'
-          }}
-        />
-
-        {/* Center pulsing glow */}
-        <div
-          className="absolute top-1/2 left-1/2 pointer-events-none z-0"
-          style={{
-            width: '800px',
-            height: '800px',
-            marginLeft: '-400px',
-            marginTop: '-400px',
-            background: 'radial-gradient(circle, rgba(255,102,0,0.4) 0%, rgba(255,102,0,0.1) 50%, transparent 70%)',
-            filter: 'blur(120px)',
-            animation: 'pulseGlow 6s ease-in-out infinite'
-          }}
-        />
-
-        <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-          <div ref={pricingRef} className={`text-center mb-12 reveal ${pricingInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Cenník</span>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
-              Transparentné <span className="text-orange-primary">cenníky</span>
-            </h2>
-            <p className="text-white/70 max-w-2xl mx-auto mb-8">
-              Cena dopravy závisí od vzdialenosti a typu techniky
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300">
-              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 mx-auto">
-                <MapPin className="text-orange-primary" size={28} />
-              </div>
-              <h3 className="text-white font-bold text-lg mb-2">Do 20 km</h3>
-              <p className="text-orange-primary text-2xl font-black mb-2">ZDARMA</p>
-              <p className="text-white/60 text-sm">Pri prenájme nad 3 dni</p>
-            </div>
-            <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300">
-              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 mx-auto">
-                <Truck className="text-orange-primary" size={28} />
-              </div>
-              <h3 className="text-white font-bold text-lg mb-2">20-50 km</h3>
-              <p className="text-orange-primary text-2xl font-black mb-2">0,50 €/km</p>
-              <p className="text-white/60 text-sm">Malé náradie a stroje</p>
-            </div>
-            <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300">
-              <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-3 mx-auto">
-                <TruckIcon className="text-orange-primary" size={28} />
-              </div>
-              <h3 className="text-white font-bold text-lg mb-2">Nad 50 km</h3>
-              <p className="text-orange-primary text-2xl font-black mb-2">Dohodou</p>
-              <p className="text-white/60 text-sm">Individuálna cena</p>
+              ))}
             </div>
           </div>
+        </section>
 
-          <div className="mt-12 text-center">
-            <div className="inline-flex items-start gap-3 bg-orange-primary/10 border border-orange-primary/30 rounded-xl px-6 py-4 max-w-3xl">
-              <div className="w-8 h-8 rounded-lg bg-orange-primary/20 border border-orange-primary/40 flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Lightbulb className="text-orange-primary" size={18} />
-              </div>
-              <p className="text-white/90 text-sm text-left">
-                <strong className="text-white">Tip:</strong> Pri dlhšom prenájme (nad 7 dní) alebo opakovanej spolupráci
-                ponúkame <strong className="text-orange-primary">dopravu ZDARMA</strong> aj na väčšie vzdialenosti!
+        {/* Pricing */}
+        <section id="cennik" className="py-12 md:py-16 lg:py-20 border-t border-zinc-200/70 scroll-mt-24">
+          <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
+            <div ref={pricingRef} className={`text-center max-w-2xl mx-auto mb-8 md:mb-12 reveal ${pricingInView ? 'in-view' : ''}`}>
+              <span className="eyebrow eyebrow--center mb-4">Cenník dopravy</span>
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mt-4">
+                Transparentné ceny <span className="text-orange-primary">bez prekvapení</span>
+              </h2>
+              <p className="text-zinc-600 text-sm md:text-lg mt-3">
+                Cena dopravy závisí od typu a hmotnosti techniky.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-black">
-        <div ref={ctaRef} className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-          <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
-            Potrebujete dopravu techniky?
-          </h2>
-          <p className="text-white/70 text-lg mb-8 max-w-2xl mx-auto">
-            Zavolajte nám a dohodneme presný termín dovozu priamo na vašu stavbu.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <span className="flex items-center gap-2 text-white/70">
-              <span className="text-orange-primary">✓</span> Dovoz do 24 hodín
-            </span>
-            <span className="flex items-center gap-2 text-white/70">
-              <span className="text-orange-primary">✓</span> Non-stop linka
-            </span>
-            <span className="flex items-center gap-2 text-white/70">
-              <span className="text-orange-primary">✓</span> Celé Slovensko
-            </span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+              {pricing.map((p) => {
+                const Icon = p.icon;
+                return (
+                  <div
+                    key={p.title}
+                    className="relative bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 flex flex-col"
+                  >
+                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent rounded-t-2xl" />
+                    <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-4">
+                      <Icon className="text-orange-primary" size={26} />
+                    </div>
+                    <h3 className="text-zinc-900 font-black text-lg md:text-xl mb-1">{p.title}</h3>
+                    <p className="text-zinc-500 text-sm mb-5">{p.subtitle}</p>
+                    <div className="mt-auto space-y-2 border-t border-zinc-100 pt-4">
+                      {p.rows.map((r) => (
+                        <div key={r.label} className="flex items-baseline justify-between gap-3">
+                          <span className="text-zinc-600 text-sm">{r.label}</span>
+                          <span className="text-right">
+                            <span className="text-orange-primary font-black text-xl">{r.value}</span>
+                            {r.note && <span className="block text-zinc-400 text-xs">{r.note}</span>}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <p className="text-center text-zinc-500 text-sm mt-6">
+              Presnú cenu vám oznámime pri objednávke. Uvedené ceny sú <strong className="text-zinc-700">bez DPH</strong>.
+            </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="tel:+421948555551"
-              className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
-            >
-              <Phone size={20} />
-              <span>Zavolať teraz</span>
-            </a>
-            <a
-              href="mailto:info@royalstroje.sk"
-              className="btn-secondary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
-            >
-              <Mail size={20} />
-              <span>Napísať email</span>
-            </a>
+        </section>
+
+        {/* CTA */}
+        <section className="py-12 md:py-16 lg:py-20 border-t border-zinc-200/70">
+          <div ref={ctaRef} className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
+            <span className="eyebrow eyebrow--center mb-4">Objednať dopravu</span>
+            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
+              Potrebujete techniku na stavbe?
+            </h2>
+            <p className="text-zinc-600 text-lg mb-8 max-w-2xl mx-auto">
+              Zavolajte nám a dohodneme presný termín dovozu priamo na vašu stavbu.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a href={PHONE} className="btn-primary text-base px-8 py-4">
+                <Phone size={18} />
+                <span>Zavolať teraz: 0948 555 551</span>
+              </a>
+              <a href="mailto:info@royalstroje.sk" className="btn-outline-light text-base px-8 py-4">
+                <Mail size={18} />
+                <span>Napísať email</span>
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

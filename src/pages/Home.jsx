@@ -1,7 +1,11 @@
 import { Helmet } from 'react-helmet-async';
-import Hero from '../components/home/Hero';
-import MobileHero from '../components/home/MobileHero';
+import HeroSplit from '../components/home/HeroSplit';
+import BusinessPillars from '../components/home/BusinessPillars';
+import PromoCarousel from '../components/home/PromoCarousel';
 import Catalog from '../components/home/Catalog';
+// --- OLD HERO (revert: uncomment 2 imports below + the block in JSX, remove <HeroSplit />) ---
+// import Hero from '../components/home/Hero';
+// import MobileHero from '../components/home/MobileHero';
 
 export default function Home() {
   return (
@@ -67,15 +71,22 @@ export default function Home() {
         </script>
       </Helmet>
 
-      {/* Hero - Desktop only */}
+      {/* NEW split hero (prenájom | predaj) — desktop diagonal split, mobile stacked */}
+      <HeroSplit />
+
+      {/* --- OLD HERO — kept for revert (re-enable the 2 imports above) ---
       <div className="hidden md:block">
         <Hero />
       </div>
-      {/* Separator line between hero and content - Desktop only */}
       <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
-
-      {/* Hero - Mobile only */}
       <MobileHero />
+      */}
+
+      {/* Štyri hlavné okruhy podnikania */}
+      <BusinessPillars />
+
+      {/* Aktuálne akcie — carousel */}
+      <PromoCarousel />
 
       <Catalog />
     </>

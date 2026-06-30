@@ -214,78 +214,42 @@ export default function Catalog() {
   const handleSubcategoryChange = (subcategoryId) => setActiveSubcategory(subcategoryId);
 
   return (
-    <ContentSection id="katalog" className="pt-0">
-      {/* Radial gradient overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: 'radial-gradient(ellipse at 50% 50%, rgba(100, 100, 110, 0.2) 0%, transparent 75%)',
-          top: '15%'
-        }}
-      />
-
+    <ContentSection id="katalog" light className="pt-0">
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pb-16 md:py-16">
         {/* Mobile Header */}
         <div ref={headerRef} className={`md:hidden text-center mb-6 pt-6 reveal ${headerInView ? 'in-view' : ''}`}>
           <span className="eyebrow eyebrow--center mb-3">Katalóg</span>
-          <h2 className="text-xl font-black text-white mb-2 mt-3 leading-tight">
+          <h2 className="text-xl font-black text-zinc-900 mb-2 mt-3 leading-tight">
             <span className="text-orange-primary">Katalóg náradia</span> a strojov na prenájom
           </h2>
-          <p className="text-white/70 text-sm leading-relaxed max-w-2xl mx-auto">
+          <p className="text-zinc-600 text-sm leading-relaxed max-w-2xl mx-auto">
             Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
           </p>
         </div>
 
         {/* Desktop Header */}
         <div ref={desktopHeaderRef} className={`hidden md:block mb-8 reveal ${desktopHeaderInView ? 'in-view' : ''}`}>
-          <div className="relative flex items-center justify-center gap-8">
-            {/* Left Product Image */}
-            <div className="hidden lg:block flex-shrink-0">
-              <img
-                src="/pictures/graphics/JCB-19C-transparent.webp"
-                alt="Produkt"
-                className="w-64 h-auto opacity-75 select-none pointer-events-none"
-                width={800}
-                height={800}
-                draggable="false"
-              />
-            </div>
-
-            {/* Center Content */}
-            <div className="text-center flex-1">
-              <span className="eyebrow eyebrow--center mb-4">Požičovňa</span>
-              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
-                <span className="text-orange-primary">Katalóg</span> strojov na prenájom
-              </h2>
-              <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-6">
-                Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
-              </p>
-            </div>
-
-            {/* Right Product Image */}
-            <div className="hidden lg:block flex-shrink-0">
-              <img
-                src="/pictures/graphics/wacker-neuson-803-transparent.webp"
-                alt="Produkt"
-                className="w-64 h-auto opacity-75 select-none pointer-events-none"
-                width={800}
-                height={800}
-                draggable="false"
-              />
-            </div>
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="eyebrow eyebrow--center mb-4">Požičovňa</span>
+            <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+              <span className="text-orange-primary">Katalóg</span> strojov na prenájom
+            </h2>
+            <p className="text-zinc-600 text-sm md:text-lg mx-auto mb-6">
+              Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
+            </p>
           </div>
         </div>
 
         {/* Customer Type Selector & Search - Centered Row */}
         <div ref={filtersRef} className={`flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4 mb-4 md:mb-8 reveal-fade stagger-2 ${filtersInView ? 'in-view' : ''}`}>
             {/* Customer Type Selector */}
-            <div className="inline-flex bg-zinc-900 border border-white/10 rounded-lg md:rounded-2xl p-0.5 md:p-1.5 gap-0.5 md:gap-1.5">
+            <div className="inline-flex bg-white border border-zinc-200 rounded-lg md:rounded-2xl p-0.5 md:p-1.5 gap-0.5 md:gap-1.5">
               <button
                 onClick={() => setCustomerType('po')}
                 className={`flex items-center gap-1 md:gap-2 px-3 py-3 md:px-4 md:py-2 rounded-md md:rounded-xl font-bold text-xs md:text-sm transition-all min-h-[48px] ${
                   customerType === 'po'
                     ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
-                    : 'text-white/70 hover:text-white/80'
+                    : 'text-zinc-600 hover:text-zinc-900'
                 }`}
               >
                 <Building2 size={14} className="md:w-4 md:h-4" />
@@ -297,7 +261,7 @@ export default function Catalog() {
                 className={`flex items-center gap-1 md:gap-2 px-3 py-3 md:px-4 md:py-2 rounded-md md:rounded-xl font-bold text-xs md:text-sm transition-all min-h-[48px] ${
                   customerType === 'fo'
                     ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg'
-                    : 'text-white/70 hover:text-white/80'
+                    : 'text-zinc-600 hover:text-zinc-900'
                 }`}
               >
                 <User size={14} className="md:w-4 md:h-4" />
@@ -308,18 +272,18 @@ export default function Catalog() {
 
             {/* Search Bar */}
             <div className="relative w-full sm:w-80">
-              <Search className="absolute left-2.5 md:left-3 top-1/2 -translate-y-1/2 text-white/40" size={12} />
+              <Search className="absolute left-2.5 md:left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={12} />
               <input
                 type="text"
                 placeholder="Hľadať produkty..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-zinc-900 border border-white/10 rounded-lg md:rounded-xl pl-8 md:pl-10 pr-8 md:pr-10 py-3 md:py-2.5 text-sm md:text-sm text-white placeholder-white/40 focus:outline-none focus:border-orange-primary/50 transition-all min-h-[48px]"
+                className="w-full bg-white border border-zinc-200 rounded-lg md:rounded-xl pl-8 md:pl-10 pr-8 md:pr-10 py-3 md:py-2.5 text-sm md:text-sm text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-orange-primary/50 focus:ring-1 focus:ring-orange-primary/20 transition-all min-h-[48px]"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-2.5 md:right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
+                  className="absolute right-2.5 md:right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-900 transition-colors"
                 >
                   <X size={10} className="md:w-3.5 md:h-3.5" />
                 </button>
@@ -334,8 +298,8 @@ export default function Catalog() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Sidebar - Categories */}
           <aside ref={sidebarRef} className={`lg:w-80 flex-shrink-0 reveal-left stagger-1 ${sidebarInView ? 'in-view' : ''}`}>
-            <div className="bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 sticky top-24">
-              <h3 className="flex items-center gap-2.5 text-white font-black text-sm md:text-lg uppercase tracking-wide mb-3 md:mb-6 px-1 md:px-2">
+            <div className="bg-white border border-zinc-200 shadow-sm shadow-zinc-900/5 rounded-xl md:rounded-2xl p-3 md:p-6 sticky top-24">
+              <h3 className="flex items-center gap-2.5 text-zinc-900 font-black text-sm md:text-lg uppercase tracking-wide mb-3 md:mb-6 px-1 md:px-2">
                 <span className="inline-block w-5 md:w-6 h-0.5 bg-orange-primary" />
                 Kategórie
               </h3>
@@ -351,7 +315,7 @@ export default function Catalog() {
                       className={`group w-full text-left px-2 py-3 md:px-4 md:py-3.5 rounded-lg md:rounded-xl font-bold transition-all duration-300 min-h-[48px] ${
                         isActive
                           ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg shadow-orange-primary/40'
-                          : 'bg-zinc-800/50 text-white/80 hover:bg-zinc-800 hover:text-white border border-transparent hover:border-orange-primary/30'
+                          : 'bg-zinc-50 text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 border border-transparent hover:border-orange-primary/30'
                       }`}
                     >
                       <div className="flex items-center gap-2 md:gap-3 relative">
@@ -359,7 +323,7 @@ export default function Catalog() {
                         <div className={`relative flex-shrink-0 w-7 h-7 md:w-10 md:h-10 rounded-md md:rounded-lg flex items-center justify-center transition-all duration-300 ${
                           isActive
                             ? 'bg-white/20'
-                            : 'bg-zinc-700/50 group-hover:bg-orange-primary/20'
+                            : 'bg-white border border-zinc-200 group-hover:bg-orange-primary/10 group-hover:border-orange-primary/30'
                         }`}>
                           {IconComponent && (
                             <IconComponent
@@ -373,7 +337,7 @@ export default function Catalog() {
                           )}
                           {/* Badge as small dot indicator on icon */}
                           {category.badge && !isActive && (
-                            <span className="absolute -top-0.5 -right-0.5 md:-top-1 md:-right-1 w-2 h-2 md:w-3 md:h-3 bg-orange-primary rounded-full border border-zinc-900 md:border-2"></span>
+                            <span className="absolute -top-0.5 -right-0.5 md:-top-1 md:-right-1 w-2 h-2 md:w-3 md:h-3 bg-orange-primary rounded-full border border-white md:border-2"></span>
                           )}
                         </div>
 
@@ -572,18 +536,18 @@ export default function Catalog() {
                       className={`subcategory-btn group relative px-3 py-3 md:px-6 md:py-3.5 rounded-lg md:rounded-2xl font-bold text-xs md:text-base transition-all duration-300 min-h-[48px] ${
                         isActive
                           ? 'subcategory-btn--active text-white scale-[1.02]'
-                          : 'text-white/80 hover:text-white hover:scale-[1.02]'
+                          : 'text-zinc-700 hover:text-zinc-900 hover:scale-[1.02]'
                       }`}
                       style={{
                         background: isActive
                           ? 'linear-gradient(135deg, #ff6600 0%, #ff8533 50%, #ff6600 100%)'
-                          : 'linear-gradient(145deg, #2a2a2e 0%, #1a1a1d 100%)',
+                          : 'linear-gradient(145deg, #ffffff 0%, #f4f4f5 100%)',
                         boxShadow: isActive
                           ? '0 8px 25px -5px rgba(255, 102, 0, 0.5), 0 4px 10px -5px rgba(255, 102, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.15)'
-                          : '0 4px 15px -3px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -2px 0 rgba(0, 0, 0, 0.2)',
+                          : '0 1px 2px rgba(24, 24, 27, 0.06), 0 1px 3px rgba(24, 24, 27, 0.04)',
                         border: isActive
                           ? '1px solid rgba(255, 255, 255, 0.2)'
-                          : '1px solid rgba(255, 255, 255, 0.1)',
+                          : '1px solid rgb(228, 228, 231)',
                         transform: isActive ? 'translateY(-2px)' : 'translateY(0)',
                       }}
                     >
@@ -602,7 +566,7 @@ export default function Catalog() {
             </div>
 
             {/* Image disclaimer */}
-            <div className="flex items-center gap-2 mb-3 md:mb-4 text-white/50 text-[11px] md:text-xs italic">
+            <div className="flex items-center gap-2 mb-3 md:mb-4 text-zinc-500 text-[11px] md:text-xs italic">
               <Info size={12} className="flex-shrink-0 text-orange-primary/60" />
               <span>Obrázky v katalógu sú ilustračné — skutočné prevedenie sa môže líšiť.</span>
             </div>
@@ -610,9 +574,9 @@ export default function Catalog() {
             {/* Products Grid or Accessories Table */}
             {activeSubcategory === 'prislusenstvo' && activeCategory === 'male-naradie' ? (
               <div className="mb-8">
-                <div className="bg-zinc-900/80 border border-white/10 rounded-2xl overflow-hidden">
+                <div className="bg-white border border-zinc-200 shadow-sm shadow-zinc-900/5 rounded-2xl overflow-hidden">
                   {/* Table header */}
-                  <div className="grid grid-cols-4 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-orange-primary/20 to-transparent border-b border-white/10">
+                  <div className="grid grid-cols-4 px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-orange-primary/20 to-transparent border-b border-zinc-200">
                     <span className="text-orange-primary font-bold text-xs md:text-sm uppercase tracking-wider">Produkt</span>
                     <span className="text-orange-primary font-bold text-xs md:text-sm uppercase tracking-wider text-center">Parametre</span>
                     <span className="text-orange-primary font-bold text-xs md:text-sm uppercase tracking-wider text-right">Cena bez DPH</span>
@@ -631,11 +595,11 @@ export default function Catalog() {
                       return (
                         <div
                           key={item.id}
-                          className="grid grid-cols-4 px-4 md:px-6 py-3 md:py-4 items-center border-b border-white/5 last:border-b-0 hover:bg-white/5 transition-colors"
+                          className="grid grid-cols-4 px-4 md:px-6 py-3 md:py-4 items-center border-b border-zinc-100 last:border-b-0 hover:bg-zinc-50 transition-colors"
                         >
-                          <span className="text-white font-medium text-sm md:text-base">{productName}</span>
-                          <span className="text-white/60 text-sm md:text-base text-center">{parameter}</span>
-                          <span className="text-white/80 text-sm md:text-base text-right">
+                          <span className="text-zinc-900 font-medium text-sm md:text-base">{productName}</span>
+                          <span className="text-zinc-600 text-sm md:text-base text-center">{parameter}</span>
+                          <span className="text-zinc-700 text-sm md:text-base text-right">
                             {isNeg ? 'Na požiadanie' : `${priceBez.toFixed(2)}€`}
                           </span>
                           <span className="text-orange-primary font-bold text-sm md:text-base text-right">
@@ -665,8 +629,8 @@ export default function Catalog() {
                       disabled={currentPage === 1}
                       className={`p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 ${
                         currentPage === 1
-                          ? 'bg-zinc-900 text-white/30 cursor-not-allowed'
-                          : 'bg-zinc-900 border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10'
+                          ? 'bg-white border border-zinc-200 text-zinc-300 cursor-not-allowed'
+                          : 'bg-white border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10'
                       }`}
                     >
                       <ChevronLeft size={18} />
@@ -694,7 +658,7 @@ export default function Catalog() {
                             className={`w-10 h-10 md:w-10 md:h-10 rounded-lg font-bold text-xs md:text-sm transition ${
                               currentPage === page
                                 ? 'bg-orange-primary text-white shadow-lg shadow-orange-primary/40'
-                                : 'bg-zinc-900 border border-white/10 text-white/70 hover:bg-zinc-800 hover:text-white hover:border-orange-primary/30'
+                                : 'bg-white border border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 hover:border-orange-primary/30'
                             }`}
                           >
                             {page}
@@ -709,8 +673,8 @@ export default function Catalog() {
                       disabled={currentPage === totalPages}
                       className={`p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 ${
                         currentPage === totalPages
-                          ? 'bg-zinc-900 text-white/30 cursor-not-allowed'
-                          : 'bg-zinc-900 border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10'
+                          ? 'bg-white border border-zinc-200 text-zinc-300 cursor-not-allowed'
+                          : 'bg-white border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10'
                       }`}
                     >
                       <span className="hidden md:inline text-sm">Ďalšia</span>
@@ -722,10 +686,10 @@ export default function Catalog() {
             ) : (
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-zinc-900 mb-2">
                   {searchQuery ? 'Nenašli sa žiadne výsledky' : 'Žiadne produkty'}
                 </h3>
-                <p className="text-white/70">
+                <p className="text-zinc-600">
                   {searchQuery
                     ? `Skúste hľadať iný výraz alebo upravte filter kategórií`
                     : 'V tejto kategórii momentálne nie sú dostupné žiadne produkty.'}
@@ -759,26 +723,26 @@ export default function Catalog() {
         <div ref={blogCtaRef} className={`relative mt-16 md:mt-24 pt-12 md:pt-16 reveal ${blogCtaInView ? 'in-view' : ''}`}>
           <div className="text-center mb-8 md:mb-12">
             <span className="eyebrow eyebrow--center mb-4">Blog</span>
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4 mt-4">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
               Chcete vedieť viac?
             </h2>
-            <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto">
+            <p className="text-zinc-600 text-sm md:text-lg max-w-2xl mx-auto">
               Navštívte náš blog plný užitočných rád, tipov a noviniek zo sveta stavebnej mechanizácie
             </p>
           </div>
 
           <div ref={blogCardsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-8 md:mb-12">
             {/* Tip 1 */}
-            <div className={`group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 reveal stagger-1 ${blogCardsInView ? 'in-view' : ''}`}>
+            <div className={`group relative card-light p-6 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-1 ${blogCardsInView ? 'in-view' : ''}`}>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-primary/20 transition-all">
                   <BookOpen className="text-orange-primary" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
+                  <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
                     Návody a tipy
                   </h3>
-                  <p className="text-white/70 text-sm leading-relaxed">
+                  <p className="text-zinc-600 text-sm leading-relaxed">
                     Praktické rady ako vybrať správnu techniku, ako správne používať stroje a ako ušetriť na prenájme
                   </p>
                 </div>
@@ -786,16 +750,16 @@ export default function Catalog() {
             </div>
 
             {/* Tip 2 */}
-            <div className={`group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 reveal stagger-2 ${blogCardsInView ? 'in-view' : ''}`}>
+            <div className={`group relative card-light p-6 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-2 ${blogCardsInView ? 'in-view' : ''}`}>
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-primary/20 transition-all">
                   <Calendar className="text-orange-primary" size={24} />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
+                  <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
                     Novinky a aktuality
                   </h3>
-                  <p className="text-white/70 text-sm leading-relaxed">
+                  <p className="text-zinc-600 text-sm leading-relaxed">
                     Informácie o nových strojoch v našej ponuke, zmenách v cenníku a špeciálnych akciách
                   </p>
                 </div>

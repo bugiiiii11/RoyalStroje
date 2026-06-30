@@ -1,7 +1,8 @@
-import { Calendar, ArrowRight, Clock } from 'lucide-react';
+import { Calendar, ArrowRight, Clock, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import PageHero from '../components/common/PageHero';
 import { useInView } from '../hooks/useInView';
 
 export default function Blog() {
@@ -236,7 +237,6 @@ export default function Blog() {
     },
   ];
 
-  const [heroRef, heroInView] = useInView();
   const [headingRef, headingInView] = useInView();
   const [gridRef, gridInView] = useInView();
   const [ctaRef, ctaInView] = useInView();
@@ -261,48 +261,28 @@ export default function Blog() {
         <meta property="og:url" content="https://royalstroje.sk/blog" />
       </Helmet>
 
-      {/* Hero Section - Desktop only */}
-      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/hero-pozicovna.webp"
-            alt="Royal Stroje - Blog"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Gradient fade na spodok - prechod do content sekcie */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none"
-          style={{
-            height: '160px',
-            background: 'linear-gradient(to bottom, transparent, #181818)'
-          }}
-        />
-
-        {/* Content */}
-        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
-          <div className="max-w-3xl">
-            <span className="eyebrow mb-5">Blog</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
-              Stavajte efektívnejšie. <span className="text-orange-primary">Tipy od profesionálov.</span>
-            </h1>
-            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
-              Praktické rady, návody a novinky zo sveta stavebnej mechanizácie pre región Senec - Bratislava.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Separator line between hero and content */}
-      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
+      {/* Hero (desktop, light) */}
+      <PageHero
+        eyebrow="Blog"
+        title={<>Stavajte efektívnejšie. <span className="text-orange-primary">Tipy od profesionálov.</span></>}
+        subtitle="Praktické rady, návody a novinky zo sveta stavebnej mechanizácie pre región Senec - Bratislava."
+        image="/hero-pozicovna.webp"
+        imageAlt="Royal Stroje - Blog"
+        actions={
+          <>
+            <a href="tel:+421948555551" className="btn-primary">
+              <Phone size={16} />
+              Zavolať teraz
+            </a>
+            <a href="/#katalog" className="btn-outline-light px-5 py-3">
+              Zobraziť techniku
+            </a>
+          </>
+        }
+      />
 
       {/* Main Content Section */}
-      <ContentSection>
+      <ContentSection light>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -317,10 +297,10 @@ export default function Blog() {
           {/* Section Heading - Improved Typography */}
           <div ref={headingRef} className="text-center mb-10 md:mb-16 pt-16 md:pt-0">
             <span className={`eyebrow eyebrow--center mb-4 reveal ${headingInView ? 'in-view' : ''}`}>Články &amp; návody</span>
-            <h1 className={`text-2xl md:text-5xl font-black text-white mb-3 md:mb-6 mt-4 tracking-tight leading-tight reveal ${headingInView ? 'in-view' : ''}`}>
+            <h1 className={`text-2xl md:text-5xl font-black text-zinc-900 mb-3 md:mb-6 mt-4 tracking-tight leading-tight reveal ${headingInView ? 'in-view' : ''}`}>
               Najnovšie články <span className="text-orange-primary">a praktické návody</span>
             </h1>
-            <p className={`text-white/80 text-base md:text-xl max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
+            <p className={`text-zinc-700 text-base md:text-xl max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Odborné know-how z 20 rokov praxe v stavebníctve. Konkrétne riešenia pre vaše projekty.
             </p>
           </div>
@@ -332,7 +312,7 @@ export default function Blog() {
                 <Link
                   key={post.id}
                   to={`/blog/${post.slug}`}
-                  className={`group bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 hover:-translate-y-1 transition-all duration-300 relative reveal stagger-${Math.min(index + 1, 8)} ${gridInView ? 'in-view' : ''}`}
+                  className={`group bg-white border border-zinc-200 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 shadow-sm shadow-zinc-900/5 hover:-translate-y-1 transition-all duration-300 relative reveal stagger-${Math.min(index + 1, 8)} ${gridInView ? 'in-view' : ''}`}
                 >
                   {/* Orange top accent rule */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-20 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -350,7 +330,7 @@ export default function Blog() {
                   {/* Content */}
                   <div className="p-3 md:p-5">
                     {/* Meta Info - Enhanced */}
-                    <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-3 text-[10px] md:text-xs text-white/70">
+                    <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-3 text-[10px] md:text-xs text-zinc-600">
                       <span className="flex items-center gap-1 transition-colors group-hover:text-orange-primary">
                         <Calendar size={12} className="md:w-3.5 md:h-3.5 text-orange-primary/70" />
                         <span className="font-medium">{post.date}</span>
@@ -362,12 +342,12 @@ export default function Blog() {
                     </div>
 
                     {/* Title - Optimized Size */}
-                    <h3 className="text-sm md:text-xl font-black text-white mb-2 md:mb-3 group-hover:text-orange-primary transition-colors duration-300 line-clamp-2 leading-tight tracking-tight">
+                    <h3 className="text-sm md:text-xl font-black text-zinc-900 mb-2 md:mb-3 group-hover:text-orange-primary transition-colors duration-300 line-clamp-2 leading-tight tracking-tight">
                       {post.title}
                     </h3>
 
                     {/* Excerpt - Compact */}
-                    <p className="text-white/75 text-xs md:text-sm leading-relaxed mb-3 md:mb-4 line-clamp-2">
+                    <p className="text-zinc-700 text-xs md:text-sm leading-relaxed mb-3 md:mb-4 line-clamp-2">
                       {post.excerpt}
                     </p>
 
@@ -388,14 +368,14 @@ export default function Blog() {
           {/* CTA Section - Enhanced with Gradient */}
           <div ref={ctaRef} className={`relative mt-12 md:mt-20 reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             {/* Gradient Background - Subtle */}
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-700/20 via-zinc-600/10 to-transparent rounded-3xl blur-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/10 via-orange-primary/5 to-transparent rounded-3xl blur-3xl"></div>
 
             <div className="relative text-center py-12 md:py-16 px-4">
               <span className="eyebrow eyebrow--center mb-4">Potrebujete techniku?</span>
-              <h2 className="text-2xl md:text-4xl font-black text-white mb-4 md:mb-6 mt-4 tracking-tight">
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mb-4 md:mb-6 mt-4 tracking-tight">
                 Zaujala vás naša ponuka?
               </h2>
-              <p className={`text-white/80 text-base md:text-xl mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
+              <p className={`text-zinc-700 text-base md:text-xl mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
                 Kontaktujte nás a radi vám pomôžeme s výberom správnej techniky pre váš projekt.
               </p>
               <div className={`flex flex-wrap justify-center gap-4 md:gap-6 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}>
@@ -407,7 +387,7 @@ export default function Blog() {
                 </Link>
                 <Link
                   to="/sluzby"
-                  className="btn-secondary text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
+                  className="btn-outline-light text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
                 >
                   <span>Naše služby</span>
                 </Link>

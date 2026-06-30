@@ -26,6 +26,11 @@
 | 21 | 2026-06-03 | Mobile footer gap + mobile GPU garbage fix | Removed `main pb-20` black gap above footer on mobile; fixed scrambled GPU garbage/tearing bands on real Android (FAQ + product grid) — root cause was `backdrop-filter` on the fixed hamburger button forcing whole-page read-back compositing |
 | 22 | 2026-06-16 | Landing page redesign — Industrial Premium | New type system (Archivo display + Manrope body via Google Fonts), eyebrow/hairline/button primitives, refined hero (desktop+mobile), numbered why-us cards, cleaner FAQ, modernized catalog shell + product cards + quote form, header/footer cohesion. Dark+orange+white kept, hero image + all texts/CTAs preserved. Committed `bf57e7d` (session 23). |
 | 23 | 2026-06-16 | Industrial-premium rollout to all remaining pages | Applied the session-22 design system across all 18 remaining public pages (Sluzby, Kontakt, Partneri, CenovaPonuka, Kosik, Blog, BlogDetail, ProductDetail, 7 service pages, 3 legal pages): eyebrows, `.btn-primary`/`.btn-secondary` CTAs, canonical card style, orange top-accent rules, removed loud cards + `gradient-shift` sheen. GPU guard upheld. Build + lint clean. Committed `f8d1d38` + pushed. |
+| 24 | 2026-06-23 | Cenník dopravy + nový split-screen hero (WIP) | Added 3rd transport item (preprava cudzieho stroja 1,50 €/km, min 30 €) — committed `44d0cd3` + pushed. Built NEW full-screen split hero (Prenájom \| Predaj) with thin orange diagonal divider, 16:9 image strip, white USP band — **UNCOMMITTED**, old hero preserved on disk for revert. |
+| 25 | 2026-06-23 | Homepage light theme — white redesign (WIP) | Flipped homepage content bg dark→light (`#FAFAFA` via `ContentSection` `light` prop, Home-only), then full "clean white panels" redesign of every homepage surface (catalog sidebar/toggle/search/subcategory pills/table/pagination, product cards, why-us cards, FAQ accordion+contact box, QuoteForm, blog CTA). New `.card-light`/`.input-light`/`.btn-outline-light` primitives; `CustomSelect` got opt-in `light` variant (Kontakt stays dark). Heroes/footer/orange unchanged. Build clean. Owner approved ("vyzerá to daleko lepšie"). **UNCOMMITTED.** |
+| 28 | 2026-06-26 | Light `PageHero` rolled out to all remaining subpage heroes | Converted the 11 remaining dark subpage heroes (Blog, BlogDetail, Kontakt, CenovaPonuka, NahradneDiely, RoyalFleet, SkoLenieObsluhy, Partneri, PredajTechniky, ServisNaradia, ZemnePrace) to the shared light `PageHero`; removed per-page `<hr>` orange seam (PageHero has its own) + unused `heroRef`. 10 via parallel agents, BlogDetail by hand (dynamic meta→chips, excerpt→subtitle, back-link→action). Build + lint clean. **UNCOMMITTED.** |
+| 27 | 2026-06-25 | Hero polish + homepage sections + light header + Služby/Dovoz | Trimmed transparent truck on white, removed hero 4-img strip (split full-height), gray card-style USP band w/ hover, NEW `BusinessPillars` (4 okruhy) + `PromoCarousel` (Akcie 3:1), light solid header (dark logo `logoroyal-dark.webp`, Blog nav, phone+CTA, icons removed), removed catalog excavator decor. **+ light `PageHero`, Služby grid swap Cenová ponuka→Dovoz techniky, rebuilt `DovozTechniky` subpage (real FAQ pricing) + route.** UNCOMMITTED. |
+| 26 | 2026-06-24 | Light theme rolled out to ALL remaining pages | Applied the session-25 light theme to every remaining public page (18 files): heroes kept dark (bottom fades flipped #181818→#FAFAFA), content → `#FAFAFA` + `.card-light` panels, shared `ContactForm` → light (Kontakt + Cenová ponuka). Done via a convert→verify→fix agent workflow (16/18 clean first pass; BlogDetail auto-fixed; PredajTechniky hand-finished after an API timeout). Discovered `servis-naradia`/`dovoz-techniky`/`zemne-prace` are ORPHAN files (not routed/linked) — converted anyway + glow animations removed. Build + lint clean; adversarial sweep clean. **UNCOMMITTED** (stacks on session 24/25 Home WIP). |
 
 <!-- Sessions 3-6 archived in session summary table above -->
 
@@ -327,40 +332,196 @@ Session 22's font change was global, so every page already rendered in Archivo/M
 - `npm run build` clean (11.56 s). ESLint clean on all 18 changed files (also fixed a pre-existing unused-var `catch (e)` in `Cookies.jsx`).
 - **Still not device-tested** — the session-22 heads-up about verifying on a real budget Android applies to the whole site now; the GPU guard was kept intact but real-hardware confirmation is still pending.
 
+## What Was Done (Session 24) -- Cenník dopravy + New Split-Screen Hero (WIP)
+Date: 2026-06-23
+
+### Cenník dopravy (committed + pushed)
+1. **3rd transport pricing item in FAQ** -- Added "Preprava cudzieho stroja/náradia (nie z našej požičovne) — 1,50 €/km (min. 30 €)" below the existing Dodávka + Pick-up rows in the "Cenník dopravy" block. "bez DPH" not repeated per-row (the block already has a "Uvedené ceny sú bez DPH." footnote). Files: `src/components/home/FAQ.jsx`. Committed: `44d0cd3` + pushed. NOTE: a separate, older distance-tiered transport price list still lives on `src/pages/DovozTechniky.jsx` + `knowledgebase/04-sluzby.md` (0,50 €/km 20–50 km, dohodou >50 km) — left untouched; unify later if desired.
+
+### New split-screen hero (UNCOMMITTED — in progress, continues next session)
+**Status:** `src/pages/Home.jsx` (M) + `src/components/home/HeroSplit.jsx` (new) are UNCOMMITTED by owner's choice (still iterating; not deployed). Owner approved direction ("vyzerá to naozaj lepšie"). Old hero preserved.
+2. **New `HeroSplit.jsx`** -- Split hero from owner's mockup: LEFT "Prenájom strojov a náradia s dovozom na stavbu" (img `/stroje2.webp`), RIGHT "Predaj náradia" (img `predajna-1.webp`), separated by a thin orange diagonal line. Below: a 4-image 16:9 strip (mock = existing repo photos `predajna-2/3`, `stroje-dvor`, `stroje-jcb-rameno`) then a white USP band (4 USPs: Dovoz techniky / Servisované stroje / Senec–Bratislava / Overená požičovňa). Built with the existing industrial-premium system (Archivo/Manrope, `.eyebrow`, `.btn-primary`/`.btn-secondary`, orange `#FF6600`). CTAs: `tel:` · `#katalog` · `/sluzby/predaj-techniky`.
+3. **Old hero preserved for revert** -- `Hero.jsx` + `MobileHero.jsx` left untouched on disk; in `Home.jsx` the old imports + render block are commented out with a revert note. Revert = uncomment 2 imports + block, remove `<HeroSplit />`.
+4. **Desktop = full-screen** -- section is `md:h-screen md:flex md:flex-col`; the split is `md:flex-1` (absorbs leftover height) so on 1920×1080 the bottom orange hairline sits exactly at the viewport bottom (verified: section 0→1080). Header is `fixed` overlay so it doesn't consume layout height. Mobile = stacked cards (Prenájom → Predaj → images 2×2 → USPs 2×2), natural height (not full-screen).
+5. **Owner-requested polish** -- (a) removed the orange translucent glow behind the diagonal, kept a single thin crisp line (~4px, clip-path polygon). (b) Left H1 reduced to match the right H2 exactly (both `clamp(1.8rem,2.8vw,3.1rem)` = 49.6px @1920). (c) Added an orange hairline ABOVE the 4-image strip (mirrors the bottom one → frames the images+USP block). (d) Fixed "Navštíviť predajňu" hover-lift: the entrance animation class (`hs-4`, fill `both` → `transform: none`) was overriding `.btn-primary`'s `hover:-translate-y-0.5`; moved the animation onto a wrapper `div` so the button keeps its hover lift (verified translateY(-2px) on hover). Same wrapper fix applied to the mobile Predaj CTA.
+6. **GPU guard upheld** -- no `backdrop-filter` on any `fixed`/`sticky` element; text legibility via in-flow linear-gradient overlays only; entrance keyframes end at `transform: none`. Build + ESLint clean on `HeroSplit.jsx` + `Home.jsx`.
+
+### Note: 3 pre-session commits were undocumented
+- `f8c2433` (hero element, SK link — stripped ~44 lines from old `Hero.jsx`/`MobileHero.jsx`, touched Sidebar/Footer), `88a703e` (texty — PredajTechniky), `96a315b` (textove fixy — Catalog, CenovaPonuka). These were owner's own tweaks made between session 23 and this session; logged here for completeness.
+
+## What Was Done (Session 25) -- Homepage Light Theme (White Redesign, WIP)
+Date: 2026-06-23
+**Status: UNCOMMITTED** -- 7 component files + `index.css` modified (plus `Home.jsx`/`HeroSplit.jsx` still carrying the session-24 split-hero WIP). Owner approved the look ("vyzerá to daleko lepšie ako pred tým") but asked to **not commit yet** — continues next session. Dev preview ran at `localhost:5192`.
+
+### What & why
+Owner wanted the homepage on a light background. First pass (this session, earlier) just flipped the bg + section headings, which left every dark card/pill/accordion "floating" as black blocks on white. So this is a **full redesign of all homepage surfaces** into a cohesive light theme — direction **"clean white panels"** (`#FFF` cards on `#FAFAFA`, `zinc-200` borders, soft `shadow-sm shadow-zinc-900/5`, orange `#FF6600` kept as accent). Guided by the `frontend-design` skill. **Home-only** — heroes (`HeroSplit` keeps `bg-zinc-950`), footer, header all stay dark; other 12 pages stay dark.
+
+### New primitives (`src/index.css`)
+1. **`.card-light`** (`bg-white border-zinc-200 rounded-2xl shadow-sm shadow-zinc-900/5`), **`.input-light`** (white field + orange focus ring), **`.btn-outline-light`** (white outlined button for light bg — separate from `.btn-secondary`, which stays white-on-translucent for the dark hero). `.subcategory-btn` hover box-shadow rewritten dark→light-orange. `.reveal*` left untouched (GPU guard).
+
+### Surfaces converted (palette: white cards / `zinc-200` borders / `zinc-900` headings / `zinc-700` body / `zinc-600` muted; orange + `.btn-primary` unchanged)
+2. **`Catalog.jsx`** -- PO/FO toggle, search bar, category sidebar, subcategory pills (inline `style` background/shadow/border + the `.subcategory-btn` CSS changed in lockstep), accessories table, pagination, blog CTA cards. Dead `showCart=false` cart block left dark (not rendered).
+3. **`ProductCard.jsx`** -- white card; dropped all 3 `md:backdrop-blur-*`; `Novinka` = solid orange; **price pill + `product.badge` kept DARK** over photos for legibility; blue/red accents darkened (-400→-600/-700).
+4. **`WhyRoyalStroje.jsx`** -- 4 cards → white; faint index number `text-zinc-900/[0.05]`.
+5. **`FAQ.jsx`** -- contact box + accordion → white; answer content region-scoped (bold sub-labels, `text-white/80` body, info boxes `bg-zinc-800/50`→`bg-zinc-50`, blue/orange tip boxes → -50/-200). **Left image card kept dark** (white text on the photo).
+6. **`CustomSelect.jsx`** -- added opt-in **`light` prop** (trigger/dropdown/options light variants). Default stays dark, so the shared **Kontakt page `ContactForm` stays dark** (regression-checked).
+7. **`QuoteForm.jsx`** -- card/header/inputs/success → light (uses `.input-light`); passes `light` to `CustomSelect`; error box → `bg-red-50`.
+
+### Verified
+- `npm run build` clean (10.46 s). Orange preserved; GPU guard upheld (no new `backdrop-filter` on `fixed`/`sticky`; `.reveal*.in-view` still `transform: none`; ProductCard badge blurs dropped). Regression: `/kontakt` CustomSelect still dark; ContentSection default unchanged so other pages stay dark.
+- **Still not device-tested** — real budget-Android scroll-check (FAQ + product grid) pending, same as the session-22/23 heads-up.
+
+## What Was Done (Session 26) -- Light Theme Rolled Out to All Remaining Pages
+Date: 2026-06-24
+**Status: UNCOMMITTED** -- 18 page files + shared `ContactForm.jsx` modified (on top of the still-uncommitted session-24 split hero + session-25 Home light theme). Owner asked to leave everything uncommitted and continue next session.
+
+### What & why
+Session 25 made only the **homepage** light, leaving the other ~15 pages dark — the site looked half-converted. Owner asked to apply **the same light design to every remaining subpage** for one unified look, **keeping each page's hero/header dark** (only content below the hero converts). Owner chose **"všetko svetlé"**: convert even the dark CTA bands + animated glow backgrounds (no dark accent zones).
+
+### Method (agent workflow)
+A `Workflow` ran one agent per page: **convert → adversarially verify → auto-fix**. 16/18 clean first pass; `BlogDetail.jsx` auto-fixed (its "article not found" early-return state needed a light bg + dark heading); `PredajTechniky.jsx` convert agent died on an API stream timeout and was **hand-converted** afterward. `ServisNaradia.jsx` + shared `ContactForm.jsx` were done by hand first as the pattern template.
+
+### Pages converted (18)
+- **ContentSection pages** (added `light` prop + mapped cards): `Sluzby`, `PredajTechniky`, `NahradneDiely`, `CenovaPonuka`, `RoyalFleet`, `SkoLenieObsluhy`, `Blog`, `BlogDetail`, `Partneri`, `GDPR`, `Cookies`, `ObchodnePodmienky`, `Kontakt`.
+- **Non-ContentSection** (manual `#FAFAFA` root): `Kosik` (cart + calendar widget), `ProductDetail` (hero photo overlay kept dark).
+- **Orphan service pages** (see heads-up): `ServisNaradia`, `DovozTechniky`, `ZemnePrace` — converted + their dark animated glow backgrounds (`floatGlow/pulseGlow` `@keyframes` + radial-gradient divs) removed.
+
+### Conversion pattern applied (same cheat-sheet as session 25)
+- Standard card `from-zinc-900 to-zinc-950 border-white/10` → `.card-light`; nested `bg-zinc-950/50 border-white/5` → `bg-zinc-50 border-zinc-200`.
+- Text: `text-white`→`text-zinc-900`, `/70`→`zinc-700`, `/60-50`→`zinc-600`, `/40-30`→`zinc-500`. Borders `border-white/10`→`border-zinc-200`.
+- Inputs → `.input-light`; light secondary CTA → `.btn-outline-light`; orange/`.eyebrow`/`.hairline`/`.btn-primary`/icon tiles unchanged.
+- **Hero seam fix (every page with a hero):** the bottom fade gradient target flipped `#181818`→`#FAFAFA` so the dark hero meets the light content cleanly.
+- **Shared `ContactForm.jsx` → light** (card-light wrapper, `.input-light` fields, `light` on its `CustomSelect`, light success/error states) — this is why **both Kontakt and Cenová ponuka** forms are now light (was deliberately dark in session 25). EmailJS/reCAPTCHA logic untouched.
+- Brand-colored boxes lightened keeping hue: Makita teal → `teal-50/200/700`, Nivel yellow → `yellow-50/200/700`.
+
+### Stay-dark exceptions (kept on purpose)
+Dark heroes; text/badges over photos; ProductDetail hero strip overlay; Kontakt fullscreen **lightbox** (`bg-black/90`, blur gated `md:`); product-image containers that are `bg-white`; the Blog card photo bottom-overlay.
+
+### Verified
+- `npm run build` clean (16.6 s); ESLint clean on all 19 changed files.
+- Adversarial grep across `src/pages`: only 6 residual dark hits, **all legitimate** (BlogDetail desktop back-button on the dark hero, Blog card photo overlay, Kontakt commented-out social block, ProductDetail back-button over hero photo). No `bg-black` CTA bands left, no `floatGlow/pulseGlow` left, all hero fades + non-ContentSection roots = `#FAFAFA`.
+- GPU guard upheld (no `backdrop-filter` on `fixed`/`sticky`; `.reveal*.in-view` untouched). Dev preview ran at `localhost:5176`.
+- **Still not device-tested** on real budget Android (standing item since session 22).
+
+### Heads-up for next session
+- **Orphan service pages** — `ServisNaradia.jsx` / `DovozTechniky.jsx` / `ZemnePrace.jsx` exist but are **not in `App.jsx` routes and not linked anywhere** (Sluzby's 6 cards point only to predaj-techniky / nahradne-diely / cenova-ponuka / royal-fleet / skolenie-obsluhy + `/#katalog`). They're unreachable dead files. **Owner to decide: delete them or wire up routes.** Converted anyway so they're ready either way.
+- Everything is **UNCOMMITTED** and stacks on the session-24/25 Home WIP — shipping = one commit takes the split hero + full light site live at once (push to `main` auto-deploys royalstroje.sk).
+
+## What Was Done (Session 27) -- Hero asset polish + homepage sections + light header
+Date: 2026-06-25
+**Status: UNCOMMITTED** (owner asked to wrap without committing; stacks on the session-24/25/26 WIP). Build + ESLint clean throughout. Excellent session — owner very happy with the result.
+
+### Hero truck image (`/hero-auto.*`)
+1. **New transparent truck asset** — owner supplied `public/hero-auto1.png` (Isuzu pickup + minirýpadlo on trailer, true alpha). Earlier `hero-auto.png` had a baked opaque white square; replaced. **Trimmed** the transparent padding to the truck's ink bbox → `public/hero-auto.webp` + `public/hero-auto.png` (1004×578). `hero-auto1.png` kept as the untrimmed source; old `hero-auto.full.png` backup deleted.
+2. **HeroSplit left layer** — gray gradient bg → **pure white** (`bg-white`); truck centered in the left sloped section: `absolute left-[4%] top-[57%] -translate-y-1/2 w-[46%]` (+ `overflow-hidden` on the white base div). Mobile truck = `bottom-0 inset-x-0 w-full`. Owner approved ("vyzerá to auto super").
+
+### Hero restructure ([HeroSplit.jsx](src/components/home/HeroSplit.jsx))
+3. **Removed the 4-image strip** that sat between the split and the USP band. The left (truck) + right (predajna photo) split now `md:flex-1` stretches full-height down to the USP bar (matches owner's `navrh2.png`/`hero_navrh.jpg` mock).
+4. **USP band redesigned** — white band → **gray band** (`bg-zinc-100`), 4 USPs are now **white cards** (`rounded-2xl border shadow-sm`) with bigger icon tiles (24px), bigger text, gap between them (`gap-5`), taller padding (`py-6`), and a hover (lift + orange border/shadow + icon-tile brighten). The band is intentionally taller now. GPU-safe (hover transform only, no fixed `backdrop-filter`).
+
+### New homepage sections (between Hero and Catalog, in [Home.jsx](src/pages/Home.jsx))
+5. **`BusinessPillars.jsx`** (NEW) — 4 image-led pillar cards (dark gradient overlay + orange top accent + hover zoom). Heading: eyebrow "Čo ponúkame" + "Všetko pre vašu stavbu **na jednom mieste**". Pillars + images: Dovoz techniky (`dovoz.webp`, →`#katalog`), Prenájom a predaj náradia (`predajna-1.webp`, →`/sluzby/predaj-techniky`), Ťažká technika (`stroje-dvor.webp`, →`#katalog`), Sprostredkovanie prenájmu (`royal_stroje_krivosudsky.webp`, →`/kontakt`). Grid `1→2→4` cols; mobile cards landscape `16/10`, desktop portrait `4/5`.
+6. **`PromoCarousel.jsx`** (NEW) — "Akcie" section, 3:1 banner (taller on mobile), industrial dark+orange style: deep gradient + orange radial glow, transparent product on the right, eyebrow/title/text/`.btn-primary`. Vanilla React carousel (no lib): autoplay 6 s (pauses on hover, only after first scrolled into view), prev/next arrows, dots, touch swipe, **`prefers-reduced-motion` respected**, GPU-safe (translateX on a non-fixed element). **3 slides are PLACEHOLDER offers** (text/discounts invented; products: mini-rypadlo-1000, utahovak, diamantovy-kotuc) — swap for real promos.
+
+### Header redesign ([Header.jsx](src/components/common/Header.jsx)) — desktop (`hidden md:block`)
+7. **Light/solid header** — was a transparent overlay (white text, invisible logo/nav on the new light hero). Now a **solid white bar** (`bg-white` + bottom border; shadow on scroll). Readable like the `hero_navrh.jpg` mock.
+8. **Dark logo** — generated `public/logoroyal-dark.webp` (recolored the white "ROYAL" text → zinc-900 `#18181b`; crown + "STROJE" stay orange; transparent). Header now uses it. *(Owner may send a final logo to swap.)*
+9. **Nav** — refactored to a `navItems` array; **added Blog before Kontakt**: `Požičovňa · Služby · Blog · Kontakt` (active = orange + 3px underline). Text now dark (`zinc-700`, orange on hover).
+10. **Right cluster** — removed WhatsApp/Telegram/phone-hover icons. Now: phone number `0948 555 551` (tel link, `lg:` only) + orange **"Zavolať teraz"** `.btn-primary`.
+
+### Catalog cleanup ([Catalog.jsx](src/components/home/Catalog.jsx))
+11. **Removed the two decorative excavator images** (`JCB-19C-transparent` / `wacker-neuson-803-transparent`) that flanked the desktop "Katalóg strojov na prenájom" heading — owner felt they stole attention and looked unprofessional. Heading is now cleanly centered (`text-center max-w-2xl mx-auto`).
+
+### Služby page + Dovoz techniky subpage (later in session 27)
+12. **New light subpage hero** — `src/components/common/PageHero.jsx` (NEW). Reusable **light** hero (`hidden md:block`): white bg + soft orange glow, eyebrow, dark Archivo headline w/ orange highlight, subtitle, optional `chips` + `actions`, framed photo with orange top-accent on the right (lg+), bottom 2px orange seam. Replaces the old dark photo+black-overlay hero pattern. Owner wanted a lighter header style that still fits the brand.
+13. **Sluzby.jsx** — swapped the dark hero → `<PageHero>` (CTAs Zavolať / Zobraziť techniku, predajna-1 photo). In the services grid, **replaced the "Cenová ponuka" card with "Dovoz techniky na stavbu"** (Truck icon, `dovoz.webp`, →`/sluzby/dovoz-techniky`). Royal Fleet icon Truck→`CalendarClock` (avoids two trucks). Removed now-unused `heroRef`/`FileText`. **Cenová ponuka route kept** (`/sluzby/cenova-ponuka` still works, just not in the grid).
+14. **DovozTechniky.jsx** — rebuilt the orphan into a real marketing subpage: `<PageHero>` (van photo + chips Dovoz do 24 h · Naloženie aj vyloženie · Senec·Bratislava·okolie) → Benefits (4) → How-it-works (3 numbered steps) → **Cenník dopravy** → CTA. **Pricing now matches FAQ** (Dodávka: Senec 15 € / ostatné 1 €/km min 15 €; Pick-up + vozík do 3 500 kg 1,2 €/km min 15 €; cudzia technika 1,50 €/km min 30 €; bez DPH). **Deleted the old contradictory pricing** that was in the orphan (0,50 €/km, "ZDARMA do 20 km") and did NOT invent services (no skladovanie/poistenie prepravy) — kept it truthful per FAQ + homepage copy.
+15. **App.jsx** — added route `/sluzby/dovoz-techniky` → `DovozTechniky` (it's no longer an orphan). `ServisNaradia.jsx` / `ZemnePrace.jsx` remain orphan.
+
+### Heads-up for next session
+- **Light subpage hero is only on Sluzby + DovozTechniky** — owner may want `PageHero` rolled out to the other subpages (PredajTechniky, RoyalFleet, NahradneDiely, SkoLenieObsluhy, CenovaPonuka) for one unified light look. Each still has the old dark photo+overlay hero.
+- **Cenová ponuka** — removed from the Sluzby grid but route still live. Owner to decide: fully retire, or surface it elsewhere (e.g. a hero CTA).
+- **Mobile header NOT touched** — the desktop `Header.jsx` redesign is `md:` only; mobile still uses `HamburgerMenu` + `MobileNav`. If the light theme needs the mobile top bar reworked too, that's open.
+- **Carousel "Akcie" content is placeholder** — replace slide copy/discounts + ideally add real 3:1 promo graphics. Pillar links are best-guess; adjust if needed.
+- **Logo** — `logoroyal-dark.webp` is a recolor of the existing white logo; owner may supply a final dark logo to drop in.
+- Everything still **UNCOMMITTED**, now stacking sessions 24–27. Shipping = one commit takes the whole redesign live (push to `main` auto-deploys royalstroje.sk).
+
+## What Was Done (Session 28) -- Light `PageHero` rolled out to all remaining subpage heroes
+Date: 2026-06-26
+**Status: UNCOMMITTED** (owner asked to wrap without committing; stacks on the session-24→27 WIP). Build + ESLint clean.
+
+### What & why
+Session 27 introduced the light `PageHero` but only Sluzby + DovozTechniky used it — every other subpage still had the old dark photo+black-overlay hero, so the site looked half-converted. Owner asked to apply the light hero (like Sluzby) to all remaining pages (Blog, Kontakt, …).
+
+### Pages converted (11)
+- **Via 10 parallel subagents** (one per file, tight spec): `Blog.jsx`, `Kontakt.jsx`, `CenovaPonuka.jsx`, `NahradneDiely.jsx`, `RoyalFleet.jsx`, `SkoLenieObsluhy.jsx`, `Partneri.jsx`, `PredajTechniky.jsx`, `ServisNaradia.jsx`, `ZemnePrace.jsx`.
+- **By hand** (dynamic): `BlogDetail.jsx`.
+
+### Conversion pattern applied
+1. Replaced the dark `<section className="hidden md:flex relative py-24…">` hero **and** the trailing `<hr … bg-[#FF6600] />` seam with a single `<PageHero>` (PageHero renders its own bottom orange rule).
+2. Props mapped verbatim from each old hero: `eyebrow`, `title` (incl. orange `<span>`), `subtitle`, `image`, `imageAlt`. `actions` standardized to `.btn-primary` "Zavolať teraz" + `.btn-outline-light` "Zobraziť techniku" (→`/#katalog`) — same as Sluzby.
+3. Added `import PageHero` + ensured `Phone` import; removed the now-unused `const [heroRef, heroInView] = useInView();` per page.
+4. Special cases: **SkoLenieObsluhy** "Alpha Safety" badge → `chips={['…']}` (and dropped now-unused `GraduationCap`). **Kontakt** dropped its 2nd hero paragraph (regions) for a clean hero; eyebrow set to "Kontakt · Senec". **BlogDetail** (dynamic): `title={meta.title}`, `chips={[meta.date, meta.readTime, 'Autor: …']}`, `subtitle={meta.excerpt}`, back-link → `actions`; its mobile header `reveal` set to always-`in-view` (it used the removed `heroInView`).
+
+### Not touched (on purpose)
+- **ProductDetail.jsx** — its "hero" is a 280px product photo banner (`h-[280px]`), a different component, not a text hero. Left as-is.
+- **Mobile** — `PageHero` is `hidden md:block`; every page keeps its own compact mobile heading exactly as before (parity).
+
+### Verified
+- `npm run build` clean (16.4 s). ESLint clean on all 11 + BlogDetail (caught + fixed one stray `heroInView` in BlogDetail's mobile header).
+- GPU guard upheld: `PageHero`'s orange glow is a non-fixed `absolute` div; no new `backdrop-filter` on `fixed`/`sticky`.
+
+### Heads-up for next session
+- **All subpage heroes are now the light `PageHero`** — the session-27 "roll PageHero out to other subpages" item is DONE.
+- `ServisNaradia` / `ZemnePrace` were converted too but remain **orphans** (not routed/linked) — still pending the delete-or-route decision.
+- Everything still **UNCOMMITTED**, now stacking sessions 24–28.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
-| 0 | **Verify redesign on a real budget Android** | Sessions 22+23 committed + pushed (`bf57e7d`, `f8d1d38`). Whole site now uses Archivo/Manrope + new component styling. GPU guard was kept intact but the session-21 bug only repros on real hardware, not DevTools — scroll-check FAQ + product grid + the restyled pages on a real Xiaomi/Mali device. |
-| 1 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
-| 2 | Backfill OP + birth dates on existing PO contacts | Migration 019 added columns; existing contacts have NULL. Owner needs to fill via ClientDetail Pencil edit before generating new contracts to get OP/nar. line populated |
-| 3 | Consider Workspace migration for emails | Active24 hosting paket (~10€/mo) is kept active solely for email. If only 1-2 mailboxes, Google Workspace (~6€/user) or Zoho could be cheaper. Requires MX migration. |
-| 4 | GA4 + expand cookie banner to full consent flow | When GA4 added: convert info-only banner into 3-category (Necessary/Analytics/Marketing), wire Consent Mode v2, gate GA4 + chatbot loading on consent, extend `/cookies` table |
-| 5 | Re-publish JCB 19C-I article | Update specs in `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`, remove `19` from filter in `src/pages/Blog.jsx:247`, re-set `blog_article_slug` in Supabase |
-| 6 | Verify subcategory data integrity | After Supabase migration some products had wrong subcategory_id (Custers bug). Run audit query across all products. |
-| 7 | Product images | Upload product photos via dashboard image upload feature |
-| 8 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
-| 9 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
-| 10 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
-| 11 | Online payment | Stripe/GoPay integration (post-MVP) |
-| 12 | (Optional) Re-add mobile background | `AnimatedBackground` is now `hidden lg:block` (disabled on mobile during the GPU garbage fix). If the subtle gradient/grid/vignette is wanted back on mobile, re-add it via a non-compositing CSS `body` background (NOT fixed DOM layers). See `src/App.jsx`. |
+| 0 | **Ship or revert the uncommitted redesign (split hero + WHOLE-SITE light theme + session-27/28 work)** | All build/lint clean, all owner-approved: (a) session-24 split hero, (b) session-25 Home light theme, (c) session-26 light theme across all pages + shared `ContactForm`, (d) **session-27** hero asset polish + USP band + `BusinessPillars` + `PromoCarousel` + light header (dark logo, Blog nav, phone+CTA) + catalog excavator removal + light `PageHero` + Služby card swap + `DovozTechniky` subpage, (e) **session-28** light `PageHero` rolled out to all 11 remaining subpage heroes. Decide: commit+push to deploy live OR revert (large surface). Dev preview: `npm run dev`. |
+| 0b | **Decide on orphan service pages** | `ServisNaradia.jsx` / `ZemnePrace.jsx` are still not routed in `App.jsx` and not linked — unreachable. Either **delete** them or **add routes** (+ links from `Sluzby.jsx`). (`DovozTechniky.jsx` was wired up in session 27 — now routed at `/sluzby/dovoz-techniky` and linked from the Sluzby grid.) |
+| 1 | **Verify redesign on a real budget Android** | Covers sessions 22+23 (live) AND the uncommitted session-24/25/26 work (now the WHOLE site is light). GPU guard kept intact but the session-21 bug only repros on real Xiaomi/Mali hardware, not DevTools — scroll-check FAQ + product grid + several light subpages on a real device before/after shipping. |
+| 2 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
+| 3 | Backfill OP + birth dates on existing PO contacts | Migration 019 added columns; existing contacts have NULL. Owner needs to fill via ClientDetail Pencil edit before generating new contracts to get OP/nar. line populated |
+| 4 | Consider Workspace migration for emails | Active24 hosting paket (~10€/mo) is kept active solely for email. If only 1-2 mailboxes, Google Workspace (~6€/user) or Zoho could be cheaper. Requires MX migration. |
+| 5 | GA4 + expand cookie banner to full consent flow | When GA4 added: convert info-only banner into 3-category (Necessary/Analytics/Marketing), wire Consent Mode v2, gate GA4 + chatbot loading on consent, extend `/cookies` table |
+| 6 | Re-publish JCB 19C-I article | Update specs in `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`, remove `19` from filter in `src/pages/Blog.jsx:247`, re-set `blog_article_slug` in Supabase |
+| 7 | Verify subcategory data integrity | After Supabase migration some products had wrong subcategory_id (Custers bug). Run audit query across all products. |
+| 8 | Product images | Upload product photos via dashboard image upload feature |
+| 9 | Email notifications | Send quote/invoice PDFs via email (EmailJS or Supabase Edge Function) |
+| 10 | Chatbot CORS fix | mdntech.org `/message` endpoint returns 405 on GET -- needs POST support |
+| 11 | WhatsApp Business API | Send quotes directly via WhatsApp (post-MVP) |
+| 12 | Online payment | Stripe/GoPay integration (post-MVP) |
+| 13 | (Optional) Re-add mobile background | `AnimatedBackground` is now `hidden lg:block` (disabled on mobile during the GPU garbage fix). If the subtle gradient/grid/vignette is wanted back on mobile, re-add it via a non-compositing CSS `body` background (NOT fixed DOM layers). See `src/App.jsx`. |
 
 ## Key Files
 | File | Purpose |
 |------|---------|
-| `src/pages/Home.jsx` | Home page -- renders MobileHero (mobile) + Catalog |
-| `src/components/home/Hero.jsx` | Desktop hero with entrance animations + hero-main.webp |
-| `src/components/home/MobileHero.jsx` | Mobile-only hero with CSS animations + hero-main.webp |
+| `src/pages/Home.jsx` | Home page -- renders `HeroSplit` + Catalog (old `Hero`/`MobileHero` block + 2 imports commented out for revert) |
+| `src/components/home/HeroSplit.jsx` | **NEW (session 24, UNCOMMITTED)** split hero: desktop diagonal split (Prenájom \| Predaj) full-screen via `md:h-screen md:flex` (split = `flex-1`), mobile stacked; thin orange diagonal divider; 16:9 image strip framed by orange hairlines; white USP band (dark text + orange icons). GPU-safe (no fixed `backdrop-filter`, keyframes end at `transform: none`). Entrance animations live on wrappers so `.btn-primary` hover-lift survives |
+| `src/components/home/BusinessPillars.jsx` | **NEW (session 27)** 4 image-led pillar cards (Dovoz techniky / Prenájom a predaj náradia / Ťažká technika / Sprostredkovanie prenájmu); dark gradient overlay + orange accent + hover zoom |
+| `src/components/home/PromoCarousel.jsx` | **NEW (session 27)** "Akcie" carousel, 3:1 dark+orange banners, vanilla React (autoplay/arrows/dots/swipe/reduced-motion); **3 placeholder offer slides** to replace with real promos |
+| `src/components/common/Header.jsx` | **REWRITTEN (session 27)** desktop solid white header (`hidden md:block`); dark logo `logoroyal-dark.webp`; nav `Požičovňa·Služby·Blog·Kontakt`; phone number + `.btn-primary` "Zavolať teraz" (social/phone icons removed) |
+| `public/logoroyal-dark.webp` | **NEW (session 27)** dark-text logo (white "ROYAL" recolored to zinc-900; crown+STROJE stay orange) for the light header |
+| `public/hero-auto.webp` / `.png` | Trimmed transparent hero truck (1004×578). Source: `hero-auto1.png` (owner-supplied, untrimmed) |
+| `src/components/common/PageHero.jsx` | **NEW (session 27)** reusable LIGHT subpage hero (`hidden md:block`): white bg + orange glow, eyebrow, dark headline w/ orange highlight, subtitle, optional `chips`/`actions`, framed photo w/ orange top-accent (lg+), bottom orange seam. **Used by ALL subpages (session 28)**: Sluzby, DovozTechniky, Blog, BlogDetail, Kontakt, CenovaPonuka, NahradneDiely, RoyalFleet, SkoLenieObsluhy, Partneri, PredajTechniky, ServisNaradia, ZemnePrace (ProductDetail keeps its photo-banner hero) |
+| `src/pages/DovozTechniky.jsx` | **REBUILT (session 27)** marketing subpage at `/sluzby/dovoz-techniky`: PageHero + benefits + 3-step process + **Cenník dopravy (real FAQ pricing)** + CTA. Replaced old contradictory pricing; truthful (no invented services) |
+| `src/pages/Sluzby.jsx` | Services page — light `PageHero`; grid card "Cenová ponuka" replaced by "Dovoz techniky na stavbu" (→`/sluzby/dovoz-techniky`); Royal Fleet icon → `CalendarClock` |
+| `src/components/home/Hero.jsx` | OLD desktop hero (preserved on disk for revert; NOT rendered while HeroSplit is active) |
+| `src/components/home/MobileHero.jsx` | OLD mobile hero (preserved on disk for revert; NOT rendered while HeroSplit is active) |
 | `src/components/home/Catalog.jsx` | Main catalog with URL-persisted filters + scroll animations |
 | `src/hooks/useInView.js` | IntersectionObserver hook for scroll reveal |
 | `src/hooks/useProducts.js` | Supabase product fetching + filter helpers |
-| `src/pages/Sluzby.jsx` | Services page (3+3 grid, 6 cards) |
 | `src/pages/SkoLenieObsluhy.jsx` | Školenie obsluhy service detail page |
 | `src/pages/Partneri.jsx` | Partners page with minimal grid design (8 partners, WebP logos, hover effects) |
 | `src/components/common/Footer.jsx` | Footer (mobile 2-col, MDN Tech credit) |
 | `src/components/common/Header.jsx` | Header + promo popup (hidden on mobile) |
 | `src/components/common/AnimatedBackground.jsx` | Fixed gradient/grid/vignette bg layers -- **gated `hidden lg:block` (desktop only)**; fixed layers are a mobile GPU compositing trigger |
 | `src/components/common/HamburgerMenu.jsx` | Mobile fixed hamburger button -- **no `backdrop-filter`** (caused mobile GPU garbage; backgrounds are opaque instead) |
-| `src/index.css` | Global styles: base type (body=Manrope, h1–h6=Archivo), industrial-premium primitives (`.eyebrow`, `.hairline`, `.btn-primary`, `.btn-secondary`), `.reveal*` scroll animations -- in-view end state is `transform: none` so cards de-promote off the GPU after animating |
+| `src/index.css` | Global styles: base type (body=Manrope, h1–h6=Archivo), industrial-premium primitives (`.eyebrow`, `.hairline`, `.btn-primary`, `.btn-secondary`), **light-theme primitives `.card-light`/`.input-light`/`.btn-outline-light` (session 25)**, `.subcategory-btn` hover (now light-orange), `.reveal*` scroll animations -- in-view end state is `transform: none` so cards de-promote off the GPU after animating |
+| `src/components/common/ContentSection.jsx` | Shared content-section wrapper used by 13 pages; `background: #181818` by default, **`light` prop → `#FAFAFA` (session 25, only `Catalog`/Home passes it; other pages stay dark)** |
+| `src/components/ui/CustomSelect.jsx` | Custom dropdown (shared by `QuoteForm` + Kontakt `ContactForm`); dark by default, **opt-in `light` prop (session 25)** for the light homepage — Kontakt stays dark by not passing it |
 | `index.html` | Loads Archivo (display) + Manrope (body) from Google Fonts (preconnect + `display=swap`, latin-ext for Slovak); preloads hero image |
 | `tailwind.config.js` | Orange tokens + `fontFamily.sans` (Manrope) / `fontFamily.display` (Archivo) |
 | `src/data/categories.js` | Static frontend category structure |

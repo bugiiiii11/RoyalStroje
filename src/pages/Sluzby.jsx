@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, FileText, Package, Wrench, Truck, GraduationCap, Phone } from 'lucide-react';
+import { ShoppingCart, Package, Wrench, Truck, GraduationCap, Phone, PackageSearch } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import PageHero from '../components/common/PageHero';
 import { useInView } from '../hooks/useInView';
 
 export default function Sluzby() {
-  const [heroRef, heroInView] = useInView();
   const [headingRef, headingInView] = useInView();
   const [gridRef, gridInView] = useInView();
   const [ctaRef, ctaInView] = useInView();
@@ -39,22 +39,22 @@ export default function Sluzby() {
       backgroundImage: '/pictures/graphics/servis.webp',
     },
     {
-      id: 'cenova-ponuka',
-      path: '/sluzby/cenova-ponuka',
-      icon: FileText,
-      title: 'Cenová ponuka',
-      description: 'Pripravíme pre vás presnú cenovú ponuku na mieru. Rýchlo, transparentne a bez skrytých poplatkov.',
-      features: ['Ponuka do 24 hodín', 'Presná kalkulácia', 'Individuálny prístup', 'Bezplatné poradenstvo'],
-      backgroundImage: '/pictures/graphics/objects1.webp',
+      id: 'dovoz-techniky',
+      path: '/sluzby/dovoz-techniky',
+      icon: Truck,
+      title: 'Dovoz techniky na stavbu',
+      description: 'Naložíme, privezieme a vyložíme techniku priamo na vašej stavbe. Načas, spoľahlivo a po celom okolí.',
+      features: ['Dovoz do 24 hodín', 'Naloženie aj vyloženie', 'Senec · Bratislava · okolie', 'Vlastná flotila'],
+      backgroundImage: '/pictures/graphics/dovoz.webp',
     },
     {
-      id: 'royal-fleet',
-      path: '/sluzby/royal-fleet',
-      icon: Truck,
-      title: 'Royal Fleet',
-      description: 'Dlhodobý prenájom techniky pre firmy po celom Slovensku. Fixné mesačné náklady, servis zahrnutý.',
-      features: ['Dlhodobý prenájom', 'Fixné mesačné platby', 'Servis zahrnutý', 'Pre firmy - celé Slovensko'],
-      backgroundImage: '/pictures/graphics/objects4.webp',
+      id: 'zabezpecenie-techniky',
+      path: '/sluzby/zabezpecenie-techniky',
+      icon: PackageSearch,
+      title: 'Zoženieme akýkoľvek stroj',
+      description: 'Nemáte stroj v našej ponuke? Zabezpečíme ho cez sieť overených partnerov — vrátane dopravy. Vy fakturujete len nám.',
+      features: ['Overení partneri', 'Rýchle zabezpečenie', 'Jeden kontakt', 'Doprava na stavbu'],
+      backgroundImage: '/pictures/graphics/stroje-dvor.webp',
     },
     {
       id: 'skolenie-obsluhy',
@@ -81,48 +81,28 @@ export default function Sluzby() {
         <meta property="og:url" content="https://royalstroje.sk/sluzby" />
       </Helmet>
 
-      {/* Hero Section - Desktop only */}
-      <section className="hidden md:flex relative py-12 md:py-32 lg:py-40 items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/pictures/graphics/predajna-1.webp"
-            alt="Royal Stroje - Služby"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Gradient fade na spodok - prechod do content sekcie */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none"
-          style={{
-            height: '160px',
-            background: 'linear-gradient(to bottom, transparent, #181818)'
-          }}
-        />
-
-        {/* Content */}
-        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
-          <div className="max-w-3xl">
-            <span className="eyebrow mb-5">Služby · Senec</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 mt-5 leading-tight">
-              Všetko pre vašu stavbu. <span className="text-orange-primary">Pod jednou strechou.</span>
-            </h1>
-            <p className={`text-lg md:text-xl text-white/90 leading-relaxed reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
-              Prenájom stavebnej techniky, predaj náradia, náhradné diely a odborné poradenstvo v Senci.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Separator line between hero and content */}
-      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
+      {/* Hero (desktop, light) */}
+      <PageHero
+        eyebrow="Služby · Senec"
+        title={<>Všetko pre vašu stavbu. <span className="text-orange-primary">Pod jednou strechou.</span></>}
+        subtitle="Prenájom stavebnej techniky, predaj náradia, náhradné diely a odborné poradenstvo v Senci."
+        image="/pictures/graphics/predajna-1.webp"
+        imageAlt="Predajňa a požičovňa Royal Stroje v Senci"
+        actions={
+          <>
+            <a href="tel:+421948555551" className="btn-primary">
+              <Phone size={16} />
+              Zavolať teraz
+            </a>
+            <a href="/#katalog" className="btn-outline-light px-5 py-3">
+              Zobraziť techniku
+            </a>
+          </>
+        }
+      />
 
       {/* Services Grid */}
-      <ContentSection>
+      <ContentSection light>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -136,10 +116,10 @@ export default function Sluzby() {
           {/* Services section */}
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Naše služby</span>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
               Čo pre vás <span className="text-orange-primary">môžeme urobiť?</span>
             </h1>
-            <p className={`text-white/70 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
+            <p className={`text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Profesionálne služby pre stavebné firmy, remeselníkov aj súkromné osoby
             </p>
           </div>
@@ -151,7 +131,7 @@ export default function Sluzby() {
                 <Link
                   key={service.id}
                   to={service.path}
-                  className={`relative bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-8 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/10 transition-all group overflow-hidden reveal stagger-${Math.min(index + 1, 6)} ${gridInView ? 'in-view' : ''}`}
+                  className={`relative bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all group overflow-hidden reveal stagger-${Math.min(index + 1, 6)} ${gridInView ? 'in-view' : ''}`}
                 >
                   {/* Orange top accent rule */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-20 opacity-70 group-hover:opacity-100 transition-opacity" />
@@ -163,7 +143,7 @@ export default function Sluzby() {
                       alt={service.title}
                       className="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500 brightness-110 contrast-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 to-zinc-900/50"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/50"></div>
                   </div>
 
                   {/* Content */}
@@ -172,17 +152,17 @@ export default function Sluzby() {
                       <IconComponent className="text-orange-primary" size={24} />
                     </div>
 
-                    <h3 className="text-lg md:text-3xl font-black text-white mb-2 md:mb-3 group-hover:text-orange-primary transition">
+                    <h3 className="text-lg md:text-3xl font-black text-zinc-900 mb-2 md:mb-3 group-hover:text-orange-primary transition">
                       {service.title}
                     </h3>
 
-                    <p className="text-white/70 text-xs md:text-lg leading-relaxed mb-3 md:mb-6 line-clamp-2 md:line-clamp-none">
+                    <p className="text-zinc-700 text-xs md:text-lg leading-relaxed mb-3 md:mb-6 line-clamp-2 md:line-clamp-none">
                       {service.description}
                     </p>
 
                     <ul className="space-y-1 md:space-y-2 mb-3 md:mb-6">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-xs md:text-base text-white/60">
+                        <li key={idx} className="flex items-start gap-2 text-xs md:text-base text-zinc-600">
                           <span className="text-orange-primary mt-0.5">✓</span>
                           <span>{feature}</span>
                         </li>
@@ -202,10 +182,10 @@ export default function Sluzby() {
           {/* CTA Section - Integrated */}
           <div ref={ctaRef} className={`mt-16 text-center max-w-3xl mx-auto reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Poradenstvo zdarma</span>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
+            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
               Potrebujete poradiť?
             </h2>
-            <p className={`text-white/70 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
+            <p className={`text-zinc-700 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
               Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt.
             </p>
             <a

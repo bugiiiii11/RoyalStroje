@@ -4,6 +4,7 @@ import { Calendar, Clock, ArrowLeft } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { blogMeta, loadArticle } from '../data/blogArticles';
 import ContentSection from '../components/common/ContentSection';
+import PageHero from '../components/common/PageHero';
 import { useInView } from '../hooks/useInView';
 
 export default function BlogDetail() {
@@ -12,7 +13,6 @@ export default function BlogDetail() {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const [heroRef, heroInView] = useInView();
   const [articleRef, articleInView] = useInView();
   const [shareRef, shareInView] = useInView();
   const [ctaRef, ctaInView] = useInView();
@@ -30,9 +30,9 @@ export default function BlogDetail() {
 
   if (!meta) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: '#FAFAFA' }}>
         <div className="text-center">
-          <h1 className="text-4xl font-black text-white mb-4">Článok nenájdený</h1>
+          <h1 className="text-4xl font-black text-zinc-900 mb-4">Článok nenájdený</h1>
           <Link to="/blog" className="text-orange-primary hover:underline">
             Späť na blog
           </Link>
@@ -78,67 +78,24 @@ export default function BlogDetail() {
         </script>
       </Helmet>
 
-      {/* Hero Section - Desktop only */}
-      <section className="hidden md:flex relative py-24 md:py-32 lg:py-40 items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/hero-pozicovna.webp"
-            alt={meta.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Gradient fade na spodok - prechod do content sekcie */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none"
-          style={{
-            height: '160px',
-            background: 'linear-gradient(to bottom, transparent, #181818)'
-          }}
-        />
-
-        {/* Content */}
-        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
-          <div className="max-w-4xl">
-            {/* Back Button - Prominent */}
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-800/80 border border-white/20 text-white font-semibold rounded-full hover:bg-orange-primary hover:border-orange-primary transition-all mb-8"
-            >
-              <ArrowLeft size={18} />
-              <span>Späť na blog</span>
-            </Link>
-
-            <span className="eyebrow mb-5">Článok</span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 mt-5 leading-tight">
-              {meta.title}
-            </h1>
-
-            {/* Meta Info */}
-            <div className={`flex flex-wrap items-center gap-4 text-white/80 reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
-              <span className="flex items-center gap-2">
-                <Calendar size={18} />
-                {meta.date}
-              </span>
-              <span className="flex items-center gap-2">
-                <Clock size={18} />
-                {meta.readTime}
-              </span>
-              <span>Autor: {meta.author}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Separator line between hero and content */}
-      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
+      {/* Hero (desktop, light) */}
+      <PageHero
+        eyebrow="Článok"
+        chips={[meta.date, meta.readTime, `Autor: ${meta.author}`]}
+        title={meta.title}
+        subtitle={meta.excerpt}
+        image="/hero-pozicovna.webp"
+        imageAlt={meta.title}
+        actions={
+          <Link to="/blog" className="btn-outline-light px-5 py-3">
+            <ArrowLeft size={16} />
+            Späť na blog
+          </Link>
+        }
+      />
 
       {/* Article Content */}
-      <ContentSection>
+      <ContentSection light>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -150,22 +107,22 @@ export default function BlogDetail() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 lg:px-12">
           {/* Mobile Header */}
-          <div className={`md:hidden text-center mb-6 pt-16 reveal ${heroInView ? 'in-view' : ''}`}>
+          <div className="md:hidden text-center mb-6 pt-16 reveal in-view">
             {/* Back Button - Prominent */}
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-800/80 border border-white/20 text-white font-semibold rounded-full hover:bg-orange-primary hover:border-orange-primary transition-all mb-6 text-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-zinc-200 text-zinc-900 font-semibold rounded-full hover:bg-orange-primary hover:border-orange-primary hover:text-white transition-all mb-6 text-sm shadow-sm shadow-zinc-900/5"
             >
               <ArrowLeft size={16} />
               <span>Späť na blog</span>
             </Link>
 
-            <h1 className="text-xl font-black text-white mb-2 leading-tight">
+            <h1 className="text-xl font-black text-zinc-900 mb-2 leading-tight">
               {meta.title}
             </h1>
 
             {/* Meta Info */}
-            <div className="flex flex-wrap items-center justify-center gap-3 text-white/70 text-xs">
+            <div className="flex flex-wrap items-center justify-center gap-3 text-zinc-600 text-xs">
               <span className="flex items-center gap-1">
                 <Calendar size={14} />
                 {meta.date}
@@ -179,7 +136,7 @@ export default function BlogDetail() {
           </div>
 
           {/* Article Body */}
-          <article ref={articleRef} className={`prose prose-invert prose-lg max-w-none reveal-fade ${articleInView ? 'in-view' : ''}`}>
+          <article ref={articleRef} className={`prose prose-lg max-w-none text-zinc-700 prose-headings:text-zinc-900 prose-strong:text-zinc-900 prose-a:text-orange-primary reveal-fade ${articleInView ? 'in-view' : ''}`}>
             {loading ? (
               <div className="flex items-center justify-center py-20">
                 <div className="w-10 h-10 border-4 border-orange-primary border-t-transparent rounded-full animate-spin"></div>
@@ -187,19 +144,19 @@ export default function BlogDetail() {
             ) : article ? (
               article.content
             ) : (
-              <p className="text-white/70 text-center py-20">Článok sa nepodarilo načítať.</p>
+              <p className="text-zinc-700 text-center py-20">Článok sa nepodarilo načítať.</p>
             )}
           </article>
 
           {/* Share Section */}
-          <div ref={shareRef} className={`mt-16 pt-8 border-t border-white/10 reveal ${shareInView ? 'in-view' : ''}`}>
-            <p className="text-white/70 text-center mb-4">Páčil sa vám tento článok? Zdieľajte ho!</p>
+          <div ref={shareRef} className={`mt-16 pt-8 border-t border-zinc-200 reveal ${shareInView ? 'in-view' : ''}`}>
+            <p className="text-zinc-700 text-center mb-4">Páčil sa vám tento článok? Zdieľajte ho!</p>
             <div className="flex justify-center gap-4">
               <a
                 href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-zinc-800 border border-white/10 text-white rounded-lg hover:border-orange-primary/50 transition-all"
+                className="px-6 py-3 bg-white border border-zinc-200 text-zinc-900 rounded-lg shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 transition-all"
               >
                 Facebook
               </a>
@@ -207,7 +164,7 @@ export default function BlogDetail() {
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-zinc-800 border border-white/10 text-white rounded-lg hover:border-orange-primary/50 transition-all"
+                className="px-6 py-3 bg-white border border-zinc-200 text-zinc-900 rounded-lg shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 transition-all"
               >
                 LinkedIn
               </a>
@@ -217,10 +174,10 @@ export default function BlogDetail() {
           {/* CTA Section - Integrated */}
           <div ref={ctaRef} className={`mt-16 text-center max-w-3xl mx-auto reveal-scale ${ctaInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 mt-4">
+            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
               Potrebujete poradiť?
             </h2>
-            <p className={`text-white/70 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
+            <p className={`text-zinc-700 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
               Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt.
             </p>
             <a
@@ -234,7 +191,7 @@ export default function BlogDetail() {
           {/* Related Articles */}
           <div className={`mt-16 text-center reveal ${ctaInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Súvisiace</span>
-            <h3 className="text-2xl md:text-3xl font-black text-white mb-8 mt-4 text-center">
+            <h3 className="text-2xl md:text-3xl font-black text-zinc-900 mb-8 mt-4 text-center">
               Ďalšie <span className="text-orange-primary">články</span>
             </h3>
             <div className="text-center">

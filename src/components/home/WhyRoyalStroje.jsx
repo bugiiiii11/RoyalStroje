@@ -30,14 +30,6 @@ export default function WhyRoyalStroje() {
 
   return (
     <div className="relative py-12 md:py-16 lg:py-20">
-      {/* Radial gradient overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(70, 70, 77, 0.3) 0%, transparent 70%)'
-        }}
-      />
-
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Heading */}
         <div
@@ -45,11 +37,11 @@ export default function WhyRoyalStroje() {
           className={`text-center mb-8 md:mb-12 lg:mb-16 reveal ${headingInView ? 'in-view' : ''}`}
         >
           <span className="eyebrow eyebrow--center mb-4">Prečo Royal Stroje</span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 md:mb-4 mt-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-zinc-900 mb-3 md:mb-4 mt-4">
             Prečo si nás vyberajú stavbári v{' '}
             <span className="text-orange-primary">Senci a Bratislave</span>
           </h2>
-          <p className="text-white/60 text-sm md:text-lg max-w-3xl mx-auto">
+          <p className="text-zinc-600 text-sm md:text-lg max-w-3xl mx-auto">
             20 rokov skúseností v prenájme stavebnej techniky pre firmy aj súkromné osoby
           </p>
         </div>
@@ -64,10 +56,10 @@ export default function WhyRoyalStroje() {
             return (
               <div
                 key={benefit.title}
-                className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg shadow-black/40 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${gridInView ? 'in-view' : ''}`}
+                className={`group relative bg-white border border-zinc-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${gridInView ? 'in-view' : ''}`}
               >
                 {/* Big faint index number */}
-                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-3xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-3xl md:text-5xl font-black text-zinc-900/[0.05] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
                   0{i + 1}
                 </span>
 
@@ -76,10 +68,10 @@ export default function WhyRoyalStroje() {
                     <Icon className="text-orange-primary" size={20} />
                   </div>
 
-                  <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors leading-tight">
+                  <h3 className="text-zinc-900 font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors leading-tight">
                     {benefit.title}
                   </h3>
-                  <p className="text-white/60 text-xs md:text-sm leading-relaxed">
+                  <p className="text-zinc-600 text-xs md:text-sm leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>

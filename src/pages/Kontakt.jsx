@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
+import PageHero from '../components/common/PageHero';
 import { useInView } from '../hooks/useInView';
 
 const GALLERY_IMAGES = [
@@ -13,7 +14,6 @@ const GALLERY_IMAGES = [
 ];
 
 export default function Kontakt() {
-  const [heroRef, heroInView] = useInView();
   const [headingRef, headingInView] = useInView();
   const [cardsRef, cardsInView] = useInView();
   const [visitRef, visitInView] = useInView();
@@ -81,49 +81,29 @@ export default function Kontakt() {
         </script>
       </Helmet>
       {/* Hero Section - Desktop only */}
-      <section className="hidden md:flex relative py-12 md:py-32 lg:py-40 items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/pictures/graphics/stroje-dvor.webp"
-            alt="Royal Stroje - Kontakt"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 z-10"></div>
-
-        {/* Gradient fade na spodok - prechod do content sekcie */}
-        <div
-          className="absolute bottom-0 left-0 right-0 pointer-events-none"
-          style={{
-            height: '160px',
-            background: 'linear-gradient(to bottom, transparent, #181818)'
-          }}
-        />
-
-        {/* Content */}
-        <div ref={heroRef} className={`relative z-20 w-full max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${heroInView ? 'in-view' : ''}`}>
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
-              Zavolajte teraz. <span className="text-orange-primary">Stroje budú na stavbe zajtra.</span>
-            </h1>
-            <p className={`text-lg md:text-xl text-white/90 leading-relaxed mb-4 reveal-fade stagger-2 ${heroInView ? 'in-view' : ''}`}>
-              Nonstop telefonická dostupnosť • Senec, Recká cesta 182 • Odpoveď do 15 minút
-            </p>
-            <p className="text-base md:text-lg text-white/80 leading-relaxed">
-              Obsluhujeme Senec, Bratislavu, Galantu, Trnavu, Pezinok, Modru, Sereď, Šamorín a okolie.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Separator line between hero and content */}
-      <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
+      <PageHero
+        eyebrow="Kontakt · Senec"
+        title={
+          <>Zavolajte teraz. <span className="text-orange-primary">Stroje budú na stavbe zajtra.</span></>
+        }
+        subtitle="Nonstop telefonická dostupnosť • Senec, Recká cesta 182 • Odpoveď do 15 minút"
+        image="/pictures/graphics/stroje-dvor.webp"
+        imageAlt="Royal Stroje - Kontakt"
+        actions={
+          <>
+            <a href="tel:+421948555551" className="btn-primary">
+              <Phone size={16} />
+              Zavolať teraz
+            </a>
+            <a href="/#katalog" className="btn-outline-light px-5 py-3">
+              Zobraziť techniku
+            </a>
+          </>
+        }
+      />
 
       {/* Main Content - Single Section */}
-      <ContentSection>
+      <ContentSection light>
         {/* Mobile Logo - Top Left */}
         <div className="md:hidden absolute top-3 left-3 z-30">
           <img
@@ -138,10 +118,10 @@ export default function Kontakt() {
           {/* Section Heading */}
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
-            <h1 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
               Vyberte si <span className="text-orange-primary">spôsob kontaktu</span>
             </h1>
-            <p className={`text-white/70 max-w-2xl mx-auto text-sm md:text-lg reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
+            <p className={`text-zinc-700 max-w-2xl mx-auto text-sm md:text-lg reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
               Sme dostupní telefonicky, cez email aj prostredníctvom moderných komunikačných aplikácií.
             </p>
           </div>
@@ -151,15 +131,15 @@ export default function Kontakt() {
             {/* Phone */}
             <a
               href="tel:+421948555551"
-              className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden reveal stagger-1 ${cardsInView ? 'in-view' : ''}`}
+              className={`group relative bg-white border border-zinc-200 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 shadow-sm shadow-zinc-900/5 transition-all duration-300 overflow-hidden reveal stagger-1 ${cardsInView ? 'in-view' : ''}`}
             >
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                   <Phone className="text-orange-primary" size={28} />
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Telefón</h3>
+                <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Telefón</h3>
                 <p className="text-orange-primary font-bold text-base mb-1">+421 948 555 551</p>
-                <p className="text-white/60 text-sm leading-relaxed">Non-stop dostupnosť</p>
+                <p className="text-zinc-600 text-sm leading-relaxed">Non-stop dostupnosť</p>
               </div>
 
               {/* Hover overlay */}
@@ -171,15 +151,15 @@ export default function Kontakt() {
               href="https://wa.me/421948555551"
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden reveal stagger-2 ${cardsInView ? 'in-view' : ''}`}
+              className={`group relative bg-white border border-zinc-200 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 shadow-sm shadow-zinc-900/5 transition-all duration-300 overflow-hidden reveal stagger-2 ${cardsInView ? 'in-view' : ''}`}
             >
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                   <MessageCircle className="text-orange-primary" size={28} />
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">WhatsApp</h3>
+                <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">WhatsApp</h3>
                 <p className="text-orange-primary font-bold text-base mb-1">0948 555 551</p>
-                <p className="text-white/60 text-sm leading-relaxed">Rýchla komunikácia</p>
+                <p className="text-zinc-600 text-sm leading-relaxed">Rýchla komunikácia</p>
               </div>
 
               {/* Hover overlay */}
@@ -191,15 +171,15 @@ export default function Kontakt() {
               href="https://t.me/Royalstroje"
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden reveal stagger-3 ${cardsInView ? 'in-view' : ''}`}
+              className={`group relative bg-white border border-zinc-200 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 shadow-sm shadow-zinc-900/5 transition-all duration-300 overflow-hidden reveal stagger-3 ${cardsInView ? 'in-view' : ''}`}
             >
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                   <Send className="text-orange-primary" size={28} />
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Telegram</h3>
+                <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Telegram</h3>
                 <p className="text-orange-primary font-bold text-base mb-1">@Royalstroje</p>
-                <p className="text-white/60 text-sm leading-relaxed">Alternatívny kontakt</p>
+                <p className="text-zinc-600 text-sm leading-relaxed">Alternatívny kontakt</p>
               </div>
 
               {/* Hover overlay */}
@@ -209,15 +189,15 @@ export default function Kontakt() {
             {/* Email */}
             <a
               href="mailto:info@royalstroje.sk"
-              className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden reveal stagger-4 ${cardsInView ? 'in-view' : ''}`}
+              className={`group relative bg-white border border-zinc-200 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 shadow-sm shadow-zinc-900/5 transition-all duration-300 overflow-hidden reveal stagger-4 ${cardsInView ? 'in-view' : ''}`}
             >
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                   <Mail className="text-orange-primary" size={28} />
                 </div>
-                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Email</h3>
+                <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Email</h3>
                 <p className="text-orange-primary font-bold text-base mb-1 break-all">info@royalstroje.sk</p>
-                <p className="text-white/60 text-sm leading-relaxed">Odpoveď do 24 hodín</p>
+                <p className="text-zinc-600 text-sm leading-relaxed">Odpoveď do 24 hodín</p>
               </div>
 
               {/* Hover overlay */}
@@ -230,10 +210,10 @@ export default function Kontakt() {
             {/* Section Header */}
             <div ref={visitRef} className={`text-center mb-3 md:mb-12 reveal ${visitInView ? 'in-view' : ''}`}>
               <span className="eyebrow eyebrow--center mb-4">Predajňa</span>
-              <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+              <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
                 Navštívte nás v <span className="text-orange-primary">Senci</span>
               </h2>
-              <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-lg hidden md:block">
+              <p className="text-zinc-700 max-w-2xl mx-auto text-sm md:text-lg hidden md:block">
                 Tešíme sa na vašu návštevu v našej požičovni stavebnej techniky a náradia.
               </p>
             </div>
@@ -241,14 +221,14 @@ export default function Kontakt() {
             {/* Opening Hours & Address - 2 Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8 md:mb-12">
               {/* Opening Hours */}
-              <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden">
+              <div className="group relative bg-white border border-zinc-200 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 shadow-sm shadow-zinc-900/5 transition-all duration-300 overflow-hidden">
                 <div className="relative text-center">
                   <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                     <Clock className="text-orange-primary" size={28} />
                   </div>
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Otváracie hodiny</h3>
+                  <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Otváracie hodiny</h3>
                   <p className="text-orange-primary font-bold text-base mb-1">Po - Pi</p>
-                  <p className="text-white/60 text-sm leading-relaxed">7:00 - 16:00</p>
+                  <p className="text-zinc-600 text-sm leading-relaxed">7:00 - 16:00</p>
                 </div>
 
                 {/* Hover overlay */}
@@ -256,13 +236,13 @@ export default function Kontakt() {
               </div>
 
               {/* Address */}
-              <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-xl hover:shadow-orange-primary/15 shadow-lg shadow-black/40 transition-all duration-300 overflow-hidden">
+              <div className="group relative bg-white border border-zinc-200 rounded-2xl p-6 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 shadow-sm shadow-zinc-900/5 transition-all duration-300 overflow-hidden">
                 <div className="relative text-center">
                   <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 group-hover:scale-110 transition-all">
                     <MapPin className="text-orange-primary" size={28} />
                   </div>
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Adresa predajne</h3>
-                  <p className="text-white/80 text-base mb-1">Recká cesta 182</p>
+                  <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Adresa predajne</h3>
+                  <p className="text-zinc-700 text-base mb-1">Recká cesta 182</p>
                   <p className="text-orange-primary font-bold text-base">925 26 Senec</p>
                 </div>
 
@@ -274,9 +254,9 @@ export default function Kontakt() {
             {/* Map and Company Info - 2 Column Grid - Hidden on mobile */}
             <div className="hidden md:grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Map */}
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 overflow-hidden">
-                <h3 className="text-white font-black text-xl mb-4 px-2">Nájdete nás tu</h3>
-                <div className="rounded-2xl overflow-hidden border-2 border-white/10 h-[350px] mb-4">
+              <div className="bg-white border border-zinc-200 rounded-2xl shadow-sm shadow-zinc-900/5 p-6 overflow-hidden">
+                <h3 className="text-zinc-900 font-black text-xl mb-4 px-2">Nájdete nás tu</h3>
+                <div className="rounded-2xl overflow-hidden border-2 border-zinc-200 h-[350px] mb-4">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.6!2d17.3994!3d48.2187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8f0c0c0c0c0d%3A0x0!2zUsOpxI1rYSBjZXN0YSAxODIsIDkwMyAwMSBTZW5lYw!5e0!3m2!1ssk!2ssk!4v1234567890"
                     width="100%"
@@ -300,26 +280,26 @@ export default function Kontakt() {
               </div>
 
               {/* Company Info & About */}
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl overflow-hidden">
+              <div className="bg-white border border-zinc-200 rounded-2xl shadow-sm shadow-zinc-900/5 overflow-hidden">
                 {/* Content */}
                 <div className="p-8">
                   {/* Company Information */}
                   <div className="mb-8">
-                    <h3 className="text-white font-black text-xl mb-4">Firemné údaje</h3>
-                    <div className="space-y-2.5 text-white/80 leading-relaxed">
-                      <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
-                      <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
-                      <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
-                      <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
-                      <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>
-                      <p><strong className="text-white font-bold">Zastúpený:</strong> Peter Krivosudský</p>
+                    <h3 className="text-zinc-900 font-black text-xl mb-4">Firemné údaje</h3>
+                    <div className="space-y-2.5 text-zinc-700 leading-relaxed">
+                      <p><strong className="text-zinc-900 font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
+                      <p><strong className="text-zinc-900 font-bold">Sídlo:</strong> 182, Boldog 92526</p>
+                      <p><strong className="text-zinc-900 font-bold">IČO:</strong> 57 405 425</p>
+                      <p><strong className="text-zinc-900 font-bold">DIČ:</strong> 2122722063</p>
+                      <p><strong className="text-zinc-900 font-bold">IČDPH:</strong> SK2122722063</p>
+                      <p><strong className="text-zinc-900 font-bold">Zastúpený:</strong> Peter Krivosudský</p>
                     </div>
                   </div>
 
                   {/* About Section */}
                   <div>
-                    <h3 className="text-white font-black text-xl mb-4">O nás</h3>
-                    <p className="text-white/80 leading-relaxed">
+                    <h3 className="text-zinc-900 font-black text-xl mb-4">O nás</h3>
+                    <p className="text-zinc-700 leading-relaxed">
                       ROYAL STROJE je požičovňa stavebného náradia a techniky v Senci s 20-ročnými skúsenosťami v odvetví. Ponúkame prenájom profesionálneho náradia, strednej a ťažkej mechanizácie s dovozom na stavbu.
                     </p>
                   </div>
@@ -328,9 +308,9 @@ export default function Kontakt() {
             </div>
 
             {/* Mobile Map */}
-            <div className="md:hidden bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-4 overflow-hidden">
-              <h3 className="text-white font-black text-lg mb-3">Nájdete nás tu</h3>
-              <div className="rounded-2xl overflow-hidden border-2 border-white/10 h-[250px] mb-3">
+            <div className="md:hidden bg-white border border-zinc-200 rounded-2xl shadow-sm shadow-zinc-900/5 p-4 overflow-hidden">
+              <h3 className="text-zinc-900 font-black text-lg mb-3">Nájdete nás tu</h3>
+              <div className="rounded-2xl overflow-hidden border-2 border-zinc-200 h-[250px] mb-3">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.6!2d17.3994!3d48.2187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8f0c0c0c0c0d%3A0x0!2zUsOpxI1rYSBjZXN0YSAxODIsIDkwMyAwMSBTZW5lYw!5e0!3m2!1ssk!2ssk!4v1234567890"
                   width="100%"
@@ -357,10 +337,10 @@ export default function Kontakt() {
             <div ref={galleryRef} className={`mt-8 md:mt-12 reveal ${galleryInView ? 'in-view' : ''}`}>
               <div className="text-center mb-6 md:mb-10">
                 <span className="eyebrow eyebrow--center mb-4">Galéria</span>
-                <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+                <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
                   Pohľad do <span className="text-orange-primary">našej predajne</span>
                 </h2>
-                <p className="text-white/70 max-w-2xl mx-auto text-sm md:text-lg">
+                <p className="text-zinc-700 max-w-2xl mx-auto text-sm md:text-lg">
                   Niekoľko fotiek z prevádzky v Senci.
                 </p>
               </div>
@@ -371,7 +351,7 @@ export default function Kontakt() {
                     key={img.src}
                     type="button"
                     onClick={() => setLightboxIdx(idx)}
-                    className="group block w-full overflow-hidden rounded-xl md:rounded-2xl border-2 border-white/10 hover:border-orange-primary/60 transition-all duration-300 break-inside-avoid"
+                    className="group block w-full overflow-hidden rounded-xl md:rounded-2xl border-2 border-zinc-200 hover:border-orange-primary/60 transition-all duration-300 break-inside-avoid"
                     aria-label={`Otvoriť fotografiu: ${img.alt}`}
                   >
                     <img
@@ -450,23 +430,23 @@ export default function Kontakt() {
 
             {/* Company Details - Mobile only */}
             <div className="md:hidden mt-6">
-              <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl overflow-hidden">
+              <div className="bg-white border border-zinc-200 rounded-xl shadow-sm shadow-zinc-900/5 overflow-hidden">
                 {/* Content */}
                 <div className="p-4">
                   {/* Company Information */}
-                  <h3 className="text-white font-black text-sm mb-3">Firemné údaje</h3>
-                  <div className="space-y-1.5 text-white/80 text-xs leading-relaxed mb-4">
-                    <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
-                    <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
-                    <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
-                    <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
-                    <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>
-                    <p><strong className="text-white font-bold">Zastúpený:</strong> Peter Krivosudský</p>
+                  <h3 className="text-zinc-900 font-black text-sm mb-3">Firemné údaje</h3>
+                  <div className="space-y-1.5 text-zinc-700 text-xs leading-relaxed mb-4">
+                    <p><strong className="text-zinc-900 font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
+                    <p><strong className="text-zinc-900 font-bold">Sídlo:</strong> 182, Boldog 92526</p>
+                    <p><strong className="text-zinc-900 font-bold">IČO:</strong> 57 405 425</p>
+                    <p><strong className="text-zinc-900 font-bold">DIČ:</strong> 2122722063</p>
+                    <p><strong className="text-zinc-900 font-bold">IČDPH:</strong> SK2122722063</p>
+                    <p><strong className="text-zinc-900 font-bold">Zastúpený:</strong> Peter Krivosudský</p>
                   </div>
 
                   {/* About Section */}
-                  <h3 className="text-white font-black text-sm mb-2">O nás</h3>
-                  <p className="text-white/80 text-xs leading-relaxed">
+                  <h3 className="text-zinc-900 font-black text-sm mb-2">O nás</h3>
+                  <p className="text-zinc-700 text-xs leading-relaxed">
                     ROYAL STROJE je požičovňa stavebného náradia a techniky v Senci s 20-ročnými skúsenosťami v odvetví. Ponúkame prenájom profesionálneho náradia, strednej a ťažkej mechanizácie s dovozom na stavbu.
                   </p>
                 </div>
