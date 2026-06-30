@@ -13,6 +13,7 @@ import { useCart } from '../../context/CartContext';
 import FAQ from './FAQ';
 import QuoteForm from '../catalog/QuoteForm';
 import WhyRoyalStroje from './WhyRoyalStroje';
+import SourcingBanner from './SourcingBanner';
 import ContentSection from '../common/ContentSection';
 
 // Ikony pre jednotlivé kategórie
@@ -712,6 +713,9 @@ export default function Catalog() {
         <div ref={quoteFormRef} className={`lg:hidden mt-20 mb-8 reveal ${quoteFormInView ? 'in-view' : ''}`}>
           <QuoteForm />
         </div>
+
+        {/* "Nenašli ste stroj?" sourcing CTA — between catalog and Prečo Royal Stroje */}
+        <SourcingBanner />
 
         {/* WhyRoyalStroje section - between catalog and FAQ */}
         <WhyRoyalStroje />
