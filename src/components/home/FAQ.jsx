@@ -193,10 +193,10 @@ export default function FAQ() {
         {/* Header */}
         <div ref={faqHeadingRef} className={`text-center mb-6 md:mb-12 reveal ${faqHeadingInView ? 'in-view' : ''}`}>
           <span className="eyebrow eyebrow--center mb-4">Časté otázky</span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4 mt-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
             Máte <span className="text-orange-primary">otázky?</span>
           </h2>
-          <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto">
+          <p className="text-zinc-600 text-sm md:text-lg max-w-2xl mx-auto">
             Tu nájdete odpovede na najčastejšie otázky o prenájme stavebnej mechanizácie
           </p>
         </div>

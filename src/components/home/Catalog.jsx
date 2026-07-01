@@ -220,10 +220,10 @@ export default function Catalog() {
         {/* Mobile Header */}
         <div ref={headerRef} className={`md:hidden text-center mb-6 pt-6 reveal ${headerInView ? 'in-view' : ''}`}>
           <span className="eyebrow eyebrow--center mb-3">Katalóg</span>
-          <h2 className="text-xl font-black text-white mb-2 mt-3 leading-tight">
+          <h2 className="text-xl font-black text-zinc-900 mb-2 mt-3 leading-tight">
             <span className="text-orange-primary">Katalóg náradia</span> a strojov na prenájom
           </h2>
-          <p className="text-white/70 text-sm leading-relaxed max-w-2xl mx-auto">
+          <p className="text-zinc-600 text-sm leading-relaxed max-w-2xl mx-auto">
             Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
           </p>
         </div>
@@ -232,10 +232,10 @@ export default function Catalog() {
         <div ref={desktopHeaderRef} className={`hidden md:block mb-8 reveal ${desktopHeaderInView ? 'in-view' : ''}`}>
           <div className="text-center max-w-2xl mx-auto">
             <span className="eyebrow eyebrow--center mb-4">Požičovňa</span>
-            <h2 className="text-xl md:text-4xl font-black text-white mb-2 md:mb-4 mt-4">
+            <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
               <span className="text-orange-primary">Katalóg</span> strojov na prenájom
             </h2>
-            <p className="text-white/70 text-sm md:text-lg mx-auto mb-6">
+            <p className="text-zinc-600 text-sm md:text-lg mx-auto mb-6">
               Vyberte si zo 7 kategórií stavebného náradia a mechanizácie. Objednanie mechanizácie s dovozom na stavbu do 24 hodín.
             </p>
           </div>
@@ -567,7 +567,7 @@ export default function Catalog() {
             </div>
 
             {/* Image disclaimer */}
-            <div className="flex items-center gap-2 mb-3 md:mb-4 text-white/50 text-[11px] md:text-xs italic">
+            <div className="flex items-center gap-2 mb-3 md:mb-4 text-zinc-500 text-[11px] md:text-xs italic">
               <Info size={12} className="flex-shrink-0 text-orange-primary/60" />
               <span>Obrázky v katalógu sú ilustračné — skutočné prevedenie sa môže líšiť.</span>
             </div>
@@ -687,10 +687,10 @@ export default function Catalog() {
             ) : (
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">🔍</div>
-                <h3 className="text-xl font-bold text-white mb-2">
+                <h3 className="text-xl font-bold text-zinc-900 mb-2">
                   {searchQuery ? 'Nenašli sa žiadne výsledky' : 'Žiadne produkty'}
                 </h3>
-                <p className="text-white/70">
+                <p className="text-zinc-600">
                   {searchQuery
                     ? `Skúste hľadať iný výraz alebo upravte filter kategórií`
                     : 'V tejto kategórii momentálne nie sú dostupné žiadne produkty.'}
@@ -727,10 +727,10 @@ export default function Catalog() {
         <div ref={blogCtaRef} className={`relative mt-16 md:mt-24 pt-12 md:pt-16 reveal ${blogCtaInView ? 'in-view' : ''}`}>
           <div className="text-center mb-8 md:mb-12">
             <span className="eyebrow eyebrow--center mb-4">Blog</span>
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4 mt-4">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
               Chcete vedieť viac?
             </h2>
-            <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto">
+            <p className="text-zinc-600 text-sm md:text-lg max-w-2xl mx-auto">
               Navštívte náš blog plný užitočných rád, tipov a noviniek zo sveta stavebnej mechanizácie
             </p>
           </div>
