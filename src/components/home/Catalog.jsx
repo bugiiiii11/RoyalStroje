@@ -216,6 +216,27 @@ export default function Catalog() {
 
   return (
     <ContentSection id="katalog" light className="pt-0">
+      {/* Full-bleed corner machines flanking the header (desktop only, decorative, behind content) */}
+      <img
+        src="/pictures/graphics/web_pics/bager.webp"
+        alt="JCB mini bager na prenájom"
+        aria-hidden="true"
+        className="hidden lg:block absolute top-0 left-0 w-[22vw] max-w-[400px] h-auto z-0 pointer-events-none select-none"
+        width={1254}
+        height={1254}
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        src="/pictures/graphics/web_pics/auto_katalog.webp"
+        alt="ISUZU s prívesom a strojom – dovoz techniky na stavbu"
+        aria-hidden="true"
+        className="hidden lg:block absolute top-0 right-0 w-[24vw] max-w-[440px] h-auto z-0 pointer-events-none select-none"
+        width={1254}
+        height={1254}
+        loading="lazy"
+        decoding="async"
+      />
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pb-16 md:py-16">
         {/* Mobile Header */}
         <div ref={headerRef} className={`md:hidden text-center mb-6 pt-6 reveal ${headerInView ? 'in-view' : ''}`}>

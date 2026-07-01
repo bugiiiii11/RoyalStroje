@@ -28,9 +28,9 @@ export default function HeroSplit() {
         {/* LEFT base layer — pure white; truck centered in the left section, grounded slightly into the bottom */}
         <div className="absolute inset-0 bg-white overflow-hidden">
           <img
-            src="/hero-auto.webp"
+            src="/pictures/graphics/web_pics/auto_hero.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
-            className="absolute left-[12%] top-[55%] -translate-y-1/2 w-[37%] h-auto"
+            className="absolute left-[10%] top-[55%] -translate-y-1/2 w-[42%] h-auto"
             width={1774}
             height={887}
             fetchPriority="high"
@@ -126,7 +126,7 @@ export default function HeroSplit() {
         {/* Prenájom */}
         <div className="relative h-[58vh] min-h-[380px] bg-white">
           <img
-            src="/hero-auto.webp"
+            src="/pictures/graphics/web_pics/auto_hero.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
             className="absolute bottom-0 inset-x-0 w-full h-auto"
             width={1774}

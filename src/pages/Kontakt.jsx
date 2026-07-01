@@ -421,7 +421,7 @@ export default function Kontakt() {
             <CtaBand
               eyebrow="Kontakt · Senec"
               title={<>Zavolajte teraz. <span className="text-orange-primary">Stroje budú na stavbe zajtra.</span></>}
-              text="Nonstop telefonická dostupnosť. Odpoveď do 15 minút."
+              text="Dostupnosť 7–16, Po–Pia."
               icon={Phone}
               actions={
                 <a
