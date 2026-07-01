@@ -10,6 +10,13 @@ const usps = [
   { Icon: Star, title: 'Overená požičovňa', text: 'Stovky spokojných zákazníkov' },
 ];
 
+const stripImages = [
+  { src: '/pictures/graphics/predajna-2.webp', alt: 'Predajňa Royal Stroje – Makita, meracia a laserová technika Nivel' },
+  { src: '/pictures/graphics/predajna-3.webp', alt: 'Príslušenstvo a náradie – rezné kotúče, OOPP, VRC Pro' },
+  { src: '/pictures/graphics/stroje-dvor.webp', alt: 'Stavebné stroje na dvore Royal Stroje – mini bagre a nakladače' },
+  { src: '/pictures/graphics/predajna-4.webp', alt: 'JCB mini bager a Avant nakladač – požičovňa Royal Stroje' },
+];
+
 export default function HeroSplit() {
   return (
     <section className="relative bg-zinc-950 overflow-hidden md:h-screen md:flex md:flex-col">
@@ -22,7 +29,7 @@ export default function HeroSplit() {
           <img
             src="/hero-auto.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
-            className="absolute left-[4%] top-[57%] -translate-y-1/2 w-[46%] h-auto"
+            className="absolute left-[4%] top-[56%] -translate-y-1/2 w-[42%] h-auto"
             width={1004}
             height={578}
             fetchPriority="high"
@@ -183,6 +190,29 @@ export default function HeroSplit() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= 4-image strip (white bg, rounded corners, spaced) ================= */}
+      <div className="bg-white md:shrink-0">
+        <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pt-4 pb-5 md:pt-5 md:pb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+            {stripImages.map((img, i) => (
+              <div
+                key={img.src}
+                className="group overflow-hidden rounded-xl border border-zinc-200 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/40 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300"
+                style={{ animation: 'hsUp .7s ease both', animationDelay: `${0.2 + i * 0.08}s` }}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full object-cover aspect-[4/3] md:aspect-auto md:h-[24vh] group-hover:scale-105 transition-transform duration-500 ease-out"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
