@@ -221,9 +221,9 @@ export default function Catalog() {
         src="/pictures/graphics/web_pics/bager.webp"
         alt="JCB mini bager na prenájom"
         aria-hidden="true"
-        className="hidden lg:block absolute top-0 left-0 w-[22vw] max-w-[400px] h-auto z-0 pointer-events-none select-none"
-        width={1254}
-        height={1254}
+        className="hidden lg:block absolute top-[56px] left-0 w-[calc(50vw-350px)] max-w-[760px] h-auto z-0 pointer-events-none select-none"
+        width={1000}
+        height={664}
         loading="lazy"
         decoding="async"
       />
@@ -231,9 +231,9 @@ export default function Catalog() {
         src="/pictures/graphics/web_pics/auto_katalog.webp"
         alt="ISUZU s prívesom a strojom – dovoz techniky na stavbu"
         aria-hidden="true"
-        className="hidden lg:block absolute top-0 right-0 w-[24vw] max-w-[440px] h-auto z-0 pointer-events-none select-none"
-        width={1254}
-        height={1254}
+        className="hidden lg:block absolute top-[72px] right-0 w-[calc(50vw-355px)] max-w-[760px] h-auto z-0 pointer-events-none select-none"
+        width={1232}
+        height={640}
         loading="lazy"
         decoding="async"
       />
