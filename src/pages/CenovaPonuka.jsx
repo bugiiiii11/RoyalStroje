@@ -106,21 +106,21 @@ export default function CenovaPonuka() {
                 return (
                   <div
                     key={service.id}
-                    className={`relative bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 group overflow-hidden reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
+                    className={`relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 group overflow-hidden reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                   >
-                    <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-zinc-900/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                    <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/20 transition-colors pointer-events-none select-none">
                       0{index + 1}
                     </span>
                     <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                       <IconComponent className="text-orange-primary" size={28} />
                     </div>
-                    <h3 className="text-xl font-black text-zinc-900 mb-3">{service.title}</h3>
-                    <p className="text-zinc-700 text-sm mb-4 leading-relaxed">
+                    <h3 className="text-xl font-black text-white mb-3">{service.title}</h3>
+                    <p className="text-zinc-300 text-sm mb-4 leading-relaxed">
                       {service.description}
                     </p>
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-zinc-600">
+                        <li key={idx} className="flex items-start gap-2 text-sm text-zinc-400">
                           <span className="text-orange-primary mt-0.5">•</span>
                           <span>{feature}</span>
                         </li>
@@ -135,28 +135,28 @@ export default function CenovaPonuka() {
           {/* Why Request a Quote Section */}
           <div ref={whyRef} className="mb-16">
             <div className="max-w-4xl mx-auto">
-              <div className={`relative bg-white border border-zinc-200 rounded-2xl p-8 md:p-12 overflow-hidden shadow-sm shadow-zinc-900/5 reveal-scale ${whyInView ? 'in-view' : ''}`}>
+              <div className={`relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-8 md:p-12 overflow-hidden shadow-sm shadow-zinc-900/10 reveal-scale ${whyInView ? 'in-view' : ''}`}>
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
                 <div className="text-center mb-6">
-                  <h2 className="text-2xl md:text-3xl font-black text-zinc-900 mb-4">
+                  <h2 className="text-2xl md:text-3xl font-black text-white mb-4">
                     Prečo si vyžiadať <span className="text-orange-primary">ponuku?</span>
                   </h2>
-                  <p className="text-zinc-700 leading-relaxed text-base md:text-lg">
+                  <p className="text-zinc-300 leading-relaxed text-base md:text-lg">
                     Vďaka našim <strong className="text-orange-primary">20-ročným skúsenostiam</strong> v odvetví vieme poskytnúť presnú cenovú ponuku prispôsobenú vašim potrebám. Dokážeme vám naceniť a zabezpečiť všetok potrebný tovar k realizácii projektu, čím vás odbremeníme od zbytočných komplikácií a šetríme váš čas.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                  <div className="bg-zinc-50 rounded-xl p-4 border border-zinc-200 text-center">
+                  <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
                     <div className="text-orange-primary font-black text-3xl mb-2">20</div>
-                    <p className="text-zinc-700 text-sm">rokov skúseností</p>
+                    <p className="text-zinc-300 text-sm">rokov skúseností</p>
                   </div>
-                  <div className="bg-zinc-50 rounded-xl p-4 border border-zinc-200 text-center">
+                  <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
                     <div className="text-orange-primary font-black text-3xl mb-2">24h</div>
-                    <p className="text-zinc-700 text-sm">príprava ponuky</p>
+                    <p className="text-zinc-300 text-sm">príprava ponuky</p>
                   </div>
-                  <div className="bg-zinc-50 rounded-xl p-4 border border-zinc-200 text-center">
+                  <div className="bg-white/5 rounded-xl p-4 border border-white/10 text-center">
                     <div className="text-orange-primary font-black text-3xl mb-2">100%</div>
-                    <p className="text-zinc-700 text-sm">na mieru</p>
+                    <p className="text-zinc-300 text-sm">na mieru</p>
                   </div>
                 </div>
               </div>
@@ -176,30 +176,30 @@ export default function CenovaPonuka() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   1
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2">Vyplňte formulár</h3>
-                <p className="text-zinc-600 text-sm">
+                <h3 className="text-white font-bold text-lg mb-2">Vyplňte formulár</h3>
+                <p className="text-zinc-400 text-sm">
                   Popíšte nám vaše požiadavky a potreby
                 </p>
               </div>
-              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   2
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2">Konzultácia</h3>
-                <p className="text-zinc-600 text-sm">
+                <h3 className="text-white font-bold text-lg mb-2">Konzultácia</h3>
+                <p className="text-zinc-400 text-sm">
                   Spoločne nájdeme najlepšie riešenie
                 </p>
               </div>
-              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-2xl">
                   3
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2">Cenová ponuka</h3>
-                <p className="text-zinc-600 text-sm">
+                <h3 className="text-white font-bold text-lg mb-2">Cenová ponuka</h3>
+                <p className="text-zinc-400 text-sm">
                   Dostanete detailnú kalkuláciu do 24h
                 </p>
               </div>

@@ -1,13 +1,13 @@
 import { Phone } from 'lucide-react';
 import ContentSection from '../components/common/ContentSection';
 import PageHero from '../components/common/PageHero';
+import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
 export default function Partneri() {
   const [headingRef, headingInView] = useInView();
   const [gridRef] = useInView();
   const [infoRef, infoInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
   const partners = [
     {
       id: 1,
@@ -190,24 +190,25 @@ export default function Partneri() {
             ].map((item, i) => (
               <div
                 key={item.title}
-                className="group relative bg-white border border-zinc-200 rounded-xl md:rounded-2xl p-5 md:p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden"
+                className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-5 md:p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden"
               >
-                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-zinc-900/[0.06] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/20 transition-colors pointer-events-none select-none">
                   0{i + 1}
                 </span>
                 <div className="relative">
-                  <h3 className="text-zinc-900 font-bold text-base md:text-xl mb-2 md:mb-3 group-hover:text-orange-primary transition-colors leading-tight">{item.title}</h3>
-                  <p className="text-zinc-700 text-sm md:text-base leading-relaxed">{item.text}</p>
+                  <h3 className="text-white font-bold text-base md:text-xl mb-2 md:mb-3 group-hover:text-orange-primary transition-colors leading-tight">{item.title}</h3>
+                  <p className="text-zinc-300 text-sm md:text-base leading-relaxed">{item.text}</p>
                 </div>
                 <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
               </div>
             ))}
           </div>
 
-          <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-              <p className="text-zinc-600 text-xs md:text-sm mb-3 md:mb-4">
-                Máte záujem o spoluprácu? Kontaktujte nás a začnime budovať dôveru.
-              </p>
+          <CtaBand
+            eyebrow="Spolupráca"
+            title={<>Máte záujem o <span className="text-orange-primary">spoluprácu?</span></>}
+            text="Kontaktujte nás a začnime budovať dôveru."
+            actions={
               <a
                 href="tel:+421948555551"
                 className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
@@ -215,7 +216,8 @@ export default function Partneri() {
                 <Phone size={16} className="md:w-5 md:h-5" />
                 <span>Zavolať: 0948 555 551</span>
               </a>
-          </div>
+            }
+          />
 
         </div>
       </ContentSection>

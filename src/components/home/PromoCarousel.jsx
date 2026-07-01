@@ -10,7 +10,7 @@ const PHONE = '+421948555551';
 const slides = [
   {
     eyebrow: 'Sezónna akcia',
-    title: 'Jarný prenájom minirýpadiel',
+    title: 'Letný prenájom minirýpadiel',
     text: 'Zvýhodnené týždenné sadzby na JCB 19C-I a Wacker Neuson. Ideálne na výkopy a terénne úpravy.',
     img: '/pictures/graphics/mini-rypadlo-1000-transparent.webp',
     cta: { label: 'Zobraziť stroje', to: '#katalog' },
@@ -75,16 +75,16 @@ export default function PromoCarousel() {
         ref={sectionRef}
         className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${inView ? 'in-view' : ''}`}
       >
-        {/* Header row */}
-        <div className="flex items-end justify-between gap-4 mb-6 md:mb-8">
-          <div>
-            <span className="eyebrow mb-4">Akcie</span>
+        {/* Header */}
+        <div className="relative mb-6 md:mb-8">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="eyebrow eyebrow--center mb-4">Akcie</span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-zinc-900 mt-4">
               Aktuálne <span className="text-orange-primary">ponuky a zľavy</span>
             </h2>
           </div>
           {/* Desktop arrows */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2 absolute right-0 bottom-0">
             <button
               type="button"
               onClick={() => go(-1)}

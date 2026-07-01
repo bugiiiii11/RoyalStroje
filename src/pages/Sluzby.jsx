@@ -3,12 +3,12 @@ import { ShoppingCart, Package, Wrench, Truck, GraduationCap, Phone, PackageSear
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 import PageHero from '../components/common/PageHero';
+import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
 export default function Sluzby() {
   const [headingRef, headingInView] = useInView();
   const [gridRef, gridInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
 
   const services = [
     {
@@ -131,7 +131,7 @@ export default function Sluzby() {
                 <Link
                   key={service.id}
                   to={service.path}
-                  className={`relative bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all group overflow-hidden reveal stagger-${Math.min(index + 1, 6)} ${gridInView ? 'in-view' : ''}`}
+                  className={`relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/10 p-4 md:p-8 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all group overflow-hidden reveal stagger-${Math.min(index + 1, 6)} ${gridInView ? 'in-view' : ''}`}
                 >
                   {/* Orange top accent rule */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-20 opacity-70 group-hover:opacity-100 transition-opacity" />
@@ -143,7 +143,7 @@ export default function Sluzby() {
                       alt={service.title}
                       className="w-full h-full object-cover opacity-50 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500 brightness-110 contrast-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/50"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/85 to-zinc-950/60"></div>
                   </div>
 
                   {/* Content */}
@@ -152,17 +152,17 @@ export default function Sluzby() {
                       <IconComponent className="text-orange-primary" size={24} />
                     </div>
 
-                    <h3 className="text-lg md:text-3xl font-black text-zinc-900 mb-2 md:mb-3 group-hover:text-orange-primary transition">
+                    <h3 className="text-lg md:text-3xl font-black text-white mb-2 md:mb-3 group-hover:text-orange-primary transition">
                       {service.title}
                     </h3>
 
-                    <p className="text-zinc-700 text-xs md:text-lg leading-relaxed mb-3 md:mb-6 line-clamp-2 md:line-clamp-none">
+                    <p className="text-zinc-400 text-xs md:text-lg leading-relaxed mb-3 md:mb-6 line-clamp-2 md:line-clamp-none">
                       {service.description}
                     </p>
 
                     <ul className="space-y-1 md:space-y-2 mb-3 md:mb-6">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-xs md:text-base text-zinc-600">
+                        <li key={idx} className="flex items-start gap-2 text-xs md:text-base text-zinc-300">
                           <span className="text-orange-primary mt-0.5">✓</span>
                           <span>{feature}</span>
                         </li>
@@ -179,25 +179,20 @@ export default function Sluzby() {
             })}
           </div>
 
-          {/* CTA Section - Integrated */}
-          <div ref={ctaRef} className={`mt-16 text-center max-w-3xl mx-auto reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Poradenstvo zdarma</span>
-            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
-              Potrebujete poradiť?
-            </h2>
-            <p className={`text-zinc-700 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
-              Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt.
-            </p>
-            <a
-              href="tel:+421948555551"
-              className={`btn-primary text-base px-8 py-4 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}
-            >
+        </div>
+
+        {/* CTA band (shared dark+orange) */}
+        <CtaBand
+          eyebrow="Poradenstvo zdarma"
+          title={<>Potrebujete <span className="text-orange-primary">poradiť?</span></>}
+          text="Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt."
+          actions={
+            <a href="tel:+421948555551" className="btn-primary text-base px-8 py-4">
               <Phone size={18} />
               <span>Zavolať teraz: 0948 555 551</span>
             </a>
-          </div>
-
-        </div>
+          }
+        />
       </ContentSection>
     </div>
   );

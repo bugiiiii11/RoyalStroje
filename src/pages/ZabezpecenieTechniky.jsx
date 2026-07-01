@@ -14,6 +14,7 @@ import {
   Boxes,
 } from 'lucide-react';
 import PageHero from '../components/common/PageHero';
+import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
 const PHONE = 'tel:+421948555551';
@@ -77,7 +78,6 @@ export default function ZabezpecenieTechniky() {
   const [benefitsRef, benefitsInView] = useInView();
   const [equipRef, equipInView] = useInView();
   const [stepsRef, stepsInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
 
   return (
     <div className="min-h-screen">
@@ -156,13 +156,13 @@ export default function ZabezpecenieTechniky() {
                 return (
                   <div
                     key={b.title}
-                    className={`group relative bg-white border border-zinc-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${benefitsInView ? 'in-view' : ''}`}
+                    className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${benefitsInView ? 'in-view' : ''}`}
                   >
                     <div className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
                       <Icon className="text-orange-primary" size={22} />
                     </div>
-                    <h3 className="text-zinc-900 font-bold text-sm md:text-lg mb-1 md:mb-2 leading-tight">{b.title}</h3>
-                    <p className="text-zinc-600 text-xs md:text-sm leading-relaxed">{b.text}</p>
+                    <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 leading-tight">{b.title}</h3>
+                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">{b.text}</p>
                     <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
                   </div>
                 );
@@ -192,12 +192,12 @@ export default function ZabezpecenieTechniky() {
                 return (
                   <div
                     key={e.label}
-                    className={`group flex items-center gap-3 md:gap-4 bg-white border border-zinc-200 rounded-xl md:rounded-2xl p-4 md:p-5 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-${Math.min(i + 1, 6)} ${equipInView ? 'in-view' : ''}`}
+                    className={`group flex items-center gap-3 md:gap-4 bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-5 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-${Math.min(i + 1, 6)} ${equipInView ? 'in-view' : ''}`}
                   >
                     <div className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
                       <Icon className="text-orange-primary" size={20} />
                     </div>
-                    <span className="text-zinc-800 font-semibold text-sm md:text-base leading-tight">{e.label}</span>
+                    <span className="text-zinc-200 font-semibold text-sm md:text-base leading-tight">{e.label}</span>
                   </div>
                 );
               })}
@@ -218,14 +218,14 @@ export default function ZabezpecenieTechniky() {
               {steps.map((s, i) => (
                 <div
                   key={s.n}
-                  className={`group relative bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden reveal stagger-${Math.min(i + 1, 4)} ${stepsInView ? 'in-view' : ''}`}
+                  className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden reveal stagger-${Math.min(i + 1, 4)} ${stepsInView ? 'in-view' : ''}`}
                 >
-                  <span className="absolute top-3 right-4 font-display text-5xl md:text-6xl font-black text-zinc-900/[0.05] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                  <span className="absolute top-3 right-4 font-display text-5xl md:text-6xl font-black text-white/[0.06] group-hover:text-orange-primary/20 transition-colors pointer-events-none select-none">
                     {s.n}
                   </span>
                   <div className="relative">
-                    <h3 className="text-zinc-900 font-black text-lg md:text-xl mb-2 group-hover:text-orange-primary transition-colors">{s.title}</h3>
-                    <p className="text-zinc-600 text-sm md:text-base leading-relaxed max-w-[40ch]">{s.text}</p>
+                    <h3 className="text-white font-black text-lg md:text-xl mb-2 group-hover:text-orange-primary transition-colors">{s.title}</h3>
+                    <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-[40ch]">{s.text}</p>
                   </div>
                 </div>
               ))}
@@ -233,28 +233,24 @@ export default function ZabezpecenieTechniky() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-12 md:py-16 lg:py-20 border-t border-zinc-200/70">
-          <div ref={ctaRef} className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Zabezpečiť stroj</span>
-            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
-              Potrebujete stroj, ktorý nemáme?
-            </h2>
-            <p className="text-zinc-600 text-lg mb-8 max-w-2xl mx-auto">
-              Stačí nám povedať, čo potrebujete — o všetko ostatné sa postaráme my. Zavolajte a nájdeme riešenie.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
+        {/* CTA band (shared dark+orange) */}
+        <CtaBand
+          eyebrow="Zabezpečiť stroj"
+          title={<>Potrebujete stroj, <span className="text-orange-primary">ktorý nemáme?</span></>}
+          text="Stačí nám povedať, čo potrebujete — o všetko ostatné sa postaráme my. Zavolajte a nájdeme riešenie."
+          actions={
+            <>
               <a href={PHONE} className="btn-primary text-base px-8 py-4">
                 <Phone size={18} />
                 <span>Zavolať teraz: 0948 555 551</span>
               </a>
-              <a href="mailto:info@royalstroje.sk" className="btn-outline-light text-base px-8 py-4">
+              <a href="mailto:info@royalstroje.sk" className="btn-secondary text-base px-8 py-4">
                 <Mail size={18} />
                 <span>Napísať email</span>
               </a>
-            </div>
-          </div>
-        </section>
+            </>
+          }
+        />
       </div>
     </div>
   );

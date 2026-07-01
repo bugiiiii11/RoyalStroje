@@ -121,10 +121,10 @@ export default function Kosik() {
         </div>
 
         {/* Customer Type Selector */}
-        <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm shadow-zinc-900/5 p-4 mb-4">
+        <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-2xl border border-white/10 shadow-sm shadow-zinc-900/10 p-4 mb-4">
           <div className="flex items-center gap-2 mb-3">
             <User size={16} className="text-orange-primary" />
-            <span className="text-zinc-700 text-sm font-semibold">Typ zákazníka</span>
+            <span className="text-zinc-300 text-sm font-semibold">Typ zákazníka</span>
           </div>
           <div className="flex gap-2">
             <button
@@ -132,7 +132,7 @@ export default function Kosik() {
               className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm transition-all ${
                 customerType === 'po'
                   ? 'bg-orange-primary text-white shadow-lg shadow-orange-primary/30'
-                  : 'bg-zinc-50 border border-zinc-200 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-800'
+                  : 'bg-white/5 border border-white/10 text-zinc-400 hover:bg-white/10 hover:text-zinc-200'
               }`}
             >
               <Building2 size={18} className="inline mr-2" />
@@ -144,7 +144,7 @@ export default function Kosik() {
               className={`flex-1 py-3 px-4 rounded-xl font-bold text-sm transition-all ${
                 customerType === 'fo'
                   ? 'bg-orange-primary text-white shadow-lg shadow-orange-primary/30'
-                  : 'bg-zinc-50 border border-zinc-200 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-800'
+                  : 'bg-white/5 border border-white/10 text-zinc-400 hover:bg-white/10 hover:text-zinc-200'
               }`}
             >
               <User size={18} className="inline mr-2" />
@@ -155,18 +155,18 @@ export default function Kosik() {
         </div>
 
         {/* Cart Items */}
-        <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm shadow-zinc-900/5 p-4 mb-4">
+        <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-2xl border border-white/10 shadow-sm shadow-zinc-900/10 p-4 mb-4">
           <div className="flex items-center gap-2 mb-3">
             <ShoppingCart size={16} className="text-orange-primary" />
-            <span className="text-zinc-700 text-sm font-semibold">
+            <span className="text-zinc-300 text-sm font-semibold">
               Vybrané produkty ({cartItems.length})
             </span>
           </div>
 
           {cartItems.length === 0 ? (
             <div className="text-center py-8">
-              <ShoppingCart size={48} className="text-zinc-300 mx-auto mb-3" />
-              <p className="text-zinc-500 text-sm">Košík je prázdny</p>
+              <ShoppingCart size={48} className="text-zinc-500 mx-auto mb-3" />
+              <p className="text-zinc-400 text-sm">Košík je prázdny</p>
               <a
                 href="/"
                 className="btn-primary mt-4"
@@ -185,7 +185,7 @@ export default function Kosik() {
                 return (
                   <div
                     key={item.id}
-                    className="bg-zinc-50 border border-zinc-200 rounded-xl p-3 flex items-start gap-3 group hover:bg-zinc-100 transition-all"
+                    className="bg-white/5 border border-white/10 rounded-xl p-3 flex items-start gap-3 group hover:bg-white/10 transition-all"
                   >
                     {/* Product Image */}
                     {item.image && (
@@ -198,10 +198,10 @@ export default function Kosik() {
 
                     {/* Product Info */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-zinc-900 font-bold text-sm mb-1 truncate">
+                      <h3 className="text-white font-bold text-sm mb-1 truncate">
                         {item.name}
                       </h3>
-                      <p className="text-zinc-600 text-xs mb-2 line-clamp-2">
+                      <p className="text-zinc-400 text-xs mb-2 line-clamp-2">
                         {item.description}
                       </p>
                       <p className="text-orange-primary text-sm font-black">
@@ -212,7 +212,7 @@ export default function Kosik() {
                     {/* Remove Button */}
                     <button
                       onClick={() => removeFromCart(item.id)}
-                      className="p-2 rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 transition-all opacity-0 group-hover:opacity-100"
+                      className="p-2 rounded-lg bg-red-500/10 border border-red-500/25 text-red-400 hover:bg-red-500/20 transition-all opacity-0 group-hover:opacity-100"
                       aria-label="Odstrániť z košíka"
                     >
                       <X size={16} />
@@ -226,7 +226,7 @@ export default function Kosik() {
 
         {/* Calendar - only show if cart has items */}
         {cartItems.length > 0 && (
-          <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm shadow-zinc-900/5 p-4 mb-4">
+          <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-2xl border border-white/10 shadow-sm shadow-zinc-900/10 p-4 mb-4">
             <div className="flex items-center gap-2 mb-3">
               <Calendar size={16} className="text-orange-primary" />
               <span className="text-orange-primary text-sm font-bold">{getMonthsInRange()}</span>
@@ -239,7 +239,7 @@ export default function Kosik() {
                 return (
                   <div
                     key={day}
-                    className={`text-center text-xs font-bold ${isWeekendHeader ? 'text-zinc-400' : 'text-zinc-600'}`}
+                    className={`text-center text-xs font-bold ${isWeekendHeader ? 'text-zinc-500' : 'text-zinc-400'}`}
                   >
                     {day}
                   </div>
@@ -265,7 +265,7 @@ export default function Kosik() {
                   return (
                     <div
                       key={dateString}
-                      className="p-2 rounded text-xs sm:text-sm font-medium bg-zinc-100 text-zinc-300 text-center cursor-not-allowed"
+                      className="p-2 rounded text-xs sm:text-sm font-medium bg-white/5 text-zinc-500 text-center cursor-not-allowed"
                       title="Víkendy nie sú k dispozícii"
                     >
                       {date.getDate()}
@@ -282,7 +282,7 @@ export default function Kosik() {
                         ? 'bg-orange-primary text-white'
                         : isToday
                         ? 'bg-orange-primary/30 text-orange-primary border border-orange-primary/50 hover:bg-orange-primary/40'
-                        : 'bg-zinc-50 border border-zinc-200 text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900'
+                        : 'bg-white/5 border border-white/10 text-zinc-300 hover:bg-white/10 hover:text-white'
                     }`}
                     title={`${getDayName(date)} ${dateString}`}
                   >
@@ -302,9 +302,9 @@ export default function Kosik() {
 
         {/* Total Price - only show if cart has items */}
         {cartItems.length > 0 && (
-          <div className="bg-white rounded-2xl border border-zinc-200 shadow-sm shadow-zinc-900/5 p-4 mb-4">
+          <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-2xl border border-white/10 shadow-sm shadow-zinc-900/10 p-4 mb-4">
             <div className="flex items-center justify-between">
-              <span className="text-zinc-700 text-sm">
+              <span className="text-zinc-300 text-sm">
                 {customerType === 'po' ? 'Cena bez DPH:' : 'Cena s DPH:'}
               </span>
               <div className="text-right">
@@ -312,7 +312,7 @@ export default function Kosik() {
                   {(totalPrice * rentalDays).toFixed(2)}€
                 </span>
                 {rentalDays > 1 && (
-                  <p className="text-zinc-600 text-xs">
+                  <p className="text-zinc-400 text-xs">
                     ({totalPrice.toFixed(2)}€ × {rentalDays} {rentalDays < 5 ? 'dni' : 'dní'})
                   </p>
                 )}

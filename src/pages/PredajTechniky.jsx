@@ -3,13 +3,13 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import ContentSection from '../components/common/ContentSection';
 import PageHero from '../components/common/PageHero';
+import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
 export default function PredajTechniky() {
   const [promoRef, promoInView] = useInView();
   const [catRef, catInView] = useInView();
   const [catGridRef, catGridInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
   // Akciové produkty - Jarná akcia
   const promoProducts = [
     {
@@ -181,10 +181,10 @@ export default function PredajTechniky() {
               {promoProducts.map((product, index) => (
                 <div
                   key={product.id}
-                  className={`group relative bg-white border border-zinc-200 rounded-xl overflow-hidden shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-${Math.min(index + 1, 3)} ${promoInView ? 'in-view' : ''}`}
+                  className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl overflow-hidden shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-${Math.min(index + 1, 3)} ${promoInView ? 'in-view' : ''}`}
                 >
                   {/* Product Image / Placeholder */}
-                  <div className="aspect-[4/3] bg-zinc-100 flex items-center justify-center p-4">
+                  <div className="aspect-[4/3] bg-white/5 flex items-center justify-center p-4">
                     {product.image ? (
                       <img src={product.image} alt={product.name} className="w-full h-full object-contain drop-shadow-lg" />
                     ) : (
@@ -197,17 +197,17 @@ export default function PredajTechniky() {
 
                   {/* Product Info */}
                   <div className="p-4 md:p-5">
-                    <h3 className="text-base md:text-lg font-black text-zinc-900 mb-0.5 group-hover:text-orange-primary transition-colors">
+                    <h3 className="text-base md:text-lg font-black text-white mb-0.5 group-hover:text-orange-primary transition-colors">
                       {product.name}
                     </h3>
-                    <p className="text-zinc-600 text-xs mb-3">{product.subtitle}</p>
+                    <p className="text-zinc-400 text-xs mb-3">{product.subtitle}</p>
 
                     {/* Specs */}
                     <div className="space-y-1.5 mb-4">
                       {product.specs.map((spec, idx) => (
-                        <div key={idx} className="flex justify-between text-xs border-b border-zinc-200 pb-1">
-                          <span className="text-zinc-600">{spec.label}:</span>
-                          <span className="text-zinc-900 font-medium text-right">{spec.value}</span>
+                        <div key={idx} className="flex justify-between text-xs border-b border-white/10 pb-1">
+                          <span className="text-zinc-400">{spec.label}:</span>
+                          <span className="text-white font-medium text-right">{spec.value}</span>
                         </div>
                       ))}
                     </div>
@@ -215,7 +215,7 @@ export default function PredajTechniky() {
                     {/* Price */}
                     <div className="flex items-baseline gap-1 mb-3">
                       <span className="text-2xl md:text-3xl font-black text-orange-primary">{product.price}</span>
-                      <span className="text-zinc-600 text-base">€</span>
+                      <span className="text-zinc-400 text-base">€</span>
                       <span className="text-zinc-500 text-xs ml-1">s DPH</span>
                     </div>
 
@@ -231,7 +231,7 @@ export default function PredajTechniky() {
                       {product.blogLink && (
                         <Link
                           to={product.blogLink}
-                          className="btn-outline-light text-xs px-3 py-2"
+                          className="btn-secondary text-xs px-3 py-2"
                         >
                           <ExternalLink size={12} />
                           <span>Viac info</span>
@@ -266,7 +266,7 @@ export default function PredajTechniky() {
                 return (
                   <div
                     key={category.id}
-                    className={`group relative bg-white border border-zinc-200 rounded-xl p-4 md:p-5 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden reveal stagger-${Math.min(index + 1, 4)} ${catGridInView ? 'in-view' : ''}`}
+                    className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-4 md:p-5 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden reveal stagger-${Math.min(index + 1, 4)} ${catGridInView ? 'in-view' : ''}`}
                   >
                     <div className="relative">
                       <div className="flex items-start gap-3 mb-3">
@@ -274,10 +274,10 @@ export default function PredajTechniky() {
                           <IconComponent className="text-orange-primary" size={20} />
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-sm md:text-lg font-black text-zinc-900 mb-0.5 group-hover:text-orange-primary/90 transition-colors">
+                          <h3 className="text-sm md:text-lg font-black text-white mb-0.5 group-hover:text-orange-primary/90 transition-colors">
                             {category.title}
                           </h3>
-                          <p className="text-zinc-700 text-xs md:text-sm leading-relaxed">
+                          <p className="text-zinc-300 text-xs md:text-sm leading-relaxed">
                             {category.description}
                           </p>
                         </div>
@@ -287,16 +287,16 @@ export default function PredajTechniky() {
                         {category.items.map((item, idx) => (
                           <div
                             key={idx}
-                            className="flex items-start gap-1.5 bg-zinc-50 rounded-md px-2 py-1.5 border border-zinc-200 group-hover:border-orange-primary/20 transition-colors"
+                            className="flex items-start gap-1.5 bg-white/5 rounded-md px-2 py-1.5 border border-white/10 group-hover:border-orange-primary/20 transition-colors"
                           >
                             <span className="text-orange-primary text-xs mt-0.5 flex-shrink-0">▸</span>
-                            <span className="text-zinc-700 text-xs leading-snug">{item}</span>
+                            <span className="text-zinc-300 text-xs leading-snug">{item}</span>
                           </div>
                         ))}
                       </div>
 
                       {/* Delivery info */}
-                      <div className="mt-3 pt-3 border-t border-zinc-200">
+                      <div className="mt-3 pt-3 border-t border-white/10">
                         <div className="flex items-center gap-1.5 text-xs">
                           <DeliveryIcon className="text-green-600 flex-shrink-0" size={14} />
                           <span className="text-green-600 font-medium">{category.delivery}</span>
@@ -314,13 +314,13 @@ export default function PredajTechniky() {
 
           {/* Autorizovaný predajca Makita */}
           <div className="mb-12 md:mb-16">
-            <div className="relative bg-white border border-teal-200 rounded-xl p-5 md:p-8 overflow-hidden shadow-sm shadow-zinc-900/5">
+            <div className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-5 md:p-8 overflow-hidden shadow-sm shadow-zinc-900/10">
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-48 h-48 bg-teal-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
               <div className="relative flex flex-col md:flex-row gap-5 md:gap-8 items-center">
                 {/* Makita Logo */}
-                <div className="w-28 h-28 md:w-36 md:h-36 flex-shrink-0 bg-white border border-zinc-200 rounded-xl flex items-center justify-center p-4">
+                <div className="w-28 h-28 md:w-36 md:h-36 flex-shrink-0 bg-white border border-white/10 rounded-xl flex items-center justify-center p-4">
                   <img
                     src="/pictures/graphics/makita-logo.webp"
                     alt="Makita - Autorizovaný predajca"
@@ -330,28 +330,28 @@ export default function PredajTechniky() {
 
                 {/* Content */}
                 <div className="flex-1 text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 bg-teal-50 border border-teal-200 rounded-full px-3 py-1.5 mb-3">
-                    <Shield className="text-teal-700" size={14} />
-                    <span className="text-teal-700 font-bold text-xs uppercase tracking-wider">Autorizovaný predajca</span>
+                  <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-400/30 rounded-full px-3 py-1.5 mb-3">
+                    <Shield className="text-teal-400" size={14} />
+                    <span className="text-teal-400 font-bold text-xs uppercase tracking-wider">Autorizovaný predajca</span>
                   </div>
 
-                  <h2 className="text-xl md:text-2xl font-black text-zinc-900 mb-3">
-                    Makita <span className="text-teal-700">- Japonská kvalita</span>
+                  <h2 className="text-xl md:text-2xl font-black text-white mb-3">
+                    Makita <span className="text-teal-400">- Japonská kvalita</span>
                   </h2>
 
-                  <p className="text-zinc-700 text-sm md:text-base leading-relaxed mb-4">
-                    Sme hrdým autorizovaným predajcom značky <strong className="text-zinc-900">Makita</strong> - svetového lídra v profesionálnom náradí.
-                    Ponúkame kompletný sortiment elektrického a AKU náradia vrátane revolučného <strong className="text-teal-700">40V XGT systému</strong>.
+                  <p className="text-zinc-300 text-sm md:text-base leading-relaxed mb-4">
+                    Sme hrdým autorizovaným predajcom značky <strong className="text-white">Makita</strong> - svetového lídra v profesionálnom náradí.
+                    Ponúkame kompletný sortiment elektrického a AKU náradia vrátane revolučného <strong className="text-teal-400">40V XGT systému</strong>.
                   </p>
 
                   <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                    <span className="inline-flex items-center gap-1.5 bg-zinc-50 rounded-md px-2.5 py-1.5 border border-zinc-200 text-xs text-zinc-700">
+                    <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-zinc-300">
                       <span className="text-green-600">✓</span> Plná záruka
                     </span>
-                    <span className="inline-flex items-center gap-1.5 bg-zinc-50 rounded-md px-2.5 py-1.5 border border-zinc-200 text-xs text-zinc-700">
+                    <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-zinc-300">
                       <span className="text-green-600">✓</span> Originálne náhradné diely
                     </span>
-                    <span className="inline-flex items-center gap-1.5 bg-zinc-50 rounded-md px-2.5 py-1.5 border border-zinc-200 text-xs text-zinc-700">
+                    <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-zinc-300">
                       <span className="text-green-600">✓</span> Odborné poradenstvo
                     </span>
                   </div>
@@ -362,13 +362,13 @@ export default function PredajTechniky() {
 
           {/* Nivel System */}
           <div className="mb-12 md:mb-16">
-            <div className="relative bg-white border border-yellow-200 rounded-xl p-5 md:p-8 overflow-hidden shadow-sm shadow-zinc-900/5">
+            <div className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-5 md:p-8 overflow-hidden shadow-sm shadow-zinc-900/10">
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-48 h-48 bg-yellow-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
               <div className="relative flex flex-col md:flex-row gap-5 md:gap-8 items-center">
                 {/* Nivel Logo */}
-                <div className="w-28 h-28 md:w-36 md:h-36 flex-shrink-0 bg-white border border-zinc-200 rounded-xl flex items-center justify-center p-4">
+                <div className="w-28 h-28 md:w-36 md:h-36 flex-shrink-0 bg-white border border-white/10 rounded-xl flex items-center justify-center p-4">
                   <img
                     src="/pictures/graphics/logo-nivel-home.webp"
                     alt="Nivel System - Meracie prístroje"
@@ -378,29 +378,29 @@ export default function PredajTechniky() {
 
                 {/* Content */}
                 <div className="flex-1 text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 bg-yellow-50 border border-yellow-200 rounded-full px-3 py-1.5 mb-3">
-                    <Zap className="text-yellow-700" size={14} />
-                    <span className="text-yellow-700 font-bold text-xs uppercase tracking-wider">Predávame značku</span>
+                  <div className="inline-flex items-center gap-2 bg-yellow-500/10 border border-yellow-400/30 rounded-full px-3 py-1.5 mb-3">
+                    <Zap className="text-yellow-400" size={14} />
+                    <span className="text-yellow-400 font-bold text-xs uppercase tracking-wider">Predávame značku</span>
                   </div>
 
-                  <h2 className="text-xl md:text-2xl font-black text-zinc-900 mb-3">
-                    Nivel System <span className="text-yellow-700">- Presnosť na prvom mieste</span>
+                  <h2 className="text-xl md:text-2xl font-black text-white mb-3">
+                    Nivel System <span className="text-yellow-400">- Presnosť na prvom mieste</span>
                   </h2>
 
-                  <p className="text-zinc-700 text-sm md:text-base leading-relaxed mb-4">
-                    Ponúkame profesionálne meracie prístroje značky <strong className="text-zinc-900">Nivel System</strong> - krížové lasery,
+                  <p className="text-zinc-300 text-sm md:text-base leading-relaxed mb-4">
+                    Ponúkame profesionálne meracie prístroje značky <strong className="text-white">Nivel System</strong> - krížové lasery,
                     rotačné lasery a príslušenstvo pre stavebníkov a remeselníkov.
                   </p>
 
                   <div className="flex flex-wrap justify-center md:justify-start gap-2">
-                    <span className="inline-flex items-center gap-1.5 bg-zinc-50 rounded-md px-2.5 py-1.5 border border-zinc-200 text-xs text-zinc-700">
-                      <span className="text-yellow-700">✓</span> Zelené lasery
+                    <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-zinc-300">
+                      <span className="text-yellow-400">✓</span> Zelené lasery
                     </span>
-                    <span className="inline-flex items-center gap-1.5 bg-zinc-50 rounded-md px-2.5 py-1.5 border border-zinc-200 text-xs text-zinc-700">
-                      <span className="text-yellow-700">✓</span> Kompletné sety so statívom
+                    <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-zinc-300">
+                      <span className="text-yellow-400">✓</span> Kompletné sety so statívom
                     </span>
-                    <span className="inline-flex items-center gap-1.5 bg-zinc-50 rounded-md px-2.5 py-1.5 border border-zinc-200 text-xs text-zinc-700">
-                      <span className="text-yellow-700">✓</span> Profesionálna presnosť
+                    <span className="inline-flex items-center gap-1.5 bg-white/5 rounded-md px-2.5 py-1.5 border border-white/10 text-xs text-zinc-300">
+                      <span className="text-yellow-400">✓</span> Profesionálna presnosť
                     </span>
                   </div>
                 </div>
@@ -428,14 +428,14 @@ export default function PredajTechniky() {
               return (
                 <div
                   key={idx}
-                  className="group relative bg-white border border-zinc-200 rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden"
+                  className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden"
                 >
                   <div className="relative text-center">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:bg-orange-primary/20 transition-all">
                       <IconComponent className="text-orange-primary" size={24} />
                     </div>
-                    <h3 className="text-zinc-900 font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors">{advantage.title}</h3>
-                    <p className="text-zinc-600 text-xs md:text-sm leading-relaxed">{advantage.description}</p>
+                    <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors">{advantage.title}</h3>
+                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">{advantage.description}</p>
                   </div>
                 </div>
               );
@@ -444,44 +444,44 @@ export default function PredajTechniky() {
 
           {/* Pripravujeme eshop - info banner */}
           <div className="mb-12 md:mb-16">
-            <div className="relative bg-white border border-zinc-200 rounded-2xl p-6 md:p-10 overflow-hidden shadow-sm shadow-zinc-900/5">
+            <div className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-10 overflow-hidden shadow-sm shadow-zinc-900/10">
               <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
               {/* Background decoration */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-orange-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
               <div className="relative max-w-4xl mx-auto text-center">
-                <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-full px-4 py-2 mb-4">
+                <div className="inline-flex items-center gap-2 bg-orange-primary/10 border border-orange-primary/30 rounded-full px-4 py-2 mb-4">
                   <ShoppingCart className="text-orange-primary" size={18} />
                   <span className="text-orange-primary font-bold text-sm uppercase tracking-wider">Pripravujeme</span>
                 </div>
 
-                <h2 className="text-xl md:text-3xl font-black text-zinc-900 mb-4">
+                <h2 className="text-xl md:text-3xl font-black text-white mb-4">
                   Online eshop <span className="text-orange-primary">už čoskoro</span>
                 </h2>
 
-                <p className="text-zinc-700 text-sm md:text-lg leading-relaxed mb-6 max-w-2xl mx-auto">
+                <p className="text-zinc-300 text-sm md:text-lg leading-relaxed mb-6 max-w-2xl mx-auto">
                   Pracujeme na spustení eshopu pre ešte pohodlnejší nákup. Dovtedy vám radi pomôžeme telefonicky
                   alebo osobne na našej prevádzke v Senci.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto mb-6">
-                  <div className="flex items-center gap-3 bg-zinc-50 rounded-xl p-4 border border-zinc-200">
+                  <div className="flex items-center gap-3 bg-white/5 rounded-xl p-4 border border-white/10">
                     <div className="w-10 h-10 rounded-lg bg-orange-primary/20 flex items-center justify-center flex-shrink-0">
                       <Phone className="text-orange-primary" size={20} />
                     </div>
                     <div className="text-left">
-                      <p className="text-zinc-600 text-xs">Objednávky telefonicky</p>
-                      <p className="text-zinc-900 font-bold">+421 948 555 551</p>
+                      <p className="text-zinc-400 text-xs">Objednávky telefonicky</p>
+                      <p className="text-white font-bold">+421 948 555 551</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 bg-zinc-50 rounded-xl p-4 border border-zinc-200">
+                  <div className="flex items-center gap-3 bg-white/5 rounded-xl p-4 border border-white/10">
                     <div className="w-10 h-10 rounded-lg bg-orange-primary/20 flex items-center justify-center flex-shrink-0">
                       <Truck className="text-orange-primary" size={20} />
                     </div>
                     <div className="text-left">
-                      <p className="text-zinc-600 text-xs">Doručenie</p>
-                      <p className="text-zinc-900 font-bold">Packeta / osobný odber</p>
+                      <p className="text-zinc-400 text-xs">Doručenie</p>
+                      <p className="text-white font-bold">Packeta / osobný odber</p>
                     </div>
                   </div>
                 </div>
@@ -494,7 +494,7 @@ export default function PredajTechniky() {
           </div>
 
           {/* CTA Content */}
-          <div ref={ctaRef} className={`mt-10 md:mt-20 reveal-scale ${ctaInView ? 'in-view' : ''}`}>
+          <div className="mt-10 md:mt-20">
             <div className="text-center mb-6 md:mb-12">
               <span className="eyebrow eyebrow--center mb-4">Predajňa</span>
               <h2 className="text-2xl md:text-5xl font-black text-zinc-900 mb-3 md:mb-4 mt-4">
@@ -508,21 +508,21 @@ export default function PredajTechniky() {
           {/* Info Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-12 max-w-6xl mx-auto">
             {/* Opening Hours */}
-            <div className="group relative bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden">
+            <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden">
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 transition-all">
                   <svg className="w-7 h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Otváracie hodiny</h3>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Otváracie hodiny</h3>
                 <p className="text-orange-primary font-bold text-base mb-1">Po - Pi</p>
-                <p className="text-zinc-600 text-sm leading-relaxed">7:00 - 16:00</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">7:00 - 16:00</p>
               </div>
             </div>
 
             {/* Address */}
-            <div className="group relative bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden">
+            <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden">
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 transition-all">
                   <svg className="w-7 h-7 text-orange-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -530,21 +530,21 @@ export default function PredajTechniky() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Adresa predajne</h3>
-                <p className="text-zinc-700 text-base mb-1">Recká cesta 182</p>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Adresa predajne</h3>
+                <p className="text-zinc-300 text-base mb-1">Recká cesta 182</p>
                 <p className="text-orange-primary font-bold text-base">925 26 Senec</p>
               </div>
             </div>
 
             {/* Contact */}
-            <div className="group relative bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden">
+            <div className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden">
               <div className="relative text-center">
                 <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mx-auto mb-4 group-hover:bg-orange-primary/20 transition-all">
                   <Phone className="text-orange-primary" size={28} />
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Kontakt</h3>
+                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Kontakt</h3>
                 <p className="text-orange-primary font-bold text-base mb-1">+421 948 555 551</p>
-                <p className="text-zinc-600 text-sm leading-relaxed">info@royalstroje.sk</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">info@royalstroje.sk</p>
               </div>
             </div>
           </div>
@@ -565,26 +565,35 @@ export default function PredajTechniky() {
               </div>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-              <a
-                href="tel:+421948555551"
-                className="btn-primary text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 gap-2 md:gap-3"
-              >
-                <Phone className="w-[18px] h-[18px] md:w-[22px] md:h-[22px]" />
-                <span>Zavolať teraz</span>
-              </a>
-              <a
-                href="https://wa.me/421948555551"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline-light text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 gap-2 md:gap-3"
-              >
-                <MessageCircle className="w-[18px] h-[18px] md:w-[22px] md:h-[22px] text-green-600" />
-                <span>WhatsApp</span>
-              </a>
-            </div>
           </div>
+
+          {/* CTA band */}
+          <CtaBand
+            eyebrow="Máte otázku k tovaru?"
+            title={<>Zavolajte nám alebo <span className="text-orange-primary">nám napíšte</span></>}
+            text="Poradíme s výberom náradia, overíme dostupnosť skladom a dohodneme osobný odber v Senci."
+            icon={ShoppingCart}
+            actions={
+              <>
+                <a
+                  href="tel:+421948555551"
+                  className="btn-primary text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 gap-2 md:gap-3"
+                >
+                  <Phone className="w-[18px] h-[18px] md:w-[22px] md:h-[22px]" />
+                  <span>Zavolať teraz</span>
+                </a>
+                <a
+                  href="https://wa.me/421948555551"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary text-sm md:text-lg px-6 py-3 md:px-10 md:py-5 gap-2 md:gap-3"
+                >
+                  <MessageCircle className="w-[18px] h-[18px] md:w-[22px] md:h-[22px] text-green-600" />
+                  <span>WhatsApp</span>
+                </a>
+              </>
+            }
+          />
         </div>
       </ContentSection>
     </div>

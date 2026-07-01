@@ -2,6 +2,7 @@ import { Phone, Mail, Check, Shield, Award, BookOpen, Users, ClipboardList } fro
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 import PageHero from '../components/common/PageHero';
+import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
 const certTypes = [
@@ -92,7 +93,6 @@ export default function SkoLenieObsluhy() {
   const [coursesRef, coursesInView] = useInView();
   const [benefitsRef, benefitsInView] = useInView();
   const [stepsRef, stepsInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
 
   return (
     <div className="min-h-screen">
@@ -153,17 +153,17 @@ export default function SkoLenieObsluhy() {
 
           {/* Alpha Safety Partner Banner */}
           <div className="mb-10 md:mb-16">
-            <div ref={partnerRef} className={`relative overflow-hidden bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 shadow-sm shadow-zinc-900/5 reveal-scale ${partnerInView ? 'in-view' : ''}`}>
+            <div ref={partnerRef} className={`relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 shadow-sm shadow-zinc-900/10 reveal-scale ${partnerInView ? 'in-view' : ''}`}>
               <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
               <div className="w-16 h-16 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0">
                 <Shield className="text-orange-primary" size={32} />
               </div>
               <div className="text-center md:text-left">
                 <p className="text-orange-primary font-bold text-sm mb-1 uppercase tracking-wider">Akreditovaný partner</p>
-                <h2 className="text-zinc-900 font-black text-xl md:text-2xl mb-2">
+                <h2 className="text-white font-black text-xl md:text-2xl mb-2">
                   <a href="https://alphasafety.sk/kurzy/stavebne-stroje" target="_blank" rel="noopener noreferrer" className="hover:text-orange-primary transition-colors duration-200">Alpha Safety s.r.o.</a>
                 </h2>
-                <p className="text-zinc-700 text-sm md:text-base leading-relaxed">
+                <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
                   Naším certifikovaným partnerom pre školenia je spoločnosť <a href="https://alphasafety.sk/kurzy/stavebne-stroje" target="_blank" rel="noopener noreferrer" className="text-orange-primary hover:underline">Alpha Safety s.r.o.</a> – akreditovaná inštitúcia s dlhoročnými skúsenosťami v oblasti bezpečnosti práce a odbornej prípravy obsluhy stavebných strojov.
                 </p>
               </div>
@@ -186,17 +186,17 @@ export default function SkoLenieObsluhy() {
               {certTypes.map((cert, index) => (
                 <div
                   key={cert.id}
-                  className={`bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 group reveal stagger-${Math.min(index + 1, 6)} ${coursesInView ? 'in-view' : ''}`}
+                  className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 group reveal stagger-${Math.min(index + 1, 6)} ${coursesInView ? 'in-view' : ''}`}
                 >
                   <div className="text-3xl mb-4">{cert.icon}</div>
-                  <h3 className="text-zinc-900 font-black text-lg md:text-xl mb-1 group-hover:text-orange-primary transition">
+                  <h3 className="text-white font-black text-lg md:text-xl mb-1 group-hover:text-orange-primary transition">
                     {cert.title}
                   </h3>
                   <p className="text-orange-primary text-sm font-bold mb-3">{cert.subtitle}</p>
-                  <p className="text-zinc-600 text-sm leading-relaxed mb-4">{cert.description}</p>
-                  <div className="pt-4 border-t border-zinc-200 flex items-center gap-2">
+                  <p className="text-zinc-400 text-sm leading-relaxed mb-4">{cert.description}</p>
+                  <div className="pt-4 border-t border-white/10 flex items-center gap-2">
                     <BookOpen size={14} className="text-orange-primary" />
-                    <span className="text-zinc-500 text-xs">Trvanie kurzu: <strong className="text-zinc-700">{cert.duration}</strong></span>
+                    <span className="text-zinc-500 text-xs">Trvanie kurzu: <strong className="text-zinc-300">{cert.duration}</strong></span>
                   </div>
                 </div>
               ))}
@@ -218,13 +218,13 @@ export default function SkoLenieObsluhy() {
                 return (
                   <div
                     key={idx}
-                    className={`bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-${Math.min(idx + 1, 4)} ${benefitsInView ? 'in-view' : ''}`}
+                    className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-${Math.min(idx + 1, 4)} ${benefitsInView ? 'in-view' : ''}`}
                   >
                     <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4">
                       <Icon className="text-orange-primary" size={28} />
                     </div>
-                    <h3 className="text-zinc-900 font-bold text-lg mb-2">{benefit.title}</h3>
-                    <p className="text-zinc-600 text-sm leading-relaxed">{benefit.description}</p>
+                    <h3 className="text-white font-bold text-lg mb-2">{benefit.title}</h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed">{benefit.description}</p>
                   </div>
                 );
               })}
@@ -242,12 +242,12 @@ export default function SkoLenieObsluhy() {
 
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
               {steps.map((item, index) => (
-                <div key={item.step} className={`bg-white border border-zinc-200 rounded-2xl p-4 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-${Math.min(index + 1, 5)} ${stepsInView ? 'in-view' : ''}`}>
+                <div key={item.step} className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-4 text-center shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-${Math.min(index + 1, 5)} ${stepsInView ? 'in-view' : ''}`}>
                   <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-3 mx-auto text-orange-primary font-black text-xl">
                     {item.step}
                   </div>
-                  <h3 className="text-zinc-900 font-bold text-sm mb-2">{item.title}</h3>
-                  <p className="text-zinc-600 text-xs leading-relaxed">{item.desc}</p>
+                  <h3 className="text-white font-bold text-sm mb-2">{item.title}</h3>
+                  <p className="text-zinc-400 text-xs leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -255,9 +255,9 @@ export default function SkoLenieObsluhy() {
 
           {/* Who Is It For */}
           <div className="mb-10 md:mb-16">
-            <div className="bg-white border border-zinc-200 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto shadow-sm shadow-zinc-900/5">
+            <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto shadow-sm shadow-zinc-900/10">
               <span className="eyebrow eyebrow--center mb-4">Pre koho</span>
-              <h2 className="text-2xl md:text-3xl font-black text-zinc-900 mb-4 md:mb-6 mt-4 text-center">
+              <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 mt-4 text-center">
                 Pre koho je školenie <span className="text-orange-primary">určené?</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -271,7 +271,7 @@ export default function SkoLenieObsluhy() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-3">
                     <Check className="text-orange-primary flex-shrink-0 mt-1" size={20} />
-                    <p className="text-zinc-700 text-sm md:text-base">{item}</p>
+                    <p className="text-zinc-300 text-sm md:text-base">{item}</p>
                   </div>
                 ))}
               </div>
@@ -280,13 +280,13 @@ export default function SkoLenieObsluhy() {
 
           {/* Legal Note */}
           <div className="mb-10 md:mb-16">
-            <div className="relative overflow-hidden bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto shadow-sm shadow-zinc-900/5">
+            <div className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto shadow-sm shadow-zinc-900/10">
               <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
               <span className="eyebrow eyebrow--center mb-4">Legislatíva</span>
-              <h2 className="text-xl md:text-2xl font-black text-zinc-900 mb-3 mt-4 text-center">
+              <h2 className="text-xl md:text-2xl font-black text-white mb-3 mt-4 text-center">
                 Legislatívna <span className="text-orange-primary">povinnosť</span>
               </h2>
-              <p className="text-zinc-700 text-sm md:text-base leading-relaxed text-center mb-4">
+              <p className="text-zinc-300 text-sm md:text-base leading-relaxed text-center mb-4">
                 Podľa zákona č. 124/2006 Z. z. a vyhlášky MPSVR SR je obsluha vybraných stavebných strojov viazaná na platný preukaz vydaný oprávnenou organizáciou.
               </p>
               <div className="space-y-2">
@@ -297,7 +297,7 @@ export default function SkoLenieObsluhy() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-2">
                     <span className="text-orange-primary mt-1">•</span>
-                    <p className="text-zinc-600 text-sm">{item}</p>
+                    <p className="text-zinc-400 text-sm">{item}</p>
                   </div>
                 ))}
               </div>
@@ -305,42 +305,30 @@ export default function SkoLenieObsluhy() {
           </div>
 
           {/* CTA */}
-          <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
-            <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
-              Záujem o školenie?
-            </h2>
-            <p className={`text-zinc-700 text-sm md:text-lg mb-8 max-w-2xl mx-auto reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
-              Kontaktujte nás – dohodneme termín, typ kurzu a všetky detaily. Školenie zabezpečíme rýchlo a bez zbytočnej byrokracie.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <span className="flex items-center gap-2 text-zinc-700 text-sm md:text-base">
-                <span className="text-orange-primary">✓</span> Akreditovaný partner Alpha Safety s.r.o.
-              </span>
-              <span className="flex items-center gap-2 text-zinc-700 text-sm md:text-base">
-                <span className="text-orange-primary">✓</span> Platný preukaz obsluhy
-              </span>
-              <span className="flex items-center gap-2 text-zinc-700 text-sm md:text-base">
-                <span className="text-orange-primary">✓</span> Rýchly termín
-              </span>
-            </div>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="tel:+421948555551"
-                className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
-              >
-                <Phone size={20} />
-                <span>Zavolať teraz</span>
-              </a>
-              <a
-                href="mailto:info@royalstroje.sk"
-                className="btn-outline-light text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
-              >
-                <Mail size={20} />
-                <span>Napísať email</span>
-              </a>
-            </div>
-          </div>
+          <CtaBand
+            eyebrow="Kontakt"
+            title="Záujem o školenie?"
+            text="Kontaktujte nás – dohodneme termín, typ kurzu a všetky detaily. Školenie zabezpečíme rýchlo a bez zbytočnej byrokracie."
+            icon={Award}
+            actions={
+              <>
+                <a
+                  href="tel:+421948555551"
+                  className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
+                >
+                  <Phone size={20} />
+                  <span>Zavolať teraz</span>
+                </a>
+                <a
+                  href="mailto:info@royalstroje.sk"
+                  className="btn-secondary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
+                >
+                  <Mail size={20} />
+                  <span>Napísať email</span>
+                </a>
+              </>
+            }
+          />
 
         </div>
       </ContentSection>

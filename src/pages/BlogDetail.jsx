@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { blogMeta, loadArticle } from '../data/blogArticles';
 import ContentSection from '../components/common/ContentSection';
 import PageHero from '../components/common/PageHero';
+import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
 export default function BlogDetail() {
@@ -15,7 +16,7 @@ export default function BlogDetail() {
 
   const [articleRef, articleInView] = useInView();
   const [shareRef, shareInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
+  const [relatedRef, relatedInView] = useInView();
 
   useEffect(() => {
     let cancelled = false;
@@ -156,7 +157,7 @@ export default function BlogDetail() {
                 href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-white border border-zinc-200 text-zinc-900 rounded-lg shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 transition-all"
+                className="px-6 py-3 bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 text-white rounded-lg shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 transition-all"
               >
                 Facebook
               </a>
@@ -164,32 +165,27 @@ export default function BlogDetail() {
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3 bg-white border border-zinc-200 text-zinc-900 rounded-lg shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 transition-all"
+                className="px-6 py-3 bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 text-white rounded-lg shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 transition-all"
               >
                 LinkedIn
               </a>
             </div>
           </div>
 
-          {/* CTA Section - Integrated */}
-          <div ref={ctaRef} className={`mt-16 text-center max-w-3xl mx-auto reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
-            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
-              Potrebujete poradiť?
-            </h2>
-            <p className={`text-zinc-700 text-lg mb-8 leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
-              Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt.
-            </p>
-            <a
-              href="tel:+421948555551"
-              className={`btn-primary text-base px-8 py-4 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}
-            >
-              <span>Zavolať teraz: 0948 555 551</span>
-            </a>
-          </div>
+          {/* CTA Section - shared dark band */}
+          <CtaBand
+            eyebrow="Kontakt"
+            title={<>Potrebujete poradiť?</>}
+            text="Zavolajte nám a radi vám pomôžeme vybrať správne riešenie pre váš projekt."
+            actions={
+              <a href="tel:+421948555551" className="btn-primary text-base px-8 py-4">
+                <span>Zavolať teraz: 0948 555 551</span>
+              </a>
+            }
+          />
 
           {/* Related Articles */}
-          <div className={`mt-16 text-center reveal ${ctaInView ? 'in-view' : ''}`}>
+          <div ref={relatedRef} className={`mt-16 text-center reveal ${relatedInView ? 'in-view' : ''}`}>
             <span className="eyebrow eyebrow--center mb-4">Súvisiace</span>
             <h3 className="text-2xl md:text-3xl font-black text-zinc-900 mb-8 mt-4 text-center">
               Ďalšie <span className="text-orange-primary">články</span>

@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Phone, Mail, Truck, Zap, PackageCheck, MapPin, Package, ArrowLeftRight } from 'lucide-react';
 import PageHero from '../components/common/PageHero';
+import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
 const PHONE = 'tel:+421948555551';
@@ -74,7 +75,6 @@ export default function DovozTechniky() {
   const [benefitsRef, benefitsInView] = useInView();
   const [stepsRef, stepsInView] = useInView();
   const [pricingRef, pricingInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
 
   return (
     <div className="min-h-screen">
@@ -146,13 +146,13 @@ export default function DovozTechniky() {
                 return (
                   <div
                     key={b.title}
-                    className={`group relative bg-white border border-zinc-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${benefitsInView ? 'in-view' : ''}`}
+                    className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${benefitsInView ? 'in-view' : ''}`}
                   >
                     <div className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
                       <Icon className="text-orange-primary" size={22} />
                     </div>
-                    <h3 className="text-zinc-900 font-bold text-sm md:text-lg mb-1 md:mb-2 leading-tight">{b.title}</h3>
-                    <p className="text-zinc-600 text-xs md:text-sm leading-relaxed">{b.text}</p>
+                    <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 leading-tight">{b.title}</h3>
+                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">{b.text}</p>
                     <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
                   </div>
                 );
@@ -174,14 +174,14 @@ export default function DovozTechniky() {
               {steps.map((s, i) => (
                 <div
                   key={s.n}
-                  className={`group relative bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${stepsInView ? 'in-view' : ''}`}
+                  className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${stepsInView ? 'in-view' : ''}`}
                 >
-                  <span className="absolute top-3 right-4 font-display text-5xl md:text-6xl font-black text-zinc-900/[0.05] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                  <span className="absolute top-3 right-4 font-display text-5xl md:text-6xl font-black text-white/[0.06] group-hover:text-orange-primary/20 transition-colors pointer-events-none select-none">
                     {s.n}
                   </span>
                   <div className="relative">
-                    <h3 className="text-zinc-900 font-black text-lg md:text-xl mb-2 group-hover:text-orange-primary transition-colors">{s.title}</h3>
-                    <p className="text-zinc-600 text-sm md:text-base leading-relaxed max-w-[40ch]">{s.text}</p>
+                    <h3 className="text-white font-black text-lg md:text-xl mb-2 group-hover:text-orange-primary transition-colors">{s.title}</h3>
+                    <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-[40ch]">{s.text}</p>
                   </div>
                 </div>
               ))}
@@ -208,18 +208,18 @@ export default function DovozTechniky() {
                 return (
                   <div
                     key={p.title}
-                    className="relative bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 flex flex-col"
+                    className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 flex flex-col overflow-hidden"
                   >
                     <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent rounded-t-2xl" />
                     <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-4">
                       <Icon className="text-orange-primary" size={26} />
                     </div>
-                    <h3 className="text-zinc-900 font-black text-lg md:text-xl mb-1">{p.title}</h3>
+                    <h3 className="text-white font-black text-lg md:text-xl mb-1">{p.title}</h3>
                     <p className="text-zinc-500 text-sm mb-5">{p.subtitle}</p>
-                    <div className="mt-auto space-y-2 border-t border-zinc-100 pt-4">
+                    <div className="mt-auto space-y-2 border-t border-white/10 pt-4">
                       {p.rows.map((r) => (
                         <div key={r.label} className="flex items-baseline justify-between gap-3">
-                          <span className="text-zinc-600 text-sm">{r.label}</span>
+                          <span className="text-zinc-400 text-sm">{r.label}</span>
                           <span className="text-right">
                             <span className="text-orange-primary font-black text-xl">{r.value}</span>
                             {r.note && <span className="block text-zinc-400 text-xs">{r.note}</span>}
@@ -239,27 +239,24 @@ export default function DovozTechniky() {
         </section>
 
         {/* CTA */}
-        <section className="py-12 md:py-16 lg:py-20 border-t border-zinc-200/70">
-          <div ref={ctaRef} className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Objednať dopravu</span>
-            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
-              Potrebujete techniku na stavbe?
-            </h2>
-            <p className="text-zinc-600 text-lg mb-8 max-w-2xl mx-auto">
-              Zavolajte nám a dohodneme presný termín dovozu priamo na vašu stavbu.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
+        <CtaBand
+          eyebrow="Objednať dopravu"
+          title="Potrebujete techniku na stavbe?"
+          text="Zavolajte nám a dohodneme presný termín dovozu priamo na vašu stavbu."
+          icon={Truck}
+          actions={
+            <>
               <a href={PHONE} className="btn-primary text-base px-8 py-4">
                 <Phone size={18} />
                 <span>Zavolať teraz: 0948 555 551</span>
               </a>
-              <a href="mailto:info@royalstroje.sk" className="btn-outline-light text-base px-8 py-4">
+              <a href="mailto:info@royalstroje.sk" className="btn-secondary text-base px-8 py-4">
                 <Mail size={18} />
                 <span>Napísať email</span>
               </a>
-            </div>
-          </div>
-        </section>
+            </>
+          }
+        />
       </div>
     </div>
   );

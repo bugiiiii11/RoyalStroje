@@ -2,13 +2,13 @@ import { Phone, Mail, Package, Wrench, Clock, Shield } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 import PageHero from '../components/common/PageHero';
+import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
 export default function NahradneDiely() {
   const [headingRef, headingInView] = useInView();
   const [gridRef, gridInView] = useInView();
   const [stepsRef, stepsInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
   const services = [
     {
       id: 'originalne-diely',
@@ -104,18 +104,18 @@ export default function NahradneDiely() {
                 return (
                   <div
                     key={service.id}
-                    className={`bg-white border border-zinc-200 rounded-2xl p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
+                    className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                   >
                     <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                       <IconComponent className="text-orange-primary" size={28} />
                     </div>
-                    <h3 className="text-xl font-black text-zinc-900 mb-3">{service.title}</h3>
-                    <p className="text-zinc-700 text-sm mb-4 leading-relaxed">
+                    <h3 className="text-xl font-black text-white mb-3">{service.title}</h3>
+                    <p className="text-zinc-300 text-sm mb-4 leading-relaxed">
                       {service.description}
                     </p>
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-zinc-600">
+                        <li key={idx} className="flex items-start gap-2 text-sm text-zinc-400">
                           <span className="text-orange-primary mt-0.5">•</span>
                           <span>{feature}</span>
                         </li>
@@ -140,39 +140,39 @@ export default function NahradneDiely() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-1 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   1
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2">Identifikácia</h3>
-                <p className="text-zinc-600 text-sm">
+                <h3 className="text-white font-bold text-lg mb-2">Identifikácia</h3>
+                <p className="text-zinc-400 text-sm">
                   Kontaktujte nás s označením stroja alebo dielu
                 </p>
               </div>
-              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-2 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   2
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2">Overenie</h3>
-                <p className="text-zinc-600 text-sm">
+                <h3 className="text-white font-bold text-lg mb-2">Overenie</h3>
+                <p className="text-zinc-400 text-sm">
                   Overíme dostupnosť a cenu dielu
                 </p>
               </div>
-              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-3 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   3
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2">Objednávka</h3>
-                <p className="text-zinc-600 text-sm">
+                <h3 className="text-white font-bold text-lg mb-2">Objednávka</h3>
+                <p className="text-zinc-400 text-sm">
                   Potvrdíte objednávku a spôsob platby
                 </p>
               </div>
-              <div className={`bg-white border border-zinc-200 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 reveal stagger-4 ${stepsInView ? 'in-view' : ''}`}>
+              <div className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-4 ${stepsInView ? 'in-view' : ''}`}>
                 <div className="w-12 h-12 rounded-full bg-orange-primary/20 border-2 border-orange-primary flex items-center justify-center mb-4 mx-auto text-orange-primary font-black text-xl">
                   4
                 </div>
-                <h3 className="text-zinc-900 font-bold text-lg mb-2">Dodanie</h3>
-                <p className="text-zinc-600 text-sm">
+                <h3 className="text-white font-bold text-lg mb-2">Dodanie</h3>
+                <p className="text-zinc-400 text-sm">
                   Odber skladom alebo dovoz do 48 hodín
                 </p>
               </div>
@@ -180,42 +180,30 @@ export default function NahradneDiely() {
           </div>
 
           {/* CTA Section */}
-          <div ref={ctaRef} className={`text-center reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
-            <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
-              Hľadáte náhradný diel?
-            </h2>
-            <p className="text-zinc-700 text-lg mb-8 max-w-2xl mx-auto">
-              Zavolejte nám a pomôžeme vám nájsť správny diel.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <span className="flex items-center gap-2 text-zinc-700">
-                <span className="text-orange-primary">✓</span> Originálne diely
-              </span>
-              <span className="flex items-center gap-2 text-zinc-700">
-                <span className="text-orange-primary">✓</span> Skladom
-              </span>
-              <span className="flex items-center gap-2 text-zinc-700">
-                <span className="text-orange-primary">✓</span> Express dodanie
-              </span>
-            </div>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="tel:+421948555551"
-                className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
-              >
-                <Phone size={20} />
-                <span>Zavolať teraz</span>
-              </a>
-              <a
-                href="mailto:info@royalstroje.sk"
-                className="btn-outline-light text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
-              >
-                <Mail size={20} />
-                <span>Napísať email</span>
-              </a>
-            </div>
-          </div>
+          <CtaBand
+            eyebrow="Kontakt"
+            title="Hľadáte náhradný diel?"
+            text="Zavolejte nám a pomôžeme vám nájsť správny diel."
+            icon={Package}
+            actions={
+              <>
+                <a
+                  href="tel:+421948555551"
+                  className="btn-primary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
+                >
+                  <Phone size={20} />
+                  <span>Zavolať teraz</span>
+                </a>
+                <a
+                  href="mailto:info@royalstroje.sk"
+                  className="btn-secondary text-sm md:text-base px-6 py-3 md:px-8 md:py-4"
+                >
+                  <Mail size={20} />
+                  <span>Napísať email</span>
+                </a>
+              </>
+            }
+          />
         </div>
       </ContentSection>
     </div>

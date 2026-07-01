@@ -34,26 +34,26 @@ export default function GDPR() {
             </p>
           </div>
 
-          {/* Header Info */}
-          <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 mb-6 md:mb-8">
+          {/* Header Info — dark reference card */}
+          <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/10 p-4 md:p-8 mb-6 md:mb-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-xs md:text-base">
               <div>
-                <p className="text-zinc-600 mb-1 text-[10px] md:text-sm">Prevádzkovateľ</p>
-                <p className="text-zinc-900 font-semibold text-xs md:text-base">ROYAL STROJE s.r.o.</p>
-                <p className="text-zinc-700 text-xs md:text-base">Recká cesta 182, 925 26 Boldog – Senec</p>
+                <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">Prevádzkovateľ</p>
+                <p className="text-white font-semibold text-xs md:text-base">ROYAL STROJE s.r.o.</p>
+                <p className="text-zinc-300 text-xs md:text-base">Recká cesta 182, 925 26 Boldog – Senec</p>
               </div>
               <div>
-                <p className="text-zinc-600 mb-1 text-[10px] md:text-sm">Kontakt</p>
-                <p className="text-zinc-900 font-semibold text-xs md:text-base">info@royalstroje.sk</p>
-                <p className="text-zinc-700 text-xs md:text-base">+421 948 555 551</p>
+                <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">Kontakt</p>
+                <p className="text-white font-semibold text-xs md:text-base">info@royalstroje.sk</p>
+                <p className="text-zinc-300 text-xs md:text-base">+421 948 555 551</p>
               </div>
               <div>
-                <p className="text-zinc-600 mb-1 text-[10px] md:text-sm">IČO / DIČ / IČ DPH</p>
-                <p className="text-zinc-700 text-xs md:text-base">57 405 425 / 2122722063 / SK2122722063</p>
+                <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">IČO / DIČ / IČ DPH</p>
+                <p className="text-zinc-300 text-xs md:text-base">57 405 425 / 2122722063 / SK2122722063</p>
               </div>
               <div>
-                <p className="text-zinc-600 mb-1 text-[10px] md:text-sm">Verzia / Platné od</p>
-                <p className="text-zinc-700 text-xs md:text-base">GDPR2026.01 / 01. 02. 2026</p>
+                <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">Verzia / Platné od</p>
+                <p className="text-zinc-300 text-xs md:text-base">GDPR2026.01 / 01. 02. 2026</p>
               </div>
             </div>
           </div>
@@ -61,13 +61,13 @@ export default function GDPR() {
           {/* Content Sections */}
           <div className="space-y-4 md:space-y-8">
 
-            {/* Section I */}
-            <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/30 transition-all">
+            {/* Section I — light prose */}
+            <div>
               <h2 className="text-lg md:text-3xl font-black text-zinc-900 mb-3 md:mb-6">
                 <span className="text-orange-primary">I.</span> Rozsah spracúvaných osobných údajov
               </h2>
 
-              <div className="space-y-2 md:space-y-4 text-zinc-700 text-xs md:text-base leading-relaxed">
+              <div className="space-y-2 md:space-y-4 text-zinc-800 text-xs md:text-base leading-relaxed">
                 <p>
                   <strong className="text-zinc-900">1.</strong> Prevádzkovateľ spracúva tieto bežné kategórie osobných údajov zmluvných partnerov a ich zástupcov:
                 </p>
@@ -90,77 +90,79 @@ export default function GDPR() {
               </div>
             </div>
 
-            {/* Section II - Table */}
-            <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/30 transition-all">
+            {/* Section II - Table — heading light, dark reference card */}
+            <div>
               <h2 className="text-lg md:text-3xl font-black text-zinc-900 mb-3 md:mb-6">
                 <span className="text-orange-primary">II.</span> Účel, právny základ a doba uchovávania
               </h2>
 
-              <div className="text-zinc-700 text-xs md:text-base leading-relaxed mb-4 md:mb-6">
+              <div className="text-zinc-800 text-xs md:text-base leading-relaxed mb-4 md:mb-6">
                 <p>Osobné údaje sú spracúvané vždy na konkrétny, legitímny a vopred určený účel:</p>
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-[10px] md:text-base">
-                  <thead>
-                    <tr className="bg-orange-primary/10 border-b border-zinc-200">
-                      <th className="text-left py-3 px-2 text-orange-primary font-bold">Účel spracúvania</th>
-                      <th className="text-left py-3 px-2 text-orange-primary font-bold">Právny základ (GDPR)</th>
-                      <th className="text-left py-3 px-2 text-orange-primary font-bold">Doba uchovávania</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-zinc-700">
-                    <tr className="border-b border-zinc-200">
-                      <td className="py-3 px-2">Uzatvorenie a plnenie zmluvy o prenájme</td>
-                      <td className="py-3 px-2">Čl. 6 ods. 1 písm. b) – plnenie zmluvy</td>
-                      <td className="py-3 px-2">Po dobu trvania zmluvy + 10 rokov</td>
-                    </tr>
-                    <tr className="border-b border-zinc-200">
-                      <td className="py-3 px-2">Overenie oprávnenia konať</td>
-                      <td className="py-3 px-2">Čl. 6 ods. 1 písm. b) a f)</td>
-                      <td className="py-3 px-2">Po dobu trvania zmluvy + 10 rokov</td>
-                    </tr>
-                    <tr className="border-b border-zinc-200">
-                      <td className="py-3 px-2">Fakturácia a vedenie účtovníctva</td>
-                      <td className="py-3 px-2">Čl. 6 ods. 1 písm. c) – zákonná povinnosť</td>
-                      <td className="py-3 px-2">10 rokov od vystavenia dokladu</td>
-                    </tr>
-                    <tr className="border-b border-zinc-200">
-                      <td className="py-3 px-2">Vymáhanie pohľadávok a právna ochrana</td>
-                      <td className="py-3 px-2">Čl. 6 ods. 1 písm. f) – oprávnený záujem</td>
-                      <td className="py-3 px-2">Do ukončenia konania + 5 rokov</td>
-                    </tr>
-                    <tr className="border-b border-zinc-200">
-                      <td className="py-3 px-2">Zasielanie obchodných informácií existujúcim zákazníkom</td>
-                      <td className="py-3 px-2">Čl. 6 ods. 1 písm. f) – oprávnený záujem</td>
-                      <td className="py-3 px-2">Do podania námietky</td>
-                    </tr>
-                    <tr className="border-b border-zinc-200">
-                      <td className="py-3 px-2">Zasielanie obchodných informácií – noví kontakty</td>
-                      <td className="py-3 px-2">Čl. 6 ods. 1 písm. a) – súhlas</td>
-                      <td className="py-3 px-2">Do odvolania súhlasu</td>
-                    </tr>
-                    <tr className="border-b border-zinc-200">
-                      <td className="py-3 px-2">Analytické a marketingové cookies</td>
-                      <td className="py-3 px-2">Čl. 6 ods. 1 písm. a) – súhlas</td>
-                      <td className="py-3 px-2">Max. 2 roky</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/10 p-4 md:p-8 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-[10px] md:text-base">
+                    <thead>
+                      <tr className="bg-orange-primary/10 border-b border-white/10">
+                        <th className="text-left py-3 px-2 text-orange-primary font-bold">Účel spracúvania</th>
+                        <th className="text-left py-3 px-2 text-orange-primary font-bold">Právny základ (GDPR)</th>
+                        <th className="text-left py-3 px-2 text-orange-primary font-bold">Doba uchovávania</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-zinc-300">
+                      <tr className="border-b border-white/10">
+                        <td className="py-3 px-2">Uzatvorenie a plnenie zmluvy o prenájme</td>
+                        <td className="py-3 px-2">Čl. 6 ods. 1 písm. b) – plnenie zmluvy</td>
+                        <td className="py-3 px-2">Po dobu trvania zmluvy + 10 rokov</td>
+                      </tr>
+                      <tr className="border-b border-white/10">
+                        <td className="py-3 px-2">Overenie oprávnenia konať</td>
+                        <td className="py-3 px-2">Čl. 6 ods. 1 písm. b) a f)</td>
+                        <td className="py-3 px-2">Po dobu trvania zmluvy + 10 rokov</td>
+                      </tr>
+                      <tr className="border-b border-white/10">
+                        <td className="py-3 px-2">Fakturácia a vedenie účtovníctva</td>
+                        <td className="py-3 px-2">Čl. 6 ods. 1 písm. c) – zákonná povinnosť</td>
+                        <td className="py-3 px-2">10 rokov od vystavenia dokladu</td>
+                      </tr>
+                      <tr className="border-b border-white/10">
+                        <td className="py-3 px-2">Vymáhanie pohľadávok a právna ochrana</td>
+                        <td className="py-3 px-2">Čl. 6 ods. 1 písm. f) – oprávnený záujem</td>
+                        <td className="py-3 px-2">Do ukončenia konania + 5 rokov</td>
+                      </tr>
+                      <tr className="border-b border-white/10">
+                        <td className="py-3 px-2">Zasielanie obchodných informácií existujúcim zákazníkom</td>
+                        <td className="py-3 px-2">Čl. 6 ods. 1 písm. f) – oprávnený záujem</td>
+                        <td className="py-3 px-2">Do podania námietky</td>
+                      </tr>
+                      <tr className="border-b border-white/10">
+                        <td className="py-3 px-2">Zasielanie obchodných informácií – noví kontakty</td>
+                        <td className="py-3 px-2">Čl. 6 ods. 1 písm. a) – súhlas</td>
+                        <td className="py-3 px-2">Do odvolania súhlasu</td>
+                      </tr>
+                      <tr className="border-b border-white/10">
+                        <td className="py-3 px-2">Analytické a marketingové cookies</td>
+                        <td className="py-3 px-2">Čl. 6 ods. 1 písm. a) – súhlas</td>
+                        <td className="py-3 px-2">Max. 2 roky</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
-              <p className="text-zinc-700 text-sm mt-4 italic">
-                Po uplynutí doby uchovávania budú osobné údaje vymazané alebo anonymizované.
-              </p>
+                <p className="text-zinc-500 text-sm mt-4 italic">
+                  Po uplynutí doby uchovávania budú osobné údaje vymazané alebo anonymizované.
+                </p>
+              </div>
             </div>
 
-            {/* Section III */}
-            <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/30 transition-all">
+            {/* Section III — light prose */}
+            <div className="pt-4 md:pt-8 border-t border-zinc-200">
               <h2 className="text-lg md:text-3xl font-black text-zinc-900 mb-3 md:mb-6">
                 <span className="text-orange-primary">III.</span> Zdroj údajov a poskytovanie tretím osobám
               </h2>
 
-              <div className="space-y-2 md:space-y-4 text-zinc-700 text-xs md:text-base leading-relaxed">
+              <div className="space-y-2 md:space-y-4 text-zinc-800 text-xs md:text-base leading-relaxed">
                 <p>
                   <strong className="text-zinc-900">1.</strong> Osobné údaje sú získavané priamo od dotknutej osoby, z údajov uvedených v zmluve alebo objednávke, alebo z verejne dostupných registrov (napr. obchodný register, register živnostenského podnikania).
                 </p>
@@ -183,13 +185,13 @@ export default function GDPR() {
               </div>
             </div>
 
-            {/* Section IV - Rights Table */}
-            <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/30 transition-all">
+            {/* Section IV - Rights — heading/intro light, dark reference mini-boxes */}
+            <div className="pt-4 md:pt-8 border-t border-zinc-200">
               <h2 className="text-lg md:text-3xl font-black text-zinc-900 mb-3 md:mb-6">
                 <span className="text-orange-primary">IV.</span> Práva dotknutej osoby
               </h2>
 
-              <div className="text-zinc-700 leading-relaxed mb-6">
+              <div className="text-zinc-800 leading-relaxed mb-6">
                 <p>
                   Každá dotknutá osoba má nasledovné práva, ktoré môže uplatniť písomne na adrese sídla Prevádzkovateľa alebo e-mailom na{' '}
                   <a href="mailto:info@royalstroje.sk" className="text-orange-primary hover:underline font-semibold">
@@ -200,55 +202,55 @@ export default function GDPR() {
               </div>
 
               <div className="space-y-4">
-                <div className="bg-zinc-50 rounded-lg md:rounded-xl p-3 md:p-4 border border-zinc-200">
+                <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-lg md:rounded-xl p-3 md:p-4 border border-white/10">
                   <h3 className="text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2">Prístup k údajom (čl. 15 GDPR)</h3>
-                  <p className="text-zinc-700 text-sm">Právo získať potvrdenie, či sa vaše údaje spracúvajú, a prístup k nim vrátane informácií o spracúvaní.</p>
+                  <p className="text-zinc-300 text-sm">Právo získať potvrdenie, či sa vaše údaje spracúvajú, a prístup k nim vrátane informácií o spracúvaní.</p>
                 </div>
 
-                <div className="bg-zinc-50 rounded-lg md:rounded-xl p-3 md:p-4 border border-zinc-200">
+                <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-lg md:rounded-xl p-3 md:p-4 border border-white/10">
                   <h3 className="text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2">Oprava údajov (čl. 16 GDPR)</h3>
-                  <p className="text-zinc-700 text-sm">Právo na opravu nesprávnych alebo doplnenie neúplných osobných údajov.</p>
+                  <p className="text-zinc-300 text-sm">Právo na opravu nesprávnych alebo doplnenie neúplných osobných údajov.</p>
                 </div>
 
-                <div className="bg-zinc-50 rounded-lg md:rounded-xl p-3 md:p-4 border border-zinc-200">
+                <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-lg md:rounded-xl p-3 md:p-4 border border-white/10">
                   <h3 className="text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2">Vymazanie údajov (čl. 17 GDPR)</h3>
-                  <p className="text-zinc-700 text-sm">Právo na výmaz, ak pominul účel, bol odvolaný súhlas alebo spracúvanie je protiprávne – s výnimkou zákonných povinností uchovávania.</p>
+                  <p className="text-zinc-300 text-sm">Právo na výmaz, ak pominul účel, bol odvolaný súhlas alebo spracúvanie je protiprávne – s výnimkou zákonných povinností uchovávania.</p>
                 </div>
 
-                <div className="bg-zinc-50 rounded-lg md:rounded-xl p-3 md:p-4 border border-zinc-200">
+                <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-lg md:rounded-xl p-3 md:p-4 border border-white/10">
                   <h3 className="text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2">Obmedzenie spracúvania (čl. 18 GDPR)</h3>
-                  <p className="text-zinc-700 text-sm">Právo požadovať obmedzenie spracúvania počas preverenia námietky alebo v iných zákonom stanovených prípadoch.</p>
+                  <p className="text-zinc-300 text-sm">Právo požadovať obmedzenie spracúvania počas preverenia námietky alebo v iných zákonom stanovených prípadoch.</p>
                 </div>
 
-                <div className="bg-zinc-50 rounded-lg md:rounded-xl p-3 md:p-4 border border-zinc-200">
+                <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-lg md:rounded-xl p-3 md:p-4 border border-white/10">
                   <h3 className="text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2">Prenosnosť údajov (čl. 20 GDPR)</h3>
-                  <p className="text-zinc-700 text-sm">Právo získať údaje v štruktúrovanom, strojovo čitateľnom formáte a preniesť ich inému prevádzkovateľovi.</p>
+                  <p className="text-zinc-300 text-sm">Právo získať údaje v štruktúrovanom, strojovo čitateľnom formáte a preniesť ich inému prevádzkovateľovi.</p>
                 </div>
 
-                <div className="bg-zinc-50 rounded-lg md:rounded-xl p-3 md:p-4 border border-zinc-200">
+                <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-lg md:rounded-xl p-3 md:p-4 border border-white/10">
                   <h3 className="text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2">Námietka (čl. 21 GDPR)</h3>
-                  <p className="text-zinc-700 text-sm">Právo kedykoľvek namietať spracúvanie založené na oprávnenom záujme (vrátane priameho marketingu).</p>
+                  <p className="text-zinc-300 text-sm">Právo kedykoľvek namietať spracúvanie založené na oprávnenom záujme (vrátane priameho marketingu).</p>
                 </div>
 
-                <div className="bg-zinc-50 rounded-lg md:rounded-xl p-3 md:p-4 border border-zinc-200">
+                <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-lg md:rounded-xl p-3 md:p-4 border border-white/10">
                   <h3 className="text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2">Odvolanie súhlasu (čl. 7 ods. 3 GDPR)</h3>
-                  <p className="text-zinc-700 text-sm">Ak je spracúvanie založené na súhlase, máte právo ho kedykoľvek odvolať.</p>
+                  <p className="text-zinc-300 text-sm">Ak je spracúvanie založené na súhlase, máte právo ho kedykoľvek odvolať.</p>
                 </div>
 
-                <div className="bg-zinc-50 rounded-lg md:rounded-xl p-3 md:p-4 border border-zinc-200">
+                <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-lg md:rounded-xl p-3 md:p-4 border border-white/10">
                   <h3 className="text-orange-primary font-bold text-sm md:text-lg mb-1 md:mb-2">Sťažnosť dozornému orgánu (čl. 77 GDPR)</h3>
-                  <p className="text-zinc-700 text-sm">Právo podať sťažnosť Úradu na ochranu osobných údajov SR.</p>
+                  <p className="text-zinc-300 text-sm">Právo podať sťažnosť Úradu na ochranu osobných údajov SR.</p>
                 </div>
               </div>
             </div>
 
-            {/* Sections V-VII */}
-            <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/30 transition-all">
+            {/* Section V — light prose */}
+            <div className="pt-4 md:pt-8 border-t border-zinc-200">
               <h2 className="text-lg md:text-3xl font-black text-zinc-900 mb-3 md:mb-6">
                 <span className="text-orange-primary">V.</span> Bezpečnosť osobných údajov
               </h2>
 
-              <div className="space-y-2 md:space-y-4 text-zinc-700 text-xs md:text-base leading-relaxed">
+              <div className="space-y-2 md:space-y-4 text-zinc-800 text-xs md:text-base leading-relaxed">
                 <p>
                   <strong className="text-zinc-900">1.</strong> Prevádzkovateľ prijal primerané technické a organizačné opatrenia na ochranu osobných údajov proti neoprávnenému prístupu, strate, poškodeniu, zneužitiu alebo zničeniu, v súlade s čl. 32 GDPR. Medzi tieto opatrenia patria najmä: šifrovanie dát, riadenie prístupov a autentifikácia, pravidelné zálohovanie, školenie zamestnancov.
                 </p>
@@ -258,43 +260,45 @@ export default function GDPR() {
               </div>
             </div>
 
-            <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/30 transition-all">
+            {/* Section VI — light prose */}
+            <div className="pt-4 md:pt-8 border-t border-zinc-200">
               <h2 className="text-lg md:text-3xl font-black text-zinc-900 mb-3 md:mb-6">
                 <span className="text-orange-primary">VI.</span> Automatizované rozhodovanie a profilovanie
               </h2>
 
-              <div className="text-zinc-700 leading-relaxed">
+              <div className="text-zinc-800 leading-relaxed">
                 <p>
                   <strong className="text-zinc-900">1.</strong> Prevádzkovateľ nevykonáva automatizované individuálne rozhodovanie ani profilovanie podľa čl. 22 GDPR, ktoré by malo právne účinky alebo by sa podobne závažne dotýkalo dotknutých osôb.
                 </p>
               </div>
             </div>
 
-            <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/30 transition-all">
+            {/* Section VII — light prose */}
+            <div className="pt-4 md:pt-8 border-t border-zinc-200">
               <h2 className="text-lg md:text-3xl font-black text-zinc-900 mb-3 md:mb-6">
                 <span className="text-orange-primary">VII.</span> Dobrovoľnosť poskytnutia údajov
               </h2>
 
-              <div className="text-zinc-700 leading-relaxed">
+              <div className="text-zinc-800 leading-relaxed">
                 <p>
                   <strong className="text-zinc-900">1.</strong> Poskytnutie osobných údajov je dobrovoľné. Avšak poskytnutie údajov potrebných na uzatvorenie a plnenie zmluvy je nevyhnutnou podmienkou vzniku zmluvného vzťahu — bez ich poskytnutia nie je možné zmluvu uzatvoriť. Poskytnutie údajov na marketingové účely je vždy dobrovoľné a je možné ho kedykoľvek odvolať.
                 </p>
               </div>
             </div>
 
-            {/* Section VIII - Contact Info */}
-            <div className="bg-white border border-zinc-200 rounded-2xl shadow-sm shadow-zinc-900/5 p-6 md:p-8">
+            {/* Section VIII - Contact Info — heading/intro light, dark reference box */}
+            <div className="pt-4 md:pt-8 border-t border-zinc-200">
               <h2 className="text-2xl md:text-3xl font-black text-zinc-900 mb-6">
                 <span className="text-orange-primary">VIII.</span> Dozorný orgán
               </h2>
 
-              <div className="text-zinc-700 leading-relaxed mb-4">
+              <div className="text-zinc-800 leading-relaxed mb-4">
                 <p>Dotknutá osoba má právo podať sťažnosť dozornému orgánu:</p>
               </div>
 
-              <div className="bg-zinc-50 rounded-xl p-6 border border-orange-primary/20">
-                <h3 className="text-zinc-900 font-bold text-xl mb-3">Úrad na ochranu osobných údajov Slovenskej republiky</h3>
-                <div className="space-y-1 text-zinc-700">
+              <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 rounded-xl p-6 border border-white/10">
+                <h3 className="text-white font-bold text-xl mb-3">Úrad na ochranu osobných údajov Slovenskej republiky</h3>
+                <div className="space-y-1 text-zinc-300">
                   <p>Hraničná 12, 820 07 Bratislava 27</p>
                   <p>Tel.: +421 2 3231 3214</p>
                   <p>E-mail: statny.dozor@pdp.gov.sk</p>
@@ -313,13 +317,13 @@ export default function GDPR() {
               </div>
             </div>
 
-            {/* Section IX */}
-            <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 hover:border-orange-primary/30 transition-all">
+            {/* Section IX — light prose */}
+            <div className="pt-4 md:pt-8 border-t border-zinc-200">
               <h2 className="text-lg md:text-3xl font-black text-zinc-900 mb-3 md:mb-6">
                 <span className="text-orange-primary">IX.</span> Záverečné ustanovenia
               </h2>
 
-              <div className="space-y-2 md:space-y-4 text-zinc-700 text-xs md:text-base leading-relaxed">
+              <div className="space-y-2 md:space-y-4 text-zinc-800 text-xs md:text-base leading-relaxed">
                 <p>
                   <strong className="text-zinc-900">1.</strong> Tento dokument je zverejnený na webovej stránke www.royalstroje.sk a v tlačenej forme je dostupný v sídle Prevádzkovateľa.
                 </p>

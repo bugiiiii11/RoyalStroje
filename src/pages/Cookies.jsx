@@ -84,12 +84,12 @@ export default function Cookies() {
             </p>
           </div>
 
-          {/* Intro */}
-          <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 mb-6 md:mb-8">
+          {/* Intro — light prose */}
+          <div className="mb-8 md:mb-10">
             <h2 className="text-lg md:text-2xl font-black text-zinc-900 mb-3 md:mb-4">
               <span className="text-orange-primary">Stručne</span>
             </h2>
-            <div className="space-y-2 md:space-y-3 text-zinc-700 text-xs md:text-base leading-relaxed">
+            <div className="space-y-2 md:space-y-3 text-zinc-800 text-xs md:text-base leading-relaxed">
               <p>
                 Na royalstroje.sk používame <strong className="text-zinc-900">iba nevyhnutné cookies a technológie</strong>, bez ktorých by web nemohol správne fungovať.
               </p>
@@ -102,9 +102,9 @@ export default function Cookies() {
             </div>
           </div>
 
-          {/* Table */}
-          <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 mb-6 md:mb-8 hover:border-orange-primary/30 transition-all">
-            <h2 className="text-lg md:text-2xl font-black text-zinc-900 mb-3 md:mb-6">
+          {/* Table — dark reference card */}
+          <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/10 p-4 md:p-8 mb-8 md:mb-10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all">
+            <h2 className="text-lg md:text-2xl font-black text-white mb-3 md:mb-6">
               Zoznam používaných cookies a technológií
             </h2>
 
@@ -112,7 +112,7 @@ export default function Cookies() {
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-zinc-200">
+                  <tr className="border-b border-white/10">
                     <th className="text-left py-3 px-2 text-orange-primary font-bold">Názov</th>
                     <th className="text-left py-3 px-2 text-orange-primary font-bold">Typ</th>
                     <th className="text-left py-3 px-2 text-orange-primary font-bold">Účel</th>
@@ -120,10 +120,10 @@ export default function Cookies() {
                     <th className="text-left py-3 px-2 text-orange-primary font-bold">Poskytovateľ</th>
                   </tr>
                 </thead>
-                <tbody className="text-zinc-700">
+                <tbody className="text-zinc-300">
                   {COOKIE_ROWS.map((row) => (
-                    <tr key={row.name} className="border-b border-zinc-200">
-                      <td className="py-3 px-2 font-mono text-zinc-900 whitespace-nowrap">{row.name}</td>
+                    <tr key={row.name} className="border-b border-white/10">
+                      <td className="py-3 px-2 font-mono text-white whitespace-nowrap">{row.name}</td>
                       <td className="py-3 px-2 whitespace-nowrap">{row.type}</td>
                       <td className="py-3 px-2">{row.purpose}</td>
                       <td className="py-3 px-2 whitespace-nowrap">{row.duration}</td>
@@ -139,44 +139,44 @@ export default function Cookies() {
               {COOKIE_ROWS.map((row) => (
                 <div
                   key={row.name}
-                  className="bg-zinc-50 border border-zinc-200 rounded-xl p-3"
+                  className="bg-white/5 border border-white/10 rounded-xl p-3"
                 >
-                  <div className="font-mono text-zinc-900 text-xs font-bold break-all mb-2">
+                  <div className="font-mono text-white text-xs font-bold break-all mb-2">
                     {row.name}
                   </div>
                   <dl className="space-y-1.5 text-[11px]">
                     <div className="flex gap-2">
                       <dt className="text-orange-primary font-bold w-24 flex-shrink-0">Typ</dt>
-                      <dd className="text-zinc-700">{row.type}</dd>
+                      <dd className="text-zinc-300">{row.type}</dd>
                     </div>
                     <div className="flex gap-2">
                       <dt className="text-orange-primary font-bold w-24 flex-shrink-0">Účel</dt>
-                      <dd className="text-zinc-700 leading-snug">{row.purpose}</dd>
+                      <dd className="text-zinc-300 leading-snug">{row.purpose}</dd>
                     </div>
                     <div className="flex gap-2">
                       <dt className="text-orange-primary font-bold w-24 flex-shrink-0">Doba</dt>
-                      <dd className="text-zinc-700">{row.duration}</dd>
+                      <dd className="text-zinc-300">{row.duration}</dd>
                     </div>
                     <div className="flex gap-2">
                       <dt className="text-orange-primary font-bold w-24 flex-shrink-0">Poskytovateľ</dt>
-                      <dd className="text-zinc-700">{row.provider}</dd>
+                      <dd className="text-zinc-300">{row.provider}</dd>
                     </div>
                   </dl>
                 </div>
               ))}
             </div>
 
-            <p className="text-zinc-600 text-xs md:text-sm mt-4 italic">
+            <p className="text-zinc-500 text-xs md:text-sm mt-4 italic">
               Zoznam môže byť aktualizovaný v prípade zmeny technického riešenia webu. Akákoľvek zmena bude reflektovaná na tejto stránke.
             </p>
           </div>
 
-          {/* How to manage */}
-          <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 mb-6 md:mb-8 hover:border-orange-primary/30 transition-all">
+          {/* How to manage — light prose */}
+          <div className="mb-8 md:mb-10">
             <h2 className="text-lg md:text-2xl font-black text-zinc-900 mb-3 md:mb-4">
               Ako spravovať cookies
             </h2>
-            <div className="space-y-2 md:space-y-3 text-zinc-700 text-xs md:text-base leading-relaxed">
+            <div className="space-y-2 md:space-y-3 text-zinc-800 text-xs md:text-base leading-relaxed">
               <p>
                 Keďže používame iba nevyhnutné cookies, ich vypnutie môže ovplyvniť funkčnosť webu (napr. odoslanie formulára cez ochranu reCAPTCHA).
               </p>
@@ -206,12 +206,12 @@ export default function Cookies() {
             </div>
           </div>
 
-          {/* Related */}
-          <div className="bg-white border border-zinc-200 rounded-xl md:rounded-2xl shadow-sm shadow-zinc-900/5 p-4 md:p-8 mb-6 md:mb-8">
+          {/* Related — light prose */}
+          <div className="mb-8 md:mb-10 pt-6 md:pt-8 border-t border-zinc-200">
             <h2 className="text-lg md:text-2xl font-black text-zinc-900 mb-3 md:mb-4">
               Súvisiace dokumenty
             </h2>
-            <div className="text-zinc-700 text-xs md:text-base leading-relaxed">
+            <div className="text-zinc-800 text-xs md:text-base leading-relaxed">
               <p className="mb-2">
                 Podrobné informácie o spracúvaní osobných údajov nájdete v dokumente{' '}
                 <Link to="/gdpr" className="text-orange-primary hover:text-orange-hover underline underline-offset-2 font-semibold">

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 import PageHero from '../components/common/PageHero';
+import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
 export default function Blog() {
@@ -239,7 +240,6 @@ export default function Blog() {
 
   const [headingRef, headingInView] = useInView();
   const [gridRef, gridInView] = useInView();
-  const [ctaRef, ctaInView] = useInView();
 
   // Filter out hidden articles
   // Sort by date from newest to oldest
@@ -312,7 +312,7 @@ export default function Blog() {
                 <Link
                   key={post.id}
                   to={`/blog/${post.slug}`}
-                  className={`group bg-white border border-zinc-200 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 shadow-sm shadow-zinc-900/5 hover:-translate-y-1 transition-all duration-300 relative reveal stagger-${Math.min(index + 1, 8)} ${gridInView ? 'in-view' : ''}`}
+                  className={`group bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 shadow-sm shadow-zinc-900/10 hover:-translate-y-1 transition-all duration-300 relative reveal stagger-${Math.min(index + 1, 8)} ${gridInView ? 'in-view' : ''}`}
                 >
                   {/* Orange top accent rule */}
                   <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-20 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -330,7 +330,7 @@ export default function Blog() {
                   {/* Content */}
                   <div className="p-3 md:p-5">
                     {/* Meta Info - Enhanced */}
-                    <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-3 text-[10px] md:text-xs text-zinc-600">
+                    <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-3 text-[10px] md:text-xs text-zinc-400">
                       <span className="flex items-center gap-1 transition-colors group-hover:text-orange-primary">
                         <Calendar size={12} className="md:w-3.5 md:h-3.5 text-orange-primary/70" />
                         <span className="font-medium">{post.date}</span>
@@ -342,12 +342,12 @@ export default function Blog() {
                     </div>
 
                     {/* Title - Optimized Size */}
-                    <h3 className="text-sm md:text-xl font-black text-zinc-900 mb-2 md:mb-3 group-hover:text-orange-primary transition-colors duration-300 line-clamp-2 leading-tight tracking-tight">
+                    <h3 className="text-sm md:text-xl font-black text-white mb-2 md:mb-3 group-hover:text-orange-primary transition-colors duration-300 line-clamp-2 leading-tight tracking-tight">
                       {post.title}
                     </h3>
 
                     {/* Excerpt - Compact */}
-                    <p className="text-zinc-700 text-xs md:text-sm leading-relaxed mb-3 md:mb-4 line-clamp-2">
+                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed mb-3 md:mb-4 line-clamp-2">
                       {post.excerpt}
                     </p>
 
@@ -365,20 +365,13 @@ export default function Blog() {
             </div>
           </div>
 
-          {/* CTA Section - Enhanced with Gradient */}
-          <div ref={ctaRef} className={`relative mt-12 md:mt-20 reveal-scale ${ctaInView ? 'in-view' : ''}`}>
-            {/* Gradient Background - Subtle */}
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-primary/10 via-orange-primary/5 to-transparent rounded-3xl blur-3xl"></div>
-
-            <div className="relative text-center py-12 md:py-16 px-4">
-              <span className="eyebrow eyebrow--center mb-4">Potrebujete techniku?</span>
-              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mb-4 md:mb-6 mt-4 tracking-tight">
-                Zaujala vás naša ponuka?
-              </h2>
-              <p className={`text-zinc-700 text-base md:text-xl mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${ctaInView ? 'in-view' : ''}`}>
-                Kontaktujte nás a radi vám pomôžeme s výberom správnej techniky pre váš projekt.
-              </p>
-              <div className={`flex flex-wrap justify-center gap-4 md:gap-6 reveal-fade stagger-3 ${ctaInView ? 'in-view' : ''}`}>
+          {/* CTA Section - shared dark band */}
+          <CtaBand
+            eyebrow="Potrebujete techniku?"
+            title={<>Zaujala vás naša ponuka?</>}
+            text="Kontaktujte nás a radi vám pomôžeme s výberom správnej techniky pre váš projekt."
+            actions={
+              <>
                 <Link
                   to="/kontakt"
                   className="btn-primary text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
@@ -387,13 +380,13 @@ export default function Blog() {
                 </Link>
                 <Link
                   to="/sluzby"
-                  className="btn-outline-light text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
+                  className="btn-secondary text-base md:text-lg px-8 py-4 md:px-10 md:py-5"
                 >
                   <span>Naše služby</span>
                 </Link>
-              </div>
-            </div>
-          </div>
+              </>
+            }
+          />
         </div>
       </ContentSection>
     </div>
