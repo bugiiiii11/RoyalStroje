@@ -30,7 +30,7 @@ export default function HeroSplit() {
           <img
             src="/hero-auto.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
-            className="absolute left-[5%] top-[55%] -translate-y-1/2 w-[37%] h-auto"
+            className="absolute left-[12%] top-[55%] -translate-y-1/2 w-[37%] h-auto"
             width={1004}
             height={578}
             fetchPriority="high"
