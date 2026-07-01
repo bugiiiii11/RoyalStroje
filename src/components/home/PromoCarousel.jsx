@@ -129,7 +129,7 @@ export default function PromoCarousel() {
                 aria-label={`${i + 1} z ${slides.length}`}
                 aria-hidden={i !== index}
               >
-                <div className="relative aspect-[16/10] sm:aspect-[5/2] lg:aspect-[3/1] bg-zinc-950 overflow-hidden">
+                <div className="relative aspect-[16/10] sm:aspect-[10/3] lg:aspect-[4/1] bg-zinc-950 overflow-hidden">
                   {/* Brand backdrop: deep gradient + orange glow on the right */}
                   <div
                     className="absolute inset-0"

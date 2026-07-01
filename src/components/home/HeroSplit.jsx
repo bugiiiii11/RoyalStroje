@@ -94,8 +94,8 @@ export default function HeroSplit() {
               </div>
             </div>
 
-            {/* RIGHT — Predaj náradia: heading + CTA grouped top-left */}
-            <div className="flex flex-col justify-start items-start pl-[12%] pt-24 pb-12">
+            {/* RIGHT — Predaj náradia: heading + CTA grouped top-left, close to the diagonal */}
+            <div className="flex flex-col justify-start items-start pl-[4%] pt-24 pb-12">
               {/* single soft white "cloud" behind the whole group — text + CTA */}
               <div className="relative w-fit">
                 <span aria-hidden className="absolute -inset-5 bg-white/95 rounded-[2rem] blur-xl" />
