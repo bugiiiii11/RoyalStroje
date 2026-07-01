@@ -56,10 +56,10 @@ export default function WhyRoyalStroje() {
             return (
               <div
                 key={benefit.title}
-                className={`group relative bg-white border border-zinc-200 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${gridInView ? 'in-view' : ''}`}
+                className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${gridInView ? 'in-view' : ''}`}
               >
                 {/* Big faint index number */}
-                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-3xl md:text-5xl font-black text-zinc-900/[0.05] group-hover:text-orange-primary/15 transition-colors pointer-events-none select-none">
+                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-3xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/20 transition-colors pointer-events-none select-none">
                   0{i + 1}
                 </span>
 
@@ -68,10 +68,10 @@ export default function WhyRoyalStroje() {
                     <Icon className="text-orange-primary" size={20} />
                   </div>
 
-                  <h3 className="text-zinc-900 font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors leading-tight">
+                  <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors leading-tight">
                     {benefit.title}
                   </h3>
-                  <p className="text-zinc-600 text-xs md:text-sm leading-relaxed">
+                  <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>
