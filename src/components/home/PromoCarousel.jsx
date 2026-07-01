@@ -31,7 +31,7 @@ const slides = [
   },
 ];
 
-const AUTOPLAY_MS = 6000;
+const AUTOPLAY_MS = 4000;
 
 export default function PromoCarousel() {
   const [index, setIndex] = useState(0);

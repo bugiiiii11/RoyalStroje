@@ -31,8 +31,8 @@ export default function HeroSplit() {
             src="/hero-auto.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
             className="absolute left-[12%] top-[55%] -translate-y-1/2 w-[37%] h-auto"
-            width={1004}
-            height={578}
+            width={1774}
+            height={887}
             fetchPriority="high"
           />
         </div>
@@ -129,8 +129,8 @@ export default function HeroSplit() {
             src="/hero-auto.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
             className="absolute bottom-0 inset-x-0 w-full h-auto"
-            width={1004}
-            height={578}
+            width={1774}
+            height={887}
             fetchPriority="high"
           />
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-20" />
