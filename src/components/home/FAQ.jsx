@@ -17,8 +17,8 @@ export default function FAQ() {
 
           <div className="space-y-4 mt-4">
             <div>
-              <p className="font-bold text-zinc-900 mb-2">1. Kontaktujte nás</p>
-              <ul className="space-y-1 ml-4 list-disc text-zinc-700">
+              <p className="font-bold text-white mb-2">1. Kontaktujte nás</p>
+              <ul className="space-y-1 ml-4 list-disc text-white/80">
                 <li>Najrýchlejšie telefonicky na <a href="tel:+421948555551" className="text-orange-primary hover:underline font-semibold">0948 555 551</a></li>
                 <li>Kontaktovať nás môžete aj e-mailom na <a href="mailto:info@royalstroje.sk" className="text-orange-primary hover:underline font-semibold">info@royalstroje.sk</a></li>
                 <li>alebo cez WhatsApp / Telegram</li>
@@ -26,13 +26,13 @@ export default function FAQ() {
             </div>
 
             <div>
-              <p className="font-bold text-zinc-900 mb-2">2. Dohodneme techniku, termín a spôsob prevzatia alebo dopravy</p>
-              <p className="ml-4 text-zinc-700">Spoločne si potvrdíme dostupnosť a pripravíme všetko potrebné k prenájmu.</p>
+              <p className="font-bold text-white mb-2">2. Dohodneme techniku, termín a spôsob prevzatia alebo dopravy</p>
+              <p className="ml-4 text-white/80">Spoločne si potvrdíme dostupnosť a pripravíme všetko potrebné k prenájmu.</p>
             </div>
 
             <div>
-              <p className="font-bold text-zinc-900 mb-2">3. Registrácia a vratná kaucia (pri nových zákazníkoch)</p>
-              <ul className="space-y-1 ml-4 list-disc text-zinc-700">
+              <p className="font-bold text-white mb-2">3. Registrácia a vratná kaucia (pri nových zákazníkoch)</p>
+              <ul className="space-y-1 ml-4 list-disc text-white/80">
                 <li>Noví zákazníci sa registrujú osobne alebo e-mailom na základe registračného formulára.</li>
                 <li>Pri prvom prenájme sa vyžaduje vratná kaucia podľa typu techniky.</li>
               </ul>
@@ -45,18 +45,18 @@ export default function FAQ() {
       question: 'Aké dokumenty potrebujem na požičanie?',
       answer: (
         <div className="space-y-3">
-          <p><strong className="text-zinc-900">Pre právnické osoby (PO):</strong></p>
+          <p><strong className="text-white">Pre právnické osoby (PO):</strong></p>
           <ul className="space-y-1 ml-4 list-disc">
             <li>Živnostenský list alebo výpis z obchodného registra</li>
             <li>Platný doklad totožnosti oprávnenej osoby</li>
             <li>IČO, DIČ, IČ DPH</li>
           </ul>
-          <p className="mt-3"><strong className="text-zinc-900">Pre fyzické osoby (FO):</strong></p>
+          <p className="mt-3"><strong className="text-white">Pre fyzické osoby (FO):</strong></p>
           <ul className="space-y-1 ml-4 list-disc">
             <li>Platný občiansky preukaz alebo pas</li>
             <li>Kontaktné údaje (telefón, e-mail)</li>
           </ul>
-          <p className="mt-3 text-sm text-zinc-500">Všetky údaje sú spracúvané v súlade s GDPR a používame ich výlučne na účely prenájmu.</p>
+          <p className="mt-3 text-sm text-white/70">Všetky údaje sú spracúvané v súlade s GDPR a používame ich výlučne na účely prenájmu.</p>
         </div>
       )
     },
@@ -64,12 +64,12 @@ export default function FAQ() {
       question: 'Dostanem stroj s plnou alebo prázdnou nádržou PHM?',
       answer: (
         <div className="space-y-3">
-          <p>Stroje <strong className="text-zinc-900">odovzdávame s plnou nádržou</strong> pohonných hmôt (PHM) a takisto ich <strong className="text-zinc-900">očakávame späť s plnou nádržou</strong>.</p>
-          <p className="text-zinc-700">V prípade vrátenia s prázdnou alebo čiastočne naplnenou nádržou bude účtovaný doplatok za dotankovanie vo výške:</p>
-          <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-3 mt-2">
+          <p>Stroje <strong className="text-white">odovzdávame s plnou nádržou</strong> pohonných hmôt (PHM) a takisto ich <strong className="text-white">očakávame späť s plnou nádržou</strong>.</p>
+          <p className="text-white/80">V prípade vrátenia s prázdnou alebo čiastočne naplnenou nádržou bude účtovaný doplatok za dotankovanie vo výške:</p>
+          <div className="bg-zinc-800/50 rounded-lg p-3 mt-2">
             <p className="text-orange-primary font-bold">2€/liter bez DPH</p>
           </div>
-          <p className="text-sm text-zinc-500 mt-3"><strong>Tip:</strong> Natankujte stroj pred vrátením.</p>
+          <p className="text-sm text-white/70 mt-3"><strong>Tip:</strong> Natankujte stroj pred vrátením.</p>
         </div>
       )
     },
@@ -77,33 +77,33 @@ export default function FAQ() {
       question: 'Poskytujete dopravu techniky na miesto?',
       answer: (
         <div className="space-y-3">
-          <p>Áno, poskytujeme <strong className="text-zinc-900">dopravu techniky priamo k vám</strong> na stavbu alebo iné miesto určenia.</p>
-          <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-4 mt-3 space-y-3">
+          <p>Áno, poskytujeme <strong className="text-white">dopravu techniky priamo k vám</strong> na stavbu alebo iné miesto určenia.</p>
+          <div className="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 rounded-lg p-4 mt-3 space-y-3">
             <p><strong className="text-orange-primary">Cenník dopravy:</strong></p>
 
             <div>
-              <p className="font-bold text-zinc-900 mb-1">Dodávka</p>
+              <p className="font-bold text-white mb-1">Dodávka</p>
               <ul className="space-y-1 ml-4">
-                <li>• <strong className="text-zinc-900">Senec:</strong> 15 €</li>
-                <li>• <strong className="text-zinc-900">Ostatné:</strong> 1 €/km (min. 15 €)</li>
+                <li>• <strong className="text-white">Senec:</strong> 15 €</li>
+                <li>• <strong className="text-white">Ostatné:</strong> 1 €/km (min. 15 €)</li>
               </ul>
             </div>
 
             <div>
-              <p className="font-bold text-zinc-900 mb-1">Pick-up + prívesný vozík (do 3 500 kg)</p>
+              <p className="font-bold text-white mb-1">Pick-up + prívesný vozík (do 3 500 kg)</p>
               <ul className="space-y-1 ml-4">
-                <li>• <strong className="text-zinc-900">1,2 €/km</strong> (min. 15 €)</li>
+                <li>• <strong className="text-white">1,2 €/km</strong> (min. 15 €)</li>
               </ul>
             </div>
 
             <div>
-              <p className="font-bold text-zinc-900 mb-1">Preprava cudzieho stroja/náradia (nie z našej požičovne)</p>
+              <p className="font-bold text-white mb-1">Preprava cudzieho stroja/náradia (nie z našej požičovne)</p>
               <ul className="space-y-1 ml-4">
-                <li>• <strong className="text-zinc-900">1,50 €/km</strong> (min. 30 €)</li>
+                <li>• <strong className="text-white">1,50 €/km</strong> (min. 30 €)</li>
               </ul>
             </div>
           </div>
-          <p className="text-sm text-zinc-500 mt-3">Cena dopravy závisí od typu a hmotnosti techniky. Pri objednávke vám oznámime presnú cenu. Uvedené ceny sú bez DPH.</p>
+          <p className="text-sm text-white/70 mt-3">Cena dopravy závisí od typu a hmotnosti techniky. Pri objednávke vám oznámime presnú cenu. Uvedené ceny sú bez DPH.</p>
         </div>
       )
     },
@@ -111,8 +111,8 @@ export default function FAQ() {
       question: 'Je možné prenajať stroje s obsluhou?',
       answer: (
         <div className="space-y-3">
-          <p>Áno, <strong className="text-zinc-900">ponúkame prenájom s obsluhou</strong> pre klientov, ktorí nemajú potrebné oprávnenie alebo skúsenosti s obsluhou ťažkej techniky.</p>
-          <div className="bg-zinc-50 border border-zinc-200 rounded-lg p-4 mt-3">
+          <p>Áno, <strong className="text-white">ponúkame prenájom s obsluhou</strong> pre klientov, ktorí nemajú potrebné oprávnenie alebo skúsenosti s obsluhou ťažkej techniky.</p>
+          <div className="bg-zinc-800/50 rounded-lg p-4 mt-3">
             <p className="mb-2"><strong className="text-orange-primary">Služba zahŕňa:</strong></p>
             <ul className="space-y-1 ml-4 list-disc">
               <li>Kvalifikovaného operátora s potrebnými oprávneniami</li>
@@ -120,7 +120,7 @@ export default function FAQ() {
               <li>Poradenstvo pri práci priamo na mieste</li>
             </ul>
           </div>
-          <p className="mt-3">Cena sa kalkuluje <strong className="text-zinc-900">individuálne</strong> podľa typu stroja a dĺžky prenájmu. <a href="tel:+421948555551" className="text-orange-primary hover:underline font-semibold">Zavolajte nám</a> pre konkrétnu cenovú ponuku.</p>
+          <p className="mt-3">Cena sa kalkuluje <strong className="text-white">individuálne</strong> podľa typu stroja a dĺžky prenájmu. <a href="tel:+421948555551" className="text-orange-primary hover:underline font-semibold">Zavolajte nám</a> pre konkrétnu cenovú ponuku.</p>
         </div>
       )
     },
@@ -129,7 +129,7 @@ export default function FAQ() {
       answer: (
         <div className="space-y-3">
           <p><strong className="text-orange-primary">V prípade poruchy:</strong></p>
-          <p>Ak dôjde k poruche stroja <strong className="text-zinc-900">nie vašim zavinením</strong>, okamžite nás kontaktujte na <a href="tel:+421948555551" className="text-orange-primary hover:underline">0948 555 551</a>. Zabezpečíme opravu alebo náhradný stroj do 24 hodín.</p>
+          <p>Ak dôjde k poruche stroja <strong className="text-white">nie vašim zavinením</strong>, okamžite nás kontaktujte na <a href="tel:+421948555551" className="text-orange-primary hover:underline">0948 555 551</a>. Zabezpečíme opravu alebo náhradný stroj do 24 hodín.</p>
 
           <p className="mt-4"><strong className="text-orange-primary">V prípade poškodenia:</strong></p>
           <p>Pri poškodení stroja vašim zavinením sa uplatňuje:</p>
@@ -140,10 +140,10 @@ export default function FAQ() {
 
         
           <p><strong className="text-orange-primary">ROYAL GUARD – ochrana v cene prenájmu</strong></p>
-          <p>Vybrané stroje majú v cene službu <strong className="text-zinc-900">ROYAL GUARD</strong>, ktorá kryje náhodné poškodenie pri bežnom používaní. V prípade škody sa uplatňuje spoluúčasť 5% z výšky škody. Nevzťahuje sa na úmyselné poškodenie a hrubú nedbanlivosť.</p>
+          <p>Vybrané stroje majú v cene službu <strong className="text-white">ROYAL GUARD</strong>, ktorá kryje náhodné poškodenie pri bežnom používaní. V prípade škody sa uplatňuje spoluúčasť 5% z výšky škody. Nevzťahuje sa na úmyselné poškodenie a hrubú nedbanlivosť.</p>
 
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mt-4">
-            <p className="text-sm"><strong className="text-blue-700">💡 Odporúčame:</strong> Využite službu ROYAL GUARD, ktorá výrazne znižuje riziko nákladov pri poškodení stroja.</p>
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 mt-4">
+            <p className="text-sm"><strong className="text-blue-400">💡 Odporúčame:</strong> Využite službu ROYAL GUARD, ktorá výrazne znižuje riziko nákladov pri poškodení stroja.</p>
           </div>
         </div>
       )
@@ -152,11 +152,11 @@ export default function FAQ() {
       question: 'Aké sú platobné možnosti?',
       answer: (
         <div className="space-y-3">
-          <p>Ponúkame <strong className="text-zinc-900">flexibilné platobné možnosti</strong> podľa typu zákazníka:</p>
+          <p>Ponúkame <strong className="text-white">flexibilné platobné možnosti</strong> podľa typu zákazníka:</p>
 
           <div className="space-y-4 mt-3">
             <div>
-              <p className="font-bold text-zinc-900 mb-2">🏢 Právnické osoby (PO):</p>
+              <p className="font-bold text-white mb-2">🏢 Právnické osoby (PO):</p>
               <ul className="space-y-1 ml-4 list-disc">
                 <li>Fakturácia s lehotou splatnosti 14 dní</li>
                 <li>Bankovým prevodom</li>
@@ -166,7 +166,7 @@ export default function FAQ() {
             </div>
 
             <div>
-              <p className="font-bold text-zinc-900 mb-2">👤 Fyzické osoby (FO):</p>
+              <p className="font-bold text-white mb-2">👤 Fyzické osoby (FO):</p>
               <ul className="space-y-1 ml-4 list-disc">
                 <li>Hotovosť pri prevzatí/vrátení</li>
                 <li>Bankovým prevodom vopred</li>
@@ -175,7 +175,7 @@ export default function FAQ() {
             </div>
           </div>
 
-          <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mt-4">
+          <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 mt-4">
             <p className="text-sm"><strong className="text-orange-primary">Kaucia:</strong> Pri prenájme sa vyžaduje vratná kaucia podľa typu stroja (500 € - 2000 €). Kaucia sa vracia pri riadnom vrátení techniky v plnej výške.</p>
           </div>
         </div>
@@ -193,10 +193,10 @@ export default function FAQ() {
         {/* Header */}
         <div ref={faqHeadingRef} className={`text-center mb-6 md:mb-12 reveal ${faqHeadingInView ? 'in-view' : ''}`}>
           <span className="eyebrow eyebrow--center mb-4">Časté otázky</span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-2 md:mb-4 mt-4">
             Máte <span className="text-orange-primary">otázky?</span>
           </h2>
-          <p className="text-zinc-600 text-sm md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/60 text-sm md:text-lg max-w-2xl mx-auto">
             Tu nájdete odpovede na najčastejšie otázky o prenájme stavebnej mechanizácie
           </p>
         </div>
@@ -207,7 +207,7 @@ export default function FAQ() {
           <div ref={faqSideRef} className={`hidden lg:block lg:col-span-2 reveal-left ${faqSideInView ? 'in-view' : ''}`}>
             <div className="sticky top-24">
               {/* Image Container */}
-              <div className="relative rounded-2xl overflow-hidden border border-zinc-200 mb-6">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 mb-6">
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-10" />
                 <img
                   src="/pictures/graphics/predajna-4.webp"
@@ -229,32 +229,32 @@ export default function FAQ() {
               </div>
 
               {/* Contact Options */}
-              <div className="card-light p-6 space-y-3">
-                <h4 className="text-zinc-900 font-bold text-lg mb-4">Neviete si rady?</h4>
+              <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 space-y-3">
+                <h4 className="text-white font-bold text-lg mb-4">Neviete si rady?</h4>
 
                 <a
                   href="tel:+421948555551"
-                  className="flex items-center gap-3 p-3 bg-zinc-50 border border-zinc-200 hover:border-orange-primary/40 hover:bg-orange-50 rounded-xl transition-colors group"
+                  className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
                 >
                   <div className="w-10 h-10 rounded-lg bg-orange-primary/15 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/25 transition-colors">
                     <Phone size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-zinc-500 text-xs">Zavolajte nám</p>
-                    <p className="text-zinc-900 font-bold">0948 555 551</p>
+                    <p className="text-white/55 text-xs">Zavolajte nám</p>
+                    <p className="text-white font-bold">0948 555 551</p>
                   </div>
                 </a>
 
                 <a
                   href="mailto:info@royalstroje.sk"
-                  className="flex items-center gap-3 p-3 bg-zinc-50 border border-zinc-200 hover:border-orange-primary/40 hover:bg-orange-50 rounded-xl transition-colors group"
+                  className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
                 >
                   <div className="w-10 h-10 rounded-lg bg-orange-primary/15 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/25 transition-colors">
                     <Mail size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-zinc-500 text-xs">Napíšte nám</p>
-                    <p className="text-zinc-900 font-bold">info@royalstroje.sk</p>
+                    <p className="text-white/55 text-xs">Napíšte nám</p>
+                    <p className="text-white font-bold">info@royalstroje.sk</p>
                   </div>
                 </a>
 
@@ -262,14 +262,14 @@ export default function FAQ() {
                   href="https://wa.me/421948555551"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-zinc-50 border border-zinc-200 hover:border-orange-primary/40 hover:bg-orange-50 rounded-xl transition-colors group"
+                  className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
                 >
                   <div className="w-10 h-10 rounded-lg bg-orange-primary/15 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/25 transition-colors">
                     <MessageCircle size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-zinc-500 text-xs">WhatsApp</p>
-                    <p className="text-zinc-900 font-bold">Rýchla odpoveď</p>
+                    <p className="text-white/55 text-xs">WhatsApp</p>
+                    <p className="text-white font-bold">Rýchla odpoveď</p>
                   </div>
                 </a>
               </div>
@@ -282,14 +282,14 @@ export default function FAQ() {
               {faqs.map((faq, index) => (
                 <div
                   key={index}
-                  className={`bg-white shadow-sm shadow-zinc-900/5 border rounded-xl md:rounded-2xl overflow-hidden transition-colors reveal stagger-${Math.min(index + 1, 8)} ${faqListInView ? 'in-view' : ''} ${openIndex === index ? 'border-orange-primary/40' : 'border-zinc-200 hover:border-orange-primary/30'}`}
+                  className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border rounded-xl md:rounded-2xl overflow-hidden transition-colors reveal stagger-${Math.min(index + 1, 8)} ${faqListInView ? 'in-view' : ''} ${openIndex === index ? 'border-orange-primary/40' : 'border-white/10 hover:border-orange-primary/30'}`}
                 >
                   {/* Question Button */}
                   <button
                     onClick={() => toggleFAQ(index)}
                     className="w-full flex items-center justify-between gap-2 md:gap-4 p-3 md:p-6 text-left group"
                   >
-                    <h3 className={`font-bold text-xs md:text-lg flex-1 transition-colors leading-tight ${openIndex === index ? 'text-orange-primary' : 'text-zinc-900 group-hover:text-orange-primary'}`}>
+                    <h3 className={`font-bold text-xs md:text-lg flex-1 transition-colors leading-tight ${openIndex === index ? 'text-orange-primary' : 'text-white group-hover:text-orange-primary'}`}>
                       {faq.question}
                     </h3>
                     <div
@@ -312,7 +312,7 @@ export default function FAQ() {
                       openIndex === index ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   >
-                    <div className="px-3 pb-3 md:px-6 md:pb-6 text-zinc-700 text-[11px] md:text-base leading-relaxed border-t border-zinc-200 pt-3 md:pt-6">
+                    <div className="px-3 pb-3 md:px-6 md:pb-6 text-white/80 text-[11px] md:text-base leading-relaxed border-t border-white/10 pt-3 md:pt-6">
                       {faq.answer}
                     </div>
                   </div>

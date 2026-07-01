@@ -116,12 +116,12 @@ function QuoteFormInner() {
   // Success state
   if (isSubmitted) {
     return (
-      <div className="card-light p-6 text-center">
+      <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 text-center">
         <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-primary to-orange-hover flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="text-white" size={32} />
         </div>
-        <h3 className="text-zinc-900 font-black text-lg mb-2">Ďakujeme!</h3>
-        <p className="text-zinc-600 text-sm">
+        <h3 className="text-white font-black text-lg mb-2">Ďakujeme!</h3>
+        <p className="text-white/70 text-sm">
           Ozveme sa vám do 24 hodín.
         </p>
       </div>
@@ -129,17 +129,17 @@ function QuoteFormInner() {
   }
 
   return (
-    <div className="bg-white border border-zinc-200 border-t-2 border-t-orange-primary/60 rounded-2xl shadow-sm shadow-zinc-900/5 overflow-visible">
+    <div className="bg-zinc-900 border border-white/10 border-t-2 border-t-orange-primary/60 rounded-2xl overflow-visible">
       {/* Header with Title and Description */}
-      <div className="bg-zinc-50 border-b border-zinc-200 px-4 py-4 md:py-5 rounded-t-2xl">
+      <div className="bg-zinc-900 border-b border-white/10 px-4 py-4 md:py-5 rounded-t-2xl">
         <div className="flex items-center gap-2 mb-2">
           <FileText size={18} className="text-orange-primary" />
-          <h3 className="text-zinc-900 font-bold text-base md:text-lg">
+          <h3 className="text-white font-bold text-base md:text-lg">
             Potrebujete <span className="text-orange-primary">cenovú ponuku?</span>
           </h3>
         </div>
         {/* Description - Desktop only */}
-        <p className="hidden md:block text-zinc-600 text-xs md:text-sm pl-7">
+        <p className="hidden md:block text-white/70 text-xs md:text-sm pl-7">
           Vyplňte formulár a ozveme sa vám do 24 hodín s nezáväznou ponukou.
         </p>
       </div>
@@ -165,7 +165,7 @@ function QuoteFormInner() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="input-light px-3 py-2.5"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
             placeholder="Meno a priezvisko *"
           />
         </div>
@@ -178,7 +178,7 @@ function QuoteFormInner() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="input-light px-3 py-2.5"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
             placeholder="Email *"
           />
         </div>
@@ -191,7 +191,7 @@ function QuoteFormInner() {
             value={formData.phone}
             onChange={handleChange}
             required
-            className="input-light px-3 py-2.5"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
             placeholder="Telefón *"
           />
         </div>
@@ -203,7 +203,6 @@ function QuoteFormInner() {
             value={formData.projectType}
             onChange={handleChange}
             required
-            light
             placeholder="Vyberte typ projektu *"
             options={[
               { value: 'Stavba domu', label: 'Stavba domu' },
@@ -223,15 +222,15 @@ function QuoteFormInner() {
             value={formData.message}
             onChange={handleChange}
             rows="3"
-            className="input-light px-3 py-2.5 resize-none"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all resize-none"
             placeholder="Správa (voliteľné)"
           ></textarea>
         </div>
 
         {/* Error message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-            <p className="text-red-700 text-xs">
+          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+            <p className="text-red-400 text-xs">
               {error === 'rate_limit'
                 ? 'Prekročili ste limit správ. Skúste o hodinu.'
                 : 'Chyba pri odosielaní. Zavolajte nám.'}
