@@ -10,11 +10,12 @@ const usps = [
   { Icon: Star, title: 'Overená požičovňa', text: 'Stovky spokojných zákazníkov' },
 ];
 
+// Poradie zladené so 4 USP kartami pod pásom (rovnaké stĺpce)
 const stripImages = [
-  { src: '/pictures/graphics/predajna-2.webp', alt: 'Predajňa Royal Stroje – Makita, meracia a laserová technika Nivel' },
-  { src: '/pictures/graphics/predajna-3.webp', alt: 'Príslušenstvo a náradie – rezné kotúče, OOPP, VRC Pro' },
-  { src: '/pictures/graphics/stroje-dvor.webp', alt: 'Stavebné stroje na dvore Royal Stroje – mini bagre a nakladače' },
-  { src: '/pictures/graphics/predajna-4.webp', alt: 'JCB mini bager a Avant nakladač – požičovňa Royal Stroje' },
+  { src: '/pictures/graphics/dovoz.webp', alt: 'Dovoz techniky – dodávka Royal Stroje na stavbu' }, // → Dovoz techniky
+  { src: '/pictures/graphics/predajna-4.webp', alt: 'Servisované stavebné stroje – JCB mini bager a Avant nakladač' }, // → Servisované stroje
+  { src: '/pictures/graphics/predajna-2.webp', alt: 'Predajňa a požičovňa Royal Stroje – náradie a meracia technika' }, // → Senec – Bratislava
+  { src: '/pictures/graphics/stroje-dvor.webp', alt: 'Požičovňa Royal Stroje – stroje na dvore v Senci pri Bratislave' }, // → Overená požičovňa
 ];
 
 export default function HeroSplit() {
@@ -29,7 +30,7 @@ export default function HeroSplit() {
           <img
             src="/hero-auto.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
-            className="absolute left-[4%] top-[56%] -translate-y-1/2 w-[42%] h-auto"
+            className="absolute left-[5%] top-[55%] -translate-y-1/2 w-[37%] h-auto"
             width={1004}
             height={578}
             fetchPriority="high"
@@ -38,10 +39,11 @@ export default function HeroSplit() {
 
         {/* RIGHT image — diagonally clipped overlay */}
         <div className="absolute inset-0" style={{ clipPath: 'polygon(57% 0, 100% 0, 100% 100%, 49% 100%)' }}>
+          {/* image constrained to the right portion so object-cover crops much less (less "zoomed") */}
           <img
             src="/pictures/graphics/predajna-1.webp"
             alt="Predaj profesionálneho náradia, príslušenstva a OOPP - Royal Stroje"
-            className="w-full h-full object-cover"
+            className="absolute inset-y-0 right-0 w-[58%] h-full object-cover"
             width={1280}
             height={1080}
           />
@@ -70,7 +72,7 @@ export default function HeroSplit() {
                 <span aria-hidden className="absolute -inset-5 bg-white/95 rounded-[2rem] blur-xl" />
                 <div className="relative">
                   <span className="hs-0 eyebrow">Senec · Bratislava · Okolie</span>
-                  <h1 className="hs-1 font-display font-black uppercase text-zinc-900 leading-[0.95] tracking-tight text-[clamp(1.8rem,2.8vw,3.1rem)] mt-4">
+                  <h1 className="hs-1 font-display font-black uppercase text-zinc-900 leading-[0.95] tracking-tight text-[clamp(1.55rem,2.3vw,2.6rem)] mt-4">
                     Prenájom strojov<br />
                     <span className="text-orange-primary">s dovozom na stavbu</span>
                   </h1>
@@ -99,7 +101,7 @@ export default function HeroSplit() {
                 <span aria-hidden className="absolute -inset-5 bg-white/95 rounded-[2rem] blur-xl" />
                 <div className="relative">
                   <span className="hs-2 eyebrow">Predajňa</span>
-                  <h2 className="hs-3 font-display font-black uppercase text-zinc-900 leading-[0.95] tracking-tight text-[clamp(1.8rem,2.8vw,3.1rem)] mt-4">
+                  <h2 className="hs-3 font-display font-black uppercase text-zinc-900 leading-[0.95] tracking-tight text-[clamp(1.55rem,2.3vw,2.6rem)] mt-4">
                     Prenájom a<br /><span className="text-orange-primary">predaj náradia</span>
                   </h2>
                   <p className="hs-4 text-zinc-800 text-sm md:text-base font-semibold mt-4">
@@ -216,9 +218,6 @@ export default function HeroSplit() {
           </div>
         </div>
       </div>
-
-      {/* Orange hairline framing the USP band at the bottom of the hero */}
-      <div className="h-[2px] bg-[#FF6600] w-full md:shrink-0" />
 
       {/* ================= 4 USPs (gray band, card style) ================= */}
       <div className="bg-zinc-100 md:shrink-0">
