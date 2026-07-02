@@ -237,7 +237,7 @@ export default function HeroSplit() {
                     <p className="font-display font-bold uppercase text-zinc-900 text-sm md:text-base tracking-wide leading-tight">
                       {usp.title}
                     </p>
-                    <p className="text-zinc-500 text-xs md:text-sm mt-0.5 leading-snug">{usp.text}</p>
+                    <p className="text-zinc-600 text-xs md:text-sm mt-0.5 leading-snug">{usp.text}</p>
                   </div>
                 </div>
               );

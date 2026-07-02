@@ -70,7 +70,7 @@ export default function PromoCarousel() {
   };
 
   return (
-    <section className="bg-[#FAFAFA] pb-12 md:pb-16 lg:pb-20">
+    <section className="bg-[#FAFAFA] pb-8 md:pb-16 lg:pb-20">
       <div
         ref={sectionRef}
         className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${inView ? 'in-view' : ''}`}
@@ -78,8 +78,7 @@ export default function PromoCarousel() {
         {/* Header */}
         <div className="relative mb-6 md:mb-8">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="eyebrow eyebrow--center mb-4">Akcie</span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-zinc-900 mt-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-zinc-900">
               Aktuálne <span className="text-orange-primary">ponuky a zľavy</span>
             </h2>
           </div>
@@ -186,8 +185,8 @@ export default function PromoCarousel() {
           </div>
         </div>
 
-        {/* Dots */}
-        <div className="flex items-center justify-center gap-2 mt-5">
+        {/* Dots - visual size stays small, hit area is padded to ~24px */}
+        <div className="flex items-center justify-center gap-1 mt-3">
           {slides.map((s, i) => (
             <button
               key={s.title}
@@ -195,10 +194,14 @@ export default function PromoCarousel() {
               onClick={() => goTo(i)}
               aria-label={`Prejsť na akciu ${i + 1}`}
               aria-current={i === index}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === index ? 'w-7 bg-orange-primary' : 'w-2 bg-zinc-300 hover:bg-zinc-400'
-              }`}
-            />
+              className="group/dot p-2"
+            >
+              <span
+                className={`block h-2 rounded-full transition-all duration-300 ${
+                  i === index ? 'w-7 bg-orange-primary' : 'w-2 bg-zinc-300 group-hover/dot:bg-zinc-400'
+                }`}
+              />
+            </button>
           ))}
         </div>
       </div>

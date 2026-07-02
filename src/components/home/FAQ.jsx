@@ -142,8 +142,8 @@ export default function FAQ() {
           <p><strong className="text-orange-primary">ROYAL GUARD – ochrana v cene prenájmu</strong></p>
           <p>Vybrané stroje majú v cene službu <strong className="text-white">ROYAL GUARD</strong>, ktorá kryje náhodné poškodenie pri bežnom používaní. V prípade škody sa uplatňuje spoluúčasť 5% z výšky škody. Nevzťahuje sa na úmyselné poškodenie a hrubú nedbanlivosť.</p>
 
-          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 mt-4">
-            <p className="text-sm"><strong className="text-blue-400">💡 Odporúčame:</strong> Využite službu ROYAL GUARD, ktorá výrazne znižuje riziko nákladov pri poškodení stroja.</p>
+          <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 mt-4">
+            <p className="text-sm"><strong className="text-orange-primary">Odporúčame:</strong> Využite službu ROYAL GUARD, ktorá výrazne znižuje riziko nákladov pri poškodení stroja.</p>
           </div>
         </div>
       )
@@ -188,12 +188,11 @@ export default function FAQ() {
   };
 
   return (
-    <div id="faq" className="relative pt-12 md:pt-32 pb-8 md:pb-16 overflow-hidden">
+    <div id="faq" className="relative pt-12 md:pt-20 pb-8 md:pb-16 overflow-hidden">
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
         <div ref={faqHeadingRef} className={`text-center mb-6 md:mb-12 reveal ${faqHeadingInView ? 'in-view' : ''}`}>
-          <span className="eyebrow eyebrow--center mb-4">Časté otázky</span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4">
             Máte <span className="text-orange-primary">otázky?</span>
           </h2>
           <p className="text-zinc-600 text-sm md:text-lg max-w-2xl mx-auto">
@@ -218,8 +217,7 @@ export default function FAQ() {
 
                 {/* Text Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <span className="eyebrow mb-2">Royal Stroje</span>
-                  <h3 className="text-2xl font-black text-white mb-1 mt-2">
+                  <h3 className="text-2xl font-black text-white mb-1">
                     Sme tu pre vás
                   </h3>
                   <p className="text-white/80 text-sm">
@@ -240,7 +238,7 @@ export default function FAQ() {
                     <Phone size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-white/55 text-xs">Zavolajte nám</p>
+                    <p className="text-white/70 text-xs">Zavolajte nám</p>
                     <p className="text-white font-bold">0948 555 551</p>
                   </div>
                 </a>
@@ -253,7 +251,7 @@ export default function FAQ() {
                     <Mail size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-white/55 text-xs">Napíšte nám</p>
+                    <p className="text-white/70 text-xs">Napíšte nám</p>
                     <p className="text-white font-bold">info@royalstroje.sk</p>
                   </div>
                 </a>
@@ -268,7 +266,7 @@ export default function FAQ() {
                     <MessageCircle size={20} className="text-orange-primary" />
                   </div>
                   <div>
-                    <p className="text-white/55 text-xs">WhatsApp</p>
+                    <p className="text-white/70 text-xs">WhatsApp</p>
                     <p className="text-white font-bold">Rýchla odpoveď</p>
                   </div>
                 </a>

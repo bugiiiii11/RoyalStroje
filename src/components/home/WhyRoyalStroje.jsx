@@ -24,9 +24,18 @@ const benefits = [
   },
 ];
 
+// Divider borders per cell: 2-col grid on mobile, 4-col on lg.
+// 1px structural hairlines between cells (not accent stripes).
+const cellBorders = [
+  '',
+  'border-l border-white/10',
+  'border-t border-white/10 lg:border-t-0 lg:border-l',
+  'border-l border-t border-white/10 lg:border-t-0',
+];
+
 export default function WhyRoyalStroje() {
   const [headingRef, headingInView] = useInView();
-  const [gridRef, gridInView] = useInView();
+  const [panelRef, panelInView] = useInView();
 
   return (
     <div className="relative py-12 md:py-16 lg:py-20">
@@ -34,10 +43,9 @@ export default function WhyRoyalStroje() {
         {/* Heading */}
         <div
           ref={headingRef}
-          className={`text-center mb-8 md:mb-12 lg:mb-16 reveal ${headingInView ? 'in-view' : ''}`}
+          className={`text-center mb-8 md:mb-12 reveal ${headingInView ? 'in-view' : ''}`}
         >
-          <span className="eyebrow eyebrow--center mb-4">Prečo Royal Stroje</span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-zinc-900 mb-3 md:mb-4 mt-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-zinc-900 mb-3 md:mb-4">
             Prečo si nás vyberajú stavbári v{' '}
             <span className="text-orange-primary">Senci a Bratislave</span>
           </h2>
@@ -46,41 +54,36 @@ export default function WhyRoyalStroje() {
           </p>
         </div>
 
-        {/* Benefits Grid */}
+        {/* One dark panel with hairline-divided columns (single island, not 4 clone cards) */}
         <div
-          ref={gridRef}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8"
+          ref={panelRef}
+          className={`relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900 to-zinc-950 shadow-lg shadow-zinc-900/10 reveal ${panelInView ? 'in-view' : ''}`}
         >
-          {benefits.map((benefit, i) => {
-            const Icon = benefit.icon;
-            return (
-              <div
-                key={benefit.title}
-                className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${gridInView ? 'in-view' : ''}`}
-              >
-                {/* Big faint index number */}
-                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-3xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/20 transition-colors pointer-events-none select-none">
-                  0{i + 1}
-                </span>
+          {/* Orange top accent rule — same language as CtaBand/PromoCarousel */}
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
 
-                <div className="relative">
-                  <div className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
+            {benefits.map((benefit, i) => {
+              const Icon = benefit.icon;
+              return (
+                <div
+                  key={benefit.title}
+                  className={`group p-4 md:p-6 lg:p-8 hover:bg-white/[0.03] transition-colors duration-300 ${cellBorders[i]}`}
+                >
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
                     <Icon className="text-orange-primary" size={20} />
                   </div>
 
-                  <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 group-hover:text-orange-primary transition-colors leading-tight">
+                  <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 leading-tight">
                     {benefit.title}
                   </h3>
                   <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">
                     {benefit.description}
                   </p>
                 </div>
-
-                {/* Bottom accent line grows on hover (width transition — no GPU layer) */}
-                <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
