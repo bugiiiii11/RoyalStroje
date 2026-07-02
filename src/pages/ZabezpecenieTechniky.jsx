@@ -74,6 +74,15 @@ const steps = [
   },
 ];
 
+// Hairline dividers for the single-panel benefits grid (2-col mobile, 4-col lg),
+// same language as the homepage WhyRoyalStroje island — structural 1px rules, not cards.
+const cellBorders = [
+  '',
+  'border-l border-white/10',
+  'border-t border-white/10 lg:border-t-0 lg:border-l',
+  'border-l border-t border-white/10 lg:border-t-0',
+];
+
 export default function ZabezpecenieTechniky() {
   const [benefitsRef, benefitsInView] = useInView();
   const [equipRef, equipInView] = useInView();
@@ -138,8 +147,7 @@ export default function ZabezpecenieTechniky() {
         <section className="py-12 md:py-16 lg:py-20">
           <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
             <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
-              <span className="eyebrow eyebrow--center mb-4">Prečo cez nás</span>
-              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mt-4">
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900">
                 Vy nám poviete čo treba, <span className="text-orange-primary">o zvyšok sa postaráme my</span>
               </h2>
               <p className="text-zinc-600 text-sm md:text-lg mt-3">
@@ -147,26 +155,29 @@ export default function ZabezpecenieTechniky() {
                 zabezpečíme ho prostredníctvom našej siete overených partnerov.
               </p>
             </div>
+            {/* One dark island with hairline-divided columns (not 4 clone cards) — matches homepage WhyRoyalStroje */}
             <div
               ref={benefitsRef}
-              className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6"
+              className={`relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900 to-zinc-950 shadow-lg shadow-zinc-900/10 reveal ${benefitsInView ? 'in-view' : ''}`}
             >
-              {benefits.map((b, i) => {
-                const Icon = b.icon;
-                return (
-                  <div
-                    key={b.title}
-                    className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden reveal stagger-${i + 1} ${benefitsInView ? 'in-view' : ''}`}
-                  >
-                    <div className="w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
-                      <Icon className="text-orange-primary" size={22} />
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
+              <div className="grid grid-cols-2 lg:grid-cols-4">
+                {benefits.map((b, i) => {
+                  const Icon = b.icon;
+                  return (
+                    <div
+                      key={b.title}
+                      className={`group p-4 md:p-6 lg:p-8 hover:bg-white/[0.03] transition-colors duration-300 ${cellBorders[i]}`}
+                    >
+                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-orange-primary/10 border border-orange-primary/25 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
+                        <Icon className="text-orange-primary" size={20} />
+                      </div>
+                      <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 leading-tight">{b.title}</h3>
+                      <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">{b.text}</p>
                     </div>
-                    <h3 className="text-white font-bold text-sm md:text-lg mb-1 md:mb-2 leading-tight">{b.title}</h3>
-                    <p className="text-zinc-400 text-xs md:text-sm leading-relaxed">{b.text}</p>
-                    <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
@@ -175,8 +186,7 @@ export default function ZabezpecenieTechniky() {
         <section className="py-12 md:py-16 lg:py-20 border-t border-zinc-200/70">
           <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
             <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
-              <span className="eyebrow eyebrow--center mb-4">Čo vieme zabezpečiť</span>
-              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mt-4">
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900">
                 Od bežnej techniky až po <span className="text-orange-primary">špeciálne stroje</span>
               </h2>
               <p className="text-zinc-600 text-sm md:text-lg mt-3">
@@ -209,8 +219,7 @@ export default function ZabezpecenieTechniky() {
         <section className="py-12 md:py-16 lg:py-20 border-t border-zinc-200/70">
           <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
             <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">
-              <span className="eyebrow eyebrow--center mb-4">Ako to funguje</span>
-              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mt-4">
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900">
                 Od telefonátu <span className="text-orange-primary">po stroj na stavbe</span>
               </h2>
             </div>
@@ -218,15 +227,14 @@ export default function ZabezpecenieTechniky() {
               {steps.map((s, i) => (
                 <div
                   key={s.n}
-                  className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden reveal stagger-${Math.min(i + 1, 4)} ${stepsInView ? 'in-view' : ''}`}
+                  className={`group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 reveal stagger-${Math.min(i + 1, 4)} ${stepsInView ? 'in-view' : ''}`}
                 >
-                  <span className="absolute top-3 right-4 font-display text-5xl md:text-6xl font-black text-white/[0.06] group-hover:text-orange-primary/20 transition-colors pointer-events-none select-none">
+                  {/* Deliberate step index — solid badge, not a decorative faint watermark */}
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-orange-primary/10 border border-orange-primary/30 text-orange-primary font-display font-black text-base mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
                     {s.n}
                   </span>
-                  <div className="relative">
-                    <h3 className="text-white font-black text-lg md:text-xl mb-2 group-hover:text-orange-primary transition-colors">{s.title}</h3>
-                    <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-[40ch]">{s.text}</p>
-                  </div>
+                  <h3 className="text-white font-black text-lg md:text-xl mb-2 group-hover:text-orange-primary transition-colors">{s.title}</h3>
+                  <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-[40ch]">{s.text}</p>
                 </div>
               ))}
             </div>

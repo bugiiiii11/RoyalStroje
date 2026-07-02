@@ -18,21 +18,24 @@ export default function ProductCard({ product, customerType = 'po' }) {
     <>
       <div className="group bg-gradient-to-b from-zinc-800/80 to-zinc-900 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/60 hover:shadow-2xl hover:shadow-orange-primary/20 shadow-lg shadow-black/40 hover:-translate-y-1 transition-all duration-300 ease-out relative">
         {/* Image Container - Compact on mobile, square on desktop.
-            The light gradient bg lives INSIDE the zoomed wrapper (not on the container),
-            so bg + photo scale as one layer — a fractional-pixel edge during the hover
-            zoom can only expose the dark card behind, never a white seam. */}
+            Hover effect is brightness + overlay-lift only — NO transform-scale on the
+            image. A scaled child inside this rounded+overflow-hidden card was exposing a
+            1px white seam at the rounded corners (Chrome composited-layer clip artifact,
+            DPR-dependent so it dodged screenshot tests). An unscaled layer never crosses
+            the corner arc, so the seam is physically impossible; it also drops the
+            hover-time GPU layer promotion (mobile GPU guard, session 21). */}
         <div className="relative aspect-[4/3] md:aspect-square overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-orange-50 to-zinc-100 scale-[1.02] transition-transform duration-700 ease-out group-hover:scale-105">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-orange-50 to-zinc-100">
             <img
               src={product.image}
               alt={product.name}
-              className="w-full h-full object-cover select-none"
+              className="w-full h-full object-cover select-none transition-[filter] duration-500 ease-out group-hover:brightness-[1.07]"
               loading="lazy"
               draggable="false"
             />
           </div>
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent pointer-events-none select-none" style={{ zIndex: 1 }}></div>
+          {/* Gradient Overlay — eases back on hover so the photo pops without any motion */}
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent group-hover:from-zinc-950/20 transition-colors duration-500 pointer-events-none select-none" style={{ zIndex: 1 }}></div>
 
           {product.isNew && (
             <div className="absolute top-3 left-3 px-2 py-0.5 bg-orange-primary/30 md:bg-orange-primary/20 border border-orange-primary/40 md:backdrop-blur-sm text-orange-primary text-[10px] font-bold rounded uppercase tracking-wide shadow-lg" style={{ zIndex: 2 }}>

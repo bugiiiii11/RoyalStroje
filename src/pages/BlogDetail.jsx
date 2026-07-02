@@ -186,8 +186,7 @@ export default function BlogDetail() {
 
           {/* Related Articles */}
           <div ref={relatedRef} className={`mt-16 text-center reveal ${relatedInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Súvisiace</span>
-            <h3 className="text-2xl md:text-3xl font-black text-zinc-900 mb-8 mt-4 text-center">
+            <h3 className="text-2xl md:text-3xl font-black text-zinc-900 mb-8 text-center">
               Ďalšie <span className="text-orange-primary">články</span>
             </h3>
             <div className="text-center">

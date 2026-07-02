@@ -167,8 +167,7 @@ export default function PredajTechniky() {
           {/* JARNÁ AKCIA - Akciové produkty */}
           <div className="mb-12 md:mb-20 pt-16 md:pt-0">
             <div ref={promoRef} className={`text-center mb-8 md:mb-12 reveal ${promoInView ? 'in-view' : ''}`}>
-              <span className="eyebrow eyebrow--center mb-4">Akcia</span>
-              <h1 className="text-2xl md:text-5xl font-black text-zinc-900 mb-3 md:mb-4 mt-4 leading-tight">
+              <h1 className="text-2xl md:text-5xl font-black text-zinc-900 mb-3 md:mb-4 leading-tight">
                 Akciové produkty <span className="text-orange-primary">skladom</span>
               </h1>
               <p className={`text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${promoInView ? 'in-view' : ''}`}>
@@ -250,8 +249,7 @@ export default function PredajTechniky() {
           {/* Categories Grid */}
           <div className="mb-12 md:mb-16">
             <div ref={catRef} className={`text-center mb-6 md:mb-12 reveal ${catInView ? 'in-view' : ''}`}>
-              <span className="eyebrow eyebrow--center mb-4">Sortiment</span>
-              <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4 leading-tight">
+              <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 leading-tight">
                 Kúpte náradie, ktoré používame my. <span className="text-orange-primary">Overené na stavbách.</span>
               </h2>
               <p className={`text-zinc-700 text-sm md:text-lg reveal-fade stagger-2 ${catInView ? 'in-view' : ''}`}>
@@ -410,8 +408,7 @@ export default function PredajTechniky() {
 
           {/* Intro Section */}
           <div className="text-center mb-6 md:mb-12">
-            <span className="eyebrow eyebrow--center mb-4">Prečo my</span>
-            <h2 className="text-xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-3 md:mb-6 mt-4 leading-tight">
+            <h2 className="text-xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-3 md:mb-6 leading-tight">
               Overené značky, <span className="text-orange-primary">férové ceny</span>
             </h2>
             <div className="max-w-4xl mx-auto">
@@ -496,8 +493,7 @@ export default function PredajTechniky() {
           {/* CTA Content */}
           <div className="mt-10 md:mt-20">
             <div className="text-center mb-6 md:mb-12">
-              <span className="eyebrow eyebrow--center mb-4">Predajňa</span>
-              <h2 className="text-2xl md:text-5xl font-black text-zinc-900 mb-3 md:mb-4 mt-4">
+              <h2 className="text-2xl md:text-5xl font-black text-zinc-900 mb-3 md:mb-4">
                 Navštívte našu <span className="text-orange-primary">kamennú predajňu</span>
               </h2>
               <p className="text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto">

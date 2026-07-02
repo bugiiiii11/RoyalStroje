@@ -296,8 +296,7 @@ export default function Blog() {
 
           {/* Section Heading - Improved Typography */}
           <div ref={headingRef} className="text-center mb-10 md:mb-16 pt-16 md:pt-0">
-            <span className={`eyebrow eyebrow--center mb-4 reveal ${headingInView ? 'in-view' : ''}`}>Články &amp; návody</span>
-            <h1 className={`text-2xl md:text-5xl font-black text-zinc-900 mb-3 md:mb-6 mt-4 tracking-tight leading-tight reveal ${headingInView ? 'in-view' : ''}`}>
+            <h1 className={`text-2xl md:text-5xl font-black text-zinc-900 mb-3 md:mb-6 tracking-tight leading-tight reveal ${headingInView ? 'in-view' : ''}`}>
               Najnovšie články <span className="text-orange-primary">a praktické návody</span>
             </h1>
             <p className={`text-zinc-700 text-base md:text-xl max-w-3xl mx-auto leading-relaxed reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>

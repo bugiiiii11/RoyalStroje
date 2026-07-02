@@ -115,8 +115,7 @@ export default function Sluzby() {
         <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
           {/* Services section */}
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Naše služby</span>
-            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4">
               Čo pre vás <span className="text-orange-primary">môžeme urobiť?</span>
             </h1>
             <p className={`text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>

@@ -117,8 +117,7 @@ export default function Kontakt() {
 
           {/* Section Heading */}
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Kontakt</span>
-            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4">
               Vyberte si <span className="text-orange-primary">spôsob kontaktu</span>
             </h1>
             <p className={`text-zinc-700 max-w-2xl mx-auto text-sm md:text-lg reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
@@ -209,8 +208,7 @@ export default function Kontakt() {
           <div className="space-y-4 md:space-y-8">
             {/* Section Header */}
             <div ref={visitRef} className={`text-center mb-3 md:mb-12 reveal ${visitInView ? 'in-view' : ''}`}>
-              <span className="eyebrow eyebrow--center mb-4">Predajňa</span>
-              <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+              <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4">
                 Navštívte nás v <span className="text-orange-primary">Senci</span>
               </h2>
               <p className="text-zinc-700 max-w-2xl mx-auto text-sm md:text-lg hidden md:block">
@@ -336,8 +334,7 @@ export default function Kontakt() {
             {/* Gallery - photos of the shop */}
             <div ref={galleryRef} className={`mt-8 md:mt-12 reveal ${galleryInView ? 'in-view' : ''}`}>
               <div className="text-center mb-6 md:mb-10">
-                <span className="eyebrow eyebrow--center mb-4">Galéria</span>
-                <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+                <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4">
                   Pohľad do <span className="text-orange-primary">našej predajne</span>
                 </h2>
                 <p className="text-zinc-700 max-w-2xl mx-auto text-sm md:text-lg">

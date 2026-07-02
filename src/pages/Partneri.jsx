@@ -111,8 +111,7 @@ export default function Partneri() {
 
           {/* Section Heading */}
           <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Spolupráca</span>
-            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4">
               Naši <span className="text-orange-primary">partneri</span>
             </h1>
             <p className={`text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto mb-2 md:mb-4 reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
@@ -164,8 +163,7 @@ export default function Partneri() {
 
           {/* Partnership Info Section */}
           <div ref={infoRef} className={`text-center mb-6 md:mb-12 reveal ${infoInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Filozofia</span>
-            <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+            <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4">
               Čo znamená <span className="text-orange-primary">partnerstvo</span>
             </h2>
             <p className="text-zinc-700 max-w-3xl mx-auto text-sm md:text-lg leading-relaxed">
@@ -192,13 +190,11 @@ export default function Partneri() {
                 key={item.title}
                 className="group relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-xl md:rounded-2xl p-5 md:p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 overflow-hidden"
               >
-                <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/20 transition-colors pointer-events-none select-none">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-orange-primary/10 border border-orange-primary/30 text-orange-primary font-display font-black text-base mb-4 group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors">
                   0{i + 1}
                 </span>
-                <div className="relative">
-                  <h3 className="text-white font-bold text-base md:text-xl mb-2 md:mb-3 group-hover:text-orange-primary transition-colors leading-tight">{item.title}</h3>
-                  <p className="text-zinc-300 text-sm md:text-base leading-relaxed">{item.text}</p>
-                </div>
+                <h3 className="text-white font-bold text-base md:text-xl mb-2 md:mb-3 group-hover:text-orange-primary transition-colors leading-tight">{item.title}</h3>
+                <p className="text-zinc-300 text-sm md:text-base leading-relaxed">{item.text}</p>
                 <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full bg-gradient-to-r from-orange-primary to-orange-hover transition-all duration-500" />
               </div>
             ))}

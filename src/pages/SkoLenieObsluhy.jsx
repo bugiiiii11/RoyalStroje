@@ -139,8 +139,7 @@ export default function SkoLenieObsluhy() {
 
           {/* Intro */}
           <div ref={introRef} className={`text-center mb-10 md:mb-16 pt-16 md:pt-0 reveal ${introInView ? 'in-view' : ''}`}>
-            <span className="eyebrow eyebrow--center mb-4">Školenie obsluhy</span>
-            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-3 md:mb-4 mt-4">
+            <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-3 md:mb-4">
               Školenie obsluhy <span className="text-orange-primary">stavebných strojov</span>
             </h1>
             <p className={`text-zinc-700 text-sm md:text-lg max-w-3xl mx-auto mb-4 reveal-fade stagger-2 ${introInView ? 'in-view' : ''}`}>
@@ -173,8 +172,7 @@ export default function SkoLenieObsluhy() {
           {/* Course Types */}
           <div className="mb-10 md:mb-16">
             <div ref={coursesRef} className={`text-center mb-6 md:mb-12 reveal ${coursesInView ? 'in-view' : ''}`}>
-              <span className="eyebrow eyebrow--center mb-4">Kurzy</span>
-              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mb-3 md:mb-4 mt-4">
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mb-3 md:mb-4">
                 Typy <span className="text-orange-primary">kurzov</span>
               </h2>
               <p className="text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto">
@@ -206,8 +204,7 @@ export default function SkoLenieObsluhy() {
           {/* Benefits */}
           <div className="mb-10 md:mb-16">
             <div ref={benefitsRef} className={`text-center mb-6 md:mb-12 reveal ${benefitsInView ? 'in-view' : ''}`}>
-              <span className="eyebrow eyebrow--center mb-4">Výhody</span>
-              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mb-3 md:mb-4 mt-4">
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mb-3 md:mb-4">
                 Prečo absolvovať <span className="text-orange-primary">školenie u nás?</span>
               </h2>
             </div>
@@ -234,8 +231,7 @@ export default function SkoLenieObsluhy() {
           {/* How It Works */}
           <div className="mb-10 md:mb-16">
             <div ref={stepsRef} className={`text-center mb-6 md:mb-12 reveal ${stepsInView ? 'in-view' : ''}`}>
-              <span className="eyebrow eyebrow--center mb-4">Postup</span>
-              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mb-3 md:mb-4 mt-4">
+              <h2 className="text-2xl md:text-4xl font-black text-zinc-900 mb-3 md:mb-4">
                 Ako to <span className="text-orange-primary">funguje?</span>
               </h2>
             </div>
@@ -256,8 +252,7 @@ export default function SkoLenieObsluhy() {
           {/* Who Is It For */}
           <div className="mb-10 md:mb-16">
             <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-10 max-w-4xl mx-auto shadow-sm shadow-zinc-900/10">
-              <span className="eyebrow eyebrow--center mb-4">Pre koho</span>
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 mt-4 text-center">
+              <h2 className="text-2xl md:text-3xl font-black text-white mb-4 md:mb-6 text-center">
                 Pre koho je školenie <span className="text-orange-primary">určené?</span>
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -282,8 +277,7 @@ export default function SkoLenieObsluhy() {
           <div className="mb-10 md:mb-16">
             <div className="relative overflow-hidden bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto shadow-sm shadow-zinc-900/10">
               <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
-              <span className="eyebrow eyebrow--center mb-4">Legislatíva</span>
-              <h2 className="text-xl md:text-2xl font-black text-white mb-3 mt-4 text-center">
+              <h2 className="text-xl md:text-2xl font-black text-white mb-3 text-center">
                 Legislatívna <span className="text-orange-primary">povinnosť</span>
               </h2>
               <p className="text-zinc-300 text-sm md:text-base leading-relaxed text-center mb-4">

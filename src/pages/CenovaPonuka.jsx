@@ -91,8 +91,7 @@ export default function CenovaPonuka() {
           {/* Services Grid */}
           <div className="mb-12 md:mb-16">
             <div ref={headingRef} className={`text-center mb-6 md:mb-12 pt-16 md:pt-0 reveal ${headingInView ? 'in-view' : ''}`}>
-              <span className="eyebrow eyebrow--center mb-4">Ako pracujeme</span>
-              <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+              <h1 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4">
                 Cenová ponuka do 24 hodín. <span className="text-orange-primary">Presne, férovo.</span>
               </h1>
               <p className={`text-zinc-700 text-sm md:text-lg max-w-2xl mx-auto reveal-fade stagger-2 ${headingInView ? 'in-view' : ''}`}>
@@ -106,11 +105,8 @@ export default function CenovaPonuka() {
                 return (
                   <div
                     key={service.id}
-                    className={`relative bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 group overflow-hidden reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
+                    className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 hover:shadow-md hover:shadow-orange-primary/20 transition-all duration-300 group reveal stagger-${index + 1} ${gridInView ? 'in-view' : ''}`}
                   >
-                    <span className="absolute top-2 right-3 md:top-3 md:right-4 font-display text-4xl md:text-5xl font-black text-white/[0.06] group-hover:text-orange-primary/20 transition-colors pointer-events-none select-none">
-                      0{index + 1}
-                    </span>
                     <div className="w-14 h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center mb-4 group-hover:bg-orange-primary/20 transition">
                       <IconComponent className="text-orange-primary" size={28} />
                     </div>
@@ -166,8 +162,7 @@ export default function CenovaPonuka() {
           {/* Benefits Section */}
           <div ref={stepsRef} className="mb-16">
             <div className={`text-center mb-12 reveal ${stepsInView ? 'in-view' : ''}`}>
-              <span className="eyebrow eyebrow--center mb-4">3 kroky</span>
-              <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4 mt-4">
+              <h2 className="text-3xl md:text-4xl font-black text-zinc-900 mb-4">
                 Ako to <span className="text-orange-primary">funguje?</span>
               </h2>
               <p className="text-zinc-700 max-w-3xl mx-auto mb-8">
