@@ -36,149 +36,10 @@
 | 31 | 2026-07-01 | Tému „tmavé prvky na svetlom pozadí" rozšírená na CELÝ web + nový hero obrázok + 4 s banner | Dark-on-light téma z homepage aplikovaná na **všetkých 16 verejných podstránok** (8 paralelných agentov). Nový zdieľaný **`CtaBand`** (tmavý oranžový pás, zovšeobecnený zo `SourcingBanner`) pre CTA sekcie. Výnimky: **Partneri logá ostávajú biele** (čitateľnosť), **kontaktný formulár** (Kontakt + Cenová ponuka) ostáva svetlý, **právne stránky** (GDPR/Cookies/Obch. podmienky) dlhý text čitateľný na svetlom, tmavé len tabuľky/boxy. Opravené červené „odstrániť" tlačidlo v Košíku. Vycentrovaný nadpis „Akcie" (`PromoCarousel`). **Nový hero obrázok** (ISUZU + JCB render) → `hero-auto.webp` (1622→120 KB), `width/height` 1774×887. Akciový banner autoplay **6 s → 4 s**. Orphany `ServisNaradia`/`ZemnePrace` neprevedené. Build + lint čisté. Commity `f57dd0e` + hero/banner na `dev`, NOT na `main`. |
 | 32 | 2026-07-01 | Hero obrázok swap + katalóg rohové stroje + Kontakt dostupnosť | Owner dodal 3 rendery do `public/pictures/graphics/web_pics/`. **Hero (prenájom):** ľavý/mobil obrázok `hero-auto.webp` → `auto_hero.webp` (ISUZU+JCB pred predajňou, drop-in 1774×887, desktop `w-42%`). **Katalóg:** dva full-bleed dekoračné stroje lemujúce nadpis — `bager.webp` vľavo hore, `auto_katalog.webp` vpravo hore (`hidden lg:block`, `z-0`, `pointer-events-none`). **Obrázky:** owner PNG (RGB, zapečený checkerboard) → WebP (−91 %), checkerboard sflatovaný na `#FAFAFA`, bager/auto_katalog orezané na obsah. **Finálne rozmerovanie:** `max-w-[calc(50vw−N)] max-h-[H]` (bez deformácie) — max veľkosť ohraničená bočným okrajom (neprekrýva vycentrovaný text na úzkych) aj výškovým capom (neprekrýva tlačidlá na širokých); overené 1280–1920. **Kontakt CTA:** „Dostupnosť 7–16, Po–Pia." Commity `13ed948`→`9877bf8` na `dev`, NOT na `main`. |
 | 34 | 2026-07-02 | Font Source Sans 3 + detail produktu redizajn + mobil opravy | Body font Manrope→Source Sans 3 (čitateľnosť), katalógové karty bez stavu „nedostupné" (Zavolať všade), zoom seam fix, odsadenie Akcií pod hero, mobil: USP pretekanie + katalógové filtre bez reveal (GPU), ProductDetail redizajn (H1 = popisný názov, biely foto panel, CTA v cenovej karte, logoroyal-dark v mobilnej hlavičke). Staging „garbage" za katalógom = Vercel toolbar (len preview, nie prod). Commity `65cd1b2` + `7925e08` na `dev`. |
+| 35 | 2026-07-02 | ProductDetail biely hero + word-spacing nadpisov + hover seam fix + nové hero fotky | ProductDetail: tmavý foto-banner → krátky biely hero (jazyk PageHero: tichý back-link, eyebrow značky, tmavý H1, oranžový seam); **Archivo word-spacing 0.12em** (h1–h6 + `.font-display` — úzka medzera medzi slovami v caps titulkoch); **ProductCard hover biela linka definitívne fix** (svetlý gradient presunutý DO zoomovanej vrstvy s obrázkom; overené Playwright hover testom); Blog hero → `predajna-2.webp`, Partneri hero → `stroje-jcb-rameno.webp`; zmazané orphany `ServisNaradia.jsx`/`ZemnePrace.jsx`. Commit `5a324f4` na `dev`. |
 | 33 | 2026-07-02 | UX/UI polish — homepage + katalóg (impeccable audit) | Full design audit (skóre 27/40) → volume-control fixes. **ProductCard:** jeden oranžový CTA/karta (Detail primárny, Zavolať tichý link), 2-riadkové názvy (`line-clamp-2`, koniec s `…`), stav „nedostupné" grayscale + badge na obrázku (skrytý call), tichší price tag. **Katalóg:** mobilné chip filtre kategórií+podkategórií (produkty ~1 obrazovka vs ~3), prepínač „Firmy/Súkromné osoby" + DPH popisok. **Section grammar:** eyebrow labely stenčené (AKCIE/KATALÓG/BLOG/FAQ preč), `WhyRoyalStroje` = 1 tmavý panel bez 01–04 čísel. **Formuláre:** viditeľné labely, `CustomSelect` zladený, border-l/side-tab preč. **Reveal hardening:** skrývanie len pod `html.js-reveal` (JS+IO gate) + print fallback, oprava zastaraného hero preloadu. Hamburger 44px, kontrast drobného textu. Nový `PRODUCT.md`. Build+lint čisté (0 nových), 5 commitov `f5d83f0`→`518ec12` na `dev`, NOT na `main`. |
 
-<!-- Sessions 3-6 archived in session summary table above -->
-
-## What Was Done (Session 7) -- Dashboard Contracts + Contacts Overhaul
-
-### DB
-1. **Migration 011** -- New `contracts` table (contract_number ZN-/ZF-, type navrh/finalna, time_from, return_date, time_to, calculated_days, final_total) + `client_contacts` table (id, client_id, name, phone, email, position, is_primary). RLS policies for both. Files: `supabase/migrations/011_contracts_contacts.sql`. Committed: d9662b2.
-
-### Contract Flow (návrh → finálna)
-2. **New deal: time_from + zábezpeka** -- Time picker "Čas vyzdvihnutia" added to NewDealStepItems. "Interné poznámky" replaced with "Zábezpeka (€)" numeric field (maps to `deposit_amount`). Files: `NewDealStepItems.jsx`, `NewDealStepReview.jsx`. Committed: d9662b2.
-3. **Auto-create contract on deal creation** -- After reservation insert, automatically inserts a `contracts` record (type='navrh', ZN-YYYY-XXXX number). Files: `NewDeal.jsx`. Committed: d9662b2.
-4. **Rental day algorithm** -- `rentalDays.js` utility: ≤24h→1d, 24–26h→1d (negotiable flag), 26–28h→1.5d, >28h→2d, extends per 24h period. Files: `apps/dashboard/src/lib/rentalDays.js`. Committed: d9662b2.
-5. **FinalizeContractModal** -- Modal triggered from DealDetail. Sets return date/time, auto-calculates days via algorithm, shows negotiable warning, editable final price (pre-filled from calculation), generates final PDF. Files: `FinalizeContractModal.jsx`, `DealDetail.jsx`. Committed: d9662b2.
-6. **PDF generators updated** -- Both FO and PO generators accept optional `contractData` param: "NÁVRH" suffix in title when draft, time_from shown in rental start, actual return date/time + final_total shown when finálna. Zábezpeka shown. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: d9662b2.
-
-### Faktúry Page
-7. **Merged contracts + invoices view** -- InvoiceList now fetches from both `invoices` and `contracts` tables (via new `useContracts` hook), merges into single sorted list. Type filter extended with "Návrh zmluvy" / "Finálna zmluva". Delete button on each row with confirm modal (contract delete cascades reservation). Files: `InvoiceList.jsx`, `useContracts.js`. Committed: d9662b2.
-
-### Client Contacts
-8. **Multiple contact persons (max 5)** -- PO new-client form in NewDeal supports dynamic contact list (min 1, max 5 with add/remove). Contacts saved to `client_contacts` table after client creation. ClientDetail sidebar shows all contacts with add/delete. `useClient.js` extended to fetch `client_contacts`. Files: `NewDealStepClient.jsx`, `ClientDetail.jsx`, `useClient.js`. Committed: d9662b2.
-
-## What Was Done (Session 8) -- Dashboard UX + PDF Polish + Equipment rate_unit
-
-### New Client Flow
-1. **Simplified new client form** -- Removed "Pokračovať s klientom" button. "Ďalej" renamed to "Vytvoriť obchod" (selects client + advances step). "Uložiť klienta" saves to DB and navigates to /clients. Client list hidden when form open. Files: `NewDealStepClient.jsx`, `NewDeal.jsx`. Committed: `0b77a9b`, `dfd7898`.
-2. **Fix contract number collision (409)** -- Prevented duplicate ZN- numbers on rapid deal creation. Fixed finalization for deals without pre-existing contract record. Committed: `bef02bb`.
-3. **Fix time_from seconds** -- `combineDatetime` stripped HH:MM:SS to HH:MM to prevent "08:00:00" showing in PDF. Files: `rentalDays.js`. Committed: `f28b81c`.
-
-### PDF Contracts
-4. **Dátum od/do labels + blank price on návrh** -- FO+PO: "Začiatok prenájmu" relabeled to "Dátum od", "Dohodnutá dĺžka" relabeled to "Dátum do". For návrh contracts: total/DPH left blank (filled only on finalization). Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `7dc477b`.
-5. **Wider signature rows** -- Signatures section restructured into two side-by-side `autoTable` calls. "Podpis prenajímateľa" and "Podpis nájomcu" rows use `colSpan:2` + `minCellHeight:15` for wide printable signature lines. Same layout for Protocol o vrátení PP. Committed: `7dc477b`.
-6. **Pre-fill signature date + place** -- Both parties get today's date (sk-SK locale) pre-filled. Lessor gets "Miesto: Boldog – Senec" / "V Boldog – Senec dňa…" pre-filled. Committed: `5ecdc39`.
-
-### NewDeal Step 2
-7. **Editable Dátum do picker** -- "Dátum do" field added to step 2 (Zariadenia). Auto-fills to dateFrom+1 day, but user can override. Days recalculate on change. Committed: `2c31f90`.
-8. **Timezone fix (UTC+2)** -- `toISOString()` was returning dateFrom instead of +1 in UTC+2. Fixed with `localDateStr()` using local date components. Files: `NewDealStepItems.jsx`. Committed: `5ecdc39`.
-
-### Equipment Catalog
-9. **rate_unit column + Zemné vrtáky subcategory** -- Migration 012: adds `rate_unit TEXT DEFAULT 'deň'` to equipment, inserts "Zemné vrtáky" subcategory under Záhradná technika, updates Kotúč diamantový items to `rate_unit='mm'`. EquipmentForm: new "Jednotka sadzby" dropdown (Denná/mm/Hodinová). PDF: `rateUnitLabel()` maps rate_unit to Druh sadzby column. Files: `EquipmentForm.jsx`, `DealDetail.jsx`, `generateAgreementPdf.js`, `generateAgreementPdfPO.js`, `012_rate_unit_zemne_vrtaky.sql`. Committed: `6a91ace`.
-
-## What Was Done (Session 9) -- PDF Diacritics + PO Alignment + Usage Location
-
-### PDF Fixes
-1. **Fix ľ rendering in both PDFs** -- jsPDF `addFont()` without encoding param strips high byte from Latin Extended-A chars (ľ U+013E → `>` 0x3E). Added `'Identity-H'` encoding to Inter-Regular and Inter-Bold registrations. Also fixes ď, ť, ň, Ľ, Ď, Ť, Ň. Files: `apps/dashboard/src/lib/pdfFonts.js`. Committed: `fe19188`.
-2. **PO contract signature/protocol alignment** -- Left "Overenie oprávnenia a podpisy" table and right "Protokol o vrátení PP" table drifted out of sync because the right first row ("Dátum a čas vrátenia") was shorter than the wrapped left prehlasenie text. Set `minCellHeight: 8` on both first rows. Also removed leading "1. " from the overenie text per client feedback. Files: `apps/dashboard/src/lib/generateAgreementPdfPO.js`. Committed: `0d399f6`.
-
-### Landing Page
-3. **Zemné vrtáky subcategory on landing** -- Added to `categories.js` so the Záhradná technika filter bar on the public site shows the new subcategory (DB side was already done in migration 012). Files: `src/data/categories.js`. Committed: `fe19188`.
-
-### Miesto používania PP Field
-4. **Migration 013: usage_location column** -- New TEXT column on `reservations` table for "Miesto používania PP" (where equipment is used — distinct from delivery address). Files: `supabase/migrations/013_usage_location.sql`. Applied in Supabase. Committed: `d5a1396`.
-5. **NewDealStepReview input** -- New optional "Miesto používania PP" text input between Dovoz and Poznámky sections with helper text "Vyplní sa automaticky do zmluvy". Passes through `usageLocation` to finalData. Files: `NewDealStepReview.jsx`. Committed: `d5a1396`.
-6. **NewDeal insert** -- Inserts `usage_location` into reservations row alongside delivery_address. Files: `NewDeal.jsx`. Committed: `d5a1396`.
-7. **Both PDFs use usage_location** -- "Miesto používania PP" cell in FO and PO contracts now reads `reservation.usage_location || reservation.delivery_address || ''` (fallback to delivery_address for backwards compatibility). "Miesto odovzdania PP" still uses delivery_address as before. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `d5a1396`.
-
-## What Was Done (Session 10) -- Serial Numbers + Contact Person + Hero Backdrop
-
-### Equipment Serial Numbers (Výrobné čísla)
-1. **Migration 014** -- `serial_numbers JSONB` on `equipment` (list of available serials) and `reservation_items` (selected serials for deal). Files: `supabase/migrations/014_serial_numbers.sql`. Applied. Committed: `0edf491`.
-2. **EquipmentForm** -- New "Výrobné čísla" section below Technické parametre. Add/remove serial numbers with duplicate check, font-mono display. Files: `EquipmentForm.jsx`. Committed: `0edf491`.
-3. **NewDealStepItems** -- Serial number picker shown for every equipment item (not just those with existing serials). Dropdown for existing serials + inline "Pridať nové číslo" input that saves to equipment DB. Auto-select when only 1 serial exists. Prevents same serial in multiple slots. Files: `NewDealStepItems.jsx`. Committed: `0edf491`, `c5a1a33`.
-4. **NewDeal.jsx** -- Selected serial numbers saved to `reservation_items.serial_numbers`. Files: `NewDeal.jsx`. Committed: `0edf491`.
-5. **PDF generators** -- "Výrobné číslo" column now filled from `reservation_items.serial_numbers` (was always empty). Each expanded row gets its corresponding serial. Both FO and PO PDFs updated. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `0edf491`.
-
-### Hero Text Backdrop
-6. **Desktop + Mobile hero** -- Added `backdrop-blur-sm bg-black/30 rounded-2xl` container behind text/CTA for better readability over background image. Files: `Hero.jsx`, `MobileHero.jsx`. Committed: `fc41001`.
-
-### Contact Person Selection
-7. **Migration 015** -- `contact_person TEXT` on `reservations`. Stores selected contact for this specific deal. Files: `supabase/migrations/015_reservation_contact_person.sql`. Applied. Committed: `704e94a`.
-8. **Step 3 (Súhrn) dropdown** -- Fetches `client_contacts` for PO clients. If multiple contacts exist, shows dropdown with position and "(hlavná)" label. Auto-selects primary contact. Files: `NewDealStepReview.jsx`. Committed: `704e94a`.
-9. **PDF contact person** -- Both FO and PO PDFs now prefer `reservation.contact_person` over `client.contact_person` for "Zastúpený/Kontakt" field and lessee signature name. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `704e94a`.
-
-### Bug Fix
-10. **Contract number collision** -- Changed from `COUNT` to `MAX` sequence number when generating contract numbers. Prevents "duplicate key" error after client/contract deletions. Files: `NewDeal.jsx`. Committed: `704e94a`.
-
-### Data Cleanup
-11. **Deleted all clients except** František Laky and Free Housing s.r.o. (with cascading deletion of reservations, items, contracts). Done via Supabase SQL Editor.
-
-## What Was Done (Session 11) -- Partial Returns + Unified PDFs + Catalog UX
-Date: 2026-04-17
-
-### Dashboard Catalog
-1. **Subcategory filter** -- Dropdown next to category filter, auto-filtered by selected category, resets on category change. Files: `EquipmentFilters.jsx`, `useEquipment.js`. Committed: `8973f6b`.
-2. **"Nedostupne" toggle** -- EyeOff/Eye button sets equipment `status=inactive/active`. Inactive items stay in dashboard but hidden from royalstroje.sk (portal already filters `.eq('status', 'active')`). Gray badge + filter option. Files: `EquipmentTable.jsx`, `EquipmentCatalog.jsx`, `EquipmentFilters.jsx`. Committed: `25d34dd`.
-3. **Delete equipment** -- Button added to equipment edit form with confirmation. Files: `EquipmentForm.jsx`. Committed: `2ba8381`.
-
-### Partial Return Flow
-4. **Migration 017: contract_returned_items** -- Junction table tracking which items are returned per final contract. RLS policy for authenticated users. Files: `supabase/migrations/017_contract_returned_items.sql`. Committed: `66fe595`.
-5. **ReturnItemsModal** -- Select which items to return (checkbox per item), set return date/time, auto-calculate rental days + price per selected item. Creates new final contract + inserts returned item records. Reservation auto-completes when all items returned. Files: `ReturnItemsModal.jsx`, `DealDetail.jsx`. Committed: `66fe595`.
-6. **Multiple final contracts** -- DealDetail shows "Finalne zmluvy (N)" dropdown listing all partial return contracts. Each generates its own PDF with only the returned items. Files: `DealDetail.jsx`. Committed: `66fe595`.
-7. **RLS fix** -- Added missing `WITH CHECK (true)` to `contract_returned_items` policy (user ran SQL manually).
-
-### Unified PDF Structure
-8. **Invoice PDF uses agreement layout** -- Rewrote `generateInvoicePdf.js` to call `generateAgreementPdf`/`PO` with `invoiceData` param. Same parties, equipment, rental, signatures, protocol sections. Added IBAN/VS/Splatnost to financial column. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`, `generateInvoicePdf.js`. Committed: `810e036`, `a196ce0`.
-9. **Keep ZMLUVA header on invoices** -- Invoice title stays "ZMLUVA O PRENAJME HNUTELNYCH VECI" (same contract, just with payment info). Invoice number appended to metadata subtitle. Files: `generateAgreementPdf.js`, `generateAgreementPdfPO.js`. Committed: `6f37b2d`.
-10. **Navrh zmluvy always visible** -- Button no longer hidden after reservation completed. Available for all confirmed reservations. Files: `DealDetail.jsx`. Committed: `66fe595`.
-
-### Client Management
-11. **Edit client data** -- "Upravit" button on ClientDetail opens inline edit form for all client fields. Files: `ClientDetail.jsx`. Committed: `cba4bac`.
-12. **Delete client** -- "Vymazat klienta" button with confirmation on client detail page. Files: `ClientDetail.jsx`. Committed: `9e0cf55`.
-
-### Infrastructure Fix
-13. **Vercel env vars for portal** -- After Supabase migration, royalstroje.sk portal had old `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` in Vercel. User updated manually + redeployed.
-14. **Custers subcategory bug** -- Lešenie products appearing in other subcategories due to wrong `subcategory_id` in DB after migration. Diagnosed via SQL, user fixed data manually.
-
-## What Was Done (Session 12) -- Partners Page Redesign + WebP Optimization
-Date: 2026-04-21
-
-### Partners Page Design
-1. **Option 1 minimal grid implementation** -- Clean white logo containers, hover lift effect (scale 1.05 + shadow), responsive 2 cols mobile → 4 cols desktop. Removed reveal animations and lazy loading for immediate visibility. Files: `src/pages/Partneri.jsx`. Committed: `60a9c69`.
-
-### Partner List Update
-2. **8 partners with reordered list** -- Added 3 new partners (Terra, Wacker Neuson, Makita) in positions 2-4. Final order: M&M Wood (1), Terra (2), Wacker Neuson (3), Makita (4), Zsolika (5), Mobilbox (6), Eskopa (7), Moba (8). Updated partners array with website URLs for new partners.
-
-### WebP Optimization
-3. **PNG to WebP conversion** -- Converted 7 PNG logos to WebP format with quality 85. Total savings: 88.7 KB → 37.2 KB (58.1% reduction). Individual savings: mmwood 41%, terra 42.8%, wacker 56.4%, makita 52.5%, zsolika 62.1%, mobilbox 67.2%, eskopa 59.4%. All code references auto-updated.
-
-### Bug Fix
-4. **Logo visibility issue** -- Removed lazy loading and reveal/stagger animations that were blocking logo display. Logos now render immediately in white containers with proper hover effects. Committed: `60a9c69`.
-
-## What Was Done (Session 13) -- Equipment Delete Error Handling
-Date: 2026-04-22
-
-### Dashboard Equipment Catalog
-1. **Delete button UX improvements** -- Added loading state (`deleting` flag) to prevent multiple clicks while deletion in progress. Delete button now shows spinner and is disabled during deletion. Files: `EquipmentCatalog.jsx`, `EquipmentTable.jsx`. Committed: `489cdf1`.
-2. **Better error display** -- Error messages now show at top of table with actual error details instead of generic alert. Console logging for debugging. Files: `EquipmentCatalog.jsx`. Committed: `489cdf1`.
-3. **FK constraint error handling** -- Equipment cannot be deleted if used in reservations (foreign key constraint). Added user-friendly Slovak error message: "Toto zariadenie sa používa v obchodoch a nemôže byť odstránené. Aby ste ho mohli odstrániť, musíte najprv odstrániť alebo upraviť obchody, ktoré ho používajú." Applied to both table delete and form delete. Files: `EquipmentCatalog.jsx`, `EquipmentForm.jsx`. Committed: `70a934d`.
-
-## What Was Done (Session 14) -- JCB 19C-I Blog Article + Catalog Bug Fix
-Date: 2026-04-22
-
-### Blog Article
-1. **New JCB 19C-I article** -- Full review of mini-rýpadlo (1.83t, 2.4m dig depth) in same style as Makita TW001GM201: intro, technical specs grid, compact dimensions section, robust construction, practical applications (4 segments), target audience cards, real-world performance metrics, comparison vs Takeuchi TB216 and Kubota U17-3, rental economics, pros/cons + 9.3/10 rating, CTA. Files: `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`, `src/data/blogArticles.jsx`, `src/pages/Blog.jsx`. Committed: `f6898e6`.
-2. **Product-to-blog link** -- User set `blog_article_slug = 'jcb-19c-i-mini-rypadlo-kompaktny-vykon'` in Supabase via dashboard EquipmentForm. ProductCard auto-renders "Prečítať článok o produkte" link.
-
-### Image Optimization
-3. **PNG to WebP conversion** -- Converted 3 PNG files: `blog_jcb.png` (2.97 MB → 377 KB, -87%), `wacker-neuson-803-transparent.png` (555 KB → 87 KB, -84%), `JCB-19C-transparent.png` (553 KB → 82 KB, -85%). Total: 4.0 MB → 547 KB (-86.4%). Updated refs in Blog.jsx + Catalog.jsx. PNG originals kept as fallback. Audit confirmed all other PNGs in `public/pictures/` already had WebP counterparts. Committed: `9e57416`.
-
-### Catalog Bug Fixes
-4. **Search link query simplified** -- Changed CTA URL from `?search=JCB+19C-I` to `?search=JCB+19C` to avoid I/l character ambiguity. Files: `src/data/articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx`. Committed: `dd7d559`.
-5. **#katalog hash scroll fix** -- React Router doesn't handle anchor scrolling natively, and `#katalog` element mounts after hydration so native browser scroll-to-anchor missed it. Added useEffect with `useLocation` that scrolls on hash change AND when products array length changes (re-trigger after Supabase load). Files: `src/components/home/Catalog.jsx`. Committed: `37e8bdf`.
-6. **Search reveal animation fix** -- URL search like `?search=JCB+19C` showed empty results for Supabase-only products (e.g. JCB 19C-I). Root cause: `useProducts()` initial state is `staticProducts` (157 products from `products.js`, missing JCB 19C-I which is dashboard-only). After Supabase fetch, products mounted into grid but `reveal` className kept them at `opacity: 0` until `useInView` IntersectionObserver triggered — and since `#katalog` wasn't scrolling, grid stayed below fold and observer never fired. Makita TW001GM201 worked because it's in static products and rendered immediately. Fix: force `in-view` className when `searchQuery` is active. Files: `src/components/home/Catalog.jsx`. Committed: `37e8bdf`.
+<!-- Sessions 3-14 archived in session summary table above -->
 
 ## What Was Done (Session 15) -- Real Photos + Ad-hoc Items + Gallery + Editable Days
 Date: 2026-04-30
@@ -602,14 +463,24 @@ Date: 2026-07-02
    - **Mobilna hlavicka**: `logoroyal.webp` (biely text) bol neviditelny na svetlom pozadi -> `logoroyal-dark.webp` + `pr-14` (kolizia s fixnym hamburgerom)
 9. **Overenie** -- headless Chrome screenshoty (desktop 1600px, mobil 516px = min sirka okna headless Chrome na Windows) na `/festa` proti lokalnemu `vite preview`. Build + lint ciste.
 
+## What Was Done (Session 35) -- ProductDetail biely hero + word-spacing + hover seam fix + nove hero fotky
+Date: 2026-07-02
+
+1. **ProductDetail hero redizajn (desktop)** -- tmavy 280px foto-banner (`hero3.webp` + gradienty) nahradeny kratkym BIELYM hero pasom v jazyku `PageHero`: tichy back-link (nie pill), eyebrow znacky na vlastnom riadku, tmavy Archivo H1, jemny oranzovy radial glow, 2px oranzovy seam. `pt-28` cisti fixny desktop header (~78px). Mobilna hlavicka (s34) nezmenena. Files: `src/pages/ProductDetail.jsx`. Committed: `5a324f4`.
+2. **Word-spacing 0.12em pre Archivo nadpisy** -- owner: caps titulky ("PRENAJOM STROJOV S DOVOZOM NA STAVBU") maju prilis male medzery medzi slovami. Body font bol vymeneny uz v s34, ale TITULKY su Archivo (display) — uzka medzera + negativny letter-spacing (zmensuje aj medzislovne medzery). Fix: globalny `word-spacing: 0.12em` na h1–h6 aj `.font-display` (USP pas, price tagy) namiesto dalsej vymeny fontu. Files: `src/index.css`. Committed: `5a324f4`.
+3. **ProductCard hover biela linka — definitivny fix** -- s34 zakladny `scale-[1.02]` na obrazku nestacil. Skutocna pricina: svetly gradient bol na KONTAJNERI za obrazkom, takze pri hover zoome mohol frakcny spodny okraj promotnutej img vrstvy odhalit svetle pozadie ako bielu linku. Fix: gradient presunuty DO zoomovanej vrstvy spolu s fotkou (skaluju sa ako jedna vrstva) — za nou je uz len tmava karta, seam fyzicky nemoze byt biely. **Overene Playwright hover testom** (`playwright-core` z node_modules + systemovy Chrome) na presne tej karte z owner screenshotu (Atlas Copco Weda 10N): mid-transition (350ms z 700ms) aj usadeny stav ciste. Files: `src/components/product/ProductCard.jsx`. Committed: `5a324f4`.
+4. **Nove hero fotky Blog + Partneri** -- obe stranky mali genericky `hero-pozicovna.webp`. Blog → `predajna-2.webp` (svetly interier predajne s laser/meracou technikou — sedi k "tipy od profesionalov"); Partneri → `stroje-jcb-rameno.webp` (JCB rameno ramujuce Avant + Wacker Neuson na dvore s Royal Stroje bannerom — doslova partnerske znacky; portrait crop v 4/3 rame funguje). Files: `src/pages/Blog.jsx`, `src/pages/Partneri.jsx`. Committed: `5a324f4`.
+5. **Orphan stranky zmazane** -- `ServisNaradia.jsx` + `ZemnePrace.jsx` (nikdy nerutovane v App.jsx, nikde nelinkovane; otvorene od s26) zmazane, −381 riadkov. Files: deleted. Committed: `5a324f4`.
+6. **Overenie** -- build + lint ciste (len 4 pre-existujuce nalezy v nedotknutych suboroch: CookieBanner, useInView). Headless Chrome screenshoty: ProductDetail (`/festa`), homepage hero (word-spacing), Blog, Partneri; Playwright hover test na katalogovej karte. Poznamka: headless screenshoty potrebuju `--virtual-time-budget` (Supabase fetch + entrance animacie), inak zachytia spinner/prazdny hero.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
-| 0 | **Review `dev` staging → merge `dev`→`main` to ship the redesign** | The whole redesign (sessions 24–**34**) + new "Zoženieme akýkoľvek stroj" service + homepage "Nenašli ste stroj?" banner + hero 4-image strip + the **dark-elements-on-light-bg** theme now across **the ENTIRE site** + new hero truck render + 4 s Akcie banner + session-32 hero image swap & catalog corner machines + session-33 UX/UI polish + **session-34 Source Sans 3 body font, catalog cards without availability state, ProductDetail redesign, mobile fixes** are committed on **`dev`** (many commits ahead of `main`) and deploy to the public Vercel preview URL; `main`/production is untouched. Owner reviews on staging (incl. new font feel on text-heavy pages — FAQ/blog), then merge `dev`→`main` (push to `main` auto-deploys royalstroje.sk). Owner: continue editing on `dev`. |
+| 0 | **Review `dev` staging → merge `dev`→`main` to ship the redesign** | The whole redesign (sessions 24–**35**) + new "Zoženieme akýkoľvek stroj" service + homepage "Nenašli ste stroj?" banner + hero 4-image strip + the **dark-elements-on-light-bg** theme now across **the ENTIRE site** + new hero truck render + 4 s Akcie banner + session-32 hero image swap & catalog corner machines + session-33 UX/UI polish + session-34 Source Sans 3 body font, catalog cards without availability state, ProductDetail redesign, mobile fixes + **session-35 ProductDetail white hero, Archivo word-spacing, hover seam fix, new Blog/Partneri hero photos** are committed on **`dev`** (many commits ahead of `main`) and deploy to the public Vercel preview URL; `main`/production is untouched. Owner reviews on staging (incl. new font feel on text-heavy pages — FAQ/blog), then merge `dev`→`main` (push to `main` auto-deploys royalstroje.sk). Owner: continue editing on `dev`. |
 | 0d | **Session-33 UX/UI polish — extend to subpages** | Session 33 polished only homepage + catalog. Same treatment still owed to the 8 subpages: thin eyebrows, remove `01–04` watermark numbers, add card-grid variety, standardize CtaBand width. Also blog-article bodies (`border-l-4` callouts, purple headings) + delete dead `Hero.jsx`/`Hero1.jsx`/`MobileHero.jsx` after the `main` merge. See session-33 "Not done this session". |
 | 0c | ✅ **DONE (session 31): whole-site dark-on-light theme** | Session 30 did the homepage; **session 31 rolled the same "dark elements on light `#FAFAFA` bg" out to all 16 subpages** via a shared `CtaBand` + 8 parallel agents. Exceptions kept: Partneri logos white, Kontakt/Cenová ponuka contact form light, legal-page prose readable (only tables/boxes dark). Minor polish still open (see session-31 "Open follow-ups"): review authored CtaBand copy, optional restore of dropped ✓ chips, standardize CtaBand width. Still open: **`BusinessPillars.jsx` unused orphan** (removed from Home) — delete or repurpose. |
 | 0a | **Finish Vercel dev-env setup (owner, in Vercel `royal-stroje`)** | ✅ (session 30) Public staging link — owner **disabled Vercel Authentication** (Deployment Protection), so the preview URL opens for anyone, no login. Share the stable branch alias `royal-stroje-git-dev-…vercel.app`. ⚠ Still pending: (1) Enable env vars (`VITE_SUPABASE_*`, `VITE_EMAILJS_*`, `VITE_RECAPTCHA_SITE_KEY`) for the **Preview** environment, not just Production — else staging Supabase + forms break — then Redeploy. (2) Confirm Production Branch = `main`. Web-only (dashboard not included). See the `dev-staging-environment` memory. Heads-up: reCAPTCHA/EmailJS are domain-restricted, so the form may error on the `*.vercel.app` preview domain unless whitelisted. |
-| 0b | **Decide on orphan service pages** | `ServisNaradia.jsx` / `ZemnePrace.jsx` are still not routed in `App.jsx` and not linked — unreachable. Either **delete** them or **add routes** (+ links from `Sluzby.jsx`). (`DovozTechniky.jsx` was wired up in session 27 — now routed at `/sluzby/dovoz-techniky` and linked from the Sluzby grid.) |
+| 0b | ✅ **DONE (session 35): orphan service pages deleted** | `ServisNaradia.jsx` / `ZemnePrace.jsx` deleted (never routed/linked). (`DovozTechniky.jsx` was wired up in session 27 — routed at `/sluzby/dovoz-techniky` and linked from the Sluzby grid.) |
 | 1 | ✅ **MOSTLY DONE (session 34): real-Android verify** | Owner tested staging on his Xiaomi: the scrambled band behind the catalog was the **Vercel Toolbar** (fixed + backdrop-filter — the session-21 trigger class), confirmed clean in a logged-out browser; production won't have it. Catalog filter controls additionally hardened (reveal removed). Remaining: one final scroll-check of FAQ + product grid + subpages on the real device after the latest commits, ideally logged out of Vercel. |
 | 2 | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
 | 3 | Backfill OP + birth dates on existing PO contacts | Migration 019 added columns; existing contacts have NULL. Owner needs to fill via ClientDetail Pencil edit before generating new contracts to get OP/nar. line populated |
@@ -636,7 +507,7 @@ Date: 2026-07-02
 | `public/logoroyal-dark.webp` | **NEW (session 27)** dark-text logo (white "ROYAL" recolored to zinc-900; crown+STROJE stay orange) for the light header |
 | `public/hero-auto.webp` / `.png` | Trimmed transparent hero truck (1004×578). Source: `hero-auto1.png` (owner-supplied, untrimmed). **(session 32) No longer used on the homepage** — HeroSplit now uses `web_pics/auto_hero.webp` |
 | `public/pictures/graphics/web_pics/` | **NEW (session 32)** owner-supplied renders (png source + webp): `auto_hero` (hero prenájom, 1774×887), `bager` (katalóg ľavý roh, cropped 1000×664), `auto_katalog` (katalóg pravý roh, cropped 1232×640). Owner PNGs had a baked-in checkerboard bg (RGB, no alpha) → webp flattened to `#FAFAFA` + cropped to content. To re-process: crop/flatten from the png then re-export webp (see session-32 notes) |
-| `src/components/common/PageHero.jsx` | **NEW (session 27)** reusable LIGHT subpage hero (`hidden md:block`): white bg + orange glow, eyebrow, dark headline w/ orange highlight, subtitle, optional `chips`/`actions`, framed photo w/ orange top-accent (lg+), bottom orange seam. **Used by ALL subpages (session 28)**: Sluzby, DovozTechniky, Blog, BlogDetail, Kontakt, CenovaPonuka, NahradneDiely, SkoLenieObsluhy, Partneri, PredajTechniky, ServisNaradia, ZemnePrace, **ZabezpecenieTechniky** (ProductDetail keeps its photo-banner hero; RoyalFleet retired in session 29) |
+| `src/components/common/PageHero.jsx` | **NEW (session 27)** reusable LIGHT subpage hero (`hidden md:block`): white bg + orange glow, eyebrow, dark headline w/ orange highlight, subtitle, optional `chips`/`actions`, framed photo w/ orange top-accent (lg+), bottom orange seam. **Used by ALL subpages (session 28)**: Sluzby, DovozTechniky, Blog, BlogDetail, Kontakt, CenovaPonuka, NahradneDiely, SkoLenieObsluhy, Partneri, PredajTechniky, **ZabezpecenieTechniky** (ProductDetail has its own compact white hero since s35; RoyalFleet retired s29, ServisNaradia/ZemnePrace deleted s35) |
 | `src/pages/DovozTechniky.jsx` | **REBUILT (session 27)** marketing subpage at `/sluzby/dovoz-techniky`: PageHero + benefits + 3-step process + **Cenník dopravy (real FAQ pricing)** + CTA. Replaced old contradictory pricing; truthful (no invented services) |
 | `src/pages/Sluzby.jsx` | Services page — light `PageHero`; grid card "Cenová ponuka" replaced by "Dovoz techniky na stavbu" (→`/sluzby/dovoz-techniky`); **(session 29) "Royal Fleet" card replaced by "Zoženieme akýkoľvek stroj" (→`/sluzby/zabezpecenie-techniky`, icon `PackageSearch`)** |
 | `src/pages/ZabezpecenieTechniky.jsx` | **NEW (session 29)** light service page at `/sluzby/zabezpecenie-techniky` ("Zoženieme akýkoľvek stroj" — sprostredkovanie prenájmu cez partnerov). Hero + 4 benefits + 6 equipment tiles + 4-step process + CTA. Modeled on `DovozTechniky`; replaces the retired `RoyalFleet.jsx` |
@@ -652,7 +523,7 @@ Date: 2026-07-02
 | `src/components/common/Header.jsx` | Header + promo popup (hidden on mobile) |
 | `src/components/common/AnimatedBackground.jsx` | Fixed gradient/grid/vignette bg layers -- **gated `hidden lg:block` (desktop only)**; fixed layers are a mobile GPU compositing trigger |
 | `src/components/common/HamburgerMenu.jsx` | Mobile fixed hamburger button -- **no `backdrop-filter`** (caused mobile GPU garbage; backgrounds are opaque instead) |
-| `src/index.css` | Global styles: base type (body=Source Sans 3 since s34, h1–h6=Archivo), industrial-premium primitives (`.eyebrow`, `.hairline`, `.btn-primary`, `.btn-secondary`), **light-theme primitives `.card-light`/`.input-light`/`.btn-outline-light` (session 25)**, `.subcategory-btn` hover (now light-orange), `.reveal*` scroll animations -- in-view end state is `transform: none` so cards de-promote off the GPU after animating |
+| `src/index.css` | Global styles: base type (body=Source Sans 3 since s34, h1–h6=Archivo, word-spacing 0.12em since s35), industrial-premium primitives (`.eyebrow`, `.hairline`, `.btn-primary`, `.btn-secondary`), **light-theme primitives `.card-light`/`.input-light`/`.btn-outline-light` (session 25)**, `.subcategory-btn` hover (now light-orange), `.reveal*` scroll animations -- in-view end state is `transform: none` so cards de-promote off the GPU after animating |
 | `src/components/common/ContentSection.jsx` | Shared content-section wrapper used by 13 pages; `background: #181818` by default, **`light` prop → `#FAFAFA` (session 25, only `Catalog`/Home passes it; other pages stay dark)** |
 | `src/components/ui/CustomSelect.jsx` | Custom dropdown (shared by `QuoteForm` + Kontakt `ContactForm`); dark by default, **opt-in `light` prop (session 25)** for the light homepage — Kontakt stays dark by not passing it |
 | `index.html` | Loads Archivo (display) + Source Sans 3 (body, since s34) from Google Fonts (preconnect + `display=swap`, latin-ext for Slovak); preloads hero image |
