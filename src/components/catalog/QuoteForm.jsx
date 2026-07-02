@@ -129,7 +129,7 @@ function QuoteFormInner() {
   }
 
   return (
-    <div className="bg-zinc-900 border border-white/10 border-t-2 border-t-orange-primary/60 rounded-2xl overflow-visible">
+    <div className="bg-zinc-900 border border-white/10 rounded-2xl overflow-visible">
       {/* Header with Title and Description */}
       <div className="bg-zinc-900 border-b border-white/10 px-4 py-4 md:py-5 rounded-t-2xl">
         <div className="flex items-center gap-2 mb-2">
@@ -159,51 +159,66 @@ function QuoteFormInner() {
 
         {/* Name */}
         <div>
+          <label htmlFor="quote-name" className="block text-xs font-semibold text-zinc-300 mb-1">
+            Meno a priezvisko *
+          </label>
           <input
+            id="quote-name"
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
-            placeholder="Meno a priezvisko *"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/60 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
+            placeholder="Ján Novák"
           />
         </div>
 
         {/* Email */}
         <div>
+          <label htmlFor="quote-email" className="block text-xs font-semibold text-zinc-300 mb-1">
+            Email *
+          </label>
           <input
+            id="quote-email"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
-            placeholder="Email *"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/60 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
+            placeholder="jan.novak@email.sk"
           />
         </div>
 
         {/* Phone */}
         <div>
+          <label htmlFor="quote-phone" className="block text-xs font-semibold text-zinc-300 mb-1">
+            Telefón *
+          </label>
           <input
+            id="quote-phone"
             type="tel"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
             required
-            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
-            placeholder="Telefón *"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/60 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all"
+            placeholder="0900 123 456"
           />
         </div>
 
         {/* Project Type */}
         <div>
+          <label className="block text-xs font-semibold text-zinc-300 mb-1">
+            Typ projektu *
+          </label>
           <CustomSelect
             name="projectType"
             value={formData.projectType}
             onChange={handleChange}
             required
-            placeholder="Vyberte typ projektu *"
+            placeholder="Vyberte typ projektu"
             options={[
               { value: 'Stavba domu', label: 'Stavba domu' },
               { value: 'Rekonštrukcia', label: 'Rekonštrukcia' },
@@ -217,13 +232,17 @@ function QuoteFormInner() {
 
         {/* Message */}
         <div>
+          <label htmlFor="quote-message" className="block text-xs font-semibold text-zinc-300 mb-1">
+            Správa (voliteľné)
+          </label>
           <textarea
+            id="quote-message"
             name="message"
             value={formData.message}
             onChange={handleChange}
             rows="3"
-            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/40 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all resize-none"
-            placeholder="Správa (voliteľné)"
+            className="w-full bg-zinc-950/60 border border-white/10 rounded-lg px-3 py-2.5 text-white text-sm placeholder-white/60 focus:outline-none focus:border-orange-primary/60 focus:ring-1 focus:ring-orange-primary/20 transition-all resize-none"
+            placeholder="Aké stroje potrebujete, termín, miesto stavby…"
           ></textarea>
         </div>
 
