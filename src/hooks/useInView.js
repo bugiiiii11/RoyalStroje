@@ -6,11 +6,12 @@ import { useEffect, useRef, useState } from 'react';
  */
 export function useInView(options = {}) {
   const ref = useRef(null);
-  const [inView, setInView] = useState(false);
+  // No IntersectionObserver → start visible (CSS also only hides under html.js-reveal)
+  const [inView, setInView] = useState(() => typeof IntersectionObserver === 'undefined');
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

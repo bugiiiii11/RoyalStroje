@@ -104,15 +104,21 @@
 }
 
 /* ─── Scroll reveal animations ───
-   in-view end states use `transform: none` (not translateY(0)/scale(1)) so the
-   element drops its GPU compositing layer once the animation finishes. Keeping a
+   1) GPU guard: in-view end states use `transform: none` (not translateY(0)/scale(1))
+   so the element drops its GPU compositing layer once the animation finishes. Keeping a
    non-none transform on ~157 product cards permanently promotes them all, which
    exhausts budget Android GPUs and causes tile-rasterization garbage/black bands.
-   `none` is the identity matrix, so the slide/scale animation is unchanged. */
+   `none` is the identity matrix, so the slide/scale animation is unchanged.
+   2) Visibility guard: the hidden base states apply ONLY under `html.js-reveal`,
+   which index.html adds when JS + IntersectionObserver are available. Without JS
+   (crawlers, print pipelines, old browsers) content is simply visible — motion is
+   an enhancement, never a gate. */
 .reveal {
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.js-reveal .reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
 }
 .reveal.in-view {
   opacity: 1;
@@ -120,17 +126,21 @@
 }
 
 .reveal-fade {
-  opacity: 0;
   transition: opacity 0.6s ease;
+}
+.js-reveal .reveal-fade {
+  opacity: 0;
 }
 .reveal-fade.in-view {
   opacity: 1;
 }
 
 .reveal-left {
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.js-reveal .reveal-left {
   opacity: 0;
   transform: translateX(-30px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
 }
 .reveal-left.in-view {
   opacity: 1;
@@ -138,9 +148,11 @@
 }
 
 .reveal-right {
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.js-reveal .reveal-right {
   opacity: 0;
   transform: translateX(30px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
 }
 .reveal-right.in-view {
   opacity: 1;
@@ -148,13 +160,32 @@
 }
 
 .reveal-scale {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.js-reveal .reveal-scale {
   opacity: 0;
   transform: scale(0.92);
-  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 .reveal-scale.in-view {
   opacity: 1;
   transform: none;
+}
+
+/* Print always shows everything, regardless of reveal state */
+@media print {
+  .reveal, .reveal-fade, .reveal-left, .reveal-right, .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Hide scrollbars on horizontal chip/filter scrollers (mobile catalog) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Stagger delays for child elements */

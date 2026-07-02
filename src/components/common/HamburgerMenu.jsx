@@ -17,7 +17,7 @@ export default function HamburgerMenu() {
       {/* Hamburger Button - Mobile only */}
       <button
         onClick={() => setIsOpen(true)}
-        className="md:hidden fixed top-2 right-2 z-50 w-10 h-10 flex items-center justify-center bg-zinc-900/95 border border-white/20 rounded-lg hover:bg-zinc-800 hover:border-orange-primary/50 transition-all"
+        className="md:hidden fixed top-2 right-2 z-50 w-11 h-11 flex items-center justify-center bg-zinc-900/95 border border-white/20 rounded-lg hover:bg-zinc-800 hover:border-orange-primary/50 transition-all"
         aria-label="Open menu"
       >
         <Menu className="text-white" size={20} />
@@ -42,7 +42,7 @@ export default function HamburgerMenu() {
           <h2 className="text-white font-black text-lg">Menu</h2>
           <button
             onClick={() => setIsOpen(false)}
-            className="w-8 h-8 flex items-center justify-center bg-zinc-900 border border-white/20 rounded-lg hover:bg-zinc-800 hover:border-orange-primary/50 transition-all"
+            className="w-11 h-11 flex items-center justify-center bg-zinc-900 border border-white/20 rounded-lg hover:bg-zinc-800 hover:border-orange-primary/50 transition-all"
             aria-label="Close menu"
           >
             <X className="text-white" size={18} />
