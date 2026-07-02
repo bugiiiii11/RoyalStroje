@@ -11,7 +11,7 @@ export default {
         'orange-hover': '#ff8533',
       },
       fontFamily: {
-        sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['"Source Sans 3"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         display: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       animation: {

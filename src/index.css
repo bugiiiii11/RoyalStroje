@@ -11,7 +11,7 @@
 
   /* Better font rendering and prevent horizontal overflow */
   body {
-    font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;

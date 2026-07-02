@@ -17,7 +17,7 @@ Direct, industrial, local-trustworthy. Slovak only. Short claims backed by speci
 ## Visual system (committed — do not re-litigate)
 - **Theme: dark elements on light background.** Page bg `#FAFAFA`; cards/chrome are dark zinc (`from-zinc-900 to-zinc-950`, `border-white/10`). Heroes light (PageHero white), footer black. Owner-approved direction (session 30/31).
 - **Brand color:** orange `#FF6600` (`orange-primary`), hover `#ff8533`. Orange = action/accent. Rule: **one filled-orange element per component** — don't spray orange.
-- **Type:** Archivo (display, 600–900) + Manrope (body, 400–800), Google Fonts, latin-ext. Headings `font-black`, tracking −0.015em global.
+- **Type:** Archivo (display, 600–900) + Source Sans 3 (body, 400–900), Google Fonts, latin-ext. Headings `font-black`, tracking −0.015em global. (Body was Manrope until session 34 — owner found its narrow word space hard to read; Source Sans 3 = humanist, open apertures, wider word space, contrast axis vs grotesque Archivo.)
 - **Primitives** (src/index.css): `.eyebrow` (use sparingly — heroes and true kickers only, NOT above every section), `.hairline`, `.btn-primary`, `.btn-secondary` (dark bg), `.card-light`, `.input-light`, `.btn-outline-light` (light bg), `.reveal*` scroll animations.
 - **Shared components:** `PageHero` (subpage heroes), `CtaBand` (dark orange CTA band), `ContentSection` (light section wrapper).
 
