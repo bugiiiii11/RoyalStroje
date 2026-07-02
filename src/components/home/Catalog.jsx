@@ -240,8 +240,7 @@ export default function Catalog() {
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 pb-16 md:py-16">
         {/* Mobile Header */}
         <div ref={headerRef} className={`md:hidden text-center mb-6 pt-6 reveal ${headerInView ? 'in-view' : ''}`}>
-          <span className="eyebrow eyebrow--center mb-3">Katalóg</span>
-          <h2 className="text-xl font-black text-zinc-900 mb-2 mt-3 leading-tight">
+          <h2 className="text-xl font-black text-zinc-900 mb-2 leading-tight">
             <span className="text-orange-primary">Katalóg náradia</span> a strojov na prenájom
           </h2>
           <p className="text-zinc-600 text-sm leading-relaxed max-w-2xl mx-auto">
@@ -252,8 +251,7 @@ export default function Catalog() {
         {/* Desktop Header */}
         <div ref={desktopHeaderRef} className={`hidden md:block mb-8 reveal ${desktopHeaderInView ? 'in-view' : ''}`}>
           <div className="text-center max-w-2xl mx-auto">
-            <span className="eyebrow eyebrow--center mb-4">Požičovňa</span>
-            <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+            <h2 className="text-xl md:text-4xl font-black text-zinc-900 mb-2 md:mb-4">
               <span className="text-orange-primary">Katalóg</span> strojov na prenájom
             </h2>
             <p className="text-zinc-600 text-sm md:text-lg mx-auto mb-6">
@@ -263,7 +261,8 @@ export default function Catalog() {
         </div>
 
         {/* Customer Type Selector & Search - Centered Row */}
-        <div ref={filtersRef} className={`flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4 mb-4 md:mb-8 reveal-fade stagger-2 ${filtersInView ? 'in-view' : ''}`}>
+        <div ref={filtersRef} className={`mb-4 md:mb-8 reveal-fade stagger-2 ${filtersInView ? 'in-view' : ''}`}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4">
             {/* Customer Type Selector */}
             <div className="inline-flex bg-zinc-900 border border-white/10 rounded-lg md:rounded-2xl p-0.5 md:p-1.5 gap-0.5 md:gap-1.5">
               <button
@@ -276,7 +275,7 @@ export default function Catalog() {
               >
                 <Building2 size={14} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline">Právnické osoby</span>
-                <span className="sm:hidden">PO</span>
+                <span className="sm:hidden">Firmy</span>
               </button>
               <button
                 onClick={() => setCustomerType('fo')}
@@ -288,7 +287,7 @@ export default function Catalog() {
               >
                 <User size={14} className="md:w-4 md:h-4" />
                 <span className="hidden sm:inline">Fyzické osoby</span>
-                <span className="sm:hidden">FO</span>
+                <span className="sm:hidden">Súkromné osoby</span>
               </button>
             </div>
 
@@ -312,14 +311,19 @@ export default function Catalog() {
               )}
             </div>
           </div>
+          {/* Price-mode caption - explains what the toggle changes */}
+          <p className="text-center text-[11px] md:text-xs text-zinc-600 mt-2">
+            Zobrazené ceny sú {customerType === 'po' ? 'bez DPH' : 's DPH'}.
+          </p>
+        </div>
 
         {/* Main Content - No frame */}
         <div className="relative">
 
         {/* Main Catalog Layout */}
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Left Sidebar - Categories */}
-          <aside ref={sidebarRef} className={`lg:w-80 flex-shrink-0 reveal-left stagger-1 ${sidebarInView ? 'in-view' : ''}`}>
+          {/* Left Sidebar - Categories (desktop only; mobile uses horizontal chip rows) */}
+          <aside ref={sidebarRef} className={`hidden lg:block lg:w-80 flex-shrink-0 reveal-left stagger-1 ${sidebarInView ? 'in-view' : ''}`}>
             <div className="bg-zinc-900 border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 sticky top-24">
               <h3 className="flex items-center gap-2.5 text-white font-black text-sm md:text-lg uppercase tracking-wide mb-3 md:mb-6 px-1 md:px-2">
                 <span className="inline-block w-5 md:w-6 h-0.5 bg-orange-primary" />
@@ -546,40 +550,58 @@ export default function Catalog() {
 
           {/* Main Content Area */}
           <div className="flex-1">
-            {/* Subcategory Filters */}
+            {/* Mobile/tablet: categories as horizontal chip row (replaces the sidebar panel) */}
+            <div className="lg:hidden mb-3 -mx-4 px-4 overflow-x-auto no-scrollbar">
+              <div className="flex gap-2 w-max">
+                {categories.map((category) => {
+                  const IconComponent = categoryIcons[category.id];
+                  const isActive = activeCategory === category.id;
+                  return (
+                    <button
+                      key={category.id}
+                      onClick={() => handleCategoryChange(category.id)}
+                      className={`flex items-center gap-1.5 px-3 py-2.5 rounded-lg font-bold text-xs whitespace-nowrap min-h-[44px] transition-all ${
+                        isActive
+                          ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg shadow-orange-primary/30'
+                          : 'bg-zinc-900 border border-white/10 text-white/80'
+                      }`}
+                    >
+                      {IconComponent && (
+                        <IconComponent size={14} className={isActive ? 'text-white' : 'text-orange-primary'} />
+                      )}
+                      <span>{category.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Subcategory Filters - horizontal scroller below lg, wrapping grid on desktop */}
             <div ref={subcatRef} className={`mb-4 md:mb-8 reveal-fade stagger-2 ${subcatInView ? 'in-view' : ''}`}>
-              <div className="flex flex-wrap gap-1.5 md:gap-3">
+              <div className="flex gap-1.5 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1 lg:flex-wrap lg:overflow-visible lg:mx-0 lg:px-0 lg:pb-0 lg:gap-3">
                 {currentCategory?.subcategories.map((subcategory) => {
                   const isActive = activeSubcategory === subcategory.id;
                   return (
                     <button
                       key={subcategory.id}
                       onClick={() => handleSubcategoryChange(subcategory.id)}
-                      className={`subcategory-btn group relative px-3 py-3 md:px-6 md:py-3.5 rounded-lg md:rounded-2xl font-bold text-xs md:text-base transition-all duration-300 min-h-[48px] ${
+                      className={`subcategory-btn group relative px-3 py-2.5 md:px-4 md:py-2.5 rounded-lg md:rounded-xl font-bold text-xs md:text-sm whitespace-nowrap flex-shrink-0 transition-all duration-300 min-h-[44px] ${
                         isActive
-                          ? 'subcategory-btn--active text-white scale-[1.02]'
-                          : 'text-white/80 hover:text-white hover:scale-[1.02]'
+                          ? 'subcategory-btn--active text-white'
+                          : 'text-white/80 hover:text-white'
                       }`}
                       style={{
                         background: isActive
                           ? 'linear-gradient(135deg, #ff6600 0%, #ff8533 50%, #ff6600 100%)'
                           : 'linear-gradient(145deg, #2a2a2e 0%, #1a1a1d 100%)',
                         boxShadow: isActive
-                          ? '0 8px 25px -5px rgba(255, 102, 0, 0.5), 0 4px 10px -5px rgba(255, 102, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.15)'
-                          : '0 4px 15px -3px rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -2px 0 rgba(0, 0, 0, 0.2)',
+                          ? '0 6px 16px -6px rgba(255, 102, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                          : '0 2px 8px -2px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06)',
                         border: isActive
                           ? '1px solid rgba(255, 255, 255, 0.2)'
                           : '1px solid rgba(255, 255, 255, 0.1)',
-                        transform: isActive ? 'translateY(-2px)' : 'translateY(0)',
                       }}
                     >
-                      {/* Shine effect overlay */}
-                      <span
-                        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                        style={{
-                          background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, transparent 100%)',
-                        }}
-                      />
                       <span className="relative z-10">{subcategory.name}</span>
                     </button>
                   );
@@ -588,7 +610,7 @@ export default function Catalog() {
             </div>
 
             {/* Image disclaimer */}
-            <div className="flex items-center gap-2 mb-3 md:mb-4 text-zinc-500 text-[11px] md:text-xs italic">
+            <div className="flex items-center gap-2 mb-3 md:mb-4 text-zinc-600 text-[11px] md:text-xs italic">
               <Info size={12} className="flex-shrink-0 text-orange-primary/60" />
               <span>Obrázky v katalógu sú ilustračné — skutočné prevedenie sa môže líšiť.</span>
             </div>
@@ -747,8 +769,7 @@ export default function Catalog() {
         {/* Blog CTA Section */}
         <div ref={blogCtaRef} className={`relative mt-16 md:mt-24 pt-12 md:pt-16 reveal ${blogCtaInView ? 'in-view' : ''}`}>
           <div className="text-center mb-8 md:mb-12">
-            <span className="eyebrow eyebrow--center mb-4">Blog</span>
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4 mt-4">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4">
               Chcete vedieť viac?
             </h2>
             <p className="text-zinc-600 text-sm md:text-lg max-w-2xl mx-auto">
