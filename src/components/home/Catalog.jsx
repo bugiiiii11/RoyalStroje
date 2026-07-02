@@ -53,9 +53,7 @@ export default function Catalog() {
   // Scroll reveal refs
   const [headerRef, headerInView] = useInView();
   const [desktopHeaderRef, desktopHeaderInView] = useInView();
-  const [filtersRef, filtersInView] = useInView();
   const [sidebarRef, sidebarInView] = useInView();
-  const [subcatRef, subcatInView] = useInView();
   const [gridRef, gridInView] = useInView();
   const [quoteFormRef, quoteFormInView] = useInView();
   const [blogCtaRef, blogCtaInView] = useInView();
@@ -260,8 +258,10 @@ export default function Catalog() {
           </div>
         </div>
 
-        {/* Customer Type Selector & Search - Centered Row */}
-        <div ref={filtersRef} className={`mb-4 md:mb-8 reveal-fade stagger-2 ${filtersInView ? 'in-view' : ''}`}>
+        {/* Customer Type Selector & Search - Centered Row
+            (no reveal animation: functional controls must never sit at opacity 0,
+            and the opacity-transition layer here corrupted tiles on budget Android GPUs) */}
+        <div className="mb-4 md:mb-8">
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 md:gap-4">
             {/* Customer Type Selector */}
             <div className="inline-flex bg-zinc-900 border border-white/10 rounded-lg md:rounded-2xl p-0.5 md:p-1.5 gap-0.5 md:gap-1.5">
@@ -293,7 +293,7 @@ export default function Catalog() {
 
             {/* Search Bar */}
             <div className="relative w-full sm:w-80">
-              <Search className="absolute left-2.5 md:left-3 top-1/2 -translate-y-1/2 text-white/40" size={12} />
+              <Search className="absolute left-2.5 md:left-3 top-1/2 -translate-y-1/2 text-white/40" size={16} />
               <input
                 type="text"
                 placeholder="Hľadať produkty..."
@@ -306,7 +306,7 @@ export default function Catalog() {
                   onClick={() => setSearchQuery('')}
                   className="absolute right-2.5 md:right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
                 >
-                  <X size={10} className="md:w-3.5 md:h-3.5" />
+                  <X size={14} />
                 </button>
               )}
             </div>
@@ -576,8 +576,9 @@ export default function Catalog() {
               </div>
             </div>
 
-            {/* Subcategory Filters - horizontal scroller below lg, wrapping grid on desktop */}
-            <div ref={subcatRef} className={`mb-4 md:mb-8 reveal-fade stagger-2 ${subcatInView ? 'in-view' : ''}`}>
+            {/* Subcategory Filters - horizontal scroller below lg, wrapping grid on desktop
+                (no reveal animation — same GPU/visibility guard as the toggle+search block) */}
+            <div className="mb-4 md:mb-8">
               <div className="flex gap-1.5 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1 lg:flex-wrap lg:overflow-visible lg:mx-0 lg:px-0 lg:pb-0 lg:gap-3">
                 {currentCategory?.subcategories.map((subcategory) => {
                   const isActive = activeSubcategory === subcategory.id;

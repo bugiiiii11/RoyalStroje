@@ -22,19 +22,12 @@ export default function ProductCard({ product, customerType = 'po' }) {
           <img
             src={product.image}
             alt={product.name}
-            className={`w-full h-full object-cover select-none transition-transform duration-700 ease-out group-hover:scale-105 ${!product.inStock ? 'grayscale opacity-60' : ''}`}
+            className="w-full h-full object-cover select-none transition-transform duration-700 ease-out group-hover:scale-105"
             loading="lazy"
             draggable="false"
           />
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent pointer-events-none select-none" style={{ zIndex: 1 }}></div>
-
-          {/* Status Badges */}
-          {!product.inStock && (
-            <div className="absolute top-3 right-3 px-2 py-0.5 bg-zinc-950/95 border border-white/20 text-zinc-200 text-[10px] font-bold rounded uppercase tracking-wide shadow-lg" style={{ zIndex: 2 }}>
-              Momentálne nedostupné
-            </div>
-          )}
 
           {product.isNew && (
             <div className="absolute top-3 left-3 px-2 py-0.5 bg-orange-primary/30 md:bg-orange-primary/20 border border-orange-primary/40 md:backdrop-blur-sm text-orange-primary text-[10px] font-bold rounded uppercase tracking-wide shadow-lg" style={{ zIndex: 2 }}>
@@ -86,24 +79,22 @@ export default function ProductCard({ product, customerType = 'po' }) {
               <ChevronRight size={14} className="md:w-4 md:h-4 group-hover/detail:translate-x-0.5 transition-transform" />
             </Link>
 
-            {/* Call Link - quiet secondary; hidden when unavailable */}
-            {product.inStock && (
-              <a
-                href="tel:+421948555551"
-                onClick={(e) => {
-                  // On desktop, prevent default and toggle phone number
-                  if (window.innerWidth >= 768) {
-                    e.preventDefault();
-                    setShowPhone(!showPhone);
-                  }
-                  // On mobile, allow default behavior (tel: link)
-                }}
-                className="inline-flex items-center justify-center gap-1.5 font-bold text-xs md:text-sm text-zinc-300 hover:text-orange-primary transition-colors min-h-[44px]"
-              >
-                <Phone size={14} className="md:w-4 md:h-4" />
-                <span>{showPhone ? '0948 555 551' : 'Zavolať'}</span>
-              </a>
-            )}
+            {/* Call Link - quiet secondary */}
+            <a
+              href="tel:+421948555551"
+              onClick={(e) => {
+                // On desktop, prevent default and toggle phone number
+                if (window.innerWidth >= 768) {
+                  e.preventDefault();
+                  setShowPhone(!showPhone);
+                }
+                // On mobile, allow default behavior (tel: link)
+              }}
+              className="inline-flex items-center justify-center gap-1.5 font-bold text-xs md:text-sm text-zinc-300 hover:text-orange-primary transition-colors min-h-[44px]"
+            >
+              <Phone size={14} className="md:w-4 md:h-4" />
+              <span>{showPhone ? '0948 555 551' : 'Zavolať'}</span>
+            </a>
 
             {/* Blog Article Link - Only show if product has blog article */}
             {product.blogArticleSlug && (

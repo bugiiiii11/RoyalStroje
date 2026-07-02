@@ -228,13 +228,13 @@ export default function HeroSplit() {
               return (
                 <div
                   key={usp.title}
-                  className="group flex items-center gap-3.5 md:gap-4 rounded-xl md:rounded-2xl bg-white border border-zinc-200 px-4 md:px-5 py-3.5 md:py-5 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/40 hover:shadow-md hover:shadow-orange-primary/10 hover:-translate-y-0.5 transition-all duration-300"
+                  className="group flex flex-col items-center text-center gap-2 md:flex-row md:items-center md:text-left md:gap-4 rounded-xl md:rounded-2xl bg-white border border-zinc-200 px-3 md:px-5 py-4 md:py-5 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/40 hover:shadow-md hover:shadow-orange-primary/10 hover:-translate-y-0.5 transition-all duration-300"
                 >
-                  <span className="shrink-0 grid place-items-center w-12 h-12 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/25 text-orange-primary group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors duration-300">
-                    <Icon size={24} />
+                  <span className="shrink-0 grid place-items-center w-11 h-11 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/25 text-orange-primary group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors duration-300">
+                    <Icon size={22} className="md:w-6 md:h-6" />
                   </span>
-                  <div className="min-w-0">
-                    <p className="font-display font-bold uppercase text-zinc-900 text-sm md:text-base tracking-wide leading-tight">
+                  <div className="min-w-0 w-full md:w-auto">
+                    <p className="font-display font-bold uppercase text-zinc-900 text-[13px] md:text-base tracking-wide leading-tight break-words">
                       {usp.title}
                     </p>
                     <p className="text-zinc-600 text-xs md:text-sm mt-0.5 leading-snug">{usp.text}</p>

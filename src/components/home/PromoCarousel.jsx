@@ -70,7 +70,7 @@ export default function PromoCarousel() {
   };
 
   return (
-    <section className="bg-[#FAFAFA] pb-8 md:pb-16 lg:pb-20">
+    <section className="bg-[#FAFAFA] pt-10 md:pt-16 lg:pt-20 pb-8 md:pb-16 lg:pb-20">
       <div
         ref={sectionRef}
         className={`max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 reveal ${inView ? 'in-view' : ''}`}
