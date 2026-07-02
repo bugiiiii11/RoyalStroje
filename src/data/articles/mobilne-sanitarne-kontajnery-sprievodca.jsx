@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Potrebujete mobilné WC na stavbu alebo event? Komplexný sprievodca typmi, cenami a hygienickými štandardmi.',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           Mobilné sanitárne kontajnery sú dnes nevyhnutnou súčasťou každej stavby, outdoorového eventu alebo
           dočasného pracoviska. Legislatíva ich vyžaduje, zdravý rozum ich odporúča. Ale ako si vybrať správny typ?
           Koľko ich potrebujete? A na čo si dať pozor?
@@ -42,8 +42,8 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Typy Mobilných Sanitárnych Kontajnerov</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Typy Mobilných Sanitárnych Kontajnerov</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Nie každý mobilný kontajner je rovnaký. Existujú rôzne typy pre rôzne použitie.
         </p>
 
@@ -196,8 +196,8 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Koľko Kontajnerov Potrebujete?</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Koľko Kontajnerov Potrebujete?</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Existujú odporúčané normy podľa počtu osôb a dĺžky používania.
         </p>
 
@@ -238,7 +238,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Servis a Údržba: Čo Je v Cene?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Servis a Údržba: Čo Je v Cene?</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
           <h3 className="text-lg font-bold text-orange-primary mb-4">Štandardný Servisný Balík Royal Stroje</h3>
@@ -279,7 +279,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Hygiena a Environmentálne Štandardy</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Hygiena a Environmentálne Štandardy</h2>
 
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -337,7 +337,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Praktické Tipy pre Umiestnenie Kontajnera</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Praktické Tipy pre Umiestnenie Kontajnera</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
           <div className="space-y-4">
@@ -380,7 +380,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Cenníkový Prehľad 2026</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Cenníkový Prehľad 2026</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6 overflow-x-auto">
           <table className="w-full text-sm">
@@ -427,28 +427,28 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-bold text-white mb-4 text-center">Prečo Royal Stroje?</h3>
+          <h3 className="text-2xl font-bold text-zinc-900 mb-4 text-center">Prečo Royal Stroje?</h3>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 rounded-full bg-orange-primary flex items-center justify-center text-white font-bold text-2xl mx-auto mb-3">
                 10+
               </div>
-              <p className="text-white font-bold mb-1">Viac ako 10 Kontajnerov</p>
-              <p className="text-white/70 text-sm">Vždy na sklade a pripravených</p>
+              <p className="text-zinc-900 font-bold mb-1">Viac ako 10 Kontajnerov</p>
+              <p className="text-zinc-600 text-sm">Vždy na sklade a pripravených</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 rounded-full bg-orange-primary flex items-center justify-center text-white font-bold text-2xl mx-auto mb-3">
                 24h
               </div>
-              <p className="text-white font-bold mb-1">Expresný Servis</p>
-              <p className="text-white/70 text-sm">Reakcia do 24 hodín</p>
+              <p className="text-zinc-900 font-bold mb-1">Expresný Servis</p>
+              <p className="text-zinc-600 text-sm">Reakcia do 24 hodín</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 rounded-full bg-orange-primary flex items-center justify-center text-white font-bold text-2xl mx-auto mb-3">
                 🌱
               </div>
-              <p className="text-white font-bold mb-1">Ekologické Prípravky</p>
-              <p className="text-white/70 text-sm">Certifikované a biodegradovateľné</p>
+              <p className="text-zinc-900 font-bold mb-1">Ekologické Prípravky</p>
+              <p className="text-zinc-600 text-sm">Certifikované a biodegradovateľné</p>
             </div>
           </div>
         </div>

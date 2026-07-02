@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Senec a jeho okolie zažíva stavebný boom.',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           Senec a jeho okolie zažíva v posledných rokoch stavebný boom. Nové rodinné domy rastú ako huby po daždi,
           priemyselné zóny sa rozširujú a infraštruktúra sa modernizuje. S tým rastie aj dopyt po kvalitnej stavebnej mechanizácii.
         </p>
@@ -20,8 +20,8 @@ const article = {
           </p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Prečo Lokálna Požičovňa? 5 Výhod</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Prečo Lokálna Požičovňa? 5 Výhod</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Mohli by ste si prenajať stroj v Bratislave či Trnave. Prečo teda vybrať lokálnu požičovňu v Senci?
         </p>
 
@@ -80,16 +80,16 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Mapa Pokrytia: Kam Doručujeme?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Mapa Pokrytia: Kam Doručujeme?</h2>
 
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-green-900/20 to-green-950/20 border border-green-500/30 rounded-xl p-6">
             <div className="flex items-center gap-3 mb-4">
               <span className="text-3xl">✓</span>
-              <h3 className="text-xl font-bold text-green-500">Bezplatná Doprava (0 €)</h3>
+              <h3 className="text-xl font-bold text-green-700">Bezplatná Doprava (0 €)</h3>
             </div>
-            <p className="text-white/70 text-sm mb-3"><strong>V okruhu 30 km od Senca:</strong></p>
-            <div className="grid md:grid-cols-2 gap-4 text-white/80 text-sm">
+            <p className="text-zinc-600 text-sm mb-3"><strong>V okruhu 30 km od Senca:</strong></p>
+            <div className="grid md:grid-cols-2 gap-4 text-zinc-700 text-sm">
               <ul className="space-y-1">
                 <li>• Senec a všetky mestské časti</li>
                 <li>• Bratislava: Petržalka, Ružinov, Vrakuňa</li>
@@ -110,8 +110,8 @@ const article = {
               <span className="text-3xl">💰</span>
               <h3 className="text-xl font-bold text-orange-primary">Doprava so Spoplatnením (1 € / km)</h3>
             </div>
-            <p className="text-white/70 text-sm mb-3"><strong>30-60 km od Senca:</strong></p>
-            <div className="grid md:grid-cols-2 gap-4 text-white/80 text-sm">
+            <p className="text-zinc-600 text-sm mb-3"><strong>30-60 km od Senca:</strong></p>
+            <div className="grid md:grid-cols-2 gap-4 text-zinc-700 text-sm">
               <ul className="space-y-1">
                 <li>• Bratislava: Devínska Nová Ves, Dúbravka</li>
                 <li>• Dunajská Streda</li>
@@ -141,7 +141,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Dostupnosť: Aké Stroje Máme Skladom?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Dostupnosť: Aké Stroje Máme Skladom?</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -203,13 +203,13 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 text-center">
-          <p className="text-2xl font-black text-white mb-2">
+          <p className="text-2xl font-black text-zinc-900 mb-2">
             Celkovo: Viac ako <span className="text-orange-primary">50 strojov a zariadení</span>
           </p>
-          <p className="text-white/70">pripravených na prenájom</p>
+          <p className="text-zinc-600">pripravených na prenájom</p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Cenníkový Prehľad (Región Senec 2026)</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Cenníkový Prehľad (Región Senec 2026)</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6 overflow-x-auto">
           <h3 className="text-lg font-bold text-orange-primary mb-4">Porovnanie s Konkurenciou</h3>
@@ -298,7 +298,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Špecifiká Regiónu: Na Čo Si Dať Pozor</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Špecifiká Regiónu: Na Čo Si Dať Pozor</h2>
 
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -386,7 +386,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Ako Si Objednať? Jednoduchý Proces</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Ako Si Objednať? Jednoduchý Proces</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -431,17 +431,17 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-bold text-white mb-4 text-center">
+          <h3 className="text-2xl font-bold text-zinc-900 mb-4 text-center">
             Prečo Royal Stroje?
           </h3>
           <div className="grid md:grid-cols-2 gap-4">
-            <ul className="space-y-2 text-white/90 text-sm">
+            <ul className="space-y-2 text-zinc-700 text-sm">
               <li>✓ Lokálne = nižšie náklady + rýchlejšia dostupnosť</li>
               <li>✓ Bezplatná doprava do 30 km</li>
               <li>✓ Viac ako 50 strojov na sklade</li>
               <li>✓ Flexibilné podmienky prenájmu</li>
             </ul>
-            <ul className="space-y-2 text-white/90 text-sm">
+            <ul className="space-y-2 text-zinc-700 text-sm">
               <li>✓ Osobný prístup</li>
               <li>✓ Technická podpora 24/7</li>
               <li>✓ Konkurencieschopné ceny</li>

@@ -7,8 +7,8 @@ const article = {
   excerpt: 'Kompletný prehľad krížového lasera NIVEL CL3G so zeleným lúčom - technické parametre, praktické využitie a naše skúsenosti s týmto profesionálnym meracím prístrojom.',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
-          NIVEL CL3G je profesionálny krížový laser s <strong className="text-green-500">troma 360° rovinami a zeleným lúčom</strong>,
+        <p className="text-xl text-zinc-700 leading-relaxed">
+          NIVEL CL3G je profesionálny krížový laser s <strong className="text-green-700">troma 360° rovinami a zeleným lúčom</strong>,
           ktorý je až 4-krát viditeľnejší ako červený. Tento prístroj sa stal obľúbeným nástrojom medzi
           profesionálnymi stavbármi, obkladačmi a inštalatérmi. Poďme sa pozrieť na jeho detailný rozbor.
         </p>
@@ -49,7 +49,7 @@ const article = {
           </ul>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Technické Parametre: Čo Potrebujete Vedieť</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Technické Parametre: Čo Potrebujete Vedieť</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
@@ -113,7 +113,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Tri 360° Roviny: Revolúcia v Meraní</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Tri 360° Roviny: Revolúcia v Meraní</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-green-500/30 rounded-xl p-6">
           <p className="text-white/80 mb-6">
@@ -145,7 +145,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Špeciálne Funkcie: Čím Vyniká CL3G</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Špeciálne Funkcie: Čím Vyniká CL3G</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-green-500/30 rounded-xl p-6">
@@ -175,27 +175,27 @@ const article = {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-purple-500/30 rounded-xl p-6">
-            <div className="text-purple-500 text-3xl mb-3">🛡️</div>
+          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl p-6">
+            <div className="text-orange-primary text-3xl mb-3">🛡️</div>
             <h4 className="text-white font-bold text-lg mb-2">Robustná Konštrukcia</h4>
             <p className="text-white/70">
-              Telo vystužené kovovými prvkami a <strong className="text-purple-500">gumové rohy</strong> chránia
+              Telo vystužené kovovými prvkami a <strong className="text-orange-primary">gumové rohy</strong> chránia
               laser pred poškodením. IP54 ochranca zaisťuje odolnosť voči prachu a vode.
             </p>
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Praktické Využitie: Pre Aké Práce Je Vhodný?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Praktické Využitie: Pre Aké Práce Je Vhodný?</h2>
 
         <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-green-500 mb-4">Univerzálne Použitie</h3>
-          <p className="text-white/80 mb-4">
-            NIVEL CL3G je skutočne <strong className="text-white">všestranný merací prístroj</strong>. Vyniká pri:
+          <h3 className="text-xl font-bold text-green-700 mb-4">Univerzálne Použitie</h3>
+          <p className="text-zinc-700 mb-4">
+            NIVEL CL3G je skutočne <strong className="text-zinc-900">všestranný merací prístroj</strong>. Vyniká pri:
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Stavebné Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Stavebné Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Vytyčovanie priečok a stien</li>
                 <li>• Kontrola zvislosti a vodorovnosti</li>
                 <li>• Montáž sádrokartónu</li>
@@ -203,8 +203,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Dokončovacie Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Dokončovacie Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Kladenie obkladov a dlažby</li>
                 <li>• Montáž kuchýň a nábytku</li>
                 <li>• Inštalácia plavajúcich podláh</li>
@@ -212,8 +212,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Inštalatérske Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Inštalatérske Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Rozvodov vody a kúrenia</li>
                 <li>• Elektrické rozvody</li>
                 <li>• Vedenie káblov a trubiek</li>
@@ -221,8 +221,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Exteriérové Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Exteriérové Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Stavba plotov a zábradlí</li>
                 <li>• Terénne úpravy</li>
                 <li>• Pokládka zámkovej dlažby</li>
@@ -232,7 +232,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Príslušenstvo v Balení</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Príslušenstvo v Balení</h2>
 
         <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
           <h3 className="text-xl font-bold text-green-500 mb-4">Kompletný Set</h3>
@@ -279,7 +279,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pre Koho Je NIVEL CL3G Vhodný?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pre Koho Je NIVEL CL3G Vhodný?</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-green-500/20 to-green-600/20 border-2 border-green-500 rounded-2xl p-6 relative">
@@ -288,15 +288,15 @@ const article = {
             </div>
             <div className="text-center mb-4">
               <div className="text-4xl mb-2">👷</div>
-              <h4 className="text-white font-black text-lg">Profesionáli</h4>
+              <h4 className="text-zinc-900 font-black text-lg">Profesionáli</h4>
             </div>
-            <ul className="space-y-2 text-white/80 text-sm">
+            <ul className="space-y-2 text-zinc-700 text-sm">
               <li>✓ Obkladači a dláždiari</li>
               <li>✓ Montážnici sádrokartónu</li>
               <li>✓ Inštalatéri a elektrikári</li>
               <li>✓ Stavebné firmy</li>
             </ul>
-            <p className="text-white/60 text-xs mt-4 italic">
+            <p className="text-zinc-500 text-xs mt-4 italic">
               Pre každodenné profesionálne použitie
             </p>
           </div>
@@ -334,7 +334,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Naša Skúsenosť: Prečo Odporúčame Tento Laser</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Naša Skúsenosť: Prečo Odporúčame Tento Laser</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-green-500/30 rounded-2xl p-6 md:p-8">
           <p className="text-white/90 leading-relaxed mb-4">
@@ -388,10 +388,10 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-green-500/10 to-green-600/10 border-2 border-green-500/50 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-black text-white mb-4 text-center">
+          <h3 className="text-2xl font-black text-zinc-900 mb-4 text-center">
             Prenajmite si NIVEL CL3G v Royal Stroje
           </h3>
-          <p className="text-white/80 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+          <p className="text-zinc-700 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
             Potrebujete presné meranie na váš projekt? Máme NIVEL CL3G pripravený ako kompletný set
             so statívom a latou.
           </p>
@@ -427,7 +427,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Záverečné Hodnotenie</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Záverečné Hodnotenie</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-8">

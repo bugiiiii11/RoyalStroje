@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Plánujete stavebný projekt na jar 2026? Zistite, ktorých 5 strojov sú absolútne nevyhnutné pre terénne úpravy, základy a záhradné projekty.',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           Jar je tradične najaktívnejšie obdobie pre stavebné projekty na Slovensku. Pôda je dostatočne rozmrznutá,
           počasie praje a máte pred sebou celé leto na dokončenie projektu. Ale ktoré stroje by ste si mali prenajať
           pre úspešný start?
@@ -38,8 +38,8 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">1. Minirýpadlo: Srdce Každého Projektu</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">1. Minirýpadlo: Srdce Každého Projektu</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Bez minirýpadla sa na stavbe nezaobídete. Je to najuniverzálnejší stroj, ktorý zvládne 80% prác.
         </p>
 
@@ -85,8 +85,8 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">2. Vibračná Doska: Pre Perfektné Základy</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">2. Vibračná Doska: Pre Perfektné Základy</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Hutniaca technika je absolútne nevyhnutná. Bez riadneho zhutnenia pôdy sa vaše základy časom poddajú.
         </p>
 
@@ -135,14 +135,14 @@ const article = {
 
         <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-3">💡 Profesionálny Tip</h3>
-          <p className="text-white/90 text-sm leading-relaxed">
+          <p className="text-zinc-700 text-sm leading-relaxed">
             Hutníte po vrstvách! Ideálna výška vrstvy je 20-30 cm. Najčastejšia chyba začiatočníkov je snaha zhutniť
             príliš hrubú vrstvu naraz (50+ cm) – to nefunguje. Musíte hutniť po menších vrstvách, inak sa vnútro nezhutnené ostane.
           </p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">3. Kalové Čerpadlo: Riešenie Spodnej Vody</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">3. Kalové Čerpadlo: Riešenie Spodnej Vody</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Jar znamená vysokú hladinu spodnej vody. Až 60% jarných výkopov potrebuje odčerpávanie vody.
         </p>
 
@@ -190,8 +190,8 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">4. Nákladné Auto / Kontajner: Odvoz Zeminy</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">4. Nákladné Auto / Kontajner: Odvoz Zeminy</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Každý výkop produkuje veľké množstvo zeminy. Kam s ňou? Prenájom kontajneru je najjednoduchšie riešenie.
         </p>
 
@@ -235,8 +235,8 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">5. Mobilný Sanitárny Kontajner: Pohodlie na Stavbe</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">5. Mobilný Sanitárny Kontajner: Pohodlie na Stavbe</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Na to sa často zabúda, ale je to kľúčové – kde pôjdu robotníci na WC? Mobilný sanitárny kontajner je hygienické
           a povinné riešenie.
         </p>
@@ -279,14 +279,14 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Jarný Balíček "Štart do Stavby" 2026</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Jarný Balíček "Štart do Stavby" 2026</h2>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
           <div className="text-center mb-6">
-            <h3 className="text-2xl font-black text-white mb-2">
+            <h3 className="text-2xl font-black text-zinc-900 mb-2">
               Ušetrite až <span className="text-orange-primary">20%</span> s našim balíčkom!
             </h3>
-            <p className="text-white/70">Prenájom na 7+ dní = automatická zľava</p>
+            <p className="text-zinc-600">Prenájom na 7+ dní = automatická zľava</p>
           </div>
 
           <div className="bg-zinc-900/50 rounded-xl p-6">
@@ -342,7 +342,7 @@ const article = {
           </div>
 
           <div className="mt-6 text-center">
-            <p className="text-white/80 text-sm mb-4">
+            <p className="text-zinc-700 text-sm mb-4">
               ⏰ <strong>Jarná akcia platí do 30.6.2026</strong> alebo do vypredania kapacít
             </p>
             <a
@@ -354,7 +354,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Časový Harmonogram: Kedy Čo Prenajať?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Časový Harmonogram: Kedy Čo Prenajať?</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
           <div className="space-y-6">
@@ -408,10 +408,10 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/10 to-orange-hover/10 border-2 border-orange-primary/50 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-black text-white mb-4 text-center">
+          <h3 className="text-2xl font-black text-zinc-900 mb-4 text-center">
             Pripravené Na Váš Projekt: Naše Mini-Rýpadlá
           </h3>
-          <p className="text-white/80 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+          <p className="text-zinc-700 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
             Všetky naše minirýpadlá sú pripravené, pravidelne servisované a overené stovkami zákazníkov.
             Vyberte si podľa typu vášho projektu:
           </p>
@@ -446,8 +446,8 @@ const article = {
                 <h4 className="text-orange-primary font-bold">Mini-Rýpadlo 1.8t</h4>
                 <span className="text-orange-primary text-lg font-black">90 €/deň</span>
               </div>
-              <p className="text-white/70 text-sm mb-2">Hĺbka 2,8 m · Šírka 100-120 cm</p>
-              <p className="text-white/60 text-xs">→ Garáže, základy domov, väčšie výkopy</p>
+              <p className="text-zinc-600 text-sm mb-2">Hĺbka 2,8 m · Šírka 100-120 cm</p>
+              <p className="text-zinc-500 text-xs">→ Garáže, základy domov, väčšie výkopy</p>
               <div className="mt-3 text-orange-primary text-sm font-bold group-hover:gap-2 flex items-center gap-1 transition-all">
                 <span>Pozrieť detail</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -490,8 +490,8 @@ const article = {
           </div>
 
           <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6">
-            <p className="text-blue-400 font-bold mb-2">🎯 Všetko v cene prenájmu:</p>
-            <div className="grid md:grid-cols-3 gap-3 text-white/80 text-sm">
+            <p className="text-blue-700 font-bold mb-2">🎯 Všetko v cene prenájmu:</p>
+            <div className="grid md:grid-cols-3 gap-3 text-zinc-700 text-sm">
               <div>✓ Doprava ZADARMO do 30 km</div>
               <div>✓ Technická podpora 24/7</div>
               <div>✓ 2-3 lopátky v cene</div>
@@ -518,8 +518,8 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
-          <h3 className="text-xl font-bold text-white mb-3">Záver: Prečo Si Prenajať u Royal Stroje?</h3>
-          <div className="grid md:grid-cols-2 gap-4 text-white/90 text-sm">
+          <h3 className="text-xl font-bold text-zinc-900 mb-3">Záver: Prečo Si Prenajať u Royal Stroje?</h3>
+          <div className="grid md:grid-cols-2 gap-4 text-zinc-700 text-sm">
             <ul className="space-y-2">
               <li>✓ <strong>Komplexné balíčky</strong> so zľavou až 20%</li>
               <li>✓ <strong>Lokálna požičovňa</strong> = rýchla dostupnosť</li>

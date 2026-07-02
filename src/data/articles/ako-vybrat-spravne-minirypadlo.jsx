@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Minirýpadlo je jeden z najuniverzálnejších stavebných strojov.',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           Minirýpadlo je jeden z najuniverzálnejších stavebných strojov. Dokáže kopať základy, čistiť pozemky, demolovať,
           a dokonca presúvať materiál. Ale s desiatskami modelov a veľkostí na trhu, ako si vybrať to pravé?
         </p>
@@ -28,16 +28,16 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Naše Minirýpadlá: Nájdite Perfektnú Veľkosť Pre Váš Projekt</h2>
-        <p className="text-white/80 leading-relaxed mb-4">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Naše Minirýpadlá: Nájdite Perfektnú Veľkosť Pre Váš Projekt</h2>
+        <p className="text-zinc-700 leading-relaxed mb-4">
           V Royal Stroje máme <strong className="text-orange-primary">4 veľkosti minirýpadiel</strong>, ktoré pokryjú 95% všetkých
           stavebných a záhradných projektov. Pozrime sa na ne detailne s reálnymi príkladmi použitia.
         </p>
 
         <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6">
-          <p className="text-blue-400 font-bold mb-2">💡 Ako Si Vybrať?</p>
-          <p className="text-white/80 text-sm">
-            Zvoľte si podľa <strong className="text-white">hĺbky výkopu</strong> a <strong className="text-white">objemu prác</strong>.
+          <p className="text-blue-700 font-bold mb-2">💡 Ako Si Vybrať?</p>
+          <p className="text-zinc-700 text-sm">
+            Zvoľte si podľa <strong className="text-zinc-900">hĺbky výkopu</strong> a <strong className="text-zinc-900">objemu prác</strong>.
             Ak si nie ste istí, zavolajte nám - pomôžeme vám vybrať správnu veľkosť a ušetríte peniaze.
           </p>
         </div>
@@ -306,8 +306,8 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">2. Kľúčové Technické Parametre</h2>
-        <p className="text-white/80 leading-relaxed">Pri výbere minirýpadla sledujte tieto hodnoty:</p>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">2. Kľúčové Technické Parametre</h2>
+        <p className="text-zinc-700 leading-relaxed">Pri výbere minirýpadla sledujte tieto hodnoty:</p>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -335,7 +335,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">3. Príslušenstvo a Nadstavby</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">3. Príslušenstvo a Nadstavby</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -353,10 +353,10 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Ako Si Vybrať Pre Váš Projekt?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Ako Si Vybrať Pre Váš Projekt?</h2>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
-          <h3 className="text-xl font-bold text-white mb-4">Rozhodovací Strom - Jednoduché Kroky:</h3>
+          <h3 className="text-xl font-bold text-zinc-900 mb-4">Rozhodovací Strom - Jednoduché Kroky:</h3>
 
           <div className="space-y-4">
             <div className="bg-zinc-900/50 rounded-lg p-4">
@@ -447,7 +447,7 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/10 to-orange-hover/10 border-2 border-orange-primary/50 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-black text-white mb-4 text-center">Ktoré Mini-Rýpadlo Si Vybrať?</h3>
+          <h3 className="text-2xl font-black text-zinc-900 mb-4 text-center">Ktoré Mini-Rýpadlo Si Vybrať?</h3>
 
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             <div className="bg-zinc-900/50 rounded-xl p-5">
@@ -480,8 +480,8 @@ const article = {
           </div>
 
           <div className="bg-orange-primary/20 border border-orange-primary/40 rounded-xl p-4 text-center">
-            <p className="text-white font-bold mb-2">💡 Nie ste si istí?</p>
-            <p className="text-white/80 text-sm mb-4">
+            <p className="text-zinc-900 font-bold mb-2">💡 Nie ste si istí?</p>
+            <p className="text-zinc-700 text-sm mb-4">
               Zavolajte nám a opíšte svoj projekt - poradíme vám správnu veľkosť a ušetríte peniaze!
             </p>
             <div className="flex flex-wrap justify-center gap-4">

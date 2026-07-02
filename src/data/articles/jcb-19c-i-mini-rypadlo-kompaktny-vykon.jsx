@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Kompletný prehľad mini-rýpadla JCB 19C-I - 1,83 tony hmotnosti, hĺbka výkopu 2,4 m, kompaktné rozmery pre stiesnené priestory a robustný H-rám. Prečo je toto mini-rýpadlo ideálnou voľbou pre malé stavby, výkopy a terénne úpravy?',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           JCB 19C-I je páskové mini-rýpadlo, ktoré spája kompaktné rozmery s výkonom potrebným pre náročné stavebné práce.
           S hmotnosťou len 1,83 tony, hĺbkou výkopu 2,4 metra a šírkou pod 1 meter sa dostane všade tam, kde sa veľké stroje
           jednoducho nezmestia. Pozrime sa, prečo je tento stroj jednou z najobľúbenejších volieb pre prenájom na malé a
@@ -29,7 +29,7 @@ const article = {
           </ul>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Technické Parametre: Čísla, Ktoré Rozhodujú</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Technické Parametre: Čísla, Ktoré Rozhodujú</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
@@ -85,13 +85,13 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Kompaktné Rozmery: Hlavná Sila JCB 19C-I</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Kompaktné Rozmery: Hlavná Sila JCB 19C-I</h2>
 
         <div className="bg-gradient-to-br from-blue-900/20 to-blue-950/20 border border-blue-500/30 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-blue-400 mb-4">Prečo Sú Rozmery Kľúčové?</h3>
-          <p className="text-white/80 mb-4 leading-relaxed">
-            Šírka <strong className="text-white">980 mm</strong> robí z JCB 19C-I jeden z mála strojov, ktoré
-            <strong className="text-white"> prejdú cez štandardnú bránu</strong> rodinného domu (1 m). Pri rozšírení podvozku
+          <h3 className="text-xl font-bold text-blue-700 mb-4">Prečo Sú Rozmery Kľúčové?</h3>
+          <p className="text-zinc-700 mb-4 leading-relaxed">
+            Šírka <strong className="text-zinc-900">980 mm</strong> robí z JCB 19C-I jeden z mála strojov, ktoré
+            <strong className="text-zinc-900"> prejdú cez štandardnú bránu</strong> rodinného domu (1 m). Pri rozšírení podvozku
             získate stabilitu 1 330 mm pre prácu vo svahu.
           </p>
 
@@ -122,7 +122,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Robustná Konštrukcia: Vyrobené Pre Stavbu</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Robustná Konštrukcia: Vyrobené Pre Stavbu</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl p-6">
@@ -152,14 +152,14 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Praktické Využitie: Pre Aké Práce Je Určený?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Praktické Využitie: Pre Aké Práce Je Určený?</h2>
 
         <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">Najčastejšie Aplikácie</h3>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Stavebné Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Stavebné Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Výkopy základov pre rodinné domy a garáže</li>
                 <li>• Príprava plôch pre terasy, bazény, prístrešky</li>
                 <li>• Výkopy pre oporné múry a ploty</li>
@@ -167,8 +167,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Inžinierske Siete</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Inžinierske Siete</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Výkopy pre vodovodné a kanalizačné prípojky</li>
                 <li>• Pokládka plynu, elektriky, optiky</li>
                 <li>• Drenáže okolo budov</li>
@@ -176,8 +176,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Záhradné Úpravy</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Záhradné Úpravy</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Terénne úpravy a vyrovnávanie pozemku</li>
                 <li>• Výkopy pre jazierka a záhradné prvky</li>
                 <li>• Príprava výsadby stromov a živých plotov</li>
@@ -185,8 +185,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Komunálne Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Komunálne Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Údržba chodníkov a obrubníkov</li>
                 <li>• Čistenie priekop a kanálov</li>
                 <li>• Malé opravy ciest</li>
@@ -237,7 +237,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Reálny Výkon: Čo Zvládnete Za Deň?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Reálny Výkon: Čo Zvládnete Za Deň?</h2>
 
         <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">Orientačné Hodnoty Pri 8-Hodinovej Práci</h3>
@@ -280,50 +280,50 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Porovnanie: JCB 19C-I vs. Konkurencia</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Porovnanie: JCB 19C-I vs. Konkurencia</h2>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-white/80 border-collapse">
+          <table className="w-full text-sm text-zinc-700 border-collapse">
             <thead>
               <tr className="bg-orange-primary/20 border-b-2 border-orange-primary">
-                <th className="text-left p-3 font-bold text-white">Vlastnosť</th>
+                <th className="text-left p-3 font-bold text-zinc-900">Vlastnosť</th>
                 <th className="text-center p-3 font-bold text-orange-primary">JCB 19C-I</th>
-                <th className="text-center p-3 font-bold text-white/70">Takeuchi TB216</th>
-                <th className="text-center p-3 font-bold text-white/70">Kubota U17-3</th>
+                <th className="text-center p-3 font-bold text-zinc-600">Takeuchi TB216</th>
+                <th className="text-center p-3 font-bold text-zinc-600">Kubota U17-3</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3 font-semibold">Hmotnosť</td>
                 <td className="text-center p-3 text-orange-primary font-bold">1 830 kg</td>
                 <td className="text-center p-3">1 770 kg</td>
                 <td className="text-center p-3">1 720 kg</td>
               </tr>
-              <tr className="border-b border-white/10 bg-zinc-900/30">
+              <tr className="border-b border-zinc-200 bg-zinc-50">
                 <td className="p-3 font-semibold">Hĺbka výkopu</td>
                 <td className="text-center p-3 text-orange-primary font-bold">2 426 mm</td>
                 <td className="text-center p-3">2 320 mm</td>
                 <td className="text-center p-3">2 320 mm</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3 font-semibold">Šírka podvozku</td>
                 <td className="text-center p-3 text-orange-primary font-bold">980 mm</td>
                 <td className="text-center p-3">990 mm</td>
                 <td className="text-center p-3">990 mm</td>
               </tr>
-              <tr className="border-b border-white/10 bg-zinc-900/30">
+              <tr className="border-b border-zinc-200 bg-zinc-50">
                 <td className="p-3 font-semibold">Lyžice v cene</td>
                 <td className="text-center p-3 text-orange-primary font-bold">4 ks (300/450/600 + svah)</td>
                 <td className="text-center p-3">1 - 2 ks</td>
                 <td className="text-center p-3">1 - 2 ks</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3 font-semibold">Konštrukcia podvozku</td>
-                <td className="text-center p-3 text-green-500 font-bold">100% oceľ (H-rám)</td>
-                <td className="text-center p-3 text-green-500">Oceľ</td>
-                <td className="text-center p-3 text-green-500">Oceľ</td>
+                <td className="text-center p-3 text-green-700 font-bold">100% oceľ (H-rám)</td>
+                <td className="text-center p-3 text-green-700">Oceľ</td>
+                <td className="text-center p-3 text-green-700">Oceľ</td>
               </tr>
-              <tr className="bg-zinc-900/30">
+              <tr className="bg-zinc-50">
                 <td className="p-3 font-semibold">Cena prenájmu / deň</td>
                 <td className="text-center p-3 text-orange-primary font-bold">95 € bez DPH</td>
                 <td className="text-center p-3">100 - 120 €</td>
@@ -334,14 +334,14 @@ const article = {
         </div>
 
         <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 mt-4">
-          <p className="text-green-500 font-bold mb-2">🏆 Verdikt:</p>
-          <p className="text-white/80 text-sm">
-            JCB 19C-I ponúka <strong className="text-white">najväčšiu hĺbku výkopu v kategórii</strong> pri konkurenčnej cene
+          <p className="text-green-700 font-bold mb-2">🏆 Verdikt:</p>
+          <p className="text-zinc-700 text-sm">
+            JCB 19C-I ponúka <strong className="text-zinc-900">najväčšiu hĺbku výkopu v kategórii</strong> pri konkurenčnej cene
             a so 4 lyžicami v balíku. Renomé značky JCB + robustný H-rám = istota dlhej životnosti aj pri intenzívnom prenájme.
           </p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Prečo Si Prenajať Namiesto Kúpy?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Prečo Si Prenajať Namiesto Kúpy?</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -393,7 +393,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Záverečné Hodnotenie</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Záverečné Hodnotenie</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-8">

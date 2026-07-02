@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Kompletný prehľad pracovných kôz TOUGHBUILT TB-C700 - 100% oceľová konštrukcia, nosnosť až 1,180 kg v páre, výškovo nastaviteľné nohy a revolučný samonivelačný systém. Prečo sú tieto kozy najlepšou voľbou pre profesionálov?',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           TOUGHBUILT TB-C700 nie sú len ďalšie pracovné kozy na trhu. Sú to profesionálne nástroje navrhnuté
           pre tých, ktorí potrebujú <strong className="text-orange-primary">absolútnu spoľahlivosť, stabilitu a bezpečnosť</strong> na
           stavbe. S nosnosťou až 1,180 kg v páre a 100% oceľovou konštrukciou patria medzi najodolnejšie kozy,
@@ -49,7 +49,7 @@ const article = {
           </ul>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Technické Parametre: Čo Potrebujete Vedieť</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Technické Parametre: Čo Potrebujete Vedieť</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
@@ -108,9 +108,9 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Stabilita a Bezpečnosť: Vaša Ochrana Na Prvom Mieste</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Stabilita a Bezpečnosť: Vaša Ochrana Na Prvom Mieste</h2>
 
-        <p className="text-white/80 leading-relaxed">
+        <p className="text-zinc-700 leading-relaxed">
           Práca vo výškach môže byť nebezpečná, preto TOUGHBUILT implementoval <strong className="text-orange-primary">niekoľko revolučných bezpečnostných systémov</strong>,
           ktoré robia z TB-C700 jedny z najbezpečnejších pracovných kôz na trhu:
         </p>
@@ -146,9 +146,9 @@ const article = {
 
         <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">⚠️ Bezpečnostné Tipy Pri Práci s Kozami</h3>
-          <div className="grid md:grid-cols-2 gap-4 text-white/80 text-sm">
+          <div className="grid md:grid-cols-2 gap-4 text-zinc-700 text-sm">
             <div>
-              <h4 className="text-white font-bold mb-2">✓ Čo robiť:</h4>
+              <h4 className="text-zinc-900 font-bold mb-2">✓ Čo robiť:</h4>
               <ul className="space-y-1">
                 <li>• Vždy používajte kozy v páre pre maximálnu stabilitu</li>
                 <li>• Skontrolujte zamknutie nôh pred začatím práce</li>
@@ -157,7 +157,7 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-2">✗ Čo nerobiť:</h4>
+              <h4 className="text-zinc-900 font-bold mb-2">✗ Čo nerobiť:</h4>
               <ul className="space-y-1">
                 <li>• Neprekračujte maximálnu nosnosť 1,180 kg (pár)</li>
                 <li>• Nestavajte kozy na klzkú alebo nestabilnú plochu</li>
@@ -168,17 +168,17 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Praktické Využitie: Pre Aké Práce Sú Vhodné?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Praktické Využitie: Pre Aké Práce Sú Vhodné?</h2>
 
         <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">Univerzálne Použitie Na Stavbe</h3>
-          <p className="text-white/80 mb-4">
-            TOUGHBUILT TB-C700 sú skutočne <strong className="text-white">všestranný nástroj</strong>. Vynikajú pri:
+          <p className="text-zinc-700 mb-4">
+            TOUGHBUILT TB-C700 sú skutočne <strong className="text-zinc-900">všestranný nástroj</strong>. Vynikajú pri:
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Stavebné Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Stavebné Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Podpora dosiek pri rezaní a opracovávaní dreva</li>
                 <li>• Práca s dlhými materiálmi (fošne, profily, latky)</li>
                 <li>• Montáž sadrokartónu a stropných podhľadov</li>
@@ -187,8 +187,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Špecializované Použitie</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Špecializované Použitie</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Rezanie rúr PVC, EMT a kovových profilov (vďaka výrezom)</li>
                 <li>• Triedenie a podpora dlhých materiálov (podperné kolíky)</li>
                 <li>• Dočasný pracovný stôl pre náradie a materiály</li>
@@ -229,7 +229,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pre Koho Sú TOUGHBUILT TB-C700 Vhodné?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pre Koho Sú TOUGHBUILT TB-C700 Vhodné?</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-orange-primary/20 to-orange-hover/20 border-2 border-orange-primary rounded-2xl p-6 relative">
@@ -238,16 +238,16 @@ const article = {
             </div>
             <div className="text-center mb-4">
               <div className="text-4xl mb-2">👷</div>
-              <h4 className="text-white font-black text-lg">Profesionálni Stavbári</h4>
+              <h4 className="text-zinc-900 font-black text-lg">Profesionálni Stavbári</h4>
             </div>
-            <ul className="space-y-2 text-white/80 text-sm">
+            <ul className="space-y-2 text-zinc-700 text-sm">
               <li>✓ Murári a obkladači</li>
               <li>✓ Tesári a stolári</li>
               <li>✓ Inštalatéri a elektrikári</li>
               <li>✓ Stavebné firmy</li>
               <li>✓ Údržbári a renovační</li>
             </ul>
-            <p className="text-white/60 text-xs mt-4 italic">
+            <p className="text-zinc-500 text-xs mt-4 italic">
               Pre každodenné použitie na stavbách - maximálna spoľahlivosť
             </p>
           </div>
@@ -287,7 +287,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Naša Skúsenosť: Prečo Odporúčame Tieto Kozy</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Naša Skúsenosť: Prečo Odporúčame Tieto Kozy</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
           <p className="text-white/90 leading-relaxed mb-4">
@@ -344,10 +344,10 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/10 to-orange-hover/10 border-2 border-orange-primary/50 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-black text-white mb-4 text-center">
+          <h3 className="text-2xl font-black text-zinc-900 mb-4 text-center">
             Prenajmite si TOUGHBUILT TB-C700 v Royal Stroje
           </h3>
-          <p className="text-white/80 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+          <p className="text-zinc-700 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
             Potrebujete stabilné a spoľahlivé pracovné kozy na váš projekt? Máme TOUGHBUILT TB-C700
             pripravené a odskúšané. Pár kôz s nosnosťou 1,180 kg - perfektné pre akýkoľvek stavebný projekt.
           </p>
@@ -383,7 +383,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Záverečné Hodnotenie</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Záverečné Hodnotenie</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-8">

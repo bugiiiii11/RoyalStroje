@@ -9,12 +9,12 @@ const article = {
       <div className="space-y-8">
         {/* Main Question */}
         <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 border border-blue-400/30 rounded-2xl p-8">
-          <h2 className="text-3xl font-black text-white mb-6">❄️ Dá Sa Stavať V Zime?</h2>
+          <h2 className="text-3xl font-black text-zinc-900 mb-6">❄️ Dá Sa Stavať V Zime?</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6">
-              <h3 className="text-green-400 font-black text-2xl mb-4">✓ ÁNO</h3>
-              <p className="text-white/90 mb-4 font-bold">Čo SA DÁ robiť v zime:</p>
-              <ul className="space-y-2 text-white/80">
+              <h3 className="text-green-700 font-black text-2xl mb-4">✓ ÁNO</h3>
+              <p className="text-zinc-700 mb-4 font-bold">Čo SA DÁ robiť v zime:</p>
+              <ul className="space-y-2 text-zinc-700">
                 <li>• Demolácie (nútené vykurovanie ešte nie je)</li>
                 <li>• Terénne úpravy (do -5°C)</li>
                 <li>• Výkopy (ak nie je zamrznuté)</li>
@@ -24,9 +24,9 @@ const article = {
               </ul>
             </div>
             <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
-              <h3 className="text-red-400 font-black text-2xl mb-4">✗ NIE</h3>
-              <p className="text-white/90 mb-4 font-bold">Čo SA NEDÁ robiť v zime:</p>
-              <ul className="space-y-2 text-white/80">
+              <h3 className="text-red-600 font-black text-2xl mb-4">✗ NIE</h3>
+              <p className="text-zinc-700 mb-4 font-bold">Čo SA NEDÁ robiť v zime:</p>
+              <ul className="space-y-2 text-zinc-700">
                 <li>• Betonáž (pod -3°C bez aditív)</li>
                 <li>• Murování (malta mrznie)</li>
                 <li>• Omietky (dlhé schnutie)</li>
@@ -39,7 +39,7 @@ const article = {
 
         {/* 5 Winter Challenges */}
         <div>
-          <h2 className="text-2xl font-black text-white mb-6">🧊 5 Zimných Výziev</h2>
+          <h2 className="text-2xl font-black text-zinc-900 mb-6">🧊 5 Zimných Výziev</h2>
 
           {/* Challenge 1 */}
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6 mb-4">
@@ -153,13 +153,13 @@ const article = {
 
         {/* What Works in Winter */}
         <div>
-          <h2 className="text-2xl font-black text-white mb-4">✅ Čo Funguje V Zime Skvele</h2>
+          <h2 className="text-2xl font-black text-zinc-900 mb-4">✅ Čo Funguje V Zime Skvele</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {/* Demolitions */}
             <div className="bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/30 rounded-xl p-6">
-              <h3 className="text-green-400 font-bold text-lg mb-3">1. Demolácie</h3>
-              <p className="text-white/80 mb-3"><strong className="text-white">Prečo ideálne v zime:</strong></p>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h3 className="text-green-700 font-bold text-lg mb-3">1. Demolácie</h3>
+              <p className="text-zinc-700 mb-3"><strong className="text-zinc-900">Prečo ideálne v zime:</strong></p>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>✓ Nútené vykurovanie ešte neprebieha</li>
                 <li>✓ Prach sa lepšie usádza (vlhkosť)</li>
                 <li>✓ Odvoz sutiny lacnejší (mimo sezónu)</li>
@@ -169,9 +169,9 @@ const article = {
 
             {/* Excavations */}
             <div className="bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/30 rounded-xl p-6">
-              <h3 className="text-green-400 font-bold text-lg mb-3">2. Výkopy (do -5°C)</h3>
-              <p className="text-white/80 mb-3"><strong className="text-white">Podmienky:</strong></p>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h3 className="text-green-700 font-bold text-lg mb-3">2. Výkopy (do -5°C)</h3>
+              <p className="text-zinc-700 mb-3"><strong className="text-zinc-900">Podmienky:</strong></p>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>✓ Teplota nad -5°C</li>
                 <li>✓ Pôda nezamrznutá hlbšie než 20 cm</li>
                 <li>✓ Použiť ťažší stroj (3-5t)</li>
@@ -181,9 +181,9 @@ const article = {
 
             {/* Material Preparation */}
             <div className="bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/30 rounded-xl p-6">
-              <h3 className="text-green-400 font-bold text-lg mb-3">3. Príprava Materiálu</h3>
-              <p className="text-white/80 mb-3"><strong className="text-white">Využite zimu na:</strong></p>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h3 className="text-green-700 font-bold text-lg mb-3">3. Príprava Materiálu</h3>
+              <p className="text-zinc-700 mb-3"><strong className="text-zinc-900">Využite zimu na:</strong></p>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>✓ Objednávku materiálu (lacnejšie ceny v zime)</li>
                 <li>✓ Dopravu (dostupnosť kamionov)</li>
                 <li>✓ Skladovanie na stavbe (pripravené na jar)</li>
@@ -193,9 +193,9 @@ const article = {
 
             {/* Interior Work */}
             <div className="bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/30 rounded-xl p-6">
-              <h3 className="text-green-400 font-bold text-lg mb-3">4. Vnútorné Práce</h3>
-              <p className="text-white/80 mb-3"><strong className="text-white">S vykurovaním:</strong></p>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h3 className="text-green-700 font-bold text-lg mb-3">4. Vnútorné Práce</h3>
+              <p className="text-zinc-700 mb-3"><strong className="text-zinc-900">S vykurovaním:</strong></p>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>✓ Elektrorozvody</li>
                 <li>✓ Rozvody vody a kúrenia</li>
                 <li>✓ Sadrokartóny</li>
@@ -207,7 +207,7 @@ const article = {
 
         {/* Machinery in Winter */}
         <div>
-          <h2 className="text-2xl font-black text-white mb-4">🛠️ Mechanizácia V Zime: Čo Treba Vedieť</h2>
+          <h2 className="text-2xl font-black text-zinc-900 mb-4">🛠️ Mechanizácia V Zime: Čo Treba Vedieť</h2>
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
             <div className="space-y-6">
               <div>
@@ -264,8 +264,8 @@ const article = {
 
         {/* Winter Discounts */}
         <div className="bg-gradient-to-br from-orange-500/10 to-orange-600/10 border border-orange-primary/30 rounded-2xl p-8">
-          <h2 className="text-2xl font-black text-white mb-4">❄️ Zimné Zľavy až -30%!</h2>
-          <p className="text-white/90 mb-6 text-lg">December - Február = Mimo sezóna = Najnižšie ceny roka!</p>
+          <h2 className="text-2xl font-black text-zinc-900 mb-4">❄️ Zimné Zľavy až -30%!</h2>
+          <p className="text-zinc-700 mb-6 text-lg">December - Február = Mimo sezóna = Najnižšie ceny roka!</p>
 
           {/* Winter Package */}
           <div className="bg-zinc-900 border border-orange-primary/50 rounded-xl p-6 mb-6">
@@ -308,18 +308,18 @@ const article = {
             </div>
           </div>
 
-          <p className="text-white/70 text-center text-sm">
+          <p className="text-zinc-600 text-center text-sm">
             ❄️ <strong className="text-orange-primary">Platnosť:</strong> 1. December 2026 - 28. Február 2026
           </p>
         </div>
 
         {/* Safety */}
         <div>
-          <h2 className="text-2xl font-black text-white mb-4">⚠️ Bezpečnosť V Zime</h2>
+          <h2 className="text-2xl font-black text-zinc-900 mb-4">⚠️ Bezpečnosť V Zime</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
-              <h4 className="text-red-400 font-bold mb-3">Riziká:</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-red-600 font-bold mb-3">Riziká:</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Šmykľavé povrchy (ľad na strojoch)</li>
                 <li>• Zlá viditeľnosť (skorý súmrak)</li>
                 <li>• Omrzliny (práca bez rukavíc)</li>
@@ -327,8 +327,8 @@ const article = {
               </ul>
             </div>
             <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
-              <h4 className="text-green-400 font-bold mb-3">Ochrana:</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-green-700 font-bold mb-3">Ochrana:</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>✓ Zimná obuv s protišmykovou podrážkou</li>
                 <li>✓ Pracovné rukavice (termo)</li>
                 <li>✓ Reflexná vesta (viditeľnosť)</li>
@@ -343,7 +343,7 @@ const article = {
         <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
           <h2 className="text-2xl font-black text-white mb-4">📖 Case Study: Demolácia V Decembri</h2>
           <div className="space-y-4">
-            <div className="border-l-4 border-orange-primary pl-4">
+            <div className="rounded-xl border border-orange-primary/25 bg-orange-primary/[0.08] px-4 py-3">
               <h4 className="text-white font-bold mb-2">Projekt: Demolácia starého domu (Bratislava)</h4>
               <p className="text-white/70 text-sm">Dátum: 15. - 20. December 2024 | Teplota: -2°C až +3°C</p>
             </div>
@@ -363,7 +363,7 @@ const article = {
                 <li>✓ Na jar pripravený pozemok</li>
               </ul>
             </div>
-            <blockquote className="border-l-4 border-orange-primary pl-4 italic text-white/90 mt-4">
+            <blockquote className="rounded-xl border border-orange-primary/25 bg-orange-primary/[0.08] px-4 py-3 italic text-white/90 mt-4">
               "Bál som sa stavať v zime, ale Royal Stroje ma presvedčili. Ušetril som 420 € a na jar môžem rovno začať s výkopmi!" - Martin P., Bratislava
             </blockquote>
           </div>

@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Aktuálne ceny prenájmu stavebnej mechanizácie na Slovensku 2026.',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           Plánujete stavbu alebo rekonštrukciu a potrebujete prenajať mechanizáciu? Ceny na Slovensku sa líšia podľa požičovne, regiónu a dĺžky prenájmu. V tomto komplexnom cenníkovom sprievodcovi nájdete aktuálne ceny za rok 2026, porovnanie požičovní a kalkulačku nákladov.
         </p>
 
@@ -27,58 +27,58 @@ const article = {
           </ul>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Komplexný Cenník 2026</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Komplexný Cenník 2026</h2>
 
         <h3 className="text-xl md:text-2xl font-bold text-orange-primary">Minirýpadlá</h3>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-white/20">
-                <th className="p-3 text-white font-bold">Prenájom</th>
-                <th className="p-3 text-white font-bold">Royal Stroje</th>
-                <th className="p-3 text-white font-bold">BestRent</th>
-                <th className="p-3 text-white font-bold">Priemer SK</th>
+              <tr className="border-b border-zinc-300">
+                <th className="p-3 text-zinc-900 font-bold">Prenájom</th>
+                <th className="p-3 text-zinc-900 font-bold">Royal Stroje</th>
+                <th className="p-3 text-zinc-900 font-bold">BestRent</th>
+                <th className="p-3 text-zinc-900 font-bold">Priemer SK</th>
               </tr>
             </thead>
-            <tbody className="text-white/80">
-              <tr className="border-b border-white/10">
-                <td className="p-3 font-semibold text-white" colSpan={4}>Mikro Minirýpadlá (0,8-1,5t)</td>
+            <tbody className="text-zinc-700">
+              <tr className="border-b border-zinc-200">
+                <td className="p-3 font-semibold text-zinc-900" colSpan={4}>Mikro Minirýpadlá (0,8-1,5t)</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3">1 deň</td>
                 <td className="p-3 text-orange-primary font-bold">60 €</td>
                 <td className="p-3">65 €</td>
                 <td className="p-3">65 €</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3">Týždeň</td>
                 <td className="p-3 text-orange-primary font-bold">350 € (50 €/deň)</td>
                 <td className="p-3">400 € (57 €)</td>
                 <td className="p-3">390 €</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3">Mesiac</td>
                 <td className="p-3 text-orange-primary font-bold">1200 € (40 €/deň)</td>
                 <td className="p-3">1400 € (47 €)</td>
                 <td className="p-3">1370 €</td>
               </tr>
-              <tr className="border-b border-white/10">
-                <td className="p-3 font-semibold text-white" colSpan={4}>Malé Minirýpadlá (1,5-3t) - NAJPOPULÁRNEJŠIE!</td>
+              <tr className="border-b border-zinc-200">
+                <td className="p-3 font-semibold text-zinc-900" colSpan={4}>Malé Minirýpadlá (1,5-3t) - NAJPOPULÁRNEJŠIE!</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3">1 deň</td>
                 <td className="p-3 text-orange-primary font-bold">70 €</td>
                 <td className="p-3">75 €</td>
                 <td className="p-3">75 €</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3">Týždeň</td>
                 <td className="p-3 text-orange-primary font-bold">420 € (60 €/deň)</td>
                 <td className="p-3">480 € (69 €)</td>
                 <td className="p-3">470 €</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3">Mesiac</td>
                 <td className="p-3 text-orange-primary font-bold">1500 € (50 €/deň)</td>
                 <td className="p-3">1700 € (57 €)</td>
@@ -89,19 +89,19 @@ const article = {
         </div>
 
         <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-green-500 mb-4">Príklad úspory - Projekt RD</h3>
-          <p className="text-white/90 mb-4">Základy rodinného domu 10×12 m, prenájom 5 dní:</p>
+          <h3 className="text-xl font-bold text-green-700 mb-4">Príklad úspory - Projekt RD</h3>
+          <p className="text-zinc-700 mb-4">Základy rodinného domu 10×12 m, prenájom 5 dní:</p>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <p className="text-white font-bold mb-2">Royal Stroje:</p>
-              <p className="text-white/80">5 × 60 € = <span className="text-green-500 font-bold">300 €</span></p>
+              <p className="text-zinc-900 font-bold mb-2">Royal Stroje:</p>
+              <p className="text-zinc-700">5 × 60 € = <span className="text-green-700 font-bold">300 €</span></p>
             </div>
             <div>
-              <p className="text-white font-bold mb-2">BestRent:</p>
-              <p className="text-white/80">5 × 75 € = 375 €</p>
+              <p className="text-zinc-900 font-bold mb-2">BestRent:</p>
+              <p className="text-zinc-700">5 × 75 € = 375 €</p>
             </div>
           </div>
-          <p className="text-green-500 font-bold text-xl mt-4">Úspora: 75 € (20%)</p>
+          <p className="text-green-700 font-bold text-xl mt-4">Úspora: 75 € (20%)</p>
         </div>
 
         <h3 className="text-xl md:text-2xl font-bold text-orange-primary">Vibračné Dosky</h3>
@@ -127,7 +127,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Balíčky a Zľavy 2026</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Balíčky a Zľavy 2026</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-2 border-orange-primary/50 rounded-2xl p-6">
@@ -152,15 +152,15 @@ const article = {
               <span className="bg-orange-primary text-white text-xs font-bold px-3 py-1 rounded-full">POPULÁRNE</span>
             </div>
             <div className="text-center mb-4">
-              <h4 className="text-white font-black text-xl mb-2">FAMILY HOUSE</h4>
-              <p className="text-white/70 text-sm mb-4">Základy RD</p>
+              <h4 className="text-zinc-900 font-black text-xl mb-2">FAMILY HOUSE</h4>
+              <p className="text-zinc-600 text-sm mb-4">Základy RD</p>
               <div className="mb-2">
-                <span className="text-white/60 line-through text-lg">565 €</span>
+                <span className="text-zinc-500 line-through text-lg">565 €</span>
               </div>
               <div className="text-4xl font-black text-orange-primary mb-2">479 €</div>
-              <p className="text-green-500 font-bold">Úspora 15%</p>
+              <p className="text-green-700 font-bold">Úspora 15%</p>
             </div>
-            <ul className="space-y-2 text-white/80 text-sm">
+            <ul className="space-y-2 text-zinc-700 text-sm">
               <li>✓ Minirýpadlo 1,8t (5 dní)</li>
               <li>✓ Vibračná doska 150kg (3 dni)</li>
               <li>✓ Miešačka betónu (3 dni)</li>
@@ -202,7 +202,7 @@ const article = {
           </p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Skryté Náklady - Na Čo Si Dať Pozor</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Skryté Náklady - Na Čo Si Dať Pozor</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
@@ -247,12 +247,12 @@ const article = {
         <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">Tipy Na Úsporu</h3>
           <div className="grid md:grid-cols-2 gap-4">
-            <ul className="space-y-2 text-white/80">
+            <ul className="space-y-2 text-zinc-700">
               <li>✓ Plánujte vopred (zľava 5-10%)</li>
               <li>✓ Týždeň namiesto 5 dní (úspora 15%)</li>
               <li>✓ Kombinujte stroje (balíčková zľava)</li>
             </ul>
-            <ul className="space-y-2 text-white/80">
+            <ul className="space-y-2 text-zinc-700">
               <li>✓ Mimo-sezóna zima (ceny -30%)</li>
               <li>✓ Vlastné palivovanie</li>
               <li>✓ Partner program (zľava 15%)</li>

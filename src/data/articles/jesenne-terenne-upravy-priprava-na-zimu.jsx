@@ -9,11 +9,11 @@ const article = {
       <div className="space-y-8">
         {/* Intro Section */}
         <div className="bg-gradient-to-br from-orange-500/10 to-orange-600/10 border border-orange-primary/30 rounded-2xl p-6">
-          <h2 className="text-2xl font-black text-white mb-4">Prečo Je Jeseň Najlepší Čas?</h2>
+          <h2 className="text-2xl font-black text-zinc-900 mb-4">Prečo Je Jeseň Najlepší Čas?</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <h4 className="text-lg font-bold text-orange-primary">✓ Výhody:</h4>
-              <ul className="space-y-2 text-white/80">
+              <ul className="space-y-2 text-zinc-700">
                 <li>• Optimálna vlhkosť pôdy (nie sucho, nie blato)</li>
                 <li>• Pôda sa ešte nestihla zmrznúť</li>
                 <li>• Nižšie ceny prenájmu (-15-30%)</li>
@@ -22,8 +22,8 @@ const article = {
               </ul>
             </div>
             <div className="space-y-2">
-              <h4 className="text-lg font-bold text-red-400">✗ Riziká Ak Počkáte Na Jar:</h4>
-              <ul className="space-y-2 text-white/80">
+              <h4 className="text-lg font-bold text-red-600">✗ Riziká Ak Počkáte Na Jar:</h4>
+              <ul className="space-y-2 text-zinc-700">
                 <li>• Blato (apríl-máj) = nemožnosť práce</li>
                 <li>• Vysoké ceny (+20-30%)</li>
                 <li>• Obsadená mechanizácia (čakanie 2-4 týždne)</li>
@@ -35,7 +35,7 @@ const article = {
 
         {/* 10 Tasks - Priority Order */}
         <div>
-          <h2 className="text-2xl font-black text-white mb-6">10 Jesenných Úloh (Poradie!)</h2>
+          <h2 className="text-2xl font-black text-zinc-900 mb-6">10 Jesenných Úloh (Poradie!)</h2>
 
           {/* Task 1 */}
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6 mb-4">
@@ -300,11 +300,11 @@ const article = {
 
         {/* Final Checklist */}
         <div className="bg-gradient-to-br from-green-500/10 to-green-600/10 border border-green-500/30 rounded-2xl p-6">
-          <h2 className="text-2xl font-black text-white mb-4">✓ Záverečný Checklist Pred Zimou</h2>
+          <h2 className="text-2xl font-black text-zinc-900 mb-4">✓ Záverečný Checklist Pred Zimou</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <h4 className="text-white font-bold">Hotovo?</h4>
-              <ul className="space-y-2 text-white/80">
+              <h4 className="text-zinc-900 font-bold">Hotovo?</h4>
+              <ul className="space-y-2 text-zinc-700">
                 <li>☐ Ornica odstránená</li>
                 <li>☐ Drenáž položená a funkčná</li>
                 <li>☐ Štrk nasypný a zhutnený</li>
@@ -313,8 +313,8 @@ const article = {
               </ul>
             </div>
             <div className="space-y-2">
-              <h4 className="text-white font-bold">Dokumentácia?</h4>
-              <ul className="space-y-2 text-white/80">
+              <h4 className="text-zinc-900 font-bold">Dokumentácia?</h4>
+              <ul className="space-y-2 text-zinc-700">
                 <li>☐ Fotodokumentácia (pred/po)</li>
                 <li>☐ Zameranie výšok</li>
                 <li>☐ Faktúry za materiál</li>
@@ -326,7 +326,7 @@ const article = {
 
         {/* Pricing Packages */}
         <div>
-          <h2 className="text-2xl font-black text-white mb-6">Cenník Jesenné Balíčky 2026</h2>
+          <h2 className="text-2xl font-black text-zinc-900 mb-6">Cenník Jesenné Balíčky 2026</h2>
 
           <div className="grid md:grid-cols-2 gap-6 mb-6">
             {/* Basic Package */}
@@ -413,8 +413,8 @@ const article = {
           </div>
 
           <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4">
-            <p className="text-white/80 text-center">
-              <strong className="text-orange-primary">🍂 JESENNÁ AKCIA:</strong> Platí od 1.9. do 30.11.2026 | Pri objednávke uvedite kód <strong className="text-white">"JESEN2026"</strong>
+            <p className="text-zinc-700 text-center">
+              <strong className="text-orange-primary">🍂 JESENNÁ AKCIA:</strong> Platí od 1.9. do 30.11.2026 | Pri objednávke uvedite kód <strong className="text-zinc-900">"JESEN2026"</strong>
             </p>
           </div>
         </div>

@@ -7,8 +7,8 @@ const article = {
   excerpt: 'Kompletný prehľad rotačného lasera Nivel NL520R - dosah 500 m, presnosť 1,0 mm/10 m, elektronický kompenzátor a 50 hodín prevádzky. Prečo je tento laser ideálny pre veľké stavebné projekty?',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
-          Nivel NL520R je profesionálny rotačný laser s <strong className="text-red-500">dosahom až 500 metrov a presnosťou 1,0 mm na 10 metrov</strong>.
+        <p className="text-xl text-zinc-700 leading-relaxed">
+          Nivel NL520R je profesionálny rotačný laser s <strong className="text-red-600">dosahom až 500 metrov a presnosťou 1,0 mm na 10 metrov</strong>.
           Vďaka elektronickému kompenzátoru a 50 hodinovej výdrži batérie je ideálny pre rozsiahle stavebné a terénne projekty.
           Pozrime sa na jeho detailný rozbor.
         </p>
@@ -28,7 +28,7 @@ const article = {
           </ul>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Technické Parametre: Čo Potrebujete Vedieť</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Technické Parametre: Čo Potrebujete Vedieť</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
@@ -92,7 +92,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Elektronický Kompenzátor: Presnosť Na Stavenisku</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Elektronický Kompenzátor: Presnosť Na Stavenisku</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-red-500/30 rounded-xl p-6">
           <p className="text-white/80 mb-6">
@@ -124,7 +124,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Špeciálne Funkcie: Čím Vyniká NL520R</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Špeciálne Funkcie: Čím Vyniká NL520R</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-red-500/30 rounded-xl p-6">
@@ -164,7 +164,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">50 Hodín Prevádzky: Pracujte Celý Týždeň</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">50 Hodín Prevádzky: Pracujte Celý Týždeň</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-green-500/30 rounded-xl p-6">
           <p className="text-white/80 mb-4">
@@ -186,17 +186,17 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Praktické Využitie: Pre Aké Práce Je Vhodný?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Praktické Využitie: Pre Aké Práce Je Vhodný?</h2>
 
         <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-red-500 mb-4">Profesionálne Použitie</h3>
-          <p className="text-white/80 mb-4">
-            Nivel NL520R je určený pre <strong className="text-white">veľké stavebné a terénne projekty</strong>. Vyniká pri:
+          <h3 className="text-xl font-bold text-red-600 mb-4">Profesionálne Použitie</h3>
+          <p className="text-zinc-700 mb-4">
+            Nivel NL520R je určený pre <strong className="text-zinc-900">veľké stavebné a terénne projekty</strong>. Vyniká pri:
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Terénne Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Terénne Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Nivelácia pozemkov</li>
                 <li>• Príprava staveniska</li>
                 <li>• Zemné práce</li>
@@ -204,8 +204,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Stavebné Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Stavebné Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Murárske práce</li>
                 <li>• Základové dosky</li>
                 <li>• Stropy a podlahy</li>
@@ -213,8 +213,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Cestárske Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Cestárske Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Pokládka ciest</li>
                 <li>• Odvodnenie</li>
                 <li>• Parkoviská</li>
@@ -222,8 +222,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Vodohospodárske Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Vodohospodárske Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Kanalizácie</li>
                 <li>• Vodovodné rozvody</li>
                 <li>• Drenážne systémy</li>
@@ -233,7 +233,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Kompletný Set: Všetko Čo Potrebujete</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Kompletný Set: Všetko Čo Potrebujete</h2>
 
         <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
           <h3 className="text-xl font-bold text-red-500 mb-4">Obsah Balenia</h3>
@@ -280,7 +280,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Prijímač RD700: Presnosť Na Dlhé Vzdialenosti</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Prijímač RD700: Presnosť Na Dlhé Vzdialenosti</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-red-500/30 rounded-xl p-6">
           <p className="text-white/80 mb-4">
@@ -306,7 +306,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pre Koho Je Nivel NL520R Vhodný?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pre Koho Je Nivel NL520R Vhodný?</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-red-500/20 to-red-600/20 border-2 border-red-500 rounded-2xl p-6 relative">
@@ -315,15 +315,15 @@ const article = {
             </div>
             <div className="text-center mb-4">
               <div className="text-4xl mb-2">🏗️</div>
-              <h4 className="text-white font-black text-lg">Stavebné Firmy</h4>
+              <h4 className="text-zinc-900 font-black text-lg">Stavebné Firmy</h4>
             </div>
-            <ul className="space-y-2 text-white/80 text-sm">
+            <ul className="space-y-2 text-zinc-700 text-sm">
               <li>✓ Veľké stavebné projekty</li>
               <li>✓ Terénne úpravy</li>
               <li>✓ Základy a betónáž</li>
               <li>✓ Riadenie strojov</li>
             </ul>
-            <p className="text-white/60 text-xs mt-4 italic">
+            <p className="text-zinc-500 text-xs mt-4 italic">
               Pre každodenné profesionálne použitie
             </p>
           </div>
@@ -361,7 +361,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Naša Skúsenosť: Prečo Odporúčame Tento Laser</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Naša Skúsenosť: Prečo Odporúčame Tento Laser</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-red-500/30 rounded-2xl p-6 md:p-8">
           <p className="text-white/90 leading-relaxed mb-4">
@@ -415,10 +415,10 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-red-500/10 to-red-600/10 border-2 border-red-500/50 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-black text-white mb-4 text-center">
+          <h3 className="text-2xl font-black text-zinc-900 mb-4 text-center">
             Prenajmite si Nivel NL520R v Royal Stroje
           </h3>
-          <p className="text-white/80 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+          <p className="text-zinc-700 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
             Potrebujete profesionálny rotačný laser na váš projekt? Máme Nivel NL520R pripravený ako kompletný set
             so statívom, latou a všetkým príslušenstvom.
           </p>
@@ -454,7 +454,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Záverečné Hodnotenie</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Záverečné Hodnotenie</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-8">

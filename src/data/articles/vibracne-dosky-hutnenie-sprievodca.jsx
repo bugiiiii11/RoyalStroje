@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Komplexný sprievodca vibračnými doskami.',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           Vibračná doska je jedným z najdôležitejších nástrojov na stavbe. Bez správneho zhutnenia podkladu sa budú dlažby prepadávať, betón praskať a základy poklesávať.
         </p>
 
@@ -44,30 +44,30 @@ const article = {
         </div>
 
         <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-green-500 mb-4">Správne Zhutnenie = Úspora Tisícov €</h3>
+          <h3 className="text-xl font-bold text-green-700 mb-4">Správne Zhutnenie = Úspora Tisícov €</h3>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <p className="text-white/70 font-bold mb-3">Investícia:</p>
-              <ul className="space-y-2 text-white/80">
+              <p className="text-zinc-600 font-bold mb-3">Investícia:</p>
+              <ul className="space-y-2 text-zinc-700">
                 <li>• Prenájom vibračnej dosky: 25-35 €/deň</li>
                 <li>• Čas: 2-3 dni práce</li>
               </ul>
             </div>
 
             <div>
-              <p className="text-white/70 font-bold mb-3">Benefit:</p>
-              <ul className="space-y-2 text-white/80">
+              <p className="text-zinc-600 font-bold mb-3">Benefit:</p>
+              <ul className="space-y-2 text-zinc-700">
                 <li>✓ Stabilný podklad (desiatky rokov)</li>
                 <li>✓ Žiadne praskliny</li>
                 <li>✓ Žiadne prepadávanie</li>
               </ul>
-              <p className="text-green-400 font-bold mt-4">ROI: 10,000%+</p>
+              <p className="text-green-700 font-bold mt-4">ROI: 10,000%+</p>
             </div>
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Typy Vibračných Dosiek</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Typy Vibračných Dosiek</h2>
 
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -165,7 +165,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">10 Najčastejších Chýb Pri Hutnení</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">10 Najčastejších Chýb Pri Hutnení</h2>
 
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-red-500/30 rounded-xl p-6">
@@ -280,7 +280,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Postup Správneho Hutnenia</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Postup Správneho Hutnenia</h2>
 
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl p-6">
@@ -343,7 +343,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Cenník (Royal Stroje 2026)</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Cenník (Royal Stroje 2026)</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl p-6 md:p-8 overflow-x-auto">
           <table className="w-full">
@@ -393,8 +393,8 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
-          <h2 className="text-2xl md:text-3xl font-black text-white mb-4">Záver</h2>
-          <p className="text-white/90 leading-relaxed mb-4">
+          <h2 className="text-2xl md:text-3xl font-black text-zinc-900 mb-4">Záver</h2>
+          <p className="text-zinc-700 leading-relaxed mb-4">
             Hutnenie je základ každej stavby. Investícia 100-200 € do prenájmu vibračnej dosky ušetrí tisíce € na opravách.
           </p>
 

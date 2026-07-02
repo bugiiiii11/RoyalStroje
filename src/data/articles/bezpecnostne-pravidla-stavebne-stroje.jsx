@@ -7,19 +7,19 @@ const article = {
   excerpt: 'Bezpečnosť na stavbe je prvoradá! 10 kľúčových pravidiel pre prácu s minirýpadlom, nakladačom a ďalšou mechanizáciou.',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           Stavebná mechanizácia dokáže urobiť prácu ľahšou a rýchlejšou. Ale nesprávne použitie môže viesť k vážnym úrazom,
           ba dokonca k úmrtiam. Každý rok na Slovensku dochádza k desiatm úrazom pri práci so stavebnými strojmi – väčšinu
           z nich by bolo možné predísť dodržiavaním základných bezpečnostných pravidiel.
         </p>
 
         <div className="bg-gradient-to-br from-red-900/30 to-red-950/30 border border-red-500/50 rounded-2xl p-6 md:p-8">
-          <h2 className="text-2xl md:text-3xl font-black text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-black text-zinc-900 mb-4">
             ⚠️ Prečo Je Bezpečnosť Taká Dôležitá?
           </h2>
-          <div className="grid md:grid-cols-2 gap-6 text-white/90">
+          <div className="grid md:grid-cols-2 gap-6 text-zinc-700">
             <div>
-              <p className="font-bold text-red-500 mb-2">Štatistiky SR 2023-2024:</p>
+              <p className="font-bold text-red-600 mb-2">Štatistiky SR 2023-2024:</p>
               <ul className="space-y-2 text-sm">
                 <li>• <strong>47 pracovných úrazov</strong> pri práci s minirýpadlami</li>
                 <li>• <strong>3 úmrtia</strong> spôsobené prevrátením stroja</li>
@@ -39,7 +39,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pravidlo #1: Preškolenie a Oprávnenie</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pravidlo #1: Preškolenie a Oprávnenie</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
           <p className="text-white/80 mb-4">
@@ -91,7 +91,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pravidlo #2: Osobné Ochranné Pracovné Pomôcky (OOPP)</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pravidlo #2: Osobné Ochranné Pracovné Pomôcky (OOPP)</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
           <p className="text-white/80 mb-4">
@@ -164,7 +164,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pravidlo #3: Pred-prevádzková Kontrola Stroja</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pravidlo #3: Pred-prevádzková Kontrola Stroja</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
           <p className="text-white/80 mb-4">
@@ -226,7 +226,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pravidlo #4: Stabilita Stroja – Prevenujte Prevráteniu</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pravidlo #4: Stabilita Stroja – Prevenujte Prevráteniu</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-red-500/30 rounded-xl p-6">
           <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 mb-6">
@@ -305,7 +305,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pravidlo #5: Bezpečná Pracovná Zóna</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pravidlo #5: Bezpečná Pracovná Zóna</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
           <p className="text-white/80 mb-4">
@@ -360,7 +360,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pravidlo #6-10: Ďalšie Kľúčové Bezpečnostné Pravidlá</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pravidlo #6-10: Ďalšie Kľúčové Bezpečnostné Pravidlá</h2>
 
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -502,26 +502,26 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Čo Robiť Pri Nehode alebo Úraze?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Čo Robiť Pri Nehode alebo Úraze?</h2>
 
         <div className="bg-gradient-to-br from-red-900/30 to-red-950/30 border border-red-500/50 rounded-2xl p-6 md:p-8">
-          <h3 className="text-xl font-bold text-white mb-4">Postup Pri Úraze – BEZPEČNE A RÝCHLO</h3>
+          <h3 className="text-xl font-bold text-zinc-900 mb-4">Postup Pri Úraze – BEZPEČNE A RÝCHLO</h3>
 
           <div className="space-y-4">
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold shrink-0">1</div>
               <div>
-                <p className="text-white font-bold mb-1">ZABEZPEČTE Miesto Nehody</p>
-                <p className="text-white/80 text-sm">Vypnite stroj, zaistite ho, zabráňte vstupu ďalších osôb do nebezpečného priestoru</p>
+                <p className="text-zinc-900 font-bold mb-1">ZABEZPEČTE Miesto Nehody</p>
+                <p className="text-zinc-700 text-sm">Vypnite stroj, zaistite ho, zabráňte vstupu ďalších osôb do nebezpečného priestoru</p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold shrink-0">2</div>
               <div>
-                <p className="text-white font-bold mb-1">ZAVOLAJTE Záchrannú Službu</p>
-                <p className="text-white/80 text-sm">
-                  <strong className="text-red-500">155</strong> (záchranná zdravotná služba) alebo <strong className="text-red-500">112</strong> (tiesňová linka)
+                <p className="text-zinc-900 font-bold mb-1">ZAVOLAJTE Záchrannú Službu</p>
+                <p className="text-zinc-700 text-sm">
+                  <strong className="text-red-600">155</strong> (záchranná zdravotná služba) alebo <strong className="text-red-600">112</strong> (tiesňová linka)
                 </p>
               </div>
             </div>
@@ -529,16 +529,16 @@ const article = {
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold shrink-0">3</div>
               <div>
-                <p className="text-white font-bold mb-1">Poskytnutie Prvej Pomoci</p>
-                <p className="text-white/80 text-sm">Iba ak ste vyškolení! Nezhoršujte situáciu neodborným zásahom</p>
+                <p className="text-zinc-900 font-bold mb-1">Poskytnutie Prvej Pomoci</p>
+                <p className="text-zinc-700 text-sm">Iba ak ste vyškolení! Nezhoršujte situáciu neodborným zásahom</p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold shrink-0">4</div>
               <div>
-                <p className="text-white font-bold mb-1">OZNÁMTE Nehodu</p>
-                <p className="text-white/80 text-sm">
+                <p className="text-zinc-900 font-bold mb-1">OZNÁMTE Nehodu</p>
+                <p className="text-zinc-700 text-sm">
                   • Zamestnávateľovi<br/>
                   • Inšpekcii práce (pri vážnom úraze povinné!)<br/>
                   • Royal Stroje (+421 948 555 551)
@@ -557,11 +557,11 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-bold text-white mb-4 text-center">
+          <h3 className="text-2xl font-bold text-zinc-900 mb-4 text-center">
             Bezpečnosť Je Na Prvom Mieste
           </h3>
           <div className="text-center mb-6">
-            <p className="text-white/90 text-lg mb-2">
+            <p className="text-zinc-700 text-lg mb-2">
               V Royal Stroje <strong className="text-orange-primary">garantujeme</strong>, že každý stroj je:
             </p>
           </div>

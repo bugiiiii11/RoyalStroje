@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Kompletný prehľad akumulátorovej brúsky DeWalt DCG405P2 - technické parametre, bezpečnostné funkcie, praktické využitie a naše skúsenosti s týmto nástrojom. Prečo je táto brúska jednou z najlepších volieb na trhu?',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           DeWalt DCG405P2 je 18V akumulátorová uhlová brúska, ktorá sa stala jedným z najpopulárnejších nástrojov
           medzi profesionálmi aj pokročilými kutiľmi. Čo ju robí takou výnimočnou? Poďme sa pozrieť na detailný rozbor
           tohto nástroja a zistiť, či je vhodná práve pre vás.
@@ -27,7 +27,7 @@ const article = {
           </ul>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Technické Parametre: Čo Potrebujete Vedieť</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Technické Parametre: Čo Potrebujete Vedieť</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
@@ -83,9 +83,9 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Bezpečnostné Funkcie: Vaša Ochrana Na Prvom Mieste</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Bezpečnostné Funkcie: Vaša Ochrana Na Prvom Mieste</h2>
 
-        <p className="text-white/80 leading-relaxed">
+        <p className="text-zinc-700 leading-relaxed">
           Práca s uhlovou brúskou môže byť nebezpečná, preto DeWalt implementoval <strong className="text-orange-primary">niekoľko inteligentných ochranných systémov</strong>:
         </p>
 
@@ -118,17 +118,17 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Praktické Využitie: Pre Aké Práce Je Vhodná?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Praktické Využitie: Pre Aké Práce Je Vhodná?</h2>
 
         <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">Univerzálne Použitie</h3>
-          <p className="text-white/80 mb-4">
-            DeWalt DCG405P2 je skutočne <strong className="text-white">všestranný nástroj</strong>. Vyniká pri práci s:
+          <p className="text-zinc-700 mb-4">
+            DeWalt DCG405P2 je skutočne <strong className="text-zinc-900">všestranný nástroj</strong>. Vyniká pri práci s:
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Kovové Materiály</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Kovové Materiály</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Rezanie oceľových profilov a rúr</li>
                 <li>• Brúsenie zvarov</li>
                 <li>• Odstraňovanie hrdze a starých náterov</li>
@@ -136,8 +136,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Stavebné Materiály</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Stavebné Materiály</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Rezanie betónu a tehál</li>
                 <li>• Rezanie obkladov a dlažby</li>
                 <li>• Drážkovanie do múrov</li>
@@ -147,7 +147,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Bezuhlíkový Motor: Prečo Je To Dôležité?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Bezuhlíkový Motor: Prečo Je To Dôležité?</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
@@ -202,7 +202,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pre Koho Je DeWalt DCG405P2 Vhodná?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pre Koho Je DeWalt DCG405P2 Vhodná?</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/50 rounded-2xl p-6">
@@ -227,15 +227,15 @@ const article = {
             </div>
             <div className="text-center mb-4">
               <div className="text-4xl mb-2">🔧</div>
-              <h4 className="text-white font-black text-lg">Pokročilí Kutiľi</h4>
+              <h4 className="text-zinc-900 font-black text-lg">Pokročilí Kutiľi</h4>
             </div>
-            <ul className="space-y-2 text-white/80 text-sm">
+            <ul className="space-y-2 text-zinc-700 text-sm">
               <li>✓ Rekonštrukcie domov</li>
               <li>✓ Stavba garáží a prístavkov</li>
               <li>✓ Zámočnícke práce</li>
               <li>✓ DIY projekty s kovom</li>
             </ul>
-            <p className="text-white/60 text-xs mt-4 italic">
+            <p className="text-zinc-500 text-xs mt-4 italic">
               Perfektná voľba pre náročnejšie projekty
             </p>
           </div>
@@ -257,7 +257,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Naša Skúsenosť: Prečo Odporúčame Túto Brúsku</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Naša Skúsenosť: Prečo Odporúčame Túto Brúsku</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
           <p className="text-white/90 leading-relaxed mb-4">
@@ -311,10 +311,10 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-orange-primary/10 to-orange-hover/10 border-2 border-orange-primary/50 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-black text-white mb-4 text-center">
+          <h3 className="text-2xl font-black text-zinc-900 mb-4 text-center">
             Prenajmite si DeWalt DCG405P2 v Royal Stroje
           </h3>
-          <p className="text-white/80 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+          <p className="text-zinc-700 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
             Potrebujete kvalitný nástroj na váš projekt? Máme DeWalt DCG405P2 pripravenú a odskúšanú.
             Kompletný set s dvoma akumulátormi, nabíjačkou a kufríkom.
           </p>
@@ -350,7 +350,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Záverečné Hodnotenie</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Záverečné Hodnotenie</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-8">

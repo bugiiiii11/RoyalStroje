@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Rozhodujete sa, či investovať do vlastnej stavebnej mechanizácie alebo si ju radšej prenajať?',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           Rozhodujete sa, či investovať do vlastnej stavebnej mechanizácie alebo si ju radšej prenajať? Nie ste sami.
           Tento dilema riešia každý deň stovky stavebných firiem, živnostníkov aj súkromníkov po celom Slovensku.
         </p>
@@ -23,8 +23,8 @@ const article = {
           </p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">1. Finančná Analýza: Reálne Čísla</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">1. Finančná Analýza: Reálne Čísla</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Poďme si porovnať skutočné náklady na príklade <strong className="text-orange-primary">minirýpadla 1,8 tony</strong> (najpopulárnejšia veľkosť na Slovensku).
         </p>
 
@@ -62,16 +62,16 @@ const article = {
 
         <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-2">Verdikt Finančnej Analýzy</h3>
-          <p className="text-white/90 leading-relaxed">
+          <p className="text-zinc-700 leading-relaxed">
             Pri <strong>intenzívnom používaní (250+ dní ročne)</strong> sa <strong>kúpa oplatí ekonomicky po 3-4 rokoch</strong>.
             Pri príležitostnom používaní (50-100 dní ročne) je prenájom <strong>výrazne výhodnejší</strong>.
           </p>
-          <p className="text-white/70 mt-4">
+          <p className="text-zinc-600 mt-4">
             <strong>Break-even point:</strong> Približne 150-180 dní používania ročne.
           </p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">2. Flexibilita a Prístup k Technológii</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">2. Flexibilita a Prístup k Technológii</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -95,8 +95,8 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">3. Údržba a Servis: Skryté Náklady</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">3. Údržba a Servis: Skryté Náklady</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Tu je často najväčšia chyba v úvahách. Mnoho ľudí si kúpi stroj a až potom zistia skutočné náklady na údržbu.
         </p>
 
@@ -115,18 +115,18 @@ const article = {
 
         <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-3">Čo Zahŕňa Prenájom v Royal Stroje?</h3>
-          <ul className="space-y-2 text-white/90">
+          <ul className="space-y-2 text-zinc-700">
             <li>✓ Komplexný servis už v cene</li>
             <li>✓ Výmena stroja pri poruche do 24h</li>
             <li>✓ Základné poistenie</li>
             <li>✓ Technická podpora 24/7</li>
           </ul>
-          <p className="text-white/70 mt-4">
+          <p className="text-zinc-600 mt-4">
             <strong>Rozdiel:</strong> Pri prenájme <strong>nepriplácate ani euro</strong> navyše.
           </p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">4. Praktické Scenáre: Kedy sa Čo Oplatí?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">4. Praktické Scenáre: Kedy sa Čo Oplatí?</h2>
 
         <div className="space-y-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -178,15 +178,15 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Záver: Neexistuje Univerzálna Odpoveď</h2>
-        <p className="text-white/80 leading-relaxed">
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Záver: Neexistuje Univerzálna Odpoveď</h2>
+        <p className="text-zinc-700 leading-relaxed">
           Rozhodnutie medzi prenájmom a kúpou nie je čiernobiele. Závisí od vášho typu podnikania, frekvencie používania,
           finančnej situácie a dlhodobých plánov.
         </p>
 
         <div className="bg-gradient-to-br from-orange-primary/20 to-orange-primary/5 border border-orange-primary/30 rounded-2xl p-6 md:p-8">
-          <h3 className="text-xl font-bold text-white mb-3">Naša rada?</h3>
-          <p className="text-white/90 leading-relaxed">
+          <h3 className="text-xl font-bold text-zinc-900 mb-3">Naša rada?</h3>
+          <p className="text-zinc-700 leading-relaxed">
             Začnite prenájmom. Vyskúšajte rôzne stroje, zistite čo reálne potrebujete, a až potom zvážte kúpu.
             Mnoho našich zákazníkov v Royal Stroje začalo prenájmom a po roku sa rozhodli pre kúpu — ale už presne vedeli, aký stroj potrebujú.
           </p>

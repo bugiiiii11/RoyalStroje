@@ -7,7 +7,7 @@ const article = {
   excerpt: 'Kompletný prehľad rázového uťahováka Makita TW001GM201 - 40V XGT systém, 2050 Nm krútiaci moment, profesionálne použitie v autoservisoch a ťažkom priemysle. Prečo je tento nástroj skutočný beast?',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
+        <p className="text-xl text-zinc-700 leading-relaxed">
           Makita TW001GM201 je 40V akumulátorový rázový uťahovák, ktorý redefinuje, čo znamená "mobilný výkon".
           S krútiacim momentom až 2050 Nm a revolučným XGT systémom, tento nástroj konkuruje aj tým najsilnejším
           pneumatickým uťahovákom. Pozrime sa na detailný rozbor tohto "monštra".
@@ -49,7 +49,7 @@ const article = {
           </ul>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Technické Parametre: Čísla, Ktoré Hovoria Za Všetko</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Technické Parametre: Čísla, Ktoré Hovoria Za Všetko</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
@@ -105,12 +105,12 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">XGT 40V Systém: Nová Generácia Výkonu</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">XGT 40V Systém: Nová Generácia Výkonu</h2>
 
         <div className="bg-gradient-to-br from-blue-900/20 to-blue-950/20 border border-blue-500/30 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-blue-400 mb-4">Čo Je XGT a Prečo Je Revolučný?</h3>
-          <p className="text-white/80 mb-4 leading-relaxed">
-            XGT (eXtreme Greater Technology) je <strong className="text-white">najnovšia platforma</strong> akumulátorového
+          <h3 className="text-xl font-bold text-blue-700 mb-4">Čo Je XGT a Prečo Je Revolučný?</h3>
+          <p className="text-zinc-700 mb-4 leading-relaxed">
+            XGT (eXtreme Greater Technology) je <strong className="text-zinc-900">najnovšia platforma</strong> akumulátorového
             náradia od Makita. 40V systém poskytuje výkon porovnateľný s 230V sieťovými nástrojmi.
           </p>
 
@@ -141,7 +141,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Inteligentné Funkcie: Viac Než Len Brutálny Výkon</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Inteligentné Funkcie: Viac Než Len Brutálny Výkon</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl p-6">
@@ -195,14 +195,14 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Praktické Využitie: Pre Aké Práce Je Určený?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Praktické Využitie: Pre Aké Práce Je Určený?</h2>
 
         <div className="bg-orange-primary/10 border border-orange-primary/30 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">Profesionálne Aplikácie</h3>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Autoservisy a Pneuservisy</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Autoservisy a Pneuservisy</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Demontáž a montáž kolies (osobné aj nákladné)</li>
                 <li>• Práca s vysokopevnostnými skrutkami M27-M36</li>
                 <li>• Servis podvozkov a výfukových systémov</li>
@@ -210,8 +210,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Stavebníctvo a Priemysel</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Stavebníctvo a Priemysel</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Montáž oceľových konštrukcií a hál</li>
                 <li>• Stavba mostov a infraštruktúry</li>
                 <li>• Ťažký strojársky priemysel</li>
@@ -262,7 +262,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Výdrž Batérie: Koľko Práce Zvládnete?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Výdrž Batérie: Koľko Práce Zvládnete?</h2>
 
         <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">Reálne Čísla S 4,0Ah Akumulátorom</h3>
@@ -305,7 +305,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">XPT Ochrana: Odolnosť Na Prvom Mieste</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">XPT Ochrana: Odolnosť Na Prvom Mieste</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
@@ -357,68 +357,68 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Porovnanie: Makita vs. Konkurencia</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Porovnanie: Makita vs. Konkurencia</h2>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-white/80 border-collapse">
+          <table className="w-full text-sm text-zinc-700 border-collapse">
             <thead>
               <tr className="bg-orange-primary/20 border-b-2 border-orange-primary">
-                <th className="text-left p-3 font-bold text-white">Vlastnosť</th>
+                <th className="text-left p-3 font-bold text-zinc-900">Vlastnosť</th>
                 <th className="text-center p-3 font-bold text-orange-primary">Makita TW001GM201</th>
-                <th className="text-center p-3 font-bold text-white/70">Milwaukee M18 ONEFHIWF34</th>
-                <th className="text-center p-3 font-bold text-white/70">DeWalt DCF899P2</th>
+                <th className="text-center p-3 font-bold text-zinc-600">Milwaukee M18 ONEFHIWF34</th>
+                <th className="text-center p-3 font-bold text-zinc-600">DeWalt DCF899P2</th>
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3 font-semibold">Napätie</td>
                 <td className="text-center p-3 text-orange-primary font-bold">40V XGT</td>
                 <td className="text-center p-3">18V</td>
                 <td className="text-center p-3">18V</td>
               </tr>
-              <tr className="border-b border-white/10 bg-zinc-900/30">
+              <tr className="border-b border-zinc-200 bg-zinc-50">
                 <td className="p-3 font-semibold">Max. moment</td>
                 <td className="text-center p-3 text-orange-primary font-bold">2050 Nm</td>
                 <td className="text-center p-3">1627 Nm</td>
                 <td className="text-center p-3">1627 Nm</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3 font-semibold">Pohon</td>
                 <td className="text-center p-3 text-orange-primary font-bold">3/4"</td>
                 <td className="text-center p-3">3/4"</td>
                 <td className="text-center p-3">1/2"</td>
               </tr>
-              <tr className="border-b border-white/10 bg-zinc-900/30">
+              <tr className="border-b border-zinc-200 bg-zinc-50">
                 <td className="p-3 font-semibold">Akumulátory v balení</td>
                 <td className="text-center p-3 text-orange-primary font-bold">2× 4,0Ah</td>
                 <td className="text-center p-3">2× 5,0Ah</td>
                 <td className="text-center p-3">2× 5,0Ah</td>
               </tr>
-              <tr className="border-b border-white/10">
+              <tr className="border-b border-zinc-200">
                 <td className="p-3 font-semibold">Auto-stop režimy</td>
-                <td className="text-center p-3 text-green-500 font-bold">✓ (3 režimy)</td>
-                <td className="text-center p-3 text-green-500">✓</td>
-                <td className="text-center p-3 text-red-500">✗</td>
+                <td className="text-center p-3 text-green-700 font-bold">✓ (3 režimy)</td>
+                <td className="text-center p-3 text-green-700">✓</td>
+                <td className="text-center p-3 text-red-600">✗</td>
               </tr>
-              <tr className="bg-zinc-900/30">
+              <tr className="bg-zinc-50">
                 <td className="p-3 font-semibold">XPT ochrana</td>
-                <td className="text-center p-3 text-green-500 font-bold">✓</td>
-                <td className="text-center p-3 text-green-500">✓ (IP56)</td>
-                <td className="text-center p-3 text-yellow-500">Čiastočne</td>
+                <td className="text-center p-3 text-green-700 font-bold">✓</td>
+                <td className="text-center p-3 text-green-700">✓ (IP56)</td>
+                <td className="text-center p-3 text-yellow-600">Čiastočne</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div className="bg-green-500/10 border border-green-500/30 rounded-xl p-4 mt-4">
-          <p className="text-green-500 font-bold mb-2">🏆 Verdikt:</p>
-          <p className="text-white/80 text-sm">
-            Makita TW001GM201 ponúka <strong className="text-white">najvyšší krútiaci moment v tejto kategórii</strong>
+          <p className="text-green-700 font-bold mb-2">🏆 Verdikt:</p>
+          <p className="text-zinc-700 text-sm">
+            Makita TW001GM201 ponúka <strong className="text-zinc-900">najvyšší krútiaci moment v tejto kategórii</strong>
             vďaka 40V XGT systému. Ak potrebujete maximálny výkon a pracujete s veľkými skrutkami (M30+), Makita je jasná voľba.
           </p>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Záverečné Hodnotenie</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Záverečné Hodnotenie</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-8">

@@ -7,8 +7,8 @@ const article = {
   excerpt: 'Kompletný prehľad optického nivelačného prístroja NIVEL N32x - 32× zväčšenie, presnosť 1,5 mm/km, magnetický kompenzátor a IPX6 odolnosť. Prečo je tento prístroj ideálny pre geodetov a stavbárov?',
   content: (
       <div className="space-y-8">
-        <p className="text-xl text-white/90 leading-relaxed">
-          NIVEL N32x je profesionálny optický nivelačný prístroj s <strong className="text-blue-500">32-násobným zväčšením a presnosťou 1,5 mm na kilometer</strong>.
+        <p className="text-xl text-zinc-700 leading-relaxed">
+          NIVEL N32x je profesionálny optický nivelačný prístroj s <strong className="text-blue-700">32-násobným zväčšením a presnosťou 1,5 mm na kilometer</strong>.
           Vďaka magnetickému kompenzátoru a IPX6 odolnosti je ideálny pre prácu v náročných stavebných podmienkach.
           Pozrime sa na jeho detailný rozbor.
         </p>
@@ -28,7 +28,7 @@ const article = {
           </ul>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Technické Parametre: Čo Potrebujete Vedieť</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Technické Parametre: Čo Potrebujete Vedieť</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
@@ -92,7 +92,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Magnetický Kompenzátor: Kľúč k Presnosti</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Magnetický Kompenzátor: Kľúč k Presnosti</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-blue-500/30 rounded-xl p-6">
           <p className="text-white/80 mb-6">
@@ -124,7 +124,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">IPX6 Odolnosť: Práca Za Každého Počasia</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">IPX6 Odolnosť: Práca Za Každého Počasia</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-blue-500/30 rounded-xl p-6">
@@ -154,27 +154,27 @@ const article = {
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-purple-500/30 rounded-xl p-6">
-            <div className="text-purple-500 text-3xl mb-3">🏗️</div>
+          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-orange-primary/30 rounded-xl p-6">
+            <div className="text-orange-primary text-3xl mb-3">🏗️</div>
             <h4 className="text-white font-bold text-lg mb-2">Kovová Konštrukcia</h4>
             <p className="text-white/70">
-              Robustné kovové telo odolá <strong className="text-purple-500">pádom a nárazom</strong>.
+              Robustné kovové telo odolá <strong className="text-orange-primary">pádom a nárazom</strong>.
               Vytvorené pre drsné stavebné podmienky.
             </p>
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Praktické Využitie: Pre Aké Práce Je Vhodný?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Praktické Využitie: Pre Aké Práce Je Vhodný?</h2>
 
         <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-blue-500 mb-4">Univerzálne Použitie</h3>
-          <p className="text-white/80 mb-4">
-            NIVEL N32x je skutočne <strong className="text-white">všestranný merací prístroj</strong>. Vyniká pri:
+          <h3 className="text-xl font-bold text-blue-700 mb-4">Univerzálne Použitie</h3>
+          <p className="text-zinc-700 mb-4">
+            NIVEL N32x je skutočne <strong className="text-zinc-900">všestranný merací prístroj</strong>. Vyniká pri:
           </p>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Geodetické Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Geodetické Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Výškové zameranie bodov</li>
                 <li>• Dvojitý nivelačný ťah</li>
                 <li>• Presné geodetické merania</li>
@@ -182,8 +182,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Stavebné Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Stavebné Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Vytyčovanie základov</li>
                 <li>• Kontrola rovnosti plôch</li>
                 <li>• Osadenie obrubníkov</li>
@@ -191,8 +191,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Cestárske Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Cestárske Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Nivelácia ciest</li>
                 <li>• Kontrola sklonov</li>
                 <li>• Pokládka asfaltu</li>
@@ -200,8 +200,8 @@ const article = {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-bold mb-3">✓ Vodohospodárske Práce</h4>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <h4 className="text-zinc-900 font-bold mb-3">✓ Vodohospodárske Práce</h4>
+              <ul className="space-y-2 text-zinc-700 text-sm">
                 <li>• Kanalizácie a odpady</li>
                 <li>• Vodovodné prípojky</li>
                 <li>• Drenážne systémy</li>
@@ -211,7 +211,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Príslušenstvo v Balení</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Príslušenstvo v Balení</h2>
 
         <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
           <h3 className="text-xl font-bold text-blue-500 mb-4">Kompletný Set</h3>
@@ -258,7 +258,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Pre Koho Je NIVEL N32x Vhodný?</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Pre Koho Je NIVEL N32x Vhodný?</h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-2 border-blue-500 rounded-2xl p-6 relative">
@@ -267,15 +267,15 @@ const article = {
             </div>
             <div className="text-center mb-4">
               <div className="text-4xl mb-2">📐</div>
-              <h4 className="text-white font-black text-lg">Geodeti</h4>
+              <h4 className="text-zinc-900 font-black text-lg">Geodeti</h4>
             </div>
-            <ul className="space-y-2 text-white/80 text-sm">
+            <ul className="space-y-2 text-zinc-700 text-sm">
               <li>✓ Výškové zameranie</li>
               <li>✓ Nivelačné ťahy</li>
               <li>✓ Presné merania</li>
               <li>✓ Mapovanie terénu</li>
             </ul>
-            <p className="text-white/60 text-xs mt-4 italic">
+            <p className="text-zinc-500 text-xs mt-4 italic">
               Pre každodenné profesionálne použitie
             </p>
           </div>
@@ -313,7 +313,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Naša Skúsenosť: Prečo Odporúčame Tento Prístroj</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Naša Skúsenosť: Prečo Odporúčame Tento Prístroj</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-blue-500/30 rounded-2xl p-6 md:p-8">
           <p className="text-white/90 leading-relaxed mb-4">
@@ -367,10 +367,10 @@ const article = {
         </div>
 
         <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-2 border-blue-500/50 rounded-2xl p-6 md:p-8">
-          <h3 className="text-2xl font-black text-white mb-4 text-center">
+          <h3 className="text-2xl font-black text-zinc-900 mb-4 text-center">
             Prenajmite si NIVEL N32x v Royal Stroje
           </h3>
-          <p className="text-white/80 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
+          <p className="text-zinc-700 leading-relaxed mb-6 text-center max-w-3xl mx-auto">
             Potrebujete presné výškové meranie na váš projekt? Máme NIVEL N32x pripravený ako kompletný set
             so statívom a latou.
           </p>
@@ -406,7 +406,7 @@ const article = {
           </div>
         </div>
 
-        <h2 className="text-2xl md:text-3xl font-black text-white">Záverečné Hodnotenie</h2>
+        <h2 className="text-2xl md:text-3xl font-black text-zinc-900">Záverečné Hodnotenie</h2>
 
         <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 md:p-8">
           <div className="grid md:grid-cols-2 gap-8">
