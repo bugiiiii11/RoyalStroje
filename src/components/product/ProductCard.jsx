@@ -17,17 +17,20 @@ export default function ProductCard({ product, customerType = 'po' }) {
   return (
     <>
       <div className="group bg-gradient-to-b from-zinc-800/80 to-zinc-900 border border-white/10 rounded-xl md:rounded-2xl overflow-hidden hover:border-orange-primary/60 hover:shadow-2xl hover:shadow-orange-primary/20 shadow-lg shadow-black/40 hover:-translate-y-1 transition-all duration-300 ease-out relative">
-        {/* Image Container - Compact on mobile, square on desktop */}
-        <div className="relative aspect-[4/3] md:aspect-square bg-gradient-to-br from-orange-100 via-orange-50 to-zinc-100 overflow-hidden">
-          {/* Base scale-[1.02] overdraws the container so the layer's fractional-pixel
-              bottom edge can't expose the light bg as a white seam during the hover zoom */}
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-full object-cover select-none scale-[1.02] transition-transform duration-700 ease-out group-hover:scale-105"
-            loading="lazy"
-            draggable="false"
-          />
+        {/* Image Container - Compact on mobile, square on desktop.
+            The light gradient bg lives INSIDE the zoomed wrapper (not on the container),
+            so bg + photo scale as one layer — a fractional-pixel edge during the hover
+            zoom can only expose the dark card behind, never a white seam. */}
+        <div className="relative aspect-[4/3] md:aspect-square overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-orange-50 to-zinc-100 scale-[1.02] transition-transform duration-700 ease-out group-hover:scale-105">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-full object-cover select-none"
+              loading="lazy"
+              draggable="false"
+            />
+          </div>
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 via-transparent to-transparent pointer-events-none select-none" style={{ zIndex: 1 }}></div>
 

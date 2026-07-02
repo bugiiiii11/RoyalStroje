@@ -81,8 +81,8 @@ export default function Partneri() {
           </>
         }
         subtitle="Partneri Royal Stroje v Senci, Bratislave a okolí - stavbári, ktorým dôverujeme."
-        image="/hero-pozicovna.webp"
-        imageAlt="Royal Stroje - Partneri"
+        image="/pictures/graphics/stroje-jcb-rameno.webp"
+        imageAlt="Stroje partnerských značiek na dvore Royal Stroje"
         actions={
           <>
             <a href="tel:+421948555551" className="btn-primary">

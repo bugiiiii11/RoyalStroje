@@ -17,10 +17,19 @@
     overflow-x: hidden;
   }
 
-  /* Display type for headings — industrial grotesque, tightened tracking */
+  /* Display type for headings — industrial grotesque, tightened tracking.
+     Archivo's space glyph is very narrow and negative tracking shrinks word gaps
+     further, so caps headlines ("PRENÁJOM STROJOV…") ran together — word-spacing
+     compensates the gaps without loosening the letterforms. */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
     letter-spacing: -0.015em;
+    word-spacing: 0.12em;
+  }
+
+  /* Same compensation wherever Archivo is applied via the utility (USP band, price tags…) */
+  .font-display {
+    word-spacing: 0.12em;
   }
 
   /* Remove default margins */

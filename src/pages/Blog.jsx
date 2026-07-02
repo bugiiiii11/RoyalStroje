@@ -266,8 +266,8 @@ export default function Blog() {
         eyebrow="Blog"
         title={<>Stavajte efektívnejšie. <span className="text-orange-primary">Tipy od profesionálov.</span></>}
         subtitle="Praktické rady, návody a novinky zo sveta stavebnej mechanizácie pre región Senec - Bratislava."
-        image="/hero-pozicovna.webp"
-        imageAlt="Royal Stroje - Blog"
+        image="/pictures/graphics/predajna-2.webp"
+        imageAlt="Predajňa Royal Stroje — meracia technika a náradie"
         actions={
           <>
             <a href="tel:+421948555551" className="btn-primary">

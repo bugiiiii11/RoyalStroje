@@ -97,38 +97,39 @@ export default function ProductDetail() {
         </script>
       </Helmet>
 
-      {/* ═══ HERO STRIP ═══ */}
-      <section className="hidden md:block relative h-[280px] lg:h-[300px] overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/hero3.webp"
-            alt="Stavebná technika"
-            className="w-full h-full object-cover object-center"
-            width={2200}
-            height={900}
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#FAFAFA] to-transparent" />
+      {/* ═══ HERO — compact white band, consistent with the site-wide light PageHero
+          (white field, orange glow, dark Archivo headline, 2px orange brand seam) ═══ */}
+      <section className="hidden md:block relative bg-white overflow-hidden">
+        {/* Soft orange glow — non-fixed, GPU-safe */}
+        <div
+          aria-hidden
+          className="absolute -top-44 right-0 w-[40rem] h-[40rem] pointer-events-none"
+          style={{ background: 'radial-gradient(circle at 70% 30%, rgba(255,102,0,0.09), transparent 60%)' }}
+        />
 
-        <div className="relative z-10 h-full flex flex-col justify-end pb-10">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 w-full">
-            {/* Breadcrumb */}
-            <button
-              onClick={() => navigate(-1)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-orange-primary/20 border border-white/15 hover:border-orange-primary/40 text-white/80 hover:text-white text-sm font-semibold rounded-full transition-all mb-5 backdrop-blur-sm"
-            >
-              <ArrowLeft size={15} />
-              <span>Späť na katalóg</span>
-            </button>
+        {/* pt clears the fixed desktop header (~78px) */}
+        <div className="relative max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 pt-28 pb-10 lg:pb-12">
+          {/* Breadcrumb — quiet link, not a pill */}
+          <button
+            onClick={() => navigate(-1)}
+            className="inline-flex items-center gap-2 text-zinc-500 hover:text-orange-primary text-sm font-semibold transition-colors"
+          >
+            <ArrowLeft size={15} />
+            <span>Späť na katalóg</span>
+          </button>
 
-            {/* Kicker = brand/model, H1 = the descriptive name people actually search for */}
-            {productData.description && <span className="eyebrow mb-5">{productData.name}</span>}
-            <h1 className="text-3xl lg:text-4xl xl:text-5xl font-black text-white mt-4 leading-tight max-w-4xl" style={{ textWrap: 'balance' }}>
-              {product.name}
-            </h1>
-          </div>
+          {/* Kicker = brand/model, H1 = the descriptive name people actually search for */}
+          {productData.description && (
+            <div className="mt-7">
+              <span className="eyebrow">{productData.name}</span>
+            </div>
+          )}
+          <h1 className="text-3xl lg:text-4xl xl:text-5xl font-black text-zinc-900 mt-4 leading-[1.05] max-w-4xl" style={{ textWrap: 'balance' }}>
+            {product.name}
+          </h1>
         </div>
+
+        <div className="h-[2px] bg-[#FF6600] w-full" />
       </section>
 
       {/* ═══ MOBILE HEADER ═══ */}
