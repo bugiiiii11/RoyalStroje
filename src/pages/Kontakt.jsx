@@ -13,6 +13,7 @@ const GALLERY_IMAGES = [
   { src: '/pictures/graphics/predajna-3.webp', alt: 'Royal Stroje predajňa - pohľad 3' },
   { src: '/pictures/graphics/predajna-4.webp', alt: 'Royal Stroje predajňa - pohľad 4' },
   { src: '/pictures/graphics/web_pics/pasovy_bager.webp', alt: 'Pásový mini bager JCB pripravený na dovoz - Royal Stroje' },
+  { src: '/pictures/graphics/web_pics/strojovy_park.webp', alt: 'Strojový park Royal Stroje - stavebná technika a náradie' },
 ];
 
 export default function Kontakt() {

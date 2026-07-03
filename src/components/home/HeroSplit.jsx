@@ -105,7 +105,7 @@ export default function HeroSplit() {
                     Prenájom a<br /><span className="text-orange-primary">predaj náradia</span>
                   </h2>
                   <p className="hs-4 text-zinc-800 text-sm md:text-base font-semibold mt-4">
-                    Profesionálne náradie, príslušenstvo a osobné ochranné pracovné prostriedky
+                    Profesionálne náradie, príslušenstvo<br />a osobné ochranné pracovné prostriedky
                   </p>
                 </div>
               </div>
