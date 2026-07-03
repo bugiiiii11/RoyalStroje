@@ -12,7 +12,7 @@ const usps = [
 
 // Poradie zladené so 4 USP kartami pod pásom (rovnaké stĺpce)
 const stripImages = [
-  { src: '/pictures/graphics/dovoz.webp', alt: 'Dovoz techniky – dodávka Royal Stroje na stavbu' }, // → Dovoz techniky
+  { src: '/pictures/graphics/web_pics/doprava1.webp', alt: 'Dovoz techniky – JCB mini bager na vlečke Royal Stroje' }, // → Dovoz techniky
   { src: '/pictures/graphics/predajna-4.webp', alt: 'Servisované stavebné stroje – JCB mini bager a Avant nakladač' }, // → Servisované stroje
   { src: '/pictures/graphics/predajna-2.webp', alt: 'Predajňa a požičovňa Royal Stroje – náradie a meracia technika' }, // → Senec – Bratislava
   { src: '/pictures/graphics/stroje-dvor.webp', alt: 'Požičovňa Royal Stroje – stroje na dvore v Senci pri Bratislave' }, // → Overená požičovňa

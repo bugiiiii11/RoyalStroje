@@ -7,6 +7,7 @@ export const blogMeta = {
     readTime: '9 min',
     category: 'Tipy a rady',
     excerpt: 'Rozhodujete sa, či investovať do vlastnej stavebnej mechanizácie alebo si ju radšej prenajať?',
+    image: '/pictures/graphics/blog - kupa prenajom.webp',
   },
   'ako-vybrat-spravne-minirypadlo': {
     title: 'Ako Vybrať Správne Minirýpadlo: Praktický Návod pre Začiatočníkov',
@@ -15,6 +16,7 @@ export const blogMeta = {
     readTime: '10 min',
     category: 'Návody',
     excerpt: 'Minirýpadlo je jeden z najuniverzálnejších stavebných strojov.',
+    image: '/pictures/graphics/mini-rypadlo-blog.webp',
   },
   'prenajom-stavebnej-mechanizacie-senec-bratislava': {
     title: 'Prenájom Stavebnej Mechanizácie v Senci a okolí: Lokálny Sprievodca 2026',
@@ -23,6 +25,7 @@ export const blogMeta = {
     readTime: '9 min',
     category: 'Tipy a rady',
     excerpt: 'Senec a jeho okolie zažíva stavebný boom.',
+    image: '/pictures/graphics/objects3.webp',
   },
   'jarne-stavebne-projekty-mechanizacia': {
     title: 'Jarné Stavebné Projekty: Top 5 Mechanizácií, Ktoré Potrebujete',
@@ -31,6 +34,7 @@ export const blogMeta = {
     readTime: '11 min',
     category: 'Tipy a rady',
     excerpt: 'Plánujete stavebný projekt na jar 2026? Zistite, ktorých 5 strojov sú absolútne nevyhnutné pre terénne úpravy, základy a záhradné projekty.',
+    image: '/pictures/graphics/objects2.webp',
   },
   'mobilne-sanitarne-kontajnery-sprievodca': {
     title: 'Mobilné Sanitárne Kontajnery: Komplexný Sprievodca pre Stavby a Eventy',
@@ -39,6 +43,7 @@ export const blogMeta = {
     readTime: '12 min',
     category: 'Návody',
     excerpt: 'Potrebujete mobilné WC na stavbu alebo event? Komplexný sprievodca typmi, cenami a hygienickými štandardmi.',
+    image: '/pictures/graphics/objects4.webp',
   },
   'bezpecnostne-pravidla-stavebne-stroje': {
     title: '10 Bezpečnostných Pravidiel pri Práci so Stavebnými Strojmi',
@@ -47,6 +52,7 @@ export const blogMeta = {
     readTime: '13 min',
     category: 'Návody',
     excerpt: 'Bezpečnosť na stavbe je prvoradá! 10 kľúčových pravidiel pre prácu s minirýpadlom, nakladačom a ďalšou mechanizáciou.',
+    image: '/pictures/graphics/cigy-blog.webp',
   },
   'cennik-prenajmu-stavebnej-mechanizacie-2026': {
     title: 'Cenník Prenájmu Stavebnej Mechanizácie 2026: Komplexný Prehľad',
@@ -55,6 +61,7 @@ export const blogMeta = {
     readTime: '18 min',
     category: 'Tipy a rady',
     excerpt: 'Aktuálne ceny prenájmu stavebnej mechanizácie na Slovensku 2026.',
+    image: '/pictures/graphics/objects1.webp',
   },
   'vibracne-dosky-hutnenie-sprievodca': {
     title: 'Vibračné Dosky a Hutnenie: Všetko Čo Potrebujete Vedieť',
@@ -63,6 +70,7 @@ export const blogMeta = {
     readTime: '17 min',
     category: 'Návody',
     excerpt: 'Komplexný sprievodca vibračnými doskami.',
+    image: '/pictures/graphics/vibracnadoska.webp',
   },
   'jesenne-terenne-upravy-priprava-na-zimu': {
     title: 'Jesenné Terénne Úpravy: Kompletný Sprievodca',
@@ -71,6 +79,7 @@ export const blogMeta = {
     readTime: '16 min',
     category: 'Návody',
     excerpt: 'Prečo je jeseň najlepší čas na terénne úpravy? Návod krok po kroku, najčastejšie chyby a cenník.',
+    image: '/pictures/graphics/dovoz.webp',
   },
   'case-study-projekt-30-percent-rychlejsie': {
     title: 'Case Study: Ako Sme Pomohli Dokončiť Projekt o 30% Rýchlejšie',
@@ -79,6 +88,7 @@ export const blogMeta = {
     readTime: '13 min',
     category: 'Prípadové štúdie',
     excerpt: 'Reálna prípadová štúdia stavby rodinného domu v Senci. Zistite, ako dokončil Ján K. hrubú stavbu o 30% rýchlejšie a ušetril 3,325 €.',
+    image: '/pictures/graphics/predaj.webp',
   },
   'zimne-stavebne-projekty-vyzvy-riesenia': {
     title: 'Stavebné Projekty v Zime: Výzvy a Riešenia',
@@ -87,6 +97,7 @@ export const blogMeta = {
     readTime: '13 min',
     category: 'Tipy a rady',
     excerpt: 'Dá sa stavať v zime? Áno! Zistite, aké práce sú možné, čo treba sledovať a ako ušetriť až 30% na prenájme mechanizácie.',
+    image: '/pictures/graphics/servis.webp',
   },
   'rocny-prehlad-2026-trendy-prenajom': {
     title: 'Ročný Prehľad 2026: Trendy v Prenájme Stavebnej Mechanizácie',
@@ -95,6 +106,7 @@ export const blogMeta = {
     readTime: '14 min',
     category: 'Novinky',
     excerpt: 'Kompletný prehľad roku 2026 na trhu prenájmu stavebnej mechanizácie na Slovensku. Čísla, trendy, chyby zákazníkov a predpovede na rok 2026.',
+    image: '/pictures/graphics/hero4.webp',
   },
   'dewalt-dcg405p2-akumulatorova-bruska-profesionalny-nastroj': {
     title: 'DeWalt DCG405P2: Akumulátorová Brúska Pre Profesionálov i Kutiloch',
@@ -103,6 +115,7 @@ export const blogMeta = {
     readTime: '12 min',
     category: 'Návody',
     excerpt: 'Kompletný prehľad akumulátorovej brúsky DeWalt DCG405P2 - technické parametre, bezpečnostné funkcie, praktické využitie a naše skúsenosti s týmto nástrojom. Prečo je táto brúska jednou z najlepších volieb na trhu?',
+    image: '/pictures/graphics/dewalt-blog.webp',
   },
   'makita-tw001gm201-razovy-utahovak-extremny-vykon': {
     title: 'Makita TW001GM201: Rázový Uťahovák s Extrémnym Výkonom 2050 Nm',
@@ -111,6 +124,7 @@ export const blogMeta = {
     readTime: '13 min',
     category: 'Návody',
     excerpt: 'Kompletný prehľad rázového uťahováka Makita TW001GM201 - 40V XGT systém, 2050 Nm krútiaci moment, profesionálne použitie v autoservisoch a ťažkom priemysle. Prečo je tento nástroj skutočný beast?',
+    image: '/pictures/graphics/makita-blog.webp',
   },
   'toughbuilt-tb-c700-pracovne-kozy-profesionalny-nastroj': {
     title: 'TOUGHBUILT TB-C700: Pracovné Kozy, Ktoré Vydržia Všetko',
@@ -119,6 +133,7 @@ export const blogMeta = {
     readTime: '12 min',
     category: 'Návody',
     excerpt: 'Kompletný prehľad pracovných kôz TOUGHBUILT TB-C700 - 100% oceľová konštrukcia, nosnosť až 1,180 kg v páre, výškovo nastaviteľné nohy a revolučný samonivelačný systém. Prečo sú tieto kozy najlepšou voľbou pre profesionálov?',
+    image: '/pictures/graphics/koza.webp',
   },
   'nivel-cl3g-krizovy-laser-zeleny-profesionalny-nastroj': {
     title: 'NIVEL CL3G: Krížový Laser so Zeleným Lúčom Pre Profesionálnu Presnosť',
@@ -127,6 +142,7 @@ export const blogMeta = {
     readTime: '10 min',
     category: 'Návody',
     excerpt: 'Kompletný prehľad krížového lasera NIVEL CL3G so zeleným lúčom - technické parametre, praktické využitie a naše skúsenosti s týmto profesionálnym meracím prístrojom.',
+    image: '/pictures/graphics/nivel-CL3G-blog.webp',
   },
   'nivel-n32x-opticky-nivelacny-pristroj-profesionalny-nastroj': {
     title: 'NIVEL N32x: Optický Nivelačný Prístroj Pre Profesionálnu Presnosť',
@@ -135,6 +151,7 @@ export const blogMeta = {
     readTime: '9 min',
     category: 'Návody',
     excerpt: 'Kompletný prehľad optického nivelačného prístroja NIVEL N32x - 32× zväčšenie, presnosť 1,5 mm/km, magnetický kompenzátor a IPX6 odolnosť. Prečo je tento prístroj ideálny pre geodetov a stavbárov?',
+    image: '/pictures/graphics/nivel-N32-blog.webp',
   },
   'nivel-nl520r-rotacny-laser-cerveny-profesionalny-nastroj': {
     title: 'Nivel NL520R: Rotačný Laser Pre Profesionálne Stavebné Projekty',
@@ -143,6 +160,7 @@ export const blogMeta = {
     readTime: '10 min',
     category: 'Návody',
     excerpt: 'Kompletný prehľad rotačného lasera Nivel NL520R - dosah 500 m, presnosť 1,0 mm/10 m, elektronický kompenzátor a 50 hodín prevádzky. Prečo je tento laser ideálny pre veľké stavebné projekty?',
+    image: '/pictures/graphics/nivel-NL520R-blog.webp',
   },
   'jcb-19c-i-mini-rypadlo-kompaktny-vykon': {
     title: 'JCB 19C-I: Kompaktné Mini-Rýpadlo s Výkonom Pre Náročné Stavby',
@@ -151,6 +169,7 @@ export const blogMeta = {
     readTime: '11 min',
     category: 'Návody',
     excerpt: 'Kompletný prehľad mini-rýpadla JCB 19C-I - 1,83 tony hmotnosti, hĺbka výkopu 2,4 m, kompaktné rozmery pre stiesnené priestory a robustný H-rám. Prečo je toto mini-rýpadlo ideálnou voľbou pre malé stavby, výkopy a terénne úpravy?',
+    image: '/pictures/graphics/blog_jcb.webp',
   },
 };
 

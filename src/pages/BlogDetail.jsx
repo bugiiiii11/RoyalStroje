@@ -85,7 +85,7 @@ export default function BlogDetail() {
         chips={[meta.date, meta.readTime, `Autor: ${meta.author}`]}
         title={meta.title}
         subtitle={meta.excerpt}
-        image="/hero-pozicovna.webp"
+        image={meta.image || '/hero-pozicovna.webp'}
         imageAlt={meta.title}
         actions={
           <Link to="/blog" className="btn-outline-light px-5 py-3">
