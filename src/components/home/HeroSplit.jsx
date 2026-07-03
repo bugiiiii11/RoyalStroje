@@ -72,7 +72,7 @@ export default function HeroSplit() {
                 <span aria-hidden className="absolute -inset-5 bg-white/95 rounded-[2rem] blur-xl" />
                 <div className="relative">
                   <span className="hs-0 eyebrow">Senec · Bratislava · Okolie</span>
-                  <h1 className="hs-1 font-display font-black uppercase text-zinc-900 leading-[0.95] tracking-tight text-[clamp(1.55rem,2.3vw,2.6rem)] mt-4">
+                  <h1 className="hs-1 font-display font-black uppercase text-zinc-900 leading-[0.95] tracking-tight text-[clamp(1.35rem,2vw,2.2rem)] mt-4">
                     Prenájom strojov<br />
                     <span className="text-orange-primary">s dovozom na stavbu</span>
                   </h1>
@@ -94,27 +94,27 @@ export default function HeroSplit() {
               </div>
             </div>
 
-            {/* RIGHT — Predaj náradia: heading + CTA grouped top-left, close to the diagonal */}
+            {/* RIGHT — Predaj náradia: heading top-left, CTA below the cloud (on the image) */}
             <div className="flex flex-col justify-start items-start pl-[4%] pt-24 pb-12">
-              {/* single soft white "cloud" behind the whole group — text + CTA */}
+              {/* soft white "cloud" behind the text only — CTA sits below, on the image */}
               <div className="relative w-fit">
                 <span aria-hidden className="absolute -inset-5 bg-white/95 rounded-[2rem] blur-xl" />
                 <div className="relative">
                   <span className="hs-2 eyebrow">Predajňa</span>
-                  <h2 className="hs-3 font-display font-black uppercase text-zinc-900 leading-[0.95] tracking-tight text-[clamp(1.55rem,2.3vw,2.6rem)] mt-4">
+                  <h2 className="hs-3 font-display font-black uppercase text-zinc-900 leading-[0.95] tracking-tight text-[clamp(1.35rem,2vw,2.2rem)] mt-4">
                     Prenájom a<br /><span className="text-orange-primary">predaj náradia</span>
                   </h2>
                   <p className="hs-4 text-zinc-800 text-sm md:text-base font-semibold mt-4">
                     Profesionálne náradie, príslušenstvo a OOPP
                   </p>
-                  {/* animation on wrapper, not the button — keeps btn-primary hover lift working */}
-                  <div className="hs-4 mt-7">
-                    <Link to="/sluzby/predaj-techniky" className="btn-primary">
-                      <span>Navštíviť predajňu</span>
-                      <ArrowRight size={16} />
-                    </Link>
-                  </div>
                 </div>
+              </div>
+              {/* animation on wrapper, not the button — keeps btn-primary hover lift working */}
+              <div className="hs-4 mt-7">
+                <Link to="/sluzby/predaj-techniky" className="btn-primary">
+                  <span>Navštíviť predajňu</span>
+                  <ArrowRight size={16} />
+                </Link>
               </div>
             </div>
           </div>
@@ -184,13 +184,13 @@ export default function HeroSplit() {
                 <p className="hs-3 text-zinc-800 text-sm font-semibold mt-2">
                   Profesionálne náradie, príslušenstvo a OOPP
                 </p>
-                <div className="hs-3 mt-5">
-                  <Link to="/sluzby/predaj-techniky" className="btn-primary">
-                    <span>Navštíviť predajňu</span>
-                    <ArrowRight size={16} />
-                  </Link>
-                </div>
               </div>
+            </div>
+            <div className="hs-3 mt-5">
+              <Link to="/sluzby/predaj-techniky" className="btn-primary">
+                <span>Navštíviť predajňu</span>
+                <ArrowRight size={16} />
+              </Link>
             </div>
           </div>
         </div>
