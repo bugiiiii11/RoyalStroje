@@ -42,7 +42,7 @@ export default function HeroSplit() {
           {/* image constrained to the right portion so object-cover crops much less (less "zoomed") */}
           <img
             src="/pictures/graphics/predajna-1.webp"
-            alt="Predaj profesionálneho náradia, príslušenstva a OOPP - Royal Stroje"
+            alt="Predaj profesionálneho náradia, príslušenstva a osobných ochranných pracovných prostriedkov - Royal Stroje"
             className="absolute inset-y-0 right-0 w-[58%] h-full object-cover"
             width={1280}
             height={1080}
@@ -94,8 +94,8 @@ export default function HeroSplit() {
               </div>
             </div>
 
-            {/* RIGHT — Predaj náradia: heading top-left, CTA below the cloud (on the image) */}
-            <div className="flex flex-col justify-start items-start pl-[4%] pt-24 pb-12">
+            {/* RIGHT — Predaj náradia: heading top-left, CTA at the bottom (aligned with the left CTAs) */}
+            <div className="flex flex-col justify-between items-start pl-[4%] pt-24 pb-12">
               {/* soft white "cloud" behind the text only — CTA sits below, on the image */}
               <div className="relative w-fit">
                 <span aria-hidden className="absolute -inset-5 bg-white/95 rounded-[2rem] blur-xl" />
@@ -105,12 +105,12 @@ export default function HeroSplit() {
                     Prenájom a<br /><span className="text-orange-primary">predaj náradia</span>
                   </h2>
                   <p className="hs-4 text-zinc-800 text-sm md:text-base font-semibold mt-4">
-                    Profesionálne náradie, príslušenstvo a OOPP
+                    Profesionálne náradie, príslušenstvo a osobné ochranné pracovné prostriedky
                   </p>
                 </div>
               </div>
               {/* animation on wrapper, not the button — keeps btn-primary hover lift working */}
-              <div className="hs-4 mt-7">
+              <div className="hs-4">
                 <Link to="/sluzby/predaj-techniky" className="btn-primary">
                   <span>Navštíviť predajňu</span>
                   <ArrowRight size={16} />
@@ -165,7 +165,7 @@ export default function HeroSplit() {
         <div className="relative h-[42vh] min-h-[300px] border-t-2 border-orange-primary">
           <img
             src="/pictures/graphics/predajna-1.webp"
-            alt="Predaj profesionálneho náradia, príslušenstva a OOPP - Royal Stroje"
+            alt="Predaj profesionálneho náradia, príslušenstva a osobných ochranných pracovných prostriedkov - Royal Stroje"
             className="absolute inset-0 w-full h-full object-cover"
             loading="lazy"
           />
@@ -182,7 +182,7 @@ export default function HeroSplit() {
                   Prenájom a <span className="text-orange-primary">predaj náradia</span>
                 </h2>
                 <p className="hs-3 text-zinc-800 text-sm font-semibold mt-2">
-                  Profesionálne náradie, príslušenstvo a OOPP
+                  Profesionálne náradie, príslušenstvo a osobné ochranné pracovné prostriedky
                 </p>
               </div>
             </div>
