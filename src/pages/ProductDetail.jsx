@@ -1,4 +1,4 @@
-import { Phone, ArrowLeft, ArrowRight, Clock, Shield, Truck, ChevronRight, MessageCircle, BookOpen } from 'lucide-react';
+import { Phone, ArrowLeft, Clock, Shield, Truck, ChevronRight, MessageCircle, BookOpen } from 'lucide-react';
 import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import useProducts from '../hooks/useProducts';
@@ -224,10 +224,6 @@ export default function ProductDetail() {
                       <Phone size={18} />
                       <span>Zavolať 0948 555 551</span>
                     </a>
-                    <Link to="/cenova-ponuka" className="btn-secondary px-6 py-3.5">
-                      <span>Nezáväzná ponuka</span>
-                      <ArrowRight size={16} className="text-orange-primary" />
-                    </Link>
                   </div>
                 </div>
               </div>

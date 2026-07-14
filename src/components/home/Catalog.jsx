@@ -4,7 +4,7 @@ import { useInView } from '../../hooks/useInView';
 import {
   ShoppingCart, X, Send, Calendar,
   Hammer, Cog, HardHat, ArrowUpFromLine,
-  Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, BookOpen, ArrowRight, Info
+  Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, BookOpen, ArrowRight, Info, Bike
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import useProducts, { getProductsBySubcategory } from '../../hooks/useProducts';
@@ -25,6 +25,7 @@ const categoryIcons = {
   'vybavenie-staveniska': Container,
   'auta-privesy': Car,
   'zahradna-technika': TreePine,
+  'volny-cas-a-sport': Bike,
 };
 
 export default function Catalog() {
