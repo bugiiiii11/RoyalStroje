@@ -107,7 +107,15 @@ export const categories = [
       { id: 'rotavatory', name: 'Rotavátory', slug: 'rotavatory' },
       { id: 'drvice', name: 'Drviče', slug: 'drvice' },
       { id: 'zemne-vrtaky', name: 'Zemné vrtáky', slug: 'zemne-vrtaky' },
-      { id: 'volny-cas-a-sport', name: 'Voľný čas a šport', slug: 'volny-cas-a-sport' },
+    ]
+  },
+  {
+    id: 'volny-cas-a-sport',
+    name: 'Voľný čas a šport',
+    slug: 'volny-cas-a-sport',
+    description: 'Elektrobicykle a vybavenie pre voľný čas a šport',
+    subcategories: [
+      { id: 'all', name: 'Všetko', slug: 'all' },
     ]
   },
 ];
