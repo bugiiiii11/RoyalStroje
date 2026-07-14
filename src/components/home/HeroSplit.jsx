@@ -30,7 +30,7 @@ export default function HeroSplit() {
           <img
             src="/pictures/graphics/web_pics/auto_hero.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
-            className="absolute left-[10%] top-[55%] -translate-y-1/2 w-[42%] h-auto"
+            className="hs-img-l absolute left-[10%] top-[55%] -translate-y-1/2 w-[42%] h-auto"
             width={1774}
             height={887}
             fetchPriority="high"
@@ -43,7 +43,7 @@ export default function HeroSplit() {
           <img
             src="/pictures/graphics/predajna-1.webp"
             alt="Predaj profesionálneho náradia, príslušenstva a osobných ochranných pracovných prostriedkov - Royal Stroje"
-            className="absolute inset-y-0 right-0 w-[58%] h-full object-cover"
+            className="hs-img-r absolute inset-y-0 right-0 w-[58%] h-full object-cover"
             width={1280}
             height={1080}
           />
@@ -128,7 +128,7 @@ export default function HeroSplit() {
           <img
             src="/pictures/graphics/web_pics/auto_hero.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
-            className="absolute bottom-0 inset-x-0 w-full h-auto"
+            className="hs-in absolute bottom-0 inset-x-0 w-full h-auto"
             width={1774}
             height={887}
             fetchPriority="high"
@@ -166,7 +166,7 @@ export default function HeroSplit() {
           <img
             src="/pictures/graphics/predajna-1.webp"
             alt="Predaj profesionálneho náradia, príslušenstva a osobných ochranných pracovných prostriedkov - Royal Stroje"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="hs-img-r absolute inset-0 w-full h-full object-cover"
             loading="lazy"
           />
           <div
@@ -203,8 +203,8 @@ export default function HeroSplit() {
             {stripImages.map((img, i) => (
               <div
                 key={img.src}
-                className="group overflow-hidden rounded-xl border border-zinc-200 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/40 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300"
-                style={{ animation: 'hsUp .7s ease both', animationDelay: `${0.2 + i * 0.08}s` }}
+                className="hs-in group overflow-hidden rounded-xl border border-zinc-200 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/40 hover:shadow-md hover:shadow-orange-primary/10 transition-all duration-300"
+                style={{ animationDelay: `${0.2 + i * 0.08}s` }}
               >
                 <img
                   src={img.src}
@@ -223,12 +223,13 @@ export default function HeroSplit() {
       <div className="bg-zinc-100 md:shrink-0">
         <div className="max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12 py-4 md:py-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
-            {usps.map((usp) => {
+            {usps.map((usp, i) => {
               const Icon = usp.Icon;
               return (
                 <div
                   key={usp.title}
-                  className="group flex flex-col items-center text-center gap-2 md:flex-row md:items-center md:text-left md:gap-4 rounded-xl md:rounded-2xl bg-white border border-zinc-200 px-3 md:px-5 py-4 md:py-5 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/40 hover:shadow-md hover:shadow-orange-primary/10 hover:-translate-y-0.5 transition-all duration-300"
+                  className="hs-card group flex flex-col items-center text-center gap-2 md:flex-row md:items-center md:text-left md:gap-4 rounded-xl md:rounded-2xl bg-white border border-zinc-200 px-3 md:px-5 py-4 md:py-5 shadow-sm shadow-zinc-900/5 hover:border-orange-primary/40 hover:shadow-md hover:shadow-orange-primary/10 hover:-translate-y-0.5 transition-all duration-300"
+                  style={{ animationDelay: `${0.48 + i * 0.08}s` }}
                 >
                   <span className="shrink-0 grid place-items-center w-11 h-11 md:w-14 md:h-14 rounded-xl bg-orange-primary/10 border border-orange-primary/25 text-orange-primary group-hover:bg-orange-primary/20 group-hover:border-orange-primary/50 transition-colors duration-300">
                     <Icon size={22} className="md:w-6 md:h-6" />
@@ -258,6 +259,35 @@ export default function HeroSplit() {
         @keyframes hsUp {
           from { opacity: 0; transform: translateY(28px); }
           to   { opacity: 1; transform: none; }
+        }
+
+        /* Veľký ľavý obrázok (auto) — jemný nábeh zľava + fade; drží translateY(-50%) kvôli centrovaniu */
+        .hs-img-l { animation: hsImgL .95s cubic-bezier(.22,.61,.36,1) both; }
+        @keyframes hsImgL {
+          from { opacity: 0; transform: translateY(-50%) translateX(-34px); }
+          to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+        }
+
+        /* Pravý obrázok (náradie / mobil) — fade + jemné doostrenie zo zoomu; končí na transform: none */
+        .hs-img-r { animation: hsImgR .95s cubic-bezier(.22,.61,.36,1) both; animation-delay: .12s; }
+        @keyframes hsImgR {
+          from { opacity: 0; transform: scale(1.06); }
+          to   { opacity: 1; transform: none; }
+        }
+
+        /* Pás obrázkov + mobilné auto (fade-up, delay riadi inline animationDelay) */
+        .hs-in { animation: hsUp .7s ease both; }
+
+        /* USP karty (fade-up, delay inline) */
+        .hs-card { animation: hsUp .6s ease both; }
+
+        /* Rešpekt k používateľom s obmedzeným pohybom — všetko sa zobrazí staticky */
+        @media (prefers-reduced-motion: reduce) {
+          .hs-0, .hs-1, .hs-2, .hs-3, .hs-4,
+          .hs-in, .hs-card, .hs-img-l, .hs-img-r {
+            animation: none !important;
+            opacity: 1 !important;
+          }
         }
       `}</style>
     </section>

@@ -67,8 +67,13 @@ async function fetchProducts() {
 }
 
 export default function useProducts() {
-  const [products, setProducts] = useState(staticProducts); // SSR-safe: start with static
-  const [loading, setLoading] = useState(true);
+  // Prefer the module cache if products were already fetched earlier this session.
+  // Without this, every remount (e.g. going back to the catalog from a product
+  // detail) resets to `staticProducts`, which lacks Supabase-only products such as
+  // the "Voľný čas a šport" e-bikes — so that category flashed/showed empty on back
+  // navigation while other categories (present in staticProducts) looked fine.
+  const [products, setProducts] = useState(cachedProducts || staticProducts);
+  const [loading, setLoading] = useState(!cachedProducts);
 
   useEffect(() => {
     fetchProducts().then((data) => {
