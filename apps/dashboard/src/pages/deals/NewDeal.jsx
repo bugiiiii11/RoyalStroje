@@ -216,6 +216,7 @@ export default function NewDeal() {
         <NewDealStepReview
           dealData={{ client, items, dateFrom, dateTo, timeFrom }}
           onSubmit={handleSubmit}
+          onBack={() => setStep(1)}
           submitting={submitting}
         />
       )}

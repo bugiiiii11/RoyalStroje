@@ -3,7 +3,7 @@ import StatusBadge from '../../components/ui/StatusBadge';
 import { supabase } from '../../lib/supabase';
 import { formatPrice, formatDate, daysBetween, VAT_RATE, CLIENT_TYPES } from '../../lib/constants';
 
-export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
+export default function NewDealStepReview({ dealData, onSubmit, onBack, submitting }) {
   const [deliveryRequired, setDeliveryRequired] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const deliveryFee = 0;
@@ -208,13 +208,22 @@ export default function NewDealStepReview({ dealData, onSubmit, submitting }) {
         </div>
       </div>
 
-      <button
-        onClick={handleSubmit}
-        disabled={submitting}
-        className="w-full bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white font-semibold py-3 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50"
-      >
-        {submitting ? 'Vytvára sa...' : 'Vytvoriť obchod'}
-      </button>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={onBack}
+          disabled={submitting}
+          className="px-6 py-3 rounded-full text-sm font-semibold bg-green-50 text-green-700 border border-green-300 hover:bg-green-100 transition-colors disabled:opacity-50"
+        >
+          Späť
+        </button>
+        <button
+          onClick={handleSubmit}
+          disabled={submitting}
+          className="flex-1 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white font-semibold py-3 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press disabled:opacity-50"
+        >
+          {submitting ? 'Vytvára sa...' : 'Vytvoriť obchod'}
+        </button>
+      </div>
     </div>
   );
 }
