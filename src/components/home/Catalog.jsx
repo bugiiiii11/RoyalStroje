@@ -217,12 +217,12 @@ export default function Catalog() {
     <ContentSection id="katalog" light className="pt-0">
       {/* Full-bleed corner machines flanking the header (desktop only, decorative, behind content) */}
       <img
-        src="/pictures/graphics/web_pics/bager.webp"
+        src="/pictures/graphics/web_pics/bager_web.webp"
         alt="JCB mini bager na prenájom"
         aria-hidden="true"
         className="hidden lg:block absolute top-[20px] left-0 w-auto h-auto max-w-[calc(50vw-356px)] max-h-[380px] z-0 pointer-events-none select-none"
-        width={1000}
-        height={664}
+        width={1024}
+        height={683}
         loading="lazy"
         decoding="async"
       />
