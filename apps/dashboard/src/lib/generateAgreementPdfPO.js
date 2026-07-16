@@ -208,6 +208,17 @@ export default async function generateAgreementPdfPO(reservation, items, client,
     ? fmtDate(contractData.return_date) + (contractData.time_to ? ` o ${contractData.time_to.slice(0, 5)}` : '')
     : '';
   const s = { fontSize: 7, textColor: LBL_C };
+
+  // With a long equipment list the signature block (OVERENIE + PROTOKOL) starts
+  // too low and autoTable splits it across pages, scattering its header. If it
+  // won't fit, push the whole block onto a fresh page so it stays intact; page
+  // numbers are stamped at the end whenever the contract spans two pages.
+  const pageH = doc.internal.pageSize.getHeight();
+  const SIG_BLOCK_H = 62; // measured height of the signature / return-protocol block
+  if (y + SIG_BLOCK_H > pageH - 16) {
+    doc.addPage();
+    y = 12;
+  }
   const sigY = y;
   const todayStr = new Date().toLocaleDateString('sk-SK');
 
@@ -255,6 +266,16 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   });
   const finalYRight = doc.lastAutoTable.finalY;
   y = Math.max(finalYLeft, finalYRight);
+
+  // Page numbers (bottom-right) — only when the contract spilled onto a second page.
+  const pageCount = doc.getNumberOfPages();
+  if (pageCount > 1) {
+    for (let p = 1; p <= pageCount; p++) {
+      doc.setPage(p);
+      doc.setFont(f, 'normal'); doc.setFontSize(7); doc.setTextColor(...LBL_C);
+      doc.text(`Strana ${p}/${pageCount}`, w - M, pageH - 8, { align: 'right' });
+    }
+  }
 
   if (isInvoice) {
     const prefix = invoiceData.type === 'proforma' ? 'proforma' : invoiceData.type === 'credit_note' ? 'dobropis' : 'faktura';
