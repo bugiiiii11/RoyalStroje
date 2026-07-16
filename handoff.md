@@ -43,6 +43,7 @@
 | 39 | 2026-07-14 | Hero vstupné animácie (obrázky splitu + USP karty) + fix prázdneho katalógu na back-nav → **PRODUKČNÝ DEPLOY** | **HeroSplit:** dva veľké obrázky (auto/náradie) + 4 USP karty dostali koordinovanú entrance animáciu (predtým animovali len texty + pás); pás presunutý z inline na triedu `.hs-in`; nový `prefers-reduced-motion` guard; GPU guard dodržaný (transform končí na `none` okrem centrovaného ľavého auta). **Fix:** `useProducts` initial state = modulový `cachedProducts` namiesto `staticProducts` → kategória „Voľný čas a šport" (bicykle len v Supabase) už nie je prázdna po návrate z detailu produktu; bonus odstránený empty-flash aj pre ostatné kategórie. Commit `b631398`, **merge `dev`→`main` (ff) → produkcia**. |
 | 38 | 2026-07-14 | Katalóg: nové príslušenstvo + nová kategória „Voľný čas a šport" + 2 elektrobicykle → **PRODUKČNÝ DEPLOY** | **Príslušenstvo:** nový riadok „Pílový list – Alligator 430mm" (15 €/18,45 € s DPH) do Malé náradie → Príslušenstvo (len DB, existujúca podkat.). **Nová samostatná top-level kategória „Voľný čas a šport"** (sidebar, sort 70, úplne dole pod Záhradnou technikou) + **2 elektrobicykle „Green Bike – čierny/biely"** (40 €/49,20 € s DPH, `Bike_black/white.webp`). ⚠ **Najprv omylom pridaná ako podkategória** pod Záhradnou technikou → owner opravil: presunuté na samostatnú kategóriu (`categories.js` top-level objekt + `equipment_categories` riadok; bicykle `UPDATE category_id`, chybný `equipment_subcategories` riadok zmazaný). **Zistenie:** kategórie/podkat. strom je **staticky v `src/data/categories.js`** (sidebar+chipy), produkty žijú v Supabase `equipment` → nová kategória/podkat. potrebuje **oboje** (kód+deploy AND DB `equipment_categories`/`equipment_subcategories`); produkt do existujúcej vetvy je len DB. **RLS blokuje zápis anon kľúčom** → INSERT/UPDATE/DELETE spúšťal owner v Supabase SQL Editore. Commity `3d1daf3`→`3251a61`, **merge `dev`→`main` (ff) → produkcia**. |
 | 40 | 2026-07-16 | Zmluva PDF: fix rozloženia pri 4+ položkách + „Späť" v Súhrne obchodu → **PRODUKČNÝ DEPLOY** | **Zmluva PDF (FO+PO generátor):** pri 4+ položkách sa blok podpisov („OVERENIE/PODPISY" + „PROTOKOL O VRÁTENÍ PP") začínal privysoko, `autoTable` ho rozbil cez viac strán a rozsypal hlavičku. Fix: dynamický fit-check `y+62 > pageH−16` → ak sa nezmestí, celý blok ide na čistú 2. stranu; **číslovanie strán** (`Strana x/y`, vpravo dole) len pri 2-stranovej zmluve. Overené meraním s reálnym Inter fontom (Node harness): **PO zlomí na 4 položky, FO na 5** — každý presne tam, kde reálne pretekal; pri málo položkách žiadna zmena. Platí pre návrh/finálnu/faktúru. **Nový obchod (dashboard):** krok Súhrn dostal tlačidlo „Späť" (svetlozelené `green-50/300/700`, `onBack`→krok Zariadenia, stav zachovaný) v riadku s veľkým CTA. Commity `0ff8b81`+`f66b089`, **merge `dev`→`main` (ff) → produkcia**. |
+| 41 | 2026-07-16 | Dashboard: číslo zmluvy namiesto DB označenia obchodu → **PRODUKČNÝ DEPLOY** | Owner chcel na dashboarde vidieť **číslo zmluvy** (`260291`) namiesto interného DB označenia obchodu (`RS-2026-XXXX` = `reservation_number`). Klienti → detail (tab. Prenájmy) + Faktúry: stĺpec „Číslo" → „Číslo zmluvy", hodnota `RS-2026-XXXX` → číslo zmluvy. Dashboard Pipeline obchodov + Dnešný rozvrh zobrazujú číslo zmluvy. `useClient`/`useReservations` dostali join `contracts(contract_number)`; nový helper `dealContractNumber()` (fallback na `reservation_number` pre legacy obchod bez zmluvy). Commit `fffbcb8`, **merge `dev`→`main` (ff, `e1f550a`→`fffbcb8`) → produkcia**. |
 
 <!-- Sessions 3-14 archived in session summary table above -->
 
@@ -575,6 +576,31 @@ Date: 2026-07-16
 - Dashboard `vite build` clean pre oba commity (len pre-existing 500 kB chunk-size warning). ESLint: žiadne nové chyby (pre-existing `secHdr` unused v PO generátore + `react-hooks/exhaustive-deps` v Review sú staré, nesúvisia).
 - PDF fix overený meraním end-to-end (bod 3). Späť tlačidlo: build OK; odporúčané po deployi manuálne prekliknúť krok Súhrn → Späť → úprava zariadení → znova Súhrn.
 
+## What Was Done (Session 41) -- Dashboard: číslo zmluvy namiesto DB označenia obchodu
+Date: 2026-07-16
+**Status: COMMITTED + PUSHED + PRODUKČNÝ DEPLOY** (`dev`→`main` fast-forward).
+
+Owner chcel, aby dashboard zobrazoval **číslo zmluvy** (napr. `260291`) namiesto interného DB označenia obchodu (`RS-2026-XXXX` = `reservation_number`) na miestach, kde to mätie.
+
+### Dátový model (kontext)
+- `reservations` = obchod (má `reservation_number` `RS-2026-XXXX`).
+- `contracts` = zmluva (má `contract_number` `260291`, `reservation_id` FK ON DELETE CASCADE, `type` návrh/finálna).
+- **Každý nový obchod auto-vytvára `navrh` zmluvu** (`NewDeal.jsx:153-161`) → rezervácia takmer vždy má číslo zmluvy. Všetky zmluvy jednej rezervácie (návrh + finálne + čiastočné vrátenia) zdieľajú **rovnaké base číslo** → stačí vziať prvú.
+
+### Zmeny
+1. **`useClient.js` + `useReservations.js`** -- do selectu pridaný join `contracts(contract_number)` (rezervácia sama číslo zmluvy nemá). `useReservations` používa len Dashboard. Files: `apps/dashboard/src/hooks/{useClient,useReservations}.js`.
+2. **Nový helper `dealContractNumber(deal)`** v `constants.js` -- vráti `deal.contracts?.[0]?.contract_number`, fallback na `reservation_number` (legacy obchod bez zmluvy), potom `—`. Files: `apps/dashboard/src/lib/constants.js`.
+3. **Klienti → detail klienta (tabuľka „Prenájmy")** -- hlavička `Číslo` → `Číslo zmluvy`; hodnota `deal.reservation_number` → `dealContractNumber(deal)`. Files: `apps/dashboard/src/pages/clients/ClientDetail.jsx`.
+4. **Faktúry (zoznam)** -- hlavička stĺpca `Číslo` → `Číslo zmluvy` (hodnota `row.number` už bola číslo zmluvy pre zmluvné riadky). Files: `apps/dashboard/src/pages/invoices/InvoiceList.jsx`.
+5. **Dashboard** -- Pipeline obchodov (`DealCard`) + Dnešný rozvrh (`TodaySchedule`) zobrazujú `dealContractNumber(deal)` namiesto `reservation_number`. Files: `apps/dashboard/src/pages/Dashboard.jsx`.
+
+### Poznámky / heads-up
+- **Faktúry** obsahujú aj skutočné faktúry (proforma/faktúra/dobropis) — ich `number` je číslo faktúry, nie zmluvy. Hlavička je teraz „Číslo zmluvy" pre celý stĺpec (podľa požiadavky owner-a); ak by prekážalo, dá sa zmeniť na neutrálne „Číslo dokladu".
+- `RS-2026-XXXX` ostáva viditeľné vo Faktúrach v stĺpci „Obchod / Klient" (identifikácia obchodu) — nezmizlo, len sa presunul dôraz na číslo zmluvy.
+
+### Verified
+- `vite build` čistý (7–9 s), ESLint na zmenených súboroch čistý. Commit `fffbcb8` na `dev`, **merge `dev`→`main` (ff, `e1f550a`→`fffbcb8`) → produkcia `app.royalstroje.sk`**.
+
 ## What To Do Next
 | Priority | Task | Notes |
 |----------|------|-------|
@@ -650,7 +676,7 @@ Date: 2026-07-16
 | `supabase/migrations/020_contracts_drop_unique_number.sql` | Drops unique constraint on contracts.contract_number so partial returns can share the same number |
 | `apps/dashboard/src/lib/contractNumbers.js` | Contract number generation: YYXXXX format, legacy ZN/ZF scan, floor at 146, no -N suffix for partials |
 | `apps/dashboard/src/pages/deals/NewDealStepConfirm.jsx` | Post-deal confirm screen -- shows contract number (260147) instead of reservation number |
-| `apps/dashboard/src/lib/constants.js` | Adds `isoToDmy()` / `dmyToISO()` helpers + `PIPELINE_STATUSES` trimmed to `['inquiry', 'completed']` |
+| `apps/dashboard/src/lib/constants.js` | Adds `isoToDmy()` / `dmyToISO()` helpers + `PIPELINE_STATUSES` trimmed to `['inquiry', 'completed']` + **`dealContractNumber(deal)` (s41)** — vráti číslo zmluvy z `deal.contracts[0].contract_number`, fallback na `reservation_number` |
 | `apps/dashboard/vercel.json` | SPA rewrite for dashboard app (refresh on /reports etc.); separate from root vercel.json |
 | `apps/dashboard/src/hooks/useEquipment.js` | Equipment list hook with diacritic-insensitive name+description search (client-side filter when search active) |
 | `apps/dashboard/src/hooks/useDashboardStats.js` | Dashboard stats hook -- `activeRentals` counts `status='inquiry'`, monthRevenue sums bez DPH for completed+invoiced+paid |
