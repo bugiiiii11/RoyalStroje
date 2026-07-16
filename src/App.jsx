@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import MobileNav from './components/common/MobileNav';
@@ -26,6 +26,7 @@ import GDPR from './pages/GDPR';
 import Cookies from './pages/Cookies';
 import ObchodnePodmienky from './pages/ObchodnePodmienky';
 import ProductDetail from './pages/ProductDetail';
+import NotFound from './pages/NotFound';
 
 const CHATBOT_ID = 'b1637181-da22-4ae2-b79e-11c10b967b4f';
 
@@ -50,6 +51,14 @@ function App() {
 
   return (
     <HelmetProvider>
+      {/* Site-wide meta defaults — page-level <Helmet> instances override
+          matching tags (react-helmet-async dedupes by name/property). */}
+      <Helmet>
+        <meta property="og:site_name" content="Royal Stroje" />
+        <meta property="og:locale" content="sk_SK" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="og:image" content="https://royalstroje.sk/hero-main1.webp" />
+      </Helmet>
       <CartProvider>
         <Router>
         <ScrollToTop />
@@ -86,6 +95,8 @@ function App() {
                 <Route path="/obchodne-podmienky" element={<ObchodnePodmienky />} />
                 {/* Product Detail Pages - Dynamic Route */}
                 <Route path="/:productId" element={<ProductDetail />} />
+                {/* Unknown multi-segment URLs → 404 view with noindex */}
+                <Route path="*" element={<NotFound />} />
               </Routes>
           </main>
           <Footer />

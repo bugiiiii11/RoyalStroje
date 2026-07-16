@@ -1,4 +1,5 @@
 import { Phone } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import ContentSection from '../components/common/ContentSection';
 import PageHero from '../components/common/PageHero';
 import CtaBand from '../components/common/CtaBand';
@@ -73,6 +74,17 @@ export default function Partneri() {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Partneri - Overení dodávatelia a značky | Royal Stroje</title>
+        <meta
+          name="description"
+          content="Sieť overených partnerov Royal Stroje: Makita, Wacker Neuson, Terra a ďalší. Kvalitná technika a spoľahlivé služby pre región Senec - Bratislava."
+        />
+        <link rel="canonical" href="https://royalstroje.sk/partneri" />
+        <meta property="og:title" content="Partneri - Royal Stroje" />
+        <meta property="og:description" content="Sieť overených partnerov a značiek Royal Stroje. Jeden kontakt, všetky služby." />
+        <meta property="og:url" content="https://royalstroje.sk/partneri" />
+      </Helmet>
       <PageHero
         eyebrow="Partneri · Senec — Bratislava"
         title={

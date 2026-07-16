@@ -10,10 +10,6 @@ Sitemap: https://royalstroje.sk/sitemap.xml
 # Disallow cart and internal pages
 Disallow: /kosik
 
-# Block crawling of asset files
-Disallow: /*.json$
-Disallow: /assets/
-
 # AI Crawlers - Allow
 User-agent: GPTBot
 Allow: /

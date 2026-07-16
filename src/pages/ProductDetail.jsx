@@ -1,8 +1,9 @@
 import { Phone, ArrowLeft, Clock, Shield, Truck, ChevronRight, MessageCircle, BookOpen } from 'lucide-react';
-import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import useProducts from '../hooks/useProducts';
 import CtaBand from '../components/common/CtaBand';
+import NotFound from './NotFound';
 
 export default function ProductDetail() {
   const { productId } = useParams();
@@ -21,9 +22,11 @@ export default function ProductDetail() {
     );
   }
 
-  // Redirect to home if product not found
+  // Unknown product (or any unknown single-segment URL matched by the greedy
+  // /:productId route) → crawler-correct 404 view with noindex, no soft-404
+  // redirect to the homepage.
   if (!productData) {
-    return <Navigate to="/#pozicovna" replace />;
+    return <NotFound />;
   }
 
   // Extract brand and model from product name
@@ -58,11 +61,14 @@ export default function ProductDetail() {
     <div className="min-h-screen">
       {/* SEO Meta Tags */}
       <Helmet>
-        <title>{product.name} - {brand} {model} | Prenájom strojov Senec | Royal Stroje</title>
+        {/* Single string child — react-helmet-async v3 leaves <title> empty
+            when it gets multiple JSX children (array), so keep one template literal */}
+        <title>{`${product.name} - ${brand} ${model} | Prenájom strojov Senec | Royal Stroje`}</title>
         <meta
           name="description"
           content={`Prenájom ${product.name} (${brand} ${model}) v Senci a okolí. Cena od ${product.pricePerDay}€/deň bez DPH. Profesionálne stavebné stroje a náradie. ☎ 0948 555 551`}
         />
+        <link rel="canonical" href={`https://royalstroje.sk/${productId}`} />
         <meta property="og:type" content="product" />
         <meta property="og:title" content={`${product.name} - ${brand} ${model} | Prenájom strojov Senec`} />
         <meta property="og:description" content={`Profesionálny prenájom ${product.name} v Senci. Od ${product.pricePerDay}€/deň. Možnosť dovozu. ☎ 0948 555 551`} />

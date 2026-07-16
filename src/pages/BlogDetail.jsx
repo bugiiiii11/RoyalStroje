@@ -7,6 +7,7 @@ import ContentSection from '../components/common/ContentSection';
 import PageHero from '../components/common/PageHero';
 import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
+import NotFound from './NotFound';
 
 export default function BlogDetail() {
   const { slug } = useParams();
@@ -29,25 +30,20 @@ export default function BlogDetail() {
     return () => { cancelled = true; };
   }, [slug]);
 
+  // Unknown slug → crawler-correct 404 view with noindex (was a 200
+  // "Článok nenájdený" without noindex = soft-404)
   if (!meta) {
-    return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: '#FAFAFA' }}>
-        <div className="text-center">
-          <h1 className="text-4xl font-black text-zinc-900 mb-4">Článok nenájdený</h1>
-          <Link to="/blog" className="text-orange-primary hover:underline">
-            Späť na blog
-          </Link>
-        </div>
-      </div>
-    );
+    return <NotFound />;
   }
+
+  const canonicalUrl = `https://royalstroje.sk/blog/${slug}`;
 
   // Article Schema for SEO
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": meta.title,
-    "datePublished": meta.date,
+    "datePublished": meta.dateSort,
     "author": {
       "@type": "Person",
       "name": meta.author
@@ -65,14 +61,21 @@ export default function BlogDetail() {
   return (
     <div className="min-h-screen">
       <Helmet>
-        <title>{meta.title} | Blog | Royal Stroje</title>
+        {/* Single string child — react-helmet-async v3 leaves <title> empty
+            when it gets multiple JSX children (array), so keep one template literal */}
+        <title>{`${meta.title} | Blog | Royal Stroje`}</title>
         <meta name="description" content={meta.excerpt} />
-        <link rel="canonical" href={`https://royalstroje.sk/blog/${slug}`} />
+        {/* Hidden (unlisted) articles stay reachable by direct link but must
+            not be indexed; visible ones get a self-canonical. */}
+        {meta.hidden
+          ? <meta name="robots" content="noindex" />
+          : <link rel="canonical" href={canonicalUrl} />}
 
         <meta property="og:type" content="article" />
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.excerpt} />
-        <meta property="og:url" content={`https://royalstroje.sk/blog/${slug}`} />
+        <meta property="og:url" content={canonicalUrl} />
+        {meta.image && <meta property="og:image" content={`https://royalstroje.sk${encodeURI(meta.image)}`} />}
 
         <script type="application/ld+json">
           {JSON.stringify(articleSchema)}
@@ -154,7 +157,7 @@ export default function BlogDetail() {
             <p className="text-zinc-700 text-center mb-4">Páčil sa vám tento článok? Zdieľajte ho!</p>
             <div className="flex justify-center gap-4">
               <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(canonicalUrl)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 text-white rounded-lg shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 transition-all"
@@ -162,7 +165,7 @@ export default function BlogDetail() {
                 Facebook
               </a>
               <a
-                href={`https://www.linkedin.com/sharing/share-offsite/?url=${window.location.href}`}
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 text-white rounded-lg shadow-sm shadow-zinc-900/10 hover:border-orange-primary/50 transition-all"
