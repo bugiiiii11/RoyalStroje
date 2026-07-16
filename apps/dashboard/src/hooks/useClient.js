@@ -10,7 +10,7 @@ export default function useClient(clientId) {
   const reservations = useSupabaseQuery(
     () => supabase
       .from('reservations')
-      .select('*, reservation_items(count)')
+      .select('*, reservation_items(count), contracts(contract_number)')
       .eq('client_id', clientId)
       .order('created_at', { ascending: false }),
     [clientId]

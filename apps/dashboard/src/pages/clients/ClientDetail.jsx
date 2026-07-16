@@ -9,7 +9,7 @@ import StatusBadge from '../../components/ui/StatusBadge';
 import Badge from '../../components/ui/Badge';
 import Spinner from '../../components/ui/Spinner';
 import EmptyState from '../../components/ui/EmptyState';
-import { formatPrice, formatDate, CLIENT_TYPES, isoToDmy, dmyToISO } from '../../lib/constants';
+import { formatPrice, formatDate, dealContractNumber, CLIENT_TYPES, isoToDmy, dmyToISO } from '../../lib/constants';
 import ClientEditForm from './ClientEditForm';
 
 export default function ClientDetail() {
@@ -132,7 +132,7 @@ export default function ClientDetail() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100">
-                      <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Číslo</th>
+                      <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Číslo zmluvy</th>
                       <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Stav</th>
                       <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Termín</th>
                       <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Celkom</th>
@@ -145,7 +145,7 @@ export default function ClientDetail() {
                         onClick={() => navigate(`/deals/${deal.id}`)}
                         className="cursor-pointer table-row-hover"
                       >
-                        <td className="px-4 py-3 font-mono text-sm font-medium">{deal.reservation_number}</td>
+                        <td className="px-4 py-3 font-mono text-sm font-medium">{dealContractNumber(deal)}</td>
                         <td className="px-4 py-3"><StatusBadge status={deal.status} /></td>
                         <td className="px-4 py-3 text-gray-600">
                           {formatDate(deal.date_from)} – {formatDate(deal.date_to)}

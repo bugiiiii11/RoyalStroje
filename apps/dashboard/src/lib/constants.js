@@ -63,6 +63,13 @@ export function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('sk-SK');
 }
 
+// A deal's user-facing number is its contract number (e.g. 260291), shared by
+// all of a reservation's contracts (návrh + finálne). Falls back to the raw
+// reservation number for any legacy deal with no contract row.
+export function dealContractNumber(deal) {
+  return deal?.contracts?.[0]?.contract_number || deal?.reservation_number || '—';
+}
+
 export function isoToDmy(iso) {
   if (!iso) return '';
   const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})/);

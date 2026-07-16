@@ -123,7 +123,7 @@ export default function InvoiceList() {
   const columns = [
     {
       key: 'number',
-      label: 'Číslo',
+      label: 'Číslo zmluvy',
       width: '14%',
       render: (row) => <span className="font-mono font-medium">{row.number}</span>,
     },

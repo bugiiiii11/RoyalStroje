@@ -7,7 +7,7 @@ export default function useReservations(filters = {}) {
   return useSupabaseQuery(async () => {
     let query = supabase
       .from('reservations')
-      .select('*, clients(company_name, contact_person, client_type)')
+      .select('*, clients(company_name, contact_person, client_type), contracts(contract_number)')
       .neq('status', 'cancelled')
       .order('created_at', { ascending: false });
 

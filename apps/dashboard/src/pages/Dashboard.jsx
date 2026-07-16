@@ -7,7 +7,7 @@ import Spinner from '../components/ui/Spinner';
 import EmptyState from '../components/ui/EmptyState';
 import useDashboardStats from '../hooks/useDashboardStats';
 import useReservations from '../hooks/useReservations';
-import { PIPELINE_STATUSES, RESERVATION_STATUSES, getStatusColors, formatPrice, formatDate } from '../lib/constants';
+import { PIPELINE_STATUSES, RESERVATION_STATUSES, getStatusColors, formatPrice, formatDate, dealContractNumber } from '../lib/constants';
 
 function DealCard({ deal, onClick }) {
   return (
@@ -16,7 +16,7 @@ function DealCard({ deal, onClick }) {
       className="bg-white rounded-xl border border-gray-100 p-3.5 cursor-pointer card-interactive group"
     >
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs font-mono font-medium text-gray-500">{deal.reservation_number}</span>
+        <span className="text-xs font-mono font-medium text-gray-500">{dealContractNumber(deal)}</span>
         <span className="text-xs text-gray-400">{formatDate(deal.date_from)}</span>
       </div>
       <p className="text-sm font-medium text-gray-900 truncate">
@@ -87,7 +87,7 @@ function TodaySchedule({ deals }) {
                 {deal.clients?.company_name || '—'}
               </p>
               <p className="text-xs text-gray-400">
-                {deal.reservation_number} · {isStart ? 'Začiatok' : 'Koniec'} prenájmu
+                {dealContractNumber(deal)} · {isStart ? 'Začiatok' : 'Koniec'} prenájmu
               </p>
             </div>
             <StatusBadge status={deal.status} />
