@@ -4,8 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Reveal animations only hide content when JS + IntersectionObserver exist (see index.css .js-reveal) -->
-    <script>if ('IntersectionObserver' in window) document.documentElement.classList.add('js-reveal');</script>
+    <!-- Reveal animations only hide content when JS + IntersectionObserver exist (see index.css .js-reveal).
+         Prerendered pages (html[data-prerendered]) skip the hiding: their content is already painted, and
+         re-hiding it when React re-renders on boot would flash/blink. App.jsx restores js-reveal after the
+         first client-side navigation so scroll reveals still animate on subsequent pages. -->
+    <script>if ('IntersectionObserver' in window && !document.documentElement.hasAttribute('data-prerendered')) document.documentElement.classList.add('js-reveal');</script>
     <link rel="preload" as="image" href="/pictures/graphics/web_pics/auto_hero.webp" type="image/webp" fetchpriority="high" />
     <!-- Industrial type pairing: Archivo (display, grotesque) + Source Sans 3 (body, humanist —
          open apertures + wide word space; Manrope set Slovak too cramped). latin-ext subset served automatically. -->

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useLayoutEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
@@ -29,6 +29,33 @@ import ProductDetail from './pages/ProductDetail';
 import NotFound from './pages/NotFound';
 
 const CHATBOT_ID = 'b1637181-da22-4ae2-b79e-11c10b967b4f';
+
+/**
+ * Prerendered pages boot with html[data-prerendered]: the inline script in
+ * index.html skips js-reveal (content stays visible while React replaces the
+ * prerendered DOM — no blink) and HeroSplit suppresses its entrance animations.
+ * After the FIRST client-side navigation the new page mounts fresh, so we lift
+ * the attribute and restore js-reveal — scroll reveals + hero animations then
+ * behave exactly like the plain SPA. useLayoutEffect = before paint, so the
+ * new page's reveal content never shows for a frame before hiding.
+ */
+function RestoreRevealsAfterNav() {
+  const { pathname } = useLocation();
+  const firstRender = useRef(true);
+
+  useLayoutEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    const html = document.documentElement;
+    if (!html.hasAttribute('data-prerendered')) return;
+    html.removeAttribute('data-prerendered');
+    if ('IntersectionObserver' in window) html.classList.add('js-reveal');
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   useEffect(() => {
@@ -62,6 +89,7 @@ function App() {
       <CartProvider>
         <Router>
         <ScrollToTop />
+        <RestoreRevealsAfterNav />
         <div className="min-h-screen bg-zinc-950 text-white relative overflow-x-hidden">
         {/* Animated Background - desktop only. On mobile the fixed full-viewport
             layers force the page-tall content (relative z-10) to be composited so

@@ -289,6 +289,21 @@ export default function HeroSplit() {
             opacity: 1 !important;
           }
         }
+
+        /* Prerendered boot: statické HTML už hero ukázalo, takže vstupné animácie
+           neprehrávame — inak by React pri boote (createRoot().render() nahradí
+           prerendered DOM) reštartoval animácie od opacity 0 = viditeľné bliknutie.
+           App.jsx atribút po prvej klientskej navigácii odstráni, takže neskoršie
+           návštevy Domov animujú normálne. (hs-img-l drží centrovanie cez Tailwind
+           -translate-y-1/2, animation:none ho nerozbije.) */
+        html[data-prerendered] .hs-0, html[data-prerendered] .hs-1,
+        html[data-prerendered] .hs-2, html[data-prerendered] .hs-3,
+        html[data-prerendered] .hs-4, html[data-prerendered] .hs-in,
+        html[data-prerendered] .hs-card, html[data-prerendered] .hs-img-l,
+        html[data-prerendered] .hs-img-r {
+          animation: none !important;
+          opacity: 1 !important;
+        }
       `}</style>
     </section>
   );

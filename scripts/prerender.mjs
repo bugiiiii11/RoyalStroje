@@ -114,9 +114,16 @@ async function capture(page, route, staticDefaults) {
 
   return page.evaluate(({ staticTitle, staticDesc }) => {
     // 1) js-reveal off <html>: baked in, it would CSS-hide reveal content for
-    //    non-JS consumers. The inline script in index.html re-adds it at
-    //    runtime, so browser behavior is unchanged.
+    //    non-JS consumers.
     document.documentElement.classList.remove('js-reveal');
+
+    // 1b) Mark the snapshot as prerendered. The index.html inline script skips
+    //     re-adding js-reveal and HeroSplit suppresses its entrance animations
+    //     under html[data-prerendered], so the static first paint and React's
+    //     boot re-render look pixel-identical (no visible "blink" when
+    //     createRoot().render() replaces the prerendered DOM). App.jsx lifts
+    //     the attribute after the first client-side navigation.
+    document.documentElement.setAttribute('data-prerendered', '');
 
     // 2) De-dupe <title> + meta description: react-helmet-async v3 appends
     //    its own tags next to the static index.html ones (no data-rh marker
