@@ -2,7 +2,7 @@
 
 Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block below.
 
-## Archived Session Summary (sessions 1-35)
+## Archived Session Summary (sessions 1-37)
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
@@ -41,8 +41,6 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 34 | 2026-07-02 | Font Source Sans 3 + detail produktu redizajn + mobil opravy | Body font Manrope→Source Sans 3 (čitateľnosť), katalógové karty bez stavu „nedostupné" (Zavolať všade), zoom seam fix, odsadenie Akcií pod hero, mobil: USP pretekanie + katalógové filtre bez reveal (GPU), ProductDetail redizajn (H1 = popisný názov, biely foto panel, CTA v cenovej karte, logoroyal-dark v mobilnej hlavičke). Staging „garbage" za katalógom = Vercel toolbar (len preview, nie prod). Commity `65cd1b2` + `7925e08` na `dev`. |
 | 35 | 2026-07-02 | ProductDetail biely hero + word-spacing nadpisov + hover seam fix + nové hero fotky | ProductDetail: tmavý foto-banner → krátky biely hero (jazyk PageHero: tichý back-link, eyebrow značky, tmavý H1, oranžový seam); **Archivo word-spacing 0.12em** (h1–h6 + `.font-display` — úzka medzera medzi slovami v caps titulkoch); **ProductCard hover biela linka definitívne fix** (svetlý gradient presunutý DO zoomovanej vrstvy s obrázkom; overené Playwright hover testom); Blog hero → `predajna-2.webp`, Partneri hero → `stroje-jcb-rameno.webp`; zmazané orphany `ServisNaradia.jsx`/`ZemnePrace.jsx`. Commit `5a324f4` na `dev`. |
 | 33 | 2026-07-02 | UX/UI polish — homepage + katalóg (impeccable audit) | Full design audit (skóre 27/40) → volume-control fixes. **ProductCard:** jeden oranžový CTA/karta (Detail primárny, Zavolať tichý link), 2-riadkové názvy (`line-clamp-2`, koniec s `…`), stav „nedostupné" grayscale + badge na obrázku (skrytý call), tichší price tag. **Katalóg:** mobilné chip filtre kategórií+podkategórií (produkty ~1 obrazovka vs ~3), prepínač „Firmy/Súkromné osoby" + DPH popisok. **Section grammar:** eyebrow labely stenčené (AKCIE/KATALÓG/BLOG/FAQ preč), `WhyRoyalStroje` = 1 tmavý panel bez 01–04 čísel. **Formuláre:** viditeľné labely, `CustomSelect` zladený, border-l/side-tab preč. **Reveal hardening:** skrývanie len pod `html.js-reveal` (JS+IO gate) + print fallback, oprava zastaraného hero preloadu. Hamburger 44px, kontrast drobného textu. Nový `PRODUCT.md`. Build+lint čisté (0 nových), 5 commitov `f5d83f0`→`518ec12` na `dev`, NOT na `main`. |
-| 37 | 2026-07-03 | Hero fotky + blog vlastné hero obrázky -> PROD DEPLOY | Blog per-article hero images (`image` in blogMeta), hero polish, merge `dev`->`main` (38 commits) -> production |
-
 | 36 | 2026-07-02 | Web-wide polish (impeccable) + blog čitateľnosť na svetlom | Catalog hover seam definitive fix, eyebrows thinned site-wide, numbered badges, 19 blog articles re-themed readable on light bg |
 | 37 | 2026-07-03 | Hero fotky + blog vlastné hero obrázky -> PROD DEPLOY | Blog per-article hero images (`image` in blogMeta), hero polish, merge `dev`->`main` (38 commits) -> production |
 

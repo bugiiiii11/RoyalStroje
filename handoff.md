@@ -78,4 +78,4 @@ Date: 2026-07-29
 | 46 | 2026-07-29 | Release sessions 43-46 na PROD + fotky strojov v CTA pásoch + promo WT30 | 3x `dev`->`main`; cutout tool `scripts/cutout-transparent.py`; Haulotte foto v SourcingBanner + CtaBand (opt-in prop); promo slide Honda WT30; hook force-push vzor zúžený; zistený apex->www redirect vs apex canonical |
 | 47 | 2026-07-29 | RCC kalendar: tyzdenny dispecersky pohlad s ulohami -> PROD | Mesacny pohlad nahradeny tyzdennym (Po-Pi, 7-17); nova tabulka `calendar_tasks` (migracia 021, owner spustil); prenajmy v all-day pase; widget dnesnych uloh na dashboarde; fonty zvacsene po feedbacku |
 
-<!-- Sessions 1-35 summary rows + sessions 15-43 full notes + old Architecture/Supabase reference: handoff-archive.md -->
+<!-- Sessions 1-37 summary rows + sessions 15-45 full notes + old Architecture/Supabase reference: handoff-archive.md -->
