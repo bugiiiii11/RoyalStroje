@@ -9,6 +9,13 @@ const PHONE = '+421948555551';
 // swap copy/images. 3:1 banner on desktop, taller on mobile so the copy breathes.
 const slides = [
   {
+    eyebrow: 'Akcia na čerpadlá',
+    title: 'Honda WT30 + hadica zadarmo',
+    text: 'Vysokovýkonné kalové čerpadlo — 1 200 l/min, výtlak až 27 m. K prenájmu pridávame jednu hadicu zadarmo, inak sa príslušenstvo účtuje zvlášť.',
+    img: '/pictures/graphics/honda-wt30-transparent.webp',
+    cta: { label: 'Zobraziť čerpadlo', to: '/honda-wt30' },
+  },
+  {
     eyebrow: 'Sezónna akcia',
     title: 'Letný prenájom minirýpadiel',
     text: 'Zvýhodnené týždenné sadzby na JCB 19C-I a Wacker Neuson. Ideálne na výkopy a terénne úpravy.',
