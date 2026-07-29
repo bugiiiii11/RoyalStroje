@@ -33,7 +33,7 @@ const slides = [
     eyebrow: 'Výhodne',
     title: 'Víkendový prenájom',
     text: 'Požičajte si v piatok, vráťte v pondelok — a platíte len jeden deň prenájmu.',
-    img: '/pictures/graphics/diamantovy-kotuc-transparent.webp',
+    img: '/pictures/graphics/JCB-19C-transparent.webp',
     cta: { label: 'Zavolať teraz', href: `tel:${PHONE}` },
   },
 ];
