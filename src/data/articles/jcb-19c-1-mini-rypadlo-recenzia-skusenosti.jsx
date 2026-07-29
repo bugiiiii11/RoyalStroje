@@ -4,7 +4,7 @@ const article = {
   author: 'Royal Stroje',
   readTime: '10 min',
   category: 'Návody',
-  excerpt: 'Recenzia pásového minirýpadla JCB 19C-1 priamo z našej požičovne - skúsenosti po 170 motohodinách, prekvapivo lacný servis, skryté hydraulické hadice, kopanie do hĺbky 2,5 m, ale aj nevýhody, o ktorých sa v katalógoch nedočítate.',
+  excerpt: 'Recenzia pásového minirýpadla JCB 19C-1 priamo z našej požičovne - skúsenosti po 170 motohodinách, skryté hydraulické hadice, kopanie do hĺbky 2,5 m, ale aj nevýhody, o ktorých sa v katalógoch nedočítate.',
   content: (
       <div className="space-y-8">
         <p className="text-xl text-zinc-700 leading-relaxed">

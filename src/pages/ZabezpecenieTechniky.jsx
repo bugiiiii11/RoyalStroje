@@ -23,7 +23,7 @@ const benefits = [
   {
     icon: Handshake,
     title: 'Overení partneri',
-    text: 'Spolupracujeme so sieťou preverených požičovní, takže dostanete spoľahlivý a servisovaný stroj.',
+    text: 'Spolupracujeme so sieťou preverených partnerov, takže dostanete spoľahlivý a servisovaný stroj.',
   },
   {
     icon: Zap,
@@ -65,7 +65,7 @@ const steps = [
   {
     n: '03',
     title: 'Preveríme partnerov',
-    text: 'Oslovíme sieť overených požičovní a nájdeme vhodný dostupný stroj.',
+    text: 'Oslovíme sieť overených partnerov a nájdeme vhodný dostupný stroj.',
   },
   {
     n: '04',
@@ -246,6 +246,8 @@ export default function ZabezpecenieTechniky() {
           eyebrow="Zabezpečiť stroj"
           title={<>Potrebujete stroj, <span className="text-orange-primary">ktorý nemáme?</span></>}
           text="Stačí nám povedať, čo potrebujete — o všetko ostatné sa postaráme my. Zavolajte a nájdeme riešenie."
+          image="/pictures/graphics/haulotte-compact-10-transparent.webp"
+          imageAlt="Nožnicová plošina Haulotte Compact 10"
           actions={
             <>
               <a href={PHONE} className="btn-primary text-base px-8 py-4">

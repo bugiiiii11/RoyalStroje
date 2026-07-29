@@ -234,7 +234,7 @@ export const blogPosts = [
     id: 19,
     slug: 'jcb-19c-1-mini-rypadlo-recenzia-skusenosti',
     title: 'JCB 19C-1: Úprimná Recenzia Minirýpadla po 170 Motohodinách',
-    excerpt: 'Recenzia pásového minirýpadla JCB 19C-1 priamo z našej požičovne - skúsenosti po 170 motohodinách, prekvapivo lacný servis, skryté hydraulické hadice, kopanie do hĺbky 2,5 m, ale aj nevýhody, o ktorých sa v katalógoch nedočítate.',
+    excerpt: 'Recenzia pásového minirýpadla JCB 19C-1 priamo z našej požičovne - skúsenosti po 170 motohodinách, skryté hydraulické hadice, kopanie do hĺbky 2,5 m, ale aj nevýhody, o ktorých sa v katalógoch nedočítate.',
     date: '29. Júl 2026',
     dateSort: '2026-07-29',
     author: 'Royal Stroje',

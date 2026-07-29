@@ -42,12 +42,13 @@ export default function SourcingBanner() {
             }}
           />
 
-          {/* Oversized decorative icon (desktop) */}
-          <PackageSearch
-            aria-hidden="true"
-            className="hidden lg:block absolute right-8 xl:right-24 top-1/2 -translate-y-1/2 text-orange-primary/15"
-            size={260}
-            strokeWidth={1}
+          {/* Cut-out machine photo on the right (desktop) */}
+          <img
+            src="/pictures/graphics/haulotte-compact-10-transparent.webp"
+            alt="Nožnicová plošina Haulotte Compact 10"
+            loading="lazy"
+            draggable="false"
+            className="hidden lg:block pointer-events-none select-none absolute right-6 xl:right-16 top-1/2 -translate-y-1/2 h-[86%] w-auto object-contain"
           />
 
           {/* Content */}

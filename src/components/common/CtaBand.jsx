@@ -15,8 +15,11 @@ import { useInView } from '../../hooks/useInView';
  *  - text      : supporting paragraph (optional)
  *  - actions   : button/link nodes (e.g. <><a className="btn-primary">…</a>…</>)
  *  - icon      : lucide icon component for the oversized backdrop (optional)
+ *  - image     : cut-out machine photo for the right side, desktop only (optional;
+ *                takes precedence over `icon` — use a transparent-background WebP)
+ *  - imageAlt  : alt text for `image`
  */
-export default function CtaBand({ eyebrow, title, text, actions, icon: Icon }) {
+export default function CtaBand({ eyebrow, title, text, actions, icon: Icon, image, imageAlt = '' }) {
   const [ref, inView] = useInView();
 
   return (
@@ -49,8 +52,19 @@ export default function CtaBand({ eyebrow, title, text, actions, icon: Icon }) {
             }}
           />
 
-          {/* Oversized decorative icon (desktop) */}
-          {Icon && (
+          {/* Cut-out machine photo on the right (desktop) */}
+          {image && (
+            <img
+              src={image}
+              alt={imageAlt}
+              loading="lazy"
+              draggable="false"
+              className="hidden lg:block pointer-events-none select-none absolute right-6 xl:right-16 top-1/2 -translate-y-1/2 h-[86%] w-auto object-contain"
+            />
+          )}
+
+          {/* Oversized decorative icon (desktop) — skipped when a photo is used */}
+          {Icon && !image && (
             <Icon
               aria-hidden="true"
               className="hidden lg:block absolute right-8 xl:right-24 top-1/2 -translate-y-1/2 text-orange-primary/15"
