@@ -24,7 +24,7 @@ export async function loadArticle(slug) {
     'nivel-cl3g-krizovy-laser-zeleny-profesionalny-nastroj': () => import('./articles/nivel-cl3g-krizovy-laser-zeleny-profesionalny-nastroj.jsx'),
     'nivel-n32x-opticky-nivelacny-pristroj-profesionalny-nastroj': () => import('./articles/nivel-n32x-opticky-nivelacny-pristroj-profesionalny-nastroj.jsx'),
     'nivel-nl520r-rotacny-laser-cerveny-profesionalny-nastroj': () => import('./articles/nivel-nl520r-rotacny-laser-cerveny-profesionalny-nastroj.jsx'),
-    'jcb-19c-i-mini-rypadlo-kompaktny-vykon': () => import('./articles/jcb-19c-i-mini-rypadlo-kompaktny-vykon.jsx'),
+    'jcb-19c-1-mini-rypadlo-recenzia-skusenosti': () => import('./articles/jcb-19c-1-mini-rypadlo-recenzia-skusenosti.jsx'),
   };
 
   if (!modules[slug]) return null;

@@ -232,16 +232,15 @@ export const blogPosts = [
   },
   {
     id: 19,
-    slug: 'jcb-19c-i-mini-rypadlo-kompaktny-vykon',
-    title: 'JCB 19C-I: Kompaktné Mini-Rýpadlo s Výkonom Pre Náročné Stavby',
-    excerpt: 'Kompletný prehľad mini-rýpadla JCB 19C-I - 1,83 tony hmotnosti, hĺbka výkopu 2,4 m, kompaktné rozmery pre stiesnené priestory a robustný H-rám. Prečo je toto mini-rýpadlo ideálnou voľbou pre malé stavby, výkopy a terénne úpravy?',
-    date: '22. Apríl 2026',
-    dateSort: '2026-04-22',
+    slug: 'jcb-19c-1-mini-rypadlo-recenzia-skusenosti',
+    title: 'JCB 19C-1: Úprimná Recenzia Minirýpadla po 170 Motohodinách',
+    excerpt: 'Recenzia pásového minirýpadla JCB 19C-1 priamo z našej požičovne - skúsenosti po 170 motohodinách, prekvapivo lacný servis, skryté hydraulické hadice, kopanie do hĺbky 2,5 m, ale aj nevýhody, o ktorých sa v katalógoch nedočítate.',
+    date: '29. Júl 2026',
+    dateSort: '2026-07-29',
     author: 'Royal Stroje',
-    readTime: '11 min',
+    readTime: '10 min',
     image: '/pictures/graphics/blog_jcb.webp',
     category: 'Návody',
-    hidden: true,
   },
 ];
 
