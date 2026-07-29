@@ -41,8 +41,12 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 34 | 2026-07-02 | Font Source Sans 3 + detail produktu redizajn + mobil opravy | Body font Manrope→Source Sans 3 (čitateľnosť), katalógové karty bez stavu „nedostupné" (Zavolať všade), zoom seam fix, odsadenie Akcií pod hero, mobil: USP pretekanie + katalógové filtre bez reveal (GPU), ProductDetail redizajn (H1 = popisný názov, biely foto panel, CTA v cenovej karte, logoroyal-dark v mobilnej hlavičke). Staging „garbage" za katalógom = Vercel toolbar (len preview, nie prod). Commity `65cd1b2` + `7925e08` na `dev`. |
 | 35 | 2026-07-02 | ProductDetail biely hero + word-spacing nadpisov + hover seam fix + nové hero fotky | ProductDetail: tmavý foto-banner → krátky biely hero (jazyk PageHero: tichý back-link, eyebrow značky, tmavý H1, oranžový seam); **Archivo word-spacing 0.12em** (h1–h6 + `.font-display` — úzka medzera medzi slovami v caps titulkoch); **ProductCard hover biela linka definitívne fix** (svetlý gradient presunutý DO zoomovanej vrstvy s obrázkom; overené Playwright hover testom); Blog hero → `predajna-2.webp`, Partneri hero → `stroje-jcb-rameno.webp`; zmazané orphany `ServisNaradia.jsx`/`ZemnePrace.jsx`. Commit `5a324f4` na `dev`. |
 | 33 | 2026-07-02 | UX/UI polish — homepage + katalóg (impeccable audit) | Full design audit (skóre 27/40) → volume-control fixes. **ProductCard:** jeden oranžový CTA/karta (Detail primárny, Zavolať tichý link), 2-riadkové názvy (`line-clamp-2`, koniec s `…`), stav „nedostupné" grayscale + badge na obrázku (skrytý call), tichší price tag. **Katalóg:** mobilné chip filtre kategórií+podkategórií (produkty ~1 obrazovka vs ~3), prepínač „Firmy/Súkromné osoby" + DPH popisok. **Section grammar:** eyebrow labely stenčené (AKCIE/KATALÓG/BLOG/FAQ preč), `WhyRoyalStroje` = 1 tmavý panel bez 01–04 čísel. **Formuláre:** viditeľné labely, `CustomSelect` zladený, border-l/side-tab preč. **Reveal hardening:** skrývanie len pod `html.js-reveal` (JS+IO gate) + print fallback, oprava zastaraného hero preloadu. Hamburger 44px, kontrast drobného textu. Nový `PRODUCT.md`. Build+lint čisté (0 nových), 5 commitov `f5d83f0`→`518ec12` na `dev`, NOT na `main`. |
+| 37 | 2026-07-03 | Hero fotky + blog vlastné hero obrázky -> PROD DEPLOY | Blog per-article hero images (`image` in blogMeta), hero polish, merge `dev`->`main` (38 commits) -> production |
 
-## Archived What Was Done sections (sessions 15-43, oldest first)
+| 36 | 2026-07-02 | Web-wide polish (impeccable) + blog čitateľnosť na svetlom | Catalog hover seam definitive fix, eyebrows thinned site-wide, numbered badges, 19 blog articles re-themed readable on light bg |
+| 37 | 2026-07-03 | Hero fotky + blog vlastné hero obrázky -> PROD DEPLOY | Blog per-article hero images (`image` in blogMeta), hero polish, merge `dev`->`main` (38 commits) -> production |
+
+## Archived What Was Done sections (sessions 15-45, oldest first)
 
 ## What Was Done (Session 15) -- Real Photos + Ad-hoc Items + Gallery + Editable Days
 Date: 2026-04-30
@@ -643,6 +647,22 @@ Date: 2026-07-16
 - Zmazané: `public/sitemap.xml`.
 - Commit `4a7b8c2` na `dev`.
 
+## What Was Done (Session 44) -- Fix prerender boot blink + SEO-1 staging verification
+Date: 2026-07-16
+
+1. **Prerender boot "blink" fixed** -- `html[data-prerendered]` marker in snapshots; inline script skips `js-reveal`, HeroSplit suppresses `hs-*` entrance animations, `RestoreRevealsAfterNav` in App.jsx restores normal SPA behavior on first client-side navigation. Hydration rejected (IO classes + Supabase data guarantee mismatches). Verified 12/12 with puppeteer harness. Committed `92c571d`.
+2. **SEO-1 verified on Vercel staging** -- chromium build passes, staging serves prerendered HTML with per-page titles + canonical, sitemap 164 URLs. Note: local `vite preview` does NOT do filesystem-before-rewrites -- verify per-page titles on Vercel or in `dist/<path>/index.html`.
+
+
+## What Was Done (Session 45) -- New JCB 19C-1 blog article (honest review) + .claude tooling overhaul
+Date: 2026-07-29
+
+1. **New blog article** `src/data/articles/jcb-19c-1-mini-rypadlo-recenzia-skusenosti.jsx` -- honest review based on own fleet machine (170 motohours): pros (hidden hydraulic hoses in boom, long arm dig depth ~2.5 m, 100 mth service = fluids + greasing only, next at 500 mth, 980 mm width) AND cons (dug-in machine can't crawl out without pushing off the boom, 11.7 kW limits, slope stability needs widened undercarriage). Specs verified via research: Perkins 403D-07, 11.7 kW (matches owner's data).
+2. **Replaced old hidden JCB article** (id 19, wrong specs, slug `jcb-19c-i-...`) -- file deleted, blogMeta entry replaced (hidden flag removed), loader updated. Old slug 404s (was noindex + never in sitemap, safe). This closes the old "re-publish JCB article" backlog item.
+3. **Article <-> catalog prelink:** article CTA links to product page `/jcb-19c-i`; catalog -> article appears automatically once owner runs the SQL in task 1 below (RLS blocks anon writes).
+4. **Verified:** changed files lint-clean (601 baseline elsewhere), `build:spa` OK, sitemap 164 URLs (11 blog incl. new), puppeteer checks: per-page title, blog card, CTA links, full-page visual + CTA tile contrast fix (`bg-zinc-900/50` -> solid on light panel).
+5. **.claude tooling overhaul committed with this wrap:** hooks rewritten (auto-wrap Stop hook measuring real context, context-warn, test-hooks), 4 old skills consolidated into `.claude/skills/handoff/`, new root `CLAUDE.md`, old files in `.claude/_superseded/`.
+6. **Suggested to owner:** catalog product name "JCB 19C-I" has a typo (correct designation "JCB 19C-1") -- optional one-line UPDATE on `equipment.name`.
 
 ## Archived reference blocks (as of session 44)
 
