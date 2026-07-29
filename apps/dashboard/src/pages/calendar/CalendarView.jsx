@@ -8,7 +8,7 @@ import Spinner from '../../components/ui/Spinner';
 import TaskModal from './TaskModal';
 import { getStatusColors, RESERVATION_STATUSES, dealContractNumber } from '../../lib/constants';
 import {
-  DAY_NAMES_SHORT, HOURS, FIRST_HOUR, LAST_HOUR, TASK_COLORS, TASK_COLOR_KEYS,
+  DAY_NAMES, HOURS, FIRST_HOUR, LAST_HOUR, TASK_COLORS, TASK_COLOR_KEYS,
   toISO, addDays, startOfWeek, buildWeekDays, formatWeekRange, formatHour, clampHour,
   getTaskColors, layoutRentalBars,
 } from '../../lib/calendar';
@@ -96,7 +96,7 @@ function DayCell({ dayISO, hour, isToday, tasks, quickAdd, nowPct, onCellClick, 
   return (
     <div
       onClick={() => onCellClick(dayISO, hour)}
-      className={`group/cell relative min-h-[64px] border-r border-gray-100 p-1.5 space-y-1 cursor-pointer transition-colors ${
+      className={`group/cell relative min-h-[64px] border-r border-gray-300 last:border-r-0 p-1.5 space-y-1 cursor-pointer transition-colors ${
         isToday ? 'bg-royal-50/40' : ''
       } hover:bg-royal-50/60`}
     >
@@ -192,7 +192,8 @@ export default function CalendarView() {
     return map;
   }, [deals, weekDays]);
 
-  const gridCols = { gridTemplateColumns: `68px repeat(${weekDays.length}, minmax(150px, 1fr))` };
+  const gridCols = { gridTemplateColumns: `72px repeat(${weekDays.length}, minmax(160px, 1fr))` };
+  const dayCols = { gridTemplateColumns: `repeat(${weekDays.length}, minmax(0, 1fr))` };
 
   const handleQuickSubmit = async (dayISO, hour, { title, color }) => {
     setQuickAdd(null);
@@ -262,17 +263,17 @@ export default function CalendarView() {
 
       <div className="bg-white rounded-xl border border-gray-100 shadow-card overflow-hidden">
         <div className="overflow-x-auto">
-          <div className="min-w-[860px]">
+          <div className="min-w-[900px]">
             {/* Day headers */}
-            <div className="grid border-b border-gray-100" style={gridCols}>
-              <div className="border-r border-gray-100" />
+            <div className="grid bg-gray-50 border-b border-gray-200" style={gridCols}>
+              <div className="border-r border-gray-200" />
               {weekDays.map((day, idx) => {
                 const iso = toISO(day);
                 const isToday = iso === todayISO;
                 const ev = dayEvents[iso] || { pickups: 0, returns: 0 };
                 return (
-                  <div key={iso} className={`px-2 py-2.5 text-center border-r border-gray-100 last:border-r-0 ${isToday ? 'bg-royal-50/60' : ''}`}>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">{DAY_NAMES_SHORT[idx]}</p>
+                  <div key={iso} className={`px-2 py-2.5 text-center border-r border-gray-300 last:border-r-0 ${isToday ? 'bg-royal-50/60' : ''}`}>
+                    <p className={`text-[13px] font-bold uppercase tracking-wide ${isToday ? 'text-royal-600' : 'text-gray-500'}`}>{DAY_NAMES[idx]}</p>
                     <p className="mt-0.5">
                       <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-base font-semibold ${
                         isToday ? 'bg-royal-500 text-white shadow-glow' : 'text-gray-800'
@@ -299,20 +300,26 @@ export default function CalendarView() {
               })}
             </div>
 
-            {/* Rentals lane */}
-            <div className="grid border-b border-gray-100 bg-gray-50/60" style={gridCols}>
-              <div className="px-2 py-2 border-r border-gray-100 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+            {/* Rentals lane -- closes the header block, hence the heavy bottom rule */}
+            <div className="grid border-b-2 border-gray-400 bg-gray-50" style={gridCols}>
+              <div className="px-2 py-2 border-r border-gray-200 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-400">
                 Prenájmy
               </div>
-              <div style={{ gridColumn: `2 / span ${weekDays.length}` }} className="py-2 px-1">
+              <div style={{ gridColumn: `2 / span ${weekDays.length}` }} className="relative py-2">
+                {/* Column rules so the days stay readable behind the rental bars */}
+                <div className="absolute inset-0 grid pointer-events-none" style={dayCols} aria-hidden="true">
+                  {weekDays.map((day) => (
+                    <div key={toISO(day)} className="border-r border-gray-300 last:border-r-0" />
+                  ))}
+                </div>
                 {dealsLoading ? (
-                  <p className="text-sm text-gray-400 px-2">Načítavam…</p>
+                  <p className="relative text-sm text-gray-400 px-2">Načítavam…</p>
                 ) : bars.length === 0 ? (
-                  <p className="text-sm text-gray-400 px-2 py-0.5">Žiadne prenájmy v tomto týždni</p>
+                  <p className="relative text-sm text-gray-400 px-2 py-0.5">Žiadne prenájmy v tomto týždni</p>
                 ) : (
                   <div
-                    className="grid gap-y-1"
-                    style={{ gridTemplateColumns: `repeat(${weekDays.length}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${rowCount}, auto)` }}
+                    className="relative grid gap-y-1"
+                    style={{ ...dayCols, gridTemplateRows: `repeat(${rowCount}, auto)` }}
                   >
                     {bars.map(({ deal, startIdx, endIdx, row, startsBefore, endsAfter }) => {
                       const colors = getStatusColors(deal.status);
@@ -343,7 +350,7 @@ export default function CalendarView() {
             ) : (
               HOURS.map((hour) => (
                 <div key={hour} className="grid border-b border-gray-100 last:border-b-0" style={gridCols}>
-                  <div className="px-2 py-2 border-r border-gray-100 text-right text-[13px] font-medium text-gray-500 tabular-nums">
+                  <div className="px-2 py-2 border-r border-gray-200 bg-gray-50/60 text-right text-[13px] font-medium text-gray-500 tabular-nums">
                     {formatHour(hour)}
                   </div>
                   {weekDays.map((day) => {
