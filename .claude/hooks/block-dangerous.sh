@@ -50,10 +50,13 @@ BLOCKED_PATTERNS=(
   '> /dev/sd'
   'chmod -R 777 /'
   'eval.*\$\(curl'
-  'git push.*--force.*main'
-  'git push.*--force.*master'
-  'git push.*-f.*main'
-  'git push.*-f.*master'
+  # Force-push to main/master. Scoped with [^;&|]* so the pattern cannot span a
+  # command chain, and `-f` must be a standalone flag -- the old `git push.*-f.*main`
+  # false-positived on release chains like
+  #   git push origin dev && git checkout main && git merge --ff-only dev && git push origin main
+  # (the `-f` was matched inside `--ff-only`).
+  # Force flag and the protected branch, in either order, plus the `+ref` form.
+  'git push[^;&|]*((--force|--force-with-lease|[[:space:]]-f([[:space:]]|$))[^;&|]*(main|master)|(main|master)[^;&|]*(--force|--force-with-lease|[[:space:]]-f([[:space:]]|$))|[[:space:]]\+(main|master))'
 
   # === Sensitive file access via bash (closes the Edit/Write/Read tool bypass) ===
   # protect-files.sh guards the Edit/Write/Read TOOLS; these close the bash-tool
