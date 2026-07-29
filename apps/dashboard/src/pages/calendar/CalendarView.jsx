@@ -19,21 +19,21 @@ function TaskChip({ task, onToggle, onOpen }) {
     <div
       onClick={(e) => { e.stopPropagation(); onOpen(task); }}
       title={task.note ? `${task.title}\n${task.note}` : task.title}
-      className={`flex items-start gap-1.5 rounded-md border-l-[3px] pl-1.5 pr-1 py-1 cursor-pointer transition-shadow hover:shadow-sm ${colors.chip} ${task.done ? 'opacity-55' : ''}`}
+      className={`flex items-start gap-1.5 rounded-md border-l-[3px] pl-2 pr-1.5 py-1.5 cursor-pointer transition-shadow hover:shadow-sm ${colors.chip} ${task.done ? 'opacity-55' : ''}`}
     >
       <button
         onClick={(e) => { e.stopPropagation(); onToggle(task); }}
         title={task.done ? 'Označiť ako neukončené' : 'Označiť ako ukončené'}
-        className={`mt-px w-3.5 h-3.5 shrink-0 rounded border flex items-center justify-center transition-colors ${
+        className={`mt-0.5 w-4 h-4 shrink-0 rounded border flex items-center justify-center transition-colors ${
           task.done ? 'bg-green-500 border-green-500' : 'border-gray-300 bg-white hover:border-green-500'
         }`}
       >
-        {task.done && <Check className="w-2.5 h-2.5 text-white" strokeWidth={4} />}
+        {task.done && <Check className="w-3 h-3 text-white" strokeWidth={4} />}
       </button>
-      <span className={`flex-1 text-[11px] leading-snug break-words ${colors.text} ${task.done ? 'line-through' : ''}`}>
+      <span className={`flex-1 text-[13px] leading-snug break-words ${colors.text} ${task.done ? 'line-through' : ''}`}>
         {task.title}
       </span>
-      {task.note && <StickyNote className="w-3 h-3 mt-px shrink-0 text-gray-400" />}
+      {task.note && <StickyNote className="w-3.5 h-3.5 mt-0.5 shrink-0 text-gray-400" />}
     </div>
   );
 }
@@ -61,7 +61,7 @@ function QuickAdd({ onSubmit, onCancel }) {
           if (e.key === 'Escape') { e.preventDefault(); onCancel(); }
         }}
         placeholder="Nová úloha…"
-        className="w-full text-[11px] px-1 py-0.5 outline-none placeholder:text-gray-400"
+        className="w-full text-[13px] px-1 py-1 outline-none placeholder:text-gray-400"
       />
       <div className="flex items-center justify-between mt-1 px-0.5">
         <div className="flex items-center gap-1">
@@ -71,7 +71,7 @@ function QuickAdd({ onSubmit, onCancel }) {
               type="button"
               title={TASK_COLORS[key].label}
               onClick={() => setColor(key)}
-              className={`w-3.5 h-3.5 rounded-full transition-transform ${TASK_COLORS[key].dot} ${
+              className={`w-4 h-4 rounded-full transition-transform ${TASK_COLORS[key].dot} ${
                 color === key ? 'ring-2 ring-offset-1 ring-gray-400 scale-110' : 'hover:scale-110'
               }`}
             />
@@ -79,9 +79,9 @@ function QuickAdd({ onSubmit, onCancel }) {
         </div>
         <div className="flex items-center gap-1">
           <button type="button" onClick={onCancel} className="p-0.5 text-gray-400 hover:text-gray-600">
-            <X className="w-3 h-3" />
+            <X className="w-3.5 h-3.5" />
           </button>
-          <button type="button" onClick={submit} className="text-[10px] font-semibold text-royal-600 hover:text-royal-700">
+          <button type="button" onClick={submit} className="text-[11px] font-semibold text-royal-600 hover:text-royal-700">
             Uložiť
           </button>
         </div>
@@ -96,7 +96,7 @@ function DayCell({ dayISO, hour, isToday, tasks, quickAdd, nowPct, onCellClick, 
   return (
     <div
       onClick={() => onCellClick(dayISO, hour)}
-      className={`group/cell relative min-h-[54px] border-r border-gray-100 p-1 space-y-1 cursor-pointer transition-colors ${
+      className={`group/cell relative min-h-[64px] border-r border-gray-100 p-1.5 space-y-1 cursor-pointer transition-colors ${
         isToday ? 'bg-royal-50/40' : ''
       } hover:bg-royal-50/60`}
     >
@@ -192,7 +192,7 @@ export default function CalendarView() {
     return map;
   }, [deals, weekDays]);
 
-  const gridCols = { gridTemplateColumns: `56px repeat(${weekDays.length}, minmax(130px, 1fr))` };
+  const gridCols = { gridTemplateColumns: `68px repeat(${weekDays.length}, minmax(150px, 1fr))` };
 
   const handleQuickSubmit = async (dayISO, hour, { title, color }) => {
     setQuickAdd(null);
@@ -262,7 +262,7 @@ export default function CalendarView() {
 
       <div className="bg-white rounded-xl border border-gray-100 shadow-card overflow-hidden">
         <div className="overflow-x-auto">
-          <div className="min-w-[760px]">
+          <div className="min-w-[860px]">
             {/* Day headers */}
             <div className="grid border-b border-gray-100" style={gridCols}>
               <div className="border-r border-gray-100" />
@@ -272,9 +272,9 @@ export default function CalendarView() {
                 const ev = dayEvents[iso] || { pickups: 0, returns: 0 };
                 return (
                   <div key={iso} className={`px-2 py-2.5 text-center border-r border-gray-100 last:border-r-0 ${isToday ? 'bg-royal-50/60' : ''}`}>
-                    <p className="text-[11px] font-medium uppercase tracking-wide text-gray-400">{DAY_NAMES_SHORT[idx]}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">{DAY_NAMES_SHORT[idx]}</p>
                     <p className="mt-0.5">
-                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-sm font-semibold ${
+                      <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-base font-semibold ${
                         isToday ? 'bg-royal-500 text-white shadow-glow' : 'text-gray-800'
                       }`}>
                         {day.getDate()}
@@ -283,13 +283,13 @@ export default function CalendarView() {
                     {(ev.pickups > 0 || ev.returns > 0) && (
                       <div className="flex items-center justify-center gap-1 mt-1">
                         {ev.pickups > 0 && (
-                          <span title="Začiatok prenájmu" className="inline-flex items-center gap-0.5 text-[10px] font-medium text-green-700 bg-green-50 px-1.5 py-0.5 rounded-full">
-                            <ArrowUpRight className="w-2.5 h-2.5" />{ev.pickups}
+                          <span title="Začiatok prenájmu" className="inline-flex items-center gap-0.5 text-[11px] font-medium text-green-700 bg-green-50 px-1.5 py-0.5 rounded-full">
+                            <ArrowUpRight className="w-3 h-3" />{ev.pickups}
                           </span>
                         )}
                         {ev.returns > 0 && (
-                          <span title="Koniec prenájmu" className="inline-flex items-center gap-0.5 text-[10px] font-medium text-orange-700 bg-orange-50 px-1.5 py-0.5 rounded-full">
-                            <ArrowDownLeft className="w-2.5 h-2.5" />{ev.returns}
+                          <span title="Koniec prenájmu" className="inline-flex items-center gap-0.5 text-[11px] font-medium text-orange-700 bg-orange-50 px-1.5 py-0.5 rounded-full">
+                            <ArrowDownLeft className="w-3 h-3" />{ev.returns}
                           </span>
                         )}
                       </div>
@@ -301,14 +301,14 @@ export default function CalendarView() {
 
             {/* Rentals lane */}
             <div className="grid border-b border-gray-100 bg-gray-50/60" style={gridCols}>
-              <div className="px-2 py-2 border-r border-gray-100 text-right text-[10px] font-medium uppercase tracking-wide text-gray-400">
+              <div className="px-2 py-2 border-r border-gray-100 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-400">
                 Prenájmy
               </div>
               <div style={{ gridColumn: `2 / span ${weekDays.length}` }} className="py-2 px-1">
                 {dealsLoading ? (
-                  <p className="text-xs text-gray-400 px-2">Načítavam…</p>
+                  <p className="text-sm text-gray-400 px-2">Načítavam…</p>
                 ) : bars.length === 0 ? (
-                  <p className="text-xs text-gray-400 px-2 py-0.5">Žiadne prenájmy v tomto týždni</p>
+                  <p className="text-sm text-gray-400 px-2 py-0.5">Žiadne prenájmy v tomto týždni</p>
                 ) : (
                   <div
                     className="grid gap-y-1"
@@ -322,7 +322,7 @@ export default function CalendarView() {
                           onClick={() => navigate(`/deals/${deal.id}`)}
                           title={`${dealContractNumber(deal)} · ${deal.clients?.company_name || '—'} · ${deal.date_from} – ${deal.date_to}`}
                           style={{ gridColumn: `${startIdx + 1} / ${endIdx + 2}`, gridRow: row + 1 }}
-                          className={`mx-0.5 flex items-center gap-1 px-2 py-1 text-[11px] font-medium truncate hover:opacity-80 transition-opacity ${colors.bg} ${colors.text} ${
+                          className={`mx-0.5 flex items-center gap-1 px-2 py-1.5 text-[13px] font-medium truncate hover:opacity-80 transition-opacity ${colors.bg} ${colors.text} ${
                             startsBefore ? 'rounded-l-none' : 'rounded-l-md'
                           } ${endsAfter ? 'rounded-r-none' : 'rounded-r-md'}`}
                         >
@@ -343,7 +343,7 @@ export default function CalendarView() {
             ) : (
               HOURS.map((hour) => (
                 <div key={hour} className="grid border-b border-gray-100 last:border-b-0" style={gridCols}>
-                  <div className="px-2 py-1.5 border-r border-gray-100 text-right text-[11px] font-medium text-gray-400 tabular-nums">
+                  <div className="px-2 py-2 border-r border-gray-100 text-right text-[13px] font-medium text-gray-500 tabular-nums">
                     {formatHour(hour)}
                   </div>
                   {weekDays.map((day) => {
@@ -377,13 +377,13 @@ export default function CalendarView() {
       {/* Legend */}
       <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">Prenájmy</span>
+          <span className="text-sm font-semibold text-gray-400 uppercase tracking-wide">Prenájmy</span>
           {Object.entries(RESERVATION_STATUSES)
             .filter(([key]) => key !== 'cancelled' && key !== 'paid')
             .map(([key, val]) => {
               const colors = getStatusColors(key);
               return (
-                <div key={key} className="flex items-center gap-1.5 text-xs">
+                <div key={key} className="flex items-center gap-1.5 text-sm">
                   <div className={`w-3 h-3 rounded ${colors.bg}`} />
                   <span className="text-gray-600">{val.label}</span>
                 </div>
@@ -391,16 +391,16 @@ export default function CalendarView() {
             })}
         </div>
         <div className="flex flex-wrap items-center gap-3">
-          <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">Úlohy</span>
+          <span className="text-sm font-semibold text-gray-400 uppercase tracking-wide">Úlohy</span>
           {TASK_COLOR_KEYS.map((key) => (
-            <div key={key} className="flex items-center gap-1.5 text-xs">
+            <div key={key} className="flex items-center gap-1.5 text-sm">
               <div className={`w-3 h-3 rounded-full ${TASK_COLORS[key].dot}`} />
               <span className="text-gray-600">{TASK_COLORS[key].label}</span>
             </div>
           ))}
         </div>
       </div>
-      <p className="text-xs text-gray-400 mt-2">
+      <p className="text-sm text-gray-400 mt-2">
         Klik do bunky = rýchly zápis úlohy · klik na úlohu = úprava · šípky ←/→ prepínajú týždne
       </p>
 
