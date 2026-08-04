@@ -1,51 +1,36 @@
 # RoyalStroje -- Session Handoff
 
-<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-45 + old reference blocks archived 2026-07-29). -->
+<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-47 + old reference blocks archived 2026-07-29, 2026-08-04). -->
 
 ## Current State
 
-- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); SEO batch shipped in s46, dashboard week calendar shipped in s47
-- **Session count:** 47
-- **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `6952a24` after the session 47 release
+- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); SEO-2 (apex vs www) resolved in s48, JCB blog link live
+- **Session count:** 48
+- **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `f05235b`
 
-## What Was Done (Session 46) -- Release na produkciu + fotky strojov v CTA pásoch + promo akcia WT30
-Date: 2026-07-29
+## What Was Done (Session 48) -- SEO-2 domain swap + JCB SQL + product fixes
+Date: 2026-08-04
 
-1. **SEO-3 hotové: `dev` -> `main` -> produkcia (3x počas session).** Prvý release doniesol sessions 43-45 (prerender, sitemap, robots fix, blink fix, JCB článok) -- owner totiž nasadil ešte pred článkom, preto ho na webe nevidel. Overené na live: sitemap 164 URL vrátane nového článku.
-2. **POZOR -- `royalstroje.sk` 307-redirectuje na `www.royalstroje.sk`**, teda opačne než hovorí úloha SEO-2. Sitemap aj canonical používajú apex. Treba rozhodnúť smer a zosúladiť (viď úloha 2).
-3. **Release niesol aj cudziu prácu:** `871d67f` (Kalendár RCC, session 47) pribudol na `dev` počas tejto session a `--ff-only` merge ho poslal do produkcie spolu s webom. Migráciu `021` medzitým owner spustil (s47). Poučenie: pri `dev`->`main` sa vždy pozrieť, čo v `dev` pribudlo od poslednej vlastnej práce -- na `dev` môže paralelne pracovať iná session.
-4. **Vlastný nástroj na výrez pozadia:** `scripts/cutout-transparent.py` (Pillow+numpy, flood-fill od okrajov + dekontaminácia okrajových pixelov). Parametre rozhodujú: sýty stroj s mäkkým tieňom = defaulty; nesýty stroj na plochej bielej = `250 8 255 14 400` (posledný parameter otvára uzavreté plochy, napr. medzery v ráme). QA vždy cez kompozit na tmavom pozadí.
-5. **CTA pásy dostali fotku plošiny Haulotte Compact 10** namiesto watermark ikony: `SourcingBanner` natvrdo, `CtaBand` cez nový voliteľný prop `image`/`imageAlt` -- zapnutý IBA na `ZabezpecenieTechniky` (CtaBand zdieľa 12 stránok, preto opt-in).
-6. **Promo carousel: nová akcia "Honda WT30 + hadica zadarmo"** ako prvý slide, CTA na `/honda-wt30` (slug overený proti live sitemape + vyrenderovanej stránke). Text hovorí "kalové čerpadlo" podľa popisu v katalógu, nie "hasičské" -- owner môže prepísať.
-7. **Bezpečnostný hook opravený:** vzor `git push.*-f.*main` falošne blokoval release chain (nachádzal "-f" v `--ff-only` a preskakoval cez `&&`). Nový vzor je ohraničený na jeden príkaz a navyše chytá dve varianty force-pushu, ktoré starý prepúšťal. Pozor: hook skenuje CELÝ bash príkaz, takže aj commit message s takým textom ho spustí.
-8. Opravený preklep v excerpte JCB článku (`blogMeta.js`) po ručnej úprave owner-a.
-
-## What Was Done (Session 47) -- RCC dashboard: dispatcher week calendar
-Date: 2026-07-29
-
-1. **Calendar rebuilt from month grid to a week board** (Mon-Fri, hours 7-17, `Po-Ne` toggle). Month view dropped entirely -- owner's call, so there is no fallback overview of a whole month any more.
-2. **Rentals stayed on the board but NOT in the hour grid** -- reservations are date ranges, not hour slots, so they live in an all-day lane above the grid (bars across days, `«`/`»` when they overrun the week, pickup/return counters in the day header). Putting them in hour cells was rejected as it would drown the notes.
-3. **New table `calendar_tasks`** (migration `021`, RLS `is_staff()` only): one task = one date + one hour, colour `neutral|green|yellow|red`, `done` flag, optional `reservation_id` (column exists, UI does not use it yet).
-4. **Decisions with owner:** single-hour tasks (no duration), NO drag & drop, month view removed, dashboard "today" widget yes; highlighting overdue unfinished tasks was explicitly declined.
-5. **Owner ran migration 021** in Supabase during the session -- calendar tasks work in prod.
-6. **Fonts had to be enlarged right after the first prod deploy** -- 11px chips were unreadable on the owner's screen. Now 13px chips/bars, 64px cells, 150px min column. Keep 13px as the floor for this board.
-7. **QA trick for the dashboard app (auth-gated):** temporary public `/calendar-preview` route + puppeteer request interception mocking `/rest/v1/*`. Preflight must be answered too (`OPTIONS` -> 204 with `access-control-allow-headers: *`), otherwise supabase-js fails on CORS. Route reverted after the check.
-8. **Dashboard eslint treats `react-hooks/set-state-in-effect` as an ERROR** -- "sync props into state" effects do not pass. Used render-phase state adjust (`if (data !== prevData) setX(...)`) in `useCalendarTasks` and `key`-remount for the task modal instead.
+1. **Product data fixes are Supabase-only, no code/deploy needed for either:** "Plot priehľadný 3,5m" (`equipment.slug = 'standard'`, unrelated to its display name) set to `pricing_type = 'negotiable'` -- UI already fully supports "Cena dohodou"/"Na požiadanie" whenever a product is negotiable, zero code change required. Same pattern for the pending JCB `blog_article_slug` task -- owner ran both SQL statements directly.
+2. **Haulotte Compact 10 cutout fixed without the original studio photo.** The enclosed white sweep visible through the cage's guardrail gaps was never reached by `cutout-transparent.py`'s border flood-fill (walled off by the frame outline) -- same failure mode the tool's `MIN_HOLE` option exists for. Patched the *already-cut* transparent WebP in place: same hole-detection pass (bright+desaturated blob, unreached by border flood, size >= threshold) applied directly to the existing alpha channel, then localized edge ramp + colour decontamination only around the new holes so untouched edges weren't reprocessed. Pushed straight to prod (`f05235b`) -- pure asset change, no code touched.
+3. **SEO-2 resolved: apex (`royalstroje.sk`) is now canonical, `www` 308-redirects to it.** No SEO advantage either way (Google treats both equally) -- decided on apex because all existing code (sitemap `SITE_URL`, canonical/OG tags, schema) already pointed there, so zero code changes needed either way.
+4. **Vercel dashboard bug: the domain acting as a pure redirect source (`royalstroje.sk`) had no Edit/Refresh affordance at all** -- couldn't click into it, couldn't Remove it either. Zoom/hard-refresh didn't help. Root cause not confirmed, but reproducible on this project as of 2026-08-04; worth trying "click the redirect badge itself" next time before escalating.
+5. **Fixed via Vercel REST API instead of the dashboard** (`PATCH /v9/projects/{id}/domains/{domain}` with `redirect`/`redirectStatusCode`, needs `?teamId=` -- team-scoped tokens can't call `/v2/teams` to discover it, get it from any `GET /v9/projects/{id}` response's `accountId` field instead). Owner generated a 1-day team-scoped token, revoked after use. Zero downtime: API lets you flip a domain's config without ever detaching the live one, unlike remove-and-readd.
+6. **Safety hook `block-dangerous.sh` blocks all curl POST/PUT/PATCH/DELETE by design** (exfiltration guard, not a bug). Got explicit owner approval, added a narrow temporary exception scoped to `api.vercel.com` only, ran the two PATCH calls, then reverted the hook file immediately -- confirmed via `git diff` showing no changes before moving on. Precedent for next time this comes up: ask first, scope tight, revert same-turn, verify the revert.
+7. **Prerender freshness caveat confirmed real (SEO-6 backlog item):** Supabase data changes (JCB `blog_article_slug`) show immediately to real visitors (client-side fetch) but not in the crawler-facing prerendered HTML until the next deploy. Not urgent, already tracked.
 
 ## What To Do Next
 
 | # | Priority | Task | Notes |
 |---|----------|------|-------|
-| 1 | **OWNER SQL** | Set `blog_article_slug` for JCB article | Supabase SQL Editor: `UPDATE equipment SET blog_article_slug = 'jcb-19c-1-mini-rypadlo-recenzia-skusenosti' WHERE slug = 'jcb-19c-i';` (optionally also fix name typo 19C-I -> 19C-1). Enables "Prečítať článok" link on product card + detail. |
-| 2 | **OWNER + High** | SEO-2: zosúladiť www vs apex | Zistené v s46: apex `royalstroje.sk` **307-redirectuje na www**, ale sitemap aj canonical ukazujú na apex -> Google vidí canonical, ktorý sa presmeruje. Buď prehodiť redirect na www -> apex (308, pôvodný plán, nič v kóde sa nemení), alebo nechať www ako hlavnú a prepísať `SITE_URL` v `scripts/lib/collect-urls.mjs` + canonical/og v stránkach. Vercel -> project `royal-stroje` -> Settings -> Domains. |
-| 3 | **OWNER** | SEO-4: Google Search Console | Až po vyriešení úlohy 2 (inak sa submitne sitemap s presmerovanými URL). Submit sitemap; URL Inspection na `/`, `/sluzby`, 1-2 produkty -> Request indexing; Pages report sledovať 2-4 týždne. |
-| 4 | Low | SEO-5: FAQPage JSON-LD + `sameAs` | `src/components/home/FAQ.jsx` needs plain-string `answerText`; `sameAs` (GBP/Maps + Facebook URLs from owner) into LocalBusiness schema in `Home.jsx`. |
-| 5 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy. If it bothers: Vercel Deploy Hook pinged from dashboard on product change. |
-| 6 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Kept for revert; production ships HeroSplit since s37. |
-| 7 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs. |
-| 8 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit. |
-| 9 | Low | Final real-Android scroll-check | FAQ + product grid + subpages on owner's Xiaomi, logged out of Vercel (toolbar = false positive, see s34). |
-| 10 | Backlog | GA4 + full consent flow; Workspace email migration; subcategory data audit; product photos; email notifications (EmailJS/Edge Function); chatbot CORS (mdntech.org 405); WhatsApp API; online payments; mobile AnimatedBackground re-add via CSS body bg | Details in handoff-archive.md (session 15-43 notes). |
+| 1 | **OWNER** | SEO-4: Google Search Console | Unblocked since s48 (apex is now canonical, no more redirect-vs-canonical mismatch). Submit sitemap; URL Inspection na `/`, `/sluzby`, 1-2 produkty -> Request indexing; Pages report sledovať 2-4 týždne. |
+| 2 | Low | SEO-5: FAQPage JSON-LD + `sameAs` | `src/components/home/FAQ.jsx` needs plain-string `answerText`; `sameAs` (GBP/Maps + Facebook URLs from owner) into LocalBusiness schema in `Home.jsx`. |
+| 3 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy -- confirmed again in s48 (JCB `blog_article_slug`). If it bothers: Vercel Deploy Hook pinged from dashboard on product change. |
+| 4 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Kept for revert; production ships HeroSplit since s37. |
+| 5 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs. |
+| 6 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit. |
+| 7 | Low | Final real-Android scroll-check | FAQ + product grid + subpages on owner's Xiaomi, logged out of Vercel (toolbar = false positive, see s34). |
+| 8 | Backlog | GA4 + full consent flow; Workspace email migration; subcategory data audit; product photos; email notifications (EmailJS/Edge Function); chatbot CORS (mdntech.org 405); WhatsApp API; online payments; mobile AnimatedBackground re-add via CSS body bg | Details in handoff-archive.md (session 15-43 notes). |
 
 ## Key Files
 
@@ -77,5 +62,6 @@ Date: 2026-07-29
 | 45 | 2026-07-29 | Nový blog článok JCB 19C-1 (úprimná recenzia po 170 mth) | Replaces old hidden id-19 article; article<->catalog prelink (owner SQL pending); .claude tooling overhaul (auto-wrap hook, handoff skill, CLAUDE.md) |
 | 46 | 2026-07-29 | Release sessions 43-46 na PROD + fotky strojov v CTA pásoch + promo WT30 | 3x `dev`->`main`; cutout tool `scripts/cutout-transparent.py`; Haulotte foto v SourcingBanner + CtaBand (opt-in prop); promo slide Honda WT30; hook force-push vzor zúžený; zistený apex->www redirect vs apex canonical |
 | 47 | 2026-07-29 | RCC kalendar: tyzdenny dispecersky pohlad s ulohami -> PROD | Mesacny pohlad nahradeny tyzdennym (Po-Pi, 7-17); nova tabulka `calendar_tasks` (migracia 021, owner spustil); prenajmy v all-day pase; widget dnesnych uloh na dashboarde; fonty zvacsene po feedbacku |
+| 48 | 2026-08-04 | SEO-2 apex/www domain swap + JCB SQL + Haulotte cutout fix -> PROD | Plot priehladny "Cena dohodou" (Supabase only); Haulotte transparent WebP hole fixed without source photo; JCB blog_article_slug set; apex now canonical via Vercel API (dashboard UI bug blocked normal edit); safety hook temp exception scoped+reverted with owner approval |
 
-<!-- Sessions 1-37 summary rows + sessions 15-45 full notes + old Architecture/Supabase reference: handoff-archive.md -->
+<!-- Sessions 1-37 summary rows + sessions 15-47 full notes + old Architecture/Supabase reference: handoff-archive.md -->

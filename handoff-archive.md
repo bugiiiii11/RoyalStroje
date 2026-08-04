@@ -44,7 +44,7 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 36 | 2026-07-02 | Web-wide polish (impeccable) + blog čitateľnosť na svetlom | Catalog hover seam definitive fix, eyebrows thinned site-wide, numbered badges, 19 blog articles re-themed readable on light bg |
 | 37 | 2026-07-03 | Hero fotky + blog vlastné hero obrázky -> PROD DEPLOY | Blog per-article hero images (`image` in blogMeta), hero polish, merge `dev`->`main` (38 commits) -> production |
 
-## Archived What Was Done sections (sessions 15-45, oldest first)
+## Archived What Was Done sections (sessions 15-47, oldest first)
 
 ## What Was Done (Session 15) -- Real Photos + Ad-hoc Items + Gallery + Editable Days
 Date: 2026-04-30
@@ -661,6 +661,30 @@ Date: 2026-07-29
 4. **Verified:** changed files lint-clean (601 baseline elsewhere), `build:spa` OK, sitemap 164 URLs (11 blog incl. new), puppeteer checks: per-page title, blog card, CTA links, full-page visual + CTA tile contrast fix (`bg-zinc-900/50` -> solid on light panel).
 5. **.claude tooling overhaul committed with this wrap:** hooks rewritten (auto-wrap Stop hook measuring real context, context-warn, test-hooks), 4 old skills consolidated into `.claude/skills/handoff/`, new root `CLAUDE.md`, old files in `.claude/_superseded/`.
 6. **Suggested to owner:** catalog product name "JCB 19C-I" has a typo (correct designation "JCB 19C-1") -- optional one-line UPDATE on `equipment.name`.
+
+## What Was Done (Session 46) -- Release na produkciu + fotky strojov v CTA pásoch + promo akcia WT30
+Date: 2026-07-29
+
+1. **SEO-3 hotové: `dev` -> `main` -> produkcia (3x počas session).** Prvý release doniesol sessions 43-45 (prerender, sitemap, robots fix, blink fix, JCB článok) -- owner totiž nasadil ešte pred článkom, preto ho na webe nevidel. Overené na live: sitemap 164 URL vrátane nového článku.
+2. **POZOR -- `royalstroje.sk` 307-redirectuje na `www.royalstroje.sk`**, teda opačne než hovorí úloha SEO-2. Sitemap aj canonical používajú apex. Treba rozhodnúť smer a zosúladiť (viď úloha 2). (Vyriešené v session 48.)
+3. **Release niesol aj cudziu prácu:** `871d67f` (Kalendár RCC, session 47) pribudol na `dev` počas tejto session a `--ff-only` merge ho poslal do produkcie spolu s webom. Migráciu `021` medzitým owner spustil (s47). Poučenie: pri `dev`->`main` sa vždy pozrieť, čo v `dev` pribudlo od poslednej vlastnej práce -- na `dev` môže paralelne pracovať iná session.
+4. **Vlastný nástroj na výrez pozadia:** `scripts/cutout-transparent.py` (Pillow+numpy, flood-fill od okrajov + dekontaminácia okrajových pixelov). Parametre rozhodujú: sýty stroj s mäkkým tieňom = defaulty; nesýty stroj na plochej bielej = `250 8 255 14 400` (posledný parameter otvára uzavreté plochy, napr. medzery v ráme). QA vždy cez kompozit na tmavom pozadí.
+5. **CTA pásy dostali fotku plošiny Haulotte Compact 10** namiesto watermark ikony: `SourcingBanner` natvrdo, `CtaBand` cez nový voliteľný prop `image`/`imageAlt` -- zapnutý IBA na `ZabezpecenieTechniky` (CtaBand zdieľa 12 stránok, preto opt-in).
+6. **Promo carousel: nová akcia "Honda WT30 + hadica zadarmo"** ako prvý slide, CTA na `/honda-wt30` (slug overený proti live sitemape + vyrenderovanej stránke). Text hovorí "kalové čerpadlo" podľa popisu v katalógu, nie "hasičské" -- owner môže prepísať.
+7. **Bezpečnostný hook opravený:** vzor `git push.*-f.*main` falošne blokoval release chain (nachádzal "-f" v `--ff-only` a preskakoval cez `&&`). Nový vzor je ohraničený na jeden príkaz a navyše chytá dve varianty force-pushu, ktoré starý prepúšťal. Pozor: hook skenuje CELÝ bash príkaz, takže aj commit message s takým textom ho spustí.
+8. Opravený preklep v excerpte JCB článku (`blogMeta.js`) po ručnej úprave owner-a.
+
+## What Was Done (Session 47) -- RCC dashboard: dispatcher week calendar
+Date: 2026-07-29
+
+1. **Calendar rebuilt from month grid to a week board** (Mon-Fri, hours 7-17, `Po-Ne` toggle). Month view dropped entirely -- owner's call, so there is no fallback overview of a whole month any more.
+2. **Rentals stayed on the board but NOT in the hour grid** -- reservations are date ranges, not hour slots, so they live in an all-day lane above the grid (bars across days, `«`/`»` when they overrun the week, pickup/return counters in the day header). Putting them in hour cells was rejected as it would drown the notes.
+3. **New table `calendar_tasks`** (migration `021`, RLS `is_staff()` only): one task = one date + one hour, colour `neutral|green|yellow|red`, `done` flag, optional `reservation_id` (column exists, UI does not use it yet).
+4. **Decisions with owner:** single-hour tasks (no duration), NO drag & drop, month view removed, dashboard "today" widget yes; highlighting overdue unfinished tasks was explicitly declined.
+5. **Owner ran migration 021** in Supabase during the session -- calendar tasks work in prod.
+6. **Fonts had to be enlarged right after the first prod deploy** -- 11px chips were unreadable on the owner's screen. Now 13px chips/bars, 64px cells, 150px min column. Keep 13px as the floor for this board.
+7. **QA trick for the dashboard app (auth-gated):** temporary public `/calendar-preview` route + puppeteer request interception mocking `/rest/v1/*`. Preflight must be answered too (`OPTIONS` -> 204 with `access-control-allow-headers: *`), otherwise supabase-js fails on CORS. Route reverted after the check.
+8. **Dashboard eslint treats `react-hooks/set-state-in-effect` as an ERROR** -- "sync props into state" effects do not pass. Used render-phase state adjust (`if (data !== prevData) setX(...)`) in `useCalendarTasks` and `key`-remount for the task modal instead.
 
 ## Archived reference blocks (as of session 44)
 
