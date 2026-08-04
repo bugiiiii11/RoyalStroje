@@ -4,9 +4,18 @@
 
 ## Current State
 
-- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); SEO-2 (apex vs www) resolved in s48, JCB blog link live
-- **Session count:** 48
-- **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `f05235b`
+- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); GA4 with Consent Mode v2 live since s49, SEO-4 (GSC) submitted
+- **Session count:** 49
+- **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `7af7b6f`
+
+## What Was Done (Session 49) -- SEO-4 Search Console + GA4 Consent Mode v2 -> PROD
+Date: 2026-08-05
+
+1. **SEO-4 done:** sitemap was already submitted (164 URLs, success, from before this session). Requested indexing via URL Inspection on `/`, `/sluzby`, `/honda-wt30`, `/jcb-19c-i` -- homepage was already indexed, `/sluzby` needed the manual request. Manual "Request indexing" is rate-limited (~10/day) and meant for a handful of priority pages only -- the sitemap already covers full discovery of the other ~160 URLs, don't try to hand-index the whole catalog.
+2. **GA4 property created by owner** (Measurement ID `G-WTPC0SV333`), industry category "Obchod a priemysel" -- closest GA4 standard match for equipment rental, no dedicated construction/rental category exists in Google's list.
+3. **Implemented GA4 with Google Consent Mode v2**, gated behind a real accept/reject cookie banner (previous banner was a single "Rozumiem" notice from back when the site truly had no analytics). New `src/lib/analytics.js` (`enableAnalytics`/`disableAnalytics`; `gtag.js` is only fetched after explicit accept -- never on boot). `index.html` sets Consent Mode default to `denied` before `gtag.js` can ever load. `CookieBanner.jsx` now has real Prijať/Odmietnuť buttons (X = same as reject). `Cookies.jsx` copy + `_ga`/`_ga_*` row updated. Visitors who dismissed the old single-button banner are re-prompted once, since they were never actually asked about analytics.
+4. **Verified end-to-end on staging then PROD:** `gtag/js` + `collect` hit fire only after clicking Prijať (checked in Network tab both times), GA4 Realtime confirmed active users + `page_view` events on both environments. `dev` -> `main` fast-forward merge, both pushed (`7af7b6f`).
+5. **SEO-5 blocker identified:** owner tried to give a GBP link via a `google.com/search?...` results URL (has session tokens, not stable) -- explained the difference and asked for a proper Google Maps "Share" link instead (`maps.app.goo.gl/...` or `google.com/maps/place/...`). Facebook page exists, owner will send the URL separately. **Owner still needs to send both links** -- nothing else blocks SEO-5.
 
 ## What Was Done (Session 48) -- SEO-2 domain swap + JCB SQL + product fixes
 Date: 2026-08-04
@@ -23,37 +32,35 @@ Date: 2026-08-04
 
 | # | Priority | Task | Notes |
 |---|----------|------|-------|
-| 1 | **OWNER** | SEO-4: Google Search Console | Unblocked since s48 (apex is now canonical, no more redirect-vs-canonical mismatch). Submit sitemap; URL Inspection na `/`, `/sluzby`, 1-2 produkty -> Request indexing; Pages report sledovať 2-4 týždne. |
-| 2 | Low | SEO-5: FAQPage JSON-LD + `sameAs` | `src/components/home/FAQ.jsx` needs plain-string `answerText`; `sameAs` (GBP/Maps + Facebook URLs from owner) into LocalBusiness schema in `Home.jsx`. |
-| 3 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy -- confirmed again in s48 (JCB `blog_article_slug`). If it bothers: Vercel Deploy Hook pinged from dashboard on product change. |
-| 4 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Kept for revert; production ships HeroSplit since s37. |
-| 5 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs. |
-| 6 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit. |
-| 7 | Low | Final real-Android scroll-check | FAQ + product grid + subpages on owner's Xiaomi, logged out of Vercel (toolbar = false positive, see s34). |
-| 8 | Backlog | GA4 + full consent flow; Workspace email migration; subcategory data audit; product photos; email notifications (EmailJS/Edge Function); chatbot CORS (mdntech.org 405); WhatsApp API; online payments; mobile AnimatedBackground re-add via CSS body bg | Details in handoff-archive.md (session 15-43 notes). |
+| 1 | **OWNER** | Send GBP Maps link + Facebook URL | Blocks SEO-5. GBP must be a Maps "Share" link (`maps.app.goo.gl/...` or `google.com/maps/place/...`), NOT a `google.com/search?...` results URL (session tokens, not stable). FB page exists, owner confirmed will send. |
+| 2 | Low | SEO-5: FAQPage JSON-LD + `sameAs` | Blocked on row 1. `src/components/home/FAQ.jsx` needs plain-string `answerText`; `sameAs` into LocalBusiness schema in `Home.jsx`. |
+| 3 | **OWNER** | SEO-4 follow-up: monitor GSC Pages report | 2-4 weeks from 2026-08-05 -- check indexed vs excluded counts climb (Indexovanie -> Strany in GSC). |
+| 4 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy -- confirmed again in s48 (JCB `blog_article_slug`). If it bothers: Vercel Deploy Hook pinged from dashboard on product change. |
+| 5 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Kept for revert; production ships HeroSplit since s37. |
+| 6 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs. |
+| 7 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit. |
+| 8 | Low | Final real-Android scroll-check | FAQ + product grid + subpages on owner's Xiaomi, logged out of Vercel (toolbar = false positive, see s34). |
+| 9 | Backlog | Workspace email migration; subcategory data audit; product photos; email notifications (EmailJS/Edge Function); chatbot CORS (mdntech.org 405); WhatsApp API; online payments; mobile AnimatedBackground re-add via CSS body bg | Details in handoff-archive.md (session 15-43 notes). |
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
 | `handoff.md` | Current state + next steps (capped; history in handoff-archive.md) |
+| `src/lib/analytics.js` | GA4 loader gated on Consent Mode v2 -- `gtag.js` only fetched after accept; Measurement ID `G-WTPC0SV333` |
+| `src/components/common/CookieBanner.jsx` | Prijať/Odmietnuť consent UI, wired to `analytics.js` |
+| `src/components/home/FAQ.jsx` | Next step SEO-5: needs plain-string `answerText` for FAQPage JSON-LD |
+| `src/pages/Home.jsx` | Next step SEO-5: LocalBusiness schema needs `sameAs` (owner to send GBP + FB links) |
+| `apps/dashboard/src/lib/companyInfo.js` | Company info on PDFs -- IBAN placeholder (task 6) |
 | `src/data/blogMeta.js` | Single source of truth for blog metadata (plain ESM; `hidden: true` = unlisted + noindex + out of sitemap); consumed by Blog, BlogDetail, build scripts |
 | `scripts/prerender.mjs` | Post-build Puppeteer prerender ~177 URLs into `dist/<path>/index.html`; stamps `data-prerendered`; Vercel uses `@sparticuz/chromium` |
 | `scripts/generate-sitemap.mjs` + `scripts/lib/collect-urls.mjs` | Build-time sitemap (164 URLs); collect-urls = shared URL inventory (static + visible blog + Supabase products) + `SITE_URL` |
-| `scripts/cutout-transparent.py` | s46 dev tool: studio photo -> transparent WebP for the dark bands (Pillow+numpy, not part of the build); presets + QA advice in its docstring |
-| `src/components/common/CtaBand.jsx` | Shared dark CTA band on 12 subpages -- `image` prop is opt-in per page, do not turn it on globally |
-| `src/components/home/PromoCarousel.jsx` | Homepage promo slides (hardcoded array; owner edits copy/img/CTA here) |
-| `apps/dashboard/src/pages/calendar/CalendarView.jsx` | s47 week board: rentals lane + hour grid 7-17, quick-add in cells; `src/lib/calendar.js` holds week math, task colours and the rental-bar packing |
-| `apps/dashboard/src/hooks/useCalendarTasks.js` | CRUD + optimistic local copy for `calendar_tasks`; re-seeds on fetch via render-phase adjust (no sync effect -- eslint blocks it) |
-| `apps/dashboard/src/lib/companyInfo.js` | Company info on PDFs -- IBAN placeholder (task 8) |
 | `PRODUCT.md` | Design-context doc (brand, dark-on-light system, GPU + reveal guards) -- read before design passes |
 
 ## Session Summary
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
-| 38 | 2026-07-14 | Katalóg: nová kategória „Voľný čas a šport" + 2 elektrobicykle -> PROD | Category tree static in `categories.js` + products in Supabase; new category needs code+DB; RLS blocks anon writes (owner runs SQL) |
-| 39 | 2026-07-14 | Hero vstupné animácie + fix prázdneho katalógu na back-nav -> PROD | HeroSplit entrance animations (images + USP), `useProducts` initial state = module `cachedProducts` |
 | 40 | 2026-07-16 | Zmluva PDF: fix rozloženia pri 4+ položkách -> PROD | Dynamic fit-check pushes signature block to page 2; page numbering; „Späť" button in deal summary |
 | 41 | 2026-07-16 | Dashboard: číslo zmluvy namiesto DB označenia -> PROD | `dealContractNumber()` helper, contracts join in useClient/useReservations |
 | 42 | 2026-07-16 | Katalóg: nový dekoračný bager (bager_web) -> PROD | Owner RGBA PNG -> WebP 1024x683 q80 preserving alpha |
@@ -63,5 +70,6 @@ Date: 2026-08-04
 | 46 | 2026-07-29 | Release sessions 43-46 na PROD + fotky strojov v CTA pásoch + promo WT30 | 3x `dev`->`main`; cutout tool `scripts/cutout-transparent.py`; Haulotte foto v SourcingBanner + CtaBand (opt-in prop); promo slide Honda WT30; hook force-push vzor zúžený; zistený apex->www redirect vs apex canonical |
 | 47 | 2026-07-29 | RCC kalendar: tyzdenny dispecersky pohlad s ulohami -> PROD | Mesacny pohlad nahradeny tyzdennym (Po-Pi, 7-17); nova tabulka `calendar_tasks` (migracia 021, owner spustil); prenajmy v all-day pase; widget dnesnych uloh na dashboarde; fonty zvacsene po feedbacku |
 | 48 | 2026-08-04 | SEO-2 apex/www domain swap + JCB SQL + Haulotte cutout fix -> PROD | Plot priehladny "Cena dohodou" (Supabase only); Haulotte transparent WebP hole fixed without source photo; JCB blog_article_slug set; apex now canonical via Vercel API (dashboard UI bug blocked normal edit); safety hook temp exception scoped+reverted with owner approval |
+| 49 | 2026-08-05 | SEO-4 Search Console + GA4 Consent Mode v2 -> PROD | Sitemap submit confirmed, indexing requested on 4 URLs; GA4 (`G-WTPC0SV333`) with full Consent Mode v2 -- gtag.js only loads after accept; CookieBanner now has real Prijat/Odmietnut; verified on staging + PROD via Network tab + GA4 Realtime; dev->main pushed (`7af7b6f`); SEO-5 blocked on owner sending GBP Maps link + Facebook URL |
 
 <!-- Sessions 1-37 summary rows + sessions 15-47 full notes + old Architecture/Supabase reference: handoff-archive.md -->
