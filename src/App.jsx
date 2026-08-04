@@ -8,6 +8,7 @@ import HamburgerMenu from './components/common/HamburgerMenu';
 import AnimatedBackground from './components/common/AnimatedBackground';
 import ScrollToTop from './components/common/ScrollToTop';
 import CookieBanner from './components/common/CookieBanner';
+import { enableAnalytics, CONSENT_KEY } from './lib/analytics';
 import { CartProvider } from './context/CartContext';
 import Home from './pages/Home';
 import Sluzby from './pages/Sluzby';
@@ -58,6 +59,17 @@ function RestoreRevealsAfterNav() {
 }
 
 function App() {
+  useEffect(() => {
+    // Returning visitor who already accepted: index.html's inline script already
+    // flipped Consent Mode to 'granted' synchronously on boot, but the gtag.js
+    // library + config call still need to run once React is up.
+    try {
+      if (localStorage.getItem(CONSENT_KEY) === 'accepted') enableAnalytics();
+    } catch {
+      // ignore
+    }
+  }, []);
+
   useEffect(() => {
     const loadChatbot = () => {
       if (document.querySelector('script[data-chatbot-id]')) return;

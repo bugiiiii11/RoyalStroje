@@ -29,9 +29,16 @@ const COOKIE_ROWS = [
   {
     name: 'royalstroje_cookie_consent',
     type: 'localStorage',
-    purpose: 'Pamätanie zatvorenia oznámenia o cookies',
+    purpose: 'Pamätanie vašej voľby (prijať / odmietnuť) v oznámení o cookies',
     duration: '12 mesiacov',
     provider: 'Royal Stroje s.r.o.',
+  },
+  {
+    name: '_ga, _ga_*',
+    type: 'Analytická cookie tretej strany (iba so súhlasom)',
+    purpose: 'Google Analytics 4 -- anonymizované meranie návštevnosti a správania na webe. Nesťahuje sa a nič sa nemeria, kým v bannery nekliknete „Prijať".',
+    duration: '13 mesiacov (_ga_*) / 2 roky (_ga)',
+    provider: 'Google LLC',
   },
   {
     name: 'MDN Tech chatbot',
@@ -91,13 +98,13 @@ export default function Cookies() {
             </h2>
             <div className="space-y-2 md:space-y-3 text-zinc-800 text-xs md:text-base leading-relaxed">
               <p>
-                Na royalstroje.sk používame <strong className="text-zinc-900">iba nevyhnutné cookies a technológie</strong>, bez ktorých by web nemohol správne fungovať.
+                Na royalstroje.sk používame <strong className="text-zinc-900">nevyhnutné cookies a technológie</strong>, bez ktorých by web nemohol správne fungovať.
               </p>
               <p>
-                <strong className="text-zinc-900">Nepoužívame</strong> žiadne analytické nástroje (napr. Google Analytics), reklamné cookies (napr. Meta Pixel) ani profilovanie návštevníkov.
+                So <strong className="text-zinc-900">súhlasom</strong> udeleným v oznámení o cookies používame aj <strong className="text-zinc-900">Google Analytics 4</strong> na anonymizované meranie návštevnosti. Kým súhlas neudelíte (alebo ho odmietnete), Analytics sa vôbec nenačíta a nič sa nemeria. <strong className="text-zinc-900">Reklamné cookies</strong> (napr. Meta Pixel) ani profilovanie návštevníkov nepoužívame.
               </p>
               <p>
-                Súhlas s nevyhnutnými cookies sa udeľuje implicitne pri používaní webu (čl. 6 ods. 1 písm. f) GDPR – oprávnený záujem na zabezpečení funkčnosti webu).
+                Súhlas s nevyhnutnými cookies sa udeľuje implicitne pri používaní webu (čl. 6 ods. 1 písm. f) GDPR – oprávnený záujem na zabezpečení funkčnosti webu). Súhlas s Google Analytics je dobrovoľný (čl. 6 ods. 1 písm. a) GDPR) a môžete ho kedykoľvek odvolať tlačidlom nižšie.
               </p>
             </div>
           </div>

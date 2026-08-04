@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { X, Cookie } from 'lucide-react';
-
-const CONSENT_KEY = 'royalstroje_cookie_consent';
+import { enableAnalytics, disableAnalytics, CONSENT_KEY } from '../../lib/analytics';
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
@@ -11,8 +10,13 @@ export default function CookieBanner() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     try {
-      if (localStorage.getItem(CONSENT_KEY)) return;
-    } catch (e) {
+      const stored = localStorage.getItem(CONSENT_KEY);
+      // Only 'accepted' / 'rejected' are real decisions. Anything else --
+      // including the legacy ISO-timestamp value the old "OK, got it" banner
+      // used to store -- means the visitor was never actually asked about
+      // analytics, so re-prompt once.
+      if (stored === 'accepted' || stored === 'rejected') return;
+    } catch {
       // localStorage blocked – still show banner this session
     }
 
@@ -21,14 +25,29 @@ export default function CookieBanner() {
     return () => clearTimeout(t);
   }, []);
 
-  const dismiss = () => {
-    try {
-      localStorage.setItem(CONSENT_KEY, new Date().toISOString());
-    } catch (e) {
-      // ignore
-    }
+  const close = () => {
     setAnimateIn(false);
     setTimeout(() => setVisible(false), 400);
+  };
+
+  const accept = () => {
+    try {
+      localStorage.setItem(CONSENT_KEY, 'accepted');
+    } catch {
+      // ignore
+    }
+    enableAnalytics();
+    close();
+  };
+
+  const reject = () => {
+    try {
+      localStorage.setItem(CONSENT_KEY, 'rejected');
+    } catch {
+      // ignore
+    }
+    disableAnalytics();
+    close();
   };
 
   if (!visible) return null;
@@ -46,7 +65,7 @@ export default function CookieBanner() {
           <div className="flex items-start md:items-center gap-3 flex-1 min-w-0">
             <Cookie size={20} className="text-orange-primary flex-shrink-0 mt-0.5 md:mt-0" />
             <p className="text-white/80 text-xs md:text-sm leading-relaxed">
-              Používame iba <span className="text-white font-semibold">nevyhnutné cookies</span> na fungovanie webu (ochrana proti botom a chatbot). Žiadnu analytiku ani marketing.{' '}
+              Používame <span className="text-white font-semibold">nevyhnutné cookies</span> na fungovanie webu (ochrana proti botom a chatbot). So súhlasom aj Google Analytics na meranie návštevnosti.{' '}
               <Link
                 to="/cookies"
                 className="text-orange-primary hover:text-orange-hover underline underline-offset-2 font-semibold whitespace-nowrap"
@@ -57,14 +76,20 @@ export default function CookieBanner() {
           </div>
           <div className="flex items-center gap-2 md:gap-3 self-stretch md:self-auto">
             <button
-              onClick={dismiss}
-              className="flex-1 md:flex-none px-4 md:px-6 py-2 md:py-2.5 bg-orange-primary hover:bg-orange-hover text-white text-xs md:text-sm font-bold rounded-full transition-colors whitespace-nowrap"
+              onClick={reject}
+              className="flex-1 md:flex-none px-4 md:px-6 py-2 md:py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs md:text-sm font-bold rounded-full transition-colors whitespace-nowrap"
             >
-              Rozumiem
+              Odmietnuť
             </button>
             <button
-              onClick={dismiss}
-              aria-label="Zatvoriť oznámenie"
+              onClick={accept}
+              className="flex-1 md:flex-none px-4 md:px-6 py-2 md:py-2.5 bg-orange-primary hover:bg-orange-hover text-white text-xs md:text-sm font-bold rounded-full transition-colors whitespace-nowrap"
+            >
+              Prijať
+            </button>
+            <button
+              onClick={reject}
+              aria-label="Zatvoriť oznámenie (rovnocenné s odmietnutím)"
               className="p-2 text-white/50 hover:text-white transition-colors"
             >
               <X size={18} />

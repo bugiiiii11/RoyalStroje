@@ -9,6 +9,21 @@
          re-hiding it when React re-renders on boot would flash/blink. App.jsx restores js-reveal after the
          first client-side navigation so scroll reveals still animate on subsequent pages. -->
     <script>if ('IntersectionObserver' in window && !document.documentElement.hasAttribute('data-prerendered')) document.documentElement.classList.add('js-reveal');</script>
+    <!-- Google Consent Mode v2 defaults -- MUST run before gtag.js loads. Denied by
+         default; src/lib/analytics.js only flips this to 'granted' (and only then
+         fetches gtag.js) after the visitor accepts in CookieBanner.jsx. Mirrors the
+         previously-accepted choice from localStorage so returning visitors who opted
+         in don't have to wait on React to mount before consent is granted. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      gtag('consent', 'default', { analytics_storage: 'denied', wait_for_update: 500 });
+      try {
+        if (localStorage.getItem('royalstroje_cookie_consent') === 'accepted') {
+          gtag('consent', 'update', { analytics_storage: 'granted' });
+        }
+      } catch (e) {}
+    </script>
     <link rel="preload" as="image" href="/pictures/graphics/web_pics/auto_hero.webp" type="image/webp" fetchpriority="high" />
     <!-- Industrial type pairing: Archivo (display, grotesque) + Source Sans 3 (body, humanist —
          open apertures + wide word space; Manrope set Slovak too cramped). latin-ext subset served automatically. -->
