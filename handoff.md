@@ -4,9 +4,9 @@
 
 ## Current State
 
-- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); GA4 with Consent Mode v2 live since s49; SEO-5 (FAQPage + sameAs) + Footer Facebook icon live since s50
+- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); GA4 with Consent Mode v2 live since s49; SEO-5 (FAQPage + sameAs) + Footer Facebook icon + og:image fix (real yard photo, not stock AI excavators) live since s50
 - **Session count:** 50
-- **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `946d1f3`
+- **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `6270a01`
 
 ## What Was Done (Session 50) -- SEO-5 FAQPage/sameAs + Footer Facebook icon -> PROD
 Date: 2026-08-05
@@ -18,6 +18,7 @@ Date: 2026-08-05
 5. **Footer: added Facebook icon next to Telegram** (`src/components/common/Footer.jsx`), linking to the same FB profile, `target="_blank"`. Reused the same monochrome `fill-current` icon pattern as WhatsApp/Telegram (there was a leftover multi-color brand `#1877F2` Facebook icon commented out from when socials were hidden -- removed the duplicate, kept the new one). All three social icons bumped 24px -> 28px per owner request.
 6. **`dev` -> `main` fast-forward merge, both pushed** (`946d1f3`) -- SEO-5 + footer icon change now live on PROD.
 7. **SEO-5 verified via Google Rich Results Test on `/`:** 2 valid items detected -- Miestne firmy (LocalBusiness) + Organizácia (Organization, since LocalBusiness is a subtype) -- confirms `sameAs` picked up cleanly. **No FAQ item shown -- this is expected, not a bug:** Google restricted FAQ rich results to government/health sites only since August 2023 (anti-spam policy); ordinary business sites no longer get the FAQ snippet even with fully valid markup. Our `FAQPage` JSON-LD is still present/valid on-page (confirmed via curl) and harmless to keep -- other engines (Bing, AI search) may still use it, and it costs nothing. **Don't try to "fix" missing FAQ in Rich Results Test going forward -- it's a Google policy limit, not a markup problem.**
+8. **Google search snippet thumbnail was a generic AI/stock excavator photo (`hero-main1.webp`)** -- owner spotted it searching "pozicovna naradia senec". Replaced site-wide default (`App.jsx`) + homepage `og:image` + `LocalBusiness` schema `image` with `pictures/graphics/stroje-dvor.webp` (real photo: actual JCB + Wacker Neuson machines on the real yard, Royal Stroje signage on the building). Owner picked this over the logo (too wide/thin -- crops badly to a square social thumbnail, risks showing just blank white space or half the wordmark) and over a branded truck+trailer promo shot. Pushed to PROD (`6270a01`). Google/Facebook cache old previews for a while -- re-check the search snippet in a few days, not immediately.
 
 ## What Was Done (Session 49) -- SEO-4 Search Console + GA4 Consent Mode v2 -> PROD
 Date: 2026-08-05
@@ -70,6 +71,6 @@ Date: 2026-08-05
 | 47 | 2026-07-29 | RCC kalendar: tyzdenny dispecersky pohlad s ulohami -> PROD | Mesacny pohlad nahradeny tyzdennym (Po-Pi, 7-17); nova tabulka `calendar_tasks` (migracia 021, owner spustil); prenajmy v all-day pase; widget dnesnych uloh na dashboarde; fonty zvacsene po feedbacku |
 | 48 | 2026-08-04 | SEO-2 apex/www domain swap + JCB SQL + Haulotte cutout fix -> PROD | Plot priehladny "Cena dohodou" (Supabase only); Haulotte transparent WebP hole fixed without source photo; JCB blog_article_slug set; apex now canonical via Vercel API (dashboard UI bug blocked normal edit); safety hook temp exception scoped+reverted with owner approval |
 | 49 | 2026-08-05 | SEO-4 Search Console + GA4 Consent Mode v2 -> PROD | Sitemap submit confirmed, indexing requested on 4 URLs; GA4 (`G-WTPC0SV333`) with full Consent Mode v2 -- gtag.js only loads after accept; CookieBanner now has real Prijat/Odmietnut; verified on staging + PROD via Network tab + GA4 Realtime; dev->main pushed (`7af7b6f`); SEO-5 blocked on owner sending GBP Maps link + Facebook URL |
-| 50 | 2026-08-05 | SEO-5 FAQPage/sameAs + Footer Facebook icon -> PROD | Owner sent GBP Maps + FB links; sameAs added to LocalBusiness schema; FAQPage JSON-LD added to FAQ.jsx (plain-text answerText per question); Footer gets Facebook icon next to Telegram, all 3 social icons bumped to 28px; dev->main pushed (`946d1f3`) |
+| 50 | 2026-08-05 | SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD | Owner sent GBP Maps + FB links; sameAs + FAQPage JSON-LD added; Rich Results Test verified (FAQ not shown = Google policy, not a bug); Footer gets Facebook icon next to Telegram, all 3 social icons 28px; site-wide og:image + schema image swapped from stock AI excavator photo to real yard photo (stroje-dvor.webp); dev->main pushed (`6270a01`) |
 
 <!-- Sessions 1-37 summary rows + sessions 15-48 full notes + old Architecture/Supabase reference: handoff-archive.md -->
