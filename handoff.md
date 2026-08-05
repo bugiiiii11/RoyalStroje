@@ -17,6 +17,7 @@ Date: 2026-08-05
 4. **Verified via full build + prerender:** parsed `dist/index.html`'s two `ld+json` scripts programmatically -- `LocalBusiness.sameAs` has both URLs, `FAQPage.mainEntity` has all 7 questions with correct plain-text answers.
 5. **Footer: added Facebook icon next to Telegram** (`src/components/common/Footer.jsx`), linking to the same FB profile, `target="_blank"`. Reused the same monochrome `fill-current` icon pattern as WhatsApp/Telegram (there was a leftover multi-color brand `#1877F2` Facebook icon commented out from when socials were hidden -- removed the duplicate, kept the new one). All three social icons bumped 24px -> 28px per owner request.
 6. **`dev` -> `main` fast-forward merge, both pushed** (`946d1f3`) -- SEO-5 + footer icon change now live on PROD.
+7. **SEO-5 verified via Google Rich Results Test on `/`:** 2 valid items detected -- Miestne firmy (LocalBusiness) + Organizácia (Organization, since LocalBusiness is a subtype) -- confirms `sameAs` picked up cleanly. **No FAQ item shown -- this is expected, not a bug:** Google restricted FAQ rich results to government/health sites only since August 2023 (anti-spam policy); ordinary business sites no longer get the FAQ snippet even with fully valid markup. Our `FAQPage` JSON-LD is still present/valid on-page (confirmed via curl) and harmless to keep -- other engines (Bing, AI search) may still use it, and it costs nothing. **Don't try to "fix" missing FAQ in Rich Results Test going forward -- it's a Google policy limit, not a markup problem.**
 
 ## What Was Done (Session 49) -- SEO-4 Search Console + GA4 Consent Mode v2 -> PROD
 Date: 2026-08-05
@@ -31,14 +32,13 @@ Date: 2026-08-05
 
 | # | Priority | Task | Notes |
 |---|----------|------|-------|
-| 1 | Low | Verify SEO-5 rich results on PROD | Now live on royalstroje.sk -- run Google Rich Results Test on `/` to confirm FAQPage + sameAs picked up cleanly. |
-| 2 | **OWNER** | SEO-4 follow-up: monitor GSC Pages report | 2-4 weeks from 2026-08-05 -- check indexed vs excluded counts climb (Indexovanie -> Strany in GSC). |
-| 3 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy -- confirmed again in s48 (JCB `blog_article_slug`). If it bothers: Vercel Deploy Hook pinged from dashboard on product change. |
-| 4 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Kept for revert; production ships HeroSplit since s37. |
-| 5 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs. |
-| 6 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit. |
-| 7 | Low | Final real-Android scroll-check | FAQ + product grid + subpages on owner's Xiaomi, logged out of Vercel (toolbar = false positive, see s34). |
-| 8 | Backlog | Workspace email migration; subcategory data audit; product photos; email notifications (EmailJS/Edge Function); chatbot CORS (mdntech.org 405); WhatsApp API; online payments; mobile AnimatedBackground re-add via CSS body bg | Details in handoff-archive.md (session 15-43 notes). |
+| 1 | **OWNER** | SEO-4 follow-up: monitor GSC Pages report | 2-4 weeks from 2026-08-05 -- check indexed vs excluded counts climb (Indexovanie -> Strany in GSC). |
+| 2 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy -- confirmed again in s48 (JCB `blog_article_slug`). If it bothers: Vercel Deploy Hook pinged from dashboard on product change. |
+| 3 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Kept for revert; production ships HeroSplit since s37. |
+| 4 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs. |
+| 5 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit. |
+| 6 | Low | Final real-Android scroll-check | FAQ + product grid + subpages on owner's Xiaomi, logged out of Vercel (toolbar = false positive, see s34). |
+| 7 | Backlog | Workspace email migration; subcategory data audit; product photos; email notifications (EmailJS/Edge Function); chatbot CORS (mdntech.org 405); WhatsApp API; online payments; mobile AnimatedBackground re-add via CSS body bg | Details in handoff-archive.md (session 15-43 notes). |
 
 ## Key Files
 
