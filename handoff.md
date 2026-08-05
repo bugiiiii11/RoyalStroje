@@ -4,17 +4,19 @@
 
 ## Current State
 
-- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); GA4 with Consent Mode v2 live since s49; SEO-5 (FAQPage + sameAs) implemented on `dev`, not yet on PROD
+- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); GA4 with Consent Mode v2 live since s49; SEO-5 (FAQPage + sameAs) + Footer Facebook icon live since s50
 - **Session count:** 50
-- **Repo status:** work on `dev`, `main` = production; `dev` ahead of `main` (SEO-5 changes, not yet merged)
+- **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `946d1f3`
 
-## What Was Done (Session 50) -- SEO-5 FAQPage JSON-LD + LocalBusiness sameAs
+## What Was Done (Session 50) -- SEO-5 FAQPage/sameAs + Footer Facebook icon -> PROD
 Date: 2026-08-05
 
 1. **Owner sent both links:** GBP Maps share link (`maps.app.goo.gl/A7HSGKNYctVqgRuq8`) and Facebook page (`facebook.com/profile.php?id=61591259022094`) -- unblocked SEO-5.
 2. **`sameAs` added to LocalBusiness schema** in `src/pages/Home.jsx` (both links).
 3. **FAQPage JSON-LD added in `src/components/home/FAQ.jsx`:** each FAQ item now carries a plain-string `answerText` alongside its existing rich-JSX `answer` (Google requires plain text, not markup, in `acceptedAnswer.text`); a new `<Helmet>` block renders the `FAQPage` schema built from `faqs.map(...)`. `FAQ.jsx` had no Helmet before -- react-helmet-async merges multiple Helmet instances across the tree fine, confirmed no conflict with `Home.jsx`'s own Helmet block.
-4. **Verified via full build + prerender:** parsed `dist/index.html`'s two `ld+json` scripts programmatically -- `LocalBusiness.sameAs` has both URLs, `FAQPage.mainEntity` has all 7 questions with correct plain-text answers. Not yet pushed to `main`/PROD -- still on `dev`.
+4. **Verified via full build + prerender:** parsed `dist/index.html`'s two `ld+json` scripts programmatically -- `LocalBusiness.sameAs` has both URLs, `FAQPage.mainEntity` has all 7 questions with correct plain-text answers.
+5. **Footer: added Facebook icon next to Telegram** (`src/components/common/Footer.jsx`), linking to the same FB profile, `target="_blank"`. Reused the same monochrome `fill-current` icon pattern as WhatsApp/Telegram (there was a leftover multi-color brand `#1877F2` Facebook icon commented out from when socials were hidden -- removed the duplicate, kept the new one). All three social icons bumped 24px -> 28px per owner request.
+6. **`dev` -> `main` fast-forward merge, both pushed** (`946d1f3`) -- SEO-5 + footer icon change now live on PROD.
 
 ## What Was Done (Session 49) -- SEO-4 Search Console + GA4 Consent Mode v2 -> PROD
 Date: 2026-08-05
@@ -29,7 +31,7 @@ Date: 2026-08-05
 
 | # | Priority | Task | Notes |
 |---|----------|------|-------|
-| 1 | Med | Verify SEO-5 on staging, then push `dev` -> `main` | FAQPage + sameAs schema implemented + build-verified locally (s50), not yet checked on Vercel preview or PROD. Use Rich Results Test after deploy. |
+| 1 | Low | Verify SEO-5 rich results on PROD | Now live on royalstroje.sk -- run Google Rich Results Test on `/` to confirm FAQPage + sameAs picked up cleanly. |
 | 2 | **OWNER** | SEO-4 follow-up: monitor GSC Pages report | 2-4 weeks from 2026-08-05 -- check indexed vs excluded counts climb (Indexovanie -> Strany in GSC). |
 | 3 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy -- confirmed again in s48 (JCB `blog_article_slug`). If it bothers: Vercel Deploy Hook pinged from dashboard on product change. |
 | 4 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Kept for revert; production ships HeroSplit since s37. |
@@ -45,8 +47,9 @@ Date: 2026-08-05
 | `handoff.md` | Current state + next steps (capped; history in handoff-archive.md) |
 | `src/lib/analytics.js` | GA4 loader gated on Consent Mode v2 -- `gtag.js` only fetched after accept; Measurement ID `G-WTPC0SV333` |
 | `src/components/common/CookieBanner.jsx` | Prijať/Odmietnuť consent UI, wired to `analytics.js` |
-| `src/components/home/FAQ.jsx` | FAQPage JSON-LD (s50) -- `answerText` per FAQ + `<Helmet>` block; not yet on PROD |
-| `src/pages/Home.jsx` | LocalBusiness schema `sameAs` added (s50) -- not yet on PROD |
+| `src/components/home/FAQ.jsx` | FAQPage JSON-LD (s50, on PROD) -- `answerText` per FAQ + `<Helmet>` block |
+| `src/pages/Home.jsx` | LocalBusiness schema `sameAs` added (s50, on PROD) |
+| `src/components/common/Footer.jsx` | Social icons: WhatsApp/Telegram/Facebook, all 28px (s50, on PROD) |
 | `apps/dashboard/src/lib/companyInfo.js` | Company info on PDFs -- IBAN placeholder (task 5) |
 | `src/data/blogMeta.js` | Single source of truth for blog metadata (plain ESM; `hidden: true` = unlisted + noindex + out of sitemap); consumed by Blog, BlogDetail, build scripts |
 | `scripts/prerender.mjs` | Post-build Puppeteer prerender ~177 URLs into `dist/<path>/index.html`; stamps `data-prerendered`; Vercel uses `@sparticuz/chromium` |
@@ -67,6 +70,6 @@ Date: 2026-08-05
 | 47 | 2026-07-29 | RCC kalendar: tyzdenny dispecersky pohlad s ulohami -> PROD | Mesacny pohlad nahradeny tyzdennym (Po-Pi, 7-17); nova tabulka `calendar_tasks` (migracia 021, owner spustil); prenajmy v all-day pase; widget dnesnych uloh na dashboarde; fonty zvacsene po feedbacku |
 | 48 | 2026-08-04 | SEO-2 apex/www domain swap + JCB SQL + Haulotte cutout fix -> PROD | Plot priehladny "Cena dohodou" (Supabase only); Haulotte transparent WebP hole fixed without source photo; JCB blog_article_slug set; apex now canonical via Vercel API (dashboard UI bug blocked normal edit); safety hook temp exception scoped+reverted with owner approval |
 | 49 | 2026-08-05 | SEO-4 Search Console + GA4 Consent Mode v2 -> PROD | Sitemap submit confirmed, indexing requested on 4 URLs; GA4 (`G-WTPC0SV333`) with full Consent Mode v2 -- gtag.js only loads after accept; CookieBanner now has real Prijat/Odmietnut; verified on staging + PROD via Network tab + GA4 Realtime; dev->main pushed (`7af7b6f`); SEO-5 blocked on owner sending GBP Maps link + Facebook URL |
-| 50 | 2026-08-05 | SEO-5 FAQPage JSON-LD + LocalBusiness sameAs (on dev) | Owner sent GBP Maps + FB links; sameAs added to LocalBusiness schema; FAQPage JSON-LD added to FAQ.jsx (plain-text answerText per question + new Helmet block); build-verified by parsing dist/index.html's ld+json scripts; not yet pushed to main/PROD |
+| 50 | 2026-08-05 | SEO-5 FAQPage/sameAs + Footer Facebook icon -> PROD | Owner sent GBP Maps + FB links; sameAs added to LocalBusiness schema; FAQPage JSON-LD added to FAQ.jsx (plain-text answerText per question); Footer gets Facebook icon next to Telegram, all 3 social icons bumped to 28px; dev->main pushed (`946d1f3`) |
 
 <!-- Sessions 1-37 summary rows + sessions 15-48 full notes + old Architecture/Supabase reference: handoff-archive.md -->
