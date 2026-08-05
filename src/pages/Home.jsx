@@ -25,7 +25,7 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Royal Stroje - Požičovňa náradia Senec" />
         <meta property="og:description" content="Profesionálna požičovňa stavebného náradia. 20 rokov skúseností. Dovoz do 24h." />
-        <meta property="og:image" content="https://royalstroje.sk/hero-main1.webp" />
+        <meta property="og:image" content="https://royalstroje.sk/pictures/graphics/stroje-dvor.webp" />
         <meta property="og:url" content="https://royalstroje.sk/" />
         <meta property="og:locale" content="sk_SK" />
 
@@ -43,7 +43,7 @@ export default function Home() {
             "description": "Profesionálna požičovňa stavebného náradia a techniky v Senci s 20-ročnými skúsenosťami",
             "url": "https://royalstroje.sk",
             "logo": "https://royalstroje.sk/logoroyal.webp",
-            "image": "https://royalstroje.sk/hero-main1.webp",
+            "image": "https://royalstroje.sk/pictures/graphics/stroje-dvor.webp",
             "telephone": "+421948555551",
             "email": "info@royalstroje.sk",
             "address": {

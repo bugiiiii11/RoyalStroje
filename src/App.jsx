@@ -96,7 +96,7 @@ function App() {
         <meta property="og:site_name" content="Royal Stroje" />
         <meta property="og:locale" content="sk_SK" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="og:image" content="https://royalstroje.sk/hero-main1.webp" />
+        <meta property="og:image" content="https://royalstroje.sk/pictures/graphics/stroje-dvor.webp" />
       </Helmet>
       <CartProvider>
         <Router>
