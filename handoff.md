@@ -8,7 +8,7 @@
 - **Session count:** 50
 - **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `6270a01`
 
-## What Was Done (Session 50) -- SEO-5 FAQPage/sameAs + Footer Facebook icon -> PROD
+## What Was Done (Session 50) -- SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD
 Date: 2026-08-05
 
 1. **Owner sent both links:** GBP Maps share link (`maps.app.goo.gl/A7HSGKNYctVqgRuq8`) and Facebook page (`facebook.com/profile.php?id=61591259022094`) -- unblocked SEO-5.
@@ -19,6 +19,7 @@ Date: 2026-08-05
 6. **`dev` -> `main` fast-forward merge, both pushed** (`946d1f3`) -- SEO-5 + footer icon change now live on PROD.
 7. **SEO-5 verified via Google Rich Results Test on `/`:** 2 valid items detected -- Miestne firmy (LocalBusiness) + Organizácia (Organization, since LocalBusiness is a subtype) -- confirms `sameAs` picked up cleanly. **No FAQ item shown -- this is expected, not a bug:** Google restricted FAQ rich results to government/health sites only since August 2023 (anti-spam policy); ordinary business sites no longer get the FAQ snippet even with fully valid markup. Our `FAQPage` JSON-LD is still present/valid on-page (confirmed via curl) and harmless to keep -- other engines (Bing, AI search) may still use it, and it costs nothing. **Don't try to "fix" missing FAQ in Rich Results Test going forward -- it's a Google policy limit, not a markup problem.**
 8. **Google search snippet thumbnail was a generic AI/stock excavator photo (`hero-main1.webp`)** -- owner spotted it searching "pozicovna naradia senec". Replaced site-wide default (`App.jsx`) + homepage `og:image` + `LocalBusiness` schema `image` with `pictures/graphics/stroje-dvor.webp` (real photo: actual JCB + Wacker Neuson machines on the real yard, Royal Stroje signage on the building). Owner picked this over the logo (too wide/thin -- crops badly to a square social thumbnail, risks showing just blank white space or half the wordmark) and over a branded truck+trailer promo shot. Pushed to PROD (`6270a01`). Google/Facebook cache old previews for a while -- re-check the search snippet in a few days, not immediately.
+9. **Preview caches confirmed as the actual blocker, not the deploy:** live `curl` on `royalstroje.sk` showed the new `og:image` tag serving correctly right after push -- Telegram and Google were just showing their own stale cached previews. **Telegram fix that worked:** owner sent the URL to `@WebpageBot` (official Telegram cache-buster bot) -- confirmed it refreshed the preview. **Google fix in progress:** owner ran Request Indexing on `/` via GSC URL Inspection -- image thumbnail in search results can lag days-to-weeks behind text reindexing even after this, so don't expect it instantly.
 
 ## What Was Done (Session 49) -- SEO-4 Search Console + GA4 Consent Mode v2 -> PROD
 Date: 2026-08-05
