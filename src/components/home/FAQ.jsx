@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { ChevronDown, Phone, Mail, MessageCircle } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
 
@@ -11,6 +12,7 @@ export default function FAQ() {
   const faqs = [
     {
       question: 'Ako funguje prenájom?',
+      answerText: 'Prenájom funguje jednoducho: kontaktujte nás telefonicky na 0948 555 551, e-mailom na info@royalstroje.sk alebo cez WhatsApp/Telegram. Dohodneme techniku, termín a spôsob prevzatia alebo dopravy. Noví zákazníci sa registrujú osobne alebo e-mailom na základe registračného formulára a pri prvom prenájme sa vyžaduje vratná kaucia podľa typu techniky.',
       answer: (
         <div className="space-y-3">
           <p>Prenájom u nás funguje jednoducho a rýchlo – na základe priamej dohody a potvrdenia dostupnosti.</p>
@@ -43,6 +45,7 @@ export default function FAQ() {
     },
     {
       question: 'Aké dokumenty potrebujem na požičanie?',
+      answerText: 'Pre právnické osoby: živnostenský list alebo výpis z obchodného registra, platný doklad totožnosti oprávnenej osoby, IČO, DIČ, IČ DPH. Pre fyzické osoby: platný občiansky preukaz alebo pas a kontaktné údaje (telefón, e-mail). Všetky údaje spracúvame v súlade s GDPR výlučne na účely prenájmu.',
       answer: (
         <div className="space-y-3">
           <p><strong className="text-white">Pre právnické osoby (PO):</strong></p>
@@ -62,6 +65,7 @@ export default function FAQ() {
     },
     {
       question: 'Dostanem stroj s plnou alebo prázdnou nádržou PHM?',
+      answerText: 'Stroje odovzdávame s plnou nádržou pohonných hmôt a očakávame ich späť tiež s plnou nádržou. Pri vrátení s prázdnou alebo čiastočne naplnenou nádržou sa účtuje doplatok za dotankovanie vo výške 2€/liter bez DPH.',
       answer: (
         <div className="space-y-3">
           <p>Stroje <strong className="text-white">odovzdávame s plnou nádržou</strong> pohonných hmôt (PHM) a takisto ich <strong className="text-white">očakávame späť s plnou nádržou</strong>.</p>
@@ -75,6 +79,7 @@ export default function FAQ() {
     },
     {
       question: 'Poskytujete dopravu techniky na miesto?',
+      answerText: 'Áno, poskytujeme dopravu techniky priamo na stavbu alebo iné miesto určenia. Dodávka: Senec 15€, ostatné 1€/km (min. 15€). Pick-up s prívesným vozíkom do 3500 kg: 1,2€/km (min. 15€). Preprava cudzieho stroja/náradia: 1,50€/km (min. 30€). Ceny sú bez DPH, presnú cenu oznámime pri objednávke.',
       answer: (
         <div className="space-y-3">
           <p>Áno, poskytujeme <strong className="text-white">dopravu techniky priamo k vám</strong> na stavbu alebo iné miesto určenia.</p>
@@ -109,6 +114,7 @@ export default function FAQ() {
     },
     {
       question: 'Je možné prenajať stroje s obsluhou?',
+      answerText: 'Áno, ponúkame prenájom s obsluhou pre klientov, ktorí nemajú potrebné oprávnenie alebo skúsenosti s obsluhou ťažkej techniky. Služba zahŕňa kvalifikovaného operátora s potrebnými oprávneniami, prípravu a údržbu stroja počas prenájmu a poradenstvo pri práci priamo na mieste. Cena sa kalkuluje individuálne podľa typu stroja a dĺžky prenájmu.',
       answer: (
         <div className="space-y-3">
           <p>Áno, <strong className="text-white">ponúkame prenájom s obsluhou</strong> pre klientov, ktorí nemajú potrebné oprávnenie alebo skúsenosti s obsluhou ťažkej techniky.</p>
@@ -126,6 +132,7 @@ export default function FAQ() {
     },
     {
       question: 'Čo v prípade poruchy alebo poškodenia?',
+      answerText: 'Ak dôjde k poruche stroja nie vaším zavinením, okamžite nás kontaktujte na 0948 555 551 – zabezpečíme opravu alebo náhradný stroj do 24 hodín. Pri poškodení vaším zavinením hradíte skutočné náklady na opravu (s DPH), pri závažnom poškodení máme právo na úhradu zostatkovej hodnoty stroja. Vybrané stroje majú v cene službu ROYAL GUARD, ktorá kryje náhodné poškodenie pri bežnom používaní so spoluúčasťou 5% z výšky škody. Nevzťahuje sa na úmyselné poškodenie a hrubú nedbanlivosť.',
       answer: (
         <div className="space-y-3">
           <p><strong className="text-orange-primary">V prípade poruchy:</strong></p>
@@ -150,6 +157,7 @@ export default function FAQ() {
     },
     {
       question: 'Aké sú platobné možnosti?',
+      answerText: 'Právnické osoby: fakturácia so splatnosťou 14 dní, bankový prevod, možnosť pravidelných mesačných faktúr, platba kartou na prevádzke aj v teréne. Fyzické osoby: hotovosť pri prevzatí/vrátení, bankový prevod vopred, platba kartou na prevádzke aj v teréne. Pri prenájme sa vyžaduje vratná kaucia (500 € - 2000 €), ktorá sa vracia v plnej výške pri riadnom vrátení techniky.',
       answer: (
         <div className="space-y-3">
           <p>Ponúkame <strong className="text-white">flexibilné platobné možnosti</strong> podľa typu zákazníka:</p>
@@ -189,6 +197,23 @@ export default function FAQ() {
 
   return (
     <div id="faq" className="relative pt-12 md:pt-20 pb-8 md:pb-16 overflow-hidden">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map((faq) => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answerText
+              }
+            }))
+          })}
+        </script>
+      </Helmet>
+
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Header */}
         <div ref={faqHeadingRef} className={`text-center mb-6 md:mb-12 reveal ${faqHeadingInView ? 'in-view' : ''}`}>

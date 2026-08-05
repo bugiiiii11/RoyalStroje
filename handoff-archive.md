@@ -46,7 +46,7 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 38 | 2026-07-14 | Katalóg: nová kategória „Voľný čas a šport" + 2 elektrobicykle -> PROD | Category tree static in `categories.js` + products in Supabase; new category needs code+DB; RLS blocks anon writes (owner runs SQL) |
 | 39 | 2026-07-14 | Hero vstupné animácie + fix prázdneho katalógu na back-nav -> PROD | HeroSplit entrance animations (images + USP), `useProducts` initial state = module `cachedProducts` |
 
-## Archived What Was Done sections (sessions 15-47, oldest first)
+## Archived What Was Done sections (sessions 15-48, oldest first)
 
 ## What Was Done (Session 15) -- Real Photos + Ad-hoc Items + Gallery + Editable Days
 Date: 2026-04-30
@@ -687,6 +687,17 @@ Date: 2026-07-29
 6. **Fonts had to be enlarged right after the first prod deploy** -- 11px chips were unreadable on the owner's screen. Now 13px chips/bars, 64px cells, 150px min column. Keep 13px as the floor for this board.
 7. **QA trick for the dashboard app (auth-gated):** temporary public `/calendar-preview` route + puppeteer request interception mocking `/rest/v1/*`. Preflight must be answered too (`OPTIONS` -> 204 with `access-control-allow-headers: *`), otherwise supabase-js fails on CORS. Route reverted after the check.
 8. **Dashboard eslint treats `react-hooks/set-state-in-effect` as an ERROR** -- "sync props into state" effects do not pass. Used render-phase state adjust (`if (data !== prevData) setX(...)`) in `useCalendarTasks` and `key`-remount for the task modal instead.
+
+## What Was Done (Session 48) -- SEO-2 domain swap + JCB SQL + product fixes
+Date: 2026-08-04
+
+1. **Product data fixes are Supabase-only, no code/deploy needed for either:** "Plot priehľadný 3,5m" (`equipment.slug = 'standard'`, unrelated to its display name) set to `pricing_type = 'negotiable'` -- UI already fully supports "Cena dohodou"/"Na požiadanie" whenever a product is negotiable, zero code change required. Same pattern for the pending JCB `blog_article_slug` task -- owner ran both SQL statements directly.
+2. **Haulotte Compact 10 cutout fixed without the original studio photo.** The enclosed white sweep visible through the cage's guardrail gaps was never reached by `cutout-transparent.py`'s border flood-fill (walled off by the frame outline) -- same failure mode the tool's `MIN_HOLE` option exists for. Patched the *already-cut* transparent WebP in place: same hole-detection pass (bright+desaturated blob, unreached by border flood, size >= threshold) applied directly to the existing alpha channel, then localized edge ramp + colour decontamination only around the new holes so untouched edges weren't reprocessed. Pushed straight to prod (`f05235b`) -- pure asset change, no code touched.
+3. **SEO-2 resolved: apex (`royalstroje.sk`) is now canonical, `www` 308-redirects to it.** No SEO advantage either way (Google treats both equally) -- decided on apex because all existing code (sitemap `SITE_URL`, canonical/OG tags, schema) already pointed there, so zero code changes needed either way.
+4. **Vercel dashboard bug: the domain acting as a pure redirect source (`royalstroje.sk`) had no Edit/Refresh affordance at all** -- couldn't click into it, couldn't Remove it either. Zoom/hard-refresh didn't help. Root cause not confirmed, but reproducible on this project as of 2026-08-04; worth trying "click the redirect badge itself" next time before escalating.
+5. **Fixed via Vercel REST API instead of the dashboard** (`PATCH /v9/projects/{id}/domains/{domain}` with `redirect`/`redirectStatusCode`, needs `?teamId=` -- team-scoped tokens can't call `/v2/teams` to discover it, get it from any `GET /v9/projects/{id}` response's `accountId` field instead). Owner generated a 1-day team-scoped token, revoked after use. Zero downtime: API lets you flip a domain's config without ever detaching the live one, unlike remove-and-readd.
+6. **Safety hook `block-dangerous.sh` blocks all curl POST/PUT/PATCH/DELETE by design** (exfiltration guard, not a bug). Got explicit owner approval, added a narrow temporary exception scoped to `api.vercel.com` only, ran the two PATCH calls, then reverted the hook file immediately -- confirmed via `git diff` showing no changes before moving on. Precedent for next time this comes up: ask first, scope tight, revert same-turn, verify the revert.
+7. **Prerender freshness caveat confirmed real (SEO-6 backlog item):** Supabase data changes (JCB `blog_article_slug`) show immediately to real visitors (client-side fetch) but not in the crawler-facing prerendered HTML until the next deploy. Not urgent, already tracked.
 
 ## Archived reference blocks (as of session 44)
 

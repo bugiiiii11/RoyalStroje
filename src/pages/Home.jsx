@@ -65,7 +65,11 @@ export default function Home() {
               "closes": "16:00"
             },
             "priceRange": "€€",
-            "areaServed": ["Senec", "Bratislava", "Galanta", "Trnava", "Pezinok", "Šamorín"]
+            "areaServed": ["Senec", "Bratislava", "Galanta", "Trnava", "Pezinok", "Šamorín"],
+            "sameAs": [
+              "https://maps.app.goo.gl/A7HSGKNYctVqgRuq8",
+              "https://www.facebook.com/profile.php?id=61591259022094"
+            ]
           })}
         </script>
       </Helmet>
