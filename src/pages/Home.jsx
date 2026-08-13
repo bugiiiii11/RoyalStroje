@@ -49,7 +49,7 @@ export default function Home() {
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Recká cesta 182",
-              "addressLocality": "Senec",
+              "addressLocality": "Boldog",
               "postalCode": "925 26",
               "addressCountry": "SK"
             },

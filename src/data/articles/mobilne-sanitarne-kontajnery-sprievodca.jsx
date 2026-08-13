@@ -459,7 +459,7 @@ const article = {
             <div>
               <p className="text-white/70 text-sm mb-3">Kontaktujte nás a my vám poradíme správny typ a počet kontajnerov pre váš projekt.</p>
               <div className="space-y-2 text-white/80 text-sm">
-                <p>📍 Recká cesta 182, 903 01 Senec</p>
+                <p>📍 Recká cesta 182, 925 26 Boldog</p>
                 <p>📞 <a href="tel:+421948555551" className="text-orange-primary hover:underline font-bold">+421 948 555 551</a></p>
                 <p>📧 <a href="mailto:info@royalstroje.sk" className="text-orange-primary hover:underline">info@royalstroje.sk</a></p>
                 <p>⏰ Po-Pi: 7:00-18:00 | So: 8:00-14:00</p>

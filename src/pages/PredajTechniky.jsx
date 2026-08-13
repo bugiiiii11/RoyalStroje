@@ -528,7 +528,7 @@ export default function PredajTechniky() {
                 </div>
                 <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Adresa predajne</h3>
                 <p className="text-zinc-300 text-base mb-1">Recká cesta 182</p>
-                <p className="text-orange-primary font-bold text-base">925 26 Senec</p>
+                <p className="text-orange-primary font-bold text-base">925 26 Boldog</p>
               </div>
             </div>
 

@@ -3,7 +3,7 @@
 | PRENAJÍMATEĽ |  | NÁJOMCA – SPOTREBITEĽ |  |
 | :---- | :---- | :---- | :---- |
 | **Obchodné meno:** | ROYAL STROJE s.r.o. | **Meno a priezvisko:** |  |
-| **Sídlo:** | Recká cesta 182, 925 26 Boldog – Senec | **Adresa trvalého bydliska:** |  |
+| **Sídlo:** | Boldog 182, 925 26 Boldog | **Adresa trvalého bydliska:** |  |
 | **IČO / DIČ / IČ DPH:** | 57 405 425 / 2122722063 / SK2122722063 | **Dátum narodenia:** |  |
 | **Zastúpený:** | Peter Krivosudský, konateľ | **Číslo OP / pasu:** |  |
 | **Tel. / E-mail:** | \+421 948 555 551 / info@royalstroje.sk | **Telefón / E-mail:** |  |

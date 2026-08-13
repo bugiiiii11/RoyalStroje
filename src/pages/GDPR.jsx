@@ -40,7 +40,7 @@ export default function GDPR() {
               <div>
                 <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">Prevádzkovateľ</p>
                 <p className="text-white font-semibold text-xs md:text-base">ROYAL STROJE s.r.o.</p>
-                <p className="text-zinc-300 text-xs md:text-base">Recká cesta 182, 925 26 Boldog – Senec</p>
+                <p className="text-zinc-300 text-xs md:text-base">Boldog 182, 925 26 Boldog</p>
               </div>
               <div>
                 <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">Kontakt</p>
@@ -347,7 +347,7 @@ export default function GDPR() {
               ROYAL STROJE s.r.o. | Verzia GDPR2026.01 | Platné od 01.02.2026 | www.royalstroje.sk
             </p>
             <p className="text-zinc-500 text-[10px] md:text-xs mt-2">
-              Recká cesta 182, 925 26 Boldog – Senec | IČO: 57 405 425 | info@royalstroje.sk
+              Boldog 182, 925 26 Boldog | IČO: 57 405 425 | info@royalstroje.sk
             </p>
           </div>
 

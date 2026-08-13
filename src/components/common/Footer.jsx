@@ -201,7 +201,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2 text-white/70">
                 <MapPin size={16} className="mt-0.5 flex-shrink-0" />
-                <span>Recká cesta 182<br />925 26 Senec-Boldog</span>
+                <span>Recká cesta 182<br />925 26 Boldog</span>
               </li>
               <li className="flex items-start gap-2 text-white/70">
                 <Clock size={16} className="mt-0.5 flex-shrink-0" />

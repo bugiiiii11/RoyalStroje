@@ -538,7 +538,7 @@ const article = {
         <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">Začnite Váš Jarný Projekt s Nami!</h3>
           <div className="space-y-2 text-white/80">
-            <p>📍 Recká cesta 182, 903 01 Senec</p>
+            <p>📍 Recká cesta 182, 925 26 Boldog</p>
             <p>📞 <a href="tel:+421948555551" className="text-orange-primary hover:underline">+421 948 555 551</a></p>
             <p>📧 <a href="mailto:info@royalstroje.sk" className="text-orange-primary hover:underline">info@royalstroje.sk</a></p>
             <p>🌐 <a href="https://www.royalstroje.sk" className="text-orange-primary hover:underline">www.royalstroje.sk</a></p>

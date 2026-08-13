@@ -148,7 +148,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   const rfBody = isInvoice ? [
     [{ content: 'Ostatné info o PP a príslušenstve:', styles: L }, reservation.notes || '', { content: 'Celkom k úhrade:', styles: { ...L, fontStyle: 'bold' } }, ''],
     [{ content: 'Miesto používania PP:', styles: L }, reservation.usage_location || reservation.delivery_address || '', { content: 'bez DPH', styles: L }, invSubtotal != null ? fmtPrice(invSubtotal) : ''],
-    [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, Senec', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, invVat != null ? fmtPrice(invVat) : ''],
+    [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, 925 26 Boldog', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, invVat != null ? fmtPrice(invVat) : ''],
     [{ content: 'Začiatok prenájmu (dátum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, invTotal != null ? fmtPrice(invTotal) : ''],
     [{ content: 'Dátum do (dohodnutý koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Dátum splatnosti:', styles: L }, dueRow],
     [{ content: 'Skutočný koniec prenájmu:', styles: L }, actualReturnStr, { content: 'IBAN:', styles: L }, ibanRow],
@@ -156,7 +156,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
   ] : [
     [{ content: 'Ostatné info o PP a príslušenstve:', styles: L }, reservation.notes || '', { content: 'Celkové nájomné:', styles: { ...L, fontStyle: 'bold' } }, ''],
     [{ content: 'Miesto používania PP:', styles: L }, reservation.usage_location || reservation.delivery_address || '', { content: 'bez DPH', styles: L }, netto != null ? fmtPrice(netto) : ''],
-    [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, Senec', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, dph != null ? fmtPrice(dph) : ''],
+    [{ content: 'Presné miesto odovzdania PP:', styles: L }, reservation.delivery_address || 'Recká cesta 182, 925 26 Boldog', { content: `DPH ${COMPANY.vatRate}%`, styles: L }, dph != null ? fmtPrice(dph) : ''],
     [{ content: 'Začiatok prenájmu (dátum od):', styles: L }, fmtDate(reservation.date_from) + timeFromStr, { content: 's DPH', styles: { ...L, fontStyle: 'bold' } }, displayTotal != null ? fmtPrice(displayTotal) : ''],
     [{ content: 'Dátum do (dohodnutý koniec):', styles: L }, fmtDate(reservation.date_to), { content: 'Zábezpeka v EUR:', styles: L }, depositStr],
     [{ content: 'Skutočný koniec prenájmu:', styles: L }, actualReturnStr, { content: 'Vrátená zábezpeka v EUR:', styles: L }, ''],
@@ -182,7 +182,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
     'PP je odovzdávaný v technickom stave zodpovedajúcom jeho veku, miere opotrebenia a účelu použitia. ' +
     'Nájomca podpisom tejto Zmluvy potvrdzuje, že PP prevzal funkčný, riadne ho skontroloval a nevzniesol žiadne výhrady k jeho technickému stavu, okrem tých, ktoré sú výslovne uvedené v tejto Zmluve alebo v protokole. ' +
     'Prílohou č. 1 tejto Zmluvy sú Všeobecné podmienky prenájmu mechanizácie a príslušenstva (ďalej len „VPPM") verzie VPPM2026.02, ktoré tvoria neoddeliteľnú súčasť tejto Zmluvy. ' +
-    'VPPM sú k dispozícii na sídle Prenajímateľa (Royal stroje, s.r.o., 182, Boldog 92526) a zároveň v elektronickej podobe na webovej stránke www.royalstroje.sk; ' +
+    'VPPM sú k dispozícii na sídle Prenajímateľa (Royal stroje, s.r.o., Boldog 182, 925 26 Boldog) a zároveň v elektronickej podobe na webovej stránke www.royalstroje.sk; ' +
     'tlačenú verziu poskytne Prenajímateľ Nájomcovi na požiadanie bezplatne. Nájomca vyhlasuje, že si VPPM pred podpisom tejto Zmluvy preštudoval, porozumel ich obsahu a v plnom rozsahu ich akceptuje.', CW);
   doc.text(vppm, M, y);
   y += vppm.length * 2.2 + 1.5;
@@ -236,7 +236,7 @@ export default async function generateAgreementPdfPO(reservation, items, client,
       [{ content: 'Osoba podpisujúca Zmluvu v mene Nájomcu prehlasuje, že je na to riadne oprávnená (štatutárny orgán alebo splnomocnená osoba)', colSpan: 2, styles: { ...s, fontSize: 6, fillColor: [250, 250, 250], minCellHeight: 8 } }],
       [{ content: 'Za prenaj\u00EDmate\u013Ea:', styles: { ...s, fontStyle: 'bold' } }, { content: 'Za n\u00E1jomcu:', styles: { ...s, fontStyle: 'bold' } }],
       [{ content: `Meno: ${repName}`, styles: s }, { content: `Meno: ${lesseeName}`, styles: s }],
-      [{ content: `V Boldog \u2013 Senec d\u0148a ${todayStr}`, styles: { ...s, fontSize: 6.5 } }, { content: opBirthStr, styles: { ...s, fontSize: 6.5 } }],
+      [{ content: `V Boldogu d\u0148a ${todayStr}`, styles: { ...s, fontSize: 6.5 } }, { content: opBirthStr, styles: { ...s, fontSize: 6.5 } }],
       [{ content: 'Podpis prenaj\u00EDmate\u013Ea:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
       [{ content: 'Podpis n\u00E1jomcu:', colSpan: 2, styles: { ...s, minCellHeight: 15 } }],
     ],

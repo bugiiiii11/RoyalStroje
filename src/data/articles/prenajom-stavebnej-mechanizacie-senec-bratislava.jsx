@@ -419,7 +419,7 @@ const article = {
           <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-xl p-6">
             <div className="w-12 h-12 rounded-full bg-orange-primary flex items-center justify-center text-white font-bold text-xl mb-4">3</div>
             <h3 className="text-lg font-bold text-white mb-3">Osobne v Prevádzkarni</h3>
-            <p className="text-white/80 text-sm mb-3">Recká cesta 182, Senec</p>
+            <p className="text-white/80 text-sm mb-3">Recká cesta 182, Boldog pri Senci</p>
             <ul className="space-y-1 text-white/70 text-sm">
               <li>• Po-Pi: 7:00-18:00</li>
               <li>• So: 8:00-14:00</li>
@@ -453,7 +453,7 @@ const article = {
         <div className="bg-zinc-900 border border-white/10 rounded-xl p-6">
           <h3 className="text-xl font-bold text-orange-primary mb-4">Kontaktujte Nás Ešte Dnes!</h3>
           <div className="space-y-2 text-white/80">
-            <p>📍 <strong>Adresa:</strong> Recká cesta 182, 903 01 Senec</p>
+            <p>📍 <strong>Adresa:</strong> Recká cesta 182, 925 26 Boldog</p>
             <p>📞 <strong>Telefón:</strong> <a href="tel:+421948555551" className="text-orange-primary hover:underline">+421 948 555 551</a></p>
             <p>📧 <strong>Email:</strong> <a href="mailto:info@royalstroje.sk" className="text-orange-primary hover:underline">info@royalstroje.sk</a></p>
             <p>🌐 <strong>Web:</strong> <a href="https://www.royalstroje.sk" className="text-orange-primary hover:underline">www.royalstroje.sk</a></p>

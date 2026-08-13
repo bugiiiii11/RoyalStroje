@@ -592,7 +592,7 @@ const article = {
                 Máte otázky k bezpečnosti? Potrebujete poradiť? Zavolajte nám!
               </p>
               <div className="space-y-2 text-white/80 text-sm">
-                <p>📍 Recká cesta 182, 903 01 Senec</p>
+                <p>📍 Recká cesta 182, 925 26 Boldog</p>
                 <p>📞 <a href="tel:+421948555551" className="text-orange-primary hover:underline font-bold">+421 948 555 551</a></p>
                 <p>📧 <a href="mailto:info@royalstroje.sk" className="text-orange-primary hover:underline">info@royalstroje.sk</a></p>
                 <p>⏰ Po-Pi: 7:00-18:00 | So: 8:00-14:00</p>

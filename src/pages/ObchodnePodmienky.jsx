@@ -82,7 +82,7 @@ export default function ObchodnePodmienky() {
                   </div>
                   <div>
                     <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">Vydavateľ</p>
-                    <p className="text-zinc-300 text-xs md:text-base">ROYAL STROJE s.r.o., Recká cesta 182, 925 26 Boldog – Senec</p>
+                    <p className="text-zinc-300 text-xs md:text-base">ROYAL STROJE s.r.o., Boldog 182, 925 26 Boldog</p>
                   </div>
                   <div>
                     <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">Web</p>
@@ -356,7 +356,7 @@ export default function ObchodnePodmienky() {
                   ROYAL STROJE s.r.o. | Verzia VPPM2026.02 | Platné od 01.02.2026 | www.royalstroje.sk
                 </p>
                 <p className="text-zinc-500 text-[10px] md:text-xs mt-2">
-                  Recká cesta 182, 925 26 Boldog – Senec | IČO: 57 405 425 | info@royalstroje.sk
+                  Boldog 182, 925 26 Boldog | IČO: 57 405 425 | info@royalstroje.sk
                 </p>
               </div>
             </>
@@ -378,7 +378,7 @@ export default function ObchodnePodmienky() {
                   </div>
                   <div>
                     <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">Vydavateľ</p>
-                    <p className="text-zinc-300 text-xs md:text-base">ROYAL STROJE s.r.o., Recká cesta 182, 925 26 Boldog – Senec</p>
+                    <p className="text-zinc-300 text-xs md:text-base">ROYAL STROJE s.r.o., Boldog 182, 925 26 Boldog</p>
                   </div>
                   <div>
                     <p className="text-zinc-500 mb-1 text-[10px] md:text-sm">Web</p>
@@ -512,7 +512,7 @@ export default function ObchodnePodmienky() {
                   <div className="space-y-2 md:space-y-3 text-zinc-800 text-xs md:text-base leading-relaxed">
                     <p><strong className="text-zinc-900">1.</strong> Spotrebiteľ má právo reklamovať vady PP bez zbytočného odkladu po ich zistení. Reklamáciu možno uplatniť:</p>
                     <ul className="ml-6 list-disc list-inside space-y-1">
-                      <li>osobne v sídle Prenajímateľa (Recká cesta 182, Boldog)</li>
+                      <li>osobne v sídle Prenajímateľa (Boldog 182, 925 26 Boldog)</li>
                       <li>e-mailom na info@royalstroje.sk</li>
                       <li>telefonicky na +421 948 555 551</li>
                     </ul>
@@ -603,7 +603,7 @@ export default function ObchodnePodmienky() {
                   ROYAL STROJE s.r.o. | Verzia VPPM-FO 2026.01 | Platné od 01.02.2026 | www.royalstroje.sk
                 </p>
                 <p className="text-zinc-500 text-[10px] md:text-xs mt-2">
-                  Recká cesta 182, 925 26 Boldog – Senec | IČO: 57 405 425 | info@royalstroje.sk
+                  Boldog 182, 925 26 Boldog | IČO: 57 405 425 | info@royalstroje.sk
                 </p>
               </div>
             </>

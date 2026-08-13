@@ -69,7 +69,7 @@ export default function Kontakt() {
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Recká cesta 182",
-              "addressLocality": "Senec",
+              "addressLocality": "Boldog",
               "postalCode": "925 26",
               "addressCountry": "SK"
             },
@@ -88,7 +88,7 @@ export default function Kontakt() {
         title={
           <>Zavolajte teraz. <span className="text-orange-primary">Stroje budú na stavbe zajtra.</span></>
         }
-        subtitle="Nonstop telefonická dostupnosť • Senec, Recká cesta 182 • Odpoveď do 15 minút"
+        subtitle="Nonstop telefonická dostupnosť • Recká cesta 182, Boldog pri Senci • Odpoveď do 15 minút"
         image="/pictures/graphics/stroje-dvor.webp"
         imageAlt="Royal Stroje - Kontakt"
         actions={
@@ -243,7 +243,7 @@ export default function Kontakt() {
                   </div>
                   <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">Adresa predajne</h3>
                   <p className="text-zinc-300 text-base mb-1">Recká cesta 182</p>
-                  <p className="text-orange-primary font-bold text-base">925 26 Senec</p>
+                  <p className="text-orange-primary font-bold text-base">925 26 Boldog</p>
                 </div>
 
                 {/* Hover overlay */}
@@ -288,7 +288,7 @@ export default function Kontakt() {
                     <h3 className="text-white font-black text-xl mb-4">Firemné údaje</h3>
                     <div className="space-y-2.5 text-zinc-300 leading-relaxed">
                       <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
-                      <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
+                      <p><strong className="text-white font-bold">Sídlo:</strong> Boldog 182, 925 26 Boldog</p>
                       <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
                       <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
                       <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>
@@ -442,7 +442,7 @@ export default function Kontakt() {
                   <h3 className="text-white font-black text-sm mb-3">Firemné údaje</h3>
                   <div className="space-y-1.5 text-zinc-300 text-xs leading-relaxed mb-4">
                     <p><strong className="text-white font-bold">Názov:</strong> Royal stroje, s.r.o.</p>
-                    <p><strong className="text-white font-bold">Sídlo:</strong> 182, Boldog 92526</p>
+                    <p><strong className="text-white font-bold">Sídlo:</strong> Boldog 182, 925 26 Boldog</p>
                     <p><strong className="text-white font-bold">IČO:</strong> 57 405 425</p>
                     <p><strong className="text-white font-bold">DIČ:</strong> 2122722063</p>
                     <p><strong className="text-white font-bold">IČDPH:</strong> SK2122722063</p>

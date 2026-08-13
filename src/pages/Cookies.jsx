@@ -242,7 +242,7 @@ export default function Cookies() {
               ROYAL STROJE s.r.o. | Platné od 04.05.2026 | www.royalstroje.sk
             </p>
             <p className="text-zinc-500 text-[10px] md:text-xs mt-2">
-              Recká cesta 182, 925 26 Boldog – Senec | IČO: 57 405 425 | info@royalstroje.sk
+              Boldog 182, 925 26 Boldog | IČO: 57 405 425 | info@royalstroje.sk
             </p>
           </div>
         </div>

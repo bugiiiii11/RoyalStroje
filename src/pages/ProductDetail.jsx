@@ -96,7 +96,7 @@ export default function ProductDetail() {
                 "@type": "Organization",
                 "name": "Royal Stroje",
                 "telephone": "+421948555551",
-                "address": { "@type": "PostalAddress", "addressLocality": "Senec", "addressCountry": "SK" }
+                "address": { "@type": "PostalAddress", "streetAddress": "Recká cesta 182", "addressLocality": "Boldog", "postalCode": "925 26", "addressCountry": "SK" }
               }
             }
           })}
