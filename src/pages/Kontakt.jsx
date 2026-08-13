@@ -73,6 +73,11 @@ export default function Kontakt() {
               "postalCode": "925 26",
               "addressCountry": "SK"
             },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "48.224467",
+              "longitude": "17.418349"
+            },
             "openingHoursSpecification": {
               "@type": "OpeningHoursSpecification",
               "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -258,7 +263,7 @@ export default function Kontakt() {
                 <h3 className="text-white font-black text-xl mb-4 px-2">Nájdete nás tu</h3>
                 <div className="rounded-2xl overflow-hidden border-2 border-white/10 h-[350px] mb-4">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.6!2d17.3994!3d48.2187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8f0c0c0c0c0d%3A0x0!2zUsOpxI1rYSBjZXN0YSAxODIsIDkwMyAwMSBTZW5lYw!5e0!3m2!1ssk!2ssk!4v1234567890"
+                    src="https://maps.google.com/maps?q=48.224467,17.418349&z=16&hl=sk&output=embed"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -269,7 +274,7 @@ export default function Kontakt() {
                   ></iframe>
                 </div>
                 <a
-                  href="https://maps.google.com/?q=Réčka+cesta+182,+Senec"
+                  href="https://maps.app.goo.gl/A7HSGKNYctVqgRuq8"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 text-orange-primary font-bold hover:gap-3 transition-all"
@@ -312,7 +317,7 @@ export default function Kontakt() {
               <h3 className="text-white font-black text-lg mb-3">Nájdete nás tu</h3>
               <div className="rounded-2xl overflow-hidden border-2 border-white/10 h-[250px] mb-3">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656.6!2d17.3994!3d48.2187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476c8f0c0c0c0c0d%3A0x0!2zUsOpxI1rYSBjZXN0YSAxODIsIDkwMyAwMSBTZW5lYw!5e0!3m2!1ssk!2ssk!4v1234567890"
+                  src="https://maps.google.com/maps?q=48.224467,17.418349&z=16&hl=sk&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -323,7 +328,7 @@ export default function Kontakt() {
                 ></iframe>
               </div>
               <a
-                href="https://maps.google.com/?q=Réčka+cesta+182,+Senec"
+                href="https://maps.app.goo.gl/A7HSGKNYctVqgRuq8"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 text-orange-primary font-bold text-sm"
