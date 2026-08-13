@@ -45,8 +45,10 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 37 | 2026-07-03 | Hero fotky + blog vlastné hero obrázky -> PROD DEPLOY | Blog per-article hero images (`image` in blogMeta), hero polish, merge `dev`->`main` (38 commits) -> production |
 | 38 | 2026-07-14 | Katalóg: nová kategória „Voľný čas a šport" + 2 elektrobicykle -> PROD | Category tree static in `categories.js` + products in Supabase; new category needs code+DB; RLS blocks anon writes (owner runs SQL) |
 | 39 | 2026-07-14 | Hero vstupné animácie + fix prázdneho katalógu na back-nav -> PROD | HeroSplit entrance animations (images + USP), `useProducts` initial state = module `cachedProducts` |
+| 40 | 2026-07-16 | Zmluva PDF: fix rozloženia pri 4+ položkách -> PROD | Dynamic fit-check pushes signature block to page 2; page numbering; „Späť" button in deal summary |
+| 41 | 2026-07-16 | Dashboard: číslo zmluvy namiesto DB označenia -> PROD | `dealContractNumber()` helper, contracts join in useClient/useReservations |
 
-## Archived What Was Done sections (sessions 15-48, oldest first)
+## Archived What Was Done sections (sessions 15-49, oldest first)
 
 ## What Was Done (Session 15) -- Real Photos + Ad-hoc Items + Gallery + Editable Days
 Date: 2026-04-30
@@ -724,3 +726,12 @@ RoyalStroje/
 - **Auth:** Email/password, roles in user_metadata (admin, staff, royal_card)
 - **Admin user:** info@royalstroje.sk (app_role: admin)
 - **Website env vars:** `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY` set in Vercel for royalstroje.sk
+
+## What Was Done (Session 49) -- SEO-4 Search Console + GA4 Consent Mode v2 -> PROD
+Date: 2026-08-05
+
+1. **SEO-4 done:** sitemap was already submitted (164 URLs, success, from before this session). Requested indexing via URL Inspection on `/`, `/sluzby`, `/honda-wt30`, `/jcb-19c-i` -- homepage was already indexed, `/sluzby` needed the manual request. Manual "Request indexing" is rate-limited (~10/day) and meant for a handful of priority pages only -- the sitemap already covers full discovery of the other ~160 URLs, don't try to hand-index the whole catalog.
+2. **GA4 property created by owner** (Measurement ID `G-WTPC0SV333`), industry category "Obchod a priemysel" -- closest GA4 standard match for equipment rental, no dedicated construction/rental category exists in Google's list.
+3. **Implemented GA4 with Google Consent Mode v2**, gated behind a real accept/reject cookie banner (previous banner was a single "Rozumiem" notice from back when the site truly had no analytics). New `src/lib/analytics.js` (`enableAnalytics`/`disableAnalytics`; `gtag.js` is only fetched after explicit accept -- never on boot). `index.html` sets Consent Mode default to `denied` before `gtag.js` can ever load. `CookieBanner.jsx` now has real Prijať/Odmietnuť buttons (X = same as reject). `Cookies.jsx` copy + `_ga`/`_ga_*` row updated. Visitors who dismissed the old single-button banner are re-prompted once, since they were never actually asked about analytics.
+4. **Verified end-to-end on staging then PROD:** `gtag/js` + `collect` hit fire only after clicking Prijať (checked in Network tab both times), GA4 Realtime confirmed active users + `page_view` events on both environments. `dev` -> `main` fast-forward merge, both pushed (`7af7b6f`).
+5. **SEO-5 blocker identified:** owner tried to give a GBP link via a `google.com/search?...` results URL (has session tokens, not stable) -- explained the difference and asked for a proper Google Maps "Share" link instead (`maps.app.goo.gl/...` or `google.com/maps/place/...`). Facebook page exists, owner will send the URL separately.

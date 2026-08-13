@@ -1,12 +1,25 @@
 # RoyalStroje -- Session Handoff
 
-<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-48 + old reference blocks archived 2026-07-29, 2026-08-04, 2026-08-05). -->
+<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-49 + old reference blocks archived 2026-07-29, 2026-08-04, 2026-08-05, 2026-08-13). -->
 
 ## Current State
 
-- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); GA4 with Consent Mode v2 live since s49; SEO-5 (FAQPage + sameAs) + Footer Facebook icon + og:image fix (real yard photo, not stock AI excavators) live since s50
-- **Session count:** 50
-- **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `6270a01`
+- **Phase:** Live in production (royalstroje.sk + app.royalstroje.sk); GA4 with Consent Mode v2 live since s49; SEO-5 (FAQPage + sameAs) + og:image fix live since s50; NAP address unified on Boldog since s51
+- **Session count:** 51
+- **Repo status:** work on `dev`, `main` = production; `dev` == `main` == `9fc7fb5`
+
+## What Was Done (Session 51) -- NAP adresa zjednotena na Boldog + GBP + opravene mapy -> PROD
+Date: 2026-08-13
+
+1. **Owner's question: why does Maps label BESTRENT (long gone) but not Royal Stroje?** Not a website issue -- map label prominence is a GBP ranking, and the pin does render when searched directly. Levers named for the owner: report BESTRENT as permanently closed via Navrhnut upravu, complete the profile (Sluzby/Produkty/Popis), keep review velocity, build NAP citations. **Do not look for a code fix for map labels.**
+2. **Root cause of the weak local signal: SIX conflicting address variants across the site.** Register (FinStat) says `Boldog 182, 925 26 Boldog`; the site variously claimed `903 01 Senec` (6 blog articles), `925 26 Senec` (impossible combination -- 925 26 is Boldog), `Senec-Boldog`, `Boldog - Senec`, and `182, Boldog 92526`. Google's "Pozicovna naradia v Boldogu" descriptor was correct all along.
+3. **Decision -- two addresses, two purposes, never mixed** (BESTRENT at the same parcel proves Google geocodes the street form): **prevadzka = `Recká cesta 182, 925 26 Boldog`** (GBP, visible contact, Footer, LocalBusiness + Product schema, blog articles) vs **sidlo = `Boldog 182, 925 26 Boldog`** (GDPR/Cookies/Obchodne podmienky, Kontakt "Firemne udaje", dashboard `COMPANY`, both PDF generators, static contract template). Owner changed GBP to the prevadzka form; pin stayed correct. **"Senec" deliberately kept as a service-area keyword in prose, titles and meta -- that is legitimate and Boldog is 4 km away.**
+4. **Coordinates were wrong:** schema geo `48.2187/17.3994` is roughly Senec town centre, not the yard. Owner supplied `48.224467/17.418349` from the GBP pin; added to Home + Kontakt schema.
+5. **Both Kontakt maps were broken** -- a hand-fabricated `/maps/embed?pb=...` blob with a placeholder place id (`0x...0c0c0c0d:0x0`), dummy `4v1234567890`, and a base64 label reading "Récka cesta 182, 903 01 Senec"; both "Otvorit v Google Maps" links used `?q=Réčka+cesta+182,+Senec` (misspelled street, wrong city). Now a plain coordinate embed (no API key) + the verified GBP share link.
+6. **VPPM PDF contains no address** -- confirmed by decompressing its streams. The s51 grep "Binary file matches" was a false positive on compressed bytes. No action needed.
+7. **GSC 161 non-indexed analysed:** only the 141 "Objavene - momentalne nie je v indexe" is real (noindex 6 / alt-canonical 8 / redirect 5 are all intentional). 141 == exactly the product-page count. Cause: product pages are orphans -- catalog pagination and category filters are `<button>`, so the whole static site exposes only 8 product links. Sitemap alone never suffices. -> SEO-7.
+8. **Prerender is non-deterministic (open risk).** Two local builds each baked the SAME 38 product pages as noindex 404s -- exactly the Supabase-only slugs missing from `src/data/products.js` (correlation 103/38, zero exceptions). `useProducts.js:57` silently falls back to `staticProducts` when the Supabase fetch fails and the build bakes the 404 without warning. **PROD verified clean on 9 sampled slugs** (Vercel builds have fast Supabase access), so this is local-environment-specific -- but one slow Vercel build would ship 38 noindex pages silently.
+9. **GBP copy generated for the owner in chat** (not in the repo): 12 service descriptions under the 300-char limit, plus a 750-char business description. Google rejects phone numbers, URLs and prices in service descriptions -- the drafts avoid them.
 
 ## What Was Done (Session 50) -- SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD
 Date: 2026-08-05
@@ -21,26 +34,20 @@ Date: 2026-08-05
 8. **Google search snippet thumbnail was a generic AI/stock excavator photo (`hero-main1.webp`)** -- owner spotted it searching "pozicovna naradia senec". Replaced site-wide default (`App.jsx`) + homepage `og:image` + `LocalBusiness` schema `image` with `pictures/graphics/stroje-dvor.webp` (real photo: actual JCB + Wacker Neuson machines on the real yard, Royal Stroje signage on the building). Owner picked this over the logo (too wide/thin -- crops badly to a square social thumbnail, risks showing just blank white space or half the wordmark) and over a branded truck+trailer promo shot. Pushed to PROD (`6270a01`). Google/Facebook cache old previews for a while -- re-check the search snippet in a few days, not immediately.
 9. **Preview caches confirmed as the actual blocker, not the deploy:** live `curl` on `royalstroje.sk` showed the new `og:image` tag serving correctly right after push -- Telegram and Google were just showing their own stale cached previews. **Telegram fix that worked:** owner sent the URL to `@WebpageBot` (official Telegram cache-buster bot) -- confirmed it refreshed the preview. **Google fix in progress:** owner ran Request Indexing on `/` via GSC URL Inspection -- image thumbnail in search results can lag days-to-weeks behind text reindexing even after this, so don't expect it instantly.
 
-## What Was Done (Session 49) -- SEO-4 Search Console + GA4 Consent Mode v2 -> PROD
-Date: 2026-08-05
-
-1. **SEO-4 done:** sitemap was already submitted (164 URLs, success, from before this session). Requested indexing via URL Inspection on `/`, `/sluzby`, `/honda-wt30`, `/jcb-19c-i` -- homepage was already indexed, `/sluzby` needed the manual request. Manual "Request indexing" is rate-limited (~10/day) and meant for a handful of priority pages only -- the sitemap already covers full discovery of the other ~160 URLs, don't try to hand-index the whole catalog.
-2. **GA4 property created by owner** (Measurement ID `G-WTPC0SV333`), industry category "Obchod a priemysel" -- closest GA4 standard match for equipment rental, no dedicated construction/rental category exists in Google's list.
-3. **Implemented GA4 with Google Consent Mode v2**, gated behind a real accept/reject cookie banner (previous banner was a single "Rozumiem" notice from back when the site truly had no analytics). New `src/lib/analytics.js` (`enableAnalytics`/`disableAnalytics`; `gtag.js` is only fetched after explicit accept -- never on boot). `index.html` sets Consent Mode default to `denied` before `gtag.js` can ever load. `CookieBanner.jsx` now has real Prijať/Odmietnuť buttons (X = same as reject). `Cookies.jsx` copy + `_ga`/`_ga_*` row updated. Visitors who dismissed the old single-button banner are re-prompted once, since they were never actually asked about analytics.
-4. **Verified end-to-end on staging then PROD:** `gtag/js` + `collect` hit fire only after clicking Prijať (checked in Network tab both times), GA4 Realtime confirmed active users + `page_view` events on both environments. `dev` -> `main` fast-forward merge, both pushed (`7af7b6f`).
-5. **SEO-5 blocker identified:** owner tried to give a GBP link via a `google.com/search?...` results URL (has session tokens, not stable) -- explained the difference and asked for a proper Google Maps "Share" link instead (`maps.app.goo.gl/...` or `google.com/maps/place/...`). Facebook page exists, owner will send the URL separately.
-
 ## What To Do Next
 
 | # | Priority | Task | Notes |
 |---|----------|------|-------|
-| 1 | **OWNER** | SEO-4 follow-up: monitor GSC Pages report | 2-4 weeks from 2026-08-05 -- check indexed vs excluded counts climb (Indexovanie -> Strany in GSC). |
-| 2 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy -- confirmed again in s48 (JCB `blog_article_slug`). If it bothers: Vercel Deploy Hook pinged from dashboard on product change. |
-| 3 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Kept for revert; production ships HeroSplit since s37. |
-| 4 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs. |
-| 5 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit. |
-| 6 | Low | Final real-Android scroll-check | FAQ + product grid + subpages on owner's Xiaomi, logged out of Vercel (toolbar = false positive, see s34). |
-| 7 | Backlog | Workspace email migration; subcategory data audit; product photos; email notifications (EmailJS/Edge Function); chatbot CORS (mdntech.org 405); WhatsApp API; online payments; mobile AnimatedBackground re-add via CSS body bg | Details in handoff-archive.md (session 15-43 notes). |
+| 1 | **OWNER** | GBP: report BESTRENT as permanently closed + fill Sluzby / Produkty / Popis firmy | Copy generated in s51 chat (12 service descriptions <300 chars + 750-char business description). Defunct competitor still holds the map label at that parcel. |
+| 2 | High | SEO-7: internal links to the 141 orphan product pages | Root cause of "Objavene - momentalne nie je v indexe" (s51). Do (a) pagination + category filters as real `<a href>` on `?category=&page=`, and (b) an HTML sitemap `/katalog` listing all products, linked from Footer. Optional (c): related machines on ProductDetail. |
+| 3 | High | Prerender guard: retry a route that renders as NotFound, fail the build if a sitemap URL still 404s | s51: two local builds each baked 38 noindex 404s (Supabase-only slugs). PROD clean, but a slow Vercel build would ship them silently. A failed deploy is harmless -- the previous one keeps serving. |
+| 4 | **OWNER** | SEO-4 follow-up: monitor GSC Pages report | 2-4 weeks from 2026-08-05 -- check indexed vs excluded counts climb (Indexovanie -> Strany in GSC). Re-check after SEO-7 ships. |
+| 5 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy -- confirmed again in s48 (JCB `blog_article_slug`). If it bothers: Vercel Deploy Hook pinged from dashboard on product change. |
+| 6 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Kept for revert; production ships HeroSplit since s37. |
+| 7 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs. |
+| 8 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit. |
+| 9 | Low | Final real-Android scroll-check | FAQ + product grid + subpages on owner's Xiaomi, logged out of Vercel (toolbar = false positive, see s34). |
+| 10 | Backlog | Workspace email migration; subcategory data audit; product photos; email notifications (EmailJS/Edge Function); chatbot CORS (mdntech.org 405); WhatsApp API; online payments; mobile AnimatedBackground re-add via CSS body bg | Details in handoff-archive.md (session 15-43 notes). |
 
 ## Key Files
 
@@ -49,10 +56,11 @@ Date: 2026-08-05
 | `handoff.md` | Current state + next steps (capped; history in handoff-archive.md) |
 | `src/lib/analytics.js` | GA4 loader gated on Consent Mode v2 -- `gtag.js` only fetched after accept; Measurement ID `G-WTPC0SV333` |
 | `src/components/common/CookieBanner.jsx` | Prijať/Odmietnuť consent UI, wired to `analytics.js` |
-| `src/components/home/FAQ.jsx` | FAQPage JSON-LD (s50, on PROD) -- `answerText` per FAQ + `<Helmet>` block |
-| `src/pages/Home.jsx` | LocalBusiness schema `sameAs` added (s50, on PROD) |
-| `src/components/common/Footer.jsx` | Social icons: WhatsApp/Telegram/Facebook, all 28px (s50, on PROD) |
-| `apps/dashboard/src/lib/companyInfo.js` | Company info on PDFs -- IBAN placeholder (task 5) |
+| `src/pages/Home.jsx` | LocalBusiness schema -- `sameAs` (s50), address `Boldog` + geo `48.224467/17.418349` (s51) |
+| `src/pages/Kontakt.jsx` | Contact page: prevadzka address + sidlo block + map embeds + LocalBusiness schema (all corrected s51) |
+| `src/components/home/Catalog.jsx` | Catalog: pagination + category filters are `<button>` -- the SEO-7 orphan-page root cause (`productsPerPage` line 93) |
+| `src/hooks/useProducts.js` | Supabase fetch with a SILENT fallback to `staticProducts` on failure (line 57) -- the prerender-404 root cause |
+| `apps/dashboard/src/lib/companyInfo.js` | `COMPANY` on PDFs -- sidlo address (s51), IBAN still "DOPLNIT" (task 7) |
 | `src/data/blogMeta.js` | Single source of truth for blog metadata (plain ESM; `hidden: true` = unlisted + noindex + out of sitemap); consumed by Blog, BlogDetail, build scripts |
 | `scripts/prerender.mjs` | Post-build Puppeteer prerender ~177 URLs into `dist/<path>/index.html`; stamps `data-prerendered`; Vercel uses `@sparticuz/chromium` |
 | `scripts/generate-sitemap.mjs` + `scripts/lib/collect-urls.mjs` | Build-time sitemap (164 URLs); collect-urls = shared URL inventory (static + visible blog + Supabase products) + `SITE_URL` |
@@ -62,8 +70,6 @@ Date: 2026-08-05
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
-| 40 | 2026-07-16 | Zmluva PDF: fix rozloženia pri 4+ položkách -> PROD | Dynamic fit-check pushes signature block to page 2; page numbering; „Späť" button in deal summary |
-| 41 | 2026-07-16 | Dashboard: číslo zmluvy namiesto DB označenia -> PROD | `dealContractNumber()` helper, contracts join in useClient/useReservations |
 | 42 | 2026-07-16 | Katalóg: nový dekoračný bager (bager_web) -> PROD | Owner RGBA PNG -> WebP 1024x683 q80 preserving alpha |
 | 43 | 2026-07-16 | SEO: prerender + build-time sitemap + noindex/meta fixy (na `dev`) | Root cause weak indexing: robots.txt blocked `/assets/`; prerender ~177 URLs; helmet v3 multi-child title bug; blogMeta.js created |
 | 44 | 2026-07-16 | Fix prerender boot blink + SEO-1 staging verification | `data-prerendered` suppression chain; SEO-1 verified on Vercel staging; commit `92c571d` |
@@ -73,5 +79,6 @@ Date: 2026-08-05
 | 48 | 2026-08-04 | SEO-2 apex/www domain swap + JCB SQL + Haulotte cutout fix -> PROD | Plot priehladny "Cena dohodou" (Supabase only); Haulotte transparent WebP hole fixed without source photo; JCB blog_article_slug set; apex now canonical via Vercel API (dashboard UI bug blocked normal edit); safety hook temp exception scoped+reverted with owner approval |
 | 49 | 2026-08-05 | SEO-4 Search Console + GA4 Consent Mode v2 -> PROD | Sitemap submit confirmed, indexing requested on 4 URLs; GA4 (`G-WTPC0SV333`) with full Consent Mode v2 -- gtag.js only loads after accept; CookieBanner now has real Prijat/Odmietnut; verified on staging + PROD via Network tab + GA4 Realtime; dev->main pushed (`7af7b6f`); SEO-5 blocked on owner sending GBP Maps link + Facebook URL |
 | 50 | 2026-08-05 | SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD | Owner sent GBP Maps + FB links; sameAs + FAQPage JSON-LD added; Rich Results Test verified (FAQ not shown = Google policy, not a bug); Footer gets Facebook icon next to Telegram, all 3 social icons 28px; site-wide og:image + schema image swapped from stock AI excavator photo to real yard photo (stroje-dvor.webp); dev->main pushed (`6270a01`) |
+| 51 | 2026-08-13 | NAP adresa zjednotena na Boldog + GBP + opravene mapy -> PROD | Site carried 6 conflicting addresses; split into prevadzka `Recká cesta 182, 925 26 Boldog` (GBP/contact/schema) vs sidlo `Boldog 182, 925 26 Boldog` (legal/PDFs); "Senec" kept as service-area keyword; geo fixed to the real yard; both Kontakt map embeds were fabricated `pb=` blobs + links had a "Réčka" typo -> coordinate embed + GBP link; VPPM PDF has no address (false-positive grep); GSC 141 orphan product pages diagnosed (SEO-7); prerender non-determinism found (38 noindex 404s locally, PROD clean); dev->main pushed (`9fc7fb5`) |
 
-<!-- Sessions 1-37 summary rows + sessions 15-48 full notes + old Architecture/Supabase reference: handoff-archive.md -->
+<!-- Sessions 1-41 summary rows + sessions 15-49 full notes + old Architecture/Supabase reference: handoff-archive.md -->
