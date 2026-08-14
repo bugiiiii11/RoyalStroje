@@ -2,7 +2,7 @@
 
 Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block below.
 
-## Archived Session Summary (sessions 1-43)
+## Archived Session Summary (sessions 1-44)
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
@@ -49,8 +49,9 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 41 | 2026-07-16 | Dashboard: číslo zmluvy namiesto DB označenia -> PROD | `dealContractNumber()` helper, contracts join in useClient/useReservations |
 | 42 | 2026-07-16 | Katalóg: nový dekoračný bager (bager_web) -> PROD | Owner RGBA PNG -> WebP 1024x683 q80 preserving alpha |
 | 43 | 2026-07-16 | SEO: prerender + build-time sitemap + noindex/meta fixy (na `dev`) | Root cause weak indexing: robots.txt blocked `/assets/`; prerender ~177 URLs; helmet v3 multi-child title bug; blogMeta.js created |
+| 44 | 2026-07-16 | Fix prerender boot blink + SEO-1 staging verification | `data-prerendered` suppression chain; SEO-1 verified on Vercel staging; commit `92c571d` |
 
-## Archived What Was Done sections (sessions 15-51, oldest first)
+## Archived What Was Done sections (sessions 15-52, oldest first)
 
 ## What Was Done (Session 15) -- Real Photos + Ad-hoc Items + Gallery + Editable Days
 Date: 2026-04-30
@@ -761,3 +762,13 @@ Date: 2026-08-13
 5. **Both Kontakt maps were broken** -- a hand-fabricated `/maps/embed?pb=...` blob with a placeholder place id and a base64 label reading "Récka cesta 182, 903 01 Senec"; links had a "Réčka" typo. Now a plain coordinate embed (no API key) + the verified GBP share link.
 6. **GSC 161 non-indexed analysed:** only the 141 "Objavene - momentalne nie je v indexe" is real. 141 == exactly the product-page count; product pages are orphans (pagination/filters were `<button>`) -> became SEO-7, done in s52.
 7. **GBP copy generated for the owner in chat** (not in repo): 12 service descriptions <300 chars + 750-char business description. Google rejects phone numbers, URLs and prices in service descriptions.
+
+## What Was Done (Session 52) -- SEO-7 interne linky + /katalog + prerender guard (na `dev`)
+Date: 2026-08-14
+
+1. **SEO-7 shipped on `dev` (`c236b2e`), NOT pushed** -- awaiting owner OK for dev->main. Catalog filters + pagination are real `<a href>` links (`buildHref` in Catalog.jsx; ScrollToTop only fires on pathname change, so scroll UX unchanged). New `/katalog` HTML sitemap page: all 141 products as static links grouped by category/subcategory with prices, linked site-wide from Footer, added to sitemap + prerender. Verified: baked HTML carries exactly the 141 sitemap slugs.
+2. **Prerender guard DONE (was task 3):** snapshot validator in prerender.mjs fails the build when `/katalog` misses a product link or a product route bakes as NotFound (retry first, then exit 1, nothing written). A failed Vercel build is harmless -- previous deploy keeps serving.
+3. **s51 non-determinism ROOT CAUSE:** the in-browser Supabase fetch fails consistently on this machine while Node fetch works (sitemap always got live data). Prerender now PROXIES Supabase GETs through Node fetch (CORS + preflight handled) -> first fully clean local build: 0 noindex product bakes, /katalog complete.
+4. **Local quirk:** client-side rendering in local browsers still hits the silent staticProducts fallback (e.g. triple Custers row in screenshots) -- not a site bug; PROD client fetch works fine.
+5. **GBP (owner did):** services with descriptions added, profile edited. Advice: KEEP the extra categories (Prenajom kontajnerov, Pozicovna zariadeni, Prenajom stavebnych zariadeni -- real business lines); reconsider only "Predajca stavebnych strojov" (keep if machine sales/brokering is real, else swap for a tool-shop category); primary category must stay a rental one.
+6. **GBP products: 15 recommendations + prices + original descriptions generated in chat** (not in repo). Prices recommended s DPH for the GBP field; descriptions written from own DB specs + blogs (no copied manufacturer text -- copyright + duplicate content). Owner will upload.

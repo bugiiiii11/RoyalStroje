@@ -1,12 +1,22 @@
 # RoyalStroje -- Session Handoff
 
-<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-51 + old reference blocks archived 2026-07-29, 2026-08-04, 2026-08-05, 2026-08-13, 2026-08-14). -->
+<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-52 + old reference blocks archived 2026-07-29, 2026-08-04, 2026-08-05, 2026-08-13, 2026-08-14). -->
 
 ## Current State
 
-- **Phase:** SEO-7 live on PROD; cart removal + baked 404 shell pushed to `main` (`fcdeab3`) but the **production build FAILED** -- PROD still serves the previous deploy, awaiting a Redeploy click
-- **Session count:** 53
-- **Repo status:** `dev` == `main` == `origin` == `fcdeab3`, working tree clean
+- **Phase:** GBP product catalogue populated (15 products live). Docs-only push to `main` fired a fresh PROD build -- **verify it went green**, since the previous build of `fcdeab3` failed and PROD may still be serving pre-`296d1f8` HTML (cart removal + baked 404 shell)
+- **Session count:** 54
+- **Repo status:** `dev` == `main` == `origin`, working tree clean
+
+## What Was Done (Session 54) -- 15 GBP produktovych PNG + release na PROD
+Date: 2026-08-14
+
+1. **GBP does not accept WebP** -- generated PNG versions of the 15 GBP products into `C:\Users\cryptomeda\Desktop\GBP-produkty-PNG\` (deliberately OUTSIDE the repo so they never get committed). Owner uploaded all 15 to GBP the same day. **Task 2 is done.**
+2. **The s52 15-product list existed only in chat, not in the repo** -- owner re-pasted it. Repo filenames were NOT a reliable key: 5 of the 15 (WN 803, DW20, RD18, TH412, Avant 528) have no matching file under `public/pictures/Katalog-PNG/`. **Authoritative mapping = query Supabase `equipment.image_path` by slug**, which is exactly what the live product page renders. Those 5 live in Supabase Storage (`equipment-images/...`), not in the repo.
+3. **Machine gotcha: Python's SSL trust store rejects the Supabase cert here** (`CERTIFICATE_VERIFY_FAILED ... Basic Constraints of CA cert not marked critical`) while **Node `fetch` works fine** -- same asymmetry as the s52 browser-vs-Node finding, opposite direction. Pattern that works: download with Node, process with Pillow.
+4. **GBP image rules applied:** flatten any alpha onto white (GBP renders transparency black), upscale to >=720px on the short side (2 of 15 needed it), PNG well under the 5 MB cap. Verified all 15 visually via a generated contact sheet before handing them over.
+5. **Flagged to owner, not acted on:** these are manufacturer studio renders on white -- own yard photos remain the stronger GBP signal (non-duplicate vs other rental firms). Treat the PNGs as the fallback where no own photo exists.
+6. **Released to PROD** -- docs-only `dev`->`main` fast-forward. Serves double duty as the Redeploy for the s53 blocker: the failed build was on `fcdeab3`, so this push rebuilds the same code.
 
 ## What Was Done (Session 53) -- SEO-7 na PROD + kosik zmazany + zapeceny 404 shell + NAP citacie
 Date: 2026-08-14
@@ -20,23 +30,13 @@ Date: 2026-08-14
 7. **GBP "Boldog-Senec" is NOT an inconsistency** -- the profile form holds `Rečká cesta 182 / 925 26 / Boldog`; Google appends the district itself when rendering. Do not "fix" it and never write `Boldog-Senec` on the site (that would be a 7th address variant). Pin coordinates confirmed to match the schema geo.
 8. **Ran ~40 polling requests against PROD and tripped Vercel's bot mitigation** (403 "Vercel Security Checkpoint" for several minutes, from two different IPs). Cleared on its own. **Don't poll production in a tight loop** -- use the GitHub deployments API (`api.github.com/repos/bugiiiii11/RoyalStroje/deployments`) to watch deploy state instead, it is public and needs no auth.
 
-## What Was Done (Session 52) -- SEO-7 interne linky + /katalog + prerender guard (na `dev`)
-Date: 2026-08-14
-
-1. **SEO-7 shipped on `dev` (`c236b2e`), NOT pushed** -- awaiting owner OK for dev->main. Catalog filters + pagination are real `<a href>` links (`buildHref` in Catalog.jsx; ScrollToTop only fires on pathname change, so scroll UX unchanged). New `/katalog` HTML sitemap page: all 141 products as static links grouped by category/subcategory with prices, linked site-wide from Footer, added to sitemap + prerender. Verified: baked HTML carries exactly the 141 sitemap slugs.
-2. **Prerender guard DONE (was task 3):** snapshot validator in prerender.mjs fails the build when `/katalog` misses a product link or a product route bakes as NotFound (retry first, then exit 1, nothing written). A failed Vercel build is harmless -- previous deploy keeps serving.
-3. **s51 non-determinism ROOT CAUSE:** the in-browser Supabase fetch fails consistently on this machine while Node fetch works (sitemap always got live data). Prerender now PROXIES Supabase GETs through Node fetch (CORS + preflight handled) -> first fully clean local build: 0 noindex product bakes, /katalog complete.
-4. **Local quirk:** client-side rendering in local browsers still hits the silent staticProducts fallback (e.g. triple Custers row in screenshots) -- not a site bug; PROD client fetch works fine.
-5. **GBP (owner did):** services with descriptions added, profile edited. Advice: KEEP the extra categories (Prenajom kontajnerov, Pozicovna zariadeni, Prenajom stavebnych zariadeni -- real business lines); reconsider only "Predajca stavebnych strojov" (keep if machine sales/brokering is real, else swap for a tool-shop category); primary category must stay a rental one.
-6. **GBP products: 15 recommendations + prices + original descriptions generated in chat** (not in repo). Prices recommended s DPH for the GBP field; descriptions written from own DB specs + blogs (no copied manufacturer text -- copyright + duplicate content). Owner will upload.
-
 ## What To Do Next
 
 | # | Priority | Task | Notes |
 |---|----------|------|-------|
-| 1 | **BLOCKER** | Redeploy the failed PROD build (`fcdeab3`, project `royal-stroje`) from the Vercel dashboard -- and read the log | Code is proven good (same commit succeeded on Preview + locally). If it fails again the log is the only way forward; owner must fetch it, the local CLI cannot reach that Vercel scope. Retry is safe: a bad bake fails the guard and PROD keeps serving the old deploy. **Verify after deploy:** bogus URL -> "Stránka nenájdená" + noindex, `/kosik` gone |
-| 2 | **OWNER** | GBP: upload 15 produktov (copy + ceny s DPH v s52 chate) | Product photos: use own yard photos, NOT the catalog stock images. BESTRENT already reported (correctly, as "not at this location" -- other branches still trade, so NOT "permanently closed") |
-| 3 | **OWNER** | NAP citations per `docs/nap-citations.md` -- next up: Azet, Firemný portál, Waze | Zlaté stránky + Bing done s53; Apple with the founder. Highest value is actually partner/manufacturer links, not directories |
+| 1 | **High** | Confirm the s54 PROD build went green -- it is the retry of the failed `fcdeab3` build | Verify live: bogus URL -> "Stránka nenájdená" + noindex + no canonical, `/kosik` 404, `/katalog` intact. If it fails AGAIN it is not transient and the log is the only way forward -- owner must fetch it, the local CLI cannot reach the `martins-projects-48bcb01d` Vercel scope. **Do not poll PROD in a loop** (s53 tripped bot mitigation) -- use `api.github.com/repos/bugiiiii11/RoyalStroje/deployments` |
+| 2 | Low | GBP products: swap studio renders for own yard photos as they get taken | 15 products uploaded s54 with catalog stock renders (PNGs on Desktop, outside repo). Own photos are the stronger, non-duplicate signal. BESTRENT already reported (correctly, as "not at this location" -- other branches still trade, so NOT "permanently closed") |
+| 3 | **OWNER** | NAP citations per `docs/nap-citations.md` -- next up: Azet, Firemný portál, Waze | Zlaté stránky + Bing done s53; Apple with the founder. Highest value is actually partner/manufacturer links, not directories. Also pending: switch GBP Website field from `www.` to the apex (canonical since s48) |
 | 4 | **OWNER** | SEO-4/7 follow-up: monitor GSC Pages report (Indexovanie -> Strany) | Due now (2-4 weeks from 2026-08-05); re-check ~2 weeks after the s53 deploy lands |
 | 5 | Low | SEO-6: Prerender freshness hook | New/changed Supabase product shows in static HTML only after next deploy. If it bothers: Vercel Deploy Hook pinged from dashboard on product change |
 | 6 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Production ships HeroSplit since s37 |
@@ -66,7 +66,6 @@ Date: 2026-08-14
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
-| 44 | 2026-07-16 | Fix prerender boot blink + SEO-1 staging verification | `data-prerendered` suppression chain; SEO-1 verified on Vercel staging; commit `92c571d` |
 | 45 | 2026-07-29 | Nový blog článok JCB 19C-1 (úprimná recenzia po 170 mth) | Replaces old hidden id-19 article; article<->catalog prelink (owner SQL pending); .claude tooling overhaul (auto-wrap hook, handoff skill, CLAUDE.md) |
 | 46 | 2026-07-29 | Release sessions 43-46 na PROD + fotky strojov v CTA pásoch + promo WT30 | 3x `dev`->`main`; cutout tool `scripts/cutout-transparent.py`; Haulotte foto v SourcingBanner + CtaBand (opt-in prop); promo slide Honda WT30; hook force-push vzor zúžený; zistený apex->www redirect vs apex canonical |
 | 47 | 2026-07-29 | RCC kalendar: tyzdenny dispecersky pohlad s ulohami -> PROD | Mesacny pohlad nahradeny tyzdennym (Po-Pi, 7-17); nova tabulka `calendar_tasks` (migracia 021, owner spustil); prenajmy v all-day pase; widget dnesnych uloh na dashboarde; fonty zvacsene po feedbacku |
@@ -76,5 +75,6 @@ Date: 2026-08-14
 | 51 | 2026-08-13 | NAP adresa zjednotena na Boldog + GBP + opravene mapy -> PROD | Site carried 6 conflicting addresses; split into prevadzka `Recká cesta 182, 925 26 Boldog` vs sidlo `Boldog 182, 925 26 Boldog`; "Senec" kept as service-area keyword; geo fixed to the real yard; both Kontakt map embeds were fabricated -> coordinate embed + GBP link; GSC 141 orphan product pages diagnosed (SEO-7); prerender non-determinism found; dev->main pushed (`9fc7fb5`) |
 | 52 | 2026-08-14 | SEO-7 interné linky + /katalog + prerender guard (na `dev`) | Catalog filtre/stránkovanie ako `<a href>`; nová stránka /katalog so všetkými 141 produktmi (Footer link, sitemap, prerender, validované); prerender proxy Supabase cez Node fetch + validátor -- build spadne pri chybnom bake, vyriešený s51 nedeterminizmus; GBP rada ku kategóriám + 15 produktových popisov s cenami v chate; commit `c236b2e`, NEPUSHnuté |
 | 53 | 2026-08-14 | SEO-7 na PROD + kosik zmazany + zapeceny 404 shell + NAP citacie | SEO-7 released and verified live (146/146 slugs linked from /katalog); dead cart code deleted end-to-end; real 404 fix = prerender bakes `dist/404.html` and vercel.json rewrites there, so noindex ships in raw HTML; PROD build of `fcdeab3` FAILED (transient -- same commit green on Preview + locally), awaiting Redeploy; `docs/nap-citations.md` written, then corrected after 4 listed SK directories turned out dead |
+| 54 | 2026-08-14 | 15 GBP produktových PNG + release na PROD | GBP neberie WebP -> 15 PNG na plochu (mimo repa), owner nahral do GBP; správne párovanie ide cez Supabase `equipment.image_path` podľa slugu, nie cez názvy súborov v repe (5 z 15 je len v Supabase Storage); Python SSL tu odmieta Supabase cert, Node fetch funguje; docs-only `dev`->`main` push = zároveň retry padnutého buildu `fcdeab3` |
 
-<!-- Sessions 1-42 summary rows + sessions 15-51 full notes + old Architecture/Supabase reference: handoff-archive.md -->
+<!-- Sessions 1-44 summary rows + sessions 15-52 full notes + old Architecture/Supabase reference: handoff-archive.md -->
