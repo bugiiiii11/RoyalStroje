@@ -2,14 +2,13 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useLocation, Link } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
 import {
-  ShoppingCart, X, Send, Calendar,
+  X, Calendar,
   Hammer, Cog, HardHat, ArrowUpFromLine,
   Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, BookOpen, ArrowRight, Info, Bike
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import useProducts, { getProductsBySubcategory } from '../../hooks/useProducts';
 import ProductCard from '../product/ProductCard';
-import { useCart } from '../../context/CartContext';
 import FAQ from './FAQ';
 import QuoteForm from '../catalog/QuoteForm';
 import WhyRoyalStroje from './WhyRoyalStroje';
@@ -48,7 +47,6 @@ export default function Catalog() {
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   const searchQuery = searchParams.get('search') || '';
 
-  const [selectedDays, setSelectedDays] = useState([]);
   const [customerType, setCustomerType] = useState('po'); // 'po' or 'fo'
 
   // Scroll reveal refs
@@ -59,9 +57,6 @@ export default function Catalog() {
   const [quoteFormRef, quoteFormInView] = useInView();
   const [blogCtaRef, blogCtaInView] = useInView();
   const [blogCardsRef, blogCardsInView] = useInView();
-
-  // Feature flag to show/hide cart functionality
-  const showCart = false;
 
   // Helper to update URL params without losing existing ones
   const updateParams = (updates) => {
@@ -115,92 +110,6 @@ export default function Catalog() {
   // Mobile: 6 products, Desktop: 8 products
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const productsPerPage = isMobile ? 6 : 8;
-
-  const { cartItems, removeFromCart, getTotal } = useCart();
-
-  // Generate calendar days starting from today, aligned to week grid
-  const generateCalendarData = () => {
-    const today = new Date();
-    const days = [];
-
-    // Get the day of week for today (0 = Sunday, 1 = Monday, etc.)
-    // Convert to Monday-based (0 = Monday, 6 = Sunday)
-    const todayDayOfWeek = today.getDay();
-    const mondayBasedDay = todayDayOfWeek === 0 ? 6 : todayDayOfWeek - 1;
-
-    // Add empty slots for days before today in the current week
-    for (let i = 0; i < mondayBasedDay; i++) {
-      days.push(null); // null = empty cell
-    }
-
-    // Add next 35 days
-    for (let i = 0; i < 35; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-      days.push(date);
-    }
-
-    return days;
-  };
-
-  const calendarDays = generateCalendarData();
-
-  // Get unique months in the range
-  const getMonthsInRange = () => {
-    const months = [];
-    const monthNames = ['Január', 'Február', 'Marec', 'Apríl', 'Máj', 'Jún', 'Júl', 'August', 'September', 'Október', 'November', 'December'];
-    calendarDays.forEach(date => {
-      if (date) { // Skip null (empty) cells
-        const monthYear = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
-        if (!months.includes(monthYear)) {
-          months.push(monthYear);
-        }
-      }
-    });
-    return months.join(' / ');
-  };
-
-  const toggleDay = (dateString) => {
-    setSelectedDays(prev => {
-      if (prev.includes(dateString)) {
-        return prev.filter(d => d !== dateString);
-      }
-      return [...prev, dateString];
-    });
-  };
-
-  const getDayName = (date) => {
-    const days = ['Ne', 'Po', 'Ut', 'St', 'Št', 'Pi', 'So'];
-    return days[date.getDay()];
-  };
-
-  const formatDate = (date) => {
-    return `${date.getDate()}.${date.getMonth() + 1}`;
-  };
-
-  const dayHeaders = ['Po', 'Ut', 'St', 'Št', 'Pi', 'So', 'Ne'];
-
-  const rentalDays = selectedDays.length || 1;
-  const baseTotal = getTotal();
-  const totalPrice = customerType === 'po' ? baseTotal : baseTotal * 1.23;
-
-  const handleSendOrder = () => {
-    if (cartItems.length === 0) return;
-    const productList = cartItems.map((item) => {
-      const itemPrice = item.pricePerDay && !isNaN(item.pricePerDay)
-        ? (customerType === 'po' ? item.pricePerDay : item.pricePerDay * 1.23).toFixed(2)
-        : 'Cena dohodou';
-      const priceLabel = customerType === 'po' ? 'bez DPH' : 's DPH';
-      return `- ${item.name} (${itemPrice}€ ${priceLabel}/deň)`;
-    }).join('\n');
-    const daysText = selectedDays.length > 0
-      ? `\n\nVybrané dni (${selectedDays.length}): ${selectedDays.sort().join(', ')}`
-      : '';
-    const priceType = customerType === 'po' ? 'bez DPH' : 's DPH';
-    const message = `Dobrý deň, mám záujem o prenájom:\n\n${productList}${daysText}\n\nCelková suma: ${(totalPrice * rentalDays).toFixed(2)}€ ${priceType} (${rentalDays} ${rentalDays === 1 ? 'deň' : rentalDays < 5 ? 'dni' : 'dní'})`;
-    const whatsappUrl = `https://wa.me/421948555551?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-  };
 
   // Helper function to remove diacritics (accents)
   const removeDiacritics = (str) => {
@@ -408,163 +317,6 @@ export default function Catalog() {
               <QuoteForm />
             </div>
 
-            {/* Cart - Under Categories (Hidden) */}
-            {showCart && (
-            <div className="hidden lg:block bg-zinc-900 border border-white/10 rounded-2xl overflow-hidden mt-6">
-              {/* Header */}
-              <div className="bg-zinc-800 border-b border-white/10 px-4 py-3 flex items-center gap-2">
-                <ShoppingCart size={18} className="text-orange-primary" />
-                <h3 className="text-white font-bold text-sm">Nezáväzná objednávka</h3>
-                {cartItems.length > 0 && (
-                  <span className="ml-auto bg-orange-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                    {cartItems.length}
-                  </span>
-                )}
-              </div>
-
-              {/* Content */}
-              <div className="p-4">
-                {cartItems.length === 0 ? (
-                  <p className="text-white/50 text-sm text-center py-4">
-                    Košík je prázdny
-                  </p>
-                ) : (
-                  <>
-                    {/* Items List */}
-                    <div className="space-y-2 max-h-48 overflow-y-auto mb-4">
-                      {cartItems.map((item) => {
-                        const itemPrice = item.pricePerDay && !isNaN(item.pricePerDay)
-                          ? (customerType === 'po' ? item.pricePerDay : item.pricePerDay * 1.23).toFixed(2)
-                          : null;
-                        return (
-                          <div
-                            key={item.id}
-                            className="flex items-center justify-between gap-2 bg-zinc-800/50 rounded-lg px-3 py-2"
-                          >
-                            <div className="flex-1 min-w-0">
-                              <p className="text-white text-xs font-semibold truncate">
-                                {item.name}
-                              </p>
-                              <p className="text-orange-primary text-xs font-bold">
-                                {itemPrice ? `${itemPrice}€/deň` : 'Cena dohodou'}
-                              </p>
-                            </div>
-                            <button
-                              onClick={() => removeFromCart(item.id)}
-                              className="w-6 h-6 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:bg-red-500/20 hover:border-red-500/50 hover:text-red-400 transition-all flex-shrink-0"
-                            >
-                              <X size={12} />
-                            </button>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* Mini Calendar */}
-                    <div className="border-t border-white/10 pt-3 mb-3">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Calendar size={14} className="text-orange-primary" />
-                        <span className="text-orange-primary text-xs font-bold">{getMonthsInRange()}</span>
-                      </div>
-                      {/* Day headers */}
-                      <div className="grid grid-cols-7 gap-1 mb-2">
-                        {dayHeaders.map((day, idx) => {
-                          const isWeekendHeader = idx >= 5; // So, Ne
-                          return (
-                            <div
-                              key={day}
-                              className={`text-center text-xs font-bold ${isWeekendHeader ? 'text-white/30' : 'text-white/70'}`}
-                            >
-                              {day}
-                            </div>
-                          );
-                        })}
-                      </div>
-                      {/* Calendar grid */}
-                      <div className="grid grid-cols-7 gap-1">
-                        {calendarDays.map((date, index) => {
-                          // Empty cell for days before today
-                          if (!date) {
-                            return <div key={`empty-${index}`} className="p-2" />;
-                          }
-
-                          const dateString = formatDate(date);
-                          const isSelected = selectedDays.includes(dateString);
-                          const isWeekend = date.getDay() === 0 || date.getDay() === 6;
-                          const isToday = date.toDateString() === new Date().toDateString();
-
-                          // Weekends are not clickable
-                          if (isWeekend) {
-                            return (
-                              <div
-                                key={dateString}
-                                className="p-2 rounded text-sm font-medium bg-zinc-800/30 text-white/20 text-center cursor-not-allowed"
-                                title="Víkendy nie sú k dispozícii"
-                              >
-                                {date.getDate()}
-                              </div>
-                            );
-                          }
-
-                          return (
-                            <button
-                              key={dateString}
-                              onClick={() => toggleDay(dateString)}
-                              className={`p-2 rounded text-sm font-bold transition-all ${
-                                isSelected
-                                  ? 'bg-orange-primary text-white'
-                                  : isToday
-                                  ? 'bg-orange-primary/30 text-orange-primary border border-orange-primary/50 hover:bg-orange-primary/40'
-                                  : 'bg-zinc-800/50 text-white/80 hover:bg-zinc-700 hover:text-white'
-                              }`}
-                              title={`${getDayName(date)} ${dateString}`}
-                            >
-                              {date.getDate()}
-                            </button>
-                          );
-                        })}
-                      </div>
-                      {selectedDays.length > 0 && (
-                        <p className="text-orange-primary text-sm mt-3 font-semibold">
-                          {selectedDays.length} {selectedDays.length === 1 ? 'deň' : selectedDays.length < 5 ? 'dni' : 'dní'}
-                        </p>
-                      )}
-                    </div>
-
-                    {/* Total */}
-                    <div className="border-t border-white/10 pt-3 mb-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-white/70 text-sm">
-                          {customerType === 'po' ? 'Cena bez DPH:' : 'Cena s DPH:'}
-                        </span>
-                        <div className="text-right">
-                          <span className="text-orange-primary text-lg font-black">
-                            {(totalPrice * rentalDays).toFixed(2)}€
-                          </span>
-                          {rentalDays > 1 && (
-                            <p className="text-white/50 text-xs">
-                              ({totalPrice.toFixed(2)}€ × {rentalDays} {rentalDays < 5 ? 'dni' : 'dní'})
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Send Order Button */}
-                    <button
-                      onClick={handleSendOrder}
-                      className="relative w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-orange-primary to-orange-hover text-white font-bold text-sm rounded-full hover:scale-105 transition-all shadow-lg shadow-orange-primary/40 overflow-hidden group"
-                    >
-                      {/* Shine effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-                      <Send size={16} className="relative z-10" />
-                      <span className="relative z-10">Poslať objednávku</span>
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-            )}
           </aside>
 
           {/* Main Content Area */}

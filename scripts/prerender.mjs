@@ -133,7 +133,7 @@ async function capture(page, route, staticDefaults) {
   );
   // Helmet flushes head tags slightly after the DOM content renders — wait
   // until a page-specific <title> shows up. Some routes legitimately keep the
-  // static default title (/kosik, legal pages, homepage), so time out softly.
+  // static default title (legal pages, homepage), so time out softly.
   try {
     await page.waitForFunction(
       (staticTitle) =>
@@ -205,7 +205,16 @@ async function capture(page, route, staticDefaults) {
   }, staticDefaults);
 }
 
+// Unknown URLs used to fall through vercel.json's SPA rewrite to dist/index.html,
+// so a crawler's FIRST fetch of a bogus path got the homepage HTML (homepage
+// title + canonical to '/'), and the noindex only appeared after React rendered
+// NotFound. Baking the NotFound view to dist/404.html and pointing the rewrite
+// there puts the noindex in the raw HTML. Multi-segment on purpose: it hits the
+// App's `*` route directly, independent of product data.
+const NOT_FOUND_ROUTE = '/__prerender-404__/nenajdene';
+
 function outFile(route) {
+  if (route === NOT_FOUND_ROUTE) return path.join(DIST, '404.html');
   // '/' -> dist/index.html, '/sluzby' -> dist/sluzby/index.html, etc.
   const rel = route === '/' ? 'index.html' : path.join(...route.replace(/^\//, '').split('/'), 'index.html');
   return path.join(DIST, rel);
@@ -220,7 +229,12 @@ function outFile(route) {
 function makeSnapshotValidator(productSlugs) {
   const productRoutes = new Set(productSlugs.map((s) => `/${s}`));
   return (route, html) => {
-    if (route === '/katalog') {
+    if (route === NOT_FOUND_ROUTE) {
+      // The whole point of dist/404.html is the baked noindex — never ship it without.
+      if (!html.includes('content="noindex')) {
+        throw new Error('404 snapshot has no noindex meta');
+      }
+    } else if (route === '/katalog') {
       const missing = productSlugs.filter((slug) => !html.includes(`href="/${slug}"`));
       if (missing.length > 0) {
         throw new Error(
@@ -251,6 +265,7 @@ async function main() {
     ...blogVisible.map(({ slug }) => `/blog/${slug}`),
     ...blogHidden.map((slug) => `/blog/${slug}`), // bakes noindex
     ...(process.env.PRERENDER_PRODUCTS === '0' ? [] : productSlugs.map((slug) => `/${slug}`)),
+    NOT_FOUND_ROUTE, // -> dist/404.html (SPA rewrite fallback)
   ];
   console.log(`[prerender] ${routes.length} routes (products: ${productSource})`);
 

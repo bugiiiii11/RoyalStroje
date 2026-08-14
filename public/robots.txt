@@ -7,9 +7,6 @@ Allow: /
 # Sitemap location
 Sitemap: https://royalstroje.sk/sitemap.xml
 
-# Disallow cart and internal pages
-Disallow: /kosik
-
 # AI Crawlers - Allow
 User-agent: GPTBot
 Allow: /

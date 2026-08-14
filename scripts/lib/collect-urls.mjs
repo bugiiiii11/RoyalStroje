@@ -28,7 +28,6 @@ export const STATIC_INDEXABLE = [
 // Static routes that carry a client-side noindex — kept OUT of the sitemap,
 // but still prerendered so the noindex is baked into the static HTML.
 export const STATIC_NOINDEX = [
-  '/kosik',
   '/gdpr',
   '/cookies',
   '/obchodne-podmienky',

@@ -8,8 +8,6 @@ export default function MobileNav() {
     { path: '/', icon: Home, label: 'Požičovňa' },
     { path: '/sluzby', icon: Wrench, label: 'Služby' },
     { path: '/kontakt', icon: Phone, label: 'Kontakt' },
-    // Košík/Objednávka je dočasne skrytá
-    // { path: '/kosik', icon: ShoppingCart, label: 'Objednávka' },
   ];
 
   return (

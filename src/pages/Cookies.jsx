@@ -13,13 +13,6 @@ const COOKIE_ROWS = [
     provider: 'Google LLC',
   },
   {
-    name: 'royalstroje_cart',
-    type: 'localStorage',
-    purpose: 'Pamätanie obsahu košíka medzi návštevami',
-    duration: 'Trvalé (kým ho nevymažete)',
-    provider: 'Royal Stroje s.r.o.',
-  },
-  {
     name: 'formSubmissions',
     type: 'localStorage',
     purpose: 'Obmedzenie počtu odoslaných formulárov (max. 3 / hodinu)',

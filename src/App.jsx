@@ -9,7 +9,6 @@ import AnimatedBackground from './components/common/AnimatedBackground';
 import ScrollToTop from './components/common/ScrollToTop';
 import CookieBanner from './components/common/CookieBanner';
 import { enableAnalytics, CONSENT_KEY } from './lib/analytics';
-import { CartProvider } from './context/CartContext';
 import Home from './pages/Home';
 import Katalog from './pages/Katalog';
 import Sluzby from './pages/Sluzby';
@@ -22,7 +21,6 @@ import DovozTechniky from './pages/DovozTechniky';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Kontakt from './pages/Kontakt';
-import Kosik from './pages/Kosik';
 import Partneri from './pages/Partneri';
 import GDPR from './pages/GDPR';
 import Cookies from './pages/Cookies';
@@ -99,8 +97,7 @@ function App() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="og:image" content="https://royalstroje.sk/pictures/graphics/stroje-dvor.webp" />
       </Helmet>
-      <CartProvider>
-        <Router>
+      <Router>
         <ScrollToTop />
         <RestoreRevealsAfterNav />
         <div className="min-h-screen bg-zinc-950 text-white relative overflow-x-hidden">
@@ -130,7 +127,6 @@ function App() {
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogDetail />} />
                 <Route path="/kontakt" element={<Kontakt />} />
-                <Route path="/kosik" element={<Kosik />} />
                 <Route path="/partneri" element={<Partneri />} />
                 <Route path="/gdpr" element={<GDPR />} />
                 <Route path="/cookies" element={<Cookies />} />
@@ -147,7 +143,6 @@ function App() {
         </div>
       </div>
       </Router>
-    </CartProvider>
     </HelmetProvider>
   );
 }
