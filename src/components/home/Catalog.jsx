@@ -82,11 +82,35 @@ export default function Catalog() {
     }, { replace: true });
   };
 
-  // Setters that write to URL
-  const setActiveCategory = (id) => updateParams({ category: id, subcategory: null, page: null });
-  const setActiveSubcategory = (id) => updateParams({ subcategory: id, page: null });
-  const setCurrentPage = (p) => updateParams({ page: p });
+  // Setter that writes to URL (search input only — filters and pagination
+  // navigate via real <a href> links below)
   const setSearchQuery = (q) => updateParams({ search: q || null, page: null });
+
+  // Real hrefs for filter/pagination state (SEO-7): category, subcategory and
+  // page controls render as crawlable <Link>/<a> elements, so Google discovers
+  // the ?category=&page= URLs from the prerendered HTML and can reach every
+  // product card. Same param-cleanup rules as updateParams. ScrollToTop only
+  // fires on pathname change, so these same-path navigations keep the scroll
+  // position exactly like the old onClick handlers did.
+  const buildHref = (updates) => {
+    const next = new URLSearchParams(searchParams);
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === null || value === undefined || value === '' || (key === 'subcategory' && value === 'all') || (key === 'page' && value === 1)) {
+        next.delete(key);
+      } else {
+        next.set(key, value);
+      }
+    });
+    // Clean up default category to keep URL short
+    if (next.get('category') === 'male-naradie' && !next.get('search')) {
+      next.delete('category');
+    }
+    const qs = next.toString();
+    return qs ? `/?${qs}` : '/';
+  };
+  const categoryHref = (id) => buildHref({ category: id, subcategory: null, page: null });
+  const subcategoryHref = (id) => buildHref({ subcategory: id, page: null });
+  const pageHref = (p) => buildHref({ page: p });
 
   // Mobile: 6 products, Desktop: 8 products
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
@@ -206,12 +230,6 @@ export default function Catalog() {
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = allProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-
-  // Handle category change (setActiveCategory already resets subcategory & page)
-  const handleCategoryChange = (categoryId) => setActiveCategory(categoryId);
-
-  // Handle subcategory change (setActiveSubcategory already resets page)
-  const handleSubcategoryChange = (subcategoryId) => setActiveSubcategory(subcategoryId);
 
   return (
     <ContentSection id="katalog" light className="pt-0">
@@ -336,10 +354,10 @@ export default function Catalog() {
                   const isActive = activeCategory === category.id;
 
                   return (
-                    <button
+                    <Link
                       key={category.id}
-                      onClick={() => handleCategoryChange(category.id)}
-                      className={`group w-full text-left px-2 py-3 md:px-4 md:py-3.5 rounded-lg md:rounded-xl font-bold transition-all duration-300 min-h-[48px] ${
+                      to={categoryHref(category.id)}
+                      className={`group block w-full text-left px-2 py-3 md:px-4 md:py-3.5 rounded-lg md:rounded-xl font-bold transition-all duration-300 min-h-[48px] ${
                         isActive
                           ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg shadow-orange-primary/40'
                           : 'bg-zinc-800/50 text-white/80 hover:bg-zinc-800 hover:text-white border border-transparent hover:border-orange-primary/30'
@@ -379,7 +397,7 @@ export default function Catalog() {
                           )}
                         </div>
                       </div>
-                    </button>
+                    </Link>
                   );
                 })}
               </div>
@@ -558,9 +576,9 @@ export default function Catalog() {
                   const IconComponent = categoryIcons[category.id];
                   const isActive = activeCategory === category.id;
                   return (
-                    <button
+                    <Link
                       key={category.id}
-                      onClick={() => handleCategoryChange(category.id)}
+                      to={categoryHref(category.id)}
                       className={`flex items-center gap-1.5 px-3 py-2.5 rounded-lg font-bold text-xs whitespace-nowrap min-h-[44px] transition-all ${
                         isActive
                           ? 'bg-gradient-to-r from-orange-primary to-orange-hover text-white shadow-lg shadow-orange-primary/30'
@@ -571,7 +589,7 @@ export default function Catalog() {
                         <IconComponent size={14} className={isActive ? 'text-white' : 'text-orange-primary'} />
                       )}
                       <span>{category.name}</span>
-                    </button>
+                    </Link>
                   );
                 })}
               </div>
@@ -584,10 +602,10 @@ export default function Catalog() {
                 {currentCategory?.subcategories.map((subcategory) => {
                   const isActive = activeSubcategory === subcategory.id;
                   return (
-                    <button
+                    <Link
                       key={subcategory.id}
-                      onClick={() => handleSubcategoryChange(subcategory.id)}
-                      className={`subcategory-btn group relative px-3 py-2.5 md:px-4 md:py-2.5 rounded-lg md:rounded-xl font-bold text-xs md:text-sm whitespace-nowrap flex-shrink-0 transition-all duration-300 min-h-[44px] ${
+                      to={subcategoryHref(subcategory.id)}
+                      className={`subcategory-btn group relative inline-flex items-center px-3 py-2.5 md:px-4 md:py-2.5 rounded-lg md:rounded-xl font-bold text-xs md:text-sm whitespace-nowrap flex-shrink-0 transition-all duration-300 min-h-[44px] ${
                         isActive
                           ? 'subcategory-btn--active text-white'
                           : 'text-white/80 hover:text-white'
@@ -605,7 +623,7 @@ export default function Catalog() {
                       }}
                     >
                       <span className="relative z-10">{subcategory.name}</span>
-                    </button>
+                    </Link>
                   );
                 })}
               </div>
@@ -670,18 +688,20 @@ export default function Catalog() {
                 {totalPages > 1 && (
                   <div className="flex justify-center items-center gap-1 md:gap-2">
                     {/* Previous Button */}
-                    <button
-                      onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))}
-                      disabled={currentPage === 1}
-                      className={`p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 ${
-                        currentPage === 1
-                          ? 'bg-zinc-900 text-white/30 cursor-not-allowed'
-                          : 'bg-zinc-900 border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10'
-                      }`}
-                    >
-                      <ChevronLeft size={18} />
-                      <span className="hidden md:inline text-sm">Predošlá</span>
-                    </button>
+                    {currentPage === 1 ? (
+                      <span className="p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 bg-zinc-900 text-white/30 cursor-not-allowed">
+                        <ChevronLeft size={18} />
+                        <span className="hidden md:inline text-sm">Predošlá</span>
+                      </span>
+                    ) : (
+                      <Link
+                        to={pageHref(currentPage - 1)}
+                        className="p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 bg-zinc-900 border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10"
+                      >
+                        <ChevronLeft size={18} />
+                        <span className="hidden md:inline text-sm">Predošlá</span>
+                      </Link>
+                    )}
 
                     {/* Page Numbers - Show max 5 pages on mobile */}
                     <div className="flex gap-1 md:gap-2">
@@ -698,34 +718,36 @@ export default function Catalog() {
                         }
 
                         return (
-                          <button
+                          <Link
                             key={page}
-                            onClick={() => setCurrentPage(page)}
-                            className={`w-10 h-10 md:w-10 md:h-10 rounded-lg font-bold text-xs md:text-sm transition ${
+                            to={pageHref(page)}
+                            className={`w-10 h-10 md:w-10 md:h-10 rounded-lg font-bold text-xs md:text-sm transition flex items-center justify-center ${
                               currentPage === page
                                 ? 'bg-orange-primary text-white shadow-lg shadow-orange-primary/40'
                                 : 'bg-zinc-900 border border-white/10 text-white/70 hover:bg-zinc-800 hover:text-white hover:border-orange-primary/30'
                             }`}
                           >
                             {page}
-                          </button>
+                          </Link>
                         );
                       })}
                     </div>
 
                     {/* Next Button */}
-                    <button
-                      onClick={() => setCurrentPage(Math.min(currentPage + 1, totalPages))}
-                      disabled={currentPage === totalPages}
-                      className={`p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 ${
-                        currentPage === totalPages
-                          ? 'bg-zinc-900 text-white/30 cursor-not-allowed'
-                          : 'bg-zinc-900 border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10'
-                      }`}
-                    >
-                      <span className="hidden md:inline text-sm">Ďalšia</span>
-                      <ChevronRight size={18} />
-                    </button>
+                    {currentPage === totalPages ? (
+                      <span className="p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 bg-zinc-900 text-white/30 cursor-not-allowed">
+                        <span className="hidden md:inline text-sm">Ďalšia</span>
+                        <ChevronRight size={18} />
+                      </span>
+                    ) : (
+                      <Link
+                        to={pageHref(currentPage + 1)}
+                        className="p-2 md:px-4 md:py-2 rounded-lg font-bold transition flex items-center gap-1 bg-zinc-900 border border-orange-primary/50 text-orange-primary hover:bg-orange-primary/10"
+                      >
+                        <span className="hidden md:inline text-sm">Ďalšia</span>
+                        <ChevronRight size={18} />
+                      </Link>
+                    )}
                   </div>
                 )}
               </>

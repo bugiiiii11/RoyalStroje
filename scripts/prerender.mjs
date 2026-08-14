@@ -45,7 +45,20 @@ async function launchBrowser() {
 }
 
 // Cache Supabase REST responses so ~180 pages trigger 1 fetch, not 180.
+// GET requests are additionally PROXIED through Node's fetch: the in-browser
+// fetch has proven flaky in some build environments (s51: useProducts silently
+// fell back to staticProducts and baked 38 product pages as noindex 404s),
+// while the Node-side fetch — the same one generate-sitemap.mjs uses — is
+// reliable. Proxy + cache makes the baked data deterministic; the snapshot
+// validator in main() guards whatever still slips through.
 const supabaseCache = new Map();
+const SUPA_PROXY_HEADERS = ['apikey', 'authorization', 'accept', 'accept-profile', 'x-client-info', 'prefer', 'range'];
+const SUPA_CORS = {
+  'access-control-allow-origin': '*',
+  'access-control-allow-methods': 'GET,HEAD,OPTIONS',
+  'access-control-allow-headers':
+    'apikey, authorization, x-client-info, accept-profile, content-profile, content-type, prefer, range',
+};
 
 async function setupPage(page) {
   await page.setViewport({ width: 1366, height: 900 });
@@ -60,12 +73,35 @@ async function setupPage(page) {
   });
 
   await page.setRequestInterception(true);
-  page.on('request', (req) => {
+  page.on('request', async (req) => {
     const url = req.url();
     if (BLOCKED_HOSTS.some((h) => url.includes(h))) return req.abort();
-    if (url.includes('.supabase.co/rest/v1/') && supabaseCache.has(url)) {
-      const hit = supabaseCache.get(url);
-      return req.respond({ status: hit.status, headers: hit.headers, body: hit.body });
+    if (url.includes('.supabase.co/rest/v1/')) {
+      // CORS preflight for the fulfilled responses below
+      if (req.method() === 'OPTIONS') return req.respond({ status: 204, headers: SUPA_CORS });
+      if (supabaseCache.has(url)) {
+        const hit = supabaseCache.get(url);
+        return req.respond({ status: hit.status, headers: { ...hit.headers, ...SUPA_CORS }, body: hit.body });
+      }
+      if (req.method() === 'GET') {
+        try {
+          const headers = {};
+          for (const [k, v] of Object.entries(req.headers())) {
+            if (SUPA_PROXY_HEADERS.includes(k.toLowerCase())) headers[k] = v;
+          }
+          const res = await fetch(url, { headers });
+          const hit = {
+            status: res.status,
+            headers: { 'content-type': res.headers.get('content-type') || 'application/json' },
+            body: await res.text(),
+          };
+          if (res.ok) supabaseCache.set(url, hit);
+          return req.respond({ status: hit.status, headers: { ...hit.headers, ...SUPA_CORS }, body: hit.body });
+        } catch {
+          // Node-side fetch failed too — fall back to the in-browser fetch
+          return req.continue();
+        }
+      }
     }
     return req.continue();
   });
@@ -175,6 +211,30 @@ function outFile(route) {
   return path.join(DIST, rel);
 }
 
+// Prerender guard: a route that "renders" but with wrong data must count as a
+// capture failure (retry, then fail the whole build). Root cause (s51):
+// useProducts silently falls back to staticProducts when the in-page Supabase
+// fetch fails, so a bad snapshot looks rendered while baking stale or missing
+// product links. Failing the Vercel build is harmless — the previous
+// deployment keeps serving.
+function makeSnapshotValidator(productSlugs) {
+  const productRoutes = new Set(productSlugs.map((s) => `/${s}`));
+  return (route, html) => {
+    if (route === '/katalog') {
+      const missing = productSlugs.filter((slug) => !html.includes(`href="/${slug}"`));
+      if (missing.length > 0) {
+        throw new Error(
+          `/katalog is missing ${missing.length} product links (static-fallback data?): ${missing.slice(0, 5).join(', ')}...`
+        );
+      }
+    } else if (productRoutes.has(route)) {
+      if (html.includes('content="noindex') || html.includes('Stránka nenájdená')) {
+        throw new Error('product route rendered as NotFound (static-fallback data baked a 404)');
+      }
+    }
+  };
+}
+
 async function main() {
   if (process.env.PRERENDER === '0') {
     console.log('[prerender] PRERENDER=0 — skipped');
@@ -202,6 +262,10 @@ async function main() {
     staticDesc: shellHtml.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '',
   };
 
+  const validateSnapshot = makeSnapshotValidator(
+    process.env.PRERENDER_PRODUCTS === '0' ? [] : productSlugs
+  );
+
   const server = await preview({ preview: { port: PORT, strictPort: true } });
   const browser = await launchBrowser();
 
@@ -218,10 +282,14 @@ async function main() {
           const route = queue.shift();
           if (!route) break;
           try {
-            snapshots.set(route, await capture(page, route, staticDefaults));
+            const html = await capture(page, route, staticDefaults);
+            validateSnapshot(route, html);
+            snapshots.set(route, html);
           } catch (err1) {
             try {
-              snapshots.set(route, await capture(page, route, staticDefaults)); // one retry
+              const html = await capture(page, route, staticDefaults); // one retry
+              validateSnapshot(route, html);
+              snapshots.set(route, html);
             } catch (err2) {
               failures.push({ route, error: err2.message || err1.message });
             }

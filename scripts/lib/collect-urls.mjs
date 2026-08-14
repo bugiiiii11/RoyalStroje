@@ -12,6 +12,7 @@ export const SITE = 'https://royalstroje.sk';
 // Static routes from src/App.jsx that SHOULD be indexed (in the sitemap).
 export const STATIC_INDEXABLE = [
   '/',
+  '/katalog',
   '/sluzby',
   '/sluzby/predaj-techniky',
   '/sluzby/nahradne-diely',

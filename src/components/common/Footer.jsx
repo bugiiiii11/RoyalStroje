@@ -154,6 +154,11 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
+                <Link to="/katalog" className="text-white/70 hover:text-orange-primary transition">
+                  Katalóg strojov
+                </Link>
+              </li>
+              <li>
                 <Link to="/blog" className="text-white/70 hover:text-orange-primary transition">
                   Blog
                 </Link>

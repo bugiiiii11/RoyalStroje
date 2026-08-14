@@ -11,6 +11,7 @@ import CookieBanner from './components/common/CookieBanner';
 import { enableAnalytics, CONSENT_KEY } from './lib/analytics';
 import { CartProvider } from './context/CartContext';
 import Home from './pages/Home';
+import Katalog from './pages/Katalog';
 import Sluzby from './pages/Sluzby';
 import PredajTechniky from './pages/PredajTechniky';
 import NahradneDiely from './pages/NahradneDiely';
@@ -118,6 +119,7 @@ function App() {
           <main>
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/katalog" element={<Katalog />} />
                 <Route path="/sluzby" element={<Sluzby />} />
                 <Route path="/sluzby/predaj-techniky" element={<PredajTechniky />} />
                 <Route path="/sluzby/nahradne-diely" element={<NahradneDiely />} />
