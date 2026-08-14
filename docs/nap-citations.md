@@ -40,6 +40,10 @@ Na čo si dať pozor:
   používaj len tam, kde formulár medzinárodnú predvoľbu odmieta.
 - **Boldog, nie Senec.** "Senec" je marketingové kľúčové slovo do popisu, nie
   do poľa Mesto. V popise pokojne píš "požičovňa v okrese Senec".
+- **V GBP je v poli Web `https://www.royalstroje.sk/`** (vidno to na importe
+  do Bing Places). Od s48 je kanonická doména apex, `www` sa 308-presmerováva.
+  Nie je to chyba, ale pri najbližšej úprave profilu to zmeň na
+  `https://royalstroje.sk` -- ušetrí to jeden presmerovací skok.
 
 ### Dve adresy -- nepliesť si ich
 
@@ -87,23 +91,33 @@ Pezinka a Trnavy. Servisované stroje, zaškolenie obsluhy, poradenstvo.
 | Platforma | URL | Poznámka |
 |-----------|-----|----------|
 | Google Business Profile | business.google.com | HOTOVO (overený profil) |
-| Bing Places for Business | bingplaces.com | Zadarmo. Vie importovať priamo z GBP jedným klikom. Živí Bing aj Copilot -- rastie s AI vyhľadávaním |
+| Bing Places for Business | bingplaces.com | HOTOVO (import z GBP). Živí Bing aj Copilot -- rastie s AI vyhľadávaním |
 | Apple Business Connect | businessconnect.apple.com | Zadarmo. Apple Maps = každý iPhone. Overenie cez telefonát alebo dokument |
-| Mapy.cz / Firmy.cz | firmy.cz | Seznam, pokrýva aj SK. Bezplatný základný zápis |
 | Waze | waze.com/business | Zadarmo, používajú vodiči -- relevantné pre dovoz techniky |
-| Facebook stránka | facebook.com | Máte ju. Skontroluj, či má vyplnenú adresu, hodiny a telefón -- Google ju číta |
+| Facebook stránka | facebook.com | Existuje. Skontroluj, či má vyplnenú adresu, hodiny a telefón -- Google ju číta |
+
+**Firmy.cz / Mapy.cz -- NEREGISTROVAŤ.** Seznam do Firmy.cz púšťa len firmy
+s činnosťou v Českej republike, slovenská adresa tam neprejde. Pre firmu
+pôsobiacu výhradne na Slovensku to nemá zmysel.
 
 ### Úroveň 2: slovenské firemné katalógy
 
+Slovenská katalógová scéna za posledné roky prakticky vymrela. Overené
+k 14. 8. 2026 -- **firmy.sk (zaparkovaná doména), firmy.azet.sk (doména
+neexistuje), surne.sk (na predaj) a edb.sk (nedostupná) už nefungujú.**
+Zostáva toto:
+
 | Katalóg | URL | Poznámka |
 |---------|-----|----------|
-| Firmy.sk | firmy.sk | Zoznam.sk. Základný zápis zadarmo |
-| Azet katalóg firiem | firmy.azet.sk | Základný zápis zadarmo |
-| Zlaté stránky | zlatestranky.sk | Mediatel. Zadarmo, budú volať s ponukou plateného -- netreba |
-| Súrne.sk | surne.sk | Katalóg remeselníkov a služieb |
-| Európska databanka | edb.sk | Silná B2B databáza, časť zadarmo |
-| Infoma | infoma.sk | Automatický import z registra -- skôr si len over a doplň |
+| Azet katalóg firiem | azet.sk/katalog/pridat/firma/ | Žije, len sa presťahoval z `firmy.azet.sk`. Zadarmo, až 3 kategórie, zápis schvaľuje administrátor |
+| Zlaté stránky | zlatestranky.sk | HOTOVO. Budú volať s ponukou plateného zápisu -- netreba |
+| Firemný portál | katalog-firiem.firemnyportal.sk/sk/registracia-firmy | Menší, ale živý a zadarmo |
 | FinStat | finstat.sk | Ťahá z registra (ukáže sídlo). Dá sa doplniť kontakt a web |
+| Infoma | infoma.sk | **Platená inzercia**, nie bezplatný zápis. Neoplatí sa |
+| SlovakData | slovakdata.sk | Len automatický výpis z registra, nedá sa doň zapisovať. Ignorovať |
+
+Keďže katalógov ostalo málo, ťažisko sa presúva na úroveň 3 -- tam je aj
+vyššia hodnota, lebo ide o skutočné odkazy z relevantných webov.
 
 ### Úroveň 3: odborové a lokálne
 
@@ -137,18 +151,14 @@ Pezinka a Trnavy. Servisované stroje, zaškolenie obsluhy, poradenstvo.
 
 | Katalóg | URL záznamu | Prihlásenie (e-mail) | Dátum | Stav |
 |---------|-------------|----------------------|-------|------|
-| Google Business Profile | | | | hotovo, overené |
-| Bing Places | | | | |
-| Apple Business Connect | | | | |
-| Firmy.cz / Mapy.cz | | | | |
+| Google Business Profile | | | 2026-08-13 | hotovo, overené |
+| Bing Places | | | 2026-08-14 | hotovo, čaká na publikovanie (7-12 dní) |
+| Zlaté stránky | | | 2026-08-14 | hotovo |
+| Apple Business Connect | | | | odovzdané zakladateľovi (treba Apple ID) |
+| Facebook | | | | existuje, zakladateľ kontroluje údaje |
+| Azet katalóg | | | | |
+| Firemný portál | | | | |
 | Waze | | | | |
-| Facebook | | | | existuje, skontrolovať údaje |
-| Firmy.sk | | | | |
-| Azet | | | | |
-| Zlaté stránky | | | | |
-| Súrne.sk | | | | |
-| Európska databanka | | | | |
-| Infoma | | | | |
 | FinStat | | | | |
 
 ---
