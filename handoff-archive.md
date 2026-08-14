@@ -2,7 +2,7 @@
 
 Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block below.
 
-## Archived Session Summary (sessions 1-37)
+## Archived Session Summary (sessions 1-42)
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
@@ -47,8 +47,9 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 39 | 2026-07-14 | Hero vstupné animácie + fix prázdneho katalógu na back-nav -> PROD | HeroSplit entrance animations (images + USP), `useProducts` initial state = module `cachedProducts` |
 | 40 | 2026-07-16 | Zmluva PDF: fix rozloženia pri 4+ položkách -> PROD | Dynamic fit-check pushes signature block to page 2; page numbering; „Späť" button in deal summary |
 | 41 | 2026-07-16 | Dashboard: číslo zmluvy namiesto DB označenia -> PROD | `dealContractNumber()` helper, contracts join in useClient/useReservations |
+| 42 | 2026-07-16 | Katalóg: nový dekoračný bager (bager_web) -> PROD | Owner RGBA PNG -> WebP 1024x683 q80 preserving alpha |
 
-## Archived What Was Done sections (sessions 15-49, oldest first)
+## Archived What Was Done sections (sessions 15-50, oldest first)
 
 ## What Was Done (Session 15) -- Real Photos + Ad-hoc Items + Gallery + Editable Days
 Date: 2026-04-30
@@ -735,3 +736,16 @@ Date: 2026-08-05
 3. **Implemented GA4 with Google Consent Mode v2**, gated behind a real accept/reject cookie banner (previous banner was a single "Rozumiem" notice from back when the site truly had no analytics). New `src/lib/analytics.js` (`enableAnalytics`/`disableAnalytics`; `gtag.js` is only fetched after explicit accept -- never on boot). `index.html` sets Consent Mode default to `denied` before `gtag.js` can ever load. `CookieBanner.jsx` now has real Prijať/Odmietnuť buttons (X = same as reject). `Cookies.jsx` copy + `_ga`/`_ga_*` row updated. Visitors who dismissed the old single-button banner are re-prompted once, since they were never actually asked about analytics.
 4. **Verified end-to-end on staging then PROD:** `gtag/js` + `collect` hit fire only after clicking Prijať (checked in Network tab both times), GA4 Realtime confirmed active users + `page_view` events on both environments. `dev` -> `main` fast-forward merge, both pushed (`7af7b6f`).
 5. **SEO-5 blocker identified:** owner tried to give a GBP link via a `google.com/search?...` results URL (has session tokens, not stable) -- explained the difference and asked for a proper Google Maps "Share" link instead (`maps.app.goo.gl/...` or `google.com/maps/place/...`). Facebook page exists, owner will send the URL separately.
+
+## What Was Done (Session 50) -- SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD
+Date: 2026-08-05
+
+1. **Owner sent both links:** GBP Maps share link (`maps.app.goo.gl/A7HSGKNYctVqgRuq8`) and Facebook page (`facebook.com/profile.php?id=61591259022094`) -- unblocked SEO-5.
+2. **`sameAs` added to LocalBusiness schema** in `src/pages/Home.jsx` (both links).
+3. **FAQPage JSON-LD added in `src/components/home/FAQ.jsx`:** each FAQ item now carries a plain-string `answerText` alongside its existing rich-JSX `answer` (Google requires plain text, not markup, in `acceptedAnswer.text`); a new `<Helmet>` block renders the `FAQPage` schema built from `faqs.map(...)`. `FAQ.jsx` had no Helmet before -- react-helmet-async merges multiple Helmet instances across the tree fine, confirmed no conflict with `Home.jsx`'s own Helmet block.
+4. **Verified via full build + prerender:** parsed `dist/index.html`'s two `ld+json` scripts programmatically -- `LocalBusiness.sameAs` has both URLs, `FAQPage.mainEntity` has all 7 questions with correct plain-text answers.
+5. **Footer: added Facebook icon next to Telegram** (`src/components/common/Footer.jsx`), linking to the same FB profile, `target="_blank"`. Reused the same monochrome `fill-current` icon pattern as WhatsApp/Telegram (there was a leftover multi-color brand `#1877F2` Facebook icon commented out from when socials were hidden -- removed the duplicate, kept the new one). All three social icons bumped 24px -> 28px per owner request.
+6. **`dev` -> `main` fast-forward merge, both pushed** (`946d1f3`) -- SEO-5 + footer icon change now live on PROD.
+7. **SEO-5 verified via Google Rich Results Test on `/`:** 2 valid items detected -- Miestne firmy (LocalBusiness) + Organizácia (Organization, since LocalBusiness is a subtype) -- confirms `sameAs` picked up cleanly. **No FAQ item shown -- this is expected, not a bug:** Google restricted FAQ rich results to government/health sites only since August 2023 (anti-spam policy); ordinary business sites no longer get the FAQ snippet even with fully valid markup. Our `FAQPage` JSON-LD is still present/valid on-page (confirmed via curl) and harmless to keep -- other engines (Bing, AI search) may still use it, and it costs nothing. **Don't try to "fix" missing FAQ in Rich Results Test going forward -- it's a Google policy limit, not a markup problem.**
+8. **Google search snippet thumbnail was a generic AI/stock excavator photo (`hero-main1.webp`)** -- owner spotted it searching "pozicovna naradia senec". Replaced site-wide default (`App.jsx`) + homepage `og:image` + `LocalBusiness` schema `image` with `pictures/graphics/stroje-dvor.webp` (real photo: actual JCB + Wacker Neuson machines on the real yard, Royal Stroje signage on the building). Owner picked this over the logo (too wide/thin -- crops badly to a square social thumbnail) and over a branded truck+trailer promo shot. Pushed to PROD (`6270a01`). Google/Facebook cache old previews for a while.
+9. **Preview caches confirmed as the actual blocker, not the deploy:** live `curl` on `royalstroje.sk` showed the new `og:image` tag serving correctly right after push -- Telegram and Google were just showing their own stale cached previews. **Telegram fix that worked:** owner sent the URL to `@WebpageBot` (official Telegram cache-buster bot) -- confirmed it refreshed the preview. **Google fix in progress:** owner ran Request Indexing on `/` via GSC URL Inspection -- image thumbnail in search results can lag days-to-weeks behind text reindexing.
