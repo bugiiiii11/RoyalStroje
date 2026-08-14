@@ -2,7 +2,7 @@
 
 Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block below.
 
-## Archived Session Summary (sessions 1-42)
+## Archived Session Summary (sessions 1-43)
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
@@ -48,8 +48,9 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 40 | 2026-07-16 | Zmluva PDF: fix rozloženia pri 4+ položkách -> PROD | Dynamic fit-check pushes signature block to page 2; page numbering; „Späť" button in deal summary |
 | 41 | 2026-07-16 | Dashboard: číslo zmluvy namiesto DB označenia -> PROD | `dealContractNumber()` helper, contracts join in useClient/useReservations |
 | 42 | 2026-07-16 | Katalóg: nový dekoračný bager (bager_web) -> PROD | Owner RGBA PNG -> WebP 1024x683 q80 preserving alpha |
+| 43 | 2026-07-16 | SEO: prerender + build-time sitemap + noindex/meta fixy (na `dev`) | Root cause weak indexing: robots.txt blocked `/assets/`; prerender ~177 URLs; helmet v3 multi-child title bug; blogMeta.js created |
 
-## Archived What Was Done sections (sessions 15-50, oldest first)
+## Archived What Was Done sections (sessions 15-51, oldest first)
 
 ## What Was Done (Session 15) -- Real Photos + Ad-hoc Items + Gallery + Editable Days
 Date: 2026-04-30
@@ -749,3 +750,14 @@ Date: 2026-08-05
 7. **SEO-5 verified via Google Rich Results Test on `/`:** 2 valid items detected -- Miestne firmy (LocalBusiness) + Organizácia (Organization, since LocalBusiness is a subtype) -- confirms `sameAs` picked up cleanly. **No FAQ item shown -- this is expected, not a bug:** Google restricted FAQ rich results to government/health sites only since August 2023 (anti-spam policy); ordinary business sites no longer get the FAQ snippet even with fully valid markup. Our `FAQPage` JSON-LD is still present/valid on-page (confirmed via curl) and harmless to keep -- other engines (Bing, AI search) may still use it, and it costs nothing. **Don't try to "fix" missing FAQ in Rich Results Test going forward -- it's a Google policy limit, not a markup problem.**
 8. **Google search snippet thumbnail was a generic AI/stock excavator photo (`hero-main1.webp`)** -- owner spotted it searching "pozicovna naradia senec". Replaced site-wide default (`App.jsx`) + homepage `og:image` + `LocalBusiness` schema `image` with `pictures/graphics/stroje-dvor.webp` (real photo: actual JCB + Wacker Neuson machines on the real yard, Royal Stroje signage on the building). Owner picked this over the logo (too wide/thin -- crops badly to a square social thumbnail) and over a branded truck+trailer promo shot. Pushed to PROD (`6270a01`). Google/Facebook cache old previews for a while.
 9. **Preview caches confirmed as the actual blocker, not the deploy:** live `curl` on `royalstroje.sk` showed the new `og:image` tag serving correctly right after push -- Telegram and Google were just showing their own stale cached previews. **Telegram fix that worked:** owner sent the URL to `@WebpageBot` (official Telegram cache-buster bot) -- confirmed it refreshed the preview. **Google fix in progress:** owner ran Request Indexing on `/` via GSC URL Inspection -- image thumbnail in search results can lag days-to-weeks behind text reindexing.
+
+## What Was Done (Session 51) -- NAP adresa zjednotena na Boldog + GBP + opravene mapy -> PROD
+Date: 2026-08-13
+
+1. **Owner's question: why does Maps label BESTRENT (long gone) but not Royal Stroje?** Not a website issue -- map label prominence is a GBP ranking, and the pin does render when searched directly. Levers named for the owner: report BESTRENT as permanently closed via Navrhnut upravu, complete the profile (Sluzby/Produkty/Popis), keep review velocity, build NAP citations. **Do not look for a code fix for map labels.**
+2. **Root cause of the weak local signal: SIX conflicting address variants across the site.** Register (FinStat) says `Boldog 182, 925 26 Boldog`; the site variously claimed `903 01 Senec` (6 blog articles), `925 26 Senec` (impossible combination -- 925 26 is Boldog), `Senec-Boldog`, `Boldog - Senec`, and `182, Boldog 92526`. Google's "Pozicovna naradia v Boldogu" descriptor was correct all along.
+3. **Decision -- two addresses, two purposes, never mixed** (BESTRENT at the same parcel proves Google geocodes the street form): **prevadzka = `Recká cesta 182, 925 26 Boldog`** (GBP, visible contact, Footer, LocalBusiness + Product schema, blog articles) vs **sidlo = `Boldog 182, 925 26 Boldog`** (GDPR/Cookies/Obchodne podmienky, Kontakt "Firemne udaje", dashboard `COMPANY`, both PDF generators, static contract template). Owner changed GBP to the prevadzka form; pin stayed correct. **"Senec" deliberately kept as a service-area keyword in prose, titles and meta.**
+4. **Coordinates were wrong:** schema geo `48.2187/17.3994` is roughly Senec town centre, not the yard. Owner supplied `48.224467/17.418349` from the GBP pin; added to Home + Kontakt schema.
+5. **Both Kontakt maps were broken** -- a hand-fabricated `/maps/embed?pb=...` blob with a placeholder place id and a base64 label reading "Récka cesta 182, 903 01 Senec"; links had a "Réčka" typo. Now a plain coordinate embed (no API key) + the verified GBP share link.
+6. **GSC 161 non-indexed analysed:** only the 141 "Objavene - momentalne nie je v indexe" is real. 141 == exactly the product-page count; product pages are orphans (pagination/filters were `<button>`) -> became SEO-7, done in s52.
+7. **GBP copy generated for the owner in chat** (not in repo): 12 service descriptions <300 chars + 750-char business description. Google rejects phone numbers, URLs and prices in service descriptions.
