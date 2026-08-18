@@ -7,7 +7,7 @@ import { useInView } from '../hooks/useInView';
 
 export default function Partneri() {
   const [headingRef, headingInView] = useInView();
-  const [gridRef] = useInView();
+  const [gridRef, gridInView] = useInView();
   const [infoRef, infoInView] = useInView();
   const partners = [
     {
@@ -146,43 +146,51 @@ export default function Partneri() {
             </p>
           </div>
 
-          {/* Partners Grid - Option 1: Minimal with Hover Lift */}
-          <div ref={gridRef} className={`grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-16`}>
-            {partners.map((partner) => {
-              const innerContent = (
-                <div className="group flex flex-col items-center justify-center w-full h-full">
-                  {/* Logo Container - White square background */}
-                  <div className="bg-white rounded-xl ring-1 ring-white/10 p-4 flex items-center justify-center h-32 w-32 md:h-40 md:w-40 mb-3 md:mb-4 transition-all duration-200 group-hover:scale-105 group-hover:ring-orange-primary/50 group-hover:shadow-lg group-hover:shadow-orange-primary/20">
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className="h-24 w-24 md:h-28 md:w-28 object-contain"
-                    />
+          {/* Partner logo wall.
+              One continuous sheet with a hairline lattice (gap-px over a zinc
+              background paints the rules) rather than twelve floating tiles --
+              the wall reads as a single composed object. Twelve partners divide
+              evenly by 2, 3 and 4, so every breakpoint fills complete rows.
+              Names are intentionally absent: on most of these logos the caption
+              just repeated the wordmark. The name survives as alt + title. */}
+          <div
+            ref={gridRef}
+            className={`mb-8 md:mb-16 reveal ${gridInView ? 'in-view' : ''}`}
+          >
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-zinc-200 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm shadow-zinc-900/5">
+              {partners.map((partner) => {
+                // max-height caps the square marks, max-width caps the wide
+                // wordmarks -- together they even out the optical weight of
+                // logos whose natural aspect ratios run from 0.76:1 to 7.3:1.
+                const logo = (
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    loading="lazy"
+                    className="partner-logo max-h-10 md:max-h-[3.25rem] max-w-[7rem] md:max-w-[10rem] w-auto object-contain"
+                  />
+                );
+                const cellClass =
+                  'partner-cell relative flex items-center justify-center bg-white px-4 py-8 md:px-8 md:py-11 min-h-[6.5rem] md:min-h-[9rem]';
+
+                return partner.website ? (
+                  <a
+                    key={partner.id}
+                    href={partner.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={partner.name}
+                    className={cellClass}
+                  >
+                    {logo}
+                  </a>
+                ) : (
+                  <div key={partner.id} title={partner.name} className={cellClass}>
+                    {logo}
                   </div>
-
-                  {/* Partner Name */}
-                  <h3 className="text-center text-xs md:text-sm text-zinc-700 font-medium line-clamp-2">
-                    {partner.name}
-                  </h3>
-                </div>
-              );
-
-              return partner.website ? (
-                <a
-                  key={partner.id}
-                  href={partner.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cursor-pointer hover:opacity-80 transition-opacity"
-                >
-                  {innerContent}
-                </a>
-              ) : (
-                <div key={partner.id}>
-                  {innerContent}
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
           {/* Partnership Info Section */}

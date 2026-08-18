@@ -197,6 +197,51 @@
   display: none;
 }
 
+/* ─── Partner logo wall (Partneri) ───
+   Twelve brand palettes side by side fight each other, so the wall rests
+   desaturated and returns to full colour on hover. Gated behind (hover: hover):
+   a touch device never produces that hover, and this audience is mobile-heavy,
+   so on phones the logos simply stay in colour. Hover lifts the cell with the
+   orange glow already used by .subcategory-btn -- that glow is the single
+   orange element in this component. No transform is involved, so nothing here
+   permanently promotes a compositing layer (GPU guard, session 21). */
+.partner-cell {
+  transition: box-shadow 0.25s ease;
+}
+.partner-logo {
+  transition: filter 0.3s ease;
+}
+@media (hover: hover) {
+  /* Not plain grayscale(1): the palest logos (M&M WOOD's beige) desaturate to a
+     near-white that vanishes against the cell. Pulling brightness down and
+     nudging contrast keeps every mark readable at rest. */
+  .partner-logo {
+    filter: grayscale(1) brightness(0.78) contrast(1.06);
+  }
+  .partner-cell:hover {
+    z-index: 1;
+    box-shadow: 0 10px 24px -6px rgba(255, 102, 0, 0.28), 0 3px 8px -3px rgba(24, 24, 27, 0.12);
+  }
+  .partner-cell:hover .partner-logo {
+    filter: none;
+  }
+}
+/* Keyboard parity: the same colour restore plus a visible orange focus ring */
+.partner-cell:focus-visible {
+  outline: 2px solid #ff6600;
+  outline-offset: -2px;
+  z-index: 1;
+}
+.partner-cell:focus-visible .partner-logo {
+  filter: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .partner-cell,
+  .partner-logo {
+    transition: none;
+  }
+}
+
 /* Stagger delays for child elements */
 .stagger-1 { transition-delay: 0.07s; }
 .stagger-2 { transition-delay: 0.14s; }
