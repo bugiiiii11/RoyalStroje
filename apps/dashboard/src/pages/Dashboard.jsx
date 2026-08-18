@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Package, BarChart3, Users, Calendar, PlusCircle, ArrowRight, ChevronRight } from 'lucide-react';
+import { Package, BarChart3, Users, Calendar, PlusCircle, ArrowRight, ChevronRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import { StatCard } from '../components/ui/Card';
 import StatusBadge from '../components/ui/StatusBadge';
 import Spinner from '../components/ui/Spinner';
@@ -137,7 +137,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stats Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         <StatCard
           icon={Package}
           label="Aktívne prenájmy"
@@ -161,6 +161,22 @@ export default function Dashboard() {
           label="Dnešné udalosti"
           value={statsLoading ? '…' : stats.todayEvents}
           color="bg-orange-500"
+        />
+        <StatCard
+          icon={CheckCircle2}
+          label="Zaplatené faktúry"
+          value={statsLoading ? '…' : stats.paidContracts}
+          sub={statsLoading ? null : formatPrice(stats.paidTotal)}
+          color="bg-emerald-500"
+          onClick={() => navigate('/invoices?type=finalna&payment=paid')}
+        />
+        <StatCard
+          icon={AlertCircle}
+          label="Nezaplatené faktúry"
+          value={statsLoading ? '…' : stats.unpaidContracts}
+          sub={statsLoading ? null : formatPrice(stats.unpaidTotal)}
+          color="bg-red-500"
+          onClick={() => navigate('/invoices?type=finalna&payment=unpaid')}
         />
       </div>
 

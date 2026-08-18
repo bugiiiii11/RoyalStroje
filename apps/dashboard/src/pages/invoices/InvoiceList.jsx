@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, Check, Clock } from 'lucide-react';
 import useInvoices from '../../hooks/useInvoices';
 import useContracts from '../../hooks/useContracts';
 import { supabase } from '../../lib/supabase';
@@ -29,15 +29,19 @@ const STATUS_MAP = {
 };
 
 const VALID_TYPE_PARAMS = ['navrh', 'finalna', 'proforma', 'invoice', 'credit_note'];
+const VALID_PAYMENT_PARAMS = ['paid', 'unpaid'];
 
 export default function InvoiceList() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const initialType = VALID_TYPE_PARAMS.includes(searchParams.get('type')) ? searchParams.get('type') : '';
-  const [filters, setFilters] = useState({ type: initialType, status: '', search: '' });
+  const initialPayment = VALID_PAYMENT_PARAMS.includes(searchParams.get('payment')) ? searchParams.get('payment') : '';
+  const [filters, setFilters] = useState({ type: initialType, status: '', payment: initialPayment, search: '' });
   const [showCreate, setShowCreate] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null); // { id, kind: 'invoice'|'contract', reservationId? }
   const [deleting, setDeleting] = useState(false);
+  const [togglingPayment, setTogglingPayment] = useState(null); // contract id being written
+  const [paymentOverrides, setPaymentOverrides] = useState({}); // id -> paid_at, applied over fetched rows
 
   // Separate filter signals for each hook
   const invoiceFilters = useMemo(() => ({
@@ -85,6 +89,9 @@ export default function InvoiceList() {
       total: con.final_total,
       status: con.type,
       isOverdue: false,
+      // Payment state only applies to finálne zmluvy; NULL paid_at = nezaplatená
+      isFinal: con.type === 'finalna',
+      paidAt: (con.id in paymentOverrides ? paymentOverrides[con.id] : con.paid_at) || null,
     }));
 
     // If a specific type filter targets only invoices or only contracts, skip the other
@@ -92,11 +99,37 @@ export default function InvoiceList() {
     const showInvoices = !typeFilter || ['proforma', 'invoice', 'credit_note'].includes(typeFilter);
     const showContracts = !typeFilter || ['navrh', 'finalna'].includes(typeFilter);
 
-    return [
+    const merged = [
       ...(showInvoices ? invRows : []),
       ...(showContracts ? conRows : []),
-    ].sort((a, b) => (b.issueDate || '').localeCompare(a.issueDate || ''));
-  }, [invoices, contracts, filters.type]);
+    ];
+
+    // Payment filter is a finálna-zmluva concept — it hides everything else
+    const byPayment = !filters.payment
+      ? merged
+      : merged.filter((r) => r.isFinal && (filters.payment === 'paid' ? !!r.paidAt : !r.paidAt));
+
+    return byPayment.sort((a, b) => (b.issueDate || '').localeCompare(a.issueDate || ''));
+  }, [invoices, contracts, filters.type, filters.payment, paymentOverrides]);
+
+  const togglePayment = async (row) => {
+    const nextPaidAt = row.paidAt ? null : new Date().toISOString();
+    setTogglingPayment(row.id);
+    try {
+      const { error } = await supabase
+        .from('contracts')
+        .update({ paid_at: nextPaidAt })
+        .eq('id', row.id);
+      if (error) throw error;
+      // Local override instead of refetchCon(): a refetch flips the whole table
+      // back to its loading spinner on every single toggle
+      setPaymentOverrides((o) => ({ ...o, [row.id]: nextPaidAt }));
+    } catch (e) {
+      alert('Chyba pri zmene stavu platby: ' + e.message);
+    } finally {
+      setTogglingPayment(null);
+    }
+  };
 
   const handleDelete = async () => {
     if (!deleteTarget) return;
@@ -124,13 +157,13 @@ export default function InvoiceList() {
     {
       key: 'number',
       label: 'Číslo zmluvy',
-      width: '14%',
+      width: '12%',
       render: (row) => <span className="font-mono font-medium">{row.number}</span>,
     },
     {
       key: 'type',
       label: 'Typ',
-      width: '14%',
+      width: '12%',
       render: (row) => {
         const t = TYPE_MAP[row.type] || TYPE_MAP.invoice;
         return <Badge label={t.label} bg={t.bg} text={t.text} />;
@@ -139,7 +172,7 @@ export default function InvoiceList() {
     {
       key: 'reservation',
       label: 'Obchod / Klient',
-      width: '20%',
+      width: '18%',
       render: (row) => (
         <div>
           <p className="text-sm font-medium">{row.reservationNumber}</p>
@@ -150,13 +183,13 @@ export default function InvoiceList() {
     {
       key: 'issueDate',
       label: 'Vystavená',
-      width: '12%',
+      width: '10%',
       render: (row) => formatDate(row.issueDate),
     },
     {
       key: 'dueDate',
       label: 'Splatnosť',
-      width: '12%',
+      width: '10%',
       render: (row) => {
         if (!row.dueDate) return <span className="text-gray-300">—</span>;
         return <span className={row.isOverdue ? 'text-red-600 font-medium' : ''}>{formatDate(row.dueDate)}</span>;
@@ -165,8 +198,36 @@ export default function InvoiceList() {
     {
       key: 'total',
       label: 'Celkom',
-      width: '12%',
+      width: '10%',
       render: (row) => row.total != null ? <span className="font-semibold">{formatPrice(row.total)}</span> : <span className="text-gray-300">—</span>,
+    },
+    {
+      key: 'payment',
+      label: 'Platba',
+      width: '12%',
+      render: (row) => {
+        // Only finálne zmluvy carry a payment state
+        if (!row.isFinal) return <span className="text-gray-300">—</span>;
+        const isPaid = !!row.paidAt;
+        const busy = togglingPayment === row.id;
+        return (
+          <button
+            onClick={(e) => { e.stopPropagation(); if (!busy) togglePayment(row); }}
+            disabled={busy}
+            title={isPaid
+              ? `Zaplatená ${formatDate(row.paidAt.slice(0, 10))} — kliknutím označíte ako nezaplatenú`
+              : 'Kliknutím označíte ako zaplatenú'}
+            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors disabled:opacity-50 ${
+              isPaid
+                ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                : 'bg-red-100 text-red-700 hover:bg-red-200'
+            }`}
+          >
+            {isPaid ? <Check className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+            {busy ? 'Ukladá sa…' : (isPaid ? 'Zaplatená' : 'Nezaplatená')}
+          </button>
+        );
+      },
     },
     {
       key: 'status',
@@ -232,6 +293,16 @@ export default function InvoiceList() {
           <option value="sent">Odoslaná</option>
           <option value="paid">Zaplatená</option>
           <option value="cancelled">Zrušená</option>
+        </select>
+        <select
+          value={filters.payment}
+          onChange={(e) => setFilters(f => ({ ...f, payment: e.target.value }))}
+          className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
+          title="Platba sa týka iba finálnych zmlúv"
+        >
+          <option value="">Všetky platby</option>
+          <option value="paid">Zaplatené zmluvy</option>
+          <option value="unpaid">Nezaplatené zmluvy</option>
         </select>
       </div>
 
