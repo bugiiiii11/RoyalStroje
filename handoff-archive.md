@@ -50,9 +50,21 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 42 | 2026-07-16 | Katalóg: nový dekoračný bager (bager_web) -> PROD | Owner RGBA PNG -> WebP 1024x683 q80 preserving alpha |
 | 43 | 2026-07-16 | SEO: prerender + build-time sitemap + noindex/meta fixy (na `dev`) | Root cause weak indexing: robots.txt blocked `/assets/`; prerender ~177 URLs; helmet v3 multi-child title bug; blogMeta.js created |
 | 45 | 2026-07-29 | Nový blog článok JCB 19C-1 (úprimná recenzia po 170 mth) | Replaces old hidden id-19 article; article<->catalog prelink (owner SQL pending); .claude tooling overhaul (auto-wrap hook, handoff skill, CLAUDE.md) |
+| 46 | 2026-07-29 | Release sessions 43-46 na PROD + fotky strojov v CTA pásoch + promo WT30 | 3x `dev`->`main`; cutout tool `scripts/cutout-transparent.py`; Haulotte foto v SourcingBanner + CtaBand (opt-in prop); promo slide Honda WT30; hook force-push vzor zúžený; zistený apex->www redirect vs apex canonical |
 | 44 | 2026-07-16 | Fix prerender boot blink + SEO-1 staging verification | `data-prerendered` suppression chain; SEO-1 verified on Vercel staging; commit `92c571d` |
 
-## Archived What Was Done sections (sessions 15-53)
+## Archived What Was Done sections (sessions 15-54)
+
+## What Was Done (Session 54) -- 15 GBP produktovych PNG + release na PROD
+Date: 2026-08-14
+
+1. **GBP does not accept WebP** -- generated PNG versions of the 15 GBP products into `C:\Users\cryptomeda\Desktop\GBP-produkty-PNG\` (deliberately OUTSIDE the repo so they never get committed). Owner uploaded all 15 to GBP the same day. **Task 2 is done.**
+2. **The s52 15-product list existed only in chat, not in the repo** -- owner re-pasted it. Repo filenames were NOT a reliable key: 5 of the 15 (WN 803, DW20, RD18, TH412, Avant 528) have no matching file under `public/pictures/Katalog-PNG/`. **Authoritative mapping = query Supabase `equipment.image_path` by slug**, which is exactly what the live product page renders. Those 5 live in Supabase Storage (`equipment-images/...`), not in the repo.
+3. **Machine gotcha: Python's SSL trust store rejects the Supabase cert here** (`CERTIFICATE_VERIFY_FAILED ... Basic Constraints of CA cert not marked critical`) while **Node `fetch` works fine** -- same asymmetry as the s52 browser-vs-Node finding, opposite direction. Pattern that works: download with Node, process with Pillow.
+4. **GBP image rules applied:** flatten any alpha onto white (GBP renders transparency black), upscale to >=720px on the short side (2 of 15 needed it), PNG well under the 5 MB cap. Verified all 15 visually via a generated contact sheet before handing them over.
+5. **Flagged to owner, not acted on:** these are manufacturer studio renders on white -- own yard photos remain the stronger GBP signal (non-duplicate vs other rental firms). Treat the PNGs as the fallback where no own photo exists.
+6. **Released to PROD** -- docs-only `dev`->`main` fast-forward. Serves double duty as the Redeploy for the s53 blocker: the failed build was on `fcdeab3`, so this push rebuilds the same code.
+
 
 ## What Was Done (Session 53) -- SEO-7 na PROD + kosik zmazany + zapeceny 404 shell + NAP citacie
 Date: 2026-08-14
