@@ -180,8 +180,21 @@ export default function Dashboard() {
         />
       </div>
 
-      {/* Pipeline Kanban */}
+      {/* Today's Schedule */}
       <div className="bg-white rounded-xl border border-gray-100 shadow-card p-6 mb-6">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Dnešný rozvrh</h2>
+        <TodayTasks />
+        <div className="border-t border-gray-100 my-5" />
+        <h3 className="text-sm font-semibold text-gray-700 mb-3">Prenájmy</h3>
+        {dealsLoading ? (
+          <div className="flex justify-center py-8"><Spinner /></div>
+        ) : (
+          <TodaySchedule deals={todayDeals} />
+        )}
+      </div>
+
+      {/* Pipeline Kanban */}
+      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Pipeline obchodov</h2>
         {dealsLoading ? (
           <div className="flex justify-center py-8"><Spinner /></div>
@@ -200,19 +213,6 @@ export default function Dashboard() {
               onShowAll={() => navigate('/invoices?type=finalna')}
             />
           </div>
-        )}
-      </div>
-
-      {/* Today's Schedule */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Dnešný rozvrh</h2>
-        <TodayTasks />
-        <div className="border-t border-gray-100 my-5" />
-        <h3 className="text-sm font-semibold text-gray-700 mb-3">Prenájmy</h3>
-        {dealsLoading ? (
-          <div className="flex justify-center py-8"><Spinner /></div>
-        ) : (
-          <TodaySchedule deals={todayDeals} />
         )}
       </div>
     </div>

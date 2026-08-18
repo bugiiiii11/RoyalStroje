@@ -36,7 +36,7 @@ export default function InvoiceList() {
   const [searchParams] = useSearchParams();
   const initialType = VALID_TYPE_PARAMS.includes(searchParams.get('type')) ? searchParams.get('type') : '';
   const initialPayment = VALID_PAYMENT_PARAMS.includes(searchParams.get('payment')) ? searchParams.get('payment') : '';
-  const [filters, setFilters] = useState({ type: initialType, status: '', payment: initialPayment, search: '' });
+  const [filters, setFilters] = useState({ type: initialType, payment: initialPayment, search: '' });
   const [showCreate, setShowCreate] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null); // { id, kind: 'invoice'|'contract', reservationId? }
   const [deleting, setDeleting] = useState(false);
@@ -46,7 +46,6 @@ export default function InvoiceList() {
   // Separate filter signals for each hook
   const invoiceFilters = useMemo(() => ({
     type: ['proforma', 'invoice', 'credit_note', ''].includes(filters.type) ? filters.type : '__none__',
-    status: filters.status,
     search: filters.search,
   }), [filters]);
 
@@ -279,20 +278,6 @@ export default function InvoiceList() {
           <option value="">Všetky typy</option>
           <option value="navrh">Návrh zmluvy</option>
           <option value="finalna">Finálna zmluva</option>
-          <option value="proforma">Proforma</option>
-          <option value="invoice">Faktúra</option>
-          <option value="credit_note">Dobropis</option>
-        </select>
-        <select
-          value={filters.status}
-          onChange={(e) => setFilters(f => ({ ...f, status: e.target.value }))}
-          className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
-        >
-          <option value="">Všetky stavy</option>
-          <option value="draft">Návrh (faktúra)</option>
-          <option value="sent">Odoslaná</option>
-          <option value="paid">Zaplatená</option>
-          <option value="cancelled">Zrušená</option>
         </select>
         <select
           value={filters.payment}
