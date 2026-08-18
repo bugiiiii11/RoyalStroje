@@ -131,14 +131,14 @@ export default function ClientDetail() {
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-gray-100">
+                    <tr className="border-b border-gray-200">
                       <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Číslo zmluvy</th>
                       <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Stav</th>
                       <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Termín</th>
                       <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Celkom</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-gray-100">
                     {deals.map((deal) => (
                       <tr
                         key={deal.id}

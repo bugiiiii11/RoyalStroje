@@ -77,7 +77,7 @@ export default function ClientDirectory() {
         <SearchInput value={search} onChange={setSearch} placeholder="Hľadať podľa firmy, kontaktu, IČO..." />
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-100 shadow-card">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-card">
         <DataTable
           columns={columns}
           data={clients}

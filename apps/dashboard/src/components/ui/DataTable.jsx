@@ -19,12 +19,15 @@ export default function DataTable({ columns, data, loading, sortBy, sortAsc, onS
             <col key={col.key} style={col.width ? { width: col.width } : undefined} />
           ))}
         </colgroup>
+        {/* No fill on the header row: the table is dropped straight into a
+            rounded card with no overflow clipping, so a background band would
+            square off the card's top corners. Weight and rule carry it. */}
         <thead>
-          <tr className="border-b border-gray-100">
+          <tr className="border-b border-gray-200">
             {columns.map((col) => (
               <th
                 key={col.key}
-                className={`text-left px-4 py-3 text-xs font-medium text-gray-400 uppercase tracking-wider ${col.sortable ? 'cursor-pointer hover:text-gray-600 select-none transition-colors' : ''}`}
+                className={`text-left px-4 py-2.5 text-xs font-semibold text-gray-500 uppercase tracking-wider ${col.sortable ? 'cursor-pointer hover:text-gray-800 select-none transition-colors' : ''}`}
                 onClick={() => col.sortable && onSort?.(col.key)}
               >
                 <div className="flex items-center gap-1">
@@ -37,7 +40,7 @@ export default function DataTable({ columns, data, loading, sortBy, sortAsc, onS
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-50">
+        <tbody className="divide-y divide-gray-100">
           {data.map((row, i) => (
             <tr
               key={row._rowKey || row.id || i}

@@ -47,7 +47,7 @@ export default function EquipmentDetail({ item, open, onClose, onEdit, onDelete,
             )}
           </div>
 
-          <div className="border-t border-gray-100 pt-4">
+          <div className="border-t border-gray-200 pt-4">
             <h4 className="text-sm font-medium text-gray-700 mb-2">Cena</h4>
             {item.pricing_type === 'negotiable' ? (
               <p className="text-lg font-semibold text-gray-900">Na požiadanie</p>
@@ -66,7 +66,7 @@ export default function EquipmentDetail({ item, open, onClose, onEdit, onDelete,
           </div>
 
           {features.length > 0 && (
-            <div className="border-t border-gray-100 pt-4">
+            <div className="border-t border-gray-200 pt-4">
               <h4 className="text-sm font-medium text-gray-700 mb-2">Parametre</h4>
               <ul className="space-y-1">
                 {features.map((f, i) => (
@@ -82,7 +82,7 @@ export default function EquipmentDetail({ item, open, onClose, onEdit, onDelete,
       </div>
 
       {/* Action buttons */}
-      <div className="flex gap-2 mt-6 pt-4 border-t border-gray-100">
+      <div className="flex gap-2 mt-6 pt-4 border-t border-gray-200">
         <button
           onClick={() => onEdit?.(item)}
           className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-royal-600 bg-royal-50 hover:bg-royal-100 rounded-lg transition-colors"

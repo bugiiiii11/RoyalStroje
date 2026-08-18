@@ -472,7 +472,7 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
           <div className="space-y-2">
             {form.features.map((f, i) => (
               <div key={i} className="flex items-center gap-2">
-                <span className="flex-1 text-sm text-gray-700 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                <span className="flex-1 text-sm text-gray-700 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
                   {f}
                 </span>
                 <button
@@ -515,7 +515,7 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
           <div className="space-y-2">
             {form.serial_numbers.map((sn, i) => (
               <div key={i} className="flex items-center gap-2">
-                <span className="flex-1 text-sm text-gray-700 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100 font-mono">
+                <span className="flex-1 text-sm text-gray-700 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 font-mono">
                   {sn}
                 </span>
                 <button
@@ -623,7 +623,7 @@ export default function EquipmentForm({ open, onClose, onSave, item }) {
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-3 pt-2 border-t border-gray-100">
+        <div className="flex items-center gap-3 pt-2 border-t border-gray-200">
           {isEdit && (
             <button
               type="button"

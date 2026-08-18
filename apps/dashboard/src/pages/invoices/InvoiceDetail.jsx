@@ -131,14 +131,14 @@ export default function InvoiceDetail() {
           <ContentCard title="Položky">
             {items && items.length > 0 ? (
               <table className="w-full text-sm">
-                <thead><tr className="border-b border-gray-100">
+                <thead><tr className="border-b border-gray-200">
                   <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Zariadenie</th>
                   <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Ks</th>
                   <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Sadzba</th>
                   <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Dní</th>
                   <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Spolu</th>
                 </tr></thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-gray-100">
                   {items.map(item => (
                     <tr key={item.id}>
                       <td className="px-4 py-3 font-medium">{item.equipment?.name || '—'}</td>
@@ -166,7 +166,7 @@ export default function InvoiceDetail() {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between"><span className="text-gray-500">Medzisúčet</span><span>{formatPrice(invoice.subtotal)}</span></div>
               <div className="flex justify-between"><span className="text-gray-500">DPH ({invoice.vat_rate}%)</span><span>{formatPrice(invoice.vat_amount)}</span></div>
-              <div className="flex justify-between pt-2 border-t border-gray-100 text-lg font-bold"><span>Celkom</span><span>{formatPrice(invoice.total)}</span></div>
+              <div className="flex justify-between pt-2 border-t border-gray-200 text-lg font-bold"><span>Celkom</span><span>{formatPrice(invoice.total)}</span></div>
             </div>
           </ContentCard>
 

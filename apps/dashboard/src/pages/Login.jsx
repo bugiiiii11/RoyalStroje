@@ -35,15 +35,18 @@ export default function Login() {
       <div className="max-w-md w-full">
         {/* Logo / Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-royal-500 to-royal-400 rounded-2xl shadow-glow-md mb-4">
-            <span className="text-2xl font-bold text-white">RS</span>
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900">Royal Stroje</h1>
-          <p className="text-gray-500 mt-1">Dashboard prihlásenie</p>
+          <img
+            src="/znak.webp"
+            alt="Royal Stroje"
+            className="w-20 h-20 object-contain mx-auto mb-4"
+          />
+          <h1 className="text-2xl font-bold text-gray-900">
+            Royal <span className="text-royal-500">Command Center</span>
+          </h1>
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-card border border-gray-100 p-8">
+        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-card border border-gray-200 p-8">
           {error && (
             <div className="mb-4 flex items-center gap-2 bg-red-50 text-red-700 px-4 py-3 rounded-lg text-sm">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />

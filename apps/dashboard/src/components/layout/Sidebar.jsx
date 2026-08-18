@@ -31,7 +31,7 @@ const navigation = [
 function MiniStat({ icon: Icon, label, value, loading, accent }) {
   return (
     <div className="flex items-center gap-2.5">
-      <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${accent ? 'bg-red-50' : 'bg-white/60'}`}>
+      <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ring-1 ${accent ? 'bg-red-50 ring-red-100' : 'bg-white ring-gray-200'}`}>
         <Icon className={`w-3.5 h-3.5 ${accent ? 'text-red-500' : 'text-royal-500'}`} />
       </div>
       <div className="min-w-0 flex-1">
@@ -61,7 +61,7 @@ export default function Sidebar({ open, onClose }) {
       <aside
         className={`
           fixed top-0 left-0 z-50 h-full w-[260px]
-          bg-gradient-to-b from-gray-50 via-gray-50/95 to-orange-50/40
+          bg-white
           flex flex-col
           transform transition-transform duration-300 ease-out
           lg:translate-x-0 lg:static lg:z-auto
@@ -83,13 +83,13 @@ export default function Sidebar({ open, onClose }) {
                   ROYAL <span className="text-royal-500">STROJE</span>
                 </h1>
                 <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest">
-                  Dashboard
+                  Command Center
                 </p>
               </div>
             </NavLink>
             <button
               onClick={onClose}
-              className="lg:hidden p-1.5 hover:bg-gray-200/60 rounded-lg transition-colors"
+              className="lg:hidden p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
             >
               <X className="w-4 h-4 text-gray-400" />
             </button>
@@ -109,11 +109,11 @@ export default function Sidebar({ open, onClose }) {
         </div>
 
         {/* Divider */}
-        <div className="mx-5 h-px bg-gradient-to-r from-gray-200/80 via-gray-200 to-gray-200/80" />
+        <div className="mx-5 h-px bg-gray-200" />
 
         {/* Navigation */}
         <nav className="flex-1 px-3 py-3 space-y-0.5 overflow-y-auto">
-          <p className="px-3 pb-1.5 pt-1 text-[10px] font-semibold text-gray-300 uppercase tracking-wider">
+          <p className="px-3 pb-1.5 pt-1 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
             Menu
           </p>
           {navigation.map((item) => (
@@ -122,28 +122,31 @@ export default function Sidebar({ open, onClose }) {
               to={item.to}
               onClick={onClose}
               className={({ isActive }) =>
-                `group flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-200 ${
+                // The active row has to carry the state on its own now that the
+                // sidebar is white -- the old `bg-white` marker was invisible
+                // against it. Orange fill + a solid left rail, no pulsing dot.
+                `group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] transition-colors duration-150 ${
                   isActive
-                    ? 'bg-white text-royal-600 shadow-sm ring-1 ring-gray-200/60'
-                    : 'text-gray-500 hover:bg-white/60 hover:text-gray-800'
+                    ? 'bg-royal-50 text-royal-700 font-semibold'
+                    : 'text-gray-600 font-medium hover:bg-gray-50 hover:text-gray-900'
                 }`
               }
             >
               {({ isActive }) => (
                 <>
+                  {isActive && (
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 rounded-r-full bg-royal-500" />
+                  )}
                   <div
-                    className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 ${
+                    className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors duration-150 ${
                       isActive
-                        ? 'bg-royal-500 text-white shadow-glow'
-                        : 'bg-gray-200/60 text-gray-400 group-hover:bg-gray-200 group-hover:text-gray-600'
+                        ? 'bg-royal-500 text-white'
+                        : 'bg-gray-100 text-gray-500 group-hover:bg-gray-200 group-hover:text-gray-700'
                     }`}
                   >
                     <item.icon className="w-4 h-4" />
                   </div>
                   <span>{item.name}</span>
-                  {isActive && (
-                    <div className="ml-auto w-1.5 h-1.5 rounded-full bg-royal-500 animate-pulse-slow" />
-                  )}
                 </>
               )}
             </NavLink>
@@ -151,7 +154,7 @@ export default function Sidebar({ open, onClose }) {
         </nav>
 
         {/* Expanded stats panel */}
-        <div className="mx-4 mb-2 p-3.5 rounded-2xl bg-white/50 backdrop-blur-sm border border-gray-200/60 shadow-sm">
+        <div className="mx-4 mb-2 p-3.5 rounded-2xl bg-gray-50 border border-gray-200">
           <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-2.5">
             Prehľad
           </p>
@@ -204,7 +207,7 @@ export default function Sidebar({ open, onClose }) {
             href="https://mdntech.org/sk"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-white/50 transition-all"
+            className="group flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-gray-50 transition-colors"
           >
             <div className="w-5 h-5 rounded bg-gray-900 flex items-center justify-center flex-shrink-0 overflow-hidden">
               <img src="/logo_mdntech.webp" alt="M.D.N Tech" className="w-4 h-4 object-contain" />
@@ -218,8 +221,9 @@ export default function Sidebar({ open, onClose }) {
           </a>
         </div>
 
-        {/* Bottom orange accent bar */}
-        <div className="h-1 bg-gradient-to-r from-royal-500 via-royal-400 to-royal-300" />
+        {/* Bottom orange accent bar. Solid, not a fade -- against the white
+            sidebar the old gradient tail read as a half-filled progress bar. */}
+        <div className="h-1 bg-royal-500" />
       </aside>
     </>
   );

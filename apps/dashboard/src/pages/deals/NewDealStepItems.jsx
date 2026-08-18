@@ -275,7 +275,7 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
       </div>
 
       {search && (
-        <div className="border border-gray-100 rounded-xl shadow-card mb-6 max-h-[200px] overflow-y-auto">
+        <div className="border border-gray-200 rounded-xl shadow-card mb-6 max-h-[200px] overflow-y-auto">
           {loading && <p className="text-sm text-gray-400 p-3">Načítavam...</p>}
           {!loading && equipment?.length === 0 && (
             <p className="text-sm text-gray-400 p-3">Nič nenájdené</p>
@@ -286,7 +286,7 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
               <div
                 key={eq.id}
                 onClick={() => !alreadyAdded && addItem(eq)}
-                className={`flex items-center justify-between px-3 py-2 border-b border-gray-100 last:border-0 ${
+                className={`flex items-center justify-between px-3 py-2 border-b border-gray-200 last:border-0 ${
                   alreadyAdded ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-50'
                 }`}
               >
@@ -306,8 +306,8 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
 
       {/* Selected Items */}
       {items.length > 0 && (
-        <div className="border border-gray-100 rounded-xl shadow-card">
-          <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
+        <div className="border border-gray-200 rounded-xl shadow-card">
+          <div className="px-4 py-2 bg-gray-50 border-b border-gray-200">
             <p className="text-xs font-medium text-gray-500 uppercase">Vybrané zariadenia ({items.length})</p>
           </div>
           {items.map((item, idx) => {
@@ -316,7 +316,7 @@ export default function NewDealStepItems({ dateFrom, dateTo, timeFrom, items, on
             const usedSerials = (item.serial_numbers || []).filter(Boolean);
             const isCustom = !!item.is_custom;
             return (
-              <div key={isCustom ? `custom-${idx}` : item.equipment_id} className="border-b border-gray-100 last:border-0">
+              <div key={isCustom ? `custom-${idx}` : item.equipment_id} className="border-b border-gray-200 last:border-0">
                 <div className="flex items-center justify-between px-4 py-3">
                   <div className="flex-1">
                     <p className="text-sm font-medium text-gray-900">

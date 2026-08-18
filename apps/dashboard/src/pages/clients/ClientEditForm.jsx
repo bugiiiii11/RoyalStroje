@@ -285,7 +285,7 @@ export default function ClientEditForm({ open, onClose, onSave, client }) {
         </div>
 
         {/* Actions */}
-        <div className="flex justify-end gap-3 pt-2 border-t border-gray-100">
+        <div className="flex justify-end gap-3 pt-2 border-t border-gray-200">
           <button
             type="button"
             onClick={onClose}

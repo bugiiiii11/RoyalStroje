@@ -65,7 +65,7 @@ export default function NewDealStepReview({ dealData, onSubmit, onBack, submitti
       <p className="text-sm text-gray-500 mb-6">Skontrolujte údaje a potvrďte vytvorenie</p>
 
       {/* Client */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-card p-4 mb-4">
         <p className="text-xs font-medium text-gray-500 uppercase mb-2">Klient</p>
         <p className="font-medium text-gray-900">{client?.company_name}</p>
         <p className="text-sm text-gray-500">{client?.contact_person} · {client?.phone || client?.email}</p>
@@ -76,7 +76,7 @@ export default function NewDealStepReview({ dealData, onSubmit, onBack, submitti
 
       {/* Contact person selection */}
       {(contacts.length > 1 || (contacts.length === 0 && client?.entity_type === 'po')) && (
-        <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">
+        <div className="bg-white rounded-xl border border-gray-200 shadow-card p-4 mb-4">
           <label className="block text-xs font-medium text-gray-500 uppercase mb-2">Kontaktná osoba (na zmluvu)</label>
           {contacts.length > 0 ? (
             <select
@@ -103,7 +103,7 @@ export default function NewDealStepReview({ dealData, onSubmit, onBack, submitti
       )}
 
       {/* Dates */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-card p-4 mb-4">
         <p className="text-xs font-medium text-gray-500 uppercase mb-2">Termín</p>
         <p className="text-sm text-gray-900">
           {formatDate(dateFrom)}{timeFrom ? ` o ${timeFrom}` : ''} – {formatDate(dateTo)}{' '}
@@ -112,12 +112,12 @@ export default function NewDealStepReview({ dealData, onSubmit, onBack, submitti
       </div>
 
       {/* Items */}
-      <div className="border border-gray-100 rounded-xl shadow-card mb-4">
-        <div className="px-4 py-2 bg-gray-50 border-b border-gray-100">
+      <div className="border border-gray-200 rounded-xl shadow-card mb-4">
+        <div className="px-4 py-2 bg-gray-50 border-b border-gray-200">
           <p className="text-xs font-medium text-gray-500 uppercase">Zariadenia ({items.length})</p>
         </div>
         {items.map((item, idx) => (
-          <div key={item.is_custom ? `custom-${idx}` : item.equipment_id} className="flex items-center justify-between px-4 py-3 border-b border-gray-100 last:border-0 text-sm">
+          <div key={item.is_custom ? `custom-${idx}` : item.equipment_id} className="flex items-center justify-between px-4 py-3 border-b border-gray-200 last:border-0 text-sm">
             <div>
               <span className="font-medium text-gray-900">{item.name}</span>
               {item.is_custom && (
@@ -131,7 +131,7 @@ export default function NewDealStepReview({ dealData, onSubmit, onBack, submitti
       </div>
 
       {/* Delivery */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-card p-4 mb-4">
         <label className="flex items-center gap-2 text-sm cursor-pointer">
           <input
             type="checkbox"
@@ -192,7 +192,7 @@ export default function NewDealStepReview({ dealData, onSubmit, onBack, submitti
       </div>
 
       {/* Financials */}
-      <div className="border border-gray-100 rounded-xl shadow-card p-4 mb-6">
+      <div className="border border-gray-200 rounded-xl shadow-card p-4 mb-6">
         <div className="space-y-2 text-sm">
           <div className="flex justify-between"><span className="text-gray-500">Medzisúčet</span><span>{formatPrice(subtotal)}</span></div>
           {discountPercent > 0 && (
@@ -202,7 +202,7 @@ export default function NewDealStepReview({ dealData, onSubmit, onBack, submitti
             <div className="flex justify-between"><span className="text-gray-500">Dovoz</span><span>{formatPrice(deliveryFeeNum)}</span></div>
           )}
           <div className="flex justify-between"><span className="text-gray-500">DPH (23%)</span><span>{formatPrice(vatAmount)}</span></div>
-          <div className="flex justify-between pt-2 border-t border-gray-100 text-lg font-bold">
+          <div className="flex justify-between pt-2 border-t border-gray-200 text-lg font-bold">
             <span>Celkom</span><span>{formatPrice(total)}</span>
           </div>
         </div>

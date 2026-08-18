@@ -125,7 +125,7 @@ export default function TaskModal({ task, onClose, onSave, onDelete }) {
           {form.done ? 'Ukončené' : 'Označiť ako ukončené'}
         </button>
 
-        <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+        <div className="flex items-center justify-between pt-2 border-t border-gray-200">
           {!isNew ? (
             <button
               type="button"

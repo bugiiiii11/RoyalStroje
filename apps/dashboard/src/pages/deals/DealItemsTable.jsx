@@ -10,7 +10,7 @@ export default function DealItemsTable({ items, returnedBySerial, returnedQty })
   return (
     <table className="w-full text-sm">
       <thead>
-        <tr className="border-b border-gray-100">
+        <tr className="border-b border-gray-200">
           <th className="text-left px-4 py-2 text-xs font-medium text-gray-500 uppercase">Zariadenie</th>
           <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Ks</th>
           {showReturnInfo && (
@@ -21,7 +21,7 @@ export default function DealItemsTable({ items, returnedBySerial, returnedQty })
           <th className="text-right px-4 py-2 text-xs font-medium text-gray-500 uppercase">Spolu</th>
         </tr>
       </thead>
-      <tbody className="divide-y divide-gray-50">
+      <tbody className="divide-y divide-gray-100">
         {items.map((item) => {
           const serials = Array.isArray(item.serial_numbers) ? item.serial_numbers.filter(Boolean) : [];
           const qty = parseInt(item.quantity, 10) || 1;

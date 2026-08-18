@@ -7,7 +7,10 @@ export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex bg-gray-50/60">
+    // The canvas is the tinted plane and the chrome (sidebar, header, cards) is
+    // white on top of it. Before, sidebar and canvas were both washed grey and
+    // the menu had nothing to separate it from the page.
+    <div className="min-h-screen flex bg-gray-100/70">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <div className="flex-1 flex flex-col min-w-0">

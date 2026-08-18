@@ -5,7 +5,10 @@ export default function Header({ onMenuClick }) {
   const { user, userRole, signOut } = useAuth();
 
   return (
-    <header className="h-14 bg-white/80 backdrop-blur-sm border-b border-gray-100 flex items-center justify-between px-5 lg:px-7 sticky top-0 z-30">
+    // Solid white, not white/80 + backdrop-blur: a blurred sticky bar is the
+    // exact construct that produced GPU garbage on this project's phones
+    // (session 21), and it bought nothing over an opaque bar.
+    <header className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-5 lg:px-7 sticky top-0 z-30">
       {/* Left: menu toggle (mobile) */}
       <button
         onClick={onMenuClick}

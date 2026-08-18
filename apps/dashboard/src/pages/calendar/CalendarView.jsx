@@ -225,11 +225,11 @@ export default function CalendarView() {
           <p className="text-sm text-gray-500 mt-0.5">{formatWeekRange(weekDays[0], weekDays[weekDays.length - 1])}</p>
         </div>
         <div className="flex items-center gap-2">
-          <div className="flex items-center bg-white border border-gray-100 rounded-lg shadow-card">
+          <div className="flex items-center bg-white border border-gray-200 rounded-lg shadow-card">
             <button onClick={goPrev} title="Predchádzajúci týždeň" className="p-2 hover:bg-royal-50 hover:text-royal-600 rounded-l-lg transition-colors">
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <button onClick={goToday} className="px-3 py-1.5 text-sm font-medium border-x border-gray-100 hover:bg-royal-50 hover:text-royal-600 transition-colors">
+            <button onClick={goToday} className="px-3 py-1.5 text-sm font-medium border-x border-gray-200 hover:bg-royal-50 hover:text-royal-600 transition-colors">
               Dnes
             </button>
             <button onClick={goNext} title="Nasledujúci týždeň" className="p-2 hover:bg-royal-50 hover:text-royal-600 rounded-r-lg transition-colors">
@@ -239,7 +239,7 @@ export default function CalendarView() {
           <button
             onClick={() => setShowWeekend(v => !v)}
             className={`px-3 py-2 text-sm font-medium rounded-lg border transition-colors ${
-              showWeekend ? 'bg-royal-50 border-royal-200 text-royal-700' : 'bg-white border-gray-100 text-gray-600 hover:bg-gray-50'
+              showWeekend ? 'bg-royal-50 border-royal-200 text-royal-700' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
             }`}
           >
             {showWeekend ? 'Po–Ne' : 'Po–Pi'}
@@ -261,7 +261,7 @@ export default function CalendarView() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl border border-gray-100 shadow-card overflow-hidden">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-card overflow-hidden">
         <div className="overflow-x-auto">
           <div className="min-w-[900px]">
             {/* Day headers */}
@@ -349,7 +349,7 @@ export default function CalendarView() {
               <div className="flex justify-center py-20"><Spinner /></div>
             ) : (
               HOURS.map((hour) => (
-                <div key={hour} className="grid border-b border-gray-100 last:border-b-0" style={gridCols}>
+                <div key={hour} className="grid border-b border-gray-200 last:border-b-0" style={gridCols}>
                   <div className="px-2 py-2 border-r border-gray-200 bg-gray-50/60 text-right text-[13px] font-medium text-gray-500 tabular-nums">
                     {formatHour(hour)}
                   </div>

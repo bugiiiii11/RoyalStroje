@@ -18,7 +18,7 @@ export default function EquipmentGrid({ data, loading, onItemClick, onEdit, onDe
       {data.map((item) => (
         <div
           key={item.id}
-          className="bg-white rounded-xl border border-gray-100 overflow-hidden card-interactive group relative"
+          className="bg-white rounded-xl border border-gray-200 overflow-hidden card-interactive group relative"
         >
           {/* Action buttons overlay */}
           <div className="absolute top-2 right-2 z-10 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

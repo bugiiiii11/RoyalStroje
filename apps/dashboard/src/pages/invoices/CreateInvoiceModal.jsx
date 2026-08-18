@@ -95,12 +95,12 @@ export default function CreateInvoiceModal({ open, onClose, onCreated, reservati
           ) : (
             <div className="space-y-2">
               <SearchInput value={search} onChange={setSearch} placeholder="Hľadať obchod..." />
-              <div className="max-h-[200px] overflow-y-auto border border-gray-100 rounded-xl shadow-card">
+              <div className="max-h-[200px] overflow-y-auto border border-gray-200 rounded-xl shadow-card">
                 {(reservations || [])
                   .filter(r => !search || r.reservation_number.includes(search) || r.clients?.company_name?.toLowerCase().includes(search.toLowerCase()))
                   .map(r => (
                     <div key={r.id} onClick={() => setSelectedRes(r)}
-                      className="flex items-center justify-between px-3 py-2 border-b border-gray-100 last:border-0 cursor-pointer hover:bg-gray-50">
+                      className="flex items-center justify-between px-3 py-2 border-b border-gray-200 last:border-0 cursor-pointer hover:bg-gray-50">
                       <div>
                         <p className="text-sm font-mono font-medium">{r.reservation_number}</p>
                         <p className="text-xs text-gray-400">{r.clients?.company_name}</p>
@@ -134,7 +134,7 @@ export default function CreateInvoiceModal({ open, onClose, onCreated, reservati
         <div className="bg-gray-50 rounded-lg p-4 mb-4 text-sm">
           <div className="flex justify-between"><span className="text-gray-500">Medzisúčet</span><span>{formatPrice(activeRes.subtotal)}</span></div>
           <div className="flex justify-between"><span className="text-gray-500">DPH (23%)</span><span>{formatPrice(activeRes.vat_amount)}</span></div>
-          <div className="flex justify-between pt-2 border-t border-gray-100 font-bold text-lg mt-2">
+          <div className="flex justify-between pt-2 border-t border-gray-200 font-bold text-lg mt-2">
             <span>Celkom</span><span>{formatPrice(activeRes.total)}</span>
           </div>
         </div>

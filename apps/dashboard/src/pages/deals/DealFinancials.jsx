@@ -25,12 +25,12 @@ export default function DealFinancials({ reservation }) {
         <span className="text-gray-500">DPH (23%)</span>
         <span>{formatPrice(reservation.vat_amount)}</span>
       </div>
-      <div className="flex justify-between pt-2 border-t border-gray-100 text-lg font-bold">
+      <div className="flex justify-between pt-2 border-t border-gray-200 text-lg font-bold">
         <span>Celkom</span>
         <span>{formatPrice(reservation.total)}</span>
       </div>
       {reservation.deposit_required && (
-        <div className="flex justify-between pt-2 border-t border-gray-100 text-sm">
+        <div className="flex justify-between pt-2 border-t border-gray-200 text-sm">
           <span className="text-gray-500">Záloha</span>
           <span>{reservation.deposit_amount > 0 ? formatPrice(reservation.deposit_amount) : 'Vyžadovaná'}</span>
         </div>

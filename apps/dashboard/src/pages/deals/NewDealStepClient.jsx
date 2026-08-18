@@ -138,7 +138,7 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
       </div>
 
       {showNew && (
-        <div className="bg-white rounded-xl border border-gray-100 shadow-card p-4 mb-4 space-y-4">
+        <div className="bg-white rounded-xl border border-gray-200 shadow-card p-4 mb-4 space-y-4">
           {/* FO/PO Toggle */}
           <div className="flex items-center gap-2">
             <button
@@ -303,7 +303,7 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
               key={client.id}
               onClick={() => onSelect(client)}
               className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all ${
-                isSelected ? 'border-royal-500 bg-royal-50 ring-1 ring-royal-500' : 'border-gray-100 hover:border-gray-300 hover:bg-gray-50'
+                isSelected ? 'border-royal-500 bg-royal-50 ring-1 ring-royal-500' : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
               }`}
             >
               <div className="flex items-center gap-2">

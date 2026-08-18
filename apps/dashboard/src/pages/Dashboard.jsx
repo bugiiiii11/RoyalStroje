@@ -14,7 +14,7 @@ function DealCard({ deal, onClick }) {
   return (
     <div
       onClick={() => onClick(deal)}
-      className="bg-white rounded-xl border border-gray-100 p-3.5 cursor-pointer card-interactive group"
+      className="bg-white rounded-xl border border-gray-200 p-3.5 cursor-pointer card-interactive group"
     >
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs font-mono font-medium text-gray-500">{dealContractNumber(deal)}</span>
@@ -181,10 +181,10 @@ export default function Dashboard() {
       </div>
 
       {/* Today's Schedule */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-6 mb-6">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-card p-6 mb-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Dnešný rozvrh</h2>
         <TodayTasks />
-        <div className="border-t border-gray-100 my-5" />
+        <div className="border-t border-gray-200 my-5" />
         <h3 className="text-sm font-semibold text-gray-700 mb-3">Prenájmy</h3>
         {dealsLoading ? (
           <div className="flex justify-center py-8"><Spinner /></div>
@@ -194,7 +194,7 @@ export default function Dashboard() {
       </div>
 
       {/* Pipeline Kanban */}
-      <div className="bg-white rounded-xl border border-gray-100 shadow-card p-6">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-card p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Pipeline obchodov</h2>
         {dealsLoading ? (
           <div className="flex justify-center py-8"><Spinner /></div>
