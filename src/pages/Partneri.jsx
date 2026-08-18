@@ -5,81 +5,109 @@ import PageHero from '../components/common/PageHero';
 import CtaBand from '../components/common/CtaBand';
 import { useInView } from '../hooks/useInView';
 
+// Optical sizing for the logo wall. A single shared bounding box would be
+// wrong: a 9.35:1 wordmark fills it and a 0.76:1 portrait mark rattles around
+// inside it at a third of the visual weight. So each mark gets the same
+// AREA instead -- w = sqrt(AREA * ratio) -- clamped by what the cell can hold.
+// Numbers are for the xl breakpoint; --logo-scale in index.css steps them down.
+const LOGO_AREA = 11000; // px^2; a square mark lands at ~105px
+const LOGO_MAX_W = 224;
+const LOGO_MAX_H = 108;
+const logoWidth = (ratio) =>
+  Math.round(Math.min(Math.sqrt(LOGO_AREA * ratio), LOGO_MAX_W, LOGO_MAX_H * ratio));
+
 export default function Partneri() {
   const [headingRef, headingInView] = useInView();
   const [gridRef, gridInView] = useInView();
   const [infoRef, infoInView] = useInView();
+  // `ratio` is the asset's own width/height. Every file is trimmed HARD to its
+  // ink box, so canvas ratio == ink ratio and the numbers below drive the
+  // on-page size directly (see logoWidth). A new partner logo MUST be trimmed
+  // the same way -- transparent padding inside the canvas silently shrinks the
+  // mark on the wall.
   const partners = [
     {
       id: 1,
       name: 'M & M WOOD',
       logo: '/pictures/graphics/partneri/logo_mmwood.webp',
+      ratio: 1.2,
       website: 'https://www.mmwood.sk/',
     },
     {
       id: 2,
       name: 'TERRA',
       logo: '/pictures/graphics/partneri/logo_terra.webp',
+      ratio: 4.55,
       website: 'https://www.terra-world.sk/',
     },
     {
       id: 3,
       name: 'WACKER NEUSON',
       logo: '/pictures/graphics/partneri/logo_wacker.webp',
+      ratio: 2.93,
       website: 'https://www.wackerneuson.sk/',
     },
     {
       id: 4,
       name: 'MAKITA',
       logo: '/pictures/graphics/partneri/logo_makita.webp',
+      ratio: 4.29,
       website: 'https://makita.sk/',
     },
     {
       id: 5,
       name: 'M.D.N Tech',
-      logo: '/pictures/graphics/partneri/logo_mdn_tech.webp',
+      logo: '/pictures/graphics/partneri/logo_mdn_tech_v2.webp',
+      ratio: 5.73,
       website: 'https://mdntech.org/sk',
     },
     {
       id: 6,
       name: 'Royal Works',
       logo: '/pictures/graphics/partneri/logo_royal_works.webp',
+      ratio: 9.35,
       website: 'https://royalworks.sk/',
     },
     {
       id: 7,
       name: 'ZSOLIKA',
       logo: '/pictures/graphics/partneri/logo_zsolika.webp',
+      ratio: 2.23,
       website: 'https://www.zsolika.sk/',
     },
     {
       id: 8,
       name: 'MOBILBOX',
       logo: '/pictures/graphics/partneri/logo_mobilbox.webp',
+      ratio: 1.24,
       website: 'https://mobilbox.sk/',
     },
     {
       id: 9,
       name: 'ESKOPA',
       logo: '/pictures/graphics/partneri/logo_eskopa.webp',
+      ratio: 3.26,
       website: null,
     },
     {
       id: 10,
       name: 'MOBA',
       logo: '/pictures/graphics/partneri/logo_moba.webp',
+      ratio: 2.4,
       website: 'https://moba.sk/',
     },
     {
       id: 11,
       name: 'MK Stavebná činnosť',
-      logo: '/pictures/graphics/partneri/logo_mk_stavebna_cinnost.webp',
+      logo: '/pictures/graphics/partneri/logo_mk_stavebna_cinnost_v2.webp',
+      ratio: 0.76,
       website: 'https://www.facebook.com/people/MK-Stavebn%C3%A1-%C4%8Cinnos%C5%A5/61579051122998/',
     },
     {
       id: 12,
       name: 'UNICON',
-      logo: '/pictures/graphics/partneri/logo_unicon.webp',
+      logo: '/pictures/graphics/partneri/logo_unicon_v2.webp',
+      ratio: 3.31,
       website: 'https://www.unicon.cz/',
     },
   ];
@@ -151,27 +179,28 @@ export default function Partneri() {
               background paints the rules) rather than twelve floating tiles --
               the wall reads as a single composed object. Twelve partners divide
               evenly by 2, 3 and 4, so every breakpoint fills complete rows.
+              The 4th column waits for lg, not md: at 768px four columns leave a
+              cell too narrow to hold a wordmark at readable size, and three
+              wide cells beat four cramped ones.
               Names are intentionally absent: on most of these logos the caption
               just repeated the wordmark. The name survives as alt + title. */}
           <div
             ref={gridRef}
             className={`mb-8 md:mb-16 reveal ${gridInView ? 'in-view' : ''}`}
           >
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-zinc-200 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm shadow-zinc-900/5">
+            <div className="partner-wall grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-zinc-200 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm shadow-zinc-900/5">
               {partners.map((partner) => {
-                // max-height caps the square marks, max-width caps the wide
-                // wordmarks -- together they even out the optical weight of
-                // logos whose natural aspect ratios run from 0.76:1 to 7.3:1.
                 const logo = (
                   <img
                     src={partner.logo}
                     alt={partner.name}
                     loading="lazy"
-                    className="partner-logo max-h-10 md:max-h-[3.25rem] max-w-[7rem] md:max-w-[10rem] w-auto object-contain"
+                    style={{ '--logo-w': `${logoWidth(partner.ratio)}px` }}
+                    className="partner-logo"
                   />
                 );
                 const cellClass =
-                  'partner-cell relative flex items-center justify-center bg-white px-4 py-8 md:px-8 md:py-11 min-h-[6.5rem] md:min-h-[9rem]';
+                  'partner-cell relative flex items-center justify-center bg-white px-3 py-5 sm:px-4 sm:py-6 xl:px-6 xl:py-7 min-h-[7rem] sm:min-h-[8.75rem] md:min-h-[9.5rem] xl:min-h-[10.5rem]';
 
                 return partner.website ? (
                   <a

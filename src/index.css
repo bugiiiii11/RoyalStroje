@@ -208,7 +208,34 @@
 .partner-cell {
   transition: box-shadow 0.25s ease;
 }
+/* Each logo carries its own --logo-w (Partneri.jsx computes it from the mark's
+   aspect ratio so every mark reads at the same optical weight). --logo-scale
+   steps that ladder down per breakpoint -- it has to drop at sm/base because
+   the wall goes 4 -> 3 -> 2 columns while the viewport shrinks faster. Height
+   is never set: the width plus the asset's own ratio decides it, so a stale
+   cached asset renders a little short rather than distorted. */
+.partner-wall {
+  --logo-scale: 0.56;
+}
+@media (min-width: 640px) {
+  .partner-wall {
+    --logo-scale: 0.7;
+  }
+}
+@media (min-width: 768px) {
+  .partner-wall {
+    --logo-scale: 0.85;
+  }
+}
+@media (min-width: 1280px) {
+  .partner-wall {
+    --logo-scale: 1;
+  }
+}
 .partner-logo {
+  width: calc(var(--logo-w, 160px) * var(--logo-scale, 1));
+  max-width: 100%;
+  height: auto;
   transition: filter 0.3s ease;
 }
 @media (hover: hover) {
