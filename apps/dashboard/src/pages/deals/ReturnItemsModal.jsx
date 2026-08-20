@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { calculateRentalDays, combineDatetime } from '../../lib/rentalDays';
 import { formatPrice, VAT_RATE } from '../../lib/constants';
 import { prepareFinalizationContract } from '../../lib/contractNumbers';
+import { buildFinancialSync } from '../../lib/reservationFinance';
 import generateAgreementPdf from '../../lib/generateAgreementPdf';
 import generateAgreementPdfPO from '../../lib/generateAgreementPdfPO';
 
@@ -202,26 +203,13 @@ export default function ReturnItemsModal({
       const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
       await gen(reservation, pdfItems, client, contractDataForPdf);
 
-      // 6. Sync reservation financials to the finalized price. The custom final
-      //    price is authoritative (dashboard revenue reads reservations.total /
-      //    vat_amount, not contracts.final_total). Sum across ALL finálne
-      //    contracts — partial returns each carry their own final_total.
-      //    Discount/delivery are folded into the custom price, so zero them
-      //    out to keep DealFinancials arithmetic consistent.
+      // 6. Sync reservation financials to the finalized price (see
+      //    buildFinancialSync) and auto-complete when everything is returned.
       const otherFinals = (contracts || [])
         .filter((c) => c.type === 'finalna' && c.id !== contractId)
         .reduce((sum, c) => sum + (parseFloat(c.final_total) || 0), 0);
-      const grossTotal = Math.round((otherFinals + (parseFloat(finalTotal) || 0)) * 100) / 100;
-      const netTotal = Math.round((grossTotal / (1 + VAT_RATE)) * 100) / 100;
       const remainingAfter = rows.length - selectedRows.length;
-      const resUpdate = {
-        subtotal: netTotal,
-        vat_amount: Math.round((grossTotal - netTotal) * 100) / 100,
-        total: grossTotal,
-        discount_amount: 0,
-        discount_percent: 0,
-        delivery_fee: 0,
-      };
+      const resUpdate = buildFinancialSync(otherFinals + (parseFloat(finalTotal) || 0));
       if (remainingAfter === 0) resUpdate.status = 'completed';
       const { error: resSyncErr } = await supabase
         .from('reservations')

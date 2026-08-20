@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Building2, Phone, Mail, FileDown, FileText, Receipt, CheckCircle, ChevronDown } from 'lucide-react';
+import { ArrowLeft, Building2, Phone, Mail, FileDown, FileText, Receipt, CheckCircle, ChevronDown, Pencil } from 'lucide-react';
 import useSupabaseQuery from '../../hooks/useSupabaseQuery';
 import useReservationContracts from '../../hooks/useReservationContracts';
 import { supabase } from '../../lib/supabase';
@@ -17,6 +17,7 @@ import generateAgreementPdf from '../../lib/generateAgreementPdf';
 import generateAgreementPdfPO from '../../lib/generateAgreementPdfPO';
 import CreateInvoiceModal from '../invoices/CreateInvoiceModal';
 import ReturnItemsModal from './ReturnItemsModal';
+import EditFinalPriceModal from './EditFinalPriceModal';
 import { VALID_TRANSITIONS, RESERVATION_STATUSES, formatDate, formatPrice } from '../../lib/constants';
 
 export default function DealDetail() {
@@ -28,6 +29,7 @@ export default function DealDetail() {
   const [showInvoice, setShowInvoice] = useState(false);
   const [showReturn, setShowReturn] = useState(false);
   const [finalDropdownOpen, setFinalDropdownOpen] = useState(false);
+  const [editPriceContract, setEditPriceContract] = useState(null);
 
   const { data: reservation, loading, refetch } = useSupabaseQuery(
     () => supabase
@@ -171,8 +173,8 @@ export default function DealDetail() {
                     {finalContracts.map((fc) => {
                       const count = fc.contract_returned_items?.length || 0;
                       return (
+                        <div key={fc.id} className="flex items-stretch hover:bg-gray-50">
                         <button
-                          key={fc.id}
                           onClick={async () => {
                             setFinalDropdownOpen(false);
                             // Rebuild items with only the returned ones for this contract
@@ -202,16 +204,28 @@ export default function DealDetail() {
                             const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
                             await gen(reservation, pdfItems, client, fc);
                           }}
-                          className="w-full text-left px-3 py-2 hover:bg-gray-50 flex items-center justify-between"
+                          className="flex-1 min-w-0 text-left px-3 py-2 flex items-center justify-between"
+                          title="Stiahnuť PDF"
                         >
-                          <div>
+                          <div className="min-w-0">
                             <p className="text-sm font-mono font-medium text-gray-900">{fc.contract_number}</p>
                             <p className="text-xs text-gray-500">
-                              {fc.return_date ? formatDate(fc.return_date) : '—'} · {count} {count === 1 ? 'položka' : 'položky'}
+                              {fc.return_date ? formatDate(fc.return_date) : '—'} · {count} {count === 1 ? 'položka' : 'položky'} · {formatPrice(parseFloat(fc.final_total) || 0)}
                             </p>
                           </div>
-                          <FileDown className="w-4 h-4 text-gray-400" />
+                          <FileDown className="w-4 h-4 text-gray-400 flex-shrink-0" />
                         </button>
+                        <button
+                          onClick={() => {
+                            setFinalDropdownOpen(false);
+                            setEditPriceContract(fc);
+                          }}
+                          className="px-3 flex items-center text-gray-400 hover:text-royal-600 hover:bg-royal-50 transition-colors"
+                          title="Upraviť cenu"
+                        >
+                          <Pencil className="w-4 h-4" />
+                        </button>
+                        </div>
                       );
                     })}
                   </div>
@@ -373,6 +387,18 @@ export default function DealDetail() {
         returnedBySerial={returnedBySerial}
         returnedQty={returnedQty}
         onFinalized={() => { setShowReturn(false); refetchContract(); refetch(); }}
+      />
+
+      {/* Edit final contract price */}
+      <EditFinalPriceModal
+        open={!!editPriceContract}
+        onClose={() => setEditPriceContract(null)}
+        contract={editPriceContract}
+        otherFinalsTotal={finalContracts
+          .filter((c) => c.id !== editPriceContract?.id)
+          .reduce((sum, c) => sum + (parseFloat(c.final_total) || 0), 0)}
+        reservationId={id}
+        onSaved={() => { refetchContract(); refetch(); }}
       />
 
       {/* Invoice Modal */}
