@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { BarChart3, Package, Users, TrendingUp } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { BarChart3, Package, FileText, TrendingUp } from 'lucide-react';
 import { StatCard } from '../../components/ui/Card';
 import { ContentCard } from '../../components/ui/Card';
 import Spinner from '../../components/ui/Spinner';
@@ -61,6 +62,7 @@ function RankingTable({ data, columns }) {
 }
 
 export default function Reports() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({
     monthRevenue: 0, yearRevenue: 0, totalInvoices: 0, paidInvoices: 0,
@@ -78,8 +80,10 @@ export default function Reports() {
       const [monthRes, yearRes, invoiceCountRes, paidCountRes, equipRes, activeEquipRes] = await Promise.all([
         supabase.from('reservations').select('total, vat_amount').in('status', ['completed', 'invoiced', 'paid']).gte('created_at', monthStart),
         supabase.from('reservations').select('total, vat_amount').in('status', ['completed', 'invoiced', 'paid']).gte('created_at', yearStart),
-        supabase.from('invoices').select('id', { count: 'exact', head: true }),
-        supabase.from('invoices').select('id', { count: 'exact', head: true }).eq('status', 'paid'),
+        // "Faktúry" are finálne zmluvy (payment lives on contracts.paid_at),
+        // NOT the dead invoices table — it would always count 0/0.
+        supabase.from('contracts').select('id', { count: 'exact', head: true }).eq('type', 'finalna'),
+        supabase.from('contracts').select('id', { count: 'exact', head: true }).eq('type', 'finalna').not('paid_at', 'is', null),
         supabase.from('equipment').select('id', { count: 'exact', head: true }),
         supabase.from('equipment').select('id', { count: 'exact', head: true }).eq('status', 'active'),
       ]);
@@ -158,7 +162,13 @@ export default function Reports() {
         <StatCard icon={TrendingUp} label="Tržby tento mesiac (bez DPH)" value={formatPrice(stats.monthRevenue)} color="bg-green-500" />
         <StatCard icon={BarChart3} label="Tržby tento rok (bez DPH)" value={formatPrice(stats.yearRevenue)} color="bg-blue-500" />
         <StatCard icon={Package} label="Zariadenia" value={`${stats.activeEquipment}/${stats.totalEquipment}`} color="bg-purple-500" />
-        <StatCard icon={Users} label="Faktúry (zaplatené)" value={`${stats.paidInvoices}/${stats.totalInvoices}`} color="bg-orange-500" />
+        <StatCard
+          icon={FileText}
+          label="Faktúry (zaplatené)"
+          value={`${stats.paidInvoices}/${stats.totalInvoices}`}
+          color="bg-orange-500"
+          onClick={() => navigate('/invoices?type=finalna')}
+        />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

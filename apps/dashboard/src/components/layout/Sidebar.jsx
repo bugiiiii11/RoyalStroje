@@ -11,6 +11,7 @@ import {
   TrendingUp,
   ShoppingCart,
   Clock,
+  ListChecks,
   AlertTriangle,
   Wrench,
   Euro,
@@ -187,6 +188,12 @@ export default function Sidebar({ open, onClose }) {
               icon={Clock}
               label="Dnešné udalosti"
               value={stats.todayEvents === 0 ? 'Žiadne' : `${stats.todayEvents}`}
+              loading={loading}
+            />
+            <MiniStat
+              icon={ListChecks}
+              label="Dnešné úlohy (splnené)"
+              value={stats.tasksTotal === 0 ? 'Žiadne' : `${stats.tasksDone}/${stats.tasksTotal}`}
               loading={loading}
             />
             {stats.overdueInvoices > 0 && (

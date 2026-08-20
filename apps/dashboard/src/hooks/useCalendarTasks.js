@@ -4,6 +4,10 @@ import { supabase } from '../lib/supabase';
 
 // Dispatcher tasks for a date range (inclusive). Mutations update local state
 // optimistically so ticking a task off never flashes the whole grid.
+
+// Other listeners (sidebar Prehľad counter) re-fetch on this signal.
+const announceChange = () => window.dispatchEvent(new Event('rs:stats-refresh'));
+
 export default function useCalendarTasks(from, to) {
   const { data, loading, error, refetch } = useSupabaseQuery(
     () => supabase
@@ -35,6 +39,7 @@ export default function useCalendarTasks(from, to) {
       .single();
     if (e) { setMutationError(e.message); return null; }
     setTasks(prev => [...prev, row]);
+    announceChange();
     return row;
   }, []);
 
@@ -48,6 +53,7 @@ export default function useCalendarTasks(from, to) {
       .single();
     if (e) { setMutationError(e.message); refetch(); return null; }
     setTasks(prev => prev.map(t => (t.id === id ? row : t)));
+    announceChange();
     return row;
   }, [refetch]);
 
@@ -56,6 +62,7 @@ export default function useCalendarTasks(from, to) {
     setTasks(prev => { snapshot = prev; return prev.filter(t => t.id !== id); });
     const { error: e } = await supabase.from('calendar_tasks').delete().eq('id', id);
     if (e) { setMutationError(e.message); setTasks(snapshot); return false; }
+    announceChange();
     return true;
   }, []);
 
