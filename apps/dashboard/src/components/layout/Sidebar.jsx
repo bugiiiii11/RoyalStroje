@@ -10,7 +10,6 @@ import {
   X,
   TrendingUp,
   ShoppingCart,
-  Clock,
   ListChecks,
   AlertTriangle,
   Wrench,
@@ -182,12 +181,6 @@ export default function Sidebar({ open, onClose }) {
               icon={Wrench}
               label="Zariadenia"
               value={stats.totalEquipment}
-              loading={loading}
-            />
-            <MiniStat
-              icon={Clock}
-              label="Dnešné udalosti"
-              value={stats.todayEvents === 0 ? 'Žiadne' : `${stats.todayEvents}`}
               loading={loading}
             />
             <MiniStat

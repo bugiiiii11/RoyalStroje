@@ -11,12 +11,16 @@ export default function useDashboardStats() {
   const [loading, setLoading] = useState(true);
 
   const fetchStats = useCallback(async () => {
-    const today = new Date().toISOString().split('T')[0];
+    const now = new Date();
+    const today = now.toISOString().split('T')[0];
     const monthStart = today.slice(0, 7) + '-01';
+    const monthEndD = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    const monthEnd = `${monthEndD.getFullYear()}-${String(monthEndD.getMonth() + 1).padStart(2, '0')}-${String(monthEndD.getDate()).padStart(2, '0')}`;
 
     const [activeRes, revenueRes, clientsRes, todayRes, overdueRes, equipRes, contractsRes, tasksRes] = await Promise.all([
       supabase.from('reservations').select('id', { count: 'exact', head: true }).eq('status', 'inquiry'),
-      supabase.from('reservations').select('total, vat_amount').in('status', ['completed', 'invoiced', 'paid']).gte('created_at', monthStart),
+      // date_from basis, same as Reports — created_at drifted the two apart
+      supabase.from('reservations').select('total, vat_amount').in('status', ['completed', 'invoiced', 'paid']).gte('date_from', monthStart).lte('date_from', monthEnd),
       supabase.from('clients').select('id', { count: 'exact', head: true }),
       supabase.from('reservations').select('id', { count: 'exact', head: true }).or(`date_from.eq.${today},date_to.eq.${today}`),
       supabase.from('invoices').select('id', { count: 'exact', head: true }).in('status', ['draft', 'sent']).lt('due_date', today),
