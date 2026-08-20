@@ -110,6 +110,13 @@ export default function Partneri() {
       ratio: 3.31,
       website: 'https://www.unicon.cz/',
     },
+    {
+      id: 13,
+      name: 'SILKOT-ETI',
+      logo: '/pictures/graphics/partneri/logo_silkot_eti.webp',
+      ratio: 5.31,
+      website: 'https://silkot-eti.sk/',
+    },
   ];
 
   return (
@@ -176,9 +183,11 @@ export default function Partneri() {
 
           {/* Partner logo wall.
               One continuous sheet with a hairline lattice (gap-px over a zinc
-              background paints the rules) rather than twelve floating tiles --
-              the wall reads as a single composed object. Twelve partners divide
-              evenly by 2, 3 and 4, so every breakpoint fills complete rows.
+              background paints the rules) rather than floating tiles -- the
+              wall reads as a single composed object. Thirteen partners no
+              longer divide evenly by 2/3/4, so blank white filler cells top up
+              the last row per breakpoint (1 on 2-col, 2 on 3-col, 3 on 4-col)
+              -- without them the container's zinc shows as a grey block.
               The 4th column waits for lg, not md: at 768px four columns leave a
               cell too narrow to hold a wordmark at readable size, and three
               wide cells beat four cramped ones.
@@ -219,6 +228,11 @@ export default function Partneri() {
                   </div>
                 );
               })}
+              {/* Row top-ups: 13 % cols leaves 1 orphan at every breakpoint.
+                  Mobile 2-col needs +1, sm 3-col +2, lg 4-col +3. */}
+              <div className="bg-white min-h-[7rem] sm:min-h-[8.75rem] md:min-h-[9.5rem] xl:min-h-[10.5rem]" aria-hidden="true" />
+              <div className="hidden sm:block min-h-[8.75rem] md:min-h-[9.5rem] xl:min-h-[10.5rem] bg-white" aria-hidden="true" />
+              <div className="hidden lg:block min-h-[9.5rem] xl:min-h-[10.5rem] bg-white" aria-hidden="true" />
             </div>
           </div>
 
