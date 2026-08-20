@@ -4,10 +4,9 @@
 
 ## Current State
 
-- **Phase:** design polish. Partner logo wall re-cut and re-sized (s56); dashboard chrome redesigned (s56). Both on `dev` only -- **NOT released to PROD this session**
+- **Phase:** design polish. s55+s56 (partner wall + dashboard chrome) RELEASED to PROD; migration 022 confirmed run (payment tiles show live numbers: 222 paid / 80 unpaid, 2026-08-20)
 - **Session count:** 56
-- **Repo status:** `dev` == `origin/dev` at `d99f794`, tree clean. `main` still at `44c4f48` -- dev is 2 feature commits ahead of PROD
-- **PENDING OWNER ACTION:** migration `022_contract_payment_status.sql` still not run in the Supabase SQL editor. Until then the two payment tiles read 0 and the toggle errors -- code degrades gracefully, it does not crash
+- **Repo status:** `dev` == `origin/dev` == `origin/main` at `8857f6f`, tree clean
 
 ## What Was Done (Session 55) -- Platby faktur v dashboarde + upratane filtre + redizajn steny partnerov
 Date: 2026-08-18
@@ -35,8 +34,6 @@ Date: 2026-08-18
 
 | # | Priority | Task | Notes |
 |---|----------|------|-------|
-| 0 | **OWNER** | Run `supabase/migrations/022_contract_payment_status.sql` in the Supabase SQL editor | Adds `contracts.paid_at` + backfills finálne older than 30 days as paid + partial index. No RLS change needed (`contracts_all` from 011 already covers it). After it runs, review the last 30 days on the Faktúry page and mark the genuinely paid ones |
-| 1 | High | **Release s55+s56 to PROD** once the owner has reviewed staging | `dev` (`d99f794`) is 2 commits ahead of `main` (`44c4f48`): partner wall + dashboard chrome. Both are visual-only. Fast-forward `dev`->`main` |
 | 2 | Med | Dashboard design -- next wins, owner picked none yet | Offered at the end of s56, awaiting a choice: (a) "Nový obchod" renders twice on the Dashboard, drop the page-header one; (b) sidebar "Prehľad" duplicates 4 of the 6 stat tiles, trim to what is not already on screen; (c) global search / cmd-K in the empty header; (d) compact table rows (~40% more rows per screen); (e) stat-tile colours are decorative, make them semantic (neutral/positive/attention); (f) single 1.05 MB JS chunk -- route-level code splitting |
 | 3 | Med | Footer credit still uses the OLD M.D.N Tech icon | `src/components/common/Footer.jsx:235` renders `logo_mdntech.webp` (white-on-black square, superseded) while `/partneri` now shows the new mark. Fix = `logo-final-white.svg` from `M.D.N-Tech-main/public/brand/`. Owner said "zatiaľ neriešiť". Same stale icon also sits in `apps/dashboard/public/logo_mdntech.webp` (sidebar credit) |
 | 4 | **OWNER** | NAP citations per `docs/nap-citations.md` -- next up: Azet, Firemný portál, Waze | Zlaté stránky + Bing done s53; Apple with the founder. Highest value is actually partner/manufacturer links, not directories. Also pending: switch GBP Website field from `www.` to the apex (canonical since s48) |

@@ -300,8 +300,42 @@ export default function CalendarView() {
               })}
             </div>
 
-            {/* Rentals lane -- closes the header block, hence the heavy bottom rule */}
-            <div className="grid border-b-2 border-gray-400 bg-gray-50" style={gridCols}>
+            {/* Hour grid */}
+            {loading && tasks.length === 0 ? (
+              <div className="flex justify-center py-20"><Spinner /></div>
+            ) : (
+              HOURS.map((hour) => (
+                <div key={hour} className="grid border-b border-gray-200 last:border-b-0" style={gridCols}>
+                  <div className="px-2 py-2 border-r border-gray-200 bg-gray-50/60 text-right text-[13px] font-medium text-gray-500 tabular-nums">
+                    {formatHour(hour)}
+                  </div>
+                  {weekDays.map((day) => {
+                    const iso = toISO(day);
+                    const isToday = iso === todayISO;
+                    const showNow = isToday && now.getHours() === hour && hour >= FIRST_HOUR && hour <= LAST_HOUR;
+                    return (
+                      <DayCell
+                        key={iso + hour}
+                        dayISO={iso}
+                        hour={hour}
+                        isToday={isToday}
+                        tasks={tasksBySlot[`${iso}|${hour}`] || []}
+                        quickAdd={quickAdd?.dayISO === iso && quickAdd?.hour === hour}
+                        nowPct={showNow ? (now.getMinutes() / 60) * 100 : null}
+                        onCellClick={(d, h) => setQuickAdd({ dayISO: d, hour: h })}
+                        onQuickSubmit={handleQuickSubmit}
+                        onQuickCancel={() => setQuickAdd(null)}
+                        onToggleTask={(t) => updateTask(t.id, { done: !t.done })}
+                        onOpenTask={(t) => setModalTask(t)}
+                      />
+                    );
+                  })}
+                </div>
+              ))
+            )}
+
+            {/* Rentals lane -- sits under the hour grid, the heavy top rule closes it off */}
+            <div className="grid border-t-2 border-gray-400 bg-gray-50" style={gridCols}>
               <div className="px-2 py-2 border-r border-gray-200 text-right text-[11px] font-semibold uppercase tracking-wide text-gray-400">
                 Prenájmy
               </div>
@@ -343,40 +377,6 @@ export default function CalendarView() {
                 )}
               </div>
             </div>
-
-            {/* Hour grid */}
-            {loading && tasks.length === 0 ? (
-              <div className="flex justify-center py-20"><Spinner /></div>
-            ) : (
-              HOURS.map((hour) => (
-                <div key={hour} className="grid border-b border-gray-200 last:border-b-0" style={gridCols}>
-                  <div className="px-2 py-2 border-r border-gray-200 bg-gray-50/60 text-right text-[13px] font-medium text-gray-500 tabular-nums">
-                    {formatHour(hour)}
-                  </div>
-                  {weekDays.map((day) => {
-                    const iso = toISO(day);
-                    const isToday = iso === todayISO;
-                    const showNow = isToday && now.getHours() === hour && hour >= FIRST_HOUR && hour <= LAST_HOUR;
-                    return (
-                      <DayCell
-                        key={iso + hour}
-                        dayISO={iso}
-                        hour={hour}
-                        isToday={isToday}
-                        tasks={tasksBySlot[`${iso}|${hour}`] || []}
-                        quickAdd={quickAdd?.dayISO === iso && quickAdd?.hour === hour}
-                        nowPct={showNow ? (now.getMinutes() / 60) * 100 : null}
-                        onCellClick={(d, h) => setQuickAdd({ dayISO: d, hour: h })}
-                        onQuickSubmit={handleQuickSubmit}
-                        onQuickCancel={() => setQuickAdd(null)}
-                        onToggleTask={(t) => updateTask(t.id, { done: !t.done })}
-                        onOpenTask={(t) => setModalTask(t)}
-                      />
-                    );
-                  })}
-                </div>
-              ))
-            )}
           </div>
         </div>
       </div>
