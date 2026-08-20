@@ -202,14 +202,32 @@ export default function ReturnItemsModal({
       const gen = client?.entity_type === 'fo' ? generateAgreementPdf : generateAgreementPdfPO;
       await gen(reservation, pdfItems, client, contractDataForPdf);
 
-      // 6. Auto-complete reservation if everything is now returned
+      // 6. Sync reservation financials to the finalized price. The custom final
+      //    price is authoritative (dashboard revenue reads reservations.total /
+      //    vat_amount, not contracts.final_total). Sum across ALL finálne
+      //    contracts — partial returns each carry their own final_total.
+      //    Discount/delivery are folded into the custom price, so zero them
+      //    out to keep DealFinancials arithmetic consistent.
+      const otherFinals = (contracts || [])
+        .filter((c) => c.type === 'finalna' && c.id !== contractId)
+        .reduce((sum, c) => sum + (parseFloat(c.final_total) || 0), 0);
+      const grossTotal = Math.round((otherFinals + (parseFloat(finalTotal) || 0)) * 100) / 100;
+      const netTotal = Math.round((grossTotal / (1 + VAT_RATE)) * 100) / 100;
       const remainingAfter = rows.length - selectedRows.length;
-      if (remainingAfter === 0) {
-        await supabase
-          .from('reservations')
-          .update({ status: 'completed' })
-          .eq('id', reservation.id);
-      }
+      const resUpdate = {
+        subtotal: netTotal,
+        vat_amount: Math.round((grossTotal - netTotal) * 100) / 100,
+        total: grossTotal,
+        discount_amount: 0,
+        discount_percent: 0,
+        delivery_fee: 0,
+      };
+      if (remainingAfter === 0) resUpdate.status = 'completed';
+      const { error: resSyncErr } = await supabase
+        .from('reservations')
+        .update(resUpdate)
+        .eq('id', reservation.id);
+      if (resSyncErr) throw resSyncErr;
 
       onFinalized?.();
       onClose();
