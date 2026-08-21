@@ -2,7 +2,7 @@
 
 Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block below.
 
-## Archived Session Summary (sessions 1-44)
+## Archived Session Summary (sessions 1-47)
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
@@ -52,8 +52,18 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 45 | 2026-07-29 | Nový blog článok JCB 19C-1 (úprimná recenzia po 170 mth) | Replaces old hidden id-19 article; article<->catalog prelink (owner SQL pending); .claude tooling overhaul (auto-wrap hook, handoff skill, CLAUDE.md) |
 | 46 | 2026-07-29 | Release sessions 43-46 na PROD + fotky strojov v CTA pásoch + promo WT30 | 3x `dev`->`main`; cutout tool `scripts/cutout-transparent.py`; Haulotte foto v SourcingBanner + CtaBand (opt-in prop); promo slide Honda WT30; hook force-push vzor zúžený; zistený apex->www redirect vs apex canonical |
 | 44 | 2026-07-16 | Fix prerender boot blink + SEO-1 staging verification | `data-prerendered` suppression chain; SEO-1 verified on Vercel staging; commit `92c571d` |
+| 47 | 2026-07-29 | RCC kalendar: tyzdenny dispecersky pohlad s ulohami -> PROD | Mesacny pohlad nahradeny tyzdennym (Po-Pi, 7-17); nova tabulka `calendar_tasks` (migracia 021, owner spustil); prenajmy v all-day pase; widget dnesnych uloh na dashboarde |
 
-## Archived What Was Done sections (sessions 15-54)
+## Archived What Was Done sections (sessions 15-55)
+
+## What Was Done (Session 55) -- Platby faktur v dashboarde + upratane filtre + redizajn steny partnerov
+Date: 2026-08-18
+
+1. **s53/s54 blocker closed.** The retry build went green; verified live via Node fetch (local `curl` fails with SSL exit 35 on this machine -- use Node). Note for the record: a bogus URL and `/kosik` return **HTTP 200** with the 404 shell, not a 404 status -- Vercel `rewrite` cannot change the status. Google drops them via `noindex`, so the SEO goal holds; a true 404 would need `routes` in `vercel.json`. Not worth doing.
+2. **Payment status lives on `contracts.paid_at`, NOT on `invoices`** -- "Finálna zmluva" is a `contracts` row. Because NULL is the default, finalization in `ReturnItemsModal.jsx` needed **zero** changes: a new finálna zmluva is automatically unpaid. Backfill marks finálne older than 30 days as paid (owner's choice) so the counter starts from a realistic baseline.
+3. Dashboard grid went 4 -> 3 columns so 6 tiles form two clean rows. Toggle on the Faktúry page uses an **optimistic local override, not `refetchCon()`** -- a refetch spinner-flashes the whole table on every single toggle.
+4. **The "Všetky stavy" dropdown was not broken, it was filtering `invoices.status`** -- and no visible row carries one, since every row is a contract. Removed. **Owner confirmed the invoice subsystem stays in code.**
+5. Partners: all twelve logos retrimmed, captions dropped, wall rebuilt as one hairline lattice. Desaturated rest state gated behind `@media (hover: hover)` so phones keep the logos in colour.
 
 ## What Was Done (Session 54) -- 15 GBP produktovych PNG + release na PROD
 Date: 2026-08-14

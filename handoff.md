@@ -1,21 +1,12 @@
 # RoyalStroje -- Session Handoff
 
-<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-54 + old reference blocks archived 2026-07-29, 2026-08-04, 2026-08-05, 2026-08-13, 2026-08-14, 2026-08-18). -->
+<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-55 + old reference blocks; last rotation 2026-08-20). -->
 
 ## Current State
 
-- **Phase:** design polish. s55+s56 (partner wall + dashboard chrome) RELEASED to PROD; migration 022 confirmed run (payment tiles show live numbers: 222 paid / 80 unpaid, 2026-08-20)
-- **Session count:** 56
-- **Repo status:** `dev` == `origin/dev` == `origin/main` at `8857f6f`, tree clean
-
-## What Was Done (Session 55) -- Platby faktur v dashboarde + upratane filtre + redizajn steny partnerov
-Date: 2026-08-18
-
-1. **s53/s54 blocker closed.** The retry build went green; verified live via Node fetch (local `curl` fails with SSL exit 35 on this machine -- use Node). Note for the record: a bogus URL and `/kosik` return **HTTP 200** with the 404 shell, not a 404 status -- Vercel `rewrite` cannot change the status. Google drops them via `noindex`, so the SEO goal holds; a true 404 would need `routes` in `vercel.json`. Not worth doing.
-2. **Payment status lives on `contracts.paid_at`, NOT on `invoices`** -- "Finálna zmluva" is a `contracts` row. Because NULL is the default, finalization in `ReturnItemsModal.jsx` needed **zero** changes: a new finálna zmluva is automatically unpaid. Backfill marks finálne older than 30 days as paid (owner's choice) so the counter starts from a realistic baseline.
-3. Dashboard grid went 4 -> 3 columns so 6 tiles form two clean rows. Toggle on the Faktúry page uses an **optimistic local override, not `refetchCon()`** -- a refetch spinner-flashes the whole table on every single toggle.
-4. **The "Všetky stavy" dropdown was not broken, it was filtering `invoices.status`** -- and no visible row carries one, since every row is a contract. Removed. **Owner confirmed the invoice subsystem stays in code.**
-5. Partners: all twelve logos retrimmed, captions dropped, wall rebuilt as one hairline lattice. Desaturated rest state gated behind `@media (hover: hover)` so phones keep the logos in colour.
+- **Phase:** RCC feature work (payments, price editing, reports) + partner wall growth. Everything from s57 released to PROD continuously; migrations 022 AND 023 confirmed run by owner
+- **Session count:** 57
+- **Repo status:** `dev` == `origin/dev` == `origin/main` at `3b95008` + local wrap commit (unpushed)
 
 ## What Was Done (Session 56) -- Loga partnerov zvacsene + redizajn Command Centra
 Date: 2026-08-18
@@ -29,6 +20,18 @@ Date: 2026-08-18
 7. That broke the active nav row, which was marked with `bg-white` -- **any future sidebar recolour has to re-check the active state**, it has no other marker. Now orange fill + text + a solid left rail.
 8. Login page: crown mark instead of the "RS" tile, "Royal Command Center" instead of the two-line brand block; sidebar eyebrow follows. Header switched from `white/80 + backdrop-blur` to opaque -- a blurred **sticky** bar is the s21 mobile-GPU-garbage construct.
 9. **Could not log into the dashboard to verify** (no credentials). Shell was checked by injecting a throwaway Supabase session into `localStorage` via Puppeteer -- layout is real, all numbers read 0 because the fake token 401s. Both apps build green.
+
+## What Was Done (Session 57) -- Custom cena fix + reporty s 4 zalozkami + SILKOT-ETI
+Date: 2026-08-20
+
+1. **Custom final price never reached revenue** -- return flow wrote it only to `contracts.final_total`, while dashboard/reports read `reservations.total/vat_amount`. Fix: every finalization AND price edit now syncs reservation money fields to the SUM of all finálne contracts via `buildFinancialSync` (`lib/reservationFinance.js`); discount/delivery zeroed (folded into the custom price). Backfill migration 023 **run by owner 2026-08-20, verified working** -- historical revenue now matches contracts.
+2. **New: edit price on a finálna zmluva** -- pencil in the "Finálna zmluva" dropdown on DealDetail opens `EditFinalPriceModal` (net/gross linked both ways at 23%), writes contract + syncs system + logs `contract.price_updated` into Aktivita.
+3. **Reports rebuilt into 4 tabs** (`?tab=` param): Prehľad (tiles + 6-month chart + avg rental length/value), Pohľadávky (unpaid aging 0-14/15-30/30+ by return_date + oldest-unpaid call list), Stroje (rented-days last 30d, category revenue this year, all-time demand), Klienti (top net, new vs returning). One broad fetch per table replaced the per-month query loop.
+4. **Revenue basis unified on `date_from`** (was `created_at` on tiles vs `date_from` on chart -- numbers disagreed by a few EUR). Dashboard tile + sidebar + Reports now agree. Top klienti switched to bez DPH.
+5. Reports "Faktúry (zaplatené)" counted the dead `invoices` table (always 0/0) -- now counts finálne zmluvy with `paid_at`, tile clicks through to Faktúry.
+6. Sidebar Prehľad: "Dnešné udalosti" dropped for a live "Dnešné úlohy (splnené)" done/total counter -- `useCalendarTasks` mutations broadcast `rs:stats-refresh`, `useDashboardStats` listens (refreshes silently, loading only gates first paint).
+7. Dashboard reorder per owner: Pipeline above Dnešný rozvrh; calendar hour grid (tasks) above the Prenájmy lane (heavy rule flipped to border-top).
+8. **SILKOT-ETI added as partner 13** -- source PNG was white-backed RGB; re-cut with the s56 soft-knockout method, ratio 5.31, 4x LANCZOS (`logo_silkot_eti.webp`). 13 partners break the 2/3/4-col lattice, so blank white filler cells top up the last row per breakpoint (1/2/3).
 
 ## What To Do Next
 
@@ -51,9 +54,9 @@ Date: 2026-08-18
 |------|---------|
 | `handoff.md` | Current state + next steps (capped; history in handoff-archive.md) |
 | `src/pages/Partneri.jsx` | Logo wall. `logoWidth` = equal-area sizing from each partner's `ratio`; the ratio must match the asset's trimmed canvas or the mark renders wrong. Deliberately no `max-height` on the img |
-| `src/index.css` (`.partner-wall`/`.partner-logo`/`.partner-cell`) | `--logo-scale` ladder per breakpoint (0.56 / 0.7 / 0.85 / 1). Desaturation stays gated behind `@media (hover: hover)` |
-| `apps/dashboard/src/components/layout/Sidebar.jsx` | White sidebar; the active row's only marker is orange fill + left rail (s56). Recolouring the sidebar means re-checking that state |
-| `apps/dashboard/src/index.css` | `.sidebar-border`, `.card-interactive` (border+shadow hover, no lift), table row hover |
+| `apps/dashboard/src/lib/reservationFinance.js` | `buildFinancialSync(gross)` -- THE way reservation money fields follow finálne contracts. Any new flow touching final prices must call it |
+| `apps/dashboard/src/pages/reports/Reports.jsx` | 4-tab reports; all stats derived client-side from 4 broad fetches; revenue basis = `date_from` |
+| `apps/dashboard/src/components/layout/Sidebar.jsx` | White sidebar; active row marker = orange fill + left rail (s56); live task counter listens to `rs:stats-refresh` |
 | `apps/dashboard/src/pages/invoices/InvoiceList.jsx` | Merged invoices+contracts list. Payment toggle writes `contracts.paid_at` with an optimistic override (s55) -- do NOT swap it for `refetchCon()` |
 | `vercel.json` | SPA rewrite fallback points at `/404.html` (s53) so unknown URLs ship noindex in raw HTML -- NOT `/index.html`. Static assets get `max-age=86400` (see s56 note 1) |
 | `scripts/prerender.mjs` | Puppeteer prerender; Supabase GETs proxied through Node fetch (s52) + snapshot validator; bakes `dist/404.html`. Build FAILS on missing /katalog links, NotFound product bakes, or a 404 snapshot without noindex |
@@ -64,7 +67,6 @@ Date: 2026-08-18
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
-| 47 | 2026-07-29 | RCC kalendar: tyzdenny dispecersky pohlad s ulohami -> PROD | Mesacny pohlad nahradeny tyzdennym (Po-Pi, 7-17); nova tabulka `calendar_tasks` (migracia 021, owner spustil); prenajmy v all-day pase; widget dnesnych uloh na dashboarde |
 | 48 | 2026-08-04 | SEO-2 apex/www domain swap + JCB SQL + Haulotte cutout fix -> PROD | Plot priehladny "Cena dohodou" (Supabase only); Haulotte transparent WebP hole fixed without source photo; apex now canonical via Vercel API (dashboard UI bug blocked normal edit) |
 | 49 | 2026-08-05 | SEO-4 Search Console + GA4 Consent Mode v2 -> PROD | Sitemap submit confirmed, indexing requested on 4 URLs; GA4 (`G-WTPC0SV333`) with full Consent Mode v2 -- gtag.js only loads after accept; CookieBanner now has real Prijat/Odmietnut; pushed (`7af7b6f`) |
 | 50 | 2026-08-05 | SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD | sameAs + FAQPage JSON-LD added; Rich Results Test verified (FAQ not shown = Google policy, not a bug); site-wide og:image + schema image swapped to real yard photo; pushed (`6270a01`) |
@@ -74,5 +76,6 @@ Date: 2026-08-18
 | 54 | 2026-08-14 | 15 GBP produktových PNG + release na PROD | GBP neberie WebP -> 15 PNG na plochu (mimo repa); správne párovanie ide cez Supabase `equipment.image_path` podľa slugu, nie cez názvy súborov v repe; Python SSL tu odmieta Supabase cert, Node fetch funguje; docs-only `dev`->`main` push = zároveň retry padnutého buildu `fcdeab3` |
 | 55 | 2026-08-18 | Platby faktúr v dashboarde + upratané filtre + redizajn steny partnerov | `contracts.paid_at` = stav platby (migrácia 022, owner ju stále NESPUSTIL); 2 nové dlaždice + prepínač na Faktúrach s optimistickým updatom; roleta "Všetky stavy" zmazaná; M.D.N Tech + Royal Works ako partneri 5 a 6; stena partnerov prerobená na vlasovú mriežku; 4x `dev`->`main` |
 | 56 | 2026-08-18 | Loga partnerov zvacsene (rovnaka opticka plocha) + redizajn Command Centra | Hlásené "šedé pozadie" bola stará cache (`max-age=86400`), nie asset -- preto `_v2` názvy; logá teraz podľa rovnakej optickej PLOCHY, nie spoločného boxu (+25-105%); UNICON a MK prerezané nanovo, MDN lockup na finálnu značku; dashboard: biele chrome na tónovanom plátne, 53 neviditeľných `border-gray-100` -> `gray-200`, aktívna položka menu prekreslená, login = "Royal Command Center"; NEPUSHnuté na PROD |
+| 57 | 2026-08-20 | Custom cena fix + reporty so 4 zalozkami + editacia ceny + SILKOT-ETI | Custom finálna cena sa teraz prepisuje aj do rezervácie (`buildFinancialSync`, migrácia 023 = backfill); nový modál na editáciu ceny finálnej zmluvy (bez/s DPH obojsmerne); Reporty = 4 záložky (Pohľadávky so starnutím, Stroje, Klienti); tržby zjednotené na `date_from`; živé počítadlo dnešných úloh v sidebari; SILKOT-ETI partner 13; priebežne 5x `dev`->`main` |
 
 <!-- Sessions 1-46 summary rows + sessions 15-54 full notes + old Architecture/Supabase reference: handoff-archive.md -->
