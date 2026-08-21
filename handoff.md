@@ -6,7 +6,7 @@
 
 - **Phase:** RCC feature work (payments, price editing, reports) + partner wall growth. Everything from s57 released to PROD continuously; migrations 022 AND 023 confirmed run by owner
 - **Session count:** 57
-- **Repo status:** `dev` == `origin/dev` == `origin/main` at `3b95008` + local wrap commit (unpushed)
+- **Repo status:** `dev` == `origin/dev` == `origin/main` at `cb93f93`, tree clean
 
 ## What Was Done (Session 56) -- Loga partnerov zvacsene + redizajn Command Centra
 Date: 2026-08-18
@@ -31,7 +31,9 @@ Date: 2026-08-20
 5. Reports "Faktúry (zaplatené)" counted the dead `invoices` table (always 0/0) -- now counts finálne zmluvy with `paid_at`, tile clicks through to Faktúry.
 6. Sidebar Prehľad: "Dnešné udalosti" dropped for a live "Dnešné úlohy (splnené)" done/total counter -- `useCalendarTasks` mutations broadcast `rs:stats-refresh`, `useDashboardStats` listens (refreshes silently, loading only gates first paint).
 7. Dashboard reorder per owner: Pipeline above Dnešný rozvrh; calendar hour grid (tasks) above the Prenájmy lane (heavy rule flipped to border-top).
-8. **SILKOT-ETI added as partner 13** -- source PNG was white-backed RGB; re-cut with the s56 soft-knockout method, ratio 5.31, 4x LANCZOS (`logo_silkot_eti.webp`). 13 partners break the 2/3/4-col lattice, so blank white filler cells top up the last row per breakpoint (1/2/3).
+8. **Contract vocabulary renamed in the UI only** (owner's wording): nav "Faktúry" -> "Zmluvy", heading "Faktúry & Zmluvy" -> "Zmluvy", `navrh` -> "Otvorená zmluva"/"Otvorená", `finalna` -> "Ukončená zmluva"/"Ukončená" (list, filter, DealDetail buttons). **DB values untouched** -- `contracts.type` stays `navrh`/`finalna`, so `?type=` URLs, queries and reports keep working. Do NOT rename the DB values without sweeping every query.
+9. List "Celkom" column -> "Celkom bez DPH" showing NET: invoices use their own `subtotal`, contracts derive it (`final_total` is stored WITH VAT). Return modal also gained a net price field linked both ways to gross.
+10. **SILKOT-ETI added as partner 13** -- source PNG was white-backed RGB; re-cut with the s56 soft-knockout method, ratio 5.31, 4x LANCZOS (`logo_silkot_eti.webp`). 13 partners break the 2/3/4-col lattice, so blank white filler cells top up the last row per breakpoint (1/2/3).
 
 ## What To Do Next
 
@@ -57,7 +59,7 @@ Date: 2026-08-20
 | `apps/dashboard/src/lib/reservationFinance.js` | `buildFinancialSync(gross)` -- THE way reservation money fields follow finálne contracts. Any new flow touching final prices must call it |
 | `apps/dashboard/src/pages/reports/Reports.jsx` | 4-tab reports; all stats derived client-side from 4 broad fetches; revenue basis = `date_from` |
 | `apps/dashboard/src/components/layout/Sidebar.jsx` | White sidebar; active row marker = orange fill + left rail (s56); live task counter listens to `rs:stats-refresh` |
-| `apps/dashboard/src/pages/invoices/InvoiceList.jsx` | Merged invoices+contracts list. Payment toggle writes `contracts.paid_at` with an optimistic override (s55) -- do NOT swap it for `refetchCon()` |
+| `apps/dashboard/src/pages/invoices/InvoiceList.jsx` | "Zmluvy" page (merged invoices+contracts). Payment toggle writes `contracts.paid_at` with an optimistic override (s55) -- do NOT swap it for `refetchCon()`. UI labels are Otvorená/Ukončená, DB stays navrh/finalna |
 | `vercel.json` | SPA rewrite fallback points at `/404.html` (s53) so unknown URLs ship noindex in raw HTML -- NOT `/index.html`. Static assets get `max-age=86400` (see s56 note 1) |
 | `scripts/prerender.mjs` | Puppeteer prerender; Supabase GETs proxied through Node fetch (s52) + snapshot validator; bakes `dist/404.html`. Build FAILS on missing /katalog links, NotFound product bakes, or a 404 snapshot without noindex |
 | `docs/nap-citations.md` | Canonical NAP block + live SK directory list (verified 2026-08-14) + tracking table |
