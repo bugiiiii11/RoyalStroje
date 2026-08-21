@@ -6,7 +6,7 @@
 
 - **Phase:** RCC feature work (payments, price editing, reports) + partner wall growth. Everything from s57 released to PROD continuously; migrations 022 AND 023 confirmed run by owner
 - **Session count:** 57
-- **Repo status:** `dev` == `origin/dev` == `origin/main` at `cb93f93`, tree clean
+- **Repo status:** `dev` == `origin/dev` == `origin/main` at `cc418d9` + local wrap commit; everything from s57 is live on PROD
 
 ## What Was Done (Session 56) -- Loga partnerov zvacsene + redizajn Command Centra
 Date: 2026-08-18
@@ -33,7 +33,8 @@ Date: 2026-08-20
 7. Dashboard reorder per owner: Pipeline above Dnešný rozvrh; calendar hour grid (tasks) above the Prenájmy lane (heavy rule flipped to border-top).
 8. **Contract vocabulary renamed in the UI only** (owner's wording): nav "Faktúry" -> "Zmluvy", heading "Faktúry & Zmluvy" -> "Zmluvy", `navrh` -> "Otvorená zmluva"/"Otvorená", `finalna` -> "Ukončená zmluva"/"Ukončená" (list, filter, DealDetail buttons). **DB values untouched** -- `contracts.type` stays `navrh`/`finalna`, so `?type=` URLs, queries and reports keep working. Do NOT rename the DB values without sweeping every query.
 9. List "Celkom" column -> "Celkom bez DPH" showing NET: invoices use their own `subtotal`, contracts derive it (`final_total` is stored WITH VAT). Return modal also gained a net price field linked both ways to gross.
-10. **SILKOT-ETI added as partner 13** -- source PNG was white-backed RGB; re-cut with the s56 soft-knockout method, ratio 5.31, 4x LANCZOS (`logo_silkot_eti.webp`). 13 partners break the 2/3/4-col lattice, so blank white filler cells top up the last row per breakpoint (1/2/3).
+10. Zmluvy page: second search field filters by client with type-ahead (`ClientSearchInput`). Suggestions come from names present in the LOADED rows, not the `clients` table -- a pick can never produce an empty table. Matching is substring + diacritic-insensitive (`stripDiacritics`, exported for reuse).
+11. **SILKOT-ETI added as partner 13** -- source PNG was white-backed RGB; re-cut with the s56 soft-knockout method, ratio 5.31, 4x LANCZOS (`logo_silkot_eti.webp`). 13 partners break the 2/3/4-col lattice, so blank white filler cells top up the last row per breakpoint (1/2/3).
 
 ## What To Do Next
 
@@ -78,6 +79,6 @@ Date: 2026-08-20
 | 54 | 2026-08-14 | 15 GBP produktových PNG + release na PROD | GBP neberie WebP -> 15 PNG na plochu (mimo repa); správne párovanie ide cez Supabase `equipment.image_path` podľa slugu, nie cez názvy súborov v repe; Python SSL tu odmieta Supabase cert, Node fetch funguje; docs-only `dev`->`main` push = zároveň retry padnutého buildu `fcdeab3` |
 | 55 | 2026-08-18 | Platby faktúr v dashboarde + upratané filtre + redizajn steny partnerov | `contracts.paid_at` = stav platby (migrácia 022, owner ju stále NESPUSTIL); 2 nové dlaždice + prepínač na Faktúrach s optimistickým updatom; roleta "Všetky stavy" zmazaná; M.D.N Tech + Royal Works ako partneri 5 a 6; stena partnerov prerobená na vlasovú mriežku; 4x `dev`->`main` |
 | 56 | 2026-08-18 | Loga partnerov zvacsene (rovnaka opticka plocha) + redizajn Command Centra | Hlásené "šedé pozadie" bola stará cache (`max-age=86400`), nie asset -- preto `_v2` názvy; logá teraz podľa rovnakej optickej PLOCHY, nie spoločného boxu (+25-105%); UNICON a MK prerezané nanovo, MDN lockup na finálnu značku; dashboard: biele chrome na tónovanom plátne, 53 neviditeľných `border-gray-100` -> `gray-200`, aktívna položka menu prekreslená, login = "Royal Command Center"; NEPUSHnuté na PROD |
-| 57 | 2026-08-20 | Custom cena fix + reporty so 4 zalozkami + editacia ceny + SILKOT-ETI | Custom finálna cena sa teraz prepisuje aj do rezervácie (`buildFinancialSync`, migrácia 023 = backfill); nový modál na editáciu ceny finálnej zmluvy (bez/s DPH obojsmerne); Reporty = 4 záložky (Pohľadávky so starnutím, Stroje, Klienti); tržby zjednotené na `date_from`; živé počítadlo dnešných úloh v sidebari; SILKOT-ETI partner 13; priebežne 5x `dev`->`main` |
+| 57 | 2026-08-20/21 | Custom cena fix + reporty so 4 zalozkami + premenovanie zmluv + hladanie klienta | Custom finálna cena sa teraz prepisuje aj do rezervácie (`buildFinancialSync`, migrácia 023 spustená); editácia ceny ukončenej zmluvy + pole bez DPH pri vrátení (obojsmerne); Reporty = 4 záložky (Pohľadávky, Stroje, Klienti); tržby zjednotené na `date_from`; živé počítadlo úloh v sidebari; Faktúry -> Zmluvy, Návrh/Finálna -> Otvorená/Ukončená (len UI, DB nezmenená), stĺpec Celkom bez DPH; hľadanie podľa klienta s našepkávačom; SILKOT-ETI partner 13; priebežne 7x `dev`->`main` |
 
 <!-- Sessions 1-46 summary rows + sessions 15-54 full notes + old Architecture/Supabase reference: handoff-archive.md -->
