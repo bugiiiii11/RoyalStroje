@@ -24,7 +24,7 @@ const navigation = [
   { name: 'Katalóg', to: '/equipment', icon: Package },
   { name: 'Klienti', to: '/clients', icon: Users },
   { name: 'Kalendár', to: '/calendar', icon: Calendar },
-  { name: 'Faktúry', to: '/invoices', icon: FileText },
+  { name: 'Zmluvy', to: '/invoices', icon: FileText },
   { name: 'Reporty', to: '/reports', icon: BarChart3 },
 ];
 

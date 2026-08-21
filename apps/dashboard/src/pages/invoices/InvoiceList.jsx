@@ -8,15 +8,15 @@ import SearchInput from '../../components/ui/SearchInput';
 import DataTable from '../../components/ui/DataTable';
 import Badge from '../../components/ui/Badge';
 import Modal from '../../components/ui/Modal';
-import { formatPrice, formatDate } from '../../lib/constants';
+import { formatPrice, formatDate, VAT_RATE } from '../../lib/constants';
 import CreateInvoiceModal from './CreateInvoiceModal';
 
 const TYPE_MAP = {
-  proforma:  { label: 'Proforma',       bg: 'bg-blue-100',   text: 'text-blue-700' },
-  invoice:   { label: 'Faktúra',         bg: 'bg-green-100',  text: 'text-green-700' },
-  credit_note: { label: 'Dobropis',      bg: 'bg-orange-100', text: 'text-orange-700' },
-  navrh:     { label: 'Návrh zmluvy',   bg: 'bg-gray-100',   text: 'text-gray-700' },
-  finalna:   { label: 'Finálna zmluva', bg: 'bg-purple-100', text: 'text-purple-700' },
+  proforma:  { label: 'Proforma',        bg: 'bg-blue-100',   text: 'text-blue-700' },
+  invoice:   { label: 'Faktúra',          bg: 'bg-green-100',  text: 'text-green-700' },
+  credit_note: { label: 'Dobropis',       bg: 'bg-orange-100', text: 'text-orange-700' },
+  navrh:     { label: 'Otvorená zmluva', bg: 'bg-gray-100',   text: 'text-gray-700' },
+  finalna:   { label: 'Ukončená zmluva', bg: 'bg-purple-100', text: 'text-purple-700' },
 };
 
 const STATUS_MAP = {
@@ -24,8 +24,8 @@ const STATUS_MAP = {
   sent:      { label: 'Odoslaná',  bg: 'bg-blue-100',  text: 'text-blue-700' },
   paid:      { label: 'Zaplatená', bg: 'bg-green-100', text: 'text-green-700' },
   cancelled: { label: 'Zrušená',   bg: 'bg-red-100',   text: 'text-red-700' },
-  navrh:     { label: 'Návrh',     bg: 'bg-gray-100',  text: 'text-gray-700' },
-  finalna:   { label: 'Finálna',   bg: 'bg-purple-100',text: 'text-purple-700' },
+  navrh:     { label: 'Otvorená',  bg: 'bg-gray-100',  text: 'text-gray-700' },
+  finalna:   { label: 'Ukončená',  bg: 'bg-purple-100',text: 'text-purple-700' },
 };
 
 const VALID_TYPE_PARAMS = ['navrh', 'finalna', 'proforma', 'invoice', 'credit_note'];
@@ -70,7 +70,9 @@ export default function InvoiceList() {
       clientName: inv.reservations?.clients?.company_name || '—',
       issueDate: inv.issue_date,
       dueDate: inv.due_date,
-      total: inv.total,
+      // Column shows net. Invoices carry their own subtotal; fall back to
+      // deriving it when an old row has none.
+      total: inv.subtotal != null ? inv.subtotal : (inv.total != null ? inv.total / (1 + VAT_RATE) : null),
       status: inv.status,
       isOverdue: inv.status !== 'paid' && inv.status !== 'cancelled' && new Date(inv.due_date) < new Date(),
     }));
@@ -85,7 +87,8 @@ export default function InvoiceList() {
       clientName: con.reservations?.clients?.company_name || '—',
       issueDate: con.created_at?.slice(0, 10),
       dueDate: null,
-      total: con.final_total,
+      // contracts.final_total is stored WITH VAT — the column shows net
+      total: con.final_total != null ? con.final_total / (1 + VAT_RATE) : null,
       status: con.type,
       isOverdue: false,
       // Payment state only applies to finálne zmluvy; NULL paid_at = nezaplatená
@@ -196,7 +199,7 @@ export default function InvoiceList() {
     },
     {
       key: 'total',
-      label: 'Celkom',
+      label: 'Celkom bez DPH',
       width: '10%',
       render: (row) => row.total != null ? <span className="font-semibold">{formatPrice(row.total)}</span> : <span className="text-gray-300">—</span>,
     },
@@ -256,7 +259,7 @@ export default function InvoiceList() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Faktúry & Zmluvy</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Zmluvy</h1>
         <button
           onClick={() => setShowCreate(true)}
           className="flex items-center gap-2 bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-glow hover:shadow-glow-md transition-all btn-press"
@@ -276,8 +279,8 @@ export default function InvoiceList() {
           className="px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500 outline-none input-glow"
         >
           <option value="">Všetky typy</option>
-          <option value="navrh">Návrh zmluvy</option>
-          <option value="finalna">Finálna zmluva</option>
+          <option value="navrh">Otvorená zmluva</option>
+          <option value="finalna">Ukončená zmluva</option>
         </select>
         <select
           value={filters.payment}

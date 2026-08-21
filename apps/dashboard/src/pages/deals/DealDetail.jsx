@@ -139,7 +139,7 @@ export default function DealDetail() {
               Ponuka
             </button>
           )}
-          {/* Návrh zmluvy — always available once deal exists */}
+          {/* Otvorená zmluva (DB type 'navrh') — always available once deal exists */}
           {items && items.length > 0 && (
             <button
               onClick={async () => {
@@ -147,23 +147,23 @@ export default function DealDetail() {
                 await gen(reservation, items, client, navrhContract || null);
               }}
               className="flex items-center gap-1.5 px-3 py-2 border border-gray-200 rounded-lg text-sm hover:bg-gray-50 transition-all"
-              title="Stiahnuť návrh zmluvy"
+              title="Stiahnuť otvorenú zmluvu"
             >
               <FileText className="w-4 h-4" />
-              Návrh zmluvy
+              Otvorená zmluva
             </button>
           )}
 
-          {/* Finálne zmluvy dropdown (one or more) */}
+          {/* Ukončené zmluvy (DB type 'finalna') dropdown (one or more) */}
           {finalContracts.length > 0 && (
             <div className="relative">
               <button
                 onClick={() => setFinalDropdownOpen((v) => !v)}
                 className="flex items-center gap-1.5 px-3 py-2 border border-purple-300 text-purple-700 hover:bg-purple-50 rounded-lg text-sm font-medium transition-all"
-                title="Finálne zmluvy"
+                title="Ukončené zmluvy"
               >
                 <FileText className="w-4 h-4" />
-                {finalContracts.length === 1 ? 'Finálna zmluva' : `Finálne zmluvy (${finalContracts.length})`}
+                {finalContracts.length === 1 ? 'Ukončená zmluva' : `Ukončené zmluvy (${finalContracts.length})`}
                 <ChevronDown className="w-3.5 h-3.5" />
               </button>
               {finalDropdownOpen && (
