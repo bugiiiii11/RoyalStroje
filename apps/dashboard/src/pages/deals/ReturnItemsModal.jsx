@@ -65,7 +65,8 @@ export default function ReturnItemsModal({
   const [returnDate, setReturnDate] = useState('');
   const [returnTime, setReturnTime] = useState('08:00');
   const [daysInput, setDaysInput] = useState('');
-  const [finalTotal, setFinalTotal] = useState('');
+  const [finalTotal, setFinalTotal] = useState('');   // gross — the value that gets saved
+  const [finalNet, setFinalNet] = useState('');       // net — display only, linked to gross
   const [notes, setNotes] = useState('');
   const [selected, setSelected] = useState(new Set());
   const [saving, setSaving] = useState(false);
@@ -115,8 +116,27 @@ export default function ReturnItemsModal({
     : null;
 
   useEffect(() => {
-    if (suggestedTotal != null) setFinalTotal(suggestedTotal.toFixed(2));
+    if (suggestedTotal != null) {
+      setFinalTotal(suggestedTotal.toFixed(2));
+      setFinalNet((Math.round((suggestedTotal / (1 + VAT_RATE)) * 100) / 100).toFixed(2));
+    }
   }, [suggestedTotal]);
+
+  // The two price fields are linked: editing either recomputes the other.
+  const round2 = (n) => Math.round(n * 100) / 100;
+  const parseNum = (s) => parseFloat(String(s).replace(',', '.'));
+
+  const onGrossChange = (value) => {
+    setFinalTotal(value);
+    const g = parseNum(value);
+    setFinalNet(Number.isFinite(g) ? round2(g / (1 + VAT_RATE)).toFixed(2) : '');
+  };
+
+  const onNetChange = (value) => {
+    setFinalNet(value);
+    const n = parseNum(value);
+    setFinalTotal(Number.isFinite(n) ? round2(n * (1 + VAT_RATE)).toFixed(2) : '');
+  };
 
   const toggle = (key) => {
     setSelected((prev) => {
@@ -343,17 +363,32 @@ export default function ReturnItemsModal({
           )}
         </div>
 
-        {/* Editable final price */}
+        {/* Editable final price — net and gross linked both ways */}
         <div>
-          <label className="block text-xs font-medium text-gray-500 mb-1">Finálna cena vrátane DPH (€)</label>
-          <input
-            type="number"
-            min="0"
-            step="0.01"
-            value={finalTotal}
-            onChange={(e) => setFinalTotal(e.target.value)}
-            className={`${inputClass} w-full`}
-          />
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">Finálna cena bez DPH (€)</label>
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                value={finalNet}
+                onChange={(e) => onNetChange(e.target.value)}
+                className={`${inputClass} w-full`}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">Finálna cena vrátane DPH (€)</label>
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                value={finalTotal}
+                onChange={(e) => onGrossChange(e.target.value)}
+                className={`${inputClass} w-full`}
+              />
+            </div>
+          </div>
           {suggestedTotal != null && (
             <p className="text-xs text-gray-400 mt-1">
               Navrhovaná cena: {formatPrice(suggestedTotal)} ({effectiveDays} {effectiveDays === 1 ? 'deň' : effectiveDays < 5 ? 'dni' : 'dní'} × {formatPrice(dailySubtotal)}/deň + {Math.round(VAT_RATE * 100)}% DPH)
