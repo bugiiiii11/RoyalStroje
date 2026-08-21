@@ -5,6 +5,7 @@ import useInvoices from '../../hooks/useInvoices';
 import useContracts from '../../hooks/useContracts';
 import { supabase } from '../../lib/supabase';
 import SearchInput from '../../components/ui/SearchInput';
+import ClientSearchInput, { stripDiacritics } from '../../components/ui/ClientSearchInput';
 import DataTable from '../../components/ui/DataTable';
 import Badge from '../../components/ui/Badge';
 import Modal from '../../components/ui/Modal';
@@ -36,7 +37,7 @@ export default function InvoiceList() {
   const [searchParams] = useSearchParams();
   const initialType = VALID_TYPE_PARAMS.includes(searchParams.get('type')) ? searchParams.get('type') : '';
   const initialPayment = VALID_PAYMENT_PARAMS.includes(searchParams.get('payment')) ? searchParams.get('payment') : '';
-  const [filters, setFilters] = useState({ type: initialType, payment: initialPayment, search: '' });
+  const [filters, setFilters] = useState({ type: initialType, payment: initialPayment, search: '', client: '' });
   const [showCreate, setShowCreate] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null); // { id, kind: 'invoice'|'contract', reservationId? }
   const [deleting, setDeleting] = useState(false);
@@ -111,8 +112,24 @@ export default function InvoiceList() {
       ? merged
       : merged.filter((r) => r.isFinal && (filters.payment === 'paid' ? !!r.paidAt : !r.paidAt));
 
-    return byPayment.sort((a, b) => (b.issueDate || '').localeCompare(a.issueDate || ''));
-  }, [invoices, contracts, filters.type, filters.payment, paymentOverrides]);
+    // Client filter matches on a substring so a partial name works, and is
+    // diacritic-insensitive (typing "vargova" finds "Vargová")
+    const clientQuery = stripDiacritics(filters.client.trim());
+    const byClient = !clientQuery
+      ? byPayment
+      : byPayment.filter((r) => stripDiacritics(r.clientName).includes(clientQuery));
+
+    return byClient.sort((a, b) => (b.issueDate || '').localeCompare(a.issueDate || ''));
+  }, [invoices, contracts, filters.type, filters.payment, filters.client, paymentOverrides]);
+
+  // Type-ahead options: only clients that actually appear in the loaded data
+  const clientOptions = useMemo(() => {
+    const names = [
+      ...(invoices || []).map((i) => i.reservations?.clients?.company_name),
+      ...(contracts || []).map((c) => c.reservations?.clients?.company_name),
+    ];
+    return [...new Set(names.filter(Boolean))];
+  }, [invoices, contracts]);
 
   const togglePayment = async (row) => {
     const nextPaidAt = row.paidAt ? null : new Date().toISOString();
@@ -272,6 +289,13 @@ export default function InvoiceList() {
       <div className="flex flex-wrap gap-3 mb-4">
         <div className="flex-1 min-w-[200px]">
           <SearchInput value={filters.search} onChange={(v) => setFilters(f => ({ ...f, search: v }))} placeholder="Hľadať podľa čísla..." />
+        </div>
+        <div className="flex-1 min-w-[220px]">
+          <ClientSearchInput
+            value={filters.client}
+            onChange={(v) => setFilters(f => ({ ...f, client: v }))}
+            options={clientOptions}
+          />
         </div>
         <select
           value={filters.type}
