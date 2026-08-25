@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { UserPlus, Check, Building2, User, Plus, Trash2 } from 'lucide-react';
 import SearchInput from '../../components/ui/SearchInput';
+import Toast from '../../components/ui/Toast';
 import useClients from '../../hooks/useClients';
 import Badge from '../../components/ui/Badge';
 import { CLIENT_TYPES, dmyToISO } from '../../lib/constants';
@@ -12,7 +12,6 @@ const EMPTY_FO = { company_name: '', email: '', phone: '', address: '', city: ''
 const EMPTY_CONTACT = { name: '', phone: '', email: '', position: '', birth_date: '', id_card_number: '' };
 
 export default function NewDealStepClient({ selected, onSelect, onSelectAndNext }) {
-  const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [showNew, setShowNew] = useState(false);
   const [entityType, setEntityType] = useState('po');
@@ -20,6 +19,8 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
   const [contacts, setContacts] = useState([{ ...EMPTY_CONTACT, is_primary: true }]);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
+  const [savedClient, setSavedClient] = useState(null);
+  const [toast, setToast] = useState('');
   const { data: clients, loading } = useClients(search);
 
   const switchEntityType = (type) => {
@@ -44,25 +45,16 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
     setContacts(updated);
   };
 
-  const buildClientData = () => {
-    const primaryContact = contacts[0];
-    const clientData = { ...newClient, _isNew: true, entity_type: entityType, client_type: 'standard', discount_percent: 0 };
-    if (entityType === 'po') {
-      clientData._contacts = contacts;
-      clientData.contact_person = primaryContact?.name || '';
-    }
-    return clientData;
-  };
-
+  // The new client must exist in the DB before the deal is built -- the deal then
+  // references a real client row, so nothing can be lost if the wizard is abandoned.
   const handleCreateDeal = () => {
-    if (!newClient.company_name.trim()) return;
-    const clientData = buildClientData();
-    onSelect(clientData);
-    onSelectAndNext?.(clientData);
+    if (!savedClient) return;
+    onSelect(savedClient);
+    onSelectAndNext?.(savedClient);
   };
 
   const handleSaveClient = async () => {
-    if (!newClient.company_name.trim()) return;
+    if (!newClient.company_name.trim() || savedClient) return;
     setSaving(true);
     setSaveError('');
     try {
@@ -109,7 +101,9 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
           await supabase.from('client_contacts').insert(contactsPayload);
         }
       }
-      navigate('/clients');
+      setSavedClient(saved);
+      onSelect(saved);
+      setToast('Klient uložený');
     } catch (e) {
       setSaveError(e.message || 'Chyba pri ukladaní klienta');
     } finally {
@@ -139,6 +133,9 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
 
       {showNew && (
         <div className="bg-white rounded-xl border border-gray-200 shadow-card p-4 mb-4 space-y-4">
+          {/* Once saved the client lives in the DB -- lock the form so the row and the
+              fields on screen cannot drift apart */}
+          <fieldset disabled={!!savedClient} className="m-0 p-0 border-0 space-y-4 disabled:opacity-60">
           {/* FO/PO Toggle */}
           <div className="flex items-center gap-2">
             <button
@@ -267,27 +264,42 @@ export default function NewDealStepClient({ selected, onSelect, onSelectAndNext 
             </div>
           )}
 
+          </fieldset>
+
           {saveError && (
             <p className="text-xs text-red-600">{saveError}</p>
+          )}
+          {savedClient && (
+            <p className="flex items-center gap-1.5 text-xs font-medium text-green-700">
+              <Check className="w-3.5 h-3.5" />
+              Klient <span className="font-semibold">{savedClient.company_name}</span> je uložený v databáze
+            </p>
           )}
           <div className="flex gap-3">
             <button
               onClick={handleCreateDeal}
-              disabled={!newClient.company_name.trim()}
-              className="bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-glow hover:shadow-glow-md disabled:opacity-50 transition-all btn-press"
+              disabled={!savedClient}
+              title={!savedClient ? 'Najprv uložte klienta' : undefined}
+              className="bg-gradient-to-r from-royal-500 to-royal-400 hover:from-royal-600 hover:to-royal-500 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-glow hover:shadow-glow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all btn-press"
             >
               Vytvoriť obchod
             </button>
             <button
               onClick={handleSaveClient}
-              disabled={!newClient.company_name.trim() || saving}
-              className="px-4 py-2 border border-gray-200 rounded-full text-sm font-medium hover:bg-gray-50 disabled:opacity-50 transition-colors"
+              disabled={!newClient.company_name.trim() || saving || !!savedClient}
+              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors disabled:opacity-50 ${
+                savedClient
+                  ? 'border-green-300 bg-green-50 text-green-700'
+                  : 'border-gray-200 hover:bg-gray-50'
+              }`}
             >
-              {saving ? 'Ukladám...' : 'Uložiť klienta'}
+              {savedClient ? 'Klient uložený' : saving ? 'Ukladám...' : 'Uložiť klienta'}
             </button>
           </div>
         </div>
       )}
+
+      <Toast message={toast} onClose={() => setToast('')} />
 
       {!showNew && <div className="space-y-2 max-h-[400px] overflow-y-auto">
         {loading && <p className="text-sm text-gray-400 py-4 text-center">Načítavam...</p>}

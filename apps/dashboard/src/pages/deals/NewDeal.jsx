@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../context/AuthContext';
 import { generateNextNavrhNumber } from '../../lib/contractNumbers';
-import { dmyToISO } from '../../lib/constants';
 import NewDealStepClient from './NewDealStepClient';
 import NewDealStepItems from './NewDealStepItems';
 import NewDealStepReview from './NewDealStepReview';
@@ -55,55 +54,10 @@ export default function NewDeal() {
     setSubmitting(true);
     setError('');
     try {
-      let clientId = finalData.client.id;
-
-      // Create new client if needed
-      if (finalData.client._isNew) {
-        const isFO = finalData.client.entity_type === 'fo';
-        const clientPayload = {
-          company_name: finalData.client.company_name,
-          email: finalData.client.email || null,
-          phone: finalData.client.phone || null,
-          entity_type: finalData.client.entity_type || 'po',
-          client_type: 'standard',
-          address: finalData.client.address || null,
-          city: finalData.client.city || null,
-          postal_code: finalData.client.postal_code || null,
-        };
-        if (isFO) {
-          clientPayload.birth_date = finalData.client.birth_date || null;
-          clientPayload.id_card_number = finalData.client.id_card_number || null;
-        } else {
-          clientPayload.contact_person = finalData.client.contact_person || null;
-          clientPayload.ico = finalData.client.ico || null;
-          clientPayload.dic = finalData.client.dic || null;
-          clientPayload.ic_dph = finalData.client.ic_dph || null;
-        }
-        const { data: newClient, error: clientErr } = await supabase
-          .from('clients')
-          .insert(clientPayload)
-          .select()
-          .single();
-        if (clientErr) throw clientErr;
-        clientId = newClient.id;
-
-        // Save contact persons (PO only)
-        if (!isFO && finalData.client._contacts?.length > 0) {
-          const contactsPayload = finalData.client._contacts.map((c, idx) => ({
-            client_id: newClient.id,
-            name: c.name,
-            phone: c.phone || null,
-            email: c.email || null,
-            position: c.position || null,
-            birth_date: dmyToISO(c.birth_date),
-            id_card_number: c.id_card_number || null,
-            is_primary: idx === 0,
-          })).filter(c => c.name.trim());
-          if (contactsPayload.length > 0) {
-            await supabase.from('client_contacts').insert(contactsPayload);
-          }
-        }
-      }
+      // The client always exists in the DB by this point -- step 1 persists a new
+      // client (with its contacts) before it lets the wizard continue.
+      const clientId = finalData.client?.id;
+      if (!clientId) throw new Error('Klient nie je uložený -- uložte klienta a skúste znova');
 
       // Create reservation with pre-calculated financials
       const { data: reservation, error: resErr } = await supabase
