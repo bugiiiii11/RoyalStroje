@@ -4,22 +4,19 @@
 
 ## Current State
 
-- **Phase:** RCC feature work (payments, price editing, reports) + partner wall growth. Everything from s57 released to PROD continuously; migrations 022 AND 023 confirmed run by owner
-- **Session count:** 57
-- **Repo status:** `dev` == `origin/dev` == `origin/main` at `cc418d9` + local wrap commit; everything from s57 is live on PROD
+- **Phase:** RCC feature work + chatbot KB pipeline. Everything through s58 released to PROD (`727683c`); migrations 022 AND 023 confirmed run by owner
+- **Session count:** 58
+- **Repo status:** `dev` == `origin/dev` == `origin/main` at `727683c` + local wrap commit. M.D.N-Tech-main repo pushed to its main (`d10cc5c`) -- Import .md button deploying to admin.mdntech.org
 
-## What Was Done (Session 56) -- Loga partnerov zvacsene + redizajn Command Centra
-Date: 2026-08-18
+## What Was Done (Session 58) -- Klient sa uklada pred obchodom + KB pipeline pre chatbota
+Date: 2026-08-25
 
-1. **The "grey background" on MK + UNICON was never in the assets.** Fetched the live files off PROD and checked the alpha channel: both were already transparent. Vercel serves `public/` images with `cache-control: public, max-age=86400`, so the owner's browser was holding a pre-s55 copy for up to a day. **Lesson: when a visual bug is reported on an asset that was just replaced under the same filename, check the served bytes before touching the code.** The re-cut files therefore ship under `_v2` names -- no cache can shadow them.
-2. **One shared bounding box cannot size a logo wall.** Ratios run 0.76:1 to 9.35:1, so `max-w`/`max-h` left MK at 40x52 in a 325x144 cell while wordmarks filled theirs. Replaced with equal-AREA sizing: `w = sqrt(11000 * ratio)`, clamped by the cell (`logoWidth` in `Partneri.jsx`). Marks grew 25-105%.
-3. **That only works if canvas ratio == ink ratio**, so every asset is now trimmed hard to its ink box (UNICON was 62% ink by height, silently rendering small). Only `width` is set on the img -- height follows the asset's own ratio, so a stale cached file renders short rather than distorted.
-4. UNICON re-cut from `unicon.cz/images/logo.png` (174x53, white plate baked in) with a soft white knockout + un-premultiplied edges, then 4x LANCZOS. The old copy came from a 150x150 letterboxed source and carried white fringing. MK re-cut the same way from the 1024px JPEG.
-5. M.D.N Tech lockup rebuilt on `logo-final-black` from `M.D.N-Tech-main/public/brand/` (the 2026-08-17 vectorised mark); the s55 lockup used the earlier, thinner raster. Geometry copied off the s55 file so the wall keeps its rhythm: mark h 102 : gap 39 : cap height 52, Segoe UI Bold.
-6. **Dashboard: the sidebar had no edge because chrome and canvas were the same grey.** Inverted the value structure instead of adding shadows -- canvas is the tinted plane (`gray-100/70`), sidebar/header/cards are white on top with a 1px `gray-200` edge. Swept 53 `border-gray-100` call sites (invisible on white) to `gray-200`.
-7. That broke the active nav row, which was marked with `bg-white` -- **any future sidebar recolour has to re-check the active state**, it has no other marker. Now orange fill + text + a solid left rail.
-8. Login page: crown mark instead of the "RS" tile, "Royal Command Center" instead of the two-line brand block; sidebar eyebrow follows. Header switched from `white/80 + backdrop-blur` to opaque -- a blurred **sticky** bar is the s21 mobile-GPU-garbage construct.
-9. **Could not log into the dashboard to verify** (no credentials). Shell was checked by injecting a throwaway Supabase session into `localStorage` via Puppeteer -- layout is real, all numbers read 0 because the fake token 401s. Both apps build green.
+1. **Novy obchod krok 1: klient musi byt v DB skor, nez vznikne obchod.** "Ulozit klienta" teraz vlozi klienta + kontakty, ostane na kroku 1 (zeleny toast, novy `components/ui/Toast.jsx`), formular sa zamkne (`fieldset disabled`) a az potom sa odomkne "Vytvorit obchod". Duplicitna insert vetva `_isNew` v `NewDeal.handleSubmit` zmazana -- vytvaranie klienta zije len na jednom mieste.
+2. **Chatbot KB bola od marca 2026 zastarana a klamala by zakaznikom**: doprava (stara "Senec zadarmo/BA 40 EUR" vs. dnesne Senec 15 EUR / 1 EUR/km / 1,20 pickup / 1,50 cudzia technika), NAP (prevadzka Recka 182 vs. sidlo Boldog 182), sluzby (Royal Fleet/servis/zemne prace uz na webe nie su; pribudlo "Zozenieme akykolvek stroj" + autorizovany predajca Makita). Vsetkych 5 suborov v `knowledgebase/` prepisanych podla aktualneho webu.
+3. **Katalog produktov sa do KB nikdy nedostal, lebo zije v Supabase, nie v repe.** Novy `scripts/kb-data.mjs` (Node, cita .env sam) stiahne 158 aktivnych strojov s cenami s DPH (x1.23, ako web) a linkami -- vygenerovany obsah je telom `03-produkty.md`. KB spolu 5,6k slov.
+4. **Import .md button v M.D.N-Tech konzole** (`KBImportButton.tsx`, commit `d10cc5c` na ich main): parsuje export format (roundtrip) aj plain .md (1 subor = 1 entry, kategoria z nazvu suboru, title z H1), preview modal, mody Replace/Merge. tsc + next build zelene; klikaciu skusku nemam (bez loginu do konzoly).
+5. `build-kb` skill (globalny) upgradnuty: detekuje `knowledgebase/` layout, spusta `scripts/kb-data.mjs` ako zdroj zivych dat, pravidlo "web vyhrava nad starou KB".
+6. Vsetko pushnute: RoyalStroje `dev`+`main` = `727683c`, mdn-tech `main` = `d10cc5c` (isiel s nim aj ich cakajuci wrap commit `b77cab6`).
 
 ## What Was Done (Session 57) -- Custom cena fix + reporty s 4 zalozkami + SILKOT-ETI
 Date: 2026-08-20
@@ -40,6 +37,7 @@ Date: 2026-08-20
 
 | # | Priority | Task | Notes |
 |---|----------|------|-------|
+| 1 | **OWNER** | Import novej KB do chatkit konzoly | Po dobehnuti Vercel deploya mdn-tech: admin.mdntech.org -> chatbot Pan Krivosudsky -> "Import .md" -> vybrat vsetkych 6 suborov z `knowledgebase/` -> mod **Replace**. Overit, ze vznikne 6 entries (general/about/faq/products/other/policies) a chatbot odpoveda nove ceny dopravy |
 | 2 | Med | Dashboard design -- next wins, owner picked none yet | Offered at the end of s56, awaiting a choice: (a) "Nový obchod" renders twice on the Dashboard, drop the page-header one; (b) sidebar "Prehľad" duplicates 4 of the 6 stat tiles, trim to what is not already on screen; (c) global search / cmd-K in the empty header; (d) compact table rows (~40% more rows per screen); (e) stat-tile colours are decorative, make them semantic (neutral/positive/attention); (f) single 1.05 MB JS chunk -- route-level code splitting |
 | 3 | Med | Footer credit still uses the OLD M.D.N Tech icon | `src/components/common/Footer.jsx:235` renders `logo_mdntech.webp` (white-on-black square, superseded) while `/partneri` now shows the new mark. Fix = `logo-final-white.svg` from `M.D.N-Tech-main/public/brand/`. Owner said "zatiaľ neriešiť". Same stale icon also sits in `apps/dashboard/public/logo_mdntech.webp` (sidebar credit) |
 | 4 | **OWNER** | NAP citations per `docs/nap-citations.md` -- next up: Azet, Firemný portál, Waze | Zlaté stránky + Bing done s53; Apple with the founder. Highest value is actually partner/manufacturer links, not directories. Also pending: switch GBP Website field from `www.` to the apex (canonical since s48) |
@@ -59,7 +57,7 @@ Date: 2026-08-20
 | `src/pages/Partneri.jsx` | Logo wall. `logoWidth` = equal-area sizing from each partner's `ratio`; the ratio must match the asset's trimmed canvas or the mark renders wrong. Deliberately no `max-height` on the img |
 | `apps/dashboard/src/lib/reservationFinance.js` | `buildFinancialSync(gross)` -- THE way reservation money fields follow finálne contracts. Any new flow touching final prices must call it |
 | `apps/dashboard/src/pages/reports/Reports.jsx` | 4-tab reports; all stats derived client-side from 4 broad fetches; revenue basis = `date_from` |
-| `apps/dashboard/src/components/layout/Sidebar.jsx` | White sidebar; active row marker = orange fill + left rail (s56); live task counter listens to `rs:stats-refresh` |
+| `scripts/kb-data.mjs` + `knowledgebase/` | Chatbot KB pipeline: kb-data pulls the live Supabase catalog into `03-produkty.md`; 1 file = 1 console entry; sync via "Import .md" (Replace) in the mdn-tech console |
 | `apps/dashboard/src/pages/invoices/InvoiceList.jsx` | "Zmluvy" page (merged invoices+contracts). Payment toggle writes `contracts.paid_at` with an optimistic override (s55) -- do NOT swap it for `refetchCon()`. UI labels are Otvorená/Ukončená, DB stays navrh/finalna |
 | `vercel.json` | SPA rewrite fallback points at `/404.html` (s53) so unknown URLs ship noindex in raw HTML -- NOT `/index.html`. Static assets get `max-age=86400` (see s56 note 1) |
 | `scripts/prerender.mjs` | Puppeteer prerender; Supabase GETs proxied through Node fetch (s52) + snapshot validator; bakes `dist/404.html`. Build FAILS on missing /katalog links, NotFound product bakes, or a 404 snapshot without noindex |
@@ -70,7 +68,6 @@ Date: 2026-08-20
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
-| 48 | 2026-08-04 | SEO-2 apex/www domain swap + JCB SQL + Haulotte cutout fix -> PROD | Plot priehladny "Cena dohodou" (Supabase only); Haulotte transparent WebP hole fixed without source photo; apex now canonical via Vercel API (dashboard UI bug blocked normal edit) |
 | 49 | 2026-08-05 | SEO-4 Search Console + GA4 Consent Mode v2 -> PROD | Sitemap submit confirmed, indexing requested on 4 URLs; GA4 (`G-WTPC0SV333`) with full Consent Mode v2 -- gtag.js only loads after accept; CookieBanner now has real Prijat/Odmietnut; pushed (`7af7b6f`) |
 | 50 | 2026-08-05 | SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD | sameAs + FAQPage JSON-LD added; Rich Results Test verified (FAQ not shown = Google policy, not a bug); site-wide og:image + schema image swapped to real yard photo; pushed (`6270a01`) |
 | 51 | 2026-08-13 | NAP adresa zjednotena na Boldog + GBP + opravene mapy -> PROD | Site carried 6 conflicting addresses; split into prevadzka `Recká cesta 182` vs sidlo `Boldog 182`; "Senec" kept as service-area keyword; both Kontakt map embeds were fabricated -> coordinate embed + GBP link; GSC 141 orphan product pages diagnosed (SEO-7); pushed (`9fc7fb5`) |
@@ -80,5 +77,6 @@ Date: 2026-08-20
 | 55 | 2026-08-18 | Platby faktúr v dashboarde + upratané filtre + redizajn steny partnerov | `contracts.paid_at` = stav platby (migrácia 022, owner ju stále NESPUSTIL); 2 nové dlaždice + prepínač na Faktúrach s optimistickým updatom; roleta "Všetky stavy" zmazaná; M.D.N Tech + Royal Works ako partneri 5 a 6; stena partnerov prerobená na vlasovú mriežku; 4x `dev`->`main` |
 | 56 | 2026-08-18 | Loga partnerov zvacsene (rovnaka opticka plocha) + redizajn Command Centra | Hlásené "šedé pozadie" bola stará cache (`max-age=86400`), nie asset -- preto `_v2` názvy; logá teraz podľa rovnakej optickej PLOCHY, nie spoločného boxu (+25-105%); UNICON a MK prerezané nanovo, MDN lockup na finálnu značku; dashboard: biele chrome na tónovanom plátne, 53 neviditeľných `border-gray-100` -> `gray-200`, aktívna položka menu prekreslená, login = "Royal Command Center"; NEPUSHnuté na PROD |
 | 57 | 2026-08-20/21 | Custom cena fix + reporty so 4 zalozkami + premenovanie zmluv + hladanie klienta | Custom finálna cena sa teraz prepisuje aj do rezervácie (`buildFinancialSync`, migrácia 023 spustená); editácia ceny ukončenej zmluvy + pole bez DPH pri vrátení (obojsmerne); Reporty = 4 záložky (Pohľadávky, Stroje, Klienti); tržby zjednotené na `date_from`; živé počítadlo úloh v sidebari; Faktúry -> Zmluvy, Návrh/Finálna -> Otvorená/Ukončená (len UI, DB nezmenená), stĺpec Celkom bez DPH; hľadanie podľa klienta s našepkávačom; SILKOT-ETI partner 13; priebežne 7x `dev`->`main` |
+| 58 | 2026-08-25 | Klient sa uklada pred obchodom + chatbot KB pipeline -> PROD | Novy obchod: "Ulozit klienta" uklada hned (toast, zamknuty formular), "Vytvorit obchod" az potom; duplicitny insert zmazany. KB refresh proti aktualnemu webu (doprava, NAP, sluzby) + `scripts/kb-data.mjs` = 158 strojov s cenami zo Supabase; Import .md button v mdn-tech konzole (Replace/Merge); build-kb skill upgrade; `dev`->`main` + mdn-tech main |
 
 <!-- Sessions 1-46 summary rows + sessions 15-54 full notes + old Architecture/Supabase reference: handoff-archive.md -->

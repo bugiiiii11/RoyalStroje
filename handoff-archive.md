@@ -2,7 +2,7 @@
 
 Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block below.
 
-## Archived Session Summary (sessions 1-47)
+## Archived Session Summary (sessions 1-48)
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
@@ -54,7 +54,22 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 | 44 | 2026-07-16 | Fix prerender boot blink + SEO-1 staging verification | `data-prerendered` suppression chain; SEO-1 verified on Vercel staging; commit `92c571d` |
 | 47 | 2026-07-29 | RCC kalendar: tyzdenny dispecersky pohlad s ulohami -> PROD | Mesacny pohlad nahradeny tyzdennym (Po-Pi, 7-17); nova tabulka `calendar_tasks` (migracia 021, owner spustil); prenajmy v all-day pase; widget dnesnych uloh na dashboarde |
 
-## Archived What Was Done sections (sessions 15-55)
+| 48 | 2026-08-04 | SEO-2 apex/www domain swap + JCB SQL + Haulotte cutout fix -> PROD | Plot priehladny "Cena dohodou" (Supabase only); Haulotte transparent WebP hole fixed without source photo; apex now canonical via Vercel API (dashboard UI bug blocked normal edit) |
+
+## Archived What Was Done sections (sessions 15-56)
+
+## What Was Done (Session 56) -- Loga partnerov zvacsene + redizajn Command Centra
+Date: 2026-08-18
+
+1. **The "grey background" on MK + UNICON was never in the assets.** Fetched the live files off PROD and checked the alpha channel: both were already transparent. Vercel serves `public/` images with `cache-control: public, max-age=86400`, so the owner's browser was holding a pre-s55 copy for up to a day. **Lesson: when a visual bug is reported on an asset that was just replaced under the same filename, check the served bytes before touching the code.** The re-cut files therefore ship under `_v2` names -- no cache can shadow them.
+2. **One shared bounding box cannot size a logo wall.** Ratios run 0.76:1 to 9.35:1, so `max-w`/`max-h` left MK at 40x52 in a 325x144 cell while wordmarks filled theirs. Replaced with equal-AREA sizing: `w = sqrt(11000 * ratio)`, clamped by the cell (`logoWidth` in `Partneri.jsx`). Marks grew 25-105%.
+3. **That only works if canvas ratio == ink ratio**, so every asset is now trimmed hard to its ink box (UNICON was 62% ink by height, silently rendering small). Only `width` is set on the img -- height follows the asset's own ratio, so a stale cached file renders short rather than distorted.
+4. UNICON re-cut from `unicon.cz/images/logo.png` (174x53, white plate baked in) with a soft white knockout + un-premultiplied edges, then 4x LANCZOS. The old copy came from a 150x150 letterboxed source and carried white fringing. MK re-cut the same way from the 1024px JPEG.
+5. M.D.N Tech lockup rebuilt on `logo-final-black` from `M.D.N-Tech-main/public/brand/` (the 2026-08-17 vectorised mark); the s55 lockup used the earlier, thinner raster. Geometry copied off the s55 file so the wall keeps its rhythm: mark h 102 : gap 39 : cap height 52, Segoe UI Bold.
+6. **Dashboard: the sidebar had no edge because chrome and canvas were the same grey.** Inverted the value structure instead of adding shadows -- canvas is the tinted plane (`gray-100/70`), sidebar/header/cards are white on top with a 1px `gray-200` edge. Swept 53 `border-gray-100` call sites (invisible on white) to `gray-200`.
+7. That broke the active nav row, which was marked with `bg-white` -- **any future sidebar recolour has to re-check the active state**, it has no other marker. Now orange fill + text + a solid left rail.
+8. Login page: crown mark instead of the "RS" tile, "Royal Command Center" instead of the two-line brand block; sidebar eyebrow follows. Header switched from `white/80 + backdrop-blur` to opaque -- a blurred **sticky** bar is the s21 mobile-GPU-garbage construct.
+9. **Could not log into the dashboard to verify** (no credentials). Shell was checked by injecting a throwaway Supabase session into `localStorage` via Puppeteer -- layout is real, all numbers read 0 because the fake token 401s. Both apps build green.
 
 ## What Was Done (Session 55) -- Platby faktur v dashboarde + upratane filtre + redizajn steny partnerov
 Date: 2026-08-18
