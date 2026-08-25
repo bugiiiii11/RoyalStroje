@@ -6,7 +6,7 @@ Prenájom funguje jednoducho na základe priamej dohody a potvrdenia dostupnosti
 
 1. **Kontaktujte nás** — telefonicky na 0948 555 551, e-mailom na info@royalstroje.sk, alebo cez WhatsApp/Telegram.
 2. **Dohodneme techniku, termín a spôsob prevzatia alebo dopravy** — spoločne potvrdíme dostupnosť a pripravíme všetko potrebné.
-3. **Registrácia a vratná kaucia (pri nových zákazníkoch)** — noví zákazníci sa registrujú osobne alebo e-mailom; pri prvom prenájme sa vyžaduje vratná kaucia podľa typu techniky.
+3. **Registrácia a vratná kaucia (pri nových zákazníkoch)** — noví zákazníci sa registrujú osobne alebo e-mailom na základe registračného formulára; pri prvom prenájme sa vyžaduje vratná kaucia podľa typu techniky.
 
 ## Aké dokumenty potrebujem na požičanie?
 
@@ -25,21 +25,29 @@ Všetky údaje sú spracúvané v súlade s GDPR a používame ich výlučne na 
 
 Stroje odovzdávame s **plnou nádržou** a takisto ich očakávame späť s **plnou nádržou**.
 
-Pri vrátení s prázdnou alebo čiastočne naplnenou nádržou bude účtovaný doplatok: **2 €/liter bez DPH**.
+Pri vrátení s prázdnou alebo čiastočne naplnenou nádržou bude účtovaný doplatok za dotankovanie: **2 €/liter bez DPH**.
 
 **Tip:** Natankujte stroj pred vrátením — ušetríte na doplatku.
 
 ## Poskytujete dopravu techniky na miesto?
 
-Áno, poskytujeme dopravu techniky priamo k vám na stavbu alebo iné miesto.
+Áno, poskytujeme dopravu techniky priamo k vám na stavbu alebo iné miesto určenia.
 
-| Vzdialenosť | Cena |
+### Cenník dopravy:
+
+**Dodávka** (malé náradie a stredná mechanizácia)
+| Kam | Cena |
 |---|---|
-| V senci | ZADARMO |
-| Bratislava | 40€ |
-| Ostatné | 1,10€/Km |
+| Senec | 15 € |
+| Ostatné | 1 €/km (min. 15 €) |
 
-Cena dopravy závisí od typu a hmotnosti techniky. Pri objednávke vám oznámime presnú cenu.
+**Pick-up + prívesný vozík** (do 3 500 kg — ťažšie stroje a minirýpadlá)
+- 1,20 €/km (min. 15 €)
+
+**Preprava cudzieho stroja/náradia** (nie z našej požičovne)
+- 1,50 €/km (min. 30 €)
+
+Uvedené ceny sú bez DPH. Cena dopravy závisí od typu a hmotnosti techniky — presnú cenu oznámime pri objednávke.
 
 ## Je možné prenajať stroje s obsluhou?
 
@@ -61,8 +69,8 @@ Okamžite nás kontaktujte na **0948 555 551**. Zabezpečíme opravu alebo náhr
 - Hradíte skutočné náklady na opravu (s DPH)
 - Pri závažnom poškodení máme právo na úhradu zostatkovej hodnoty stroja
 
-### ROYAL GUARD – ochrana v cene prenájmu:
-Vybrané stroje majú v cene službu ROYAL GUARD, ktorá kryje náhodné poškodenie pri bežnom používaní. V prípade škody sa uplatňuje spoluúčasť 5% z výšky škody. Nevzťahuje sa na úmyselné poškodenie a hrubú nedbanlivosť. Využite službu ROYAL GUARD, ktorá výrazne znižuje riziko nákladov pri poškodení stroja.
+### ROYAL GUARD — ochrana v cene prenájmu:
+Vybrané stroje majú v cene službu ROYAL GUARD, ktorá kryje náhodné poškodenie pri bežnom používaní. V prípade škody sa uplatňuje spoluúčasť 5 % z výšky škody. Nevzťahuje sa na úmyselné poškodenie a hrubú nedbanlivosť. Služba ROYAL GUARD výrazne znižuje riziko nákladov pri poškodení stroja.
 
 ## Aké sú platobné možnosti?
 
