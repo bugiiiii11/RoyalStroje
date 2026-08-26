@@ -56,7 +56,24 @@ Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block belo
 
 | 48 | 2026-08-04 | SEO-2 apex/www domain swap + JCB SQL + Haulotte cutout fix -> PROD | Plot priehladny "Cena dohodou" (Supabase only); Haulotte transparent WebP hole fixed without source photo; apex now canonical via Vercel API (dashboard UI bug blocked normal edit) |
 
-## Archived What Was Done sections (sessions 15-56)
+| 49 | 2026-08-05 | SEO-4 Search Console + GA4 Consent Mode v2 -> PROD | Sitemap submit confirmed, indexing requested on 4 URLs; GA4 (`G-WTPC0SV333`) with full Consent Mode v2 -- gtag.js only loads after accept; CookieBanner now has real Prijat/Odmietnut; pushed (`7af7b6f`) |
+
+## Archived What Was Done sections (sessions 15-57)
+
+## What Was Done (Session 57) -- Custom cena fix + reporty s 4 zalozkami + SILKOT-ETI
+Date: 2026-08-20
+
+1. **Custom final price never reached revenue** -- return flow wrote it only to `contracts.final_total`, while dashboard/reports read `reservations.total/vat_amount`. Fix: every finalization AND price edit now syncs reservation money fields to the SUM of all finálne contracts via `buildFinancialSync` (`lib/reservationFinance.js`); discount/delivery zeroed (folded into the custom price). Backfill migration 023 **run by owner 2026-08-20, verified working** -- historical revenue now matches contracts.
+2. **New: edit price on a finálna zmluva** -- pencil in the "Finálna zmluva" dropdown on DealDetail opens `EditFinalPriceModal` (net/gross linked both ways at 23%), writes contract + syncs system + logs `contract.price_updated` into Aktivita.
+3. **Reports rebuilt into 4 tabs** (`?tab=` param): Prehľad (tiles + 6-month chart + avg rental length/value), Pohľadávky (unpaid aging 0-14/15-30/30+ by return_date + oldest-unpaid call list), Stroje (rented-days last 30d, category revenue this year, all-time demand), Klienti (top net, new vs returning). One broad fetch per table replaced the per-month query loop.
+4. **Revenue basis unified on `date_from`** (was `created_at` on tiles vs `date_from` on chart -- numbers disagreed by a few EUR). Dashboard tile + sidebar + Reports now agree. Top klienti switched to bez DPH.
+5. Reports "Faktúry (zaplatené)" counted the dead `invoices` table (always 0/0) -- now counts finálne zmluvy with `paid_at`, tile clicks through to Faktúry.
+6. Sidebar Prehľad: "Dnešné udalosti" dropped for a live "Dnešné úlohy (splnené)" done/total counter -- `useCalendarTasks` mutations broadcast `rs:stats-refresh`, `useDashboardStats` listens (refreshes silently, loading only gates first paint).
+7. Dashboard reorder per owner: Pipeline above Dnešný rozvrh; calendar hour grid (tasks) above the Prenájmy lane (heavy rule flipped to border-top).
+8. **Contract vocabulary renamed in the UI only** (owner's wording): nav "Faktúry" -> "Zmluvy", heading "Faktúry & Zmluvy" -> "Zmluvy", `navrh` -> "Otvorená zmluva"/"Otvorená", `finalna` -> "Ukončená zmluva"/"Ukončená" (list, filter, DealDetail buttons). **DB values untouched** -- `contracts.type` stays `navrh`/`finalna`, so `?type=` URLs, queries and reports keep working. Do NOT rename the DB values without sweeping every query.
+9. List "Celkom" column -> "Celkom bez DPH" showing NET: invoices use their own `subtotal`, contracts derive it (`final_total` is stored WITH VAT). Return modal also gained a net price field linked both ways to gross.
+10. Zmluvy page: second search field filters by client with type-ahead (`ClientSearchInput`). Suggestions come from names present in the LOADED rows, not the `clients` table -- a pick can never produce an empty table. Matching is substring + diacritic-insensitive (`stripDiacritics`, exported for reuse).
+11. **SILKOT-ETI added as partner 13** -- source PNG was white-backed RGB; re-cut with the s56 soft-knockout method, ratio 5.31, 4x LANCZOS (`logo_silkot_eti.webp`). 13 partners break the 2/3/4-col lattice, so blank white filler cells top up the last row per breakpoint (1/2/3).
 
 ## What Was Done (Session 56) -- Loga partnerov zvacsene + redizajn Command Centra
 Date: 2026-08-18
