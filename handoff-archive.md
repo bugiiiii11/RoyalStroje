@@ -1,5 +1,15 @@
 # Handoff Archive (do not read on /start)
 
+## What Was Done (Session 58) -- Klient sa uklada pred obchodom + KB pipeline pre chatbota
+Date: 2026-08-25
+
+1. **Novy obchod krok 1: klient musi byt v DB skor, nez vznikne obchod.** "Ulozit klienta" teraz vlozi klienta + kontakty, ostane na kroku 1 (zeleny toast, novy `components/ui/Toast.jsx`), formular sa zamkne (`fieldset disabled`) a az potom sa odomkne "Vytvorit obchod". Duplicitna insert vetva `_isNew` v `NewDeal.handleSubmit` zmazana -- vytvaranie klienta zije len na jednom mieste.
+2. **Chatbot KB bola od marca 2026 zastarana a klamala by zakaznikom**: doprava (stara "Senec zadarmo/BA 40 EUR" vs. dnesne Senec 15 EUR / 1 EUR/km / 1,20 pickup / 1,50 cudzia technika), NAP (prevadzka Recka 182 vs. sidlo Boldog 182), sluzby (Royal Fleet/servis/zemne prace uz na webe nie su; pribudlo "Zozenieme akykolvek stroj" + autorizovany predajca Makita). Vsetkych 5 suborov v `knowledgebase/` prepisanych podla aktualneho webu.
+3. **Katalog produktov sa do KB nikdy nedostal, lebo zije v Supabase, nie v repe.** Novy `scripts/kb-data.mjs` (Node, cita .env sam) stiahne 158 aktivnych strojov s cenami s DPH (x1.23, ako web) a linkami -- vygenerovany obsah je telom `03-produkty.md`. KB spolu 5,6k slov.
+4. **Import .md button v M.D.N-Tech konzole** (`KBImportButton.tsx`, commit `d10cc5c` na ich main): parsuje export format (roundtrip) aj plain .md (1 subor = 1 entry, kategoria z nazvu suboru, title z H1), preview modal, mody Replace/Merge. tsc + next build zelene; klikaciu skusku nemam (bez loginu do konzoly).
+5. `build-kb` skill (globalny) upgradnuty: detekuje `knowledgebase/` layout, spusta `scripts/kb-data.mjs` ako zdroj zivych dat, pravidlo "web vyhrava nad starou KB".
+6. Vsetko pushnute: RoyalStroje `dev`+`main` = `727683c`, mdn-tech `main` = `d10cc5c` (isiel s nim aj ich cakajuci wrap commit `b77cab6`).
+
 Rotated 2026-07-29 (session 45). Newest entries go at the TOP of each block below.
 
 ## Archived Session Summary (sessions 1-48)

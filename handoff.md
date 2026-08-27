@@ -1,12 +1,19 @@
 # RoyalStroje -- Session Handoff
 
-<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-57 + old reference blocks; last rotation 2026-08-26). -->
+<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-58 + old reference blocks; last rotation 2026-08-27). -->
 
 ## Current State
 
 - **Phase:** RCC feature work + chatbot KB pipeline. Everything through s59 released to PROD (`13915fa`); migrations 022 AND 023 confirmed run by owner
-- **Session count:** 59
-- **Repo status:** `dev` == `origin/dev` == `origin/main` at `13915fa` + local wrap commit. mdn-tech `main` at `bb375f1` (chat error logging) pushed to its prod; chatbot KB imported by owner and answering live
+- **Session count:** 60
+- **Repo status:** `dev` == `origin/dev` == `origin/main` at `13915fa` + 3 lokalne docs commity (wrap s59, zrusena uloha o doprave, wrap s60) -- nic z toho nie je pushnute, ziadna zmena kodu. mdn-tech `main` at `bb375f1` (chat error logging) pushed to its prod; chatbot KB imported by owner and answering live
+
+## What Was Done (Session 60) -- Praca prebehla v `crm_core`, nie tu
+Date: 2026-08-27
+
+1. **Cele sedenie sa odohralo v susednom projekte `crm_core`** (CRM demo na demo-crm.mdntech.org) -- jeho vlastny `handoff.md` ma sedenie 8 s detailami. Tu ostava len toto: demo login uz ukazuje iba tlacidlo "Vstupit do dema", "Dashboard" sa vola "Prehlad", styri dlazdice su preklikatelne, kredit MDN nesie fialovu znacku.
+2. **Halucinacia o doprave zdarma je zrusena, bez zasahu.** Majitel preveril chatbota znova a na "kolko stoji doprava" odpoveda presne podla KB (15 EUR v Senci / 1 EUR/km, pick-up 1,20 EUR/km, min. 15 EUR). Bola to jednorazova halucinacia -- uloha 1 zo sedenia 59 vypadla zo zoznamu.
+3. **Rovnaka stara znacka MDN visi aj tu** -- patickla webu a sidebar dashboardu. Fialovy `logo-final-gradient.svg` je uz overeny v `crm_core/public/mdn-logo.svg`, takze rovnaka vymena je hotova praca (uloha 3).
 
 ## What Was Done (Session 59) -- Chatbot vypadok: minuty Anthropic kredit + logovanie chyb
 Date: 2026-08-26
@@ -20,23 +27,13 @@ Date: 2026-08-26
 7. **Bot halucinuje dopravu zadarmo** -- na otazku o mini-rypadle odpovedal "Bezplatne dorucime do 24 hodin", hoci KB ma korektny cennik (1 EUR/km, min. 15 EUR). Zlucil si "Bezplatne poradenstvo" + "do 24 hodin" z `04-sluzby.md`. **VYRIESENE bez zasahu 27.8.:** majitel preveril bota znova a na "kolko stoji doprava" odpoveda korektne (15 EUR v Senci / 1 EUR/km, pick-up 1,20 EUR/km, min. 15 EUR) -- bola to jednorazova halucinacia, uloha zrusena.
 8. RoyalStroje `dev` -> `main` push (`727683c..13915fa`): net ceny, realne URL produktov, oba nazvy strojov v katalogu + s58 wrap.
 
-## What Was Done (Session 58) -- Klient sa uklada pred obchodom + KB pipeline pre chatbota
-Date: 2026-08-25
-
-1. **Novy obchod krok 1: klient musi byt v DB skor, nez vznikne obchod.** "Ulozit klienta" teraz vlozi klienta + kontakty, ostane na kroku 1 (zeleny toast, novy `components/ui/Toast.jsx`), formular sa zamkne (`fieldset disabled`) a az potom sa odomkne "Vytvorit obchod". Duplicitna insert vetva `_isNew` v `NewDeal.handleSubmit` zmazana -- vytvaranie klienta zije len na jednom mieste.
-2. **Chatbot KB bola od marca 2026 zastarana a klamala by zakaznikom**: doprava (stara "Senec zadarmo/BA 40 EUR" vs. dnesne Senec 15 EUR / 1 EUR/km / 1,20 pickup / 1,50 cudzia technika), NAP (prevadzka Recka 182 vs. sidlo Boldog 182), sluzby (Royal Fleet/servis/zemne prace uz na webe nie su; pribudlo "Zozenieme akykolvek stroj" + autorizovany predajca Makita). Vsetkych 5 suborov v `knowledgebase/` prepisanych podla aktualneho webu.
-3. **Katalog produktov sa do KB nikdy nedostal, lebo zije v Supabase, nie v repe.** Novy `scripts/kb-data.mjs` (Node, cita .env sam) stiahne 158 aktivnych strojov s cenami s DPH (x1.23, ako web) a linkami -- vygenerovany obsah je telom `03-produkty.md`. KB spolu 5,6k slov.
-4. **Import .md button v M.D.N-Tech konzole** (`KBImportButton.tsx`, commit `d10cc5c` na ich main): parsuje export format (roundtrip) aj plain .md (1 subor = 1 entry, kategoria z nazvu suboru, title z H1), preview modal, mody Replace/Merge. tsc + next build zelene; klikaciu skusku nemam (bez loginu do konzoly).
-5. `build-kb` skill (globalny) upgradnuty: detekuje `knowledgebase/` layout, spusta `scripts/kb-data.mjs` ako zdroj zivych dat, pravidlo "web vyhrava nad starou KB".
-6. Vsetko pushnute: RoyalStroje `dev`+`main` = `727683c`, mdn-tech `main` = `d10cc5c` (isiel s nim aj ich cakajuci wrap commit `b77cab6`).
-
 ## What To Do Next
 
 | # | Priority | Task | Notes |
 |---|----------|------|-------|
 | 1 | Med | Nizky Anthropic kredit = tichy vypadok chatbota bez varovania | Toto zhodilo bota 26.8. Kredit sa mina rychlejsie odkedy ide cela KB (~21k tokenov/sprava, ~2,8 centa za novu konverzaciu). Zvazit budget alert v console.anthropic.com alebo kontrolu zostatku v mdn-tech Command Centri |
 | 2 | Med | Dashboard design -- next wins, owner picked none yet | Offered at the end of s56, awaiting a choice: (a) "Nový obchod" renders twice on the Dashboard, drop the page-header one; (b) sidebar "Prehľad" duplicates 4 of the 6 stat tiles, trim to what is not already on screen; (c) global search / cmd-K in the empty header; (d) compact table rows (~40% more rows per screen); (e) stat-tile colours are decorative, make them semantic (neutral/positive/attention); (f) single 1.05 MB JS chunk -- route-level code splitting |
-| 3 | Med | Footer credit still uses the OLD M.D.N Tech icon | `src/components/common/Footer.jsx:235` renders `logo_mdntech.webp` (white-on-black square, superseded) while `/partneri` now shows the new mark. Fix = `logo-final-white.svg` from `M.D.N-Tech-main/public/brand/`. Owner said "zatiaľ neriešiť". Same stale icon also sits in `apps/dashboard/public/logo_mdntech.webp` (sidebar credit) |
+| 3 | Med | Footer credit still uses the OLD M.D.N Tech icon | `src/components/common/Footer.jsx:235` renders `logo_mdntech.webp` (white-on-black square, superseded) while `/partneri` now shows the new mark. Fix = `logo-final-gradient.svg` from `M.D.N-Tech-main/public/brand/` (fialova verzia, s60 ju uz nasadila v `crm_core` -- na svetlom podklade bez ciernej podlozky, fixna vyska + volna sirka, pomer ~1,7:1). Owner said "zatiaľ neriešiť" (s59); v `crm_core` si ju vypytal sam, takze sa oplati sa spytat znova. Same stale icon also sits in `apps/dashboard/public/logo_mdntech.webp` (sidebar credit) |
 | 4 | **OWNER** | NAP citations per `docs/nap-citations.md` -- next up: Azet, Firemný portál, Waze | Zlaté stránky + Bing done s53; Apple with the founder. Highest value is actually partner/manufacturer links, not directories. Also pending: switch GBP Website field from `www.` to the apex (canonical since s48) |
 | 5 | **OWNER** | SEO-4/7 follow-up: monitor GSC Pages report (Indexovanie -> Strany) | Overdue (2-4 weeks from 2026-08-05); re-check ~2 weeks after the s53 deploy landed |
 | 6 | Low | GBP products: swap studio renders for own yard photos as they get taken | 15 uploaded s54 with catalog stock renders (PNGs on Desktop, outside repo). Own photos are the stronger, non-duplicate signal |
@@ -74,6 +71,7 @@ Date: 2026-08-25
 | 56 | 2026-08-18 | Loga partnerov zvacsene (rovnaka opticka plocha) + redizajn Command Centra | Hlásené "šedé pozadie" bola stará cache (`max-age=86400`), nie asset -- preto `_v2` názvy; logá teraz podľa rovnakej optickej PLOCHY, nie spoločného boxu (+25-105%); UNICON a MK prerezané nanovo, MDN lockup na finálnu značku; dashboard: biele chrome na tónovanom plátne, 53 neviditeľných `border-gray-100` -> `gray-200`, aktívna položka menu prekreslená, login = "Royal Command Center"; NEPUSHnuté na PROD |
 | 57 | 2026-08-20/21 | Custom cena fix + reporty so 4 zalozkami + premenovanie zmluv + hladanie klienta | Custom finálna cena sa teraz prepisuje aj do rezervácie (`buildFinancialSync`, migrácia 023 spustená); editácia ceny ukončenej zmluvy + pole bez DPH pri vrátení (obojsmerne); Reporty = 4 záložky (Pohľadávky, Stroje, Klienti); tržby zjednotené na `date_from`; živé počítadlo úloh v sidebari; Faktúry -> Zmluvy, Návrh/Finálna -> Otvorená/Ukončená (len UI, DB nezmenená), stĺpec Celkom bez DPH; hľadanie podľa klienta s našepkávačom; SILKOT-ETI partner 13; priebežne 7x `dev`->`main` |
 | 58 | 2026-08-25 | Klient sa uklada pred obchodom + chatbot KB pipeline -> PROD | Novy obchod: "Ulozit klienta" uklada hned (toast, zamknuty formular), "Vytvorit obchod" az potom; duplicitny insert zmazany. KB refresh proti aktualnemu webu (doprava, NAP, sluzby) + `scripts/kb-data.mjs` = 158 strojov s cenami zo Supabase; Import .md button v mdn-tech konzole (Replace/Merge); build-kb skill upgrade; `dev`->`main` + mdn-tech main |
+| 60 | 2026-08-27 | Praca v `crm_core` (CRM demo), tu len upratanie uloh | Demo login = iba tlacidlo "Vstupit do dema", Dashboard -> Prehlad, 4 klikacie dlazdice, fialova znacka MDN v kredite. Detaily v `crm_core/handoff.md` sedenie 8. Tu: halucinacia o doprave zdarma preverena majitelom ako neopakujuca sa -> uloha zrusena |
 | 59 | 2026-08-26 | Chatbot vypadok: minuty Anthropic kredit + logovanie chyb -> PROD | Bot vracal "Sorry, something went wrong" na kazdu spravu -- root cause `400: credit balance is too low`, nie web/kod/KB (KB import bol OK, bot s nim fungoval 25.8. o 20:00). Majitel dokupil kredit, bot ide. Chyba sa nedala nikde precitat -> mdn-tech `bb375f1` prida `console.error` do catch v chat route. Odhalene: `.env.local` mal archivovany kluc (401), bot halucinuje "dopravu zadarmo". RoyalStroje `dev`->`main` (`13915fa`) |
 
 <!-- Sessions 1-49 summary rows + sessions 15-57 full notes + old Architecture/Supabase reference: handoff-archive.md -->
