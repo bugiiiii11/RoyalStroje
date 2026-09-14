@@ -195,9 +195,11 @@ async function capture(page, route, staticDefaults) {
     // 3) Strip widget leftovers (script tags injected at runtime; requests
     //    were blocked, but the tags must not ship in the snapshot or the
     //    chatbot would load eagerly instead of via requestIdleCallback).
+    //    [data-transient-notice] joins them: a dated operating notice baked
+    //    into the static HTML would outlive the date it announces.
     document
       .querySelectorAll(
-        'script[data-chatbot-id], script[src*="mdntech"], script[src*="recaptcha"], .grecaptcha-badge'
+        'script[data-chatbot-id], script[src*="mdntech"], script[src*="recaptcha"], .grecaptcha-badge, [data-transient-notice]'
       )
       .forEach((el) => el.remove());
 

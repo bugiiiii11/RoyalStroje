@@ -8,6 +8,7 @@ import HamburgerMenu from './components/common/HamburgerMenu';
 import AnimatedBackground from './components/common/AnimatedBackground';
 import ScrollToTop from './components/common/ScrollToTop';
 import CookieBanner from './components/common/CookieBanner';
+import HolidayNotice from './components/common/HolidayNotice';
 import { enableAnalytics, CONSENT_KEY } from './lib/analytics';
 import Home from './pages/Home';
 import Katalog from './pages/Katalog';
@@ -140,6 +141,7 @@ function App() {
           <Footer />
           <MobileNav />
           <CookieBanner />
+          <HolidayNotice />
         </div>
       </div>
       </Router>
