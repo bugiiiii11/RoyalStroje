@@ -5,7 +5,11 @@ import { X, CalendarOff } from 'lucide-react';
 // Temporary operating notice. To retire it, drop <HolidayNotice /> from App.jsx
 // -- but it also switches itself off on its own: nothing renders once HIDE_AFTER
 // has passed, so a forgotten notice can never go stale on the live site.
-const STORAGE_KEY = 'rs-notice-sviatok-2026-09-15';
+//
+// Dismissal is deliberately NOT persisted (owner's call): closing it only hides
+// it for the current page load, and a refresh brings it back. A one-day closure
+// is worth re-stating to a returning visitor. Client-side route changes keep it
+// closed, since this component lives outside <Routes> and never remounts.
 const HIDE_AFTER = new Date('2026-09-16T00:00:00');
 
 export default function HolidayNotice() {
@@ -15,12 +19,6 @@ export default function HolidayNotice() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (Date.now() >= HIDE_AFTER.getTime()) return;
-
-    try {
-      if (localStorage.getItem(STORAGE_KEY) === 'dismissed') return;
-    } catch {
-      // localStorage blocked - still show the notice this session
-    }
 
     // Held back from the first paint on purpose: the prerender snapshot is
     // taken shortly after render, so the notice stays out of the static HTML
@@ -34,11 +32,6 @@ export default function HolidayNotice() {
 
   const close = () => {
     setAnimateIn(false);
-    try {
-      localStorage.setItem(STORAGE_KEY, 'dismissed');
-    } catch {
-      // ignore
-    }
     setTimeout(() => setVisible(false), 400);
   };
 
