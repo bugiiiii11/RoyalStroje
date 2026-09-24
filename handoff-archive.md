@@ -1,5 +1,17 @@
 # Handoff Archive (do not read on /start)
 
+## What Was Done (Session 59) -- Chatbot vypadok: minuty Anthropic kredit + logovanie chyb
+Date: 2026-08-26
+
+1. **Chatbot na royalstroje.sk vracal "Sorry, something went wrong" na kazdu spravu.** Root cause NIE JE web, kod ani KB import -- Anthropic vratil `400 invalid_request_error: "Your credit balance is too low to access the Anthropic API"`. Majitel dokupil kredit, bot ide (odpoveda cenami bez DPH aj linkami).
+2. **Diagnostika trvala dlho, lebo chybu nebolo kde precitat.** Widget nahradi realny text generickou hlaskou a chat routa ju nikam nelogovala -> vo Vercel logoch NIC. Skutocny error sa dal ziskat len zreprodukovanim requestu v prehliadaci (Playwright na live web) a precitanim surového SSE payloadu.
+3. **Oprava v mdn-tech (`bb375f1`, na ich main):** catch v `app/api/chat/[chatbotId]/message/route.ts` teraz robi aj `console.error` s chatbotId, velkostou promptu, dlzkou historie, upstream statusom a textom chyby. tsc + next build zelene.
+4. **Rozlisovanie dvoch hlasok widgetu je diagnosticky kluc:** "Sorry, something went wrong" = HTTP 200, SSE sa otvoril, spadlo volanie Claude. "Sorry, I'm having trouble connecting" = non-OK HTTP (CORS, 403 domena, nas rate limit). Podla screenshotu sa da hned zuzit, kde hladat.
+5. Co sa cestou vylucilo (pre buducnost): KB import bol OK (6 entries, 49 920 znakov, pod limitom 60k -- bot s nim preukazatelne fungoval 25.8. o 20:00 UTC, cache cisla sedia na 21 252 tokenov); chat kod sa od posledneho funkcneho deployu nezmenil; model aj domain allow-list OK.
+6. **`M.D.N-Tech-main/.env.local` mal archivovany `CLAUDE_CHATBOT_API_KEY`** (`...458...YgAA`, Anthropic vracal 401) -- lokalny dev by chatbot nerozbehol. Majitel prepisal aktivnym klucom z 24.8. (`...3XL...TQAA`). Prod ho mal spravny cely cas.
+7. **Bot halucinuje dopravu zadarmo** -- na otazku o mini-rypadle odpovedal "Bezplatne dorucime do 24 hodin", hoci KB ma korektny cennik (1 EUR/km, min. 15 EUR). Zlucil si "Bezplatne poradenstvo" + "do 24 hodin" z `04-sluzby.md`. **VYRIESENE bez zasahu 27.8.:** majitel preveril bota znova a na "kolko stoji doprava" odpoveda korektne (15 EUR v Senci / 1 EUR/km, pick-up 1,20 EUR/km, min. 15 EUR) -- bola to jednorazova halucinacia, uloha zrusena.
+8. RoyalStroje `dev` -> `main` push (`727683c..13915fa`): net ceny, realne URL produktov, oba nazvy strojov v katalogu + s58 wrap.
+
 ## What Was Done (Session 58) -- Klient sa uklada pred obchodom + KB pipeline pre chatbota
 Date: 2026-08-25
 
@@ -850,3 +862,5 @@ Date: 2026-08-14
 4. **Local quirk:** client-side rendering in local browsers still hits the silent staticProducts fallback (e.g. triple Custers row in screenshots) -- not a site bug; PROD client fetch works fine.
 5. **GBP (owner did):** services with descriptions added, profile edited. Advice: KEEP the extra categories (Prenajom kontajnerov, Pozicovna zariadeni, Prenajom stavebnych zariadeni -- real business lines); reconsider only "Predajca stavebnych strojov" (keep if machine sales/brokering is real, else swap for a tool-shop category); primary category must stay a rental one.
 6. **GBP products: 15 recommendations + prices + original descriptions generated in chat** (not in repo). Prices recommended s DPH for the GBP field; descriptions written from own DB specs + blogs (no copied manufacturer text -- copyright + duplicate content). Owner will upload.
+| 50 | 2026-08-05 | SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD | sameAs + FAQPage JSON-LD added; Rich Results Test verified (FAQ not shown = Google policy, not a bug); site-wide og:image + schema image swapped to real yard photo; pushed (`6270a01`) |
+| 51 | 2026-08-13 | NAP adresa zjednotena na Boldog + GBP + opravene mapy -> PROD | Site carried 6 conflicting addresses; split into prevadzka `Recká cesta 182` vs sidlo `Boldog 182`; "Senec" kept as service-area keyword; both Kontakt map embeds were fabricated -> coordinate embed + GBP link; GSC 141 orphan product pages diagnosed (SEO-7); pushed (`9fc7fb5`) |

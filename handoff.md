@@ -1,12 +1,24 @@
 # RoyalStroje -- Session Handoff
 
-<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-58 + old reference blocks; last rotation 2026-08-27). -->
+<!-- HARD CAP ~120 lines. Max 2 session sections. Overflow -> handoff-archive.md (sessions 1-59 + old reference blocks; last rotation 2026-09-24). -->
 
 ## Current State
 
-- **Phase:** RCC feature work + chatbot KB pipeline. Everything through s59 released to PROD (`13915fa`); migrations 022 AND 023 confirmed run by owner
-- **Session count:** 60
-- **Repo status:** `dev` == `origin/dev` == `origin/main` at `13915fa` + 3 lokalne docs commity (wrap s59, zrusena uloha o doprave, wrap s60) -- nic z toho nie je pushnute, ziadna zmena kodu. mdn-tech `main` at `bb375f1` (chat error logging) pushed to its prod; chatbot KB imported by owner and answering live
+- **Phase:** RCC feature work + CTA/oznamy na klientskom webe. Vsetko cez s61 na PROD (`b8cadcc`)
+- **Session count:** 61
+- **Repo status:** `dev` == `main` == `origin` at `b8cadcc`, strom cisty, nic necaka. mdn-tech `main` at `bb375f1`
+
+## What Was Done (Session 61) -- Sviatocny popup + prelink na divíziu Royal Works
+Date: 2026-09-14 az 2026-09-24
+
+1. **Popup "15. 9. zatvorene" (`HolidayNotice.jsx`).** Dizajn nie je novy -- vytiahnuty z commitu `8ff41f6` (april 2026), kde bol zruseny popup "testovacia prevadzka". Tam hladaj promo-popup vzor, ak bude treba dalsi.
+2. **Tri zmeny oproti povodnemu popupu:** ide aj na mobile (povodny bol `hidden md:block`, cize by ho vacsina navstevnikov nevidela), vypina sa sam datumovou poistkou `HIDE_AFTER`, a nesie `data-transient-notice` -- `scripts/prerender.mjs` ho podla toho strhava zo statickeho HTML, aby datovany oznam neprezil svoj datum v tom, co cita Google.
+3. **Ukladanie zavretia zmazane na ziadost majitela** (druha poziadavka tohto sedenia): refresh popup vrati, SPA preklikanie ho necha zavrety. NEVRACAT localStorage spat, je to vedome rozhodnutie.
+4. **Pas Royal Works pod katalogom** (`RoyalWorksBand.jsx`, v `Catalog.jsx` hned za `SourcingBanner`). Zamerne SVETLA karta: v novom wordmarku je "ROYAL" takmer cierne (#0A0A0A) a na nasej tmavej karte by zmizlo.
+5. **Bronz `#9B6133` (tokeny `works-bronze` / `works-bronze-dark`), nie nasa oranzova** -- inak by pas posobil ako tretie Royal Stroje CTA namiesto sesterskej znacky.
+6. **Riadkovy layout az od `lg`, nie `md`:** wordmark ma pomer 9.45:1, na tabletoch stlacal nadpis do troch riadkov. Sipka z textu sa stala kruhovym tlacidlom vpravo -- inline sa na mobile odtrhla od zalomeneho riadku.
+7. **Orezanie loga bez `sharp`:** projekt ho nema. PNG (2600x600, ink len 1691x179) som orezal a previedol na WebP cez puppeteer canvas (`toDataURL('image/webp')`). Pouzitelny trik aj nabuduce.
+8. **`/blog` prerender timeout (60 s) zhodil jeden build**, opakovanie preslo 162/162. Sietovy vykyv, nie regresia -- pri rovnakej hlaske na Verceli staci retry.
 
 ## What Was Done (Session 60) -- Praca prebehla v `crm_core`, nie tu
 Date: 2026-08-27
@@ -15,17 +27,6 @@ Date: 2026-08-27
 2. **Halucinacia o doprave zdarma je zrusena, bez zasahu.** Majitel preveril chatbota znova a na "kolko stoji doprava" odpoveda presne podla KB (15 EUR v Senci / 1 EUR/km, pick-up 1,20 EUR/km, min. 15 EUR). Bola to jednorazova halucinacia -- uloha 1 zo sedenia 59 vypadla zo zoznamu.
 3. **Rovnaka stara znacka MDN visi aj tu** -- patickla webu a sidebar dashboardu. Fialovy `logo-final-gradient.svg` je uz overeny v `crm_core/public/mdn-logo.svg`, takze rovnaka vymena je hotova praca (uloha 3).
 
-## What Was Done (Session 59) -- Chatbot vypadok: minuty Anthropic kredit + logovanie chyb
-Date: 2026-08-26
-
-1. **Chatbot na royalstroje.sk vracal "Sorry, something went wrong" na kazdu spravu.** Root cause NIE JE web, kod ani KB import -- Anthropic vratil `400 invalid_request_error: "Your credit balance is too low to access the Anthropic API"`. Majitel dokupil kredit, bot ide (odpoveda cenami bez DPH aj linkami).
-2. **Diagnostika trvala dlho, lebo chybu nebolo kde precitat.** Widget nahradi realny text generickou hlaskou a chat routa ju nikam nelogovala -> vo Vercel logoch NIC. Skutocny error sa dal ziskat len zreprodukovanim requestu v prehliadaci (Playwright na live web) a precitanim surového SSE payloadu.
-3. **Oprava v mdn-tech (`bb375f1`, na ich main):** catch v `app/api/chat/[chatbotId]/message/route.ts` teraz robi aj `console.error` s chatbotId, velkostou promptu, dlzkou historie, upstream statusom a textom chyby. tsc + next build zelene.
-4. **Rozlisovanie dvoch hlasok widgetu je diagnosticky kluc:** "Sorry, something went wrong" = HTTP 200, SSE sa otvoril, spadlo volanie Claude. "Sorry, I'm having trouble connecting" = non-OK HTTP (CORS, 403 domena, nas rate limit). Podla screenshotu sa da hned zuzit, kde hladat.
-5. Co sa cestou vylucilo (pre buducnost): KB import bol OK (6 entries, 49 920 znakov, pod limitom 60k -- bot s nim preukazatelne fungoval 25.8. o 20:00 UTC, cache cisla sedia na 21 252 tokenov); chat kod sa od posledneho funkcneho deployu nezmenil; model aj domain allow-list OK.
-6. **`M.D.N-Tech-main/.env.local` mal archivovany `CLAUDE_CHATBOT_API_KEY`** (`...458...YgAA`, Anthropic vracal 401) -- lokalny dev by chatbot nerozbehol. Majitel prepisal aktivnym klucom z 24.8. (`...3XL...TQAA`). Prod ho mal spravny cely cas.
-7. **Bot halucinuje dopravu zadarmo** -- na otazku o mini-rypadle odpovedal "Bezplatne dorucime do 24 hodin", hoci KB ma korektny cennik (1 EUR/km, min. 15 EUR). Zlucil si "Bezplatne poradenstvo" + "do 24 hodin" z `04-sluzby.md`. **VYRIESENE bez zasahu 27.8.:** majitel preveril bota znova a na "kolko stoji doprava" odpoveda korektne (15 EUR v Senci / 1 EUR/km, pick-up 1,20 EUR/km, min. 15 EUR) -- bola to jednorazova halucinacia, uloha zrusena.
-8. RoyalStroje `dev` -> `main` push (`727683c..13915fa`): net ceny, realne URL produktov, oba nazvy strojov v katalogu + s58 wrap.
 
 ## What To Do Next
 
@@ -37,11 +38,13 @@ Date: 2026-08-26
 | 4 | **OWNER** | NAP citations per `docs/nap-citations.md` -- next up: Azet, Firemný portál, Waze | Zlaté stránky + Bing done s53; Apple with the founder. Highest value is actually partner/manufacturer links, not directories. Also pending: switch GBP Website field from `www.` to the apex (canonical since s48) |
 | 5 | **OWNER** | SEO-4/7 follow-up: monitor GSC Pages report (Indexovanie -> Strany) | Overdue (2-4 weeks from 2026-08-05); re-check ~2 weeks after the s53 deploy landed |
 | 6 | Low | GBP products: swap studio renders for own yard photos as they get taken | 15 uploaded s54 with catalog stock renders (PNGs on Desktop, outside repo). Own photos are the stronger, non-duplicate signal |
-| 7 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Production ships HeroSplit since s37 |
-| 8 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
-| 9 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit |
-| 10 | Low | Final real-Android scroll-check | FAQ + product grid + subpages + `/katalog` on owner's Xiaomi, logged out of Vercel (toolbar = false positive, s34). Add the redesigned `/partneri` wall and the dashboard chrome to that pass |
-| 11 | Backlog | SEO-6 prerender freshness hook; workspace email migration; subcategory data audit; product photos; email notifications; chatbot CORS (mdntech.org 405); WhatsApp API; online payments | Details in handoff-archive.md (sessions 15-43) |
+| 7 | Low | Zmazat mrtvy sviatocny popup | 15. 9. 2026 je preč, `HIDE_AFTER` uz nic nevykresluje, takze to NIC nelomi -- je to len mrtvy kod. Staci `<HolidayNotice />` z `src/App.jsx` + `src/components/common/HolidayNotice.jsx`. Ak pribudne dalsi sviatok/dovolenka, komponent staci ozivit a posunut datum namiesto pisania od nuly |
+| 8 | Low | Pas Royal Works aj na `/katalog`? | `RoyalWorksBand.jsx` je zatial len na homepage pod katalogom. Na stranke `/katalog` (146 strojov, samostatna SEO stranka) chyba -- majitel sa nevyjadril, ci ho tam chce |
+| 9 | Med | Delete dead hero files | `src/components/home/Hero.jsx` + `MobileHero.jsx` + commented imports/block in `src/pages/Home.jsx`. Production ships HeroSplit since s37 |
+| 10 | Med | Add IBAN to company info | Placeholder "DOPLNIT" in `apps/dashboard/src/lib/companyInfo.js` -- shows on all PDFs |
+| 11 | Med | Backfill OP + birth dates on existing PO contacts | Migration 019 columns are NULL for old contacts; owner fills via ClientDetail pencil edit |
+| 12 | Low | Final real-Android scroll-check | FAQ + product grid + subpages + `/katalog` on owner's Xiaomi, logged out of Vercel (toolbar = false positive, s34). Add the redesigned `/partneri` wall and the dashboard chrome to that pass |
+| 13 | Backlog | SEO-6 prerender freshness hook; workspace email migration; subcategory data audit; product photos; email notifications; chatbot CORS (mdntech.org 405); WhatsApp API; online payments | Details in handoff-archive.md (sessions 15-43) |
 
 ## Key Files
 
@@ -62,8 +65,6 @@ Date: 2026-08-26
 
 | Session | Date | Title | Key changes |
 |---------|------|-------|-------------|
-| 50 | 2026-08-05 | SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD | sameAs + FAQPage JSON-LD added; Rich Results Test verified (FAQ not shown = Google policy, not a bug); site-wide og:image + schema image swapped to real yard photo; pushed (`6270a01`) |
-| 51 | 2026-08-13 | NAP adresa zjednotena na Boldog + GBP + opravene mapy -> PROD | Site carried 6 conflicting addresses; split into prevadzka `Recká cesta 182` vs sidlo `Boldog 182`; "Senec" kept as service-area keyword; both Kontakt map embeds were fabricated -> coordinate embed + GBP link; GSC 141 orphan product pages diagnosed (SEO-7); pushed (`9fc7fb5`) |
 | 52 | 2026-08-14 | SEO-7 interné linky + /katalog + prerender guard (na `dev`) | Catalog filtre/stránkovanie ako `<a href>`; nová stránka /katalog so všetkými produktmi; prerender proxy Supabase cez Node fetch + validátor -- build spadne pri chybnom bake; commit `c236b2e` |
 | 53 | 2026-08-14 | SEO-7 na PROD + kosik zmazany + zapeceny 404 shell + NAP citacie | SEO-7 released and verified live (146/146 slugs linked from /katalog); dead cart code deleted end-to-end; prerender bakes `dist/404.html` and vercel.json rewrites there; `docs/nap-citations.md` written, then corrected after 4 listed SK directories turned out dead |
 | 54 | 2026-08-14 | 15 GBP produktových PNG + release na PROD | GBP neberie WebP -> 15 PNG na plochu (mimo repa); správne párovanie ide cez Supabase `equipment.image_path` podľa slugu, nie cez názvy súborov v repe; Python SSL tu odmieta Supabase cert, Node fetch funguje; docs-only `dev`->`main` push = zároveň retry padnutého buildu `fcdeab3` |
@@ -73,5 +74,6 @@ Date: 2026-08-26
 | 58 | 2026-08-25 | Klient sa uklada pred obchodom + chatbot KB pipeline -> PROD | Novy obchod: "Ulozit klienta" uklada hned (toast, zamknuty formular), "Vytvorit obchod" az potom; duplicitny insert zmazany. KB refresh proti aktualnemu webu (doprava, NAP, sluzby) + `scripts/kb-data.mjs` = 158 strojov s cenami zo Supabase; Import .md button v mdn-tech konzole (Replace/Merge); build-kb skill upgrade; `dev`->`main` + mdn-tech main |
 | 60 | 2026-08-27 | Praca v `crm_core` (CRM demo), tu len upratanie uloh | Demo login = iba tlacidlo "Vstupit do dema", Dashboard -> Prehlad, 4 klikacie dlazdice, fialova znacka MDN v kredite. Detaily v `crm_core/handoff.md` sedenie 8. Tu: halucinacia o doprave zdarma preverena majitelom ako neopakujuca sa -> uloha zrusena |
 | 59 | 2026-08-26 | Chatbot vypadok: minuty Anthropic kredit + logovanie chyb -> PROD | Bot vracal "Sorry, something went wrong" na kazdu spravu -- root cause `400: credit balance is too low`, nie web/kod/KB (KB import bol OK, bot s nim fungoval 25.8. o 20:00). Majitel dokupil kredit, bot ide. Chyba sa nedala nikde precitat -> mdn-tech `bb375f1` prida `console.error` do catch v chat route. Odhalene: `.env.local` mal archivovany kluc (401), bot halucinuje "dopravu zadarmo". RoyalStroje `dev`->`main` (`13915fa`) |
+| 61 | 2026-09-24 | Sviatocny popup + prelink na diviziu Royal Works -> PROD | `HolidayNotice.jsx` obnoveny z popupu zruseneho v `8ff41f6`, teraz aj na mobile + datumova poistka + strip z prerenderu; zavretie sa NEUKLADA (refresh ho vrati, ziadost majitela). `RoyalWorksBand.jsx` pod katalogom: svetla karta (wordmark je takmer cierny), bronz `#9B6133` namiesto oranzovej, riadkovy layout az od `lg` kvoli pomeru 9.45:1. Logo orezane cez puppeteer canvas (projekt nema `sharp`). 2x `dev`->`main` |
 
 <!-- Sessions 1-49 summary rows + sessions 15-57 full notes + old Architecture/Supabase reference: handoff-archive.md -->
