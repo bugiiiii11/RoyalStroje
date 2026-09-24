@@ -9,6 +9,11 @@ export default {
       colors: {
         'orange-primary': '#FF6600',
         'orange-hover': '#ff8533',
+        // Royal Works (sister division) brand bronze, sampled from its wordmark.
+        // Deliberately not orange: the division cross-link must read as a
+        // sibling brand, not as another Royal Stroje CTA.
+        'works-bronze': '#9B6133',
+        'works-bronze-dark': '#7E4E28',
       },
       fontFamily: {
         sans: ['"Source Sans 3"', 'ui-sans-serif', 'system-ui', 'sans-serif'],

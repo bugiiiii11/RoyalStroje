@@ -13,6 +13,7 @@ import FAQ from './FAQ';
 import QuoteForm from '../catalog/QuoteForm';
 import WhyRoyalStroje from './WhyRoyalStroje';
 import SourcingBanner from './SourcingBanner';
+import RoyalWorksBand from './RoyalWorksBand';
 import ContentSection from '../common/ContentSection';
 
 // Ikony pre jednotlivé kategórie
@@ -535,6 +536,10 @@ export default function Catalog() {
 
         {/* "Nenašli ste stroj?" sourcing CTA — between catalog and Prečo Royal Stroje */}
         <SourcingBanner />
+
+        {/* Royal Works cross-link. Sits right after the sourcing band on purpose:
+            the two escalate ("we'll find the machine" → "we'll do the job"). */}
+        <RoyalWorksBand />
 
         {/* WhyRoyalStroje section - between catalog and FAQ */}
         <WhyRoyalStroje />
