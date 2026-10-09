@@ -56,7 +56,7 @@ Dovoz techniky na stavbu: malé náradie a stredná mechanizácia často **v ten
 
 ## Katalóg
 
-Online katalóg na https://royalstroje.sk/katalog obsahuje 158 strojov v 8 kategóriách: Malé náradie, Stredná mechanizácia, Ťažká technika, Pracovné plošiny, Vybavenie staveniska, Autá a prívesné vozíky, Záhradná technika, Voľný čas a šport.
+Online katalóg na https://royalstroje.sk/katalog obsahuje 158 strojov v 7 kategóriách: Malé náradie, Stredná mechanizácia, Ťažká technika (vrátane pracovných plošín), Vybavenie staveniska, Autá a prívesné vozíky, Záhradná technika, Voľný čas a šport.
 
 ## Partneri
 

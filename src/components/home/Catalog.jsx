@@ -31,6 +31,12 @@ const categoryIcons = {
   'volny-cas-a-sport': Bike,
 };
 
+// Retired top-level categories -> where their products live now. Old links
+// (chatbot KB, GBP, bookmarks) would otherwise land on an empty catalog.
+const RETIRED_CATEGORIES = {
+  'pracovne-plosiny': { category: 'tazka-technika', subcategory: 'pracovne-plosiny' },
+};
+
 export default function Catalog() {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
@@ -46,8 +52,9 @@ export default function Catalog() {
   }, [location.hash, products.length]);
 
   // Read filter state from URL params (persists across navigation)
-  const activeCategory = searchParams.get('category') || 'male-naradie';
-  const activeSubcategory = searchParams.get('subcategory') || 'all';
+  const retired = RETIRED_CATEGORIES[searchParams.get('category')];
+  const activeCategory = retired?.category || searchParams.get('category') || 'male-naradie';
+  const activeSubcategory = retired?.subcategory || searchParams.get('subcategory') || 'all';
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   const searchQuery = searchParams.get('search') || '';
 
@@ -78,6 +85,13 @@ export default function Catalog() {
       return next;
     }, { replace: true });
   };
+
+  // Rewrite a retired category in the URL so the filter links built from
+  // searchParams below point at the new location too.
+  useEffect(() => {
+    if (retired) updateParams({ ...retired, page: null });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [retired]);
 
   // Setter that writes to URL (search input only — filters and pagination
   // navigate via real <a href> links below)

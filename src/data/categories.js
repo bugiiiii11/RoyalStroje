@@ -45,7 +45,7 @@ export const categories = [
     id: 'tazka-technika',
     name: 'Ťažká technika',
     slug: 'tazka-technika',
-    description: 'Rýpadlá, nakladače, dumpre, valce, manipulátory - s obsluhou aj bez',
+    description: 'Rýpadlá, nakladače, dumpre, valce, manipulátory, pracovné plošiny - s obsluhou aj bez',
     badge: 'S OBSLUHOU',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
@@ -57,19 +57,24 @@ export const categories = [
       { id: 'valce', name: 'Valce', slug: 'valce' },
       { id: 'manipulatory', name: 'Manipulátory', slug: 'manipulatory' },
       { id: 'vysokozdvizne-voziky', name: 'Vysokozdvižné vozíky', slug: 'vysokozdvizne-voziky' },
+      // 3 platforms moved here from the hidden top-level category below (s63)
+      { id: 'pracovne-plosiny', name: 'Pracovné plošiny', slug: 'pracovne-plosiny' },
     ]
   },
-  {
-    id: 'pracovne-plosiny',
-    name: 'Pracovné plošiny',
-    slug: 'pracovne-plosiny',
-    description: 'Interiérové a exteriérové plošiny pre prácu vo výške',
-    subcategories: [
-      { id: 'all', name: 'Všetko', slug: 'all' },
-      { id: 'interierove', name: 'Interiérové', slug: 'interierove' },
-      { id: 'exterierove', name: 'Exteriérové', slug: 'exterierove' },
-    ]
-  },
+  // HIDDEN (s63): the top-level "Pracovné plošiny" category is retired. The 3 platforms
+  // still offered live under Ťažká technika -> Pracovné plošiny; the other 10 are
+  // status='inactive' in Supabase. Uncomment to bring the category back.
+  // {
+  //   id: 'pracovne-plosiny',
+  //   name: 'Pracovné plošiny',
+  //   slug: 'pracovne-plosiny',
+  //   description: 'Interiérové a exteriérové plošiny pre prácu vo výške',
+  //   subcategories: [
+  //     { id: 'all', name: 'Všetko', slug: 'all' },
+  //     { id: 'interierove', name: 'Interiérové', slug: 'interierove' },
+  //     { id: 'exterierove', name: 'Exteriérové', slug: 'exterierove' },
+  //   ]
+  // },
   {
     id: 'vybavenie-staveniska',
     name: 'Vybavenie staveniska',
