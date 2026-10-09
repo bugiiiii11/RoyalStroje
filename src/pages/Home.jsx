@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import HeroSplit from '../components/home/HeroSplit';
-import PromoCarousel from '../components/home/PromoCarousel';
 import Catalog from '../components/home/Catalog';
 // --- OLD HERO (revert: uncomment 2 imports below + the block in JSX, remove <HeroSplit />) ---
 // import Hero from '../components/home/Hero';
@@ -84,9 +83,6 @@ export default function Home() {
       <hr className="hidden md:block border-0 h-[2px] bg-[#FF6600] w-full m-0" />
       <MobileHero />
       */}
-
-      {/* Aktuálne akcie — carousel (prvá sekcia pod hero) */}
-      <PromoCarousel />
 
       <Catalog />
     </>

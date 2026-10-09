@@ -15,6 +15,7 @@ import WhyRoyalStroje from './WhyRoyalStroje';
 import SourcingBanner from './SourcingBanner';
 import RoyalWorksBand from './RoyalWorksBand';
 import BrandMarquee from './BrandMarquee';
+import PromoOffers from './PromoOffers';
 import BlogTeaser from './BlogTeaser';
 import ContentSection from '../common/ContentSection';
 
@@ -537,6 +538,10 @@ export default function Catalog() {
         {/* Brands we rent out -- endless logo strip, straight under the catalogue
             it vouches for; the light strip also sets up the dark sourcing band. */}
         <BrandMarquee />
+
+        {/* Current offers -- after the brands, so the deals land on makes the
+            visitor has just seen vouched for. */}
+        <PromoOffers />
 
         {/* "Nenašli ste stroj?" sourcing CTA — between catalog and Prečo Royal Stroje */}
         <SourcingBanner />
