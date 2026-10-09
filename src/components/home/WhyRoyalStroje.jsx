@@ -50,16 +50,16 @@ export default function WhyRoyalStroje() {
   return (
     <section className="relative py-12 md:py-16 lg:py-20">
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-        {/* Split heading: claim left, supporting line right (stacks on mobile) */}
+        {/* Heading + supporting line stacked -- same pattern as the FAQ heading below */}
         <div
           ref={headingRef}
-          className={`grid lg:grid-cols-2 gap-3 lg:gap-12 lg:items-end mb-6 md:mb-10 reveal ${headingInView ? 'in-view' : ''}`}
+          className={`mb-6 md:mb-10 reveal ${headingInView ? 'in-view' : ''}`}
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-zinc-900 leading-[1.05] text-balance">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-zinc-900 leading-[1.05] text-balance mb-3 md:mb-4">
             Prečo si nás vyberajú stavbári v{' '}
             <span className="text-orange-primary">Senci a Bratislave</span>
           </h2>
-          <p className="text-zinc-600 text-sm md:text-lg lg:text-right lg:justify-self-end max-w-xl">
+          <p className="text-zinc-600 text-sm md:text-lg max-w-2xl text-pretty">
             20 rokov skúseností v prenájme stavebnej techniky pre firmy aj súkromné osoby
           </p>
         </div>
