@@ -25,12 +25,16 @@ export default function HeroSplit() {
 
       {/* ---- Desktop: diagonal split (fills remaining height) ---- */}
       <div className="hidden md:block md:flex-1 md:min-h-0 relative">
-        {/* LEFT base layer — pure white; truck centered in the left section, grounded slightly into the bottom */}
+        {/* LEFT base layer — pure white. The truck is sized by the section's HEIGHT
+            and pinned bottom-right against the diagonal: with the CTAs now right
+            under the copy, a width-sized, vertically centred truck rode up into
+            them on 900-1000px tall screens. Height-sizing shrinks it exactly when
+            the column gets short; max-w keeps it from growing past the split. */}
         <div className="absolute inset-0 bg-white overflow-hidden">
           <img
             src="/pictures/graphics/web_pics/auto_hero.webp"
             alt="Prenájom stavebnej techniky a náradia s dovozom na stavbu - Royal Stroje"
-            className="hs-img-l absolute left-[10%] top-[55%] -translate-y-1/2 w-[42%] h-auto"
+            className="hs-img-l absolute right-[52.5%] bottom-[4%] h-[64%] w-auto max-w-[44%]"
             width={1774}
             height={887}
             fetchPriority="high"
@@ -65,8 +69,8 @@ export default function HeroSplit() {
         {/* Content grid aligned to the split */}
         <div className="relative z-10 h-full w-full px-6 lg:px-12">
           <div className="grid grid-cols-[57%_43%] h-full">
-            {/* LEFT — Prenájom: heading top-left, CTAs bottom-left */}
-            <div className="flex flex-col justify-between items-start pr-[8%] pt-24 pb-12">
+            {/* LEFT — Prenájom: heading top-left, CTAs right under the copy */}
+            <div className="flex flex-col justify-start items-start pr-[8%] pt-24 pb-12">
               {/* heading group — single soft white "cloud" behind the whole text block (CTA excluded) */}
               <div className="relative w-fit">
                 <span aria-hidden className="absolute -inset-5 bg-white/95 rounded-[2rem] blur-xl" />
@@ -81,21 +85,23 @@ export default function HeroSplit() {
                   </p>
                 </div>
               </div>
-              {/* CTAs — bottom-left, no white backing (buttons sit on the image) */}
-              <div className="hs-3 flex flex-wrap gap-3 mt-10">
-                <a href={`tel:${PHONE}`} className="btn-primary">
-                  <Phone size={16} />
+              {/* CTAs — directly under the copy, outside the white cloud. They used
+                  to sit at the column's bottom edge, a full screen-height away from
+                  the text they act on. Same size as the SourcingBanner CTAs. */}
+              <div className="hs-3 flex flex-wrap gap-3 mt-8">
+                <a href={`tel:${PHONE}`} className="btn-primary text-base px-7 py-4">
+                  <Phone size={18} />
                   <span>Zavolať teraz</span>
                 </a>
-                <a href="#katalog" className="btn-outline-light px-5 py-3">
+                <a href="#katalog" className="btn-outline-light text-base px-7 py-4">
                   <span>Zobraziť stroje</span>
-                  <ArrowRight size={16} className="text-orange-primary" />
+                  <ArrowRight size={18} className="text-orange-primary" />
                 </a>
               </div>
             </div>
 
-            {/* RIGHT — Predaj náradia: heading top-left, CTA at the bottom (aligned with the left CTAs) */}
-            <div className="flex flex-col justify-between items-start pl-[4%] pt-24 pb-12">
+            {/* RIGHT — Predaj náradia: heading top-left, CTA right under the copy */}
+            <div className="flex flex-col justify-start items-start pl-[4%] pt-24 pb-12">
               {/* soft white "cloud" behind the text only — CTA sits below, on the image */}
               <div className="relative w-fit">
                 <span aria-hidden className="absolute -inset-5 bg-white/95 rounded-[2rem] blur-xl" />
@@ -110,10 +116,10 @@ export default function HeroSplit() {
                 </div>
               </div>
               {/* animation on wrapper, not the button — keeps btn-primary hover lift working */}
-              <div className="hs-4">
-                <Link to="/sluzby/predaj-techniky" className="btn-primary">
+              <div className="hs-4 mt-8">
+                <Link to="/sluzby/predaj-techniky" className="btn-primary text-base px-7 py-4">
                   <span>Navštíviť predajňu</span>
-                  <ArrowRight size={16} />
+                  <ArrowRight size={18} />
                 </Link>
               </div>
             </div>
@@ -261,11 +267,11 @@ export default function HeroSplit() {
           to   { opacity: 1; transform: none; }
         }
 
-        /* Veľký ľavý obrázok (auto) — jemný nábeh zľava + fade; drží translateY(-50%) kvôli centrovaniu */
+        /* Veľký ľavý obrázok (auto) — jemný nábeh zľava + fade */
         .hs-img-l { animation: hsImgL .95s cubic-bezier(.22,.61,.36,1) both; }
         @keyframes hsImgL {
-          from { opacity: 0; transform: translateY(-50%) translateX(-34px); }
-          to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+          from { opacity: 0; transform: translateX(-34px); }
+          to   { opacity: 1; transform: none; }
         }
 
         /* Pravý obrázok (náradie / mobil) — fade + jemné doostrenie zo zoomu; končí na transform: none */
@@ -294,8 +300,7 @@ export default function HeroSplit() {
            neprehrávame — inak by React pri boote (createRoot().render() nahradí
            prerendered DOM) reštartoval animácie od opacity 0 = viditeľné bliknutie.
            App.jsx atribút po prvej klientskej navigácii odstráni, takže neskoršie
-           návštevy Domov animujú normálne. (hs-img-l drží centrovanie cez Tailwind
-           -translate-y-1/2, animation:none ho nerozbije.) */
+           návštevy Domov animujú normálne. */
         html[data-prerendered] .hs-0, html[data-prerendered] .hs-1,
         html[data-prerendered] .hs-2, html[data-prerendered] .hs-3,
         html[data-prerendered] .hs-4, html[data-prerendered] .hs-in,

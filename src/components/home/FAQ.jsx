@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ChevronDown, Phone, Mail, MessageCircle } from 'lucide-react';
+import { Plus, Phone, Mail, MessageCircle, ArrowRight } from 'lucide-react';
 import { useInView } from '../../hooks/useInView';
+
+const contacts = [
+  { href: 'tel:+421948555551', Icon: Phone, label: 'Zavolajte nám', value: '0948 555 551' },
+  { href: 'mailto:info@royalstroje.sk', Icon: Mail, label: 'Napíšte nám', value: 'info@royalstroje.sk' },
+  { href: 'https://wa.me/421948555551', Icon: MessageCircle, label: 'WhatsApp', value: 'Rýchla odpoveď', external: true },
+];
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
@@ -196,7 +202,7 @@ export default function FAQ() {
   };
 
   return (
-    <div id="faq" className="relative pt-12 md:pt-20 pb-8 md:pb-16 overflow-hidden">
+    <section id="faq" className="relative pt-12 md:pt-20 pb-8 md:pb-16">
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
@@ -213,140 +219,116 @@ export default function FAQ() {
           })}
         </script>
       </Helmet>
-
       <div className="relative z-10 max-w-[1800px] mx-auto px-4 md:px-8 lg:px-12">
-        {/* Header */}
-        <div ref={faqHeadingRef} className={`text-center mb-6 md:mb-12 reveal ${faqHeadingInView ? 'in-view' : ''}`}>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4">
-            Máte <span className="text-orange-primary">otázky?</span>
-          </h2>
-          <p className="text-zinc-600 text-sm md:text-lg max-w-2xl mx-auto">
-            Tu nájdete odpovede na najčastejšie otázky o prenájme stavebnej mechanizácie
-          </p>
-        </div>
+        {/* lg: heading + contact card stacked on the left, the accordion spans
+            both rows on the right. DOM order (heading, list, contact) is the
+            mobile order, so the contact card lands under the questions there. */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-[auto_1fr] gap-6 md:gap-8 lg:gap-x-12 xl:gap-x-16 lg:gap-y-8">
+          <div
+            ref={faqHeadingRef}
+            className={`lg:col-span-4 lg:row-start-1 reveal ${faqHeadingInView ? 'in-view' : ''}`}
+          >
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 leading-[1.05] mb-3 md:mb-4">
+              Máte <span className="text-orange-primary">otázky?</span>
+            </h2>
+            <p className="text-zinc-600 text-sm md:text-lg max-w-md">
+              Tu nájdete odpovede na najčastejšie otázky o prenájme stavebnej mechanizácie
+            </p>
+          </div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Left Side - Support Image/Info - Hidden on mobile */}
-          <div ref={faqSideRef} className={`hidden lg:block lg:col-span-2 reveal-left ${faqSideInView ? 'in-view' : ''}`}>
-            <div className="sticky top-24">
-              {/* Image Container */}
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 mb-6">
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent z-10" />
-                <img
-                  src="/pictures/graphics/predajna-4.webp"
-                  alt="Royal Stroje - FAQ"
-                  className="w-full h-auto object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
+          {/* Accordion: ONE dark panel with hairline rows (same single-island
+              language as the "Prečo" panel) instead of seven floating cards. */}
+          <div
+            ref={faqListRef}
+            className={`lg:col-span-8 lg:col-start-5 lg:row-start-1 lg:row-span-2 reveal ${faqListInView ? 'in-view' : ''}`}
+          >
+            <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900 to-zinc-950 shadow-lg shadow-zinc-900/10 divide-y divide-white/10">
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
+              {faqs.map((faq, index) => {
+                const open = openIndex === index;
+                return (
+                  <div key={faq.question} className={`transition-colors ${open ? 'bg-white/[0.025]' : ''}`}>
+                    <button
+                      type="button"
+                      onClick={() => toggleFAQ(index)}
+                      aria-expanded={open}
+                      aria-controls={`faq-panel-${index}`}
+                      id={`faq-q-${index}`}
+                      className="w-full flex items-center gap-3 md:gap-5 px-4 py-4 md:px-7 md:py-6 text-left group"
+                    >
+                      <span className={`font-display font-black text-xs md:text-sm tabular-nums w-6 md:w-8 shrink-0 transition-colors ${open ? 'text-orange-primary' : 'text-zinc-500 group-hover:text-orange-primary'}`}>
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <h3 className={`font-bold text-sm md:text-lg flex-1 leading-snug transition-colors ${open ? 'text-orange-primary' : 'text-white group-hover:text-orange-primary'}`}>
+                        {faq.question}
+                      </h3>
+                      <span
+                        className={`shrink-0 grid place-items-center w-8 h-8 md:w-9 md:h-9 rounded-full border transition-all duration-300 ${
+                          open
+                            ? 'bg-orange-primary border-orange-primary text-white rotate-45'
+                            : 'border-white/15 text-orange-primary group-hover:border-orange-primary/60'
+                        }`}
+                      >
+                        <Plus size={16} />
+                      </span>
+                    </button>
 
-                {/* Text Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-black text-white mb-1">
-                    Sme tu pre vás
-                  </h3>
-                  <p className="text-white/80 text-sm">
-                    Profesionálny prístup a spoľahlivosť
-                  </p>
-                </div>
-              </div>
-
-              {/* Contact Options */}
-              <div className="bg-gradient-to-b from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 space-y-3">
-                <h4 className="text-white font-bold text-lg mb-4">Neviete si rady?</h4>
-
-                <a
-                  href="tel:+421948555551"
-                  className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-orange-primary/15 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/25 transition-colors">
-                    <Phone size={20} className="text-orange-primary" />
+                    {/* grid-rows 0fr -> 1fr animates to the answer's real height
+                        (the old max-h-[1000px] trick eased over a made-up height). */}
+                    <div
+                      id={`faq-panel-${index}`}
+                      role="region"
+                      aria-labelledby={`faq-q-${index}`}
+                      className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                    >
+                      <div className="overflow-hidden">
+                        <div className="pl-[3.25rem] pr-4 pb-5 md:pl-[5.25rem] md:pr-20 md:pb-7 text-white/80 text-sm md:text-base leading-relaxed">
+                          {faq.answer}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-white/70 text-xs">Zavolajte nám</p>
-                    <p className="text-white font-bold">0948 555 551</p>
-                  </div>
-                </a>
-
-                <a
-                  href="mailto:info@royalstroje.sk"
-                  className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-orange-primary/15 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/25 transition-colors">
-                    <Mail size={20} className="text-orange-primary" />
-                  </div>
-                  <div>
-                    <p className="text-white/70 text-xs">Napíšte nám</p>
-                    <p className="text-white font-bold">info@royalstroje.sk</p>
-                  </div>
-                </a>
-
-                <a
-                  href="https://wa.me/421948555551"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/5 hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-orange-primary/15 border border-orange-primary/25 flex items-center justify-center group-hover:bg-orange-primary/25 transition-colors">
-                    <MessageCircle size={20} className="text-orange-primary" />
-                  </div>
-                  <div>
-                    <p className="text-white/70 text-xs">WhatsApp</p>
-                    <p className="text-white font-bold">Rýchla odpoveď</p>
-                  </div>
-                </a>
-              </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* Right Side - FAQ Accordion */}
-          <div ref={faqListRef} className="lg:col-span-3">
-            <div className="space-y-2 md:space-y-4">
-              {faqs.map((faq, index) => (
-                <div
-                  key={index}
-                  className={`bg-gradient-to-b from-zinc-900 to-zinc-950 border rounded-xl md:rounded-2xl overflow-hidden transition-colors reveal stagger-${Math.min(index + 1, 8)} ${faqListInView ? 'in-view' : ''} ${openIndex === index ? 'border-orange-primary/40' : 'border-white/10 hover:border-orange-primary/30'}`}
-                >
-                  {/* Question Button */}
-                  <button
-                    onClick={() => toggleFAQ(index)}
-                    className="w-full flex items-center justify-between gap-2 md:gap-4 p-3 md:p-6 text-left group"
-                  >
-                    <h3 className={`font-bold text-xs md:text-lg flex-1 transition-colors leading-tight ${openIndex === index ? 'text-orange-primary' : 'text-white group-hover:text-orange-primary'}`}>
-                      {faq.question}
-                    </h3>
-                    <div
-                      className={`flex-shrink-0 w-6 h-6 md:w-8 md:h-8 rounded-md md:rounded-lg bg-orange-primary/20 flex items-center justify-center transition-all ${
-                        openIndex === index ? 'rotate-180 bg-orange-primary' : ''
-                      }`}
+          {/* Contact card -- now on mobile too (it used to be desktop-only) */}
+          <div
+            ref={faqSideRef}
+            className={`lg:col-span-4 lg:row-start-2 self-start reveal ${faqSideInView ? 'in-view' : ''}`}
+          >
+            <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900 to-zinc-950 p-5 md:p-7 shadow-lg shadow-zinc-900/10">
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-orange-primary via-orange-primary/70 to-transparent" />
+              <p className="text-white font-black text-lg md:text-xl mb-1">Neviete si rady?</p>
+              <p className="text-zinc-400 text-sm mb-5">Poradíme s výberom techniky aj termínom.</p>
+
+              <div className="space-y-2.5">
+                {contacts.map(({ href, label, value, external, ...c }) => {
+                  const Icon = c.Icon;
+                  return (
+                    <a
+                      key={href}
+                      href={href}
+                      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                      className="flex items-center gap-3 p-3 bg-white/[0.03] border border-white/[0.06] hover:border-orange-primary/40 hover:bg-white/[0.06] rounded-xl transition-colors group"
                     >
-                      <ChevronDown
-                        size={16}
-                        className={`md:w-5 md:h-5 transition-colors ${
-                          openIndex === index ? 'text-white' : 'text-orange-primary'
-                        }`}
-                      />
-                    </div>
-                  </button>
-
-                  {/* Answer Content */}
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      openIndex === index ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <div className="px-3 pb-3 md:px-6 md:pb-6 text-white/80 text-[11px] md:text-base leading-relaxed border-t border-white/10 pt-3 md:pt-6">
-                      {faq.answer}
-                    </div>
-                  </div>
-                </div>
-              ))}
+                      <span className="grid place-items-center w-10 h-10 shrink-0 rounded-lg bg-orange-primary/15 border border-orange-primary/25 group-hover:bg-orange-primary/25 transition-colors">
+                        <Icon size={18} className="text-orange-primary" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-zinc-400 text-xs">{label}</span>
+                        <span className="block text-white font-bold truncate">{value}</span>
+                      </span>
+                      <ArrowRight size={16} className="text-zinc-600 group-hover:text-orange-primary transition-colors" />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
-
-
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

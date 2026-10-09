@@ -1,5 +1,12 @@
 # Handoff Archive (do not read on /start)
 
+## What Was Done (Session 60) -- Praca prebehla v `crm_core`, nie tu
+Date: 2026-08-27
+
+1. **Cele sedenie sa odohralo v susednom projekte `crm_core`** (CRM demo na demo-crm.mdntech.org) -- jeho vlastny `handoff.md` ma sedenie 8 s detailami. Tu ostava len toto: demo login uz ukazuje iba tlacidlo "Vstupit do dema", "Dashboard" sa vola "Prehlad", styri dlazdice su preklikatelne, kredit MDN nesie fialovu znacku.
+2. **Halucinacia o doprave zdarma je zrusena, bez zasahu.** Majitel preveril chatbota znova a na "kolko stoji doprava" odpoveda presne podla KB (15 EUR v Senci / 1 EUR/km, pick-up 1,20 EUR/km, min. 15 EUR). Bola to jednorazova halucinacia -- uloha 1 zo sedenia 59 vypadla zo zoznamu.
+3. **Rovnaka stara znacka MDN visi aj tu** -- patickla webu a sidebar dashboardu. Fialovy `logo-final-gradient.svg` je uz overeny v `crm_core/public/mdn-logo.svg`, takze rovnaka vymena je hotova praca (uloha 3).
+
 ## What Was Done (Session 59) -- Chatbot vypadok: minuty Anthropic kredit + logovanie chyb
 Date: 2026-08-26
 
@@ -864,3 +871,4 @@ Date: 2026-08-14
 6. **GBP products: 15 recommendations + prices + original descriptions generated in chat** (not in repo). Prices recommended s DPH for the GBP field; descriptions written from own DB specs + blogs (no copied manufacturer text -- copyright + duplicate content). Owner will upload.
 | 50 | 2026-08-05 | SEO-5 FAQPage/sameAs + Footer FB icon + og:image fix -> PROD | sameAs + FAQPage JSON-LD added; Rich Results Test verified (FAQ not shown = Google policy, not a bug); site-wide og:image + schema image swapped to real yard photo; pushed (`6270a01`) |
 | 51 | 2026-08-13 | NAP adresa zjednotena na Boldog + GBP + opravene mapy -> PROD | Site carried 6 conflicting addresses; split into prevadzka `Recká cesta 182` vs sidlo `Boldog 182`; "Senec" kept as service-area keyword; both Kontakt map embeds were fabricated -> coordinate embed + GBP link; GSC 141 orphan product pages diagnosed (SEO-7); pushed (`9fc7fb5`) |
+| 52 | 2026-08-14 | SEO-7 interné linky + /katalog + prerender guard (na `dev`) | Catalog filtre/stránkovanie ako `<a href>`; nová stránka /katalog so všetkými produktmi; prerender proxy Supabase cez Node fetch + validátor -- build spadne pri chybnom bake; commit `c236b2e` |

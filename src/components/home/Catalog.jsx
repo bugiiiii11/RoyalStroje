@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useLocation, Link } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
 import {
-  X, Calendar,
+  X,
   Hammer, Cog, HardHat, ArrowUpFromLine,
-  Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, BookOpen, ArrowRight, Info, Bike
+  Container, Car, TreePine, Building2, User, Search, ChevronLeft, ChevronRight, Info, Bike
 } from 'lucide-react';
 import { categories } from '../../data/categories';
 import useProducts, { getProductsBySubcategory } from '../../hooks/useProducts';
@@ -15,6 +15,7 @@ import WhyRoyalStroje from './WhyRoyalStroje';
 import SourcingBanner from './SourcingBanner';
 import RoyalWorksBand from './RoyalWorksBand';
 import BrandMarquee from './BrandMarquee';
+import BlogTeaser from './BlogTeaser';
 import ContentSection from '../common/ContentSection';
 
 // Ikony pre jednotlivé kategórie
@@ -57,8 +58,6 @@ export default function Catalog() {
   const [sidebarRef, sidebarInView] = useInView();
   const [gridRef, gridInView] = useInView();
   const [quoteFormRef, quoteFormInView] = useInView();
-  const [blogCtaRef, blogCtaInView] = useInView();
-  const [blogCardsRef, blogCardsInView] = useInView();
 
   // Helper to update URL params without losing existing ones
   const updateParams = (updates) => {
@@ -552,64 +551,8 @@ export default function Catalog() {
         {/* FAQ Section - Integrated */}
         <FAQ />
 
-        {/* Blog CTA Section */}
-        <div ref={blogCtaRef} className={`relative mt-16 md:mt-24 pt-12 md:pt-16 reveal ${blogCtaInView ? 'in-view' : ''}`}>
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-zinc-900 mb-2 md:mb-4">
-              Chcete vedieť viac?
-            </h2>
-            <p className="text-zinc-600 text-sm md:text-lg max-w-2xl mx-auto">
-              Navštívte náš blog plný užitočných rád, tipov a noviniek zo sveta stavebnej mechanizácie
-            </p>
-          </div>
-
-          <div ref={blogCardsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto mb-8 md:mb-12">
-            {/* Tip 1 */}
-            <div className={`group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 reveal stagger-1 ${blogCardsInView ? 'in-view' : ''}`}>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-primary/20 transition-all">
-                  <BookOpen className="text-orange-primary" size={24} />
-                </div>
-                <div>
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
-                    Návody a tipy
-                  </h3>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    Praktické rady ako vybrať správnu techniku, ako správne používať stroje a ako ušetriť na prenájme
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Tip 2 */}
-            <div className={`group relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-white/10 rounded-2xl p-6 hover:border-orange-primary/50 transition-all duration-300 reveal stagger-2 ${blogCardsInView ? 'in-view' : ''}`}>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-orange-primary/10 border border-orange-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-primary/20 transition-all">
-                  <Calendar className="text-orange-primary" size={24} />
-                </div>
-                <div>
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-orange-primary transition-colors">
-                    Novinky a aktuality
-                  </h3>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    Informácie o nových strojoch v našej ponuke, zmenách v cenníku a špeciálnych akciách
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center">
-            <Link
-              to="/blog"
-              className="btn-primary gap-3 px-8 py-4 text-base"
-            >
-              <BookOpen size={20} />
-              <span>Prečítať blog</span>
-              <ArrowRight size={20} />
-            </Link>
-          </div>
-        </div>
+        {/* Latest blog articles */}
+        <BlogTeaser />
 
       </div>
     </ContentSection>
