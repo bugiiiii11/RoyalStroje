@@ -20,7 +20,7 @@ const offers = [
   {
     category: 'Sezónna akcia',
     stamp: 'Týždenná sadzba',
-    title: 'Letný prenájom minirýpadiel',
+    title: 'Zvýhodnený prenájom minirýpadiel',
     text: 'Zvýhodnené týždenné sadzby na JCB 19C-I a Wacker Neuson. Ideálne na výkopy a terénne úpravy.',
     img: '/pictures/graphics/mini-rypadlo-1000-transparent.webp',
     imgClass: 'max-h-[108%]',
