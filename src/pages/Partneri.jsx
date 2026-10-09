@@ -117,6 +117,13 @@ export default function Partneri() {
       ratio: 5.31,
       website: 'https://silkot-eti.sk/',
     },
+    {
+      id: 14,
+      name: 'WECKO servis',
+      logo: '/pictures/graphics/partneri/logo_weckoservis.webp',
+      ratio: 2.46,
+      website: 'https://weckoservis.sk/',
+    },
   ];
 
   return (
@@ -184,9 +191,9 @@ export default function Partneri() {
           {/* Partner logo wall.
               One continuous sheet with a hairline lattice (gap-px over a zinc
               background paints the rules) rather than floating tiles -- the
-              wall reads as a single composed object. Thirteen partners no
-              longer divide evenly by 2/3/4, so blank white filler cells top up
-              the last row per breakpoint (1 on 2-col, 2 on 3-col, 3 on 4-col)
+              wall reads as a single composed object. Fourteen partners do
+              not divide evenly by 3/4, so blank white filler cells top up the
+              last row per breakpoint (0 on 2-col, 1 on 3-col, 2 on 4-col)
               -- without them the container's zinc shows as a grey block.
               The 4th column waits for lg, not md: at 768px four columns leave a
               cell too narrow to hold a wordmark at readable size, and three
@@ -228,9 +235,9 @@ export default function Partneri() {
                   </div>
                 );
               })}
-              {/* Row top-ups: 13 % cols leaves 1 orphan at every breakpoint.
-                  Mobile 2-col needs +1, sm 3-col +2, lg 4-col +3. */}
-              <div className="bg-white min-h-[7rem] sm:min-h-[8.75rem] md:min-h-[9.5rem] xl:min-h-[10.5rem]" aria-hidden="true" />
+              {/* Row top-ups: 14 partners. Mobile 2-col is even (+0),
+                  sm 3-col leaves 2 (+1), lg 4-col leaves 2 (+2).
+                  Re-count these whenever a partner is added or removed. */}
               <div className="hidden sm:block min-h-[8.75rem] md:min-h-[9.5rem] xl:min-h-[10.5rem] bg-white" aria-hidden="true" />
               <div className="hidden lg:block min-h-[9.5rem] xl:min-h-[10.5rem] bg-white" aria-hidden="true" />
             </div>

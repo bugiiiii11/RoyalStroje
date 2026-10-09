@@ -14,6 +14,7 @@ import QuoteForm from '../catalog/QuoteForm';
 import WhyRoyalStroje from './WhyRoyalStroje';
 import SourcingBanner from './SourcingBanner';
 import RoyalWorksBand from './RoyalWorksBand';
+import BrandMarquee from './BrandMarquee';
 import ContentSection from '../common/ContentSection';
 
 // Ikony pre jednotlivé kategórie
@@ -533,6 +534,10 @@ export default function Catalog() {
         <div ref={quoteFormRef} className={`lg:hidden mt-20 mb-8 reveal ${quoteFormInView ? 'in-view' : ''}`}>
           <QuoteForm />
         </div>
+
+        {/* Brands we rent out -- endless logo strip, straight under the catalogue
+            it vouches for; the light strip also sets up the dark sourcing band. */}
+        <BrandMarquee />
 
         {/* "Nenašli ste stroj?" sourcing CTA — between catalog and Prečo Royal Stroje */}
         <SourcingBanner />

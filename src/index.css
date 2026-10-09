@@ -269,6 +269,87 @@
   }
 }
 
+/* ─── Brand marquee (homepage, under the catalogue) ───
+   Two identical lists in one track; sliding by -50% lands copy 2 exactly where
+   copy 1 started, so the loop is seamless. Each item carries its spacing as
+   padding (not flex gap) so both halves measure the same, trailing gap included.
+   Edges fade out via a mask instead of overlay gradients. Rest state mirrors
+   the Partneri wall: desaturated on hover-capable devices, colour on hover;
+   touch devices keep full colour. Hovering the strip pauses it. */
+.brand-viewport {
+  --brand-scale: 0.76;
+  --brand-gap: 2.25rem;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+}
+@media (min-width: 768px) {
+  .brand-viewport {
+    --brand-scale: 0.84;
+    --brand-gap: 3.5rem;
+  }
+}
+@media (min-width: 1280px) {
+  .brand-viewport {
+    --brand-scale: 1;
+    --brand-gap: 4.5rem;
+  }
+}
+.brand-track {
+  width: max-content;
+  animation: brand-scroll 48s linear infinite;
+}
+.brand-track.is-paused {
+  animation-play-state: paused;
+}
+.brand-item {
+  padding: 0 calc(var(--brand-gap) / 2);
+  min-height: calc(50px * var(--brand-scale));
+}
+.brand-logo {
+  width: calc(var(--logo-w, 120px) * var(--brand-scale));
+  max-width: none;
+  height: auto;
+  transition: filter 0.3s ease;
+}
+@keyframes brand-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (hover: hover) {
+  .brand-logo {
+    filter: grayscale(1) brightness(0.78) contrast(1.06);
+  }
+  .brand-item:hover .brand-logo {
+    filter: none;
+  }
+  .brand-viewport:hover .brand-track {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-viewport {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .brand-track {
+    animation: none;
+    width: auto;
+    justify-content: center;
+  }
+  .brand-copy {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1.5rem;
+    flex-shrink: 1;
+  }
+  .brand-copy[aria-hidden='true'] {
+    display: none;
+  }
+  .brand-logo {
+    transition: none;
+  }
+}
+
 /* Stagger delays for child elements */
 .stagger-1 { transition-delay: 0.07s; }
 .stagger-2 { transition-delay: 0.14s; }
