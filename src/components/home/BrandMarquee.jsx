@@ -17,6 +17,7 @@ const brands = [
   { name: 'NTC', file: 'ntc.webp', w: 324, h: 128 },
   { name: 'Honda Power Equipment', file: 'honda.webp', w: 270, h: 58 },
   { name: 'MASTER', file: 'master.webp', w: 223, h: 32 },
+  { name: 'Atlas Copco', file: 'atlas-copco.webp', w: 503, h: 240 },
   { name: 'CEDIMA', file: 'cedima.webp', w: 478, h: 240 },
   { name: 'GÖLZ', file: 'golz.webp', w: 188, h: 54 },
 ];
