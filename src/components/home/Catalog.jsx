@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams, useLocation, Link } from 'react-router-dom';
+import { useSearchParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import { useInView } from '../../hooks/useInView';
 import {
   X,
@@ -31,15 +31,17 @@ const categoryIcons = {
   'volny-cas-a-sport': Bike,
 };
 
-// Retired top-level categories -> where their products live now. Old links
-// (chatbot KB, GBP, bookmarks) would otherwise land on an empty catalog.
+// Retired top-level categories -> page that serves the same need. Old links
+// (chatbot KB, Google, bookmarks) would otherwise land on an empty catalog.
+// Platforms are no longer rented, but can still be sourced on request.
 const RETIRED_CATEGORIES = {
-  'pracovne-plosiny': { category: 'tazka-technika', subcategory: 'pracovne-plosiny' },
+  'pracovne-plosiny': '/sluzby/zabezpecenie-techniky',
 };
 
 export default function Catalog() {
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const { products } = useProducts();
 
   // Scroll to #katalog when URL has the hash (e.g. from blog CTA links).
@@ -52,9 +54,9 @@ export default function Catalog() {
   }, [location.hash, products.length]);
 
   // Read filter state from URL params (persists across navigation)
-  const retired = RETIRED_CATEGORIES[searchParams.get('category')];
-  const activeCategory = retired?.category || searchParams.get('category') || 'male-naradie';
-  const activeSubcategory = retired?.subcategory || searchParams.get('subcategory') || 'all';
+  const retiredTarget = RETIRED_CATEGORIES[searchParams.get('category')];
+  const activeCategory = searchParams.get('category') || 'male-naradie';
+  const activeSubcategory = searchParams.get('subcategory') || 'all';
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   const searchQuery = searchParams.get('search') || '';
 
@@ -86,12 +88,9 @@ export default function Catalog() {
     }, { replace: true });
   };
 
-  // Rewrite a retired category in the URL so the filter links built from
-  // searchParams below point at the new location too.
   useEffect(() => {
-    if (retired) updateParams({ ...retired, page: null });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [retired]);
+    if (retiredTarget) navigate(retiredTarget, { replace: true });
+  }, [retiredTarget, navigate]);
 
   // Setter that writes to URL (search input only — filters and pagination
   // navigate via real <a href> links below)

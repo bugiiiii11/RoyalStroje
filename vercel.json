@@ -22,8 +22,8 @@
   ],
   "redirects": [
     {
-      "source": "/:slug(genie-gs-2632|genie-gs-3246|genie-gs-4047|genie-gs-5390-rt|genie-gs3384-rt|genie-s65|genie-z3422n|genie-z4525je|genie-z4525jrt|genie-z6034)",
-      "destination": "/?category=tazka-technika&subcategory=pracovne-plosiny",
+      "source": "/:slug(genie-gs-1932|genie-gs-2632|genie-gs-3246|genie-gs-4047|genie-gs-5390-rt|genie-gs3384-rt|genie-s65|genie-s85|genie-z34-22|genie-z3422n|genie-z4525je|genie-z4525jrt|genie-z6034)",
+      "destination": "/sluzby/zabezpecenie-techniky",
       "permanent": true
     }
   ],

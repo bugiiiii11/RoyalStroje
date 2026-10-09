@@ -45,7 +45,7 @@ export const categories = [
     id: 'tazka-technika',
     name: 'Ťažká technika',
     slug: 'tazka-technika',
-    description: 'Rýpadlá, nakladače, dumpre, valce, manipulátory, pracovné plošiny - s obsluhou aj bez',
+    description: 'Rýpadlá, nakladače, dumpre, valce, manipulátory - s obsluhou aj bez',
     badge: 'S OBSLUHOU',
     subcategories: [
       { id: 'all', name: 'Všetko', slug: 'all' },
@@ -56,14 +56,12 @@ export const categories = [
       { id: 'dumpre', name: 'Dumpre', slug: 'dumpre' },
       { id: 'valce', name: 'Valce', slug: 'valce' },
       { id: 'manipulatory', name: 'Manipulátory', slug: 'manipulatory' },
-      { id: 'vysokozdvizne-voziky', name: 'Vysokozdvižné vozíky', slug: 'vysokozdvizne-voziky' },
-      // 3 platforms moved here from the hidden top-level category below (s63)
-      { id: 'pracovne-plosiny', name: 'Pracovné plošiny', slug: 'pracovne-plosiny' },
+      // HIDDEN (s63): no active products (Doosan D35C-7 is inactive in Supabase)
+      // { id: 'vysokozdvizne-voziky', name: 'Vysokozdvižné vozíky', slug: 'vysokozdvizne-voziky' },
     ]
   },
-  // HIDDEN (s63): the top-level "Pracovné plošiny" category is retired. The 3 platforms
-  // still offered live under Ťažká technika -> Pracovné plošiny; the other 10 are
-  // status='inactive' in Supabase. Uncomment to bring the category back.
+  // HIDDEN (s63): platforms are no longer rented. All 13 rows stay in Supabase as
+  // status='inactive' (migration 024). Uncomment to bring the category back.
   // {
   //   id: 'pracovne-plosiny',
   //   name: 'Pracovné plošiny',

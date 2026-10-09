@@ -1508,61 +1508,7 @@ export const products = [
     isPopular: false,
   },
 
-  {
-    id: 'genie-s85',
-    name: 'GENIE S85',
-    category: 'tazka-technika',
-    subcategory: 'pracovne-plosiny',
-    image: '/pictures/Katalog-PNG/Pracovné plošiny/Exteriérové/plosina-teleskopicka-28m-GENIE-S85-exterierova.webp',
-    price: 'NA požiadanie',
-    pricePerDay: 0,
-    description: 'Teleskopická plošina do 28m',
-    features: [
-      'Pracovná výška - 27.91 m',
-      'Šírka/dĺžka/výška - 2.49m/12.37m/2.80m',
-      'Palivo - nafta',
-    ],
-    inStock: true,
-    isNew: false,
-    isPopular: false,
-  },
-  {
-    id: 'genie-z34-22',
-    name: 'GENIE Z34 / 22',
-    category: 'tazka-technika',
-    subcategory: 'pracovne-plosiny',
-    image: '/pictures/Katalog-PNG/Pracovné plošiny/Exteriérové/plosina-klbova-13m-GENIE-Z34-exterierova.webp',
-    price: 'NA požiadanie',
-    pricePerDay: 0,
-    description: 'Kĺbová plošina do 13m',
-    features: [
-      'Pracovná výška - 12.52 m',
-      'Šírka/dĺžka/výška - 1.73m/5.64m/2.26m',
-      'Palivo - nafta',
-    ],
-    inStock: true,
-    isNew: false,
-    isPopular: false,
-  },
 
-  {
-    id: 'genie-gs-1932',
-    name: 'GENIE GS 1932',
-    category: 'tazka-technika',
-    subcategory: 'pracovne-plosiny',
-    image: '/pictures/Katalog-PNG/Pracovné plošiny/Interiérové/plosina-noznicova-8m-GENIE-GS1932-interierova.webp',
-    price: 'NA požiadanie',
-    pricePerDay: 0,
-    description: 'Nožnicová plošina do 8 m',
-    features: [
-      'Pracovná výška - 7.60 m',
-      'Šírka/dĺžka/výška - 0.81m/1.83m/2.11m',
-      'Pohon - batérie',
-    ],
-    inStock: true,
-    isNew: false,
-    isPopular: false,
-  },
 
   // stredna-mechanizacia/cestne-rezacky-frezy-a-brusky (3 produktov)
   {
@@ -2359,25 +2305,6 @@ export const products = [
     isPopular: false,
   },
 
-  // tazka-technika/vysokozdvizne-voziky (1 produktov)
-  {
-    id: 'doosan-d35c-7',
-    name: 'Doosan D35C-7',
-    category: 'tazka-technika',
-    subcategory: 'vysokozdvizne-voziky',
-    image: '/pictures/Katalog-PNG/Ťažká technika/Vysokozdvižné vozíky/vysokozdvizny-vozik-3500.webp',
-    price: 'NA požiadanie',
-    pricePerDay: 0,
-    description: 'Vysokozdvižný vozík do 3500kg',
-    features: [
-      'Nosnosť - 3500 kg',
-      'Hmotnosť - 5300 kg',
-      'Palivo - nafta',
-    ],
-    inStock: true,
-    isNew: false,
-    isPopular: false,
-  },
 
   // vybavenie-staveniska/kancelarske-kontajnery-a-vratnice (2 produktov)
   {
